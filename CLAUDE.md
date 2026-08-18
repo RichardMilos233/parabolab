@@ -14,8 +14,19 @@
   derivative caches). Four JEQ §5 examples in library.py reproduce
   Figs 6–9 at paper budgets (examples/jeq_fig6..9_*.py). 64 tests green
   (`pytest -m 'slow or not slow'`, ~35 s).
-- M3 (numba/vectorized backend + d ≥ 2), M4 (torch deep branching,
-  JCP Alg. 2), M5 (vendored baselines): not started.
+- **M3 complete**: multidimensional extension (JCP2024 §2).
+  `FullyNonlinearPDEnD` (deriv_map jets, diffusion σ² = authors' `nu`,
+  polynomial-support zero detection), `DxN(mu)` codes,
+  `FullyNonlinearMechanismND` with reduced-set table construction (the
+  Faà-di-Bruno recursion itself is pruned by a monotone possibly-nonzero
+  predicate — this, not raw enumeration, is what makes d = 100 tractable),
+  d-dim BM in tree.py (scalar d = 1 path byte-identical),
+  `parallel.estimate_parallel` (multiprocessing over sample batches,
+  n_jobs-independent results). Reproduced: Fig 1 (Allen–Cahn d = 5/100),
+  Figs 4/5 (exp gradient d = 5/10), Table 2 (AC d = 100, T = 0.3),
+  Table 5 (HJB d = 100, T = 1, exact 4.590162 by Cole–Hopf quadrature).
+- M4 (torch deep branching, JCP Alg. 2), M5 (vendored baselines):
+  not started.
 - Env: `conda activate parabolab` (python 3.11). Editable install of this repo.
   Torch intentionally NOT installed until M4.
 
@@ -120,6 +131,48 @@
     (different Subs normal forms; diff of a Subs-built jet can even raise).
     The identity tests instead use f = exp(Σ a_q z_q) with symbolic a_q —
     ∂^ν f = (Π a_q^{ν_q}) f separates every ν as a distinct monomial.
+
+## Gotchas discovered (M3)
+17. **Full-Laplacian problems ((5.1), (5.9)) via σ²**: the authors' `nu`.
+    ∂ₜu + (σ²/2)Δu + f = 0 with BM variance σ²·dt and the third mechanism
+    union carrying −σ²/2 (only place σ² enters the tables). Validated by a
+    σ² = 2 heat control and by HJB against the Cole–Hopf exact value.
+18. **d = 100 is tractable only through reduced-set construction**: the
+    raw M(g*) has m²d + Σ|fdb(α_p)| elements (HJB: ~1.01e6); we prune the
+    FdB recursion itself with the monotone `possibly_nonzero` predicate
+    (polynomial support test) and build the reduced table directly
+    (HJB |M(f*)| = 20 000 in ~1 s). The authors sample the RAW set — for
+    HJB ~98% of their branch draws are identically-zero samples with the
+    full 1.01e6 weight multiplier.
+19. **The optimal ρ rate flips at large d** (vs gotcha 5): each branching
+    multiplies H by |M(c)| e^{λτ}/λ; with |M| = 2e4 (HJB) frequent
+    branching at rate 1 compounds to exploding variance AND 184 min/1e5
+    samples. The authors' jcp_rate(T) = −log(0.95)/T keeps branchings rare
+    (mean nodes 1.05, 11 s/1e5, sane variance). Rate 1 stays better for
+    small-|M| problems (d = 1, Fig-1/4 profiles).
+20. **Table 5 heavy-tail anatomy**: at 1e5 samples, HJB runs bifurcate —
+    tail-missing runs cluster at ≈4.580 with stderr ≈0.0037 (the paper's
+    published 4.580340 ± 0.001869 is exactly this cluster, 5 of its own
+    SDs below the exact 4.590162), tail-catching runs have stderr 0.01–0.02
+    and centre on the exact value. Our 5-run mean 4.590153. Same mechanism
+    as gotcha 15, now with a quantitative fingerprint.
+21. **sympy pathology: first diff of tanh(wide Add) takes minutes**
+    (~173 s for tanh of a 100-term sum; subsequent diffs are cached).
+    The logistic/exp form −1 + 1/(1 + e^{−2y}) differentiates in ms —
+    `library.allen_cahn_nd` writes φ that way (identical function).
+22. **Worker processes must reuse PDE instances**: a FullyNonlinearPDEnD
+    is cheap to build but its lazy caches (mechanism tables, lambdified
+    ∂^μφ) are not; rebuilding per chunk made d = 100 profiles ~30x slower.
+    parallel.py keeps a per-process `_PDE_CACHE` and profiles.py shares
+    one ProcessPoolExecutor across grid points.
+23. **Constant-derivative codes cannot be pruned** (exp example (5.5):
+    ∂z_i f = α/d for the gradient arguments): their reduced tables are the
+    guaranteed-zero fallback tuple, so such particles return 0 whenever
+    they branch and the constant only at leaves — unbiased (the source
+    term of a constant really is 0) but variance-adding. Together with
+    exact u ≈ 0 near the dip of (5.6), this is why Fig-4 error bars blow
+    up around x ≈ −0.44 (the paper plots no error bars there; the
+    authors' own d = 10 value at that point is 0.157 vs exact 0.003).
 
 ## Paper pointers (M2 done, for M3)
 - General mechanism: JEQ2023 Def. 2.2, eqs. (2.4)–(2.5); multivariate Faà di

@@ -29,13 +29,17 @@ $\phi$ (JEQ2023 Thm. 1, JCP2024 Alg. 1).
 ```bash
 conda env create -f environment.yml     # or: conda env update -f environment.yml
 conda activate parabolab
-pytest                                  # fast suite (~5 s)
-pytest -m 'slow or not slow'            # + paper-budget validation (~30 s)
+pytest                                  # fast suite (~30 s)
+pytest -m 'slow or not slow'            # + paper-budget validation (minutes)
 python examples/jeq_allen_cahn_1d.py    # M1: Allen-Cahn vs closed form
 python examples/jeq_fig6_dym.py         # M2: JEQ Figs 6-9 reproductions
 python examples/jeq_fig7_tan.py         #     (each prints a table and saves
 python examples/jeq_fig8_cosine.py      #      a .png next to the script)
 python examples/jeq_fig9_log.py
+python examples/jeq_fig1_allen_cahn_nd.py   # M3: Fig 1, d = 5 and d = 100
+python examples/jeq_fig4_exponential_nd.py  # M3: Figs 4/5, d = 5 and 10
+python examples/jeq_table2_allen_cahn_d100.py  # M3: Table 2 (d = 100)
+python examples/jeq_table5_hjb_d100.py         # M3: Table 5 (HJB, d = 100)
 ```
 
 ```python
@@ -51,13 +55,14 @@ print(r, "exact:", pde.exact_solution(0.0, 0.0))
 
 | module | contents |
 |---|---|
-| `parabolab/pde.py` | `ParabolicPDE` (semilinear spec) and `FullyNonlinearPDE1D` (sympy f/phi, lazy derivative caches) |
-| `parabolab/mechanism.py` | codes (`Id`, `Dx`, `FDeriv`, `FNu`) + semilinear mechanism (2.7) + general `FullyNonlinearMechanism1D` (2.4)–(2.5) |
-| `parabolab/fdb.py` | multivariate Faà di Bruno term enumeration (cross-checked against the authors' `deep_branching/fdb.py`) |
-| `parabolab/tree.py` | recursive `TREE(t,x,c)` sampler, JCP2024 Alg. 1 / JEQ2023 Def. 4.1 |
+| `parabolab/pde.py` | `ParabolicPDE` (semilinear), `FullyNonlinearPDE1D` (sympy f/phi), `FullyNonlinearPDEnD` (d-dim `deriv_map` jets, diffusion σ², polynomial-support zero detection) |
+| `parabolab/mechanism.py` | codes (`Id`, `Dx`, `DxN`, `FDeriv`, `FNu`) + semilinear mechanism (2.7) + `FullyNonlinearMechanism1D` (2.4)–(2.5) + d-dim `FullyNonlinearMechanismND` (JCP2024 §2) with reduced-set table construction |
+| `parabolab/fdb.py` | multivariate Faà di Bruno enumeration, 1-d and d-dim, with monotone-predicate pruning (cross-checked against the authors' `deep_branching/fdb.py`) |
+| `parabolab/tree.py` | recursive `TREE(t,x,c)` sampler, JCP2024 Alg. 1 / JEQ2023 Def. 4.1; d-dim BM with variance σ² |
 | `parabolab/mc.py` | pointwise estimator: mean, stderr, tree-size diagnostics |
-| `parabolab/profiles.py` | profile estimation over an x-grid + Fig-style plotting |
-| `parabolab/library.py` | Allen–Cahn (5.2)–(5.4); Dym (5.7), tan (5.8), 4th-order cosine (5.10), 3rd-order log (5.11) with exact solutions |
+| `parabolab/parallel.py` | `estimate_parallel`: sample batches over worker processes (n_jobs-independent results; pure-Python `estimate` stays the reference) |
+| `parabolab/profiles.py` | profile estimation over an x-grid (+ d-dim embedding) + Fig-style plotting |
+| `parabolab/library.py` | Allen–Cahn (5.1)–(5.4) incl. d-dim; Dym (5.7), tan (5.8), cosine (5.10), log (5.11); exponential gradient (5.5); HJB (5.9) with Cole–Hopf exact value |
 
 ## Milestones
 
@@ -69,8 +74,13 @@ print(r, "exact:", pde.exact_solution(0.0, 0.0))
   derivative order n; sympy-based `FullyNonlinearPDE1D`; the four JEQ §5
   examples (Dym, tan, 4th-order cosine, 3rd-order log) reproduce Figs 6–9
   at the paper's sample budgets. Two paper errata found (see Notes).
-- **M3** — performance backend (numba and/or vectorized batching) for large
-  sample counts and d up to 100 (paper-scale experiments).
+- **M3 (done)** — multidimensional extension (JCP2024 §2): `deriv_map`
+  jets, multi-index codes ∂^μ, diffusion σ², d-dim Brownian sampler,
+  reduced-set mechanism construction (tractable at d = 100), and
+  multiprocessing over sample batches. Reproduced JEQ §5.1: Fig 1
+  (Allen–Cahn d = 5/100), Figs 4/5 (exponential gradient d = 5/10),
+  Table 2 (Allen–Cahn d = 100, T = 0.3) and Table 5 (HJB d = 100, T = 1,
+  exact 4.590162 via Cole–Hopf quadrature).
 - **M4** — deep branching solver (JCP2024 Alg. 2): torch (CPU default,
   GPU optional) neural regression on tree samples.
 - **M5** — vendor the authors' baselines and run systematic comparisons
@@ -83,6 +93,17 @@ print(r, "exact:", pde.exact_solution(0.0, 0.0))
   `-log(0.95)/T` (`parabolab.jcp_rate`) yields heavier-tailed weights: at
   T = 0.5 its empirical mean shows a visible systematic deviation — also
   present in the authors' own logs. See `CLAUDE.md` for gotchas.
+- **The optimal rate flips at large d**: with a big reduced mechanism
+  (HJB d = 100: |ℳ(f*)| = 20 000) every branching multiplies the weight by
+  |ℳ|·e^{λτ}/λ, so frequent branching (rate 1) compounds catastrophically
+  — the sparse `jcp_rate` is *essential* there, the opposite of the d = 1
+  recommendation.
+- **Table 5 tail anatomy (HJB d = 100)**: 10⁵-sample runs that miss the
+  rare large-weight branches cluster at ≈ 4.580 with deceptively small
+  stderr — precisely the paper's published 4.580340 ± 0.001869, which is
+  5 of its own SDs below the exact 4.590162. Runs that catch monsters
+  report honestly large stderr and centre on the exact value; our 5-run
+  mean is 4.590153.
 - The method is short-time by nature: integrability of $\mathcal H$
   (JEQ2023 Prop. 4.2) can fail for large T; Allen–Cahn at T ≲ 0.5 is safely
   inside the window.
