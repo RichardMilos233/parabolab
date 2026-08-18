@@ -25,10 +25,25 @@
   n_jobs-independent results). Reproduced: Fig 1 (Allen–Cahn d = 5/100),
   Figs 4/5 (exp gradient d = 5/10), Table 2 (AC d = 100, T = 0.3),
   Table 5 (HJB d = 100, T = 1, exact 4.590162 by Cole–Hopf quadrature).
-- M4 (torch deep branching, JCP Alg. 2), M5 (vendored baselines):
-  not started.
-- Env: `conda activate parabolab` (python 3.11). Editable install of this repo.
-  Torch intentionally NOT installed until M4.
+- **M4 complete**: deep branching solver (JCP2024 §3 Algorithm 2 +
+  Remark 3.1) in `parabolab/deep/` (torch; NOT imported by the top-level
+  package — `import parabolab.deep` explicitly). `generator.py` draws N
+  training states (τ≡0, X uniform on the 10%-overtrained segment
+  [x_lo,x_hi]×{x_mid}^{d−1}, Remark 3.1 vi) and M tree samples per state
+  through the M3 sampler over worker processes, with the authors'
+  outlier filter; supports non-Id root codes (∂^α families). `net.py` =
+  the paper's residual net (first plain + 5 residual hidden layers of
+  20, tanh, batchnorm after activation). `solver.py` = full-batch Adam,
+  lr 0.01 ÷10 every ⌊P/3⌋, P = 3000; grid_errors implements the paper's
+  101-point L1/L2 protocol; consistency_plot = JCP Fig 7. Reproduced (on
+  CPU, minutes instead of the paper's GPU-hours): Table 1/Fig 1 (AC
+  d = 1, 5), Table 3 (exp d = 1), Table 5 + Fig 7 (Merton HJB (4.6),
+  new library entry `merton_hjb`, non-polynomial f) — including the
+  paper's own tanh training anomaly (our run 9 ≙ their third run).
+- M5 (vendored baselines + blow-up study): not started.
+- Env: `conda activate parabolab` (python 3.11). Editable install of this
+  repo. Torch CPU build installed (M4); all deep code is device-agnostic —
+  pass device="cuda" on a GPU machine.
 
 ## Conventions
 - Terminal-value problem u_t + (1/2)u_xx + f(u) = 0, u(T,·) = φ. The 1/2
@@ -173,6 +188,44 @@
     exact u ≈ 0 near the dip of (5.6), this is why Fig-4 error bars blow
     up around x ≈ −0.44 (the paper plots no error bars there; the
     authors' own d = 10 value at that point is 0.157 vs exact 0.003).
+
+## Gotchas discovered (M4)
+24. **The paper's eq. (3.6) vs branch.py**: the paper writes the loss over
+    individual tree samples H_{i,j}; the authors' code regresses on the
+    per-state (outlier-filtered) MEAN over the M samples. Same argmin
+    (the losses differ by a v-independent variance term); we follow the
+    code (cheaper: N targets instead of N·M). The outlier filter is
+    percentile-based: keep [lo − 1000(hi−lo), hi + 1000(hi−lo)] with
+    (lo, hi) the (1, 99) percentiles of the M values, plus drop NaNs.
+25. **Deliberate deviations from branch.py** (all validated harmless):
+    (a) no antithetic Brownian variates (we forego a ~2x variance saving);
+    (b) our tree samples come from the M3 reduced-mechanism sympy sampler,
+    not their torch autograd sampler over the RAW mechanism — same
+    distribution (tested), orders of magnitude faster: Merton full budget
+    N=1000, M=10,000 costs us ~13 s datagen on 6 CPU cores vs their 54
+    GPU-minutes; (c) time patching (`branch_patches`) NOT implemented —
+    it is in their code (default 1, unused in all JCP §4 experiments,
+    central only in the successor deep_branching_with_domain repo);
+    doing it properly needs net-as-terminal-condition inside the sampler
+    (autograd ∂^μ of the net at leaves) — scoped out to M5+.
+    (d) the authors train u only (root code Id); we also train u only,
+    but generate_training_data(code=DxN(mu)) gives ∂^μu families for
+    free (tested against the exact Allen–Cahn du/dx).
+26. **Merton HJB (4.6) fits the sympy pipeline despite non-polynomial f**
+    (z1²/z2 and z1^{1−1/γ} terms; possibly_nonzero falls back to safe
+    degree analysis). Its exact solution needs the numerator and α^γ
+    combined BEFORE the γ-power — with the paper's parameters
+    α = −0.07 < 0 and both factors are negative separately (complex
+    powers if evaluated naively).
+27. **The paper's tanh anomaly is real and reproducible**: at full budget
+    (M=10,000, 10 runs) our run 9 trains to L1 6.8e-2 (9 other runs:
+    5e-3–1.8e-2, median ≈ 1e-2 ≙ paper's 8.49e-3) with the net visibly
+    detaching from the MC scatter for x ≳ 180 — exactly the paper's Fig 7
+    (their anomaly was on the third run). The Fig-7 consistency check
+    (MC targets ARE unbiased pointwise estimates of u) catches it; that
+    diagnostic is unavailable to deep BSDE/Galerkin. Batchnorm running
+    stats + full-batch training make the anomaly a pure optimization
+    pathology, not a data problem.
 
 ## Paper pointers (M2 done, for M3)
 - General mechanism: JEQ2023 Def. 2.2, eqs. (2.4)–(2.5); multivariate Faà di
