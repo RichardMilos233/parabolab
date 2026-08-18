@@ -30,8 +30,12 @@ $\phi$ (JEQ2023 Thm. 1, JCP2024 Alg. 1).
 conda env create -f environment.yml     # or: conda env update -f environment.yml
 conda activate parabolab
 pytest                                  # fast suite (~5 s)
-pytest -m 'slow or not slow'            # + 1e6-sample validation (~10 s)
-python examples/jeq_allen_cahn_1d.py    # table + figure vs closed form
+pytest -m 'slow or not slow'            # + paper-budget validation (~30 s)
+python examples/jeq_allen_cahn_1d.py    # M1: Allen-Cahn vs closed form
+python examples/jeq_fig6_dym.py         # M2: JEQ Figs 6-9 reproductions
+python examples/jeq_fig7_tan.py         #     (each prints a table and saves
+python examples/jeq_fig8_cosine.py      #      a .png next to the script)
+python examples/jeq_fig9_log.py
 ```
 
 ```python
@@ -47,20 +51,24 @@ print(r, "exact:", pde.exact_solution(0.0, 0.0))
 
 | module | contents |
 |---|---|
-| `parabolab/pde.py` | `ParabolicPDE` problem spec (f, its derivatives, phi, T, exact solution) |
-| `parabolab/mechanism.py` | codes (`Id`, `Dx`, `FDeriv`) + semilinear mechanism, JEQ2023 eq. (2.7) |
+| `parabolab/pde.py` | `ParabolicPDE` (semilinear spec) and `FullyNonlinearPDE1D` (sympy f/phi, lazy derivative caches) |
+| `parabolab/mechanism.py` | codes (`Id`, `Dx`, `FDeriv`, `FNu`) + semilinear mechanism (2.7) + general `FullyNonlinearMechanism1D` (2.4)–(2.5) |
+| `parabolab/fdb.py` | multivariate Faà di Bruno term enumeration (cross-checked against the authors' `deep_branching/fdb.py`) |
 | `parabolab/tree.py` | recursive `TREE(t,x,c)` sampler, JCP2024 Alg. 1 / JEQ2023 Def. 4.1 |
 | `parabolab/mc.py` | pointwise estimator: mean, stderr, tree-size diagnostics |
-| `parabolab/library.py` | Allen–Cahn examples with closed forms, JEQ2023 (5.2)–(5.4) |
+| `parabolab/profiles.py` | profile estimation over an x-grid + Fig-style plotting |
+| `parabolab/library.py` | Allen–Cahn (5.2)–(5.4); Dym (5.7), tan (5.8), 4th-order cosine (5.10), 3rd-order log (5.11) with exact solutions |
 
 ## Milestones
 
 - **M1 (done)** — semilinear coding trees, d = 1, pure Python/numpy;
   validated against the Allen–Cahn closed forms (traveling wave (5.3) and
   space-independent (5.4)) at $10^5$–$10^6$ samples, $T \le 0.5$.
-- **M2** — general fully nonlinear mechanism via the multivariate
-  Faà di Bruno formula (JEQ2023 eqs. (2.4)–(2.5)), gradient nonlinearities,
-  d ≥ 1; sympy-assisted derivative bookkeeping.
+- **M2 (done)** — general fully nonlinear mechanism via the multivariate
+  Faà di Bruno formula (JEQ2023 eqs. (2.4)–(2.5)), d = 1, arbitrary
+  derivative order n; sympy-based `FullyNonlinearPDE1D`; the four JEQ §5
+  examples (Dym, tan, 4th-order cosine, 3rd-order log) reproduce Figs 6–9
+  at the paper's sample budgets. Two paper errata found (see Notes).
 - **M3** — performance backend (numba and/or vectorized batching) for large
   sample counts and d up to 100 (paper-scale experiments).
 - **M4** — deep branching solver (JCP2024 Alg. 2): torch (CPU default,
@@ -78,3 +86,16 @@ print(r, "exact:", pde.exact_solution(0.0, 0.0))
 - The method is short-time by nature: integrability of $\mathcal H$
   (JEQ2023 Prop. 4.2) can fail for large T; Allen–Cahn at T ≲ 0.5 is safely
   inside the window.
+- **Dym instability (JEQ Fig. 6)**: the terminal condition $(6x)^{2/3}$ has
+  factorially growing high-order derivatives, so $\mathcal H$ has divergent
+  higher moments at *every* Exp rate — increasing the sample count surfaces
+  ever-bigger "monster" samples instead of converging (compare
+  `examples/jeq_fig6_dym.py` at 1e5 vs 1e6, and `examples/rate_study_dym.py`).
+  The paper's clean Fig. 6 at 1e5 samples is a lucky draw; ours at seed 0
+  shows the true behaviour.
+- **Paper errata found in JEQ2023 §5** (both sympy-verified, see
+  `parabolab/library.py`): (i) the quartic terminal-condition coefficients of
+  the cosine example (5.10) as printed (b = −36/47, c = 24b, d = 4b²) do not
+  solve the PDE — the correct values are b = 3/8, c = 1/16, e = 257/256;
+  (ii) the paper text says α = 5 for the log example (5.11) while the
+  authors' notebook uses α = 10 (we follow the paper).

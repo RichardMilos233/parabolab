@@ -2,12 +2,20 @@
 
 ## Project state
 - **M1 complete**: semilinear coding-tree Monte Carlo (JEQ2023 §2 mechanism,
-  JCP2024 Alg. 1 sampler), d = 1, pure Python/numpy. 25 tests green
-  (`pytest -m 'slow or not slow'`, ~10 s). Allen–Cahn validated against the
-  closed forms (5.3)/(5.4) at 1e5–1e6 samples, T ≤ 0.5, and cross-checked
-  against `../coding_trees/logs/final/allen_cahn_jeeq_dim_1_blow_up_analysis.csv`.
-- M2 (general Faà-di-Bruno mechanism), M3 (numba/vectorized backend),
-  M4 (torch deep branching, JCP Alg. 2), M5 (vendored baselines): not started.
+  JCP2024 Alg. 1 sampler), d = 1, pure Python/numpy. Allen–Cahn validated
+  against the closed forms (5.3)/(5.4) at 1e5–1e6 samples, T ≤ 0.5, and
+  cross-checked against
+  `../coding_trees/logs/final/allen_cahn_jeeq_dim_1_blow_up_analysis.csv`.
+- **M2 complete**: general fully nonlinear mechanism (JEQ eqs. (2.4)–(2.5))
+  in d = 1, arbitrary order n. `fdb.py` (our Faà-di-Bruno enumeration,
+  golden-tested against `../deep_branching/fdb.py`),
+  `FullyNonlinearMechanism1D` (per-PDE memoized, exact zero-tuple
+  reduction), `FullyNonlinearPDE1D` (sympy f/phi, lazy lambdified
+  derivative caches). Four JEQ §5 examples in library.py reproduce
+  Figs 6–9 at paper budgets (examples/jeq_fig6..9_*.py). 64 tests green
+  (`pytest -m 'slow or not slow'`, ~35 s).
+- M3 (numba/vectorized backend + d ≥ 2), M4 (torch deep branching,
+  JCP Alg. 2), M5 (vendored baselines): not started.
 - Env: `conda activate parabolab` (python 3.11). Editable install of this repo.
   Torch intentionally NOT installed until M4.
 
@@ -18,8 +26,14 @@
   `FDeriv(a, k)` = (a·f^{(k)})*. Real constants (e.g. the −1/2 in M(g*))
   are absorbed into `FDeriv.a`, never into sampling weights.
 - The mechanism object exposes `tuples(code)`, `terminal(code, pde, x)`,
-  `is_identically_zero(code, pde)`. tree.py depends only on this protocol —
-  the M2 fully nonlinear mechanism should implement the same three methods.
+  `is_identically_zero(code, pde)`. tree.py depends only on this protocol.
+  `SemilinearMechanism` is a static class; `FullyNonlinearMechanism1D` is an
+  instance bound to one `FullyNonlinearPDE1D` (reachable as `pde.mechanism`,
+  memoized). `estimate`/`sample_tree` with `mechanism=None` resolve to
+  `pde.mechanism` if present, else the semilinear mechanism.
+- General codes: `FNu(a, nu)` = (a·∂^ν f)*, ν a multi-index over (z0..zn).
+  `FDeriv(a, k)` ≅ `FNu(a, (k,))` (n = 0); the semilinear path is kept
+  untouched for M1 compatibility.
 - `ParabolicPDE.f_derivatives` is either a list [f′, f″, …] (entries past the
   end are declared ≡ 0 — the polynomial convention used for pruning) or a
   callable k ↦ f^{(k)} for non-polynomial f (e.g. exp; pruning then off).
@@ -68,12 +82,57 @@
    picks up the repo FOLDER (namespace package) instead of the installed
    package. Run python/pytest from inside `parabolab/` (the repo root).
 
-## Paper pointers (for M2)
+## Gotchas discovered (M2)
+10. **JEQ2023 (5.10) terminal condition is wrong in the paper AND in the
+    authors' notebook**: b = −36/47, c = 24b, d = 4b² do not satisfy the
+    traveling-wave consistency φ − (φ″/12)² + cos(πφ⁗/24) = 0 (sympy
+    residual −143ξ²/188 − 858ξ/47 + 2939/2209). Unique correct values for a
+    monic quartic with unit cubic term: b = 3/8, c = 1/16, e = 257/256
+    (`library.cosine_fourth_order_1d`). Their Fig 8 still "looks right"
+    because the y-scale is O(1000) and the error is O(1) relative O(10²)…
+    at T = 0.04 the wrong-exact curve differs by ≲1% of the plotted range.
+11. **JEQ2023 (5.11) α mismatch**: paper text says α = 5, the notebook uses
+    α = 10. We follow the paper (Fig 9 reproduces fine with α = 5).
+12. **The paper's displayed mechanism tables list duplicate tuples instead
+    of coefficients**: e.g. M(∂ₓ²) at n = 1 shows ((∂z0∂z1 f)*, ∂ₓ, ∂ₓ²)
+    twice; we carry one tuple with the Faà-di-Bruno integer constant (2)
+    inside FNu.a — same expectation, |M(c)| differs (only affects variance).
+13. **Zero-tuple reduction is a big deal for sparse f**: cosine example
+    (n = 4) has |M(f*)| = 306 raw → 23 after dropping tuples containing an
+    identically-zero (∂^ν f)* code (exact, mean-preserving — same induction
+    as gotcha 6). Without it, weights |M(c)|/ρ(τ) would be ~13x larger.
+    If reduction empties a table we keep one zero tuple (sampler returns 0).
+14. **Dym (Fig 6) has divergent higher moments at every rate**: φ = (6x)^{2/3}
+    ⇒ |φ^{(k)}| ~ Γ(k − 2/3)·x^{2/3−k} grows factorially, beating the
+    (λT)^depth branching probability for ANY λ; deep ∂ₓ-chains produce
+    monster samples (−54 ± 56 at 1e6 samples where exact = 4.05). More
+    samples make the profile WORSE, not better; higher rate is catastrophic
+    (rate 5: estimates in the thousands), lower rate just hides the
+    nonlinear correction. Strictly, φ violates the growth assumptions of
+    JEQ Prop 4.2 — the representation is numerically usable only in the
+    pre-asymptotic "lucky seed" regime. Central to the FYP short-time story.
+15. **Heavy tails masquerade as bias at small N** (cosine/log examples):
+    below ~1e5 samples the rare large-weight branches are missed, so both
+    the mean AND the stderr are too small — z-scores of 3.5–6.5 that shrink
+    with N (cosine at 4e5: all |z| < 2). Never judge these examples at 2e4.
+16. **sympy Subs pitfall in tests**: comparing our (∂^ν f)*-at-jet Subs
+    expressions against sympy's own chain-rule output fails for n ≥ 1
+    (different Subs normal forms; diff of a Subs-built jet can even raise).
+    The identity tests instead use f = exp(Σ a_q z_q) with symbolic a_q —
+    ∂^ν f = (Π a_q^{ν_q}) f separates every ν as a distinct monomial.
+
+## Paper pointers (M2 done, for M3)
 - General mechanism: JEQ2023 Def. 2.2, eqs. (2.4)–(2.5); multivariate Faà di
-  Bruno constants k_q^j, l_j (Prop. 1.1). JCP2024 p. 4 has the d-dim version
-  with multi-indices; their `deep_branching/fdb.py` implements it.
+  Bruno constants k_q^j, l_j (Prop. 1.1) — implemented in `fdb.py` as
+  multisets of blocks (l, q, mult), coeff = k!/Π(mult!·(l!)^mult).
+- |M(g*)| = 1 + Σ_{k=1..n} |fdb(n+1, k)| + (n+1)² (confirmed against the
+  Mathematica appendix variable `l1`).
 - Integrability / short-time: JEQ2023 Prop. 4.2 (sufficient, very
   conservative: needs K < 1 bounds and ρ(T) ≥ 1/min q_c — unattainable for
   the semilinear mechanism at T = 0.5 with any Exp rate, yet MC is fine).
-- First-order example mechanism (n = 1): JEQ2023 §2 second example — good
-  first target for M2 tests (7 tuples for M(g*), 2 for M(∂x)).
+- M3 (multidimensional) needs: d-dim codes ∂^μ with μ ∈ N^d (fdb.py's block
+  sizes l become multi-indices — the authors' fdb_nd already supports this
+  via `ks`), d-dim Brownian moves, and the JCP2024 p.4 d-dim mechanism.
+  Runtime is NOT the bottleneck for the JEQ figures (tiny trees at T ≤ 0.04:
+  1e5 samples/point ≈ 0.15 s) — numba matters for T ~ 0.5 (Allen-Cahn-type,
+  mean nodes > 1.5) and for d ≥ 2 sample counts.
