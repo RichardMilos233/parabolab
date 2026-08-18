@@ -82,7 +82,7 @@ def sample_tree(
     rng: np.random.Generator,
     rate: Optional[float] = None,
     code: Code = Id(),
-    mechanism=SemilinearMechanism,
+    mechanism=None,
     prune_zero: bool = True,
 ) -> TreeSample:
     """Draw one sample of H(T_{t,x,code}); E[H] = code(u)(t, x).
@@ -91,10 +91,14 @@ def sample_tree(
     ----------
     rate : rate of the Exp interbranching-time distribution rho
         (None -> default_rate(pde.T)).
+    mechanism : None picks the PDE's own mechanism if it has one
+        (FullyNonlinearPDE1D), else the semilinear mechanism.
     prune_zero : return 0 immediately for identically-zero codes (exact for
         polynomial f, see SemilinearMechanism.is_identically_zero). Pruned
         subtrees consume no randomness.
     """
+    if mechanism is None:
+        mechanism = getattr(pde, "mechanism", None) or SemilinearMechanism
     if rate is None:
         rate = default_rate(pde.T)
     counter = [0]

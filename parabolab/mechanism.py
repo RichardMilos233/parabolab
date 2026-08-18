@@ -66,6 +66,19 @@ class FDeriv(Code):
     k: int = 0
 
 
+@dataclass(frozen=True)
+class FNu(Code):
+    """The general code (a d^nu f)*, nu a multi-index over (z0, ..., zn).
+
+    Evaluate a * (d_{z0}^{nu_0} ... d_{zn}^{nu_n} f) at the solution jet
+    (u, du/dx, ..., d^n u/dx^n).  Generalizes FDeriv (which is the n = 0
+    case with nu = (k,)).
+    """
+
+    a: float
+    nu: Tuple[int, ...]
+
+
 CodeTuple = Tuple[Code, ...]
 F_STAR = FDeriv(1.0, 0)  # the plain code f*
 
@@ -122,3 +135,119 @@ class SemilinearMechanism:
         removes zero-valued samples, not just their expectation).
         """
         return isinstance(code, FDeriv) and pde.f_derivative(code.k) is None
+
+
+class FullyNonlinearMechanism1D:
+    """General mechanism for fully nonlinear PDEs, JEQ2023 eqs. (2.4)-(2.5).
+
+    Bound to one FullyNonlinearPDE1D instance (memoized per PDE).  Raw code
+    tables depend only on n; with ``reduce_zero_tuples`` (default) any tuple
+    containing a code (a d^nu f)* with d^nu f identically zero is dropped
+    from M(c).  This is exact: such a code spawns a subtree whose H vanishes
+    almost surely (every tuple in its mechanism contains a further
+    derivative of it, so by induction a zero leaf factor always occurs),
+    hence the dropped tuples contribute zero-valued samples only.  The
+    uniform probability q_c adapts to the reduced set |M(c)| -- the mean is
+    unchanged, the variance is smaller.  If reduction would empty M(c), one
+    zero tuple is kept so the sampler still returns a (zero) sample.
+
+    Structure of the raw tables (m = n + 1 arguments of f):
+
+        M(Id)     = { (f*,) }
+        M(d^k)    = { (c * (d^lam f)*,  d^{q+l} repeated mult times ...) }
+                    over the Faa di Bruno terms of order k (fdb_terms(m, k))
+        M(g*),    g = a d^nu f:
+            { (f*, (a d^{nu+e0} f)*) }
+          U { ((a d^{nu+ek} f)*, c*(d^lam f)*, d^{q+l}...) : k = 1..n,
+              FdB terms of order k }
+          U { ((-a/2 d^{nu+ej+el} f)*, d^{j+1}, d^{l+1}) : j, l = 0..n }
+
+    where the FdB integer constant c and all real coefficients live in the
+    ``a`` of the produced FNu codes, never in the sampling weights.
+    """
+
+    def __init__(self, pde, reduce_zero_tuples: bool = True) -> None:
+        self.pde = pde
+        self.n = pde.n
+        self.reduce_zero_tuples = reduce_zero_tuples
+        self._tuples_cache: dict = {}
+
+    # -- raw tables ---------------------------------------------------------
+    def _fdb_tuple(self, term, f_coeff: float, prefix: Tuple[Code, ...]) -> CodeTuple:
+        from .fdb import FdBTerm  # noqa: F401  (documentation import)
+
+        codes = list(prefix)
+        codes.append(FNu(f_coeff * term.coeff, term.lam))
+        for l, q, mult in term.blocks:
+            codes.extend([Dx(q + l)] * mult)
+        return tuple(codes)
+
+    def _raw_tuples(self, code: Code) -> Tuple[CodeTuple, ...]:
+        from .fdb import fdb_terms
+
+        m = self.n + 1
+        zero_nu = (0,) * m
+        if isinstance(code, Id):
+            return ((FNu(1.0, zero_nu),),)
+        if isinstance(code, Dx):
+            return tuple(
+                self._fdb_tuple(term, 1.0, ())
+                for term in fdb_terms(m, code.order)
+            )
+        if isinstance(code, FNu):
+            a, nu = code.a, code.nu
+            out = [(FNu(1.0, zero_nu), FNu(a, _bump(nu, 0)))]
+            for k in range(1, self.n + 1):
+                prefix = (FNu(a, _bump(nu, k)),)
+                for term in fdb_terms(m, k):
+                    out.append(self._fdb_tuple(term, 1.0, prefix))
+            for j in range(self.n + 1):
+                for l in range(self.n + 1):
+                    out.append(
+                        (FNu(-a / 2.0, _bump(_bump(nu, j), l)),
+                         Dx(j + 1), Dx(l + 1))
+                    )
+            return tuple(out)
+        raise TypeError(f"unknown code {code!r}")
+
+    # -- protocol -----------------------------------------------------------
+    def tuples(self, code: Code) -> Tuple[CodeTuple, ...]:
+        if code not in self._tuples_cache:
+            raw = self._raw_tuples(code)
+            if self.reduce_zero_tuples:
+                reduced = tuple(
+                    tpl for tpl in raw
+                    if not any(self.is_identically_zero(c, self.pde)
+                               for c in tpl)
+                )
+                # keep one zero tuple if everything vanished, so the sampler
+                # still produces a (zero-valued) sample instead of crashing
+                raw = reduced if reduced else raw[:1]
+            self._tuples_cache[code] = raw
+        return self._tuples_cache[code]
+
+    def terminal(self, code: Code, pde, x: float) -> float:
+        """Evaluate c(u)(T, x) on the terminal condition phi."""
+        if isinstance(code, Id):
+            return pde.phi_k(0)(x)
+        if isinstance(code, Dx):
+            return pde.phi_k(code.order)(x)
+        if isinstance(code, FNu):
+            fn = pde.f_nu(code.nu)
+            if fn is None:
+                return 0.0
+            return code.a * fn(*pde.phi_jet(x))
+        raise TypeError(f"unknown code {code!r}")
+
+    def is_identically_zero(self, code: Code, pde=None) -> bool:
+        """True iff code = (a d^nu f)* with d^nu f identically zero.
+
+        Dx codes are never pruned: phi^{(m)} == 0 does NOT imply that
+        d^m u(t, .) vanishes at earlier times t < T.
+        """
+        return isinstance(code, FNu) and self.pde.f_nu(code.nu) is None
+
+
+def _bump(nu: Tuple[int, ...], k: int) -> Tuple[int, ...]:
+    """nu + e_k."""
+    return nu[:k] + (nu[k] + 1,) + nu[k + 1:]

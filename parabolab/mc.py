@@ -45,14 +45,17 @@ def estimate(
     seed: Optional[int] = None,
     rate: Optional[float] = None,
     code: Code = Id(),
-    mechanism=SemilinearMechanism,
+    mechanism=None,
     prune_zero: bool = True,
 ) -> MCResult:
     """Estimate code(u)(t, x) by averaging n_samples coding-tree samples.
 
     Pass either ``rng`` (a numpy Generator) or ``seed``; ``seed`` creates a
     fresh ``np.random.default_rng(seed)`` so runs are reproducible.
+    ``mechanism=None`` picks the PDE's own mechanism if it has one.
     """
+    if mechanism is None:
+        mechanism = getattr(pde, "mechanism", None) or SemilinearMechanism
     if rng is None:
         rng = np.random.default_rng(seed)
     if rate is None:
