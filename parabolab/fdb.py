@@ -27,7 +27,8 @@ from __future__ import annotations
 
 import math
 from functools import lru_cache
-from typing import NamedTuple, Tuple
+from itertools import product
+from typing import Callable, NamedTuple, Optional, Tuple
 
 
 class FdBTerm(NamedTuple):
@@ -38,38 +39,120 @@ class FdBTerm(NamedTuple):
     blocks: Tuple[Tuple[int, int, int], ...]  # sorted (l, q, mult), mult >= 1
 
 
+class FdBTermND(NamedTuple):
+    """One term of the d-dimensional multivariate Faa di Bruno expansion.
+
+    Block sizes l are now multi-indices over the d space dimensions:
+
+        d^mu g(w_1, ..., w_m) = sum coeff * (d^lam g)(w)
+                                    * prod_{(l, q, mult)} (d^l w_q)^mult,
+
+    over multisets of blocks {(l, q): mult}, 0 < l <= mu componentwise
+    is NOT required individually but sum(mult * l) = mu is; coefficient
+
+        coeff = mu! / prod_{(l,q)} (mult! * (l!)^mult),   x! := prod x_i!.
+    """
+
+    coeff: int
+    lam: Tuple[int, ...]                       # multi-index on g, length m
+    blocks: Tuple[Tuple[Tuple[int, ...], int, int], ...]  # (l, q, mult)
+
+
 @lru_cache(maxsize=None)
 def fdb_terms(m: int, k: int) -> Tuple[FdBTerm, ...]:
     """All Faa di Bruno terms for d^k/dx^k g(v, dv, ..., d^{m-1} v), k >= 1.
 
     m is the number of arguments of g (= n + 1 for the jet up to order n).
+    Kept as the 1-d interface; implemented via fdb_terms_nd with d = 1.
     """
     if k < 1:
         raise ValueError("k must be >= 1")
-    pairs = [(l, q) for l in range(1, k + 1) for q in range(m)]
-    out = []
+    return tuple(
+        FdBTerm(t.coeff, t.lam,
+                tuple((l[0], q, mult) for l, q, mult in t.blocks))
+        for t in fdb_terms_nd(m, (k,))
+    )
 
-    def rec(idx: int, remaining: int, chosen):
-        if remaining == 0:
-            out.append(_make_term(m, k, chosen))
+
+def fdb_terms_nd(
+    m: int,
+    mu: Tuple[int, ...],
+    live: Optional[Callable[[Tuple[int, ...]], bool]] = None,
+) -> Tuple[FdBTermND, ...]:
+    """All Faa di Bruno terms for d^mu g(w_1, ..., w_m), |mu| >= 1.
+
+    ``live`` is an optional MONOTONE predicate on the partial derivative
+    multi-index lam of g: if live(lam) is False then live(lam') must be
+    False for every lam' >= lam componentwise.  Recursion subtrees whose
+    partial lam is dead are pruned, so with a polynomial-support predicate
+    the enumeration cost is proportional to the *reduced* term set (the key
+    to d = 100 tractability), not to the raw one.
+
+    Results for live=None are cached; predicate-filtered calls are not
+    (the caller caches its mechanism tables instead).
+    """
+    if live is None:
+        return _fdb_terms_nd_cached(m, mu)
+    return _fdb_terms_nd(m, mu, live)
+
+
+@lru_cache(maxsize=None)
+def _fdb_terms_nd_cached(m: int, mu: Tuple[int, ...]) -> Tuple[FdBTermND, ...]:
+    return _fdb_terms_nd(m, mu, None)
+
+
+def _fdb_terms_nd(m, mu, live) -> Tuple[FdBTermND, ...]:
+    if sum(mu) < 1:
+        raise ValueError("|mu| must be >= 1")
+    d = len(mu)
+    # candidate block sizes: 0 < l <= mu componentwise, lexicographic order
+    # (matches the historical 1-d enumeration order for d = 1)
+    ls = [l for l in product(*[range(mi + 1) for mi in mu]) if any(l)]
+    ls.sort()
+    pairs = [(l, q) for l in ls for q in range(m)]
+    out = []
+    lam = [0] * m
+
+    def rec(idx: int, remaining: Tuple[int, ...], chosen):
+        if not any(remaining):
+            out.append(_make_term_nd(m, mu, chosen))
             return
         if idx == len(pairs):
             return
         l, q = pairs[idx]
-        for mult in range(remaining // l, -1, -1):
-            rec(idx + 1, remaining - mult * l,
-                chosen + [(l, q, mult)] if mult else chosen)
+        max_mult = min(
+            (r // li for r, li in zip(remaining, l) if li), default=0
+        )
+        for mult in range(max_mult, -1, -1):
+            if mult:
+                lam[q] += mult
+                if live is not None and not live(tuple(lam)):
+                    lam[q] -= mult
+                    continue
+                rec(idx + 1,
+                    tuple(r - mult * li for r, li in zip(remaining, l)),
+                    chosen + [(l, q, mult)])
+                lam[q] -= mult
+            else:
+                rec(idx + 1, remaining, chosen)
 
-    rec(0, k, [])
+    rec(0, tuple(mu), [])
     return tuple(out)
 
 
-def _make_term(m: int, k: int, blocks) -> FdBTerm:
+def _multifactorial(v) -> int:
+    out = 1
+    for vi in v:
+        out *= math.factorial(vi)
+    return out
+
+
+def _make_term_nd(m: int, mu, blocks) -> FdBTermND:
     lam = [0] * m
     denom = 1
     for l, q, mult in blocks:
         lam[q] += mult
-        denom *= math.factorial(mult) * math.factorial(l) ** mult
-    coeff, rem = divmod(math.factorial(k), denom)
+        denom *= math.factorial(mult) * _multifactorial(l) ** mult
+    coeff, rem = divmod(_multifactorial(mu), denom)
     assert rem == 0, "Faa di Bruno coefficient must be an integer"
-    return FdBTerm(coeff=coeff, lam=tuple(lam), blocks=tuple(sorted(blocks)))
+    return FdBTermND(coeff=coeff, lam=tuple(lam), blocks=tuple(sorted(blocks)))

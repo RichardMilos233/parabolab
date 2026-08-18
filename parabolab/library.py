@@ -12,7 +12,14 @@ from __future__ import annotations
 
 import math
 
-from .pde import FullyNonlinearPDE1D, ParabolicPDE, x_symbol, z_symbols
+from .pde import (
+    FullyNonlinearPDE1D,
+    FullyNonlinearPDEnD,
+    ParabolicPDE,
+    x_symbol,
+    x_symbols,
+    z_symbols,
+)
 
 
 def _allen_cahn_f_derivatives():
@@ -210,3 +217,152 @@ def log_third_order_1d(T: float = 0.02, alpha: float = 5.0) -> FullyNonlinearPDE
         T=T, n=3, f_expr=f_expr, phi_expr=phi_expr, exact_solution=exact,
         name=f"log_third_order_1d(T={T}, alpha={alpha})",
     )
+
+
+# --------------------------------------------------------------------------
+# Multidimensional examples (M3): JEQ2023 Section 5.1
+# --------------------------------------------------------------------------
+
+def _grad_rows(d: int):
+    """deriv_map rows (e_1, ..., e_d) for first-derivative arguments."""
+    return tuple(tuple(1 if j == i else 0 for j in range(d))
+                 for i in range(d))
+
+
+def allen_cahn_nd(d: int, T: float = 0.5) -> FullyNonlinearPDEnD:
+    """Allen-Cahn traveling wave in d dimensions, JEQ2023 eqs. (5.2)-(5.3):
+
+        du/dt + (1/2) Lap u + u - u^3 = 0,
+        u(t, x) = -1/2 - (1/2) tanh( (3/4)(T-t) - sum_i x_i / (2 sqrt d) ).
+
+    The paper's Fig. 1 uses d = 5 with T = 0.5 and d = 100 with T = 0.3
+    (settings from the authors' coding_trees notebook, cells
+    allen_cahn_jeeq_dim_{5,100}), profile along x = (0, ..., 0, s),
+    s in [-8, 8], 1e5 samples.
+    """
+    import sympy as sp
+
+    z = z_symbols(0)
+    xs = x_symbols(d)
+    inv = 0.5 / math.sqrt(d)
+
+    def exact(t: float, xv) -> float:
+        return -0.5 - 0.5 * math.tanh(
+            0.75 * (T - t) - inv * float(sum(xv))
+        )
+
+    return FullyNonlinearPDEnD(
+        T=T, d=d, deriv_map=((0,) * d,),
+        f_expr=z[0] - z[0] ** 3,
+        phi_expr=-sp.Rational(1, 2)
+        - sp.tanh(-inv * sum(xs)) / 2,
+        exact_solution=exact,
+        name=f"allen_cahn_nd(d={d}, T={T})",
+    )
+
+
+def allen_cahn_bsde(d: int = 100, T: float = 0.3) -> FullyNonlinearPDEnD:
+    """Allen-Cahn benchmark of JEQ2023 Table 2 / deep-BSDE Table 1 [19]:
+
+        du/dt + Lap u + u - u^3 = 0   (FULL Laplacian: sigma2 = 2),
+        phi(x) = 1 / (2 + 2 |x|^2 / 5),   d = 100,  T = 0.3,  u(0, 0) = ?
+
+    No closed form; the deep-BSDE reference value at u(0, 0) is 0.052802
+    (E-Han-Jentzen 2017), coding trees report 0.052754 +/- 0.000364.
+    """
+    import sympy as sp
+
+    z = z_symbols(0)
+    xs = x_symbols(d)
+
+    return FullyNonlinearPDEnD(
+        T=T, d=d, deriv_map=((0,) * d,),
+        f_expr=z[0] - z[0] ** 3,
+        phi_expr=1 / (2 + sp.Rational(2, 5) * sum(x ** 2 for x in xs)),
+        sigma2=2.0,
+        name=f"allen_cahn_bsde(d={d}, T={T})",
+    )
+
+
+def exponential_gradient_nd(
+    d: int, T: float = 0.05, alpha: float = 10.0
+) -> FullyNonlinearPDEnD:
+    """Gradient-dependent exponential nonlinearity, JEQ2023 eq. (5.5):
+
+        du/dt + (alpha/d) sum_i du/dx_i + (1/2) Lap u
+              + d e^{-u} (1 - 2 e^{-u}) = 0,
+
+    i.e. f = (alpha/d) sum z_i + d e^{-z0} - 2d e^{-2 z0} over the jet
+    (u, grad u).  Traveling-wave solution (5.6):
+
+        u(t, x) = log(1 + (alpha (T-t) + sum_i x_i)^2).
+
+    Paper Figs. 4/5: d = 5 and 10, T = 0.05, alpha = 10, 1e5 samples,
+    profile along x = (0, ..., 0, s), s in [-4, 4].
+    """
+    import sympy as sp
+
+    z = z_symbols(d)
+    xs = x_symbols(d)
+    f_expr = (
+        sp.Rational(1, 1) * alpha / d * sum(z[1:])
+        + d * sp.exp(-z[0]) - 2 * d * sp.exp(-2 * z[0])
+    )
+
+    def exact(t: float, xv) -> float:
+        return math.log(1 + (alpha * (T - t) + float(sum(xv))) ** 2)
+
+    return FullyNonlinearPDEnD(
+        T=T, d=d, deriv_map=((0,) * d,) + _grad_rows(d),
+        f_expr=f_expr,
+        phi_expr=sp.log(1 + sum(xs) ** 2),
+        exact_solution=exact,
+        name=f"exponential_gradient_nd(d={d}, T={T}, alpha={alpha})",
+    )
+
+
+def hjb_nd(d: int = 100, T: float = 1.0) -> FullyNonlinearPDEnD:
+    """Hamilton-Jacobi-Bellman equation of JEQ2023 Table 5 / eq. (5.9):
+
+        du/dt + Lap u = |grad u|^2   (FULL Laplacian: sigma2 = 2),
+        phi(x) = log((1 + |x|^2) / 2),   d = 100,  T = 1.
+
+    In our framework: f = -sum_q z_q^2 over the gradient jet, sigma2 = 2.
+    Exact value at (0, x) via Cole-Hopf (w = e^{-u} solves the heat
+    equation): u(t, x) = -log E[exp(-phi(x + sqrt(2(T-t)) Z))]; use
+    hjb_exact_u0 for x = 0.  Coding trees report 4.580340 +/- 0.001869,
+    deep BSDE 4.5977 +/- 0.0019.
+    """
+    import sympy as sp
+
+    z = z_symbols(d - 1)  # d args z0..z_{d-1}, one per first derivative
+    xs = x_symbols(d)
+
+    return FullyNonlinearPDEnD(
+        T=T, d=d, deriv_map=_grad_rows(d),
+        f_expr=-sum(zi ** 2 for zi in z),
+        phi_expr=sp.log((1 + sum(x ** 2 for x in xs)) / 2),
+        sigma2=2.0,
+        name=f"hjb_nd(d={d}, T={T})",
+    )
+
+
+def hjb_exact_u0(T: float = 1.0, d: int = 100) -> float:
+    """Exact u(0, 0) for hjb_nd via Cole-Hopf + chi-squared quadrature.
+
+    u(0,0) = -log E[ 2 / (1 + 2 T S) ],  S ~ chi^2_d
+    (since |sqrt(2T) Z|^2 = 2T S), computed by high-resolution trapezoidal
+    integration of the chi^2_d density (log-pdf via lgamma for stability).
+    """
+    import numpy as np
+
+    hi = d + 12.0 * math.sqrt(2.0 * d)
+    s = np.linspace(1e-12, hi, 200_001)
+    log_pdf = (
+        (d / 2.0 - 1.0) * np.log(s)
+        - s / 2.0
+        - (d / 2.0) * math.log(2.0)
+        - math.lgamma(d / 2.0)
+    )
+    integrand = np.exp(log_pdf) * 2.0 / (1.0 + 2.0 * T * s)
+    return -math.log(float(np.trapezoid(integrand, s)))

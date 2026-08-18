@@ -8,26 +8,39 @@ From-scratch reproduction of Nguwi, Penent & Privault:
 """
 
 from .mc import MCResult, estimate
+from .parallel import estimate_parallel
 from .mechanism import (
     Code,
     Dx,
+    DxN,
     FDeriv,
     FNu,
     FullyNonlinearMechanism1D,
+    FullyNonlinearMechanismND,
     Id,
     SemilinearMechanism,
 )
-from .pde import FullyNonlinearPDE1D, ParabolicPDE, x_symbol, z_symbols
+from .pde import (
+    FullyNonlinearPDE1D,
+    FullyNonlinearPDEnD,
+    ParabolicPDE,
+    x_symbol,
+    x_symbols,
+    z_symbols,
+)
 from .tree import TreeSample, default_rate, jcp_rate, sample_tree
 from . import library
 
 __all__ = [
     "Code",
     "Dx",
+    "DxN",
     "FDeriv",
     "FNu",
     "FullyNonlinearMechanism1D",
+    "FullyNonlinearMechanismND",
     "FullyNonlinearPDE1D",
+    "FullyNonlinearPDEnD",
     "Id",
     "MCResult",
     "ParabolicPDE",
@@ -35,9 +48,11 @@ __all__ = [
     "TreeSample",
     "default_rate",
     "estimate",
+    "estimate_parallel",
     "jcp_rate",
     "library",
     "sample_tree",
     "x_symbol",
+    "x_symbols",
     "z_symbols",
 ]

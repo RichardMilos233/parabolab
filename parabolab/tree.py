@@ -101,8 +101,14 @@ def sample_tree(
         mechanism = getattr(pde, "mechanism", None) or SemilinearMechanism
     if rate is None:
         rate = default_rate(pde.T)
+    # d-dim problems (FullyNonlinearPDEnD) pass x as an ndarray of shape (d,)
+    # and may carry a diffusion sigma2 != 1 (BM variance sigma2 per unit
+    # time); the scalar d = 1 path is byte-for-byte the M1/M2 behaviour.
+    size = x.shape if isinstance(x, np.ndarray) else None
+    sig = math.sqrt(getattr(pde, "sigma2", 1.0))
     counter = [0]
-    value = _tree(pde, mechanism, t, x, code, rng, rate, prune_zero, counter)
+    value = _tree(pde, mechanism, t, x, code, rng, rate, prune_zero, counter,
+                  size, sig)
     return TreeSample(value=value, n_nodes=counter[0])
 
 
@@ -110,12 +116,14 @@ def _tree(
     pde: ParabolicPDE,
     mech,
     t: float,
-    x: float,
+    x,
     code: Code,
     rng: np.random.Generator,
     rate: float,
     prune_zero: bool,
     counter: list,
+    size=None,
+    sig: float = 1.0,
 ) -> float:
     counter[0] += 1
     if prune_zero and mech.is_identically_zero(code, pde):
@@ -127,15 +135,19 @@ def _tree(
     if tau > remaining:
         # Leaf: run the Brownian motion to the horizon and evaluate the code
         # on phi; importance weight 1/Fbar(T - t) with Fbar(s) = exp(-rate*s).
-        w = rng.normal(0.0, math.sqrt(remaining)) if remaining > 0.0 else 0.0
+        if remaining > 0.0:
+            w = rng.normal(0.0, sig * math.sqrt(remaining), size=size)
+        else:
+            w = 0.0
         return mech.terminal(code, pde, x + w) * math.exp(rate * remaining)
 
     # Branch: uniform tuple from M(code), weight |M(code)| / rho(tau).
     tuples = mech.tuples(code)
     z = tuples[rng.integers(len(tuples))] if len(tuples) > 1 else tuples[0]
     # One shared branch position for all children (JEQ2023 Section 3).
-    xb = x + rng.normal(0.0, math.sqrt(tau))
+    xb = x + rng.normal(0.0, sig * math.sqrt(tau), size=size)
     h = len(tuples) * math.exp(rate * tau) / rate  # = |M(c)|/rho(tau)
     for cc in z:
-        h *= _tree(pde, mech, t + tau, xb, cc, rng, rate, prune_zero, counter)
+        h *= _tree(pde, mech, t + tau, xb, cc, rng, rate, prune_zero, counter,
+                   size, sig)
     return h

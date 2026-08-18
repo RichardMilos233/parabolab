@@ -25,7 +25,8 @@ class FakeRng:
     def exponential(self, scale):
         return self.exponentials.pop(0)
 
-    def normal(self, loc, scale):
+    def normal(self, loc, scale, size=None):
+        assert size is None, "scalar d=1 path must not request a vector"
         return self.normals.pop(0)
 
     def integers(self, n):
