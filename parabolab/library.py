@@ -239,6 +239,11 @@ def allen_cahn_nd(d: int, T: float = 0.5) -> FullyNonlinearPDEnD:
     (settings from the authors' coding_trees notebook, cells
     allen_cahn_jeeq_dim_{5,100}), profile along x = (0, ..., 0, s),
     s in [-8, 8], 1e5 samples.
+
+    phi is written in the logistic form -1 + 1/(1 + e^{-2 y}),
+    y = sum x_i/(2 sqrt d), identical to -1/2 - tanh(-y)/2: sympy's FIRST
+    derivative of tanh(100-term Add) takes ~3 minutes (pathological cache
+    warm-up), the exp form differentiates in milliseconds.
     """
     import sympy as sp
 
@@ -254,8 +259,7 @@ def allen_cahn_nd(d: int, T: float = 0.5) -> FullyNonlinearPDEnD:
     return FullyNonlinearPDEnD(
         T=T, d=d, deriv_map=((0,) * d,),
         f_expr=z[0] - z[0] ** 3,
-        phi_expr=-sp.Rational(1, 2)
-        - sp.tanh(-inv * sum(xs)) / 2,
+        phi_expr=-1 + 1 / (1 + sp.exp(-2 * inv * sum(xs))),
         exact_solution=exact,
         name=f"allen_cahn_nd(d={d}, T={T})",
     )

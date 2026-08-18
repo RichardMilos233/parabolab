@@ -16,6 +16,7 @@ and lambdify caches are per-process.
 
 from __future__ import annotations
 
+import functools
 import math
 from concurrent.futures import ProcessPoolExecutor
 from typing import Callable, Optional
@@ -25,10 +26,26 @@ import numpy as np
 from .mc import MCResult
 from .tree import default_rate, sample_tree
 
+# Worker-process PDE memo: building a FullyNonlinearPDEnD is cheap but its
+# lazy sympy caches (mechanism tables, lambdified d^mu phi) are NOT -- at
+# d = 100 they cost tens of seconds to rebuild.  Chunks arriving in the same
+# worker process for the same factory therefore share one PDE instance.
+_PDE_CACHE: dict = {}
+
+
+def _factory_key(factory):
+    if isinstance(factory, functools.partial):
+        return (factory.func, factory.args,
+                tuple(sorted(factory.keywords.items())))
+    return factory
+
 
 def _chunk_sums(args):
     factory, t, x, n, seed, rate, code, prune_zero = args
-    pde = factory()
+    key = _factory_key(factory)
+    pde = _PDE_CACHE.get(key)
+    if pde is None:
+        pde = _PDE_CACHE[key] = factory()
     rng = np.random.default_rng(seed)
     if rate is None:
         rate = default_rate(pde.T)
@@ -58,11 +75,15 @@ def estimate_parallel(
     n_chunks: int = 32,
     code=None,
     prune_zero: bool = True,
+    executor: Optional[ProcessPoolExecutor] = None,
 ) -> MCResult:
     """Estimate u(t, x) = E[H] with n_samples trees over n_jobs processes.
 
     Chunk seeds are spawned deterministically from ``seed`` via
-    numpy SeedSequence; the result is independent of n_jobs.
+    numpy SeedSequence; the result is independent of n_jobs.  Pass a
+    long-lived ``executor`` when making many calls (e.g. one per profile
+    grid point) so worker processes -- and their per-process PDE caches --
+    are reused instead of respawned.
     """
     import time
 
@@ -77,7 +98,9 @@ def estimate_parallel(
     ]
 
     start = time.perf_counter()
-    if n_jobs == 1:
+    if executor is not None:
+        results = list(executor.map(_chunk_sums, jobs))
+    elif n_jobs == 1:
         results = [_chunk_sums(j) for j in jobs]
     else:
         with ProcessPoolExecutor(max_workers=n_jobs) as ex:

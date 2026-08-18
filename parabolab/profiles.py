@@ -49,6 +49,16 @@ class ProfileResult:
                  if self.exacts is not None else ""))
 
 
+def last_coordinate_embedding(d: int):
+    """The authors' profile convention: grid point s -> (0, ..., 0, s)."""
+    def embed(s: float) -> np.ndarray:
+        x = np.zeros(d)
+        x[-1] = s
+        return x
+
+    return embed
+
+
 def estimate_profile(
     pde,
     t: float,
@@ -57,23 +67,56 @@ def estimate_profile(
     *,
     seed: int = 0,
     rate: Optional[float] = None,
+    embed=None,
+    pde_factory=None,
+    n_jobs: int = 1,
 ) -> ProfileResult:
-    """Pointwise coding-tree estimates of u(t, x) for x in xs."""
+    """Pointwise coding-tree estimates of u(t, x) for x in xs.
+
+    For d-dim problems pass ``embed`` mapping a scalar grid point to the
+    point in R^d (e.g. last_coordinate_embedding(d), the convention of the
+    authors' notebook plots).  With ``pde_factory``/``n_jobs`` > 1 the
+    samples are computed by estimate_parallel over worker processes.
+    """
     xs = np.asarray(xs, dtype=float)
     est = np.empty_like(xs)
     err = np.empty_like(xs)
     total_nodes = 0.0
     max_nodes = 0
+    executor = None
+    if n_jobs > 1:
+        from concurrent.futures import ProcessPoolExecutor
+
+        # one long-lived pool for all grid points, so the per-worker PDE
+        # caches (mechanism tables, lambdified derivatives) stay warm
+        executor = ProcessPoolExecutor(max_workers=n_jobs)
     start = time.perf_counter()
-    for i, x in enumerate(xs):
-        r = estimate(pde, t, float(x), n_samples, seed=seed + i, rate=rate)
-        est[i], err[i] = r.estimate, r.stderr
-        total_nodes += r.mean_nodes * r.n_samples
-        max_nodes = max(max_nodes, r.max_nodes)
+    try:
+        for i, x in enumerate(xs):
+            xpt = embed(float(x)) if embed is not None else float(x)
+            if n_jobs > 1:
+                from .parallel import estimate_parallel
+
+                r = estimate_parallel(pde_factory, t, xpt, n_samples,
+                                      seed=seed + i, rate=rate,
+                                      n_jobs=n_jobs, executor=executor)
+            else:
+                r = estimate(pde, t, xpt, n_samples, seed=seed + i,
+                             rate=rate)
+            est[i], err[i] = r.estimate, r.stderr
+            total_nodes += r.mean_nodes * r.n_samples
+            max_nodes = max(max_nodes, r.max_nodes)
+    finally:
+        if executor is not None:
+            executor.shutdown()
     seconds = time.perf_counter() - start
     exacts = None
     if pde.exact_solution is not None:
-        exacts = np.array([pde.exact_solution(t, float(x)) for x in xs])
+        exacts = np.array([
+            pde.exact_solution(t, embed(float(x)) if embed is not None
+                               else float(x))
+            for x in xs
+        ])
     return ProfileResult(
         t=t, xs=xs, estimates=est, stderrs=err, exacts=exacts,
         n_samples=n_samples, seconds=seconds,
@@ -81,23 +124,34 @@ def estimate_profile(
     )
 
 
-def plot_profile(result: ProfileResult, pde, out_path, title: str) -> None:
-    """Save a Fig-6-style plot: MC points with 3-stderr bars vs closed form."""
+def plot_profile(result: ProfileResult, pde, out_path, title: str,
+                 embed=None, reference=None) -> None:
+    """Save a Fig-6-style plot: MC points with 3-stderr bars vs closed form.
+
+    ``embed`` as in estimate_profile; ``reference`` optionally overlays
+    third-party values as (xs, values, label) (e.g. the authors' CSV).
+    """
     import matplotlib
 
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
+    def ex(t, v):
+        return pde.exact_solution(t, embed(v) if embed is not None else v)
+
     fig, ax = plt.subplots(figsize=(7, 4.5))
     x_fine = np.linspace(result.xs[0], result.xs[-1], 300)
     if pde.exact_solution is not None:
-        ax.plot(x_fine, [pde.exact_solution(result.t, v) for v in x_fine],
+        ax.plot(x_fine, [ex(result.t, v) for v in x_fine],
                 "k-", label="exact")
-    ax.plot(x_fine, [pde.exact_solution(pde.T, v) for v in x_fine],
-            "k--", alpha=0.6, label=r"terminal $\phi$")
+        ax.plot(x_fine, [ex(pde.T, v) for v in x_fine],
+                "k--", alpha=0.6, label=r"terminal $\phi$")
     ax.errorbar(result.xs, result.estimates, yerr=3 * result.stderrs,
                 fmt="o", mfc="none", color="tab:blue", capsize=3,
                 label=rf"MC ($N={result.n_samples}$, $\pm 3$ stderr)")
+    if reference is not None:
+        rx, rv, rlabel = reference
+        ax.plot(rx, rv, "x", color="tab:red", label=rlabel)
     ax.set_xlabel("$x$")
     ax.set_ylabel(f"$u({result.t}, x)$")
     ax.set_title(title)
