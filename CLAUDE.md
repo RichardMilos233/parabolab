@@ -40,7 +40,19 @@
   d = 1, 5), Table 3 (exp d = 1), Table 5 + Fig 7 (Merton HJB (4.6),
   new library entry `merton_hjb`, non-polynomial f) — including the
   paper's own tanh training anomaly (our run 9 ≙ their third run).
-- M5 (vendored baselines + blow-up study): not started.
+- **M5 complete**: vendored baselines + blow-up study.
+  `parabolab/vendor/` = authors' `bsde.py` (deep BSDE / 2BSDE) and
+  `galerkin.py` (DGM) verbatim from deep_branching @ c06bef2 (MIT,
+  provenance headers) + our `adapters.py` (~150 lines: deriv_map row →
+  BSDE input-slot mapping, DGM Laplacian-row extension, sympy→torch
+  lambdify; raises `BaselineInapplicable` for rows outside
+  {0, e_k, 2e_k} or σ² ≠ 1). `examples/jcp_comparison_baselines.py`
+  rebuilds JCP Tables 1/3/5 three-way (reduced budgets default,
+  --full for paper budgets), reproducing the paper's negative results
+  (BSDE fails on Merton, DGM inapplicable). `parabolab/blowup.py` =
+  `sweep_T` + `integrability_edge`; `examples/blowup_allen_cahn.py`
+  sweeps T = 0.1..2.0 for AC d = 1/10 at both ρ rates with the authors'
+  blow_up_analysis CSVs overlaid (figures in examples/).
 - Env: `conda activate parabolab` (python 3.11). Editable install of this
   repo. Torch CPU build installed (M4); all deep code is device-agnostic —
   pass device="cuda" on a GPU machine.
@@ -226,6 +238,38 @@
     diagnostic is unavailable to deep BSDE/Galerkin. Batchnorm running
     stats + full-batch training make the anomaly a pure optimization
     pathology, not a data problem.
+
+## Gotchas discovered (M5)
+28. **The deep BSDE f-input layout is FIXED**, independent of the
+    deriv_map you pass it: index 0 = u, 1..d = ∇u, d+1..2d = diag Hess
+    (second_order=True only); its `deriv_map` argument is used for
+    SHAPES only. And the driving BM is standard, so σ² = 2 problems
+    ((5.1), (5.9)) don't fit. The DGM residual is ∂ₜu + f with f
+    entirely caller-supplied — it must INCLUDE the (σ²/2)Δu term
+    (the authors' demo passes `.5*y[second_rows].sum()` explicitly).
+29. **The Merton baselines only run on regularized expressions**: the
+    authors' notebook (cell 21, comment "TODO: how to deal with negative
+    x and y[1] properly???") puts |·| around the fractional power's base
+    and inside φ; without it the BSDE z-net's negative outputs give NaN
+    at once. Also 2BSDE needs the y_lo=0, y_hi=100 clipping. We pass
+    these as expression OVERRIDES to the adapter — library.merton_hjb
+    itself stays the honest PDE.
+30. **Paper-vs-notebook config mismatch (BSDE)**: JCP §4 says the time
+    grid is (0, T/5, ..., T) = 5 intervals; comparison.ipynb runs the
+    tables with `bsde_nb_time_intervals=4`. We follow the notebook.
+31. **The blow-up has two distinct faces depending on the ρ rate**
+    (examples/blowup_allen_cahn.py, AC d=1/10, 3 seeds × 1e5): at
+    jcp_rate the sample SD grows SMOOTHLY (stderr > 5%·|u| past
+    T ≈ 0.8/0.9) and the authors' single-seed "systematic drift" curve
+    lies inside our 3-seed spread — it is one draw from a huge sampling
+    distribution, not a bias law; at rate = 1 the estimator is sharper
+    until T ≈ 1.0/1.1 and then explodes outright (max|H| ~ 7.6e9,
+    estimates ±10³–10⁴ at T = 2). `integrability_edge` therefore checks
+    BOTH persistent drift AND relative precision loss — the drift test
+    alone never fires (the error bars balloon along with the error).
+32. **conda run captures output**: `conda run ... > log` writes the log
+    only at process exit (use --no-capture-output to stream). Long
+    comparison runs look "empty" until they finish.
 
 ## Paper pointers (M2 done, for M3)
 - General mechanism: JEQ2023 Def. 2.2, eqs. (2.4)–(2.5); multivariate Faà di
