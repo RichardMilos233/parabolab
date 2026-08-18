@@ -8,8 +8,9 @@ dependencies:
   - pytest
   - sympy
   - pip
-  # M4 (deep branching solver, JCP2024 Algorithm 2) will add pytorch.
-  # CPU build by default; switch to a CUDA/MPS build only if needed:
-  # - pytorch
   - pip:
+      # CPU build by default (M4 deep branching solver); the code is
+      # device-agnostic -- pass device="cuda" on a machine with a CUDA
+      # torch build to run on GPU.
+      - torch
       - -e .

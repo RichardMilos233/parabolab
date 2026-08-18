@@ -370,3 +370,70 @@ def hjb_exact_u0(T: float = 1.0, d: int = 100) -> float:
     )
     integrand = np.exp(log_pdf) * 2.0 / (1.0 + 2.0 * T * s)
     return -math.log(float(np.trapezoid(integrand, s)))
+
+
+def merton_hjb(
+    T: float = 0.1,
+    mu: float = 0.03,
+    sigma: float = 0.1,
+    gamma: float = 0.5,
+    rho: float = 0.01,
+) -> FullyNonlinearPDEnD:
+    """Merton-problem HJB equation, JCP2024 eq. (4.6), d = 1:
+
+        du/dt - (mu^2/(2 sigma^2)) (du/dx)^2 / d2u/dx2
+              + (gamma/(1-gamma)) (du/dx)^{1-1/gamma} = rho u,
+
+    written in our framework (du/dt + (1/2) d2u/dx2 + f = 0) as
+
+        f(z0, z1, z2) = -z2/2 - (mu^2/(2 sigma^2)) z1^2/z2
+                        + (gamma/(1-gamma)) z1^{1-1/gamma} - rho z0
+
+    over the jet (u, du/dx, d2u/dx2).  Note f is NON-polynomial (division
+    by z2, fractional power of z1) -- the sympy pipeline handles it, with
+    possibly_nonzero falling back to its safe degree analysis.
+
+    Terminal condition phi(x) = x^{1-gamma}/(1-gamma) and exact solution
+
+        u(t, x) = x^{1-gamma} (1 + (a-1) e^{-a(T-t)})^gamma
+                  / (a^gamma (1-gamma)),
+        a := (2 sigma^2 gamma rho - (1-gamma) mu^2) / (2 sigma^2 gamma^2).
+
+    JCP2024 Table 5 / Figs 6-7: mu=0.03, sigma=0.1, gamma=0.5, rho=0.01,
+    T=0.1, x in [100, 200], M = 10,000 tree samples per training point.
+    With these values a = -0.07 < 0 (fine).  x must stay positive
+    (fractional powers of x in phi); on [100, 200] with T = 0.1 the
+    Brownian excursions are ~0.3, so this is never an issue.
+    """
+    import sympy as sp
+
+    z = z_symbols(2)
+    (xsym,) = x_symbols(1)
+
+    a = (2 * sigma**2 * gamma * rho - (1 - gamma) * mu**2) / (
+        2 * sigma**2 * gamma**2
+    )
+
+    f_expr = (
+        -z[2] / 2
+        - mu**2 / (2 * sigma**2) * z[1] ** 2 / z[2]
+        + gamma / (1 - gamma) * z[1] ** (1 - 1 / gamma)
+        - rho * z[0]
+    )
+
+    def exact(t: float, xv) -> float:
+        # combine numerator and a^gamma BEFORE the gamma-power: with the
+        # paper's parameters a < 0 and 1 + (a-1)e^{-a(T-t)} < 0, but their
+        # ratio is positive.
+        x = float(xv[0]) if hasattr(xv, "__len__") else float(xv)
+        base = (1 + (a - 1) * math.exp(-a * (T - t))) / a
+        return x ** (1 - gamma) * base**gamma / (1 - gamma)
+
+    return FullyNonlinearPDEnD(
+        T=T, d=1, deriv_map=((0,), (1,), (2,)),
+        f_expr=f_expr,
+        phi_expr=xsym ** (1 - gamma) / (1 - gamma),
+        exact_solution=exact,
+        name=(f"merton_hjb(T={T}, mu={mu}, sigma={sigma}, "
+              f"gamma={gamma}, rho={rho})"),
+    )
