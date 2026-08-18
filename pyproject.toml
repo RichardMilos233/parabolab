@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "parabolab"
+version = "0.1.0"
+description = "Coding-tree Monte Carlo for fully nonlinear parabolic PDEs (Nguwi-Penent-Privault JEQ2023 / JCP2024, reproduced from scratch)"
+requires-python = ">=3.11"
+dependencies = ["numpy"]
+
+[tool.setuptools.packages.find]
+include = ["parabolab*"]
+
+[tool.pytest.ini_options]
+addopts = "-m 'not slow'"
+markers = [
+    "slow: heavy Monte Carlo validation runs (run with: pytest -m 'slow or not slow')",
+]

@@ -1,0 +1,15 @@
+name: parabolab
+channels:
+  - defaults
+dependencies:
+  - python=3.11
+  - numpy
+  - matplotlib
+  - pytest
+  - sympy
+  - pip
+  # M4 (deep branching solver, JCP2024 Algorithm 2) will add pytorch.
+  # CPU build by default; switch to a CUDA/MPS build only if needed:
+  # - pytorch
+  - pip:
+      - -e .
