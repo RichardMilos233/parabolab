@@ -25,6 +25,10 @@ class MCResult:
     mean_nodes: float
     max_nodes: int
     seconds: float
+    # tail diagnostic: largest |H| among the samples.  When max_abs/n
+    # rivals stderr, the empirical mean is dominated by single trees and
+    # the integrability window is closing (M5 blow-up study).
+    max_abs: float = float("nan")
 
     def __str__(self) -> str:  # pragma: no cover - cosmetic
         return (
@@ -87,4 +91,5 @@ def estimate(
         mean_nodes=total_nodes / n_samples,
         max_nodes=max_nodes,
         seconds=seconds,
+        max_abs=float(np.abs(values).max()),
     )

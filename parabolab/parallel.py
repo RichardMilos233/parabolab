@@ -53,6 +53,7 @@ def _chunk_sums(args):
     s = s2 = 0.0
     nodes = 0
     max_nodes = 0
+    max_abs = 0.0
     for _ in range(n):
         smp = sample_tree(pde, t, x, rng=rng, rate=rate,
                           prune_zero=prune_zero, **kwargs)
@@ -60,7 +61,8 @@ def _chunk_sums(args):
         s2 += smp.value * smp.value
         nodes += smp.n_nodes
         max_nodes = max(max_nodes, smp.n_nodes)
-    return n, s, s2, nodes, max_nodes
+        max_abs = max(max_abs, abs(smp.value))
+    return n, s, s2, nodes, max_nodes, max_abs
 
 
 def estimate_parallel(
@@ -112,6 +114,7 @@ def estimate_parallel(
     s2 = sum(r[2] for r in results)
     nodes = sum(r[3] for r in results)
     max_nodes = max(r[4] for r in results)
+    max_abs = max(r[5] for r in results)
     mean = s / n
     var = (s2 - n * mean * mean) / (n - 1)
     if rate is None:
@@ -124,4 +127,5 @@ def estimate_parallel(
         mean_nodes=nodes / n,
         max_nodes=max_nodes,
         seconds=seconds,
+        max_abs=max_abs,
     )

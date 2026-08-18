@@ -29,6 +29,7 @@ from .pde import (
     z_symbols,
 )
 from .tree import TreeSample, default_rate, jcp_rate, sample_tree
+from .blowup import TSweep, integrability_edge, sweep_T
 from . import library
 
 __all__ = [
@@ -45,13 +46,16 @@ __all__ = [
     "MCResult",
     "ParabolicPDE",
     "SemilinearMechanism",
+    "TSweep",
     "TreeSample",
     "default_rate",
     "estimate",
     "estimate_parallel",
+    "integrability_edge",
     "jcp_rate",
     "library",
     "sample_tree",
+    "sweep_T",
     "x_symbol",
     "x_symbols",
     "z_symbols",
