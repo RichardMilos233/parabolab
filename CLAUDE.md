@@ -1,5 +1,22 @@
 # parabolab — agent notes
 
+## Workspace
+- Sessions for THIS project open this repo directly as the workspace
+  root. The repo lives inside the umbrella `fyp/` folder (one level up),
+  which keeps the papers and hosts the sibling projects.
+- Source papers (NOT in the repo, kept in `../`): `../JEQ2023.pdf`
+  (coding trees / fully nonlinear Feynman–Kac) and `../JCP2024.pdf`
+  (deep branching solver). DOI links are in README.md.
+- Sibling project: `../wavelab` = the EARLIER wave-equation project
+  (branching MC for `u_tt − c²Δu = f(u)`, FD ill-posedness study) with
+  its own repo and CLAUDE.md; its paper is `../m.pdf`. Not needed here.
+- Cross-check material: sibling clones `../coding_trees`,
+  `../deep_branching`, `../deep_branching_with_domain` (the authors'
+  repos). Tests and example scripts locate them RELATIVE to the repo
+  parent and skip/degrade gracefully if absent — on a new machine,
+  clone them next to `parabolab/` to enable the golden tests and
+  CSV overlays.
+
 ## Project state
 - **M1 complete**: semilinear coding-tree Monte Carlo (JEQ2023 §2 mechanism,
   JCP2024 Alg. 1 sampler), d = 1, pure Python/numpy. Allen–Cahn validated

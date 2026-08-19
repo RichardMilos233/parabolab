@@ -26,8 +26,8 @@ from parabolab.profiles import (
     plot_profile,
 )
 
-AUTHORS_LOGS = pathlib.Path(
-    "/Users/michael/Desktop/NTU/fyp/coding_trees/logs/final")
+AUTHORS_LOGS = (pathlib.Path(__file__).resolve().parents[2]
+                / "coding_trees" / "logs" / "final")
 T_BY_DIM = {5: 0.5, 100: 0.3}
 
 

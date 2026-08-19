@@ -53,6 +53,20 @@ The `jcp_*_deep.py` scripts default to reduced Monte Carlo budgets;
 pass `--full` for the paper's budgets and `--device cuda` on a GPU
 machine (everything is device-agnostic, CPU by default).
 
+Reproducing on a new machine needs only the clone and the conda env
+above. Optionally, clone the authors' repos **next to** `parabolab/`
+to enable the golden cross-check tests and the reference-CSV overlays
+in the example plots (everything skips gracefully without them):
+
+```bash
+git clone https://github.com/nguwijy/coding_trees
+git clone https://github.com/nguwijy/deep_branching
+git clone https://github.com/nguwijy/deep_branching_with_domain
+```
+
+The papers themselves are not distributed with this repo — see the
+DOI/arXiv links at the top.
+
 ```python
 from parabolab import estimate
 from parabolab.library import allen_cahn_wave_1d

@@ -8,7 +8,8 @@ import pytest
 
 from parabolab.fdb import fdb_terms
 
-AUTHORS_REPO = pathlib.Path("/Users/michael/Desktop/NTU/fyp/deep_branching")
+# Sibling clone of the authors' repo (optional; tests skip if absent).
+AUTHORS_REPO = pathlib.Path(__file__).resolve().parents[2] / "deep_branching"
 
 
 def test_single_argument_counts_are_partition_numbers():
