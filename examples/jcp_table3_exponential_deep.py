@@ -14,7 +14,7 @@ from parabolab.library import exponential_gradient_nd
 import parabolab.deep as deep
 
 
-def main() -> None:
+if __name__ == "__main__":
     p = argparse.ArgumentParser()
     p.add_argument("--samples", type=int, default=3_000, help="M per state")
     p.add_argument("--states", type=int, default=1000)
@@ -51,7 +51,3 @@ def main() -> None:
     )
     print("figure saved to examples/jcp_table3_exponential_deep.png",
           flush=True)
-
-
-if __name__ == "__main__":
-    main()

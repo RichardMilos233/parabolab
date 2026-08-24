@@ -45,7 +45,7 @@ def run_block(rate, label, n_runs, n_samples, jobs, seed0, executor):
     return vals
 
 
-def main() -> None:
+if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--samples", type=int, default=1_000_000,
                     help="samples per run (paper: 1e6)")
@@ -64,7 +64,3 @@ def main() -> None:
                   args.runs, args.samples, args.jobs, seed0=100, executor=ex)
         run_block(1.0, "rate 1.0", args.runs, args.samples, args.jobs,
                   seed0=200, executor=ex)
-
-
-if __name__ == "__main__":
-    main()

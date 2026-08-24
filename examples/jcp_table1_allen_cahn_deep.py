@@ -18,7 +18,7 @@ import parabolab.deep as deep
 PAPER = {1: ("1.32E-03", "1.05E-04", "28m"), 5: ("3.63E-03", "1.57E-04", "110m")}
 
 
-def main() -> None:
+if __name__ == "__main__":
     p = argparse.ArgumentParser()
     p.add_argument("--dims", type=int, nargs="+", default=[1, 5])
     p.add_argument("--samples", type=int, default=10_000, help="M per state")
@@ -70,7 +70,3 @@ def main() -> None:
         fig.savefig(out, dpi=150)
         plt.close(fig)
         print(f"figure saved to {out}\n", flush=True)
-
-
-if __name__ == "__main__":
-    main()

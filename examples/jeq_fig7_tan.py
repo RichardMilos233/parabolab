@@ -17,7 +17,7 @@ from parabolab import CodingTreeMC, compare
 from parabolab.library import quasilinear_tan_1d
 
 
-def main() -> None:
+if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--samples", type=int, default=100_000,
                     help="MC samples per grid point (paper: 1000000)")
@@ -30,7 +30,3 @@ def main() -> None:
     compare(pde, mc).table().plot(
         pathlib.Path(__file__).with_name("jeq_fig7_tan.png"),
         "JEQ2023 Fig. 7: quasilinear tan example (5.8), $u(0,x)$")
-
-
-if __name__ == "__main__":
-    main()

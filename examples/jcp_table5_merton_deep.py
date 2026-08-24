@@ -19,7 +19,7 @@ from parabolab.library import merton_hjb
 import parabolab.deep as deep
 
 
-def main() -> None:
+if __name__ == "__main__":
     p = argparse.ArgumentParser()
     p.add_argument("--samples", type=int, default=1_000, help="M per state")
     p.add_argument("--states", type=int, default=1000)
@@ -65,7 +65,3 @@ def main() -> None:
             x_lo=100.0, x_hi=200.0, device=args.device,
         )
         print(f"figure saved to {out}", flush=True)
-
-
-if __name__ == "__main__":
-    main()

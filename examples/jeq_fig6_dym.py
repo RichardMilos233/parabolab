@@ -15,7 +15,7 @@ from parabolab import CodingTreeMC, compare
 from parabolab.library import dym_1d
 
 
-def main() -> None:
+if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--samples", type=int, default=100_000,
                     help="MC samples per grid point (paper: 100000)")
@@ -28,7 +28,3 @@ def main() -> None:
     compare(pde, mc).table().plot(
         pathlib.Path(__file__).with_name("jeq_fig6_dym.png"),
         "JEQ2023 Fig. 6: Dym equation (5.7), $u(0,x)$")
-
-
-if __name__ == "__main__":
-    main()

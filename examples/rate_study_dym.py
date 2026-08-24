@@ -16,7 +16,7 @@ from parabolab.library import dym_1d
 from parabolab.tree import jcp_rate
 
 
-def main() -> None:
+if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--samples", type=int, default=100_000)
     args = ap.parse_args()
@@ -34,7 +34,3 @@ def main() -> None:
                 r = estimate(pde, 0.0, x, args.samples, seed=seed, rate=rate)
                 line += f"{r.estimate:+9.3f} +/-{r.stderr:8.3f}  "
             print(line)
-
-
-if __name__ == "__main__":
-    main()

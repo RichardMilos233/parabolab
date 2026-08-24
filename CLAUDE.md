@@ -104,8 +104,8 @@
   branching L1 1.89e-03 / 22 s, deep BSDE 5.68e-03 / 50 s, deep Galerkin
   5.31e-03 / 35 s; Merton deep branching 1.12e-02 / 22 s. The paper's
   "28–184 GPU-minutes" is their raw-mechanism torch sampler (gotcha 25b),
-  not the training. `demo/allen_cahn.py --deep` and `demo/merton.py --deep`
-  run exactly these.
+  not the training. `demo/allen_cahn.py` and `demo/merton.py` run exactly
+  these by default.
 
 ## Conventions
 - Terminal-value problem u_t + (1/2)u_xx + f(u) = 0, u(T,·) = φ. The 1/2
@@ -369,12 +369,19 @@
     `KMP_DUPLICATE_LIB_OK=TRUE` — Intel's own text calls that unsafe and it
     can silently corrupt results. Repair an existing env with
     `pip install --force-reinstall --no-deps numpy`.
-37. **The two `demo/` scripts need `if __name__ == "__main__":`** now that
-    `--deep` is wired in: `DeepBranching` fans training data out to a
-    `ProcessPoolExecutor`, and under spawn (Windows, macOS) the worker
-    re-imports the launching script. All 15 `examples/` scripts already
-    had the guard; the demos did not, because until now they only ran
-    `CodingTreeMC(n_jobs=1)`.
+37. **`if __name__ == "__main__"` is required; `def main()` is not.**
+    `DeepBranching` / `CodingTreeMC(n_jobs>1)` fan work to a
+    `ProcessPoolExecutor`. Under spawn (Windows, macOS) each worker
+    re-imports the launching *file* as `__mp_main__` -- even though the
+    worker function itself lives in `parabolab.deep.generator`. Without
+    the guard the child hits `.solve()` again and the pool nests until
+    the machine dies. Imports, `partial(...)` factories, and grid setup
+    at module level are cheap and fine; only the code that *starts a
+    pool* has to sit under the guard. `def main()` was just an extra
+    hop and is gone from `demo/` and `examples/`. This is a different
+    problem from the unpicklable-PDE factory (gotcha 22 / solve.py
+    contract a). Demo and example scripts run clean production budgets
+    directly, while fast smoke validation is handled by `pytest`.
 
 ## Paper pointers (M2 done, for M3)
 - General mechanism: JEQ2023 Def. 2.2, eqs. (2.4)–(2.5); multivariate Faà di
