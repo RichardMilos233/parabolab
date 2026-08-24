@@ -4,7 +4,7 @@ from pathlib import Path
 
 import numpy as np
 
-from parabolab import CodingTreeMC, DeepBranching, compare
+from parabolab import CodingTreeMC, DeepBranching, DeepBSDE, DeepGalerkin, compare
 from parabolab.library import merton_hjb
 
 # u_t + (1/2) u_xx + f(u, u_x, u_xx) = 0
@@ -16,6 +16,8 @@ if __name__ == "__main__":
     curves = [
         CodingTreeMC(n_samples=10_000, seed=0).solve(pde, grid),
         DeepBranching(n_states=1000, m_samples=10_000, epochs=3000, n_jobs=8).solve(pde, grid),
+        # DeepBSDE(epochs=3000, n_states=1000).solve(pde, grid),
+        # DeepGalerkin(epochs=3000, n_states=1000).solve(pde, grid),
     ]
 
     title = "Merton HJB $d=1$: MC and deep branching"
