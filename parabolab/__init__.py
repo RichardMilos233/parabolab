@@ -28,12 +28,30 @@ from .pde import (
     x_symbols,
     z_symbols,
 )
+from .solve import (
+    CodingTreeMC,
+    Comparison,
+    Curve,
+    DeepBSDE,
+    DeepBranching,
+    DeepGalerkin,
+    Solver,
+    compare,
+    exact_on,
+    grid_states,
+)
 from .tree import TreeSample, default_rate, jcp_rate, sample_tree
 from .blowup import TSweep, integrability_edge, sweep_T
 from . import library
 
 __all__ = [
     "Code",
+    "CodingTreeMC",
+    "Comparison",
+    "Curve",
+    "DeepBSDE",
+    "DeepBranching",
+    "DeepGalerkin",
     "Dx",
     "DxN",
     "FDeriv",
@@ -46,11 +64,15 @@ __all__ = [
     "MCResult",
     "ParabolicPDE",
     "SemilinearMechanism",
+    "Solver",
     "TSweep",
     "TreeSample",
+    "compare",
     "default_rate",
     "estimate",
     "estimate_parallel",
+    "exact_on",
+    "grid_states",
     "integrability_edge",
     "jcp_rate",
     "library",
