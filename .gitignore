@@ -7,3 +7,5 @@ dist/
 build/
 examples/*.png
 examples/*.csv
+demo/*.png
+.vscode/

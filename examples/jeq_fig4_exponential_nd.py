@@ -10,6 +10,10 @@ Authors' settings: profile along x = (0, ..., 0, s), s in [-4, 4],
 10 grid points, 1e5 MC samples/point; their published values
 (logs/final/plt_exponential_nonlinearity_jeeq_dim_*_coarse.csv) overlaid.
 
+The profile follows the AUTHORS' embedding (0, ..., 0, s), not solve.py's
+default (s, x_mid, ..., x_mid) -- their CSVs live on that grid, so the
+overlay would be meaningless otherwise.
+
 Usage: python jeq_fig4_exponential_nd.py [--samples N] [--seed S]
        [--dims 5 10] [--jobs J]
 """
@@ -20,12 +24,9 @@ import pathlib
 
 import numpy as np
 
+from parabolab import CodingTreeMC, compare
 from parabolab.library import exponential_gradient_nd
-from parabolab.profiles import (
-    estimate_profile,
-    last_coordinate_embedding,
-    plot_profile,
-)
+from parabolab.profiles import last_coordinate_embedding
 
 AUTHORS_LOGS = (pathlib.Path(__file__).resolve().parents[2]
                 / "coding_trees" / "logs" / "final")
@@ -43,14 +44,11 @@ def main() -> None:
     for d in args.dims:
         factory = functools.partial(exponential_gradient_nd, d=d)
         pde = factory()
-        xs = np.linspace(-4.0, 4.0, 10)
+        grid = np.linspace(-4.0, 4.0, 10)
         print(f"=== exponential nonlinearity (5.5), d={d}, T={pde.T} ===")
-        res = estimate_profile(
-            pde, 0.0, xs, args.samples, seed=args.seed,
-            embed=last_coordinate_embedding(d),
-            pde_factory=factory, n_jobs=args.jobs,
-        )
-        res.print_table()
+        mc = CodingTreeMC(n_samples=args.samples, seed=args.seed,
+                          n_jobs=args.jobs).solve(
+            factory, grid, embed=last_coordinate_embedding(d))
 
         reference = None
         csv = (AUTHORS_LOGS /
@@ -58,16 +56,15 @@ def main() -> None:
         if csv.exists():
             data = np.loadtxt(csv, delimiter=",", skiprows=1)
             reference = (data[:, 0], data[:, 1], "authors' coding_trees")
-            ours_interp = np.interp(data[:, 0], xs, res.estimates)
+            ours = np.interp(data[:, 0], grid, mc.values)
             print(f"max |ours - authors| on their grid: "
-                  f"{np.max(np.abs(ours_interp - data[:, 1])):.4f}")
+                  f"{np.max(np.abs(ours - data[:, 1])):.4f}")
 
-        out = pathlib.Path(__file__).with_name(
-            f"jeq_fig4_exponential_d{d}.png")
-        plot_profile(res, pde, out,
-                     f"JEQ2023 Fig. 4: exp nonlinearity (5.5), $d={d}$",
-                     embed=last_coordinate_embedding(d), reference=reference)
-        print(f"figure saved to {out}\n")
+        compare(pde, mc).table().plot(
+            pathlib.Path(__file__).with_name(f"jeq_fig4_exponential_d{d}.png"),
+            f"JEQ2023 Fig. 4: exp nonlinearity (5.5), $d={d}$",
+            reference=reference)
+        print()
 
 
 if __name__ == "__main__":

@@ -11,8 +11,8 @@ import pathlib
 
 import numpy as np
 
+from parabolab import CodingTreeMC, compare
 from parabolab.library import dym_1d
-from parabolab.profiles import estimate_profile, plot_profile
 
 
 def main() -> None:
@@ -23,13 +23,11 @@ def main() -> None:
     args = ap.parse_args()
 
     pde = dym_1d()
-    xs = np.linspace(1.0, 2.0, 11)
-    res = estimate_profile(pde, 0.0, xs, args.samples, seed=args.seed)
-    res.print_table()
-
-    out = pathlib.Path(__file__).with_name("jeq_fig6_dym.png")
-    plot_profile(res, pde, out, "JEQ2023 Fig. 6: Dym equation (5.7), $u(0,x)$")
-    print(f"figure saved to {out}")
+    grid = np.linspace(1.0, 2.0, 11)
+    mc = CodingTreeMC(n_samples=args.samples, seed=args.seed).solve(pde, grid)
+    compare(pde, mc).table().plot(
+        pathlib.Path(__file__).with_name("jeq_fig6_dym.png"),
+        "JEQ2023 Fig. 6: Dym equation (5.7), $u(0,x)$")
 
 
 if __name__ == "__main__":

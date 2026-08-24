@@ -9,6 +9,10 @@ x = (0, ..., 0, s), s in [-8, 8], 10 grid points, 1e5 MC samples/point.
 Their published grid values (logs/final/plt_allen_cahn_jeeq_dim_*_coarse.csv)
 are overlaid when available.
 
+The profile follows the AUTHORS' embedding (0, ..., 0, s), not solve.py's
+default (s, x_mid, ..., x_mid) -- their CSVs live on that grid, so the
+overlay would be meaningless otherwise.
+
 Usage: python jeq_fig1_allen_cahn_nd.py [--samples N] [--seed S]
        [--dims 5 100] [--jobs J]
 """
@@ -19,12 +23,9 @@ import pathlib
 
 import numpy as np
 
+from parabolab import CodingTreeMC, compare
 from parabolab.library import allen_cahn_nd
-from parabolab.profiles import (
-    estimate_profile,
-    last_coordinate_embedding,
-    plot_profile,
-)
+from parabolab.profiles import last_coordinate_embedding
 
 AUTHORS_LOGS = (pathlib.Path(__file__).resolve().parents[2]
                 / "coding_trees" / "logs" / "final")
@@ -44,30 +45,26 @@ def main() -> None:
         T = T_BY_DIM.get(d, 0.5)
         factory = functools.partial(allen_cahn_nd, d=d, T=T)
         pde = factory()
-        xs = np.linspace(-8.0, 8.0, 10)
+        grid = np.linspace(-8.0, 8.0, 10)
         print(f"=== Allen-Cahn (5.2), d={d}, T={T} ===")
-        res = estimate_profile(
-            pde, 0.0, xs, args.samples, seed=args.seed,
-            embed=last_coordinate_embedding(d),
-            pde_factory=factory, n_jobs=args.jobs,
-        )
-        res.print_table()
+        mc = CodingTreeMC(n_samples=args.samples, seed=args.seed,
+                          n_jobs=args.jobs).solve(
+            factory, grid, embed=last_coordinate_embedding(d))
 
         reference = None
         csv = AUTHORS_LOGS / f"plt_allen_cahn_jeeq_dim_{d}_coarse.csv"
         if csv.exists():
             data = np.loadtxt(csv, delimiter=",", skiprows=1)
             reference = (data[:, 0], data[:, 1], "authors' coding_trees")
-            ours_interp = np.interp(data[:, 0], xs, res.estimates)
+            ours = np.interp(data[:, 0], grid, mc.values)
             print(f"max |ours - authors| on their grid: "
-                  f"{np.max(np.abs(ours_interp - data[:, 1])):.4f}")
+                  f"{np.max(np.abs(ours - data[:, 1])):.4f}")
 
-        out = pathlib.Path(__file__).with_name(
-            f"jeq_fig1_allen_cahn_d{d}.png")
-        plot_profile(res, pde, out,
-                     f"JEQ2023 Fig. 1: Allen-Cahn (5.2), $d={d}$, $T={T}$",
-                     embed=last_coordinate_embedding(d), reference=reference)
-        print(f"figure saved to {out}\n")
+        compare(pde, mc).table().plot(
+            pathlib.Path(__file__).with_name(f"jeq_fig1_allen_cahn_d{d}.png"),
+            f"JEQ2023 Fig. 1: Allen-Cahn (5.2), $d={d}$, $T={T}$",
+            reference=reference)
+        print()
 
 
 if __name__ == "__main__":
