@@ -32,7 +32,9 @@ conda env create -f environment.yml     # or: conda env update -f environment.ym
 conda activate parabolab
 pytest                                  # fast suite (~30 s)
 pytest -m 'slow or not slow'            # + paper-budget validation (minutes)
-python examples/jeq_allen_cahn_1d.py    # M1: Allen-Cahn vs closed form
+python demo/allen_cahn.py               # start here: one PDE, several
+python demo/merton.py                   #   methods (see demo/README.md)
+python examples/jeq_allen_cahn_1d.py    # paper reproductions (see examples/)
 python examples/jeq_fig6_dym.py         # M2: JEQ Figs 6-9 reproductions
 python examples/jeq_fig7_tan.py         #     (each prints a table and saves
 python examples/jeq_fig8_cosine.py      #      a .png next to the script)
@@ -67,6 +69,8 @@ git clone https://github.com/nguwijy/deep_branching_with_domain
 The papers themselves are not distributed with this repo — see the
 DOI/arXiv links at the top.
 
+One value:
+
 ```python
 from parabolab import estimate
 from parabolab.library import allen_cahn_wave_1d
@@ -75,6 +79,34 @@ pde = allen_cahn_wave_1d(T=0.5)
 r = estimate(pde, t=0.0, x=0.0, n_samples=100_000, seed=0)
 print(r, "exact:", pde.exact_solution(0.0, 0.0))
 ```
+
+A whole profile, and the same PDE through a different method — every
+solver is `Solver(**budget).solve(pde, grid) -> Curve`, so swapping one
+for another is a one-line edit:
+
+```python
+from functools import partial
+import numpy as np
+from parabolab import CodingTreeMC, compare
+from parabolab.library import allen_cahn_nd
+
+pde  = partial(allen_cahn_nd, d=1, T=0.5)     # a factory: PDEs are not picklable
+grid = np.linspace(-8.0, 8.0, 27)
+
+mc = CodingTreeMC(n_samples=10_000, seed=0).solve(pde, grid)
+# deep = DeepBranching(n_states=1000, m_samples=10_000, epochs=3000).solve(pde, grid)
+# bsde = DeepBSDE(epochs=3000, n_states=1000).solve(pde, grid)
+# dgm  = DeepGalerkin(epochs=3000, n_states=1000).solve(pde, grid)
+compare(pde, mc).table().plot("allen_cahn.png")
+```
+
+`CodingTreeMC` is a pointwise expectation and costs about a second for the
+whole profile; the three network solvers train and want real budgets
+(JCP2024 quotes 28–184 GPU-minutes per run). Runnable versions of the
+above are in `demo/`. The seven profile scripts in `examples/` use the
+same interface; the rest (multi-run tables, the three-way comparison,
+the blow-up and rate sweeps) keep their own shape because their output
+is a statistic, not a curve.
 
 ## Results at a glance
 
@@ -120,6 +152,7 @@ budget closes the gap (see the M4 milestone summary).
 | `parabolab/fdb.py` | multivariate Faà di Bruno enumeration, 1-d and d-dim, with monotone-predicate pruning (cross-checked against the authors' `deep_branching/fdb.py`) |
 | `parabolab/tree.py` | recursive `TREE(t,x,c)` sampler, JCP2024 Alg. 1 / JEQ2023 Def. 4.1; d-dim BM with variance σ² |
 | `parabolab/mc.py` | pointwise estimator: mean, stderr, tree-size diagnostics |
+| `parabolab/solve.py` | uniform solver interface: `CodingTreeMC`, `DeepBranching`, `DeepBSDE`, `DeepGalerkin`, all `Solver(**budget).solve(pde, grid) -> Curve`, plus `compare(...)` for the table and figure; pins the grid convention and keeps torch out of the top-level import |
 | `parabolab/parallel.py` | `estimate_parallel`: sample batches over worker processes (n_jobs-independent results; pure-Python `estimate` stays the reference) |
 | `parabolab/profiles.py` | profile estimation over an x-grid (+ d-dim embedding) + Fig-style plotting |
 | `parabolab/library.py` | Allen–Cahn (5.1)–(5.4) incl. d-dim; Dym (5.7), tan (5.8), cosine (5.10), log (5.11); exponential gradient (5.5); HJB (5.9) with Cole–Hopf exact value; Merton HJB (JCP 4.6, non-polynomial f) |

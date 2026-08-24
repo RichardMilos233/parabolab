@@ -70,6 +70,29 @@
   `sweep_T` + `integrability_edge`; `examples/blowup_allen_cahn.py`
   sweeps T = 0.1..2.0 for AC d = 1/10 at both ρ rates with the authors'
   blow_up_analysis CSVs overlaid (figures in examples/).
+- **M6 complete**: uniform solver interface `parabolab/solve.py` --
+  `CodingTreeMC`, `DeepBranching`, `DeepBSDE`, `DeepGalerkin`, each
+  `Solver(**budget).solve(pde, grid, t=0.0) -> Curve`, plus
+  `compare(pde, *curves)` -> `.table()` / `.plot()` / `.errors()`. Thin
+  facade over profiles.py / deep/ / vendor/ -- no new numerics. Exported
+  from the top level; `demo/` (two ~25-line scripts, Allen-Cahn and
+  Merton) is its showcase. 29 tests in `tests/test_solve.py`.
+  The seven PROFILE examples were migrated onto it (jeq_fig1/4/6/7/8/9 +
+  jeq_allen_cahn_1d), verified numerically identical row-for-row except
+  jeq_allen_cahn_1d, whose hand-rolled seed scheme
+  (`seed + 1000*i + int(100t)`) was replaced by the library's `seed + i`
+  per curve -- a different draw of the same distribution, flagged in the
+  script. The other SEVEN examples were deliberately NOT migrated: their
+  deliverable is not a curve. `jeq_table2/table5_d100` report mean/SD of
+  a single point over runs AND share one ProcessPoolExecutor across them
+  (migrating would rebuild the d=100 mechanism table per call, gotcha 22);
+  `jcp_table1/3/5_deep` report multi-run L1/L2 plus consistency plots
+  (`DeepBranching` is n_runs=1 by design); `jcp_comparison_baselines` is a
+  three-way report with paper columns and `--full`; `blowup_allen_cahn`
+  sweeps T; `rate_study_dym` sweeps the rho rate. Do not "finish the job"
+  by forcing these onto `.solve(pde, grid)`.
+  `profiles.plot_profile` lost its last caller in the migration and is now
+  dead code (untested, unexported) -- left in place pending a decision.
 - Env: `conda activate parabolab` (python 3.11). Editable install of this
   repo. Torch CPU build installed (M4); all deep code is device-agnostic —
   pass device="cuda" on a GPU machine.
@@ -92,6 +115,16 @@
 - `ParabolicPDE.f_derivatives` is either a list [f′, f″, …] (entries past the
   end are declared ≡ 0 — the polynomial convention used for pruning) or a
   callable k ↦ f^{(k)} for non-polynomial f (e.g. exp; pruning then off).
+- `solve.py` contracts: (a) `.solve()` takes a PDE **or** a zero-argument
+  factory; solvers that use worker processes (`CodingTreeMC(n_jobs>1)`,
+  `DeepBranching`) require the factory and raise `TypeError` naming the fix
+  when given an instance -- PDE objects hold lambdified sympy callables and
+  local closures and are genuinely unpicklable (verified). (b) The grid
+  convention is `s -> (s, x_mid, ..., x_mid)` via the single `_point_map`,
+  matching `deep/solver.py::_grid_inputs`, NOT
+  `profiles.last_coordinate_embedding`'s `(0, ..., 0, s)` -- see gotcha 33.
+  (c) torch is imported inside the three network `.solve()` bodies only, so
+  `import parabolab` stays torch-free (subprocess-tested).
 - rng: pass `seed=` or a `np.random.Generator`. Tests rely on the exact draw
   order inside `_tree`: exponential → (leaf) normal | (branch) integers-if-
   |M|>1 → normal → children in tuple order. Changing the order breaks
@@ -287,6 +320,30 @@
 32. **conda run captures output**: `conda run ... > log` writes the log
     only at process exit (use --no-capture-output to stream). Long
     comparison runs look "empty" until they finish.
+
+## Gotchas discovered (M6)
+33. **Two incompatible profile-grid conventions coexist in the package**:
+    `profiles.last_coordinate_embedding(d)` maps a scalar grid point to
+    `(0, ..., 0, s)` (the authors' notebook plots), while
+    `deep/solver.py::_grid_inputs` maps it to `(s, x_mid, ..., x_mid)`
+    (the paper's evaluation grid, `x_mid` = grid midpoint). Identical at
+    d = 1, silently different for d >= 2 -- an MC profile and a network
+    curve plotted together would be sampling different states. `solve.py`
+    pins the `_grid_inputs` convention for everything and
+    `tests/test_solve.py` asserts the two agree elementwise.
+34. **`estimate_profile` needs an explicit `embed` for every
+    `FullyNonlinearPDEnD`, including d = 1**: its phi is lambdified over a
+    d-vector, so passing a float raises a bare
+    `TypeError: _lambdifygenerated() argument after * must be an iterable`
+    from inside sympy with no hint about the cause. `solve.py` picks the
+    embedding by `isinstance(pde, FullyNonlinearPDEnD)`.
+35. **JCP2024 Sec. 4 (d)'s "DGM is inapplicable to Merton" is an editorial
+    judgement, not something the code detects.** `vendor/adapters.py`
+    raises `BaselineInapplicable` only for deriv_map rows outside
+    {0, e_k, 2e_k} or sigma^2 != 1; `dgm_functions(merton_hjb())` builds
+    fine and `DeepGalerkin.solve` runs there. The skip lives in the
+    `dgm_inapplicable` entry of `examples/jcp_comparison_baselines.py`'s
+    CASES dict. Do not describe it as automatic detection.
 
 ## Paper pointers (M2 done, for M3)
 - General mechanism: JEQ2023 Def. 2.2, eqs. (2.4)–(2.5); multivariate Faà di
