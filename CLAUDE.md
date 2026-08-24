@@ -93,9 +93,19 @@
   by forcing these onto `.solve(pde, grid)`.
   `profiles.plot_profile` lost its last caller in the migration and is now
   dead code (untested, unexported) -- left in place pending a decision.
-- Env: `conda activate parabolab` (python 3.11). Editable install of this
-  repo. Torch CPU build installed (M4); all deep code is device-agnostic —
-  pass device="cuda" on a GPU machine.
+- Env: `conda activate parabolab` (python 3.11), built from
+  `environment.yml` — python from conda, EVERYTHING ELSE from pip (see
+  gotcha 36: conda's MKL numpy and pip's torch each ship their own Intel
+  OpenMP and the process aborts). Editable install of this repo. Torch CPU
+  build; all deep code is device-agnostic — pass device="cuda" on a GPU
+  machine, but for the JCP §4 budgets CPU is the right choice (see below).
+- The network solvers run at PAPER budget (N=1000, M=10 000, 3000 epochs)
+  in well under a minute each on a 16-core laptop CPU: Allen–Cahn d=1 deep
+  branching L1 1.89e-03 / 22 s, deep BSDE 5.68e-03 / 50 s, deep Galerkin
+  5.31e-03 / 35 s; Merton deep branching 1.12e-02 / 22 s. The paper's
+  "28–184 GPU-minutes" is their raw-mechanism torch sampler (gotcha 25b),
+  not the training. `demo/allen_cahn.py --deep` and `demo/merton.py --deep`
+  run exactly these.
 
 ## Conventions
 - Terminal-value problem u_t + (1/2)u_xx + f(u) = 0, u(T,·) = φ. The 1/2
@@ -344,6 +354,27 @@
     fine and `DeepGalerkin.solve` runs there. The skip lives in the
     `dgm_inapplicable` entry of `examples/jcp_comparison_baselines.py`'s
     CASES dict. Do not describe it as automatic detection.
+
+## Gotchas discovered (environment)
+36. **conda MKL numpy + pip torch = `OMP: Error #15` -> `Fatal Python
+    error: Aborted` on Windows.** conda `defaults` numpy is an MKL build
+    carrying Intel OpenMP (`libiomp5md.dll`); the pip torch wheel carries
+    its own. A process holding both aborts. The trap is that it needs BOTH
+    live at once, so `python demo/allen_cahn.py` (no torch) is fine and the
+    crash surfaces as a `pytest` abort in `test_solve.py`'s figure test —
+    with a matplotlib `errorbar` frame on the stack, which looks like a
+    matplotlib bug and is not. Fix: take numpy from pip (OpenBLAS, no
+    second OpenMP), which is what `environment.yml` now does for every
+    dependency but python. Do NOT paper over it with
+    `KMP_DUPLICATE_LIB_OK=TRUE` — Intel's own text calls that unsafe and it
+    can silently corrupt results. Repair an existing env with
+    `pip install --force-reinstall --no-deps numpy`.
+37. **The two `demo/` scripts need `if __name__ == "__main__":`** now that
+    `--deep` is wired in: `DeepBranching` fans training data out to a
+    `ProcessPoolExecutor`, and under spawn (Windows, macOS) the worker
+    re-imports the launching script. All 15 `examples/` scripts already
+    had the guard; the demos did not, because until now they only ran
+    `CodingTreeMC(n_jobs=1)`.
 
 ## Paper pointers (M2 done, for M3)
 - General mechanism: JEQ2023 Def. 2.2, eqs. (2.4)–(2.5); multivariate Faà di

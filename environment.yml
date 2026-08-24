@@ -3,14 +3,27 @@ channels:
   - defaults
 dependencies:
   - python=3.11
-  - numpy
-  - matplotlib
-  - pytest
-  - sympy
   - pip
   - pip:
+      # Everything but python comes from pip on purpose.  conda's `defaults`
+      # numpy is an MKL build that ships Intel OpenMP (libiomp5md.dll), and
+      # the pip torch wheel ships its own copy; on Windows any process that
+      # loads both dies with
+      #     OMP: Error #15: Initializing libiomp5md.dll, but found
+      #     libiomp5md.dll already initialized.
+      # -> Fatal Python error: Aborted.  It only fires once torch and a
+      # numpy-backed C extension are live together (e.g. `import torch` plus
+      # a matplotlib errorbar), so a torch-free script looks fine and the
+      # crash lands in the test suite instead.  The pip numpy wheel is
+      # OpenBLAS-based and has no second OpenMP runtime.
+      - numpy
+      - matplotlib
+      - pytest
+      - sympy
       # CPU build by default (M4 deep branching solver); the code is
-      # device-agnostic -- pass device="cuda" on a machine with a CUDA
-      # torch build to run on GPU.
+      # device-agnostic -- pass device="cuda" on a machine with a CUDA torch
+      # build to run on GPU.  CPU is the right default even for the JCP
+      # budgets: the nets are 6 x 20 neurons trained full batch, and the
+      # expensive half (tree sampling) is numpy over worker processes.
       - torch
       - -e .
