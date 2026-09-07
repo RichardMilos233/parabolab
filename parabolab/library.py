@@ -484,3 +484,109 @@ def vasicek_no_consumption_exact(
     exponent = a0 * tau + a1 * m_I + 0.5 * (a1**2) * s_I2
     return math.exp(exponent)
 
+
+def merton_vasicek_reduced(
+    T: float = 0.1,
+    kappa: float = 1.0,
+    theta: float = 0.03,
+    eta: float = 0.02,
+    lambda_: float = 0.03,
+    sigma: float = 0.1,
+    gamma: float = 0.5,
+    rho: float = 0.01,
+    consumption: bool = True,
+):
+    """Reduced Merton problem with Vasicek stochastic rate, F(t, y), d = 1.
+
+    Normalized interest rate coordinate y = (r - theta) / eta, dY = -kappa*y*dt + dW.
+    CRRA value function scales as V(t, x, y) = x^(1-gamma)/(1-gamma) * F(t, y).
+    Terminal condition F(T, y) = 1.
+    """
+    import sympy as sp
+    from .state_dependent import StateDependentPDEnD
+
+    (y,) = sp.symbols("x0:1")
+    z = sp.symbols("z0:2")  # z0 = F, z1 = F_y
+
+    a0 = (1.0 - gamma) * theta + (1.0 - gamma) * (lambda_**2) / (2.0 * gamma * sigma**2) - rho
+    a1 = (1.0 - gamma) * eta
+
+    f_expr = -kappa * y * z[1] + (a0 + a1 * y) * z[0]
+    if consumption:
+        f_expr += gamma * (z[0] ** (-(1.0 - gamma) / gamma))
+
+    def exact(t: float, yv) -> float:
+        y_val = float(yv[0]) if hasattr(yv, "__len__") else float(yv)
+        if consumption:
+            return float("nan")
+        return vasicek_no_consumption_exact(
+            t=t, y=y_val, T=T, kappa=kappa, theta=theta, eta=eta,
+            lambda_=lambda_, sigma=sigma, gamma=gamma, rho=rho,
+        )
+
+    return StateDependentPDEnD(
+        T=T,
+        d=1,
+        deriv_map=((0,), (1,)),
+        f_expr=f_expr,
+        phi_expr=sp.Integer(1),
+        exact_solution=exact if not consumption else None,
+        name=f"merton_vasicek_reduced(T={T}, consumption={consumption})",
+    )
+
+
+def merton_vasicek_2d(
+    T: float = 0.1,
+    kappa: float = 1.0,
+    theta: float = 0.03,
+    eta: float = 0.02,
+    lambda_: float = 0.03,
+    sigma: float = 0.1,
+    gamma: float = 0.5,
+    rho: float = 0.01,
+    consumption: bool = True,
+):
+    """Full 2D Merton HJB with Vasicek stochastic rate, V(t, x, y), d = 2.
+
+    Coordinates: x0 = wealth x, x1 = normalized rate y = (r - theta) / eta.
+    deriv_map rows: u, u_x, u_xx, u_y, u_yy.
+    Terminal condition V(T, x, y) = x^(1-gamma)/(1-gamma).
+    """
+    import sympy as sp
+    from .state_dependent import StateDependentPDEnD
+
+    x, y = sp.symbols("x0:2")
+    z = sp.symbols("z0:5")  # z0=u, z1=u_x, z2=u_xx, z3=u_y, z4=u_yy
+
+    f_expr = (
+        -z[2] / 2
+        - kappa * y * z[3]
+        + (theta + eta * y) * x * z[1]
+        - (lambda_**2 / (2.0 * sigma**2)) * (z[1] ** 2 / z[2])
+        - rho * z[0]
+    )
+    if consumption:
+        f_expr += (gamma / (1.0 - gamma)) * (z[1] ** (1.0 - 1.0 / gamma))
+
+    def exact(t: float, xv) -> float:
+        if consumption:
+            return float("nan")
+        x_val = float(xv[0])
+        y_val = float(xv[1])
+        F_val = vasicek_no_consumption_exact(
+            t=t, y=y_val, T=T, kappa=kappa, theta=theta, eta=eta,
+            lambda_=lambda_, sigma=sigma, gamma=gamma, rho=rho,
+        )
+        return (x_val ** (1.0 - gamma)) / (1.0 - gamma) * F_val
+
+    return StateDependentPDEnD(
+        T=T,
+        d=2,
+        deriv_map=((0, 0), (1, 0), (2, 0), (0, 1), (0, 2)),
+        f_expr=f_expr,
+        phi_expr=(x ** (1.0 - gamma)) / (1.0 - gamma),
+        exact_solution=exact if not consumption else None,
+        name=f"merton_vasicek_2d(T={T}, consumption={consumption})",
+    )
+
+

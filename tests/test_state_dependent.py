@@ -57,3 +57,50 @@ def test_state_dependent_linear_potential():
 
     assert abs(mc_mean - exact) < 3.0 * stderr
 
+
+def test_merton_vasicek_reduced_no_consumption():
+    """CodingTreeMC on merton_vasicek_reduced matches exact closed form within error bars."""
+    from parabolab.library import merton_vasicek_reduced, vasicek_no_consumption_exact
+    from parabolab.tree import sample_tree
+
+    pde = merton_vasicek_reduced(T=0.05, consumption=False)
+    t, y_val = 0.0, 0.5
+    exact = vasicek_no_consumption_exact(t=t, y=y_val, T=pde.T)
+
+    rng = np.random.default_rng(123)
+    n_samples = 3000
+    samples = [sample_tree(pde, t, np.array([y_val]), rng=rng, rate=1.5).value for _ in range(n_samples)]
+    mc_mean = float(np.mean(samples))
+    stderr = float(np.std(samples, ddof=1) / math.sqrt(n_samples))
+
+    assert abs(mc_mean - exact) < 3.5 * stderr
+
+
+def test_merton_vasicek_reduced_with_consumption():
+    """Smoke test: consumption term adds utility, positive finite values."""
+    from parabolab.library import merton_vasicek_reduced
+    from parabolab.tree import sample_tree
+
+    pde = merton_vasicek_reduced(T=0.05, consumption=True)
+    rng = np.random.default_rng(456)
+    n_samples = 500
+    samples = [sample_tree(pde, 0.0, np.array([0.0]), rng=rng, rate=2.0).value for _ in range(n_samples)]
+    mc_mean = float(np.mean(samples))
+    assert np.isfinite(mc_mean)
+    assert mc_mean > 1.0  # with consumption and terminal=1, total value > 1.0
+
+
+def test_merton_vasicek_2d_smoke():
+    """2D full Merton problem: runs, produces finite estimate."""
+    from parabolab.library import merton_vasicek_2d
+    from parabolab.tree import sample_tree
+
+    pde = merton_vasicek_2d(T=0.05, consumption=False)
+    rng = np.random.default_rng(789)
+    # wealth x=100, normalized rate y=0.0
+    pt = np.array([100.0, 0.0])
+    sample = sample_tree(pde, 0.0, pt, rng=rng, rate=1.0)
+    assert np.isfinite(sample.value)
+    assert sample.n_nodes >= 1
+
+
