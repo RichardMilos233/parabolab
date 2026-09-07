@@ -3,8 +3,9 @@
 One PDE per script: define the equation, solve with multiple methods, print a comparison table, and save a figure.
 
 ```bash
-python demo/allen_cahn.py    # Allen-Cahn d=1 (JCP2024 Table 1 / Fig. 1)
-python demo/merton.py        # Merton HJB d=1 (JCP2024 eq. (4.6), Table 5)
+python demo/allen_cahn.py        # Allen-Cahn d=1 (JCP2024 Table 1 / Fig. 1)
+python demo/merton.py            # Merton HJB d=1 (JCP2024 eq. (4.6), Table 5)
+python demo/merton_vasicek.py    # Merton HJB with Vasicek stochastic rate (d=1 reduced)
 ```
 
 Figures land next to the scripts.
@@ -32,5 +33,6 @@ compare(pde, *curves).table().plot("out.png")
 | | Deep BSDE | 5.68e-03 | 50 s |
 | | Deep Galerkin | 5.31e-03 | 35 s |
 | Merton HJB $d=1$ | Deep Branching | 1.12e-02 | 22 s |
+| Merton Vasicek $d=1$ | Deep Branching | 6.89e-04 | 6 s |
 
 Full multi-run paper reproduction scripts are located in `examples/`.
