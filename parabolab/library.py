@@ -437,3 +437,50 @@ def merton_hjb(
         name=(f"merton_hjb(T={T}, mu={mu}, sigma={sigma}, "
               f"gamma={gamma}, rho={rho})"),
     )
+
+
+# ---------------------------------------------------------------------------
+# Stochastic-rate Merton extensions (Vasicek)
+# ---------------------------------------------------------------------------
+
+def vasicek_no_consumption_exact(
+    t: float,
+    y: float,
+    *,
+    T: float = 0.1,
+    kappa: float = 1.0,
+    theta: float = 0.03,
+    eta: float = 0.02,
+    lambda_: float = 0.03,
+    sigma: float = 0.1,
+    gamma: float = 0.5,
+    rho: float = 0.01,
+) -> float:
+    """Exact solution F(t, y) for the reduced Merton problem without consumption.
+
+    When intermediate consumption is omitted, the reduced PDE for F(t, y) is:
+        F_t - kappa*y*F_y + (1/2)*F_yy + (a0 + a1*y)*F = 0,   F(T, y) = 1,
+    with a0 = (1-gamma)*theta + (1-gamma)*lambda_^2/(2*gamma*sigma^2) - rho
+    and a1 = (1-gamma)*eta.
+
+    By the Feynman-Kac formula on the OU process dY_s = -kappa*Y_s ds + dW_s,
+    int_t^T Y_s ds is conditionally Gaussian with known mean and variance,
+    yielding this exact closed form to machine precision.
+    """
+    tau = T - t
+    if tau <= 0.0:
+        return 1.0
+    a0 = (1.0 - gamma) * theta + (1.0 - gamma) * (lambda_**2) / (2.0 * gamma * sigma**2) - rho
+    a1 = (1.0 - gamma) * eta
+    if kappa > 1e-12:
+        m_I = float(y) * (1.0 - math.exp(-kappa * tau)) / kappa
+        s_I2 = (1.0 / (kappa**2)) * (
+            tau - 2.0 * (1.0 - math.exp(-kappa * tau)) / kappa
+            + (1.0 - math.exp(-2.0 * kappa * tau)) / (2.0 * kappa)
+        )
+    else:
+        m_I = float(y) * tau
+        s_I2 = (tau**3) / 3.0
+    exponent = a0 * tau + a1 * m_I + 0.5 * (a1**2) * s_I2
+    return math.exp(exponent)
+
