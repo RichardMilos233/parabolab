@@ -1,2 +1,4 @@
 import EstimatorIntegrity.FiniteTree
 import EstimatorIntegrity.MomentIteration
+import EstimatorIntegrity.Proposal
+import EstimatorIntegrity.Dym
