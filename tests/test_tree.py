@@ -81,6 +81,44 @@ def test_hand_computed_tree_weight():
     assert not rng.exponentials and not rng.normals and not rng.integers_q
 
 
+class FakeChoiceRng(FakeRng):
+    def choice(self, n, p):
+        self.last_probabilities = np.asarray(p)
+        return self.integers_q.pop(0)
+
+
+def test_hand_computed_tree_weight_with_nonuniform_proposal():
+    pde = allen_cahn_wave_1d(0.5)
+    rate = 1.0
+    rng = FakeChoiceRng(
+        exponentials=[0.2, 0.1, 5.0, 0.9, 3.0],
+        normals=[0.1, -0.05, 0.02, -0.01, 0.0],
+        integers=[1],
+    )
+
+    def prop(code, t, x, tau, depth, tuples):
+        if len(tuples) == 2:
+            return (0.9, 0.1)
+        return (1.0,)
+
+    s = sample_tree(pde, 0.0, 0.3, rng=rng, rate=rate, tuple_proposal=prop)
+
+    phi, dphi = pde.phi, pde.phi_derivative(1)
+    f2 = pde.f_derivative(2)
+    w_id = math.exp(rate * 0.2) / rate
+    # q=0.1 chosen at tuple index 1
+    w_fstar = (1.0 / 0.1) * math.exp(rate * 0.1) / rate
+    leaf_dx_1 = dphi(0.35 + 0.02) * math.exp(rate * 0.2)
+    leaf_dx_2 = dphi(0.35 - 0.01) * math.exp(rate * 0.2)
+    leaf_f2 = -0.5 * f2(phi(0.35 + 0.0)) * math.exp(rate * 0.2)
+    expected = w_id * w_fstar * leaf_dx_1 * leaf_dx_2 * leaf_f2
+
+    assert math.isclose(s.value, expected, rel_tol=1e-12)
+    assert s.n_nodes == 5
+    assert not rng.exponentials and not rng.normals and not rng.integers_q
+    np.testing.assert_allclose(rng.last_probabilities, [0.9, 0.1])
+
+
 def test_root_leaf_weight():
     """Root surviving to T: H = phi(x + W) / Fbar(T - t)."""
     pde = heat_pde(0.5)

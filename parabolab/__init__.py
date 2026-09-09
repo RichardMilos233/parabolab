@@ -49,6 +49,13 @@ from .tree import TreeSample, default_rate, jcp_rate, sample_tree
 from .blowup import TSweep, integrability_edge, sweep_T
 from .moments import MomentQuadrature, finite_depth_moment_1d
 from .integrability import truncated_normal_inverse_power
+from .proposals import (
+    FrozenTupleProposal,
+    oracle_ratio_bound,
+    second_moment_objective,
+    sqrt_optimal_probabilities,
+    validate_probabilities,
+)
 from . import library
 
 __all__ = [
@@ -63,6 +70,7 @@ __all__ = [
     "DxN",
     "FDeriv",
     "FNu",
+    "FrozenTupleProposal",
     "FullyNonlinearMechanism1D",
     "FullyNonlinearMechanismND",
     "FullyNonlinearPDE1D",
@@ -85,9 +93,13 @@ __all__ = [
     "integrability_edge",
     "jcp_rate",
     "library",
+    "oracle_ratio_bound",
     "sample_tree",
+    "second_moment_objective",
+    "sqrt_optimal_probabilities",
     "sweep_T",
     "truncated_normal_inverse_power",
+    "validate_probabilities",
     "x_symbol",
     "x_symbols",
     "z_symbols",

@@ -85,6 +85,7 @@ def sample_tree(
     mechanism=None,
     prune_zero: bool = True,
     max_depth: Optional[int] = None,
+    tuple_proposal: Optional[Any] = None,
 ) -> TreeSample:
     """Draw one sample of H(T_{t,x,code}); E[H] = code(u)(t, x).
 
@@ -100,6 +101,8 @@ def sample_tree(
     max_depth : if not None, kill branches when generation depth reaches or
         exceeds max_depth (returning 0.0 without drawing children). Root is
         depth 0.
+    tuple_proposal : optional callable (code, t, x, tau, depth, tuples) -> Sequence[float]
+        providing custom tuple proposal probabilities q(Z).
     """
     if max_depth is not None:
         if not isinstance(max_depth, (int, np.integer)) or isinstance(max_depth, bool) or max_depth < 0:
@@ -118,7 +121,8 @@ def sample_tree(
     sig = math.sqrt(getattr(pde, "sigma2", 1.0))
     counter = [0]
     value = _tree(pde, mechanism, t, x, code, rng, rate, prune_zero, counter,
-                  size, sig, depth=0, max_depth=max_depth)
+                  size, sig, depth=0, max_depth=max_depth,
+                  tuple_proposal=tuple_proposal)
     return TreeSample(value=value, n_nodes=counter[0])
 
 
@@ -136,6 +140,7 @@ def _tree(
     sig: float = 1.0,
     depth: int = 0,
     max_depth: Optional[int] = None,
+    tuple_proposal: Optional[Any] = None,
 ) -> float:
     counter[0] += 1
     if prune_zero and mech.is_identically_zero(code, pde):
@@ -157,13 +162,28 @@ def _tree(
     if max_depth is not None and depth >= max_depth:
         return 0.0
 
-    # uniform tuple from M(code), weight |M(code)| / rho(tau).
     tuples = mech.tuples(code)
-    z = tuples[rng.integers(len(tuples))] if len(tuples) > 1 else tuples[0]
+    if len(tuples) == 1:
+        z = tuples[0]
+        inv_q = 1.0
+    elif tuple_proposal is None:
+        # uniform tuple from M(code), weight |M(code)| / rho(tau).
+        z = tuples[rng.integers(len(tuples))]
+        inv_q = float(len(tuples))
+    else:
+        from .proposals import validate_probabilities
+
+        raw_probs = tuple_proposal(code, t, x, tau, depth, tuples)
+        probs = validate_probabilities(raw_probs, len(tuples))
+        idx = int(rng.choice(len(tuples), p=probs))
+        z = tuples[idx]
+        inv_q = 1.0 / probs[idx]
+
     # One shared branch position for all children (JEQ2023 Section 3).
     xb = x + rng.normal(0.0, sig * math.sqrt(tau), size=size)
-    h = len(tuples) * math.exp(rate * tau) / rate  # = |M(c)|/rho(tau)
+    h = inv_q * math.exp(rate * tau) / rate  # = 1 / (q_c * rho(tau))
     for cc in z:
         h *= _tree(pde, mech, t + tau, xb, cc, rng, rate, prune_zero, counter,
-                   size, sig, depth=depth + 1, max_depth=max_depth)
+                   size, sig, depth=depth + 1, max_depth=max_depth,
+                   tuple_proposal=tuple_proposal)
     return h

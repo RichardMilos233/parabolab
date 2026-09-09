@@ -52,6 +52,7 @@ def estimate(
     mechanism=None,
     prune_zero: bool = True,
     max_depth: Optional[int] = None,
+    tuple_proposal: Optional[Any] = None,
 ) -> MCResult:
     """Estimate code(u)(t, x) by averaging n_samples coding-tree samples.
 
@@ -77,6 +78,7 @@ def estimate(
             pde, t, x, rng=rng, rate=rate, code=code,
             mechanism=mechanism, prune_zero=prune_zero,
             max_depth=max_depth,
+            tuple_proposal=tuple_proposal,
         )
         values[i] = s.value
         total_nodes += s.n_nodes
