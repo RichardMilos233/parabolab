@@ -14,8 +14,8 @@ grid = np.linspace(-1.0, 1.0, 21)
 
 if __name__ == "__main__":
     curves = [
-        CodingTreeMC(n_samples=10_000, seed=0, rate=1.5).solve(pde, grid),
-        DeepBranching(n_states=500, m_samples=2000, epochs=1000, n_jobs=4).solve(pde, grid),
+        CodingTreeMC(n_samples=50_000, seed=0, rate=1.5).solve(pde, grid),
+        DeepBranching(n_states=3000, m_samples=50_000, epochs=8000, n_jobs=8).solve(pde, grid),
     ]
 
     title = "Merton Vasicek stochastic rate: MC and deep branching"
