@@ -51,6 +51,8 @@ from .moments import MomentQuadrature, finite_depth_moment_1d
 from .integrability import truncated_normal_inverse_power
 from .proposals import (
     FrozenTupleProposal,
+    TuplePilotResult,
+    estimate_tuple_contributions,
     oracle_ratio_bound,
     second_moment_objective,
     sqrt_optimal_probabilities,
@@ -83,10 +85,12 @@ __all__ = [
     "Solver",
     "TSweep",
     "TreeSample",
+    "TuplePilotResult",
     "compare",
     "default_rate",
     "estimate",
     "estimate_parallel",
+    "estimate_tuple_contributions",
     "exact_on",
     "finite_depth_moment_1d",
     "grid_states",

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import math
+from dataclasses import dataclass
 from typing import Any, Callable, Mapping, Sequence, Tuple
 
 import numpy as np
@@ -122,3 +123,103 @@ class FrozenTupleProposal:
             return self.probabilities_by_key[key]
         n = len(tuples)
         return tuple(1.0 / n for _ in range(n))
+
+
+@dataclass(frozen=True)
+class TuplePilotResult:
+    """Estimated second-moment contributions B_Z and standard errors for tuples of a code."""
+
+    contributions: np.ndarray
+    stderr: np.ndarray
+    n_samples: int
+    continuation_depth: int
+
+
+def estimate_tuple_contributions(
+    pde,
+    t: float,
+    x: object,
+    code: Code,
+    *,
+    n_samples: int,
+    seed: int,
+    rate: float,
+    continuation_depth: int,
+    mechanism=None,
+) -> TuplePilotResult:
+    r"""Estimate tuple second-moment contributions via pilot continuation sampling:
+
+    B_Z = \int_0^{T-t} \frac{1}{\rho(s)} \mathbb{E}\left[ \left|\prod_{z \in Z} H_z^{[d]}(t+s, X_s)\right|^2 \right] ds.
+    """
+    from .mechanism import SemilinearMechanism
+    from .tree import sample_tree
+
+    if mechanism is None:
+        mechanism = getattr(pde, "mechanism", None) or SemilinearMechanism
+
+    remaining = pde.T - t
+    if remaining <= 0.0:
+        raise ValueError(f"Remaining time pde.T - t must be positive, got T={pde.T}, t={t}")
+    if n_samples < 1:
+        raise ValueError(f"n_samples must be >= 1, got {n_samples}")
+    if rate <= 0.0:
+        raise ValueError(f"rate must be positive, got {rate}")
+
+    tuples = mechanism.tuples(code)
+    m = len(tuples)
+    if m == 0:
+        raise ValueError(f"No tuples for code {code}")
+
+    sig = math.sqrt(getattr(pde, "sigma2", 1.0))
+    size = x.shape if isinstance(x, np.ndarray) else None
+
+    # Spawn independent RNG streams for each tuple
+    streams = np.random.SeedSequence(seed).spawn(m)
+    b_means = np.empty(m, dtype=float)
+    b_stderrs = np.empty(m, dtype=float)
+
+    for j, (Z_tuple, child_seed) in enumerate(zip(tuples, streams)):
+        rng_j = np.random.default_rng(child_seed)
+        samples = np.empty(n_samples, dtype=float)
+
+        for i in range(n_samples):
+            # 1. draw s uniformly on (0, remaining)
+            s = float(rng_j.uniform(0.0, remaining))
+            # 2. draw shared branch position using PDE diffusion
+            xb = x + rng_j.normal(0.0, sig * math.sqrt(s), size=size)
+
+            # 3. independently sample each child killed tree at continuation_depth
+            prod_val = 1.0
+            for child_code in Z_tuple:
+                child_sample = sample_tree(
+                    pde,
+                    t + s,
+                    xb,
+                    rng=rng_j,
+                    rate=rate,
+                    code=child_code,
+                    mechanism=mechanism,
+                    prune_zero=True,
+                    max_depth=continuation_depth,
+                )
+                prod_val *= child_sample.value
+
+            # 4 & 5. importance weight: remaining * abs(product)^2 / rho(s)
+            rho_s = rate * math.exp(-rate * s)
+            term = remaining * (abs(prod_val) ** 2) / rho_s
+            if not math.isfinite(term):
+                raise ValueError(
+                    f"Non-finite pilot observation encountered for tuple {Z_tuple}: {term}"
+                )
+            samples[i] = term
+
+        b_means[j] = float(np.mean(samples))
+        b_stderrs[j] = float(np.std(samples, ddof=1) / math.sqrt(n_samples))
+
+    return TuplePilotResult(
+        contributions=b_means,
+        stderr=b_stderrs,
+        n_samples=n_samples,
+        continuation_depth=continuation_depth,
+    )
+

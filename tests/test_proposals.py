@@ -11,6 +11,8 @@ from parabolab import Id, ParabolicPDE, estimate
 from parabolab.moments import finite_depth_moment_1d
 from parabolab.proposals import (
     FrozenTupleProposal,
+    TuplePilotResult,
+    estimate_tuple_contributions,
     oracle_ratio_bound,
     second_moment_objective,
     sqrt_optimal_probabilities,
@@ -120,3 +122,85 @@ def test_frozen_tuple_proposal():
     # Fallback to uniform at depth 1
     q1 = frozen(Id(), 0.1, 0.0, 0.05, 1, ((Id(),), (Id(), Id())))
     assert q1 == (0.5, 0.5)
+
+
+def test_pilot_estimator_matches_analytic_b_z():
+    """Verify pilot estimated contributions B_Z against exact integrals."""
+    T = 0.2
+    pde = ParabolicPDE(
+        T=T,
+        f=lambda z: 0.0,
+        f_derivatives=(),
+        phi=lambda x: 1.0,
+        phi_derivatives=(lambda x: 0.0,),
+        exact_solution=lambda t, x: 1.0,
+        name="pilot_analytic_test",
+    )
+    # Exact analytic values derived for continuation_depth = 0:
+    # B_{Z_0} = T * exp(T)
+    # B_{Z_1} = exp(2*T) - exp(T)
+    exact_b0 = T * math.exp(T)
+    exact_b1 = math.exp(2.0 * T) - math.exp(T)
+
+    pilot = estimate_tuple_contributions(
+        pde,
+        0.0,
+        0.0,
+        Id(),
+        n_samples=25_000,
+        seed=42,
+        rate=1.0,
+        continuation_depth=0,
+        mechanism=BinaryTwoTupleMechanism,
+    )
+    assert len(pilot.contributions) == 2
+    assert abs(pilot.contributions[0] - exact_b0) <= 5.0 * pilot.stderr[0]
+    assert abs(pilot.contributions[1] - exact_b1) <= 5.0 * pilot.stderr[1]
+
+    # Verify sqrt optimal probabilities
+    q_empirical = sqrt_optimal_probabilities(pilot.contributions)
+    q_exact = sqrt_optimal_probabilities([exact_b0, exact_b1])
+    np.testing.assert_allclose(q_empirical, q_exact, atol=0.05)
+
+
+def test_pilot_freeze_stream_separation():
+    """Frozen proposal remains identical when only evaluation seed changes."""
+    pde = ParabolicPDE(
+        T=0.1,
+        f=lambda z: 0.0,
+        f_derivatives=(),
+        phi=lambda x: 1.0,
+        phi_derivatives=(lambda x: 0.0,),
+        exact_solution=lambda t, x: 1.0,
+        name="stream_sep_test",
+    )
+    # Pilot run with seed 101
+    pilot_101 = estimate_tuple_contributions(
+        pde, 0.0, 0.0, Id(), n_samples=500, seed=101, rate=1.0,
+        continuation_depth=0, mechanism=BinaryTwoTupleMechanism,
+    )
+    q_101 = tuple(sqrt_optimal_probabilities(pilot_101.contributions, floor_mass=0.05))
+
+    # Evaluate with seed 202 vs seed 303: proposal remains strictly frozen
+    frozen_prop = FrozenTupleProposal({(0, Id()): q_101})
+
+    res_eval1 = estimate(
+        pde, 0.0, 0.0, 1000, seed=202, rate=1.0,
+        mechanism=BinaryTwoTupleMechanism, tuple_proposal=frozen_prop,
+    )
+    res_eval2 = estimate(
+        pde, 0.0, 0.0, 1000, seed=303, rate=1.0,
+        mechanism=BinaryTwoTupleMechanism, tuple_proposal=frozen_prop,
+    )
+    # Proposals evaluated in both runs are identical
+    tuples = BinaryTwoTupleMechanism.tuples(Id())
+    assert frozen_prop(Id(), 0.0, 0.0, 0.05, 0, tuples) == q_101
+
+    # Changing pilot seed gives different estimates
+    pilot_999 = estimate_tuple_contributions(
+        pde, 0.0, 0.0, Id(), n_samples=500, seed=999, rate=1.0,
+        continuation_depth=0, mechanism=BinaryTwoTupleMechanism,
+    )
+    q_999 = tuple(sqrt_optimal_probabilities(pilot_999.contributions, floor_mass=0.05))
+    assert q_101 != q_999
+
