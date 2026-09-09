@@ -48,6 +48,7 @@ from .solve import (
 from .tree import TreeSample, default_rate, jcp_rate, sample_tree
 from .blowup import TSweep, integrability_edge, sweep_T
 from .moments import MomentQuadrature, finite_depth_moment_1d
+from .integrability import truncated_normal_inverse_power
 from . import library
 
 __all__ = [
@@ -86,6 +87,7 @@ __all__ = [
     "library",
     "sample_tree",
     "sweep_T",
+    "truncated_normal_inverse_power",
     "x_symbol",
     "x_symbols",
     "z_symbols",
