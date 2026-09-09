@@ -47,6 +47,7 @@ from .solve import (
 )
 from .tree import TreeSample, default_rate, jcp_rate, sample_tree
 from .blowup import TSweep, integrability_edge, sweep_T
+from .moments import MomentQuadrature, finite_depth_moment_1d
 from . import library
 
 __all__ = [
@@ -67,6 +68,7 @@ __all__ = [
     "FullyNonlinearPDEnD",
     "Id",
     "MCResult",
+    "MomentQuadrature",
     "ParabolicPDE",
     "SemilinearMechanism",
     "Solver",
@@ -77,6 +79,7 @@ __all__ = [
     "estimate",
     "estimate_parallel",
     "exact_on",
+    "finite_depth_moment_1d",
     "grid_states",
     "integrability_edge",
     "jcp_rate",

@@ -84,6 +84,7 @@ def sample_tree(
     code: Code = Id(),
     mechanism=None,
     prune_zero: bool = True,
+    max_depth: Optional[int] = None,
 ) -> TreeSample:
     """Draw one sample of H(T_{t,x,code}); E[H] = code(u)(t, x).
 
@@ -96,7 +97,16 @@ def sample_tree(
     prune_zero : return 0 immediately for identically-zero codes (exact for
         polynomial f, see SemilinearMechanism.is_identically_zero). Pruned
         subtrees consume no randomness.
+    max_depth : if not None, kill branches when generation depth reaches or
+        exceeds max_depth (returning 0.0 without drawing children). Root is
+        depth 0.
     """
+    if max_depth is not None:
+        if not isinstance(max_depth, (int, np.integer)) or isinstance(max_depth, bool) or max_depth < 0:
+            raise ValueError(
+                f"max_depth must be None or a non-negative integer, got {max_depth!r}"
+            )
+        max_depth = int(max_depth)
     if mechanism is None:
         mechanism = getattr(pde, "mechanism", None) or SemilinearMechanism
     if rate is None:
@@ -108,7 +118,7 @@ def sample_tree(
     sig = math.sqrt(getattr(pde, "sigma2", 1.0))
     counter = [0]
     value = _tree(pde, mechanism, t, x, code, rng, rate, prune_zero, counter,
-                  size, sig)
+                  size, sig, depth=0, max_depth=max_depth)
     return TreeSample(value=value, n_nodes=counter[0])
 
 
@@ -124,6 +134,8 @@ def _tree(
     counter: list,
     size=None,
     sig: float = 1.0,
+    depth: int = 0,
+    max_depth: Optional[int] = None,
 ) -> float:
     counter[0] += 1
     if prune_zero and mech.is_identically_zero(code, pde):
@@ -141,7 +153,11 @@ def _tree(
             w = 0.0
         return mech.terminal(code, pde, x + w) * math.exp(rate * remaining)
 
-    # Branch: uniform tuple from M(code), weight |M(code)| / rho(tau).
+    # Branch:
+    if max_depth is not None and depth >= max_depth:
+        return 0.0
+
+    # uniform tuple from M(code), weight |M(code)| / rho(tau).
     tuples = mech.tuples(code)
     z = tuples[rng.integers(len(tuples))] if len(tuples) > 1 else tuples[0]
     # One shared branch position for all children (JEQ2023 Section 3).
@@ -149,5 +165,5 @@ def _tree(
     h = len(tuples) * math.exp(rate * tau) / rate  # = |M(c)|/rho(tau)
     for cc in z:
         h *= _tree(pde, mech, t + tau, xb, cc, rng, rate, prune_zero, counter,
-                   size, sig)
+                   size, sig, depth=depth + 1, max_depth=max_depth)
     return h

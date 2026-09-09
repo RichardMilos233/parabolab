@@ -147,3 +147,14 @@ def test_prune_zero_does_not_change_mean():
     r_full = estimate(pde, 0.0, 0.0, 30_000, seed=5, prune_zero=False)
     joint = math.hypot(r_pruned.stderr, r_full.stderr)
     assert abs(r_pruned.estimate - r_full.estimate) < 3.0 * joint
+
+
+def test_max_depth_zero_kills_a_root_branch_without_extra_draws():
+    pde = allen_cahn_wave_1d(0.5)
+    rng = FakeRng(exponentials=[0.1], normals=[], integers=[])
+    sample = sample_tree(
+        pde, 0.0, 0.3, rng=rng, rate=1.0, max_depth=0,
+    )
+    assert sample.value == 0.0
+    assert sample.n_nodes == 1
+    assert not rng.exponentials and not rng.normals and not rng.integers_q
