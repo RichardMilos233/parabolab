@@ -48,6 +48,13 @@ from .solve import (
 from .tree import TreeSample, default_rate, jcp_rate, sample_tree
 from .blowup import TSweep, integrability_edge, sweep_T
 from .moments import MomentQuadrature, finite_depth_moment_1d
+from .rate_optimization import (
+    RateMomentDerivatives,
+    RateOptimizationResult,
+    finite_depth_moment_derivatives_1d,
+    optimize_exponential_rate_1d,
+    riccati_binary_second_moment,
+)
 from .integrability import truncated_normal_inverse_power
 from .proposals import (
     FrozenTupleProposal,
@@ -93,11 +100,16 @@ __all__ = [
     "estimate_tuple_contributions",
     "exact_on",
     "finite_depth_moment_1d",
+    "finite_depth_moment_derivatives_1d",
     "grid_states",
     "integrability_edge",
     "jcp_rate",
     "library",
     "oracle_ratio_bound",
+    "optimize_exponential_rate_1d",
+    "RateMomentDerivatives",
+    "RateOptimizationResult",
+    "riccati_binary_second_moment",
     "sample_tree",
     "second_moment_objective",
     "sqrt_optimal_probabilities",
