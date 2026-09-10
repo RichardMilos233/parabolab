@@ -93,6 +93,20 @@ conda run --no-capture-output -n parabolab \
   - Pilot square-root proposal concentrates on the dominant low-derivative pairs ($Z_0, Z_1 \approx 49.3\% \text{ and } 46.2\%$), reducing allocation to high-derivative, zero-terminal codes ($Z_2, Z_3, Z_4, Z_5 \le 1.4\%$).
   - Achieves variance $\times$ mean nodes reduction from $\approx 0.049$ down to $\approx 0.048$ while preserving strict unbiasedness across all 5 evaluation seeds (mean estimate $1.0025 \pm 0.0003$).
 
+### Exponential Rate Sweet-Spot Optimization Experiment (Task 5)
+```bash
+conda run --no-capture-output -n parabolab \
+  python examples/exponential_rate_sweet_spot.py
+```
+- **Script**: `examples/exponential_rate_sweet_spot.py`
+- **Generated Outputs**:
+  - `examples/exponential_rate_sweet_spot.csv`
+  - `examples/exponential_rate_sweet_spot.png`
+- **Benchmark Targets**:
+  - Binary Control ($u^2$) with $\phi \equiv 1$ across $T \in \{0.05, 0.10, 0.15\}$, verified against closed-form Riccati ground truth $V(T; \lambda) = \frac{\lambda^2 e^{\lambda T}}{\lambda^2 + 1 - e^{\lambda T}}$.
+  - Allen--Cahn (1D) traveling wave across $T \in \{0.05, 0.10, 0.20\}$, confirming $O(1)$ scaling $\lambda^*(T) \to 0.72$ as $T \to 0$ vs. JCP heuristic $\lambda_{\text{JCP}}(T) = -\ln(0.95)/T \to \infty$.
+  - Harry Dym equation across sample sizes $N \in \{10^3, 10^4, 50^5\}$ and rates $\lambda \in [0.2, 5.0]$, confirming catastrophic non-integrability and absence of any stable interior rate minimum.
+
 ---
 
 ## 4. Formal Research Claim Ledger
@@ -111,6 +125,10 @@ Every claim is categorized into one of the seven approved categories:
 | **Candidate 8** | Coefficient Sensitivities and Policy Intervals | **Conditional Theorem** | `docs/research/estimator-integrity/secondary-candidates.md` (§Candidate 8) | N/A (Requires bounded denominators and non-vanishing Hessians) |
 | **Candidate 9** | Monte Carlo Challenger-Model Certificate | **Proved Theorem** | `docs/research/estimator-integrity/secondary-candidates.md` (§Candidate 9) | Algebraic metric triangle inequality derivation |
 | **Candidate 10** | Short-Time Wave Proposal Optimization | **Proved Theorem** | `docs/research/estimator-integrity/secondary-candidates.md` (§Candidate 10) | Asymptotic variance expansion & joint $(\gamma, q)$ minimization |
+| **PR-RATE-1** | Local Exponential Rate Strict Convexity | **Proved Theorem** | `docs/research/estimator-integrity/exponential-rate-optimization.md` (§Thm 1.1) | `formal/EstimatorIntegrity/ExponentialRate.lean` (`singleEventKernelFactor_pos`, `modelRateObjective_ge_amgm`, `modelRateObjective_at_optimum`, `modelObjective_eq_lower_bound_iff`) |
+| **PR-RATE-2** | Full Tree Topology Rate Convexity | **Proved Theorem** | `docs/research/estimator-integrity/exponential-rate-optimization.md` (§Thm 2.1) | `formal/EstimatorIntegrity/ExponentialRate.lean` (`topologyFactor_pos_of_pos`) |
+| **PR-RATE-3** | Short-Horizon $O(1)$ Scaling Law | **Proved Theorem** | `docs/research/estimator-integrity/exponential-rate-optimization.md` (§Thm 3.1) | N/A (Taylor asymptotic series) |
+| **PR-RATE-4** | Exact Riccati Binary Second-Moment Oracle | **Proved Theorem** | `docs/research/estimator-integrity/exponential-rate-optimization.md` (§Thm 4.1) | N/A (Closed-form Riccati differential equation) |
 
 ---
 
