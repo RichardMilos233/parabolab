@@ -4,7 +4,7 @@ import math
 import numpy as np
 import pytest
 
-from parabolab.mechanism import SemilinearMechanism
+from parabolab.mechanism import Id, SemilinearMechanism
 from parabolab.moments import finite_depth_moment_1d
 from parabolab.pde import FullyNonlinearPDE1D, ParabolicPDE, x_symbol, z_symbols
 from parabolab.rate_optimization import (
@@ -100,3 +100,58 @@ def test_rate_optimizer_riccati_benchmark():
 
     # Verify that second derivative is strictly positive (strict convexity)
     assert opt_res.d2_rate > 0.0
+
+
+def test_rate_optimization_monte_carlo_agreement():
+    # Compare deterministic second moment at rate* against Monte Carlo sample second moment
+    from parabolab.tree import sample_tree
+
+    class BinarySemilinearMechanism:
+        @staticmethod
+        def tuples(code):
+            return ((Id(), Id()),)
+
+        @staticmethod
+        def terminal(code, pde, x):
+            return 1.0
+
+        @staticmethod
+        def is_identically_zero(code, pde):
+            return False
+
+    T = 0.05
+    pde = _binary_control_pde(T=T)
+    rate = 1.05  # near the optimum
+    det_res = finite_depth_moment_derivatives_1d(
+        pde, 0.0, 0.0, max_depth=1, rate=rate, mechanism=BinarySemilinearMechanism
+    )
+
+    n_samples = 40_000
+    rng = np.random.default_rng(20260910)
+    samples_sq = np.empty(n_samples)
+    for i in range(n_samples):
+        s = sample_tree(
+            pde,
+            0.0,
+            0.0,
+            rng=rng,
+            rate=rate,
+            mechanism=BinarySemilinearMechanism,
+            max_depth=1,
+        )
+        samples_sq[i] = s.value**2
+
+    emp_mean = float(np.mean(samples_sq))
+    emp_stderr = float(np.std(samples_sq, ddof=1) / math.sqrt(n_samples))
+
+    assert abs(emp_mean - det_res.value) <= 4.0 * emp_stderr
+
+
+def test_rate_optimizer_short_horizon_asymptotics():
+    # As T -> 0, lambda*(T) -> sqrt(B / G) = 1.0 for binary control u^2 with phi == 1
+    pde_short = _binary_control_pde(T=0.01)
+    opt = optimize_exponential_rate_1d(pde_short, 0.0, 0.0, max_depth=1, bracket=(0.5, 2.0), tol=1e-5)
+    assert opt.converged
+    # Should be close to 1.0 within O(T)
+    assert opt.rate == pytest.approx(1.0, abs=0.03)
+
