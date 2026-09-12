@@ -1,0 +1,114 @@
+{
+  "record_note": "Captured from the single 2026-09-12 example run. The original output key 'seed' is recorded here as 'seed_state_uint64' to match the corrected example schema; numerical values are unchanged. This file was assembled from captured stdout, not a second run.",
+  "command": "conda run --no-capture-output -n parabolab python examples/sampling_tuning.py",
+  "benchmark": "library.allen_cahn_wave_1d",
+  "parameters": {
+    "T": 0.05,
+    "evaluation_max_depth": null,
+    "optimizer_bracket": [
+      0.2,
+      2
+    ],
+    "optimizer_depth": 2,
+    "proposal_floor_mass": 0.1,
+    "quadrature_order": 4,
+    "root_seed": 20260912,
+    "samples_per_run": 2000,
+    "t": 0,
+    "x": 0
+  },
+  "versions": {
+    "numpy": "2.4.6",
+    "python": "3.11.15",
+    "sympy": "1.14.0"
+  },
+  "runs": [
+    {
+      "name": "default_rate_1_uniform",
+      "seed_state_uint64": "6518322821295319263",
+      "seed_spawn_key": [
+        0
+      ],
+      "lambda": 1,
+      "optimizer_second_moment": 0.2733006447898527,
+      "optimizer_depth": 2,
+      "optimizer_converged": null,
+      "tuning_kind": "fixed-rate finite-depth evaluation",
+      "tuning_seconds": 0.00930733303539455,
+      "sampling_seconds": 0.0039045829325914383,
+      "empirical_mean": -0.5192225511704908,
+      "stderr": 0.001445970433829058,
+      "exact": -0.5187412158785353,
+      "empirical_variance_stderr_squared_times_n": 0.0041816609910155875,
+      "mean_nodes": 1.0535,
+      "variance_times_mean_nodes": 0.004405379854034922
+    },
+    {
+      "name": "rate_only",
+      "seed_state_uint64": "2164519576587359883",
+      "seed_spawn_key": [
+        1
+      ],
+      "lambda": 0.7305486297108235,
+      "optimizer_second_moment": 0.27231712672119146,
+      "optimizer_depth": 2,
+      "optimizer_converged": true,
+      "tuning_kind": "bracket-constrained finite-depth optimization",
+      "tuning_seconds": 0.055574874859303236,
+      "sampling_seconds": 0.0029819579795002937,
+      "empirical_mean": -0.5175267480638887,
+      "stderr": 0.0012829521154844041,
+      "exact": -0.5187412158785353,
+      "empirical_variance_stderr_squared_times_n": 0.0032919322612518153,
+      "mean_nodes": 1.043,
+      "variance_times_mean_nodes": 0.003433485348485643
+    },
+    {
+      "name": "q_only",
+      "seed_state_uint64": "17900912448573901361",
+      "seed_spawn_key": [
+        2
+      ],
+      "lambda": 1,
+      "optimizer_second_moment": 0.27330017185889627,
+      "optimizer_depth": 2,
+      "optimizer_converged": null,
+      "tuning_kind": "fixed-rate finite-depth evaluation",
+      "tuning_seconds": 0.007773708086460829,
+      "sampling_seconds": 0.0035948329605162144,
+      "empirical_mean": -0.5177081179196895,
+      "stderr": 0.001428237110179007,
+      "exact": -0.5187412158785353,
+      "empirical_variance_stderr_squared_times_n": 0.004079722485784962,
+      "mean_nodes": 1.0525,
+      "variance_times_mean_nodes": 0.004293907916288672
+    },
+    {
+      "name": "combined",
+      "seed_state_uint64": "1986342432912205464",
+      "seed_spawn_key": [
+        3
+      ],
+      "lambda": 0.7304853674984467,
+      "optimizer_second_moment": 0.27231625665608244,
+      "optimizer_depth": 2,
+      "optimizer_converged": true,
+      "tuning_kind": "bracket-constrained finite-depth optimization",
+      "tuning_seconds": 0.07087558298371732,
+      "sampling_seconds": 0.002791208913549781,
+      "empirical_mean": -0.521000553707545,
+      "stderr": 0.0012474937670419334,
+      "exact": -0.5187412158785353,
+      "empirical_variance_stderr_squared_times_n": 0.003112481397616947,
+      "mean_nodes": 1.039,
+      "variance_times_mean_nodes": 0.0032338681721240077
+    }
+  ],
+  "seed_note": "Fingerprint uint64 values are decimal strings to avoid precision loss in JavaScript JSON readers. Reconstruct the actual Generator with default_rng(SeedSequence(20260912, spawn_key=(i,))). The fingerprints are not integer seeds for default_rng.",
+  "limitations": [
+    "Rate selection minimizes a finite-depth quadrature objective; it is uncertified for the unrestricted tree used in evaluation.",
+    "TerminalTupleProposal is a parent-state heuristic, not a conditional child-moment oracle.",
+    "Empirical variance and timing are one-run diagnostics, not confidence certificates or universal performance claims.",
+    "No full-tree moment bound is certified by this example."
+  ]
+}

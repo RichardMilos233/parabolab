@@ -1,0 +1,58 @@
+Milestone 1 bounded deterministic checks: PASS
+
+Command: conda run --no-capture-output -n parabolab python docs/research/milestone-1-checks.py
+Python: 3.11.15 (/opt/miniconda3/envs/parabolab/bin/python)
+NumPy/SymPy/SciPy: 2.4.6 / 1.14.0 / 1.17.1
+Elapsed: 2.217 seconds
+Seeds: none; all checks deterministic.
+
+dense_generic_exact_rational_quadratic
+  types: 21 (D incl. Id 6, G 15)
+  labels: original reduced 94, retained 78
+  max row / arity: 20 / 3
+  grade checks: True
+  majorant constants: {"A_exact": "5929", "K_exact": "125/16", "certified_rational_T": "1/549266338", "denominator_subtraction_upper_exact": "4394130125/4394130128", "elementary_bound": "exp(x)-1 <= x/(1-x) for 0 <= x < 1", "expm1_upper_exact": "36/274633133", "heat_weight_constant_c": "36", "lambda": "32", "max_S_sum_a2_over_q_exact": "250", "max_terminal_coefficient_l1_exact": "77", "scope": "Exact coefficient arithmetic for the finite graph/terminal-polynomial certificate; the surrounding stochastic theorem is supplied and reviewed separately.", "strictly_below_tau_critical": true, "tau_critical_float": 1.8206105072193753e-09, "x_equals_2cT": "36/274633169"}
+
+exact_rational_two_factor_Merton_log_source
+  types: 18 (D incl. Id 6, G 12)
+  labels: original reduced 81, retained 68
+  max row / arity: 18 / 3
+  grade checks: True
+  majorant constants: {"A_exact": "25/16", "K_exact": "405/64", "certified_rational_T": "1/103", "conservative_T_1_over_100_certificate": {"A_exact": "25/16", "K_bound_at_lambda_32": "125/16", "S_bound": "250", "T": "1/100", "actual_S_le_250": true, "cT": "9/25", "denominator_lower": "991179/4194304", "denominator_lower_gt_1_over_5": true, "denominator_subtraction_upper": "3203125/4194304", "exp_2cT_upper": "625/256", "exp_cT_bound": "exp(cT) <= 1/(1-cT)", "exp_cT_upper": "25/16", "expm1_2cT_upper": "369/256", "numerator_A_exp_cT_lt_5_over_2": true, "resulting_b_lt_6": true, "resulting_b_squared_lt_125_over_4_lt_36": true}, "denominator_subtraction_upper_exact": "253125/253952", "elementary_bound": "exp(x)-1 <= x/(1-x) for 0 <= x < 1", "expm1_upper_exact": "72/31", "heat_weight_constant_c": "36", "lambda": "32", "max_S_sum_a2_over_q_exact": "405/2", "max_terminal_coefficient_l1_exact": "5/4", "scope": "Exact coefficient arithmetic for the finite graph/terminal-polynomial certificate; the surrounding stochastic theorem is supplied and reviewed separately.", "strictly_below_tau_critical": true, "tau_critical_float": 0.01670865305681, "x_equals_2cT": "72/103"}
+
+assessment_whitened_two_factor_Merton_log_source
+  types: 21 (D incl. Id 6, G 15)
+  labels: original reduced 94, retained 78
+  max row / arity: 20 / 3
+  grade checks: True
+  majorant constants: {"A_float": 2.7605944162891425, "K_float": 7.8125, "heat_weight_constant_c": 36.0, "lambda": 32.0, "max_S_sum_a2_over_q_exact": "250", "max_terminal_coefficient_l1_float": 1.6615036612325422, "scope": "Floating diagnostic only; no rational or interval enclosure of source coefficients.", "tau_critical_float": 0.006568172820996931}
+
+High-D expansion evidence
+  multiindices / terms: 15 / 28224
+  violations: 0
+  limitation: Finite exact-symbolic evidence for orders 3--5 only; the general order statement requires the separate grade-invariant proof.
+
+Nonquadratic stress-label membership
+  all checks: True
+  gamma=1/2 terminals G_x2x2 / G_p2p2 / G_p2: 3*x1**2/50 / 17/16 / x1**2/40 - x1
+  gamma=2 terminals G_x2x2 / G_p2p2 / G_p2: -3*x1**2/100 / 31/32 / -x1**2/80 - x1
+  scope: Four mechanism rows per gamma only.  The non-L1 divergence argument using these labels is an ordinary proof reviewed separately, not established by enumeration.
+
+Existing log-factor deterministic checks
+  symbolic: {'pde_transform_zero': True, 'portfolio_gap_zero': True}
+  Riccati method max difference: 4.396e-14
+  max log/direct residual: 2.082e-17 / 4.163e-17
+  whitened/API differences: 1.735e-18 / 4.857e-16
+  limitations: Symbolic identities and finite-point residual checks do not prove stochastic integrability. The ODE comparison is a floating-point convergence diagnostic, not exact arithmetic. The frozen-clock calculation is not a full-tree proposal theorem.
+
+Lean toolchain inventory
+  formal/lean-toolchain: leanprover/lean4:v4.33.0
+  finding: This-run observation parsed from command output: repository root Lean 4.33.1; formal/ Lean 4.33.0, selected by its asserted leanprover/lean4:v4.33.0 pin.
+  No Lean build, test, installation, update, or file edit was performed.
+
+Execution note
+  Initial interrupted run: approximately 120 seconds.
+  Cause: The generic exact-certificate code incremented n one-by-one while seeking a very small rational horizon for deliberately large generic coefficients.
+  Fix: Solved the sufficient rational condition directly as n > 2c + 2 K A^2; this was script overhead, not mathematical or numerical instability.
+
+Scope warning: these are finite symbolic/numerical checks, not a proof of the full stochastic theorem.

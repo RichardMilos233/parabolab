@@ -125,6 +125,106 @@ class FrozenTupleProposal:
         return tuple(1.0 / n for _ in range(n))
 
 
+class TerminalTupleProposal:
+    """Cheap state-local tuple proposal based on terminal-code magnitudes.
+
+    For each labelled tuple ``Z`` supplied by the sampler callback, this
+    computes the proxy ``A_Z = prod_{child in Z} |child(phi)(x)|^2`` at the
+    parent particle's birth position ``x``.  It returns the uniform-floor
+    mixture of probabilities proportional to ``sqrt(A_Z)``.  Products are
+    evaluated in log space, so large finite terminal values do not overflow.
+
+    This is a deterministic heuristic, not a conditional child-moment
+    oracle.  It is initially supported for serial ``estimate``/``sample_tree``
+    and the deterministic 1D moment tools; no multiprocessing support is
+    promised.  The proxy deliberately ignores ``t``, ``tau``, and ``depth``.
+    Since every probability is at least ``floor_mass / m``, a uniform-
+    proposal local branching/majorant coefficient transfers conservatively
+    with factor ``1 / floor_mass``.  This is not a claim that an entire
+    full-tree moment bound is inflated by only that single factor.
+    A nonfinite value at the parent-state proxy is rejected even when later
+    Brownian leaf evaluations might be finite almost surely.
+    """
+
+    def __init__(self, pde, *, mechanism=None, floor_mass: float = 0.05) -> None:
+        from .mechanism import SemilinearMechanism
+
+        try:
+            floor_mass = float(floor_mass)
+        except (TypeError, ValueError, OverflowError) as exc:
+            raise ValueError(
+                f"floor_mass must be finite and strictly between 0 and 1, got {floor_mass}"
+            ) from exc
+        if not math.isfinite(floor_mass) or not (0.0 < floor_mass < 1.0):
+            raise ValueError(
+                f"floor_mass must be finite and strictly between 0 and 1, got {floor_mass}"
+            )
+        self.pde = pde
+        if mechanism is None:
+            mechanism = getattr(pde, "mechanism", None) or SemilinearMechanism
+        self.mechanism = mechanism
+        self.floor_mass = floor_mass
+
+    def __call__(
+        self,
+        code: Code,
+        t: float,
+        x: object,
+        tau: float,
+        depth: int,
+        tuples: tuple,
+    ) -> Sequence[float]:
+        del code, t, tau, depth
+        m = len(tuples)
+        if m == 0:
+            raise ValueError("TerminalTupleProposal requires at least one tuple")
+        uniform_floor = self.floor_mass / m
+        if uniform_floor == 0.0:
+            raise ValueError(
+                "floor_mass / number of tuples underflowed to zero; "
+                "strict proposal support cannot be represented"
+            )
+
+        log_scores = np.full(m, -np.inf, dtype=float)
+        for tuple_index, labelled_tuple in enumerate(tuples):
+            log_score = 0.0
+            for child_index, child in enumerate(labelled_tuple):
+                try:
+                    terminal = float(self.mechanism.terminal(child, self.pde, x))
+                except Exception as exc:
+                    raise ValueError(
+                        "TerminalTupleProposal could not evaluate terminal value for "
+                        f"tuple {tuple_index}, child {child_index}: {child!r}"
+                    ) from exc
+                if not math.isfinite(terminal):
+                    raise ValueError(
+                        "TerminalTupleProposal requires finite terminal values; "
+                        f"tuple {tuple_index}, child {child_index} produced {terminal}"
+                    )
+                if terminal == 0.0:
+                    log_score = -math.inf
+                    break
+                log_score += math.log(abs(terminal))
+            log_scores[tuple_index] = log_score
+
+        finite = np.isfinite(log_scores)
+        if not np.any(finite):
+            return tuple(1.0 / m for _ in range(m))
+
+        max_log = float(np.max(log_scores[finite]))
+        scaled_sqrt_scores = np.zeros(m, dtype=float)
+        scaled_sqrt_scores[finite] = np.exp(log_scores[finite] - max_log)
+        total = float(np.sum(scaled_sqrt_scores))
+        if not math.isfinite(total) or total <= 0.0:
+            raise ValueError("TerminalTupleProposal produced invalid scaled terminal scores")
+
+        q_star = scaled_sqrt_scores / total
+        probabilities = (
+            (1.0 - self.floor_mass) * q_star + uniform_floor
+        )
+        return tuple(float(q) for q in probabilities)
+
+
 @dataclass(frozen=True)
 class TuplePilotResult:
     """Estimated second-moment contributions B_Z and standard errors for tuples of a code."""
@@ -222,4 +322,3 @@ def estimate_tuple_contributions(
         n_samples=n_samples,
         continuation_depth=continuation_depth,
     )
-

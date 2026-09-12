@@ -58,6 +58,7 @@ from .rate_optimization import (
 from .integrability import truncated_normal_inverse_power
 from .proposals import (
     FrozenTupleProposal,
+    TerminalTupleProposal,
     TuplePilotResult,
     estimate_tuple_contributions,
     oracle_ratio_bound,
@@ -92,6 +93,7 @@ __all__ = [
     "Solver",
     "TSweep",
     "TreeSample",
+    "TerminalTupleProposal",
     "TuplePilotResult",
     "compare",
     "default_rate",

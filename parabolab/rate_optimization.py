@@ -290,21 +290,62 @@ def optimize_exponential_rate_1d(
     tol: float = 1e-5,
     max_iter: int = 40,
     quadrature: MomentQuadrature = MomentQuadrature(),
+    mechanism=None,
+    tuple_proposal: Optional[TupleProposal] = None,
+    prune_zero: bool = True,
 ) -> RateOptimizationResult:
-    """Find the branching clock rate lambda* in bracket minimizing V_{c, max_depth}^{(2)}(t, x).
+    """Find a constrained branching-clock minimizer within ``bracket``.
 
-    Uses safeguarded bisection combined with Newton-Raphson on the derivative equation d_rate == 0.
+    Uses safeguarded bisection combined with Newton-Raphson on ``d_rate == 0``.
+    If the derivative has the appropriate monotone sign at an endpoint, that
+    endpoint is returned as a valid converged constrained minimum.  This is
+    not a claim of an unconstrained or global minimum.  ``tuple_proposal``
+    must be fixed independently of the candidate rate; it and the mechanism
+    and pruning choice are forwarded unchanged to every moment evaluation.
     """
-    lo, hi = bracket
-    if lo <= 0.0 or hi <= lo:
+    try:
+        lo, hi = bracket
+        lo = float(lo)
+        hi = float(hi)
+    except (TypeError, ValueError, OverflowError) as exc:
+        raise ValueError(f"Invalid bracket: {bracket!r}. Must contain finite 0 < lo < hi.") from exc
+    if not (math.isfinite(lo) and math.isfinite(hi) and 0.0 < lo < hi):
         raise ValueError(f"Invalid bracket: {bracket}. Must satisfy 0 < lo < hi.")
+    try:
+        tol = float(tol)
+    except (TypeError, ValueError, OverflowError) as exc:
+        raise ValueError(f"tol must be positive and finite, got {tol}") from exc
+    if not math.isfinite(tol) or tol <= 0.0:
+        raise ValueError(f"tol must be positive and finite, got {tol}")
+    if isinstance(max_iter, bool) or not isinstance(max_iter, (int, np.integer)) or max_iter <= 0:
+        raise ValueError(f"max_iter must be a positive integer, got {max_iter}")
+    if isinstance(max_depth, bool) or not isinstance(max_depth, (int, np.integer)) or max_depth < 0:
+        raise ValueError(f"max_depth must be a non-negative integer, got {max_depth}")
+    max_iter = int(max_iter)
+    max_depth = int(max_depth)
 
-    res_lo = finite_depth_moment_derivatives_1d(
-        pde, t, x, code=code, max_depth=max_depth, rate=lo, quadrature=quadrature
-    )
-    res_hi = finite_depth_moment_derivatives_1d(
-        pde, t, x, code=code, max_depth=max_depth, rate=hi, quadrature=quadrature
-    )
+    def _checked_moment(rate: float) -> RateMomentDerivatives:
+        result = finite_depth_moment_derivatives_1d(
+            pde,
+            t,
+            x,
+            code=code,
+            max_depth=max_depth,
+            rate=rate,
+            mechanism=mechanism,
+            tuple_proposal=tuple_proposal,
+            quadrature=quadrature,
+            prune_zero=prune_zero,
+        )
+        values = (result.value, result.d_rate, result.d2_rate)
+        if not all(math.isfinite(value) for value in values):
+            raise ValueError(
+                f"Non-finite moment or derivative evaluation at rate={rate}: {values}"
+            )
+        return result
+
+    res_lo = _checked_moment(lo)
+    res_hi = _checked_moment(hi)
 
     if res_lo.d_rate >= 0.0:
         # Minimum is at or to the left of lo
@@ -325,7 +366,7 @@ def optimize_exponential_rate_1d(
             second_moment=res_hi.value,
             d_rate=res_hi.d_rate,
             d2_rate=res_hi.d2_rate,
-            converged=False,
+            converged=True,
             iterations=0,
             bracket=bracket,
         )
@@ -339,9 +380,7 @@ def optimize_exponential_rate_1d(
 
     for i in range(1, max_iter + 1):
         iterations = i
-        res = finite_depth_moment_derivatives_1d(
-            pde, t, x, code=code, max_depth=max_depth, rate=curr_rate, quadrature=quadrature
-        )
+        res = _checked_moment(curr_rate)
 
         if abs(res.d_rate) < tol or (curr_hi - curr_lo) < tol:
             converged = True
@@ -364,9 +403,7 @@ def optimize_exponential_rate_1d(
         if not newton_success:
             curr_rate = 0.5 * (curr_lo + curr_hi)
 
-    final_res = finite_depth_moment_derivatives_1d(
-        pde, t, x, code=code, max_depth=max_depth, rate=curr_rate, quadrature=quadrature
-    )
+    final_res = _checked_moment(curr_rate)
 
     return RateOptimizationResult(
         rate=curr_rate,

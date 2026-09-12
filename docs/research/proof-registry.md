@@ -1,8 +1,16 @@
 # Formal and Conventional Proof Registry
 
-**Status:** authoritative proof and claim registry for the `parabolab` research programme.
+**Status:** navigation and claim inventory for the `parabolab` research programme; entries must be checked against their underlying proofs.
 **Last-reviewed commit:** `ce2949330fcff1a3faf56c8a0ff36628586b242d`
 **Scope:** all mathematical theorems, conditional representations, Lean-formalized lemmas, conjectures, and priority claims across estimator integrity and multifactor Merton research.
+
+**Current decision (12 September 2026):** the active FYP concerns reliable
+exponential-rate and tuple-proposal selection. Multidimensional Merton is not
+the selected application; its records below are historical. See the
+[research checkpoint](lambda-q-optimization-summary.md) and the new
+[general rate-selection arguments](estimator-integrity/general-rate-selection.md).
+The new all-code moment/cutoff arguments are conventional mathematics, not
+additional Lean-checked statements or an implemented certified optimizer.
 
 ---
 
@@ -35,10 +43,11 @@ This registry provides a durable, atomic record of every mathematical claim acro
 | `PR-PROP-2` | Unconstrained Event-Time Optimizer | Proved Theorem | `adaptive-proposals.md` §Thm 6.2 | None (continuous-time measure decomposition) | 1D numerical quadrature on $(0, \Delta)$ | Generalization of Poisson split |
 | `PR-PROP-3` | Pilot/Frozen Proposal Exact Unbiasedness | Proved Theorem | `adaptive-proposals.md` §Thm 6.3 | None (pilot $\sigma$-algebra / tower property) | 5-seed Merton-Vasicek MC experiment | Established multi-stage Monte Carlo |
 | `PR-PROP-4` | Multiplicative Finite-Depth Oracle Bound | Proved Theorem | `adaptive-proposals.md` §Thm 6.4 | `Proposal.lean` (`sqrtProposal_ratio_bounds`, `oracle_ratio_of_relative_error`, `secondMoment_uniformMixture_le`) | Simulated pilot error runs | Branching tree-depth composition theorem |
-| `PR-RATE-1` | Local Exponential Rate Strict Convexity | Proved Theorem | `exponential-rate-optimization.md` §Thm 1.1 | `ExponentialRate.lean` (`singleEventKernelFactor_pos`, `modelRateObjective_ge_amgm`, `modelRateObjective_at_optimum`, `modelObjective_eq_lower_bound_iff`) | Quadrature derivatives vs finite differences | Strict convexity of local branching rate objective |
-| `PR-RATE-2` | Tree Topology Rate Convexity | Proved Theorem | `exponential-rate-optimization.md` §Thm 2.1 | `ExponentialRate.lean` (`topologyFactor_pos_of_pos`) | Deterministic recursive derivatives | Topology-level coding tree convexity |
-| `PR-RATE-3` | Short-Horizon $O(1)$ Scaling Law | Proved Theorem | `exponential-rate-optimization.md` §Thm 3.1 | None (Taylor asymptotic analysis) | 1D Allen-Cahn / Riccati quadrature sweeps | Contrasts $O(1)$ rate vs JCP $O(1/T)$ heuristic |
-| `PR-RATE-4` | Exact Riccati Binary Second-Moment Oracle | Proved Theorem | `exponential-rate-optimization.md` §Thm 4.1 | None (ODEs) | Machine-precision benchmark (`riccati_binary_second_moment`) | Ground-truth benchmark for tree rate optimizer |
+| `PR-RATE-1` | Local Exponential Rate Strict Convexity | Proved Theorem | `exponential-rate-optimization.md` §Thm 7.1 | `ExponentialRate.lean` (`singleEventKernelFactor_pos`, `modelRateObjective_ge_amgm`, `modelRateObjective_at_optimum`, `modelObjective_eq_lower_bound_iff`) | Quadrature derivatives vs finite differences | Related to classical importance-sampling convexity |
+| `PR-RATE-2` | Tree Topology Rate Convexity | Conditional full-tree theorem | `exponential-rate-optimization.md` §Thm 7.2 | `ExponentialRate.lean` (`topologyFactor_pos_of_pos`) only | Deterministic recursive derivatives | Topology-level coding tree convexity; finite variance separate |
+| `PR-RATE-3` | Short-Horizon $O(1)$ Scaling Law | Local theorem; full recursion conditional | `exponential-rate-optimization.md` §Thm 7.4 | None (Taylor asymptotic analysis) | 1D Allen-Cahn / Riccati quadrature sweeps | Requires nonzero terminal terms and uniform expansions |
+| `PR-RATE-4` | Exact Riccati Binary Second-Moment Oracle | Proved for standard binary representation | `exponential-rate-optimization.md` §Thm 7.5 | None (ODEs) | Analytic formula (`riccati_binary_second_moment`) | Not the derivative-coded estimator of the same PDE |
+| `PR-RATE-5` | General Rate Selection and Cutoff Certificates | Conventional theorems under stated hypotheses | `general-rate-selection.md` §§2–5 | None | `test_sampling_tuning.py` checks engineering only | Explicit all-code bound and selection gap; novelty unestablished; certified numerics not implemented |
 | `PR-SEC-4` | State-Dependent Arbitrary-Jet Representation | Conditional Theorem | `secondary-candidates.md` §Cand 4 | None (unformalized multi-index jet algebra) | SymPy jet chain-rule checks | Candidate contribution; nearby prior art |
 | `PR-SEC-5` | Derivative-Code Sobolev Training | Prior-Art Overlap | `secondary-candidates.md` §Cand 5 | None | Deep branching gradient supervision | Overlap: Czarnecki (2017), Huge-Savine (2020) |
 | `PR-SEC-6` | Robust Deep Branching Median-of-Means | Prior-Art Overlap | `secondary-candidates.md` §Cand 6 | None | Outlier filter comparison study | Overlap: Lugosi-Mendelson (2019), Catoni (2012) |

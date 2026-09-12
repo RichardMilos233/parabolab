@@ -108,6 +108,33 @@ same interface; the rest (multi-run tables, the three-way comparison,
 the blow-up and rate sweeps) keep their own shape because their output
 is a statistic, not a curve.
 
+## Opt-in rate and tuple-proposal tuning
+
+The active research direction is selecting the exponential branching rate
+`lambda` and tuple probabilities `q_c`; multidimensional Merton is not the
+chosen application. See the [research checkpoint](docs/research/lambda-q-optimization-summary.md)
+for the current claims, limitations, and next steps.
+
+`TerminalTupleProposal(pde, floor_mass=0.1)` provides a cheap, support-preserving
+terminal-data proxy for `q_c` at each branching decision. Pass the same proposal
+to `optimize_exponential_rate_1d(..., tuple_proposal=proposal)` and serial
+`estimate(..., rate=result.rate, tuple_proposal=proposal)`. The optimizer also
+accepts `mechanism` and `prune_zero` so its sampling model can match production.
+
+Run the small four-way comparison with the existing environment:
+
+```bash
+conda run --no-capture-output -n parabolab python examples/sampling_tuning.py
+```
+
+This is **opt-in heuristic tuning**, not a universal formula or a certified
+full-tree optimum: the rate objective uses finite-depth numerical quadrature,
+and the proposal uses terminal values at the parent-birth state, not exact
+continuation moments. A positive floor does not prove integrability. Defaults
+and tree draw order are unchanged; higher-level solver and multiprocessing
+integration are not included. Measure tuning overhead and sampling runtime as
+well as variance before deciding that a configuration is faster.
+
 ## Results at a glance
 
 All numbers are from this repo's scripts on a laptop CPU; "paper" =
