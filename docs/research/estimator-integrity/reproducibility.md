@@ -1,5 +1,12 @@
 # Estimator Integrity Reproducibility and Audit Ledger
 
+**Historical run record.** Paths, revisions, versions, test counts, and
+experiment results below describe the original estimator-integrity worktree.
+They are not a statement of the current checkout or a current test run.
+For the active scope and later rate/proposal checkpoint, start at the
+[research index](../README.md). Merton experiments remain evidence from that
+historical investigation; the multifactor application is inactive.
+
 This document details the exact environment, git revisions, dependencies, formal proofs, test suites, seeds, numerical experiments, and formal claim ledger for the Branching Estimator Integrity research programme.
 
 ---

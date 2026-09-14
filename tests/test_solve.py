@@ -134,6 +134,45 @@ def test_coding_tree_mc_accepts_instance_or_factory():
     np.testing.assert_array_equal(a.values, b.values)
 
 
+def test_coding_tree_mc_forwards_nonuniform_proposal_to_sampler():
+    from parabolab.mc import estimate
+
+    pde = allen_cahn_wave_1d(T=0.5)
+    grid = np.linspace(-1.0, 1.0, 3)
+    calls = []
+
+    def proposal(code, t, x, tau, depth, tuples):
+        calls.append((x, len(tuples)))
+        weights = np.arange(1, len(tuples) + 1, dtype=float)
+        return weights / weights.sum()
+
+    curve = CodingTreeMC(
+        n_samples=300, seed=7, rate=2.0, tuple_proposal=proposal,
+        label="nonuniform q",
+    ).solve(pde, grid)
+    assert calls and any(n_tuples > 1 for _, n_tuples in calls)
+    refs = [
+        estimate(pde, 0.0, float(x), 300, seed=7 + i, rate=2.0,
+                 tuple_proposal=proposal)
+        for i, x in enumerate(grid)
+    ]
+    np.testing.assert_array_equal(curve.values, [r.estimate for r in refs])
+    np.testing.assert_array_equal(curve.stderr, [r.stderr for r in refs])
+    assert curve.label == "nonuniform q"
+
+
+def test_tuple_proposals_reject_multiprocessing():
+    from parabolab.proposals import FrozenTupleProposal
+
+    proposal = FrozenTupleProposal({})
+    with pytest.raises(ValueError, match="tuple_proposal requires n_jobs=1"):
+        CodingTreeMC(n_jobs=2, tuple_proposal=proposal)
+    pde = allen_cahn_wave_1d(T=0.1)
+    with pytest.raises(ValueError, match="tuple_proposal requires n_jobs=1"):
+        estimate_profile(pde, 0.0, [0.0], 10, n_jobs=2,
+                         tuple_proposal=proposal)
+
+
 def test_coding_tree_mc_handles_multidimensional_pdes():
     """d-dim PDEs evaluate phi at an array; a float raises deep in lambdify."""
     pde = merton_hjb(T=0.1)
@@ -142,6 +181,22 @@ def test_coding_tree_mc_handles_multidimensional_pdes():
     assert curve.values.shape == (4,)
     assert np.all(np.isfinite(curve.values))
     assert np.all(curve.stderr > 0)
+
+
+def test_solver_custom_label():
+    pde = allen_cahn_wave_1d(T=0.1)
+    grid = np.linspace(-1.0, 1.0, 3)
+    c1 = CodingTreeMC(n_samples=50, seed=0).solve(pde, grid)
+    assert c1.label == "coding-tree MC"
+    c2 = CodingTreeMC(n_samples=50, seed=0, label="custom label").solve(pde, grid)
+    assert c2.label == "custom label"
+
+    db = DeepBranching(label="custom db")
+    assert db.label == "custom db"
+    bsde = DeepBSDE(label="custom bsde")
+    assert bsde.label == "custom bsde"
+    dgm = DeepGalerkin(label="custom dgm")
+    assert dgm.label == "custom dgm"
 
 
 def test_coding_tree_mc_reproduces_the_closed_form_inside_error_bars():

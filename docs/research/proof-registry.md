@@ -4,10 +4,12 @@
 **Last-reviewed commit:** `ce2949330fcff1a3faf56c8a0ff36628586b242d`
 **Scope:** all mathematical theorems, conditional representations, Lean-formalized lemmas, conjectures, and priority claims across estimator integrity and multifactor Merton research.
 
-**Current decision (12 September 2026):** the active FYP concerns reliable
-exponential-rate and tuple-proposal selection. Multidimensional Merton is not
-the selected application; its records below are historical. See the
-[research checkpoint](lambda-q-optimization-summary.md) and the new
+**Current decision (14 September 2026):** the active FYP improves branching
+Monte Carlo PDE estimation through exponential-rate and tuple-proposal
+selection. The existing solver/demo comparison workflow remains the same.
+Multidimensional Merton is inactive as a research application; its records
+below are historical. See the [research index](README.md),
+[research checkpoint](lambda-q-optimization-summary.md), and
 [general rate-selection arguments](estimator-integrity/general-rate-selection.md).
 The new all-code moment/cutoff arguments are conventional mathematics, not
 additional Lean-checked statements or an implemented certified optimizer.
@@ -364,6 +366,11 @@ This registry provides a durable, atomic record of every mathematical claim acro
 ---
 
 ### Family 5: Multifactor Merton Theorems
+
+Historical application records: implementation targets and open obligations
+in this family are retained from the Merton programme, not assigned as
+current variance-reduction work. Mathematical status is still governed by
+each underlying proof.
 
 #### `PR-MM-1`: Optimized Factor Merton HJB Equation
 - **Exact Statement:** For observable factor $dY = b(Y)ds + \beta dW^Y$, asset excess returns $\lambda(Y)$, covariance $\Sigma \succ 0$, cross-covariance $C$, and CRRA parameter $a = 1 - \gamma \in (0, 1)$, the value function satisfies the optimized HJB:

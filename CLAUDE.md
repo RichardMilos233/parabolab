@@ -1,5 +1,30 @@
 # parabolab — agent notes
 
+## Current direction
+- The project remains a PDE solver/reproduction framework. Active research
+  improves branching estimation through the exponential clock rate `lambda`
+  and tuple probabilities `q_c(Z)`. Start at `docs/research/README.md` and
+  `docs/research/lambda-q-optimization-summary.md`.
+- Multidimensional/multifactor Merton is inactive research. Keep its proofs,
+  symbolic checks, existing examples, and general multidimensional support;
+  do not resume that roadmap as the default next task.
+- Preserve the demo contract: one PDE, a list of solver/sampling variants,
+  `Solver(**settings).solve(pde, grid) -> Curve`, then `compare(...).table().plot(...)`.
+  The variance demo uses the same interface. Rate/proposal choices are
+  estimator settings; avoid building a separate application or solver stack.
+- `CodingTreeMC` accepts `rate`, `label`, and a serial `tuple_proposal`.
+  Rate selection is explicit precomputation; a rate tuned at one point is
+  not automatically optimal elsewhere on a profile. Proposal callbacks are
+  not supported by the multiprocessing or deep-solver paths.
+- Keep exact theory separate from approximations: `A_0=P_delta(|g_c|^2)` is
+  terminal data averaged over the diffusion, while full-tree `A_lambda(s)`
+  contains rate-dependent child second moments. The local rate theorem
+  freezes continuation; full-tree differentiation includes child derivatives.
+  Finite-depth quadrature and terminal tuple scores are practical proxies,
+  not certified full-tree or jointly optimal `lambda,q` solutions.
+- Compare variance/error and total cost (including tuning). Dym is a
+  non-integrability diagnostic, not a successful variance-reduction benchmark.
+
 ## Workspace
 - Sessions for THIS project open this repo directly as the workspace
   root. The repo lives inside the umbrella `fyp/` folder (one level up),
@@ -75,8 +100,8 @@
   `Solver(**budget).solve(pde, grid, t=0.0) -> Curve`, plus
   `compare(pde, *curves)` -> `.table()` / `.plot()` / `.errors()`. Thin
   facade over profiles.py / deep/ / vendor/ -- no new numerics. Exported
-  from the top level; `demo/` (two ~25-line scripts, Allen-Cahn and
-  Merton) is its showcase. 29 tests in `tests/test_solve.py`.
+  from the top level; `demo/` showcases the interface for PDEs and sampling
+  variants. Tests are in `tests/test_solve.py`.
   The seven PROFILE examples were migrated onto it (jeq_fig1/4/6/7/8/9 +
   jeq_allen_cahn_1d), verified numerically identical row-for-row except
   jeq_allen_cahn_1d, whose hand-rolled seed scheme
@@ -200,15 +225,13 @@
     identically-zero (∂^ν f)* code (exact, mean-preserving — same induction
     as gotcha 6). Without it, weights |M(c)|/ρ(τ) would be ~13x larger.
     If reduction empties a table we keep one zero tuple (sampler returns 0).
-14. **Dym (Fig 6) has divergent higher moments at every rate**: φ = (6x)^{2/3}
-    ⇒ |φ^{(k)}| ~ Γ(k − 2/3)·x^{2/3−k} grows factorially, beating the
-    (λT)^depth branching probability for ANY λ; deep ∂ₓ-chains produce
-    monster samples (−54 ± 56 at 1e6 samples where exact = 4.05). More
-    samples make the profile WORSE, not better; higher rate is catastrophic
-    (rate 5: estimates in the thousands), lower rate just hides the
-    nonlinear correction. Strictly, φ violates the growth assumptions of
-    JEQ Prop 4.2 — the representation is numerically usable only in the
-    pre-asymptotic "lucky seed" regime. Central to the FYP short-time story.
+14. **Dym (Fig 6) is non-integrable at every positive rate** for the
+    specified real-extension estimator. The proof in
+    `docs/research/estimator-integrity/dym-nonintegrability.md` uses a fixed
+    five-particle topology and a terminal singularity; an infinite-depth
+    factorial-growth argument is not needed. Finite-sample profiles can
+    look accurate while missing rare extreme values. Rate tuning cannot
+    produce a finite variance optimum here; keep Dym as an obstruction test.
 15. **Heavy tails masquerade as bias at small N** (cosine/log examples):
     below ~1e5 samples the rare large-weight branches are missed, so both
     the mean AND the stderr are too small — z-scores of 3.5–6.5 that shrink

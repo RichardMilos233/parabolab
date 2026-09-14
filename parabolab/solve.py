@@ -59,6 +59,7 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Union
 import numpy as np
 
 from .pde import FullyNonlinearPDEnD
+from .proposals import TupleProposal
 
 __all__ = [
     "Curve",
@@ -220,24 +221,34 @@ class CodingTreeMC(Solver):
     """Pointwise coding-tree Monte Carlo (JEQ2023 Thm. 1 / JCP2024 Alg. 1).
 
     Each grid point is an independent expectation -- no training, no
-    time-marching, no coupling between points -- so this is cheap and is
-    the only solver the demo runs by default.
+    time-marching, no coupling between points. Sampling settings can be
+    compared through the same Curve interface as the network solvers.
 
     ``rate`` is the Exp rate of the branching clock; None uses the package
     default (1.0).  ``n_jobs > 1`` fans sample batches out to worker
     processes and requires a factory; the result is independent of
     ``n_jobs`` but differs from the ``n_jobs=1`` serial draw (different
     seeding scheme -- both are valid, neither is more correct).
+    ``tuple_proposal`` optionally supplies the tuple probabilities q_c(Z)
+    used by the serial sampler; it requires ``n_jobs=1``.  Pass a proposal
+    prepared for the same PDE, then compare its Curve with the baseline.
     """
 
     label = "coding-tree MC"
 
     def __init__(self, n_samples: int = 10_000, seed: int = 0,
-                 rate: Optional[float] = None, n_jobs: int = 1):
+                 rate: Optional[float] = None, n_jobs: int = 1,
+                 label: Optional[str] = None, *,
+                 tuple_proposal: Optional[TupleProposal] = None):
+        if tuple_proposal is not None and n_jobs > 1:
+            raise ValueError("tuple_proposal requires n_jobs=1")
         self.n_samples = n_samples
         self.seed = seed
         self.rate = rate
         self.n_jobs = n_jobs
+        self.tuple_proposal = tuple_proposal
+        if label is not None:
+            self.label = label
 
     @property
     def needs_factory(self) -> bool:
@@ -253,6 +264,7 @@ class CodingTreeMC(Solver):
             instance, t, grid, self.n_samples, seed=self.seed,
             rate=self.rate, embed=_embedding(instance, grid, embed),
             pde_factory=factory, n_jobs=self.n_jobs,
+            tuple_proposal=self.tuple_proposal,
         )
         return Curve(
             label=self.label,
@@ -280,7 +292,8 @@ class DeepBranching(Solver):
 
     def __init__(self, n_states: int = 1000, m_samples: int = 10_000,
                  epochs: int = 3000, seed: int = 0, n_jobs: int = 4,
-                 device: str = "cpu", activation: str = "tanh"):
+                 device: str = "cpu", activation: str = "tanh",
+                 label: Optional[str] = None):
         self.n_states = n_states
         self.m_samples = m_samples
         self.epochs = epochs
@@ -288,6 +301,8 @@ class DeepBranching(Solver):
         self.n_jobs = n_jobs
         self.device = device
         self.activation = activation
+        if label is not None:
+            self.label = label
 
     def solve(self, pde: PDELike, grid: Sequence[float], t: float = 0.0,
               embed=None) -> Curve:
@@ -338,7 +353,8 @@ class DeepBSDE(Solver):
 
     def __init__(self, epochs: int = 3000, n_states: int = 1000,
                  n_time_intervals: int = 4, seed: int = 0,
-                 f_expr=None, phi_expr=None, **net_kwargs):
+                 f_expr=None, phi_expr=None, label: Optional[str] = None,
+                 **net_kwargs):
         self.epochs = epochs
         self.n_states = n_states
         self.n_time_intervals = n_time_intervals
@@ -346,6 +362,8 @@ class DeepBSDE(Solver):
         self.f_expr = f_expr
         self.phi_expr = phi_expr
         self.net_kwargs = net_kwargs
+        if label is not None:
+            self.label = label
 
     def solve(self, pde: PDELike, grid: Sequence[float], t: float = 0.0,
               embed=None) -> Curve:
@@ -393,13 +411,16 @@ class DeepGalerkin(Solver):
     label = "deep Galerkin"
 
     def __init__(self, epochs: int = 3000, n_states: int = 1000,
-                 seed: int = 0, f_expr=None, phi_expr=None, **net_kwargs):
+                 seed: int = 0, f_expr=None, phi_expr=None,
+                 label: Optional[str] = None, **net_kwargs):
         self.epochs = epochs
         self.n_states = n_states
         self.seed = seed
         self.f_expr = f_expr
         self.phi_expr = phi_expr
         self.net_kwargs = net_kwargs
+        if label is not None:
+            self.label = label
 
     def solve(self, pde: PDELike, grid: Sequence[float], t: float = 0.0,
               embed=None) -> Curve:

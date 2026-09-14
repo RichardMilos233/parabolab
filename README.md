@@ -1,8 +1,13 @@
 # parabolab
 
-**Complete** (milestones M1–M5) from-scratch Python reproduction of the
-**coding trees** Monte Carlo method for fully nonlinear parabolic PDEs by
-Nguwi, Penent & Privault (NTU):
+Coding-tree Monte Carlo and deep branching solvers for fully nonlinear
+parabolic PDEs. The paper reproductions and common solver interface are
+implemented; current research improves the branching estimator by selecting
+the clock rate $\lambda$ and tuple probabilities $q_c(Z)$ to reduce variance.
+The PDE-solving workflow stays the same: define a PDE, choose solver or
+sampling settings, and compare estimates on a common grid.
+
+The implementation reproduces the methods of Nguwi, Penent & Privault (NTU):
 
 - **[JEQ2023]** *A fully nonlinear Feynman–Kac formula with derivatives of
   arbitrary orders*, J. Evol. Equ. 23:22 (2023).
@@ -23,7 +28,13 @@ is represented as $u(t,x) = \mathbb E[\mathcal H(\mathcal T_{t,x,\mathrm{Id}})]$
 over random *coding trees*: particles carry operator **codes**, move as
 Brownian motions, die at Exp-distributed times and branch into code tuples
 drawn from the **mechanism** $\mathcal M(c)$; leaves evaluate their code on
-$\phi$ (JEQ2023 Thm. 1, JCP2024 Alg. 1).
+$\phi$ (JEQ2023 Thm. 1, JCP2024 Alg. 1), under the representation's
+integrability assumptions.
+
+Start with [demos](demo/README.md) for the existing solver workflow and the
+[research guide](docs/research/README.md) for current results and open work.
+Multifactor Merton research is retained as historical material; the original
+Merton benchmarks and general multidimensional PDE support remain available.
 
 ## Quickstart
 
@@ -34,6 +45,8 @@ pytest                                  # fast suite (~30 s)
 pytest -m 'slow or not slow'            # + paper-budget validation (minutes)
 python demo/allen_cahn.py               # start here: one PDE, several
 python demo/merton.py                   #   methods (see demo/README.md)
+python demo/variance_reduction.py       # same workflow: baseline / lambda / q / both
+python demo/dym.py                      # non-integrability diagnostic
 python examples/jeq_allen_cahn_1d.py    # paper reproductions (see examples/)
 python examples/jeq_fig6_dym.py         # M2: JEQ Figs 6-9 reproductions
 python examples/jeq_fig7_tan.py         #     (each prints a table and saves
@@ -108,20 +121,29 @@ same interface; the rest (multi-run tables, the three-way comparison,
 the blow-up and rate sweeps) keep their own shape because their output
 is a statistic, not a curve.
 
-## Opt-in rate and tuple-proposal tuning
+## Current research: branching variance reduction
 
-The active research direction is selecting the exponential branching rate
-`lambda` and tuple probabilities `q_c`; multidimensional Merton is not the
-chosen application. See the [research checkpoint](docs/research/lambda-q-optimization-summary.md)
-for the current claims, limitations, and next steps.
+Selecting `lambda` and `q_c(Z)` changes how the same branching estimator is
+sampled. Exact inverse-probability weights preserve its represented mean when
+the estimator is integrable. Compare empirical variance, standard error,
+estimation error, and computation time; a single accurate curve does not
+establish finite variance or optimal sampling.
 
 `TerminalTupleProposal(pde, floor_mass=0.1)` provides a cheap, support-preserving
 terminal-data proxy for `q_c` at each branching decision. Pass the same proposal
-to `optimize_exponential_rate_1d(..., tuple_proposal=proposal)` and serial
-`estimate(..., rate=result.rate, tuple_proposal=proposal)`. The optimizer also
-accepts `mechanism` and `prune_zero` so its sampling model can match production.
+to `optimize_exponential_rate_1d(..., tuple_proposal=proposal)` and
+`CodingTreeMC(rate=result.rate, tuple_proposal=proposal).solve(pde, grid)`.
+Custom labels distinguish sampling variants in the existing comparison table
+and figure. Proposal tuning currently uses the serial path (`n_jobs=1`).
 
-Run the small four-way comparison with the existing environment:
+[`demo/variance_reduction.py`](demo/variance_reduction.py) compares the baseline,
+rate-only, proposal-only, and combined settings using the original
+`Solver.solve(...) -> Curve` interface. Its rate is selected at one reference
+state and reused across the profile, so it is not a pointwise optimum at every
+grid location. The existing Allen–Cahn, Merton, and network-solver demos keep
+their original roles.
+
+For pointwise variance and timing diagnostics, run:
 
 ```bash
 conda run --no-capture-output -n parabolab python examples/sampling_tuning.py
@@ -130,10 +152,13 @@ conda run --no-capture-output -n parabolab python examples/sampling_tuning.py
 This is **opt-in heuristic tuning**, not a universal formula or a certified
 full-tree optimum: the rate objective uses finite-depth numerical quadrature,
 and the proposal uses terminal values at the parent-birth state, not exact
-continuation moments. A positive floor does not prove integrability. Defaults
-and tree draw order are unchanged; higher-level solver and multiprocessing
-integration are not included. Measure tuning overhead and sampling runtime as
-well as variance before deciding that a configuration is faster.
+continuation moments. The full-tree continuation second moments themselves
+depend on `lambda`; the frozen-continuation local theorem does not supply them
+for free. A positive proposal floor does not prove integrability. Defaults and
+tree draw order are unchanged. Measure tuning overhead and sampling runtime as
+well as variance before deciding that a configuration is faster. See the
+[research checkpoint](docs/research/lambda-q-optimization-summary.md) for the
+precise claims and remaining work.
 
 ## Results at a glance
 
@@ -179,6 +204,9 @@ budget closes the gap (see the M4 milestone summary).
 | `parabolab/fdb.py` | multivariate Faà di Bruno enumeration, 1-d and d-dim, with monotone-predicate pruning (cross-checked against the authors' `deep_branching/fdb.py`) |
 | `parabolab/tree.py` | recursive `TREE(t,x,c)` sampler, JCP2024 Alg. 1 / JEQ2023 Def. 4.1; d-dim BM with variance σ² |
 | `parabolab/mc.py` | pointwise estimator: mean, stderr, tree-size diagnostics |
+| `parabolab/proposals.py` | nonuniform tuple probabilities, pilot-frozen proposals, and the terminal-data proxy |
+| `parabolab/moments.py` | deterministic finite-depth absolute-moment quadrature |
+| `parabolab/rate_optimization.py` | finite-depth rate derivatives, bracket-constrained rate selection, and the binary Riccati oracle |
 | `parabolab/solve.py` | uniform solver interface: `CodingTreeMC`, `DeepBranching`, `DeepBSDE`, `DeepGalerkin`, all `Solver(**budget).solve(pde, grid) -> Curve`, plus `compare(...)` for the table and figure; pins the grid convention and keeps torch out of the top-level import |
 | `parabolab/parallel.py` | `estimate_parallel`: sample batches over worker processes (n_jobs-independent results; pure-Python `estimate` stays the reference) |
 | `parabolab/profiles.py` | profile estimation over an x-grid (+ d-dim embedding) + Fig-style plotting |
@@ -186,8 +214,10 @@ budget closes the gap (see the M4 milestone summary).
 | `parabolab/deep/` | M4 deep branching solver (JCP2024 Alg. 2): `generator.py` (batched (τ,X,H̄) training data over worker processes, optional root codes), `net.py` (residual tanh net (3.2)–(3.3)), `solver.py` (Adam training loop, grid errors, Fig-7 consistency plot), `experiments.py` (repeated-run driver) |
 | `parabolab/vendor/` | M5 vendored baselines: the authors' deep BSDE (`bsde.py`) and deep Galerkin (`galerkin.py`) solvers, verbatim from [deep_branching](https://github.com/nguwijy/deep_branching) @ `c06bef2` (MIT), plus our thin `adapters.py` (index mapping + sympy→torch lambdify — no solver logic of ours) |
 | `parabolab/blowup.py` | M5 blow-up machinery: `sweep_T` (pointwise estimate/stderr/seed-spread/max\|H\| vs horizon T), `integrability_edge` (persistent drift or >5 % relative stderr) |
+| `docs/research/` | current variance-reduction guide, theory notes, claim registry, and historical Merton records |
+| `formal/` | Lean checks for selected algebraic and moment-iteration lemmas; coverage is listed in the proof registry |
 
-## Milestones
+## Completed reproduction milestones
 
 - **M1 (done)** — semilinear coding trees, d = 1, pure Python/numpy;
   validated against the Allen–Cahn closed forms (traveling wave (5.3) and
@@ -287,13 +317,12 @@ window closes depends on the ρ rate**:
   5e-3–1.8e-2 — and the Fig-7 consistency plot (MC targets vs net) makes
   the bad fit visible at a glance, exactly the paper's point. Excluding
   the anomalous run our mean is 1.04e-2 (paper: 8.49e-3).
-- **Dym instability (JEQ Fig. 6)**: the terminal condition $(6x)^{2/3}$ has
-  factorially growing high-order derivatives, so $\mathcal H$ has divergent
-  higher moments at *every* Exp rate — increasing the sample count surfaces
-  ever-bigger "monster" samples instead of converging (compare
-  `examples/jeq_fig6_dym.py` at 1e5 vs 1e6, and `examples/rate_study_dym.py`).
-  The paper's clean Fig. 6 at 1e5 samples is a lucky draw; ours at seed 0
-  shows the true behaviour.
+- **Dym non-integrability (JEQ Fig. 6)**: for the specified real-extension
+  estimator, a fixed finite tree topology already gives an infinite absolute
+  first moment at every positive exponential rate. There is no finite
+  variance-minimizing rate for this estimator. Its demos and rate sweeps are
+  diagnostics; a visually accurate finite-sample curve is not convergence
+  evidence. See the [proof](docs/research/estimator-integrity/dym-nonintegrability.md).
 - **Paper errata found in JEQ2023 §5** (both sympy-verified, see
   `parabolab/library.py`): (i) the quartic terminal-condition coefficients of
   the cosine example (5.10) as printed (b = −36/47, c = 24b, d = 4b²) do not

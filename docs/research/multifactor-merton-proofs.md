@@ -2,6 +2,11 @@
 
 **Status:** conventional mathematical proofs recorded on 2026-09-09.
 
+**Application status:** historical; multidimensional/multifactor Merton is
+inactive as a research application (confirmed 14 September 2026). These
+proofs and their stated limitations are retained. Current implementation
+work follows the [branching variance-reduction direction](README.md).
+
 This note contains the mathematical core needed for a genuinely
 multidimensional Merton coding-tree benchmark. It deliberately separates
 algebraic PDE identities from stochastic-control verification and from the

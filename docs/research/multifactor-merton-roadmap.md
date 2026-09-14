@@ -1,6 +1,11 @@
 # Multifactor Merton Research and Literature Roadmap
 
-**Status:** approved research roadmap for the `parabolab` multidimensional benchmark programme.
+**Status:** historical roadmap; multidimensional/multifactor Merton is inactive
+as a research application (confirmed 14 September 2026). The active direction
+is [branching-estimator variance reduction](README.md). The recommendations
+and implementation plans below are retained for provenance and are superseded
+as the current work plan. Existing Merton PDE examples remain available.
+
 **Last-reviewed commit:** `ce2949330fcff1a3faf56c8a0ff36628586b242d`
 **Companion documents:**
 - Primary proofs: `docs/research/multifactor-merton-proofs.md`

@@ -62,6 +62,61 @@ This is a local, frozen-continuation objective. In a recursive tree the child
 moments also depend on \(\lambda\); the full-tree argument later in this note
 does not freeze them.
 
+### Where the local coefficients come from
+
+Let \(g_c=c(u)(T,\cdot)\) be the terminal factor for root code \(c\), and
+let \(P_s\) be the reference diffusion semigroup. The leaf coefficient is
+
+\[
+A_{0,c}=P_\Delta|g_c|^2(x).
+\]
+
+In particular, \(A_{0,\mathrm{Id}}=P_\Delta(\phi^2)(x)\) for real terminal
+data. It is determined by terminal data and the diffusion law, independently
+of the clock rate. It is not \((P_\Delta\phi(x))^2\). Analytic integration,
+deterministic quadrature, or diffusion-only sampling can evaluate it without
+generating a branching tree.
+
+For fixed positive code-only tuple probabilities, write
+\(V_{z,\lambda}(r,y)=\mathbb E_\lambda|H_{r,y,z}|^2\). The full-tree
+continuation coefficient is
+
+\[
+A_{c,\lambda}(s)=
+\sum_{\ell\in L_c}\frac{1}{q_c(Z_{c,\ell})}
+P_s\!\left[
+\prod_{z\in Z_{c,\ell}}V_{z,\lambda}(t+s,\cdot)
+\right](x).
+\]
+
+The sum is over labelled alternatives, and the product is evaluated at the
+one shared branch position before taking \(P_s\). For the identity code,
+whose single child is \(f^*\), this reduces to
+\(A_{\mathrm{Id},\lambda}(s)=P_s[V_{f^*,\lambda}(t+s,\cdot)](x)\).
+History-dependent proposals use the corresponding conditional-moment
+expression at their actual decision state.
+
+Thus removing the root likelihood factor leaves the descendants' clock
+weights intact. In (7.4) the descendants' sampling rules are fixed, making
+\(A(s)\) independent of the **root** rate. If one rate is changed everywhere,
+the full objective instead contains \(A_{c,\lambda}(s)\), and its derivatives
+include the dependence of every child moment on \(\lambda\). Formula (7.5)
+alone does not differentiate that full objective.
+
+There is no need to simulate random trees to compute these moments: the
+[moment recursion](notation-and-moment-theorem.md)
+is a deterministic integral system. A closed system can sometimes be solved
+symbolically with \(\lambda\) left as a parameter, as in the binary Riccati
+control below. In general, one evaluates a moment approximation for each
+candidate rate and then updates that rate. The repository's
+[moment evaluator](../../../parabolab/moments.py) and
+[recursive derivative evaluator](../../../parabolab/rate_optimization.py)
+use finite-depth 1D quadrature. Avoiding random tree simulation does not remove
+the cost of these integrals or certify the omitted-depth and quadrature
+errors. The local square-root tuple oracle has the same practical issue:
+its continuation moments are generally unknown and must be computed or
+approximated.
+
 ## Theorem 7.1 (strict convexity and unique local rate)
 
 Under (7.2)--(7.3), \(J_{\exp}\) is twice continuously differentiable on

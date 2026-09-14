@@ -1,14 +1,21 @@
 # Research checkpoint: selecting the branching rate and tuple proposals
 
-Date: 12 September 2026.
+Initial checkpoint: 12 September 2026. Direction and integration updated:
+14 September 2026. [Research navigation](README.md).
 
 ## Current decision, in plain language
 
-The FYP remains about **reliably selecting the exponential branching rate
-lambda**, with tuple probabilities `q_c` as a related variance-reduction tool.
-Multidimensional Merton is **not** the chosen financial application. Dropping
-that application does not mean abandoning branching Monte Carlo or starting an
-American-option, execution, XVA, market-making, or neural-surrogate project.
+The FYP remains about **improving branching Monte Carlo estimation of nonlinear
+PDE solutions**. Selecting the exponential branching rate `lambda` and tuple
+probabilities `q_c(Z)` are ways to reduce estimator variance within that
+direction. Multidimensional Merton is **inactive as a research application**;
+its records and existing PDE examples are retained.
+
+The demo workflow remains one PDE, several solver/algorithm variants, and
+solution curves compared with a reference through `solve` and `compare`.
+Sampling variants belong inside that workflow; the one-state research checks
+supplement it. See [the demo guide](../../demo/README.md) and
+[the variance-reduction demo](../../demo/variance_reduction.py).
 
 Small rates make important branching events rare and heavily weighted, while
 large rates can also create large weights and expensive trees. A finite variance
@@ -20,11 +27,30 @@ for an arbitrary PDE.** A rate is attached to a particular estimator,
 starting state, horizon, root code, and fixed proposal rule. Numerical
 optimization and error control are still required in general.
 
-The intended deliverable is a procedure that returns a useful rate and explains
-how trustworthy that choice is. Aim for one defensible theorem and one
-convincing application, rather than many unrelated extensions.
+The intended deliverable is a procedure that chooses useful sampling rules,
+explains how trustworthy those choices are, and measures their effect on PDE
+estimation accuracy and cost. The current rate selector and proposal proxy
+are the first implementations of that procedure.
 
 ## What the formulas do and do not say
+
+The local rate objective writes
+`J_exp(lambda) = A_0 exp(lambda Delta) + integral A(s) exp(lambda s) ds / lambda`.
+For the identity root, `A_0 = P_Delta(phi^2)(x)` depends only on terminal data
+and the diffusion law. It can be evaluated without a branching simulation or
+a chosen clock rate. By contrast, `A(s)` contains child second moments:
+when all nodes use the rate being optimized, it is **`A_lambda(s)`**.
+Holding it fixed means changing only the root clock while freezing the
+continuation sampling rules. The global-rate optimizer must differentiate
+the descendants too. The [rate note](estimator-integrity/exponential-rate-optimization.md#where-the-local-coefficients-come-from)
+gives the precise definitions.
+
+Continuation moments can be obtained without simulating random trees by
+solving deterministic moment equations. Outside special closed-form models,
+this still requires evaluating those equations for candidate rates. The
+current 1D implementation approximates them by finite-depth quadrature; strict
+convexity supplies uniqueness under its hypotheses, not free coefficients or
+a universal closed-form optimal rate.
 
 For the identity-root coding tree, a short-horizon starting approximation is
 
@@ -96,10 +122,12 @@ The implementation is deliberately opt-in and reuses the existing sampler:
    **quadrature approximation of a killed-depth second moment on a supplied
    bracket**. Its convergence flag is not a certificate for the unrestricted
    estimator or for rates outside that bracket.
-3. The selected rate and proposal can be passed to serial `estimate` or
-   `sample_tree`. Existing defaults and the tree's random-draw order remain
-   unchanged. Multiprocessing/high-level solver integration is not included
-   in this checkpoint.
+3. The selected rate and proposal can be passed to serial `estimate`,
+   `sample_tree`, or `CodingTreeMC(..., rate=..., tuple_proposal=..., label=...)`.
+   The high-level solver returns the same solution curves used by `compare`.
+   Custom proposals require `n_jobs=1`; multiprocessing and neural training
+   do not yet accept this opt-in proposal. Existing sampling defaults remain
+   unchanged.
 
 No expensive tuning takes place inside particle spawning. The proposal uses
 only deterministic terminal evaluations; rate optimization is a separate
@@ -111,8 +139,9 @@ this proxy can therefore be inapplicable even when random leaf scores are
 almost surely finite. A uniform-proposal moment bound does not transfer
 unchanged: floor mass `epsilon` gives the conservative replacement `B/epsilon`.
 
-See [the opt-in example](../../examples/sampling_tuning.py) for the executable
-workflow and its explicitly labelled numerical limitations.
+See [the opt-in example](../../examples/sampling_tuning.py) for the one-state
+diagnostic and [the demo](../../demo/variance_reduction.py) for the existing
+PDE solution-curve workflow with sampling variants.
 
 ## Prior-work and novelty boundary
 
@@ -131,26 +160,75 @@ recursive coding-tree rate selection**, not the existence of a U-shaped plot,
 the square-root rule, generic convex optimization, or a universal best lambda.
 Publication novelty remains unestablished.
 
-## Next two weeks and week-eight decision gate
+## Next research checks
 
-During week one, reproduce only small optimizer checks, verify the exact
-mechanism/proposal being optimized, and sharpen the scalar certificate using
+First reproduce small optimizer checks, verify the exact mechanism/proposal
+being optimized, and sharpen the scalar certificate using
 code-dependent bounds. Test cutoff sensitivity and the effect of zero terminal
 values; do not interpret finite sample variances as upper bounds.
 
-During week two, compare default, rate-only, proposal-only, and combined tuning
-on one controlled semilinear family. Use separate evaluation randomness, record
-precomputation and sampling costs, and compare both fixed-sample variance and
-fixed-budget accuracy. Choose one application only after its economic purpose
-and estimator assumptions are established.
+Then compare default, rate-only, proposal-only, and combined tuning
+on one controlled semilinear family using the existing demo workflow. Use
+separate evaluation randomness, record precomputation and sampling costs,
+and compare both fixed-sample variance and
+fixed-budget accuracy across the solution grid. A rate selected at one state
+is not automatically optimal at every state. Establish estimator assumptions
+before making variance or confidence-interval claims for a chosen PDE.
 
-At week eight, proceed only if there is a precise theorem beyond a routine
+For the research contribution, require a precise theorem beyond a routine
 prior-art restatement, a practically useful certificate or clearly delimited
 failure result, and reproducible gains or informative limitations against
 strong baselines. Otherwise narrow the estimator class or the certification
 claim; do not compensate by adding unrelated financial models.
 
-## Verification record
+## Repository integration check: 14 September 2026
+
+The solver/demo integration preserves the existing PDE and comparison
+interfaces. `CodingTreeMC` forwards an optional tuple proposal to the serial
+sampler, and all four solvers accept custom curve labels. Existing Merton
+demos remain available; the multifactor research roadmap is marked inactive.
+
+Validation used the existing `parabolab` environment from the repository root:
+
+```bash
+python -m pytest -q
+MPLBACKEND=Agg python demo/variance_reduction.py
+MPLBACKEND=Agg python demo/dym.py
+```
+
+- The default Python suite passed **197 tests**, with **14 slow tests
+  deselected**, in 46.98 seconds. The focused solver suite passed 32 tests,
+  including same-seed equivalence with direct nonuniform-proposal sampling.
+- `lake build` from `formal/` completed successfully with the existing pinned
+  toolchain and dependencies. This verifies the written Lean statements;
+  formal coverage has not expanded in this integration.
+- Both demos completed and saved their figures. The variance demo retained
+  the standard solution-curve comparison; its generated figure was inspected.
+  Dym output is labelled as a non-integrability diagnostic.
+- Local link targets in the current entry-point documents and rate note
+  were checked, and `git diff --check` passed.
+
+The variance demo used `T=0.05`, 21 grid points on `[-2, 2]`, 10,000 samples
+per point, and seed 0 for each variant. Depth-2, order-4 quadrature selected
+rates 0.73055 (uniform tuples) and 0.73049 (terminal proxy) at `x=0`, within
+`[0.2, 2.0]`. The mean empirical sample variances over the grid were:
+
+| Configuration | Mean empirical variance |
+|---|---:|
+| Rate 1, uniform tuples | 0.00745281 |
+| Selected rate, uniform tuples | 0.00474964 |
+| Rate 1, terminal proxy | 0.00739695 |
+| Selected rate, terminal proxy | 0.00458153 |
+
+These are one-seed diagnostics, not certified population variances or
+replicated performance claims. Rate selection used deterministic quadrature,
+not the evaluation samples. Setup and both rate searches took 0.34 seconds
+in this run; sampling times are printed separately by the comparison table.
+
+## Historical verification record: 12 September 2026
+
+The counts and timings below belong to the original one-state checkpoint;
+they do not include the later high-level solver/demo integration.
 
 Implementation and execution used GPT-5.6 Sol HIGH; GPT-6 Astra MAX specified
 and reviewed the mathematics. All commands ran from the repository root in

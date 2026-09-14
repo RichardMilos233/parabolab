@@ -14,6 +14,7 @@ from typing import Optional, Sequence
 import numpy as np
 
 from .mc import estimate
+from .proposals import TupleProposal
 
 
 @dataclass
@@ -55,6 +56,7 @@ def estimate_profile(
     embed=None,
     pde_factory=None,
     n_jobs: int = 1,
+    tuple_proposal: Optional[TupleProposal] = None,
 ) -> ProfileResult:
     """Pointwise coding-tree estimates of u(t, x) for x in xs.
 
@@ -62,7 +64,11 @@ def estimate_profile(
     point in R^d (e.g. last_coordinate_embedding(d), the convention of the
     authors' notebook plots).  With ``pde_factory``/``n_jobs`` > 1 the
     samples are computed by estimate_parallel over worker processes.
+    ``tuple_proposal`` is forwarded to the serial sampler and requires
+    ``n_jobs=1``.
     """
+    if tuple_proposal is not None and n_jobs > 1:
+        raise ValueError("tuple_proposal requires n_jobs=1")
     xs = np.asarray(xs, dtype=float)
     est = np.empty_like(xs)
     err = np.empty_like(xs)
@@ -87,7 +93,7 @@ def estimate_profile(
                                       n_jobs=n_jobs, executor=executor)
             else:
                 r = estimate(pde, t, xpt, n_samples, seed=seed + i,
-                             rate=rate)
+                             rate=rate, tuple_proposal=tuple_proposal)
             est[i], err[i] = r.estimate, r.stderr
             total_nodes += r.mean_nodes * r.n_samples
             max_nodes = max(max_nodes, r.max_nodes)
