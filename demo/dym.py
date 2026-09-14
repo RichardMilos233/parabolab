@@ -21,10 +21,10 @@ if __name__ == "__main__":
     print("Dym diagnostic: this estimator is non-integrable at every positive rate; "
           "the plotted sample errors are descriptive only.")
     curves = [
-        # CodingTreeMC(
-        #     n_samples=2_000_000, seed=1, rate=0.1,
-        #     label="CodingTreeMC (rate=0.1, sparse)"
-        # ).solve(pde, grid),
+        CodingTreeMC(
+            n_samples=2_000_000, seed=1, rate=0.1,
+            label="CodingTreeMC (rate=0.1, sparse)"
+        ).solve(pde, grid),
         CodingTreeMC(
             n_samples=200, seed=1, rate=1.0,
             label="CodingTreeMC (rate=1.0, standard)"
