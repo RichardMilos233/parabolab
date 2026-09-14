@@ -39,7 +39,10 @@ def riccati_binary_second_moment(
     T: float,
     rate: float,
 ) -> float:
-    """Exact second moment for u_t + 1/2 u_xx + u^2 = 0 with phi == 1.
+    """Exact moment of the standard binary estimator for u_t + 1/2 u_xx + u^2 = 0.
+
+    The terminal function is phi == 1 and each event creates two Id children.
+    This is not the moment of the derivative-coded estimator for the same PDE.
 
     The second moment satisfies Y'(r) = (e^{rate * r} / rate) * Y(r)^2 with Y(0) = 1,
     giving V(T; rate) = (rate^2 * e^{rate * T}) / (rate^2 + 1 - e^{rate * T}).

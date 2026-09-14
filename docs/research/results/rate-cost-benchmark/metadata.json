@@ -1,0 +1,172 @@
+{
+  "status": "complete",
+  "date": "2026-09-14",
+  "python": "3.11.15",
+  "command": [
+    "/opt/miniconda3/envs/parabolab/bin/python",
+    "examples/rate_cost_benchmark.py",
+    "--output-dir",
+    "docs/research/results/rate-cost-benchmark"
+  ],
+  "numpy": "2.4.6",
+  "platform": "macOS-26.3-arm64-arm-64bit",
+  "base_commit": "0afcb3c4ba446d20ff9337e4a4e1f2124bda5730",
+  "branch": "codex/research-certified-rate",
+  "source_sha256": {
+    "docs/research/results/rate-cost-protocol.md": "8948f572c77a917b126f37a1acbc8e037081d626a2ff9b476467f9795990523c",
+    "/Users/michael/Desktop/NTU/fyp/parabolab/examples/rate_cost_benchmark.py": "858947435956179dd76ab04faa83d06695129013dd03efea90facedeef7ee9eb",
+    "parabolab/rate_optimization.py": "6e06580736d8e95ac6665d6ef9fff8956fcde268fb0a79ee541310b8bfb250cc",
+    "parabolab/tree.py": "e93b36fd8653c83ff1ceaea81c7553637ce3fa158f289cf9f11041b181aa795d",
+    "parabolab/proposals.py": "cc4dfb6be1b8aa1c09bd981bad7dda95098223d31cbf824b9f036ebad01f9319",
+    "parabolab/solve.py": "45aeaa7e124630ed7dc1ad1a91a414022c9336e0fed2a3253b10a6ef740e23d0",
+    "parabolab/profiles.py": "e9e142eab72b20ed2ac355dc8858c4cc247b2503b4b2b588016b8ba0a63469fc",
+    "parabolab/mc.py": "b8a45f4a9fb8eb875ee9bc72deb3a31b42bbf9317a1d82506aabe0214ac0f926"
+  },
+  "protocol": "docs/research/results/rate-cost-protocol.md",
+  "entropy": 202609142,
+  "grid": [
+    -2.0,
+    -1.0,
+    0.0,
+    1.0,
+    2.0
+  ],
+  "horizon": 0.05,
+  "replicates": 20,
+  "calibration_replicates": 3,
+  "fixed_samples_per_point": 10000,
+  "variants": [
+    "default_uniform",
+    "jcp_uniform",
+    "short_time_uniform",
+    "selected_uniform",
+    "default_terminal",
+    "selected_terminal"
+  ],
+  "exact_solution": "-0.5 - 0.5*tanh(0.75*(T-t)-0.5*x)",
+  "seed_definition": "uint64 SeedSequence(entropy, spawn_key=(phase,replicate,variant)); point seed = integer + grid index",
+  "cutoff": null,
+  "clipping": false,
+  "workers": 1,
+  "protocol_deviations": [],
+  "setup": [
+    {
+      "variant": "default_uniform",
+      "index": 0,
+      "rate": 1.0,
+      "proposal_floor": null,
+      "pde_seconds": 5.733314901590347e-05,
+      "proposal_setup_seconds": 4.169996827840805e-07,
+      "tuning_seconds": 3.341119736433029e-07,
+      "setup_seconds": 5.8750156313180923e-05,
+      "optimizer": null
+    },
+    {
+      "variant": "jcp_uniform",
+      "index": 1,
+      "rate": 1.0258658877510114,
+      "proposal_floor": null,
+      "pde_seconds": 3.917142748832703e-06,
+      "proposal_setup_seconds": 1.25030055642128e-07,
+      "tuning_seconds": 8.334172889590263e-06,
+      "setup_seconds": 1.2667151167988777e-05,
+      "optimizer": null
+    },
+    {
+      "variant": "short_time_uniform",
+      "index": 2,
+      "rate": 0.75,
+      "proposal_floor": null,
+      "pde_seconds": 1.8749851733446121e-06,
+      "proposal_setup_seconds": 1.25030055642128e-07,
+      "tuning_seconds": 2.4170149117708206e-06,
+      "setup_seconds": 4.667090252041817e-06,
+      "optimizer": null
+    },
+    {
+      "variant": "selected_uniform",
+      "index": 3,
+      "rate": 0.7305486297108235,
+      "proposal_floor": null,
+      "pde_seconds": 1.458916813135147e-06,
+      "proposal_setup_seconds": 8.312053978443146e-08,
+      "tuning_seconds": 0.07039624988101423,
+      "setup_seconds": 0.07039816700853407,
+      "optimizer": {
+        "second_moment": 0.27231712672119146,
+        "d_rate": -2.8115780532095985e-06,
+        "iterations": 6,
+        "bracket": [
+          0.7245035281439423,
+          1.1
+        ],
+        "converged": true
+      }
+    },
+    {
+      "variant": "default_terminal",
+      "index": 4,
+      "rate": 1.0,
+      "proposal_floor": 0.1,
+      "pde_seconds": 8.541857823729515e-06,
+      "proposal_setup_seconds": 1.0415911674499512e-05,
+      "tuning_seconds": 3.7509016692638397e-07,
+      "setup_seconds": 1.9624829292297363e-05,
+      "optimizer": null
+    },
+    {
+      "variant": "selected_terminal",
+      "index": 5,
+      "rate": 0.7304853674984467,
+      "proposal_floor": 0.1,
+      "pde_seconds": 2.125045284628868e-06,
+      "proposal_setup_seconds": 1.834006980061531e-06,
+      "tuning_seconds": 0.09150329208932817,
+      "setup_seconds": 0.09150770818814635,
+      "optimizer": {
+        "second_moment": 0.27231625665608244,
+        "d_rate": -2.825921312987409e-06,
+        "iterations": 6,
+        "bracket": [
+          0.7244250578282556,
+          1.1
+        ],
+        "converged": true
+      }
+    }
+  ],
+  "calibration_seconds": 1.5563792914617807,
+  "expected_budget_seconds": 0.17866770806722343,
+  "calibration_seconds_per_grid_sample": [
+    8.40794590767473e-06,
+    8.196570887230337e-06,
+    8.157708309590817e-06,
+    8.579979208298028e-06,
+    8.598449989221991e-06,
+    8.715999987907708e-06
+  ],
+  "budget_samples_per_point": [
+    21242,
+    21796,
+    21901,
+    12618,
+    20776,
+    10000
+  ],
+  "predicted_budget_seconds": [
+    0.1786603371271398,
+    0.1786651262092404,
+    0.1786666367786005,
+    0.1786603446588386,
+    0.1786610218053684,
+    0.17866770806722343
+  ],
+  "benchmark_wall_seconds": 30.229032167000696,
+  "completed_profiles": 240,
+  "fixed_evaluation_trees": 6000000,
+  "budget_evaluation_trees": 10833300,
+  "report_source_sha256": "a37f26699d22512252de80b8610c374bb9e83507860e50fdcf05237e14fe8763",
+  "report_only_changes": "Two user-visible labels changed from expected to predicted budget after evaluation; executed driver is preserved byte-for-byte in driver_at_execution.py. Sampling and allocation logic unchanged.",
+  "budget_terminology": "The legacy metadata field expected_budget_seconds stores a calibrated predicted budget based on median timing; it is not a mathematically established expectation.",
+  "runtime_context": "Other research agents were active during this run; certificate calculations, tests and Lean processes may have overlapped. CPU load and scheduling were not controlled or isolated. Median calibration timing is a noisy cost proxy."
+}

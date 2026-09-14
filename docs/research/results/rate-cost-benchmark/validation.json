@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "evaluation_profiles": 240,
+  "evaluation_points": 1200,
+  "calibration_profiles": 18,
+  "unique_point_seeds_all_phases": 1290,
+  "fixed_trees": 6000000,
+  "budget_trees": 10833300,
+  "checks": [
+    "Every scheduled profile and point present once",
+    "No calibration/evaluation seed overlap",
+    "Actual sample counts match frozen allocations",
+    "Closed-form reference, signed error and RMSE recomputed independently",
+    "Summary RMS errors recomputed from every raw replicate",
+    "One-shot total cost equals recorded solve time plus setup charge",
+    "Budget and floor allocations recomputed from independent calibration",
+    "Original protocol hash unchanged",
+    "Executed driver snapshot hash matches pre-evaluation metadata"
+  ]
+}

@@ -1,0 +1,182 @@
+[
+  {
+    "variant": "default_terminal",
+    "variant_index": 4,
+    "replicate": 0,
+    "execution_order": 0,
+    "seed": 16210474599958751324,
+    "samples_per_point": 10000,
+    "solve_seconds": 0.09158737491816282,
+    "sampler_reported_seconds": 0.09065991593524814
+  },
+  {
+    "variant": "short_time_uniform",
+    "variant_index": 2,
+    "replicate": 0,
+    "execution_order": 1,
+    "seed": 11586778815876209271,
+    "samples_per_point": 10000,
+    "solve_seconds": 0.08646062505431473,
+    "sampler_reported_seconds": 0.08642258308827877
+  },
+  {
+    "variant": "selected_terminal",
+    "variant_index": 5,
+    "replicate": 0,
+    "execution_order": 2,
+    "seed": 4889093752226299742,
+    "samples_per_point": 10000,
+    "solve_seconds": 0.09150316612794995,
+    "sampler_reported_seconds": 0.09147125016897917
+  },
+  {
+    "variant": "selected_uniform",
+    "variant_index": 3,
+    "replicate": 0,
+    "execution_order": 3,
+    "seed": 11712852184856895162,
+    "samples_per_point": 10000,
+    "solve_seconds": 0.10403120797127485,
+    "sampler_reported_seconds": 0.10398899996653199
+  },
+  {
+    "variant": "default_uniform",
+    "variant_index": 0,
+    "replicate": 0,
+    "execution_order": 4,
+    "seed": 1963891936588288106,
+    "samples_per_point": 10000,
+    "solve_seconds": 0.08885037479922175,
+    "sampler_reported_seconds": 0.08881500014103949
+  },
+  {
+    "variant": "jcp_uniform",
+    "variant_index": 1,
+    "replicate": 0,
+    "execution_order": 5,
+    "seed": 1875350624609782664,
+    "samples_per_point": 10000,
+    "solve_seconds": 0.08196570887230337,
+    "sampler_reported_seconds": 0.0819273330271244
+  },
+  {
+    "variant": "selected_uniform",
+    "variant_index": 3,
+    "replicate": 1,
+    "execution_order": 0,
+    "seed": 9124885024336804615,
+    "samples_per_point": 10000,
+    "solve_seconds": 0.08579979208298028,
+    "sampler_reported_seconds": 0.08575862506404519
+  },
+  {
+    "variant": "default_terminal",
+    "variant_index": 4,
+    "replicate": 1,
+    "execution_order": 1,
+    "seed": 12344488610276403129,
+    "samples_per_point": 10000,
+    "solve_seconds": 0.08564391592517495,
+    "sampler_reported_seconds": 0.0855974170845002
+  },
+  {
+    "variant": "selected_terminal",
+    "variant_index": 5,
+    "replicate": 1,
+    "execution_order": 2,
+    "seed": 14653970886544790238,
+    "samples_per_point": 10000,
+    "solve_seconds": 0.08560550003312528,
+    "sampler_reported_seconds": 0.08557929191738367
+  },
+  {
+    "variant": "short_time_uniform",
+    "variant_index": 2,
+    "replicate": 1,
+    "execution_order": 3,
+    "seed": 12106272309188606124,
+    "samples_per_point": 10000,
+    "solve_seconds": 0.08142133289948106,
+    "sampler_reported_seconds": 0.08139112498611212
+  },
+  {
+    "variant": "default_uniform",
+    "variant_index": 0,
+    "replicate": 1,
+    "execution_order": 4,
+    "seed": 15792622082885100632,
+    "samples_per_point": 10000,
+    "solve_seconds": 0.0840794590767473,
+    "sampler_reported_seconds": 0.08404929214157164
+  },
+  {
+    "variant": "jcp_uniform",
+    "variant_index": 1,
+    "replicate": 1,
+    "execution_order": 5,
+    "seed": 6365186033493639162,
+    "samples_per_point": 10000,
+    "solve_seconds": 0.08365320903249085,
+    "sampler_reported_seconds": 0.08360970811918378
+  },
+  {
+    "variant": "selected_uniform",
+    "variant_index": 3,
+    "replicate": 2,
+    "execution_order": 0,
+    "seed": 11254057907729412764,
+    "samples_per_point": 10000,
+    "solve_seconds": 0.0857175828423351,
+    "sampler_reported_seconds": 0.0856777080334723
+  },
+  {
+    "variant": "default_uniform",
+    "variant_index": 0,
+    "replicate": 2,
+    "execution_order": 1,
+    "seed": 16785458164114083177,
+    "samples_per_point": 10000,
+    "solve_seconds": 0.08341362490318716,
+    "sampler_reported_seconds": 0.08338233293034136
+  },
+  {
+    "variant": "short_time_uniform",
+    "variant_index": 2,
+    "replicate": 2,
+    "execution_order": 2,
+    "seed": 14925017523364325989,
+    "samples_per_point": 10000,
+    "solve_seconds": 0.08157708309590816,
+    "sampler_reported_seconds": 0.08153787511400878
+  },
+  {
+    "variant": "default_terminal",
+    "variant_index": 4,
+    "replicate": 2,
+    "execution_order": 3,
+    "seed": 15357131777325800548,
+    "samples_per_point": 10000,
+    "solve_seconds": 0.0859844998922199,
+    "sampler_reported_seconds": 0.08595054200850427
+  },
+  {
+    "variant": "selected_terminal",
+    "variant_index": 5,
+    "replicate": 2,
+    "execution_order": 4,
+    "seed": 569330392386644295,
+    "samples_per_point": 10000,
+    "solve_seconds": 0.08715999987907708,
+    "sampler_reported_seconds": 0.08712966600432992
+  },
+  {
+    "variant": "jcp_uniform",
+    "variant_index": 1,
+    "replicate": 2,
+    "execution_order": 5,
+    "seed": 5296871591909569666,
+    "samples_per_point": 10000,
+    "solve_seconds": 0.08192483405582607,
+    "sampler_reported_seconds": 0.08189416700042784
+  }
+]

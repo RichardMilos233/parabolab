@@ -4,9 +4,13 @@ import math
 import numpy as np
 import pytest
 
-from parabolab.mechanism import Id, SemilinearMechanism
-from parabolab.moments import finite_depth_moment_1d
-from parabolab.pde import FullyNonlinearPDE1D, ParabolicPDE, x_symbol, z_symbols
+from examples.exponential_rate_sweet_spot import (
+    BinaryControlMechanism,
+    _binary_control_experiment,
+    _binary_control_pde,
+    _binary_oracle_optimum,
+)
+from parabolab.moments import MomentQuadrature, finite_depth_moment_1d
 from parabolab.rate_optimization import (
     finite_depth_moment_derivatives_1d,
     optimize_exponential_rate_1d,
@@ -14,18 +18,10 @@ from parabolab.rate_optimization import (
 )
 
 
-def _binary_control_pde(T: float = 0.2) -> ParabolicPDE:
-    # u_t + 1/2 u_xx + u^2 = 0 with phi == 1
-    # Terminal phi = 1, f(u) = u^2
-    # Leaf terminal = 1, tuples(Id()) = ((Id(), Id()),)
-    import sympy as sp
-    z = z_symbols(0)
-    return FullyNonlinearPDE1D(
-        n=0,
-        f_expr=z[0] ** 2,
-        phi_expr=sp.Integer(1),
-        T=T,
-    )
+BINARY_SETTINGS = dict(
+    mechanism=BinaryControlMechanism,
+    quadrature=MomentQuadrature(time_order=8, normal_order=1),
+)
 
 
 def test_leaf_rate_derivatives():
@@ -33,7 +29,8 @@ def test_leaf_rate_derivatives():
     T = 0.3
     pde = _binary_control_pde(T=T)
     rate = 1.5
-    res = finite_depth_moment_derivatives_1d(pde, 0.0, 0.0, max_depth=0, rate=rate)
+    res = finite_depth_moment_derivatives_1d(
+        pde, 0.0, 0.0, max_depth=0, rate=rate, **BINARY_SETTINGS)
 
     exact_val = math.exp(rate * T)
     exact_d1 = T * math.exp(rate * T)
@@ -51,10 +48,13 @@ def test_rate_derivatives_finite_difference():
     rate = 1.2
     eps = 1e-5
 
-    res = finite_depth_moment_derivatives_1d(pde, 0.0, 0.0, max_depth=1, rate=rate)
+    res = finite_depth_moment_derivatives_1d(
+        pde, 0.0, 0.0, max_depth=1, rate=rate, **BINARY_SETTINGS)
 
-    res_plus = finite_depth_moment_derivatives_1d(pde, 0.0, 0.0, max_depth=1, rate=rate + eps)
-    res_minus = finite_depth_moment_derivatives_1d(pde, 0.0, 0.0, max_depth=1, rate=rate - eps)
+    res_plus = finite_depth_moment_derivatives_1d(
+        pde, 0.0, 0.0, max_depth=1, rate=rate + eps, **BINARY_SETTINGS)
+    res_minus = finite_depth_moment_derivatives_1d(
+        pde, 0.0, 0.0, max_depth=1, rate=rate - eps, **BINARY_SETTINGS)
 
     # First derivative central difference
     fd_d1 = (res_plus.value - res_minus.value) / (2.0 * eps)
@@ -72,8 +72,10 @@ def test_rate_derivatives_match_moment_quadrature():
     pde = _binary_control_pde(T=T)
     for depth in (0, 1, 2):
         for rate in (0.8, 1.4):
-            v_ref = finite_depth_moment_1d(pde, 0.0, 0.0, max_depth=depth, rate=rate, p=2.0)
-            res = finite_depth_moment_derivatives_1d(pde, 0.0, 0.0, max_depth=depth, rate=rate)
+            v_ref = finite_depth_moment_1d(
+                pde, 0.0, 0.0, max_depth=depth, rate=rate, p=2.0, **BINARY_SETTINGS)
+            res = finite_depth_moment_derivatives_1d(
+                pde, 0.0, 0.0, max_depth=depth, rate=rate, **BINARY_SETTINGS)
             assert res.value == pytest.approx(v_ref, rel=1e-8)
 
 
@@ -86,44 +88,86 @@ def test_riccati_binary_oracle():
     assert val == pytest.approx(exact, rel=1e-10)
 
 
+@pytest.mark.parametrize("rate", [0.6, 1.0, 2.0])
+def test_riccati_oracle_satisfies_binary_first_event_identity(rate):
+    # Independent first-event integral: the oracle must match this estimator's
+    # binary continuation product, not merely the same PDE's solution.
+    T = 0.15
+    nodes, weights = np.polynomial.legendre.leggauss(32)
+    lifetimes = T * (nodes + 1.0) / 2.0
+    branch = T / 2.0 * sum(
+        weight * math.exp(rate * s) / rate
+        * riccati_binary_second_moment(T - s, rate)**2
+        for s, weight in zip(lifetimes, weights)
+    )
+    assert riccati_binary_second_moment(T, rate) == pytest.approx(
+        math.exp(rate * T) + branch, rel=1e-12)
+
+
+def test_binary_depth_one_matches_closed_integral():
+    T, rate = 0.15, 1.3
+    result = finite_depth_moment_derivatives_1d(
+        _binary_control_pde(T), 0.0, 0.0, max_depth=1, rate=rate,
+        **BINARY_SETTINGS)
+    exact = math.exp(rate * T) * (1.0 + math.expm1(rate * T) / rate**2)
+    assert result.value == pytest.approx(exact, rel=1e-12)
+
+
+@pytest.mark.parametrize("rate", [0.8, 1.3])
+def test_binary_cutoff_moments_converge_upwards_to_full_tree(rate):
+    T = 0.1
+    oracle = riccati_binary_second_moment(T, rate)
+    values = [finite_depth_moment_derivatives_1d(
+        _binary_control_pde(T), 0.0, 0.0, max_depth=depth, rate=rate,
+        mechanism=BinaryControlMechanism,
+        quadrature=MomentQuadrature(time_order=4, normal_order=1),
+    ).value for depth in range(5)]
+    assert all(left < right < oracle for left, right in zip(values, values[1:]))
+    assert oracle - values[-1] < 2e-5
+
+
 def test_rate_optimizer_riccati_benchmark():
     # Test optimize_exponential_rate_1d against Riccati oracle for T = 0.05
     # For T = 0.05, the optimum satisfies 2(e^{rate * T} - 1) = T * rate * (rate^2 + 1)
     T = 0.05
     pde = _binary_control_pde(T=T)
 
-    # Depth 1 optimization
-    opt_res = optimize_exponential_rate_1d(pde, 0.0, 0.0, max_depth=1, bracket=(0.2, 3.0), tol=1e-6)
+    # Finite-depth optimization approximates, but does not equal, the optimum
+    # of the exact full-tree second moment.
+    opt_res = optimize_exponential_rate_1d(
+        pde, 0.0, 0.0, max_depth=2, bracket=(0.2, 3.0), tol=1e-9,
+        **BINARY_SETTINGS)
+    oracle_rate = _binary_oracle_optimum(T)
     assert opt_res.converged
-    assert 0.8 < opt_res.rate < 1.3
+    assert opt_res.rate == pytest.approx(oracle_rate, abs=0.01)
+    assert abs(opt_res.rate - oracle_rate) > 1e-5
     assert abs(opt_res.d_rate) < 1e-4
 
     # Verify that second derivative is strictly positive (strict convexity)
     assert opt_res.d2_rate > 0.0
 
 
+def test_binary_report_compares_rates_on_the_same_objective():
+    T = 0.15
+    _, record = _binary_control_experiment(T)
+    assert record["full_tree_jcp_second_moment"] == pytest.approx(
+        riccati_binary_second_moment(T, record["jcp_rate"]))
+    assert record["full_tree_at_finite_depth_rate"] == pytest.approx(
+        riccati_binary_second_moment(T, record["finite_depth_optimal_rate"]))
+    assert record["finite_depth_optimal_second_moment"] < record["full_tree_at_finite_depth_rate"]
+    assert record["full_tree_optimal_second_moment"] < record["full_tree_at_finite_depth_rate"]
+    assert record["full_tree_optimal_rate"] > record["finite_depth_optimal_rate"]
+
+
 def test_rate_optimization_monte_carlo_agreement():
     # Compare deterministic second moment at rate* against Monte Carlo sample second moment
     from parabolab.tree import sample_tree
-
-    class BinarySemilinearMechanism:
-        @staticmethod
-        def tuples(code):
-            return ((Id(), Id()),)
-
-        @staticmethod
-        def terminal(code, pde, x):
-            return 1.0
-
-        @staticmethod
-        def is_identically_zero(code, pde):
-            return False
 
     T = 0.05
     pde = _binary_control_pde(T=T)
     rate = 1.05  # near the optimum
     det_res = finite_depth_moment_derivatives_1d(
-        pde, 0.0, 0.0, max_depth=1, rate=rate, mechanism=BinarySemilinearMechanism
+        pde, 0.0, 0.0, max_depth=1, rate=rate, **BINARY_SETTINGS
     )
 
     n_samples = 40_000
@@ -136,7 +180,7 @@ def test_rate_optimization_monte_carlo_agreement():
             0.0,
             rng=rng,
             rate=rate,
-            mechanism=BinarySemilinearMechanism,
+            mechanism=BinaryControlMechanism,
             max_depth=1,
         )
         samples_sq[i] = s.value**2
@@ -150,8 +194,9 @@ def test_rate_optimization_monte_carlo_agreement():
 def test_rate_optimizer_short_horizon_asymptotics():
     # As T -> 0, lambda*(T) -> sqrt(B / G) = 1.0 for binary control u^2 with phi == 1
     pde_short = _binary_control_pde(T=0.01)
-    opt = optimize_exponential_rate_1d(pde_short, 0.0, 0.0, max_depth=1, bracket=(0.5, 2.0), tol=1e-5)
+    opt = optimize_exponential_rate_1d(
+        pde_short, 0.0, 0.0, max_depth=1, bracket=(0.5, 2.0), tol=1e-5,
+        **BINARY_SETTINGS)
     assert opt.converged
     # Should be close to 1.0 within O(T)
     assert opt.rate == pytest.approx(1.0, abs=0.03)
-
