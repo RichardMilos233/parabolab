@@ -4,6 +4,11 @@
 `0afcb3c4ba446d20ff9337e4a4e1f2124bda5730`. Results await user verification;
 nothing in this checkpoint is approved for merging to main.
 
+The prescribed profile/reuse follow-up is now complete in the
+[profile-efficiency checkpoint](profile-efficiency-checkpoint.md).
+This document retains the original certificate milestone and its dated
+next-step discussion for provenance.
+
 **The flat control and the actual wave root now have verified global
 rate-selection certificates.** For the wave at `T=0.05,x=0`, the rounded
 historical rate `0.73055` has additive full-tree variance excess below

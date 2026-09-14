@@ -6,3 +6,4 @@ import EstimatorIntegrity.ExponentialRate
 import EstimatorIntegrity.RateCertificate
 import EstimatorIntegrity.AllenCahnBounds
 import EstimatorIntegrity.ConvexEnclosure
+import EstimatorIntegrity.ProfileEfficiency

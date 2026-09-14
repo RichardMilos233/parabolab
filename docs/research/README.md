@@ -14,20 +14,23 @@ and [variance-reduction demo](../../demo/variance_reduction.py).
 
 ## Start here
 
-1. [Certified-rate checkpoint](results/certified-rate-checkpoint.md): verified
+1. [Profile-efficiency checkpoint](results/profile-efficiency-checkpoint.md):
+   certified grid objective, cheap-rate headroom, completed setup/reuse study,
+   conditional expected-MSE comparisons and ten additional Lean lemmas.
+2. [Certified-rate checkpoint](results/certified-rate-checkpoint.md): verified
    flat and wave global excess bounds, moment/depth bounds, corrected
    binary oracle, replicated cost results, and exact Lean coverage.
-2. [Sampling-method checkpoint](lambda-q-optimization-summary.md): the
+3. [Sampling-method checkpoint](lambda-q-optimization-summary.md): the
    practical selector/proposal, solver integration, and earlier evidence.
-3. [Moment model](estimator-integrity/notation-and-moment-theorem.md): the exact
+4. [Moment model](estimator-integrity/notation-and-moment-theorem.md): the exact
    tree functional, code notation, killed-depth recursion, and integrability
    obligations.
-4. [Rate optimization](estimator-integrity/exponential-rate-optimization.md):
+5. [Rate optimization](estimator-integrity/exponential-rate-optimization.md):
    frozen-continuation versus full-tree objectives, strict convexity, a
    short-time approximation, and the standard binary-tree control.
-5. [Tuple proposals](estimator-integrity/adaptive-proposals.md): the local
+6. [Tuple proposals](estimator-integrity/adaptive-proposals.md): the local
    square-root oracle, support requirements, and pilot/freeze reasoning.
-6. [General rate selection](estimator-integrity/general-rate-selection.md):
+7. [General rate selection](estimator-integrity/general-rate-selection.md):
    conditional full-tree existence, exact cutoff consistency, and explicit
    moment bounds for a specified semilinear class.
 
@@ -35,11 +38,11 @@ and [variance-reduction demo](../../demo/variance_reduction.py).
 
 | Area | Available now | Remaining work |
 |---|---|---|
-| Rate `lambda` | Conditional general theory and numerical selector; exact-rational global excess certificates for flat Allen–Cahn and the wave root at `T=0.05` | Extend verified scope across states/horizons and obtain useful rates across the evaluation grid |
+| Rate `lambda` | Exact-rational global excess certificates for flat Allen–Cahn, the wave root and the five-point wave profile at `T=0.05`; cheap profile rate within 1.60% of optimal weighted variance | Transfer to other horizons or mechanisms requires new bounds |
 | Tuple proposal `q_c(Z)` | Local square-root theorem; `TerminalTupleProposal` with a positive uniform mixture and exact inverse-probability weighting | Estimate continuation moments more accurately and establish an incremental benefit over rate tuning alone |
-| PDE estimation/demo | Existing solver interface and replicated six-variant wave cost study; no demonstrated tuning gain for its one-profile predicted budget | Prespecified amortization and grid-objective studies against the short-time baseline |
+| PDE estimation/demo | Existing solver interface; two replicated cost studies, including one/ten-request reuse; cheap grid rate wins the latest frozen expected-MSE allocation comparison | Continuation proposals are optional and must repay overhead against the cheap grid baseline |
 | Integrability | Exact moment recursion, rational six-code Allen–Cahn envelopes and factorial depth tails, plus the Dym counterexample | Discharge remaining estimator-specific assumptions; nonuniform proposals and production roundoff remain separate |
-| Formal verification | Sixteen checked public gap/field/convex-enclosure lemmas, plus two private helpers; full Lean build passed | Stochastic correspondence, analytic comparison/existence and numerical-program soundness |
+| Formal verification | Twenty-six checked public certificate/profile/cost lemmas across the two research checkpoints, plus two private helpers; full Lean build passed | Stochastic correspondence, analytic comparison/existence and numerical-program soundness |
 
 The generic optimizer minimizes a numerical approximation of a **killed-depth
 second moment on a supplied rate interval**. Its convergence flag does not
@@ -66,6 +69,14 @@ establishes the common PDE mean for every positive rate in the saved raw
 uniform flat/wave settings, so the certified additive second-moment gaps
 are also variance gaps. That stochastic correspondence is not Lean-formalized.
 
+The [profile certificate](results/profile-efficiency-checkpoint.md) extends
+this argument to equal weights on `[-2,-1,0,1,2]`. The rational candidate
+`lambda=1/2` has global weighted-variance excess below `3.848558e-5`, or
+0.93% relative to the optimum. The actual cheap grid policy
+`0.47496956016576375` is within 1.60%; exact convex interpolation covers its
+binary-float rate. The numerical grid selector's small possible variance
+gain did not repay setup in the completed one/ten-request comparisons.
+
 The moment evaluator computes deterministic integrals without sampling random
 trees. It still needs a candidate rate: descendants' second moments generally
 depend on the common `lambda`. The leaf contribution can be obtained directly
@@ -81,6 +92,10 @@ Current implementation entry points:
   six-code moment enclosures, depth tails and flat global rate certificates.
 - [wave_certificate.py](../../parabolab/wave_certificate.py): exact polynomial
   residual/linear-error verification and convex wave-rate enclosures.
+- [profile_rates.py](../../parabolab/profile_rates.py): cheap weighted
+  short-time rate and a weighted finite-depth numerical selector.
+- [profile_certificate.py](../../parabolab/profile_certificate.py): exact
+  spatial intervals, weighted global bounds and policy-rate interpolation.
 - [proposals.py](../../parabolab/proposals.py): terminal-data tuple proposal.
 - [solve.py](../../parabolab/solve.py): the `CodingTreeMC` solver interface;
   custom tuple proposals currently require serial sampling (`n_jobs=1`).
@@ -92,20 +107,22 @@ Current implementation entry points:
   recheck the wave full-tree rate witnesses and independent diagnostics.
 - [rate_cost_benchmark.py](../../examples/rate_cost_benchmark.py): the frozen,
   replicated cost protocol using the existing solver interface.
+- [certified_profile_rate.py](../../examples/certified_profile_rate.py):
+  recheck profile witnesses and frozen-allocation expected-MSE bounds.
+- [profile_efficiency_benchmark.py](../../examples/profile_efficiency_benchmark.py):
+  completed grid-objective and setup-reuse protocol.
 
 ## Next checks
 
-Extend the certificates while preserving their exact mechanism and
-proposal scope. The [first replicated cost study](results/rate-cost-results.md)
-completed all scheduled workloads and found the inexpensive short-time rate
-strongest in its calibrated-budget phase. Keep that baseline in future
-comparisons. Prespecify policy-reuse or larger workloads before testing
-amortization, and investigate a grid-averaged objective rather than assuming
-that a rate tuned at `x=0` is optimal across a profile. Any continuation-aware
-proposal must establish incremental accuracy gains with its overhead included.
-The offline rational certificate procedure was not a benchmark variant;
-its roughly 30-second generation/checking/diagnostic run establishes no
-practical amortized speedup.
+The main certification and cost milestone, including the conditional
+grid-objective/reuse extension, is complete and remains unmerged for user
+review. The [latest cost study](results/profile-efficiency-results.md)
+supports retaining the cheap grid rule as the reference policy. Further
+scalar-rate precision has at most 1.60% relative variance headroom in this
+specific profile. A continuation-aware proposal is an optional next
+algorithmic direction; it needs a common-rate ablation, support/integrability
+checks and its full overhead included before any speedup claim. Offline
+rational certification was not a timed benchmark variant.
 
 Continue separating deterministic selection from evaluation randomness,
 charging tuning cost, and recording actual runtime when allocating samples

@@ -3,8 +3,9 @@
 **Status:** navigation and claim inventory for the `parabolab` research programme; entries must be checked against their underlying proofs.
 **Last-reviewed commit:** `ce2949330fcff1a3faf56c8a0ff36628586b242d`
 **Certificate checkpoint review:** 14 September 2026, unmerged research work
-on `codex/research-certified-rate`, based on
-`0afcb3c4ba446d20ff9337e4a4e1f2124bda5730`. The earlier reviewed commit above
+on `codex/research-profile-efficiency`, based on certificate checkpoint
+`05012ffe711e19f2839d6a868ccf843d713fe44d` on `codex/research-certified-rate`.
+Main remains at `0afcb3c4ba446d20ff9337e4a4e1f2124bda5730`. The earlier reviewed commit above
 is retained as historical provenance; new entries have the scopes below.
 **Scope:** all mathematical theorems, conditional representations, Lean-formalized lemmas, conjectures, and priority claims across estimator integrity and multifactor Merton research.
 
@@ -14,12 +15,14 @@ selection. The existing solver/demo comparison workflow remains the same.
 Multidimensional Merton is inactive as a research application; its records
 below are historical. See the [research index](README.md),
 [certified-rate checkpoint](results/certified-rate-checkpoint.md),
+[profile-efficiency checkpoint](results/profile-efficiency-checkpoint.md),
 [sampling-method checkpoint](lambda-q-optimization-summary.md), and
 [general rate-selection arguments](estimator-integrity/general-rate-selection.md).
 The general stochastic moment/cutoff arguments remain conventional
 mathematics. Separate six-code exact-rational verifiers now certify flat
-Allen–Cahn and wave-root global rate excess, plus wave moment/depth bounds.
-Sixteen new public Lean theorems and two private helpers verify deterministic
+Allen–Cahn, wave-root and weighted-profile global rate excess, plus wave
+moment/depth bounds. Twenty-six public Lean theorems across the two
+checkpoints and two private helpers verify deterministic
 algebra/order/convexity substatements; they do not formalize the stochastic
 correspondence or the certificate programs. The full build has passed.
 The separate conventional Allen–Cahn mean-identification theorem now
@@ -68,7 +71,9 @@ This registry provides a durable, atomic record of every mathematical claim acro
 | `PR-RATE-8` | Factorial Omitted-Depth Bound | Conventional theorem requiring a finite moment box | `allen-cahn-codewise-certificate.md` §5 | No direct formalization of Volterra/Jacobian/simplex bound | Rational wave tail on `[0.7,0.8]`, e.g. depth 6 `<4.4445e-6` at `T=0.05` | Finite-dimensional positive closure specialization; novelty unestablished |
 | `PR-RATE-9` | Wave Full-Moment Polynomial-Residual Enclosure | Conventional residual/comparison theorem plus exact rational certificates | `wave-numerical-certification-route.md` §§2–5; `results/wave-rate-certificate.md` | Existing field/order algebra only; residual and numerical soundness not formalized | Ten wave rates plus rate-one baseline, degree 5, exact Bernstein and error witnesses | Benchmark-specific validated numerics; not a quadrature-refinement or novelty claim |
 | `PR-RATE-10` | Wave Global Rate-Excess via Convex Enclosures | Conventional full-moment convexity bridge plus exact rational objective certificate | `wave-numerical-certification-route.md` §6; `results/wave-certificate/summary.json` | Five public lemmas/two private helpers in `ConvexEnclosure.lean`; finite-real assumptions | At `T=0.05,x=0`, selected `59/80` gap `<5.688312e-6`; rounded historical `14611/20000` gap `<6.130773e-6`, globally over positive rates | Objective-excess guarantee; does not prove candidate ordering or rate-location accuracy |
+| `PR-RATE-11` | Weighted Wave-Profile Rate Certificate | Conventional weighted-objective/mean argument plus exact rational certificate | `profile-rate-efficiency.md`; `results/profile-efficiency-checkpoint.md` | Six profile convexity/enclosure/variance/interpolation lemmas in `ProfileEfficiency.lean` | Five-point equal-weight profile, `T=1/20`: λ=1/2 global variance excess `<3.848558e-5`; actual cheap policy relative excess `<1.60%` | Benchmark-specific guarantee over common positive scalar rates; novelty unestablished |
 | `PR-COST-1` | Replicated Rate/Proposal Accuracy–Cost Comparison | Conditional MSE/cost algebra and empirical evidence | `results/rate-cost-protocol.md`; `results/rate-cost-results.md` | None for stochastic MSE or timings | 240 profiles, 16,833,300 evaluation trees; no demonstrated one-profile tuning gain under calibrated predicted budget | Performance evidence, not theorem or population-significance claim |
+| `PR-COST-2` | Profile Reuse and Frozen-Allocation Expected MSE | Conditional MSE identity, certified variance/count inequalities and separate empirical timings | `results/profile-efficiency-results.md`; `results/profile-certificate/summary.json` | Four continuous-budget algebra/break-even lemmas in `ProfileEfficiency.lean`; stochastic MSE and integer allocation remain conventional | 2,200 curves, 139,621,200 evaluation trees; all eight competing frozen predicted-budget allocations have larger certified expected MSE than cheap grid policy | Conditional ideal-estimator loss result; no wall-time or universal speedup theorem |
 | `PR-SEC-4` | State-Dependent Arbitrary-Jet Representation | Conditional Theorem | `secondary-candidates.md` §Cand 4 | None (unformalized multi-index jet algebra) | SymPy jet chain-rule checks | Candidate contribution; nearby prior art |
 | `PR-SEC-5` | Derivative-Code Sobolev Training | Prior-Art Overlap | `secondary-candidates.md` §Cand 5 | None | Deep branching gradient supervision | Overlap: Czarnecki (2017), Huge-Savine (2020) |
 | `PR-SEC-6` | Robust Deep Branching Median-of-Means | Prior-Art Overlap | `secondary-candidates.md` §Cand 6 | None | Outlier filter comparison study | Overlap: Lugosi-Mendelson (2019), Catoni (2012) |
@@ -579,6 +584,74 @@ wave tails were also recomputed from the archived rational values.
 
 ---
 
+#### `PR-RATE-11`: Weighted Wave-Profile Global Certificate
+
+- **Specification:** raw uniform 1D Allen–Cahn wave, `T=1/20,t=0`,
+  positions `[-2,-1,0,1,2]`, weights `1/5`, one positive scalar rate
+  throughout all trees. Objective `Vbar(lambda)=sum_j w_j Var(H_lambda,x_j)`.
+  This is the equal-sample profile-MSE objective; it differs from the
+  point-root or unequal-allocation objectives.
+- **Conventional derivation:** nonnegative weighted sums preserve convexity;
+  rate-invariant means make moment and variance excess identical. The
+  leading short-time minimizer is
+  `sqrt(sum_j w_j f(phi_j)^2 / sum_j w_j phi_j^2)` under nondegeneracy and
+  the stated small-time expansion. See
+  [derivation](estimator-integrity/profile-rate-efficiency.md).
+- **Verified numerical construction:** fourteen degree-seven polynomial
+  residual witnesses, exact exponential/logistic coordinate intervals,
+  signed interval Horner evaluation and convex global lower bounds.
+  [Witnesses](results/profile-certificate/witnesses.json.gz) and
+  [summary](results/profile-certificate/summary.json) retain exact fractions.
+  The certificate establishes `Vbar(1/2)-inf Vbar < 3.848558e-5` and
+  `inf Vbar > .0041421075`; relative excess is below 0.93%.
+- **Actual policies:** convex upper interpolation at the exact rational
+  representation of the benchmark's binary-float rates gives relative
+  excess below 1.60% for grid short-time and 1.006% for grid selected.
+  Off-node lower bounds are conservatively global; they do not establish
+  a strict variance ordering of those two actual policies at equal n.
+- **Lean coverage:** `weightedProfile_convexOn`, `weightedProfile_enclosure`,
+  `weightedProfile_excess_le`, `weightedProfile_variance_shift`,
+  `weightedProfile_variance_excess_eq`, `convexProfile_upper_interpolation`.
+- **Omitted obligations:** stochastic correspondence, mild-PDE comparison,
+  rational verifier correctness, concrete fractions, production floating
+  arithmetic and transfer to other horizons, grids or tuple laws. Numerical
+  collocation checks are corroboration only. No universal optimizer or
+  publication-priority claim follows.
+
+#### `PR-COST-2`: Profile Reuse and Conditional Allocation Comparison
+
+- **Loss identity:** conditional on independently frozen rates and positive
+  integer counts, independent unbiased point averages have expected grid
+  MSE `Vbar/n`. Averaging this loss over R requested curves does not divide
+  its expectation by R; the curves are not pooled.
+- **Exact allocation comparison:** the matching certificate bounds the
+  actual binary-float policy rates and divides variance intervals by the
+  predicted-budget phase's frozen counts. At those allocations, all four
+  alternatives have larger expected MSE than the cheap grid policy at
+  each of R=1 and R=10; this ordering is not claimed for the fixed-n phase.
+  Numerical grid selection's expected-MSE ratio is at least 5.0312 for R=1
+  and 1.3873 for R=10. These are conditional ideal-real-estimator results,
+  not inequalities for observed replicate losses or execution times.
+- **Experiment:** [frozen protocol](results/profile-efficiency-protocol.md),
+  20 workloads per group, five policies, two sample-allocation phases,
+  reuse R=1/10, 2,200 curves and 139,621,200 evaluation trees. All 22
+  independent archive checks passed. No timed stopping or outlier removal.
+  [Report](results/profile-efficiency-results.md) records actual-vs-predicted
+  cost, setup, calibration, seeds and empirical distributions.
+- **Observed result:** numerical grid selection had 2.299 times the cheap
+  grid policy's aggregate RMSE at R=1 and 1.146 times at R=10 under the
+  predicted budgets. The numerical selector did not repay setup in these
+  workloads. The certificate procedure itself was offline.
+- **Lean coverage:** `amortizedProfileLoss_lt_iff`,
+  `amortizedProfileLoss_break_even`, `amortizedProfileLoss_reuse_break_even`,
+  `continuousBudget_profileLoss` prove real-valued cost-model algebra.
+  They do not establish the sampling MSE identity, finite moments,
+  calibration accuracy, integer floor rule or measured runtime model.
+- **Continuation decision:** retain the cheap grid rule for this benchmark;
+  continuation-aware q is optional and untested, not a failed experiment.
+
+---
+
 ### Family 4: Secondary Estimator-Integrity Candidates
 
 #### `PR-SEC-4`: State-Dependent Arbitrary-Jet Representation
@@ -820,15 +893,15 @@ For every claim touching Lean 4, the exact boundary between formalized mathemati
 | `formal/EstimatorIntegrity/RateCertificate.lean` | `rateSelection_excess_le`, `rateSelection_excess_le_inf`, `upperLower_excess_le_inf`, `commonMean_variance_excess_le`, `global_lower_of_interval_and_exterior` | Finiteness and rate-invariant mean, killed-tree domination, tail and quadrature estimates, optimizer error, exterior topology bounds, concrete witnesses and program correctness. |
 | `formal/EstimatorIntegrity/AllenCahnBounds.lean` | `allenCahnBranchPolynomial_nonneg`, `allenCahnBranchPolynomial_mono`, `allenCahnMomentField_nonneg`, `allenCahnMomentField_mono`, `allenCahnMomentField_interval_upper`, `allenCahn_postfixed_box_slope` | Actual random-tree/code correspondence, terminal bounds, ODE existence/comparison, analytic integration, stochastic domination, rational-program soundness and concrete witness values. |
 | `formal/EstimatorIntegrity/ConvexEnclosure.lean` | `convexEnclosure_right`, `convexEnclosure_left`, `convexEnclosure_right_exterior`, `convexEnclosure_left_exterior`, `convexEnclosure_cell_lower_envelope`, plus two private helpers | Finite-moment/extended-value stochastic convexity, valid numerical endpoint bounds, cell-envelope minimization algorithm, rational program correctness and concrete objective certificates. |
+| `formal/EstimatorIntegrity/ProfileEfficiency.lean` | `amortizedProfileLoss_lt_iff`, `amortizedProfileLoss_break_even`, `amortizedProfileLoss_reuse_break_even`, `continuousBudget_profileLoss`, `weightedProfile_convexOn`, `weightedProfile_enclosure`, `weightedProfile_excess_le`, `weightedProfile_variance_shift`, `weightedProfile_variance_excess_eq`, `convexProfile_upper_interpolation` | Stochastic profile-MSE identity, independence, all integrability and analytic bridges, concrete rational bounds, integer sample allocation, measured cost model and production roundoff. |
 
-The sixteen public declarations in the last three rows, plus two private
-convex-enclosure helpers, passed the full `lake build`: 3,390 jobs completed
-without warnings. Their reported axiom dependencies were only `propext`,
-`Classical.choice` and `Quot.sound`; the five new public convex declarations'
-audits transitively cover their private helpers. The latest associated
-Python suite passed 226 tests with 14 slow tests deselected in 53.47 seconds,
-including nine new wave-certificate tests. These checks verify their
-specified scope and do not discharge the omitted stochastic/numerical
+The twenty-six public declarations in the last four rows, plus two private
+convex-enclosure helpers, passed the full `lake build`: 3,391 jobs completed
+without warnings. Reported axiom dependencies for all public declarations
+were only `propext`, `Classical.choice` and `Quot.sound`; the public convex
+declarations' audits transitively cover their private helpers. The profile
+checkpoint records the final Python verification. These checks verify
+their specified scope and do not discharge the omitted stochastic/numerical
 soundness obligations listed above.
 
 ---
