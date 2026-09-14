@@ -2,6 +2,10 @@
 
 **Status:** navigation and claim inventory for the `parabolab` research programme; entries must be checked against their underlying proofs.
 **Last-reviewed commit:** `ce2949330fcff1a3faf56c8a0ff36628586b242d`
+**Certificate checkpoint review:** 14 September 2026, unmerged research work
+on `codex/research-certified-rate`, based on
+`0afcb3c4ba446d20ff9337e4a4e1f2124bda5730`. The earlier reviewed commit above
+is retained as historical provenance; new entries have the scopes below.
 **Scope:** all mathematical theorems, conditional representations, Lean-formalized lemmas, conjectures, and priority claims across estimator integrity and multifactor Merton research.
 
 **Current decision (14 September 2026):** the active FYP improves branching
@@ -9,10 +13,18 @@ Monte Carlo PDE estimation through exponential-rate and tuple-proposal
 selection. The existing solver/demo comparison workflow remains the same.
 Multidimensional Merton is inactive as a research application; its records
 below are historical. See the [research index](README.md),
-[research checkpoint](lambda-q-optimization-summary.md), and
+[certified-rate checkpoint](results/certified-rate-checkpoint.md),
+[sampling-method checkpoint](lambda-q-optimization-summary.md), and
 [general rate-selection arguments](estimator-integrity/general-rate-selection.md).
-The new all-code moment/cutoff arguments are conventional mathematics, not
-additional Lean-checked statements or an implemented certified optimizer.
+The general stochastic moment/cutoff arguments remain conventional
+mathematics. Separate six-code exact-rational verifiers now certify flat
+Allen–Cahn and wave-root global rate excess, plus wave moment/depth bounds.
+Sixteen new public Lean theorems and two private helpers verify deterministic
+algebra/order/convexity substatements; they do not formalize the stochastic
+correspondence or the certificate programs. The full build has passed.
+The separate conventional Allen–Cahn mean-identification theorem now
+discharges common-mean invariance for the saved flat/wave certificates;
+their additive global moment gaps are therefore variance gaps as well.
 
 ---
 
@@ -38,6 +50,7 @@ This registry provides a durable, atomic record of every mathematical claim acro
 | `PR-MOM-1` | Finite-Depth Killed Tree Identity | Proved Theorem | `notation-and-moment-theorem.md` §Def 2.1 | None (related algebraic definitions in `FiniteTree.lean`) | Python unit tests (`test_moments.py`) | Classical tree killing |
 | `PR-MOM-2` | Exact Multitype $p$-Moment Recursion | Proved Theorem | `notation-and-moment-theorem.md` §Thm 2.2 | `FiniteTree.lean` (`momentStep`) | Gauss-Legendre quadrature match | Coding-tree extension of branching identities |
 | `PR-MOM-3` | Minimal Fixed Point & $L^p$ Criterion | Proved Theorem | `notation-and-moment-theorem.md` §Thm 2.3 | `MomentIteration.lean` (5 lemmas) | Fixed-point Picard iteration tests | Established smoothing transform / branching theory |
+| `PR-MEAN-1` | Allen–Cahn Rate-Invariant PDE Mean | Conventional theorem under an all-code envelope hypothesis, discharged for saved flat/wave benchmarks | `allen-cahn-mean-identification.md` | No Lean stochastic formalization | Verified six-code envelope supplies required hypothesis; explicit signed mild-system identities | Benchmark-specific closing of representation obligation; no universal mean theorem |
 | `PR-DYM-1` | Dym $f_{z_0}$ Odd Singularity | Proved Theorem | `dym-nonintegrability.md` §Terminal Identities | `Dym.lean` (`dym_fz0_coefficient`) | SymPy jet differentiation | Novel verification for JEQ Fig 6 instance |
 | `PR-DYM-2` | Dym Absolute First-Moment Divergence | Proved Theorem | `dym-nonintegrability.md` §Thm 4.1 | `Dym.lean` (`one_div_not_intervalIntegrable`, `continuous_density_intervalIntegral_unbounded`) | Trapezoidal log-quadrature (`examples/dym_nonintegrability.py`) | Scoped search: first Dym-specific coding-tree proof |
 | `PR-DYM-3` | Dym Signed-Part Divergence ($\infty - \infty$) | Proved Theorem | `dym-nonintegrability.md` §Cor 4.2 | None (unformalized signed event decomposition) | Bounded Cauchy principal-value analysis | Scoped search: first Dym-specific coding-tree proof |
@@ -45,11 +58,17 @@ This registry provides a durable, atomic record of every mathematical claim acro
 | `PR-PROP-2` | Unconstrained Event-Time Optimizer | Proved Theorem | `adaptive-proposals.md` §Thm 6.2 | None (continuous-time measure decomposition) | 1D numerical quadrature on $(0, \Delta)$ | Generalization of Poisson split |
 | `PR-PROP-3` | Pilot/Frozen Proposal Exact Unbiasedness | Proved Theorem | `adaptive-proposals.md` §Thm 6.3 | None (pilot $\sigma$-algebra / tower property) | 5-seed Merton-Vasicek MC experiment | Established multi-stage Monte Carlo |
 | `PR-PROP-4` | Multiplicative Finite-Depth Oracle Bound | Proved Theorem | `adaptive-proposals.md` §Thm 6.4 | `Proposal.lean` (`sqrtProposal_ratio_bounds`, `oracle_ratio_of_relative_error`, `secondMoment_uniformMixture_le`) | Simulated pilot error runs | Branching tree-depth composition theorem |
-| `PR-RATE-1` | Local Exponential Rate Strict Convexity | Proved Theorem | `exponential-rate-optimization.md` §Thm 7.1 | `ExponentialRate.lean` (`singleEventKernelFactor_pos`, `modelRateObjective_ge_amgm`, `modelRateObjective_at_optimum`, `modelObjective_eq_lower_bound_iff`) | Quadrature derivatives vs finite differences | Related to classical importance-sampling convexity |
+| `PR-RATE-1` | Local Exponential Rate Strict Convexity | Proved Theorem | `exponential-rate-optimization.md` §Thm 7.1 | `ExponentialRate.lean` (`expKernelFactor_pos`, `modelRateObjective_ge_amgm`, `modelRateObjective_at_optimum`, `modelObjective_eq_lower_bound_iff`) | Quadrature derivatives vs finite differences | Related to classical importance-sampling convexity |
 | `PR-RATE-2` | Tree Topology Rate Convexity | Conditional full-tree theorem | `exponential-rate-optimization.md` §Thm 7.2 | `ExponentialRate.lean` (`topologyFactor_pos_of_pos`) only | Deterministic recursive derivatives | Topology-level coding tree convexity; finite variance separate |
 | `PR-RATE-3` | Short-Horizon $O(1)$ Scaling Law | Local theorem; full recursion conditional | `exponential-rate-optimization.md` §Thm 7.4 | None (Taylor asymptotic analysis) | 1D Allen-Cahn / Riccati quadrature sweeps | Requires nonzero terminal terms and uniform expansions |
-| `PR-RATE-4` | Exact Riccati Binary Second-Moment Oracle | Proved for standard binary representation | `exponential-rate-optimization.md` §Thm 7.5 | None (ODEs) | Analytic formula (`riccati_binary_second_moment`) | Not the derivative-coded estimator of the same PDE |
-| `PR-RATE-5` | General Rate Selection and Cutoff Certificates | Conventional theorems under stated hypotheses | `general-rate-selection.md` §§2–5 | None | `test_sampling_tuning.py` checks engineering only | Explicit all-code bound and selection gap; novelty unestablished; certified numerics not implemented |
+| `PR-RATE-4` | Exact Riccati Binary Second-Moment Oracle | Proved for standard binary representation | `exponential-rate-optimization.md` §Thm 7.5 | None (ODEs) | Corrected explicit standard-binary driver, first-event identity, cutoff convergence and untruncated MC; `results/binary-benchmark-audit.md` | Historical derivative-coded/oracle comparison was mismatched and is not oracle evidence |
+| `PR-RATE-5` | General Rate Selection and Cutoff Certificates | Conventional theorems under stated hypotheses | `general-rate-selection.md` §§2–5 | Five deterministic transfer/coverage lemmas in `RateCertificate.lean`; general stochastic theory remains unformalized | Generic selector remains finite-depth quadrature; the separate flat verifier is `PR-RATE-7` | Explicit selection-gap specialization; novelty unestablished |
+| `PR-RATE-6` | Six-Code Allen–Cahn Moment Enclosures | Conventional comparison theorem plus exact rational witnesses | `allen-cahn-codewise-certificate.md` §§1–4 | Six polynomial/field/order lemmas in `AllenCahnBounds.lean` | `results/rate-certificate/witnesses.json.gz`, rechecked; flat and wave envelopes | Established positive-system comparison tools specialized to the raw mechanism; novelty unestablished |
+| `PR-RATE-7` | Flat Allen–Cahn Global Rate-Excess Certificate | Exact-rational numerical certificate with conventional estimator/ODE and exterior-bound proofs | `allen-cahn-codewise-certificate.md` §6; `results/certified-rate-checkpoint.md` | Conditional infimum, exterior coverage and variance-transfer algebra; concrete numbers/program not Lean-verified | At `phi=1/2,T=1/20`, selected `1907/2560`, global excess `<10^-4`; exact witnesses verified | Flat benchmark result does not transfer to the wave; no universal optimizer |
+| `PR-RATE-8` | Factorial Omitted-Depth Bound | Conventional theorem requiring a finite moment box | `allen-cahn-codewise-certificate.md` §5 | No direct formalization of Volterra/Jacobian/simplex bound | Rational wave tail on `[0.7,0.8]`, e.g. depth 6 `<4.4445e-6` at `T=0.05` | Finite-dimensional positive closure specialization; novelty unestablished |
+| `PR-RATE-9` | Wave Full-Moment Polynomial-Residual Enclosure | Conventional residual/comparison theorem plus exact rational certificates | `wave-numerical-certification-route.md` §§2–5; `results/wave-rate-certificate.md` | Existing field/order algebra only; residual and numerical soundness not formalized | Ten wave rates plus rate-one baseline, degree 5, exact Bernstein and error witnesses | Benchmark-specific validated numerics; not a quadrature-refinement or novelty claim |
+| `PR-RATE-10` | Wave Global Rate-Excess via Convex Enclosures | Conventional full-moment convexity bridge plus exact rational objective certificate | `wave-numerical-certification-route.md` §6; `results/wave-certificate/summary.json` | Five public lemmas/two private helpers in `ConvexEnclosure.lean`; finite-real assumptions | At `T=0.05,x=0`, selected `59/80` gap `<5.688312e-6`; rounded historical `14611/20000` gap `<6.130773e-6`, globally over positive rates | Objective-excess guarantee; does not prove candidate ordering or rate-location accuracy |
+| `PR-COST-1` | Replicated Rate/Proposal Accuracy–Cost Comparison | Conditional MSE/cost algebra and empirical evidence | `results/rate-cost-protocol.md`; `results/rate-cost-results.md` | None for stochastic MSE or timings | 240 profiles, 16,833,300 evaluation trees; no demonstrated one-profile tuning gain under calibrated predicted budget | Performance evidence, not theorem or population-significance claim |
 | `PR-SEC-4` | State-Dependent Arbitrary-Jet Representation | Conditional Theorem | `secondary-candidates.md` §Cand 4 | None (unformalized multi-index jet algebra) | SymPy jet chain-rule checks | Candidate contribution; nearby prior art |
 | `PR-SEC-5` | Derivative-Code Sobolev Training | Prior-Art Overlap | `secondary-candidates.md` §Cand 5 | None | Deep branching gradient supervision | Overlap: Czarnecki (2017), Huge-Savine (2020) |
 | `PR-SEC-6` | Robust Deep Branching Median-of-Means | Prior-Art Overlap | `secondary-candidates.md` §Cand 6 | None | Outlier filter comparison study | Overlap: Lugosi-Mendelson (2019), Catoni (2012) |
@@ -108,7 +127,7 @@ This registry provides a durable, atomic record of every mathematical claim acro
 - **Lean 4 Coverage:**
   - *Formalized:* Finite algebraic sum and product step `momentStep` in `formal/EstimatorIntegrity/FiniteTree.lean`.
   - *Omitted Obligations:* Spatial Markov semigroup $P_s$, continuous time integral $\int_0^\Delta ds$, Tonelli theorem on product measure.
-- **Implementation Correspondence:** `parabolab/moments.py::MomentSystem`.
+- **Implementation Correspondence:** `parabolab/moments.py::finite_depth_moment_1d`.
 - **Empirical / Symbolic Evidence:** Gauss-Legendre quadrature of recursion matches sample empirical moments for low-order polynomial semilinear equations.
 - **Novelty / Prior Art:** Generalizes classical branching moment equations to multitype arbitrary-jet operator codes.
 - **Dependencies & Open Obligations:** Requires (H5) shared-position property (JCP Alg 1 violation trap).
@@ -269,6 +288,294 @@ This registry provides a durable, atomic record of every mathematical claim acro
 - **Empirical / Symbolic Evidence:** Pilot experiments confirm variance stays within oracle multiplier.
 - **Novelty / Prior Art:** Multiplicative error propagation specific to branching coding trees.
 - **Dependencies & Open Obligations:** Explains why adaptive gains can degrade if pilot error compounds over deep trees.
+
+---
+
+### Rate-Certificate and Cost Checkpoint (14 September 2026)
+
+The concrete numerical evidence in this subsection was read from
+[the saved summary](results/rate-certificate/summary.json) and exact
+[witness archive](results/rate-certificate/witnesses.json.gz), then the
+archive was rechecked with `examples/certified_allen_cahn_rate.py --verify`.
+All witnesses passed. The global gap/exterior comparisons and displayed
+wave tails were also recomputed from the archived rational values.
+
+#### `PR-RATE-4`: Standard-Binary Oracle Audit Amendment
+
+- **Estimator:** `Id → (Id,Id)`, terminal value one and tuple probability
+  one; this is not `FullyNonlinearPDE1D`'s default derivative-coded tree.
+- **Exact claim:** the Riccati formula and stationary equation from
+  [Theorem 7.5](estimator-integrity/exponential-rate-optimization.md) apply
+  to that standard-binary estimator. Stored stationary rates are numerical
+  roots, not exact algebraic values or interval-certified locations.
+- **Correction:** historical `binary_control_optimum` rows mixed a
+  derivative-coded cutoff objective with standard-binary oracle values.
+  Those files are retained but cannot validate the binary optimum or
+  isolate a pure rate effect.
+- **Current evidence:** the [corrected audit](results/binary-benchmark-audit.md)
+  includes matching first-event integral identities, analytic depth-one
+  values, increasing-cutoff convergence and untruncated MC checks. At
+  `T=0.15`, depth-2 selection leaves about 19.48% excess full-tree variance.
+- **Lean boundary:** no Riccati ODE, full-tree identification or concrete
+  binary optimum is formalized by this amendment.
+
+#### `PR-RATE-5`: Deterministic Certificate-Transfer Formalization
+
+- **Exact substatement:** for finite real-valued objectives `M`, `MK` and
+  `numerical`, assume `MK≤M`, a selected-rate omitted-depth bound `tail`,
+  a uniform absolute numerical error `δ`, and approximate minimization
+  error `η`. Then the selected objective exceeds any comparison objective
+  by at most `tail + 2δ + η`; the same bound holds above the infimum without
+  requiring an attained minimum.
+- **Formalized declarations:**
+  [RateCertificate.lean](../../formal/EstimatorIntegrity/RateCertificate.lean)
+  contains `rateSelection_excess_le`, `rateSelection_excess_le_inf`,
+  `upperLower_excess_le_inf`, `commonMean_variance_excess_le`, and
+  `global_lower_of_interval_and_exterior`.
+- **Additional exact substatements:** an incumbent upper bound minus a
+  global lower bound bounds objective excess; subtracting a common squared
+  mean preserves an additive gap; interval and exterior lower bounds cover
+  all positive rates.
+- **Not formalized:** stochastic integrability, the killed-tree inequality,
+  the value of a depth tail, uniform numerical error, the optimization
+  guarantee, PDE identification and common-mean invariance. They are
+  assumptions to the formal transfer lemmas. The Lean objectives are finite
+  real-valued functions; treatment of infinite moments outside the finite
+  domain remains part of the conventional application proof.
+- **Priority:** the formal algebra is a verification component; no separate
+  novelty claim is made for triangle/infimum/order reasoning.
+
+#### `PR-RATE-6`: Six-Code Allen–Cahn Full-Moment Enclosure
+
+- **Exact statement:** for raw one-dimensional `SemilinearMechanism`,
+  uniform labelled tuple probabilities and `f(z)=z-z³`, normalized squared
+  code moments are bounded by a nonnegative supersolution of
+  `y'=λ*y+(r/λ)*G(y)`, with code order `(Id,D,F₀,F₁,F₂,F₃)`. The polynomial
+  `G` and terminal bounds are given in
+  [the codewise derivation](estimator-integrity/allen-cahn-codewise-certificate.md).
+  Flat terminal data identify the exact moment with the ODE after
+  finiteness and uniqueness are established conventionally.
+- **Structural assumptions:** scalar-square homogeneity of derivative
+  codes, raw tuple multiplicities including dead alternatives, shared
+  branch positions and the fixed uniform tuple law. A nonuniform proposal
+  or renormalized mechanism requires separate arguments.
+- **Conventional proof:** polynomial positivity/monotonicity, an affine
+  rational supersolution, induction over killed moments, nonexplosion and
+  monotone convergence. A numerical trajectory without accepted exact
+  inequalities is not sufficient.
+- **Rational verification:** every step checks
+  `b ≥ a + h*(upper_rate*b + (tilt/lower_rate)*G(b))`. Serialized fractions
+  preserve exact values; accepted steps cover the whole horizon. Flat
+  lower steps round downward. The checker is ordinary Python rational
+  arithmetic, not a Lean-certified executable.
+- **Formalized declarations:**
+  [AllenCahnBounds.lean](../../formal/EstimatorIntegrity/AllenCahnBounds.lean)
+  contains `allenCahnBranchPolynomial_nonneg`,
+  `allenCahnBranchPolynomial_mono`, `allenCahnMomentField_nonneg`,
+  `allenCahnMomentField_mono`, `allenCahnMomentField_interval_upper`, and
+  `allenCahn_postfixed_box_slope`.
+- **Not formalized:** the code-to-polynomial correspondence, scalar
+  homogeneity of random trees, terminal suprema, ODE existence/comparison,
+  stochastic domination, rational implementation/serialization and
+  concrete numerical witnesses. The Lean field permits nonnegative rates
+  algebraically; the probabilistic application still requires `λ>0`.
+- **Saved evidence:** at `T=1/20`, wave rates `[7/10,4/5]`, the ordinary
+  root moment is at most `297372020821519/281474976710656`; the `2^N`-tilted
+  moment is at most `307426758639711/281474976710656`, uniformly in space.
+  Tilt 4 was inconclusive at step 171, not proved divergent.
+
+#### `PR-RATE-7`: Flat Global Rate-Excess Certificate
+
+- **Scope:** `allen_cahn_flat(phi0=1/2,T=1/20)`, raw semilinear mechanism,
+  uniform tuple probabilities and the ideal real-arithmetic estimator.
+- **Verified result:** selected rate `1907/2560`; incumbent second-moment
+  upper bound `75820673137583/281474976710656`; global infimum lower bound
+  `18948168212961/70368744177664`. Their difference is
+  `28000285739/281474976710656 < 1/10000`.
+- **Global bridge:** 45 rate cells cover `[1/5,2]`. Root survival plus a
+  single-branch topology gives exterior lower bounds `73/256` and `11/40`;
+  both are above the incumbent upper bound in exact arithmetic. This
+  excludes improvements outside the interval, without requiring an
+  attained minimizing rate.
+- **Meaning:** a bound on additive full-tree second-moment excess, not an
+  error bound on the rate location. `PR-MEAN-1` supplies the common mean
+  for this saved benchmark, so it is also an additive variance-excess
+  certificate. Relative variance
+  optimality and the traveling-wave selection are not certified here.
+- **Baseline consequence:** the rate-one lower moment bound minus the
+  selected upper bound is at least `30840997895/35184372088832`, a positive
+  certified second-moment improvement. The discharged common-mean
+  condition also makes it an additive variance reduction.
+- **Lean boundary:** the generic infimum/exterior/variance algebra in
+  `PR-RATE-5` supports this proof structure; it does not check the exact
+  fractions, the rate partition, topology-derived exterior estimates,
+  verifier implementation or stochastic correspondence.
+- **Diagnostic only:** independent DOP853 integration and scalar numerical
+  minimization locate a rate near `0.74367026`; that floating computation
+  is not used as the mathematical certificate.
+
+#### `PR-RATE-8`: Factorial Omitted-Depth Certificate
+
+- **Exact statement:** a uniform finite ordinary-moment box `B`, its
+  nonnegative Jacobian `J=DG(B)`, horizon `T` and rate interval `[ℓ,u]`
+  imply, for the exact killed-depth moment `M_K`,
+  `0 ≤ M-M_K ≤ exp(u*T)*(T/ℓ)^(K+1)/(K+1)! * [J^K G(B)]_Id`.
+- **Conventional proof:** monotone polynomial Lipschitz bound on the box,
+  repeated Volterra integration and the ordered-simplex volume. An exact
+  rational upper bound for the exponential makes the saved calculation
+  fully rational. Finiteness of `B` is a prerequisite, not a consequence
+  of the factorial expression alone.
+- **Evidence:** the verified ordinary wave box on `[0.7,0.8]` at `T=0.05`
+  gives omitted-depth bounds below `4.4445e-6` at depth 6 and `6.50e-8` at
+  depth 8. Values were recomputed from the saved rational witness.
+- **Lean boundary:** neither the Jacobian tail estimate, simplex integral,
+  exponential bound nor its stochastic application is formalized by the
+  checkpoint theorems.
+- **Remaining obligations:** the old recursive time/Gaussian quadrature
+  still has no standalone verified error bound. `PR-RATE-9/10` instead
+  certifies the full wave objective directly by a polynomial residual;
+  it does not add this depth tail to its direct full-moment error.
+
+#### `PR-RATE-9`: Wave Full-Moment Residual Certificate
+
+- **Estimator and root:** `allen_cahn_wave_1d(T=1/20)`, `(t,x)=(0,0)`,
+  raw one-dimensional semilinear mechanism and uniform tuple probabilities.
+  The exact transformed coordinate `s=1/(1+exp(x))` maps the root to `1/2`
+  and the whole spatial line into `(0,1)`, with absorbing endpoint limits.
+  No finite Brownian spatial cutoff is imposed.
+- **Conventional theorem:** a rational polynomial trial's global residual
+  and initial mismatch, combined with a separately verified true-moment
+  box, bound full-moment error through a positive linear system. The
+  Jacobian is evaluated on a signed magnitude box containing both trial
+  and true solution; trial positivity is not assumed.
+- **Exact verification:** the complete residual retains `∂τ=(1/T)∂θ`
+  and all high-degree coefficients. Bernstein coefficients bound trial
+  magnitudes and residuals over the whole domain. The actual run uses
+  time degree 5, two successive spatial bisections (four subintervals),
+  100 verified error steps and a `2^-60` rational rounding grid. Taylor
+  generation is not trusted as proof of an infinite series convergence.
+- **Evidence:** ten exact rate points in `[0.7,0.8]`, including `14611/20000`,
+  and an independent rate-one baseline. The
+  [archive](results/wave-certificate/witnesses.json.gz) passes exact
+  rechecking, and all point values agree with the
+  [summary](results/wave-certificate/summary.json). Independent collocation
+  at orders 24/36 lies within the certified intervals; its resolution
+  agreement is diagnostic, not the proof.
+- **Lean boundary:** the existing six-code field algebra is relevant, but
+  the coordinate-change/semigroup argument, Bernstein identity and code,
+  residual-to-error comparison, exact-program correctness and concrete
+  fractions are not formalized by this checkpoint.
+- **Limitations:** ideal real arithmetic, one horizon/root and uniform raw
+  mechanism. Other states/horizons, nonuniform proposals and production
+  roundoff remain distinct certification work.
+
+#### `PR-RATE-10`: Global Wave Rate-Excess Certificate
+
+- **Ten-point set:** `{0.7,0.7125,0.725,0.73055,0.7375,0.75,0.7625,0.775,0.7875,0.8}`,
+  all interpreted as exact rational numbers in the witnesses.
+- **Exact result:** at the stated wave root, `M(59/80)-inf_{λ>0}M(λ)` is
+  at most the archived rational gap, approximately `5.6883117983770254e-6`,
+  and strictly less than `5.688312e-6`. For the rounded historical rate
+  `14611/20000`, the corresponding archived gap is approximately
+  `6.130772565087558e-6`, strictly below `6.130773e-6`.
+- **Lower-envelope argument:** extrapolate neighboring certified secants
+  outside their defining pair to obtain cell lower bounds. Do not use a
+  convex chord as a lower bound inside its own pair. Cell minima use exact
+  endpoints and line intersections. Verified endpoint slope orientations
+  give exterior lower bounds above the incumbent, excluding improvements
+  outside `[0.7,0.8]`.
+- **Extended-value boundary:** the conventional topology argument gives
+  convexity of the nonnegative full moment. Infinite exterior moments
+  automatically satisfy finite lower bounds; finite exterior values allow
+  ordinary secant reasoning. Global moment finiteness and optimizer
+  attainment are not assumed.
+- **Formalized declarations:**
+  [ConvexEnclosure.lean](../../formal/EstimatorIntegrity/ConvexEnclosure.lean)
+  contains five public theorems: `convexEnclosure_right`,
+  `convexEnclosure_left`, `convexEnclosure_right_exterior`,
+  `convexEnclosure_left_exterior`, and
+  `convexEnclosure_cell_lower_envelope`. Two private cross-multiplied
+  helpers support them. These prove finite-real ray extrapolation,
+  exterior constants and the pointwise cell envelope from assumed
+  `ConvexOn` and correct endpoint bounds.
+- **Not formalized:** the envelope-minimization algorithm, rational
+  implementation, concrete input enclosures, stochastic/extended-valued
+  convexity and the global stochastic objective certificate.
+- **Meaning:** `59/80` has the smallest certified upper bound among the
+  ten samples; overlapping intervals do not prove its true moment is
+  smaller than that at `14611/20000`. The historical certificate uses
+  exactly the rounded `0.73055`, not literally the earlier optimizer
+  float `0.7305486297108235`. These are objective-gap bounds, not bounds
+  on distance to a minimizing rate.
+- **Variance and cost:** the selected second moment is below rate one's
+  by at least the positive rational number reported in the summary
+  (greater than `0.000955093206`). `PR-MEAN-1` identifies the common mean
+  for all positive rates, so the global gap and baseline improvement also
+  hold for variance. The approximately 30-second certificate run
+  included checking and six optional collocation diagnostics; it was not
+  one of the practical selector variants in `PR-COST-1`, so it establishes
+  no amortized runtime gain.
+
+#### `PR-MEAN-1`: Rate-Invariant Allen–Cahn PDE Mean
+
+- **Source:** [Allen–Cahn mean identification](estimator-integrity/allen-cahn-mean-identification.md).
+  This is a conventional stochastic/analytic proof, not a Lean theorem.
+- **Scope and hypothesis:** the exact raw uniform one-dimensional
+  semilinear estimator for the specified flat or traveling-wave data,
+  with a finite all-six-code second-moment envelope at one reference rate,
+  uniformly in starting state and remaining time. The saved certificates
+  supply that hypothesis through `T=0.05`; a root-only bound would not.
+- **Absolute integrability:** scalar normalization uses `|a|` for absolute
+  first moments. In the killed absolute first-moment recursion the
+  lifetime density, survival and tuple probabilities cancel. Thus the
+  recursion and its monotone full-depth limit do not depend on positive
+  `λ`. Cauchy–Schwarz at the reference rate supplies bounded absolute
+  first moments at every positive rate, even if some second moments are
+  infinite.
+- **Mean identification:** justified first-event conditioning gives the
+  bounded rate-free signed six-field mild system, with the negative
+  diffusion terms retained. The explicit flat/wave PDE fields satisfy
+  the same system. Polynomial Lipschitz bounds and heat-semigroup
+  contraction give bounded mild uniqueness, identifying `Eλ H` with the
+  PDE value for every positive rate.
+- **Variance consequence:** at a fixed root,
+  `Varλ(H)=M(λ)-μ²` in extended nonnegative values. The finite incumbent
+  and common mean imply that its global variance excess equals its
+  global second-moment excess exactly. No numerical evaluation of `μ`
+  is needed for this gap transfer.
+- **Coverage boundary:** no Lean probability/semigroup/conditional-
+  expectation formalization is claimed. The theorem does not establish
+  arbitrary-PDE identification, a changed/nonuniform mechanism's mean,
+  finite second moments for every rate, or production floating-point
+  unbiasedness. Numerical absolute/relative variance values need their
+  own validated evaluation of the explicit mean.
+
+#### `PR-COST-1`: Replicated Accuracy and Total-Cost Evidence
+
+- **Conditional model:** independent unbiased `n`-sample point estimators
+  with finite second moments have expected grid MSE `mean_x Var(H_x)/n`.
+  Under the idealized cost model `C(n)=h+c*n`, the continuous-budget
+  approximation is `c*meanVar/(B-h)` for `B>h`. Actual median calibration
+  timing does not establish an expected-cost identity.
+- **Predeclared experiment:** six existing sampling variants, wave
+  `T=0.05`, five grid points, 20 independent replicates per variant in
+  each phase, independent timing calibration, no clipping or timed
+  stopping. All 6,000,000 fixed-size and 10,833,300 budget-phase trees
+  completed. [Protocol](results/rate-cost-protocol.md),
+  [results](results/rate-cost-results.md),
+  [integrity audit](results/rate-cost-benchmark/validation.json).
+- **Observed result:** combined tuning had 26.4% lower aggregate RMSE at
+  fixed sample count but 2.22 times the one-profile total cost. Under the
+  calibrated predicted budget, short-time rate `0.75` had the smallest
+  observed aggregate RMSE; neither selected-rate variant demonstrated an
+  end-to-end gain for that workload.
+- **Boundary:** empirical outcome with complete recorded seeds and
+  workloads, not a population-variance certificate, confidence theorem,
+  statistically established ranking, exact hardware speed comparison or
+  claim that tuning cannot pay off when amortized. Concurrent research
+  processes and actual-vs-predicted timing differences are documented.
+- **Lean coverage:** none for the stochastic MSE identity, cost model or
+  experimental findings in this checkpoint.
 
 ---
 
@@ -509,12 +816,26 @@ For every claim touching Lean 4, the exact boundary between formalized mathemati
 | `formal/EstimatorIntegrity/MomentIteration.lean` | `momentStep_mono`, `picard_mono`, `picard_le_prefixed`, `picard_iSup_least`, `momentStep_iSup_picard` | Identification of abstract Picard supremum with continuous-time tree expectation $\mathbb E\|H\|^p$; almost-sure tree exhaustion; Fubini-Tonelli measure integration. |
 | `formal/EstimatorIntegrity/Dym.lean` | `dym_fz0_coefficient`, `one_div_not_intervalIntegrable`, `one_div_intervalIntegral_unbounded`, `continuous_density_intervalIntegral_unbounded` | 5-particle random tree event probability; joint Gaussian density conditioning over $(\tau_1, \tau_2, Y)$; signed-part decomposition $\mathbb E[H^+] = \mathbb E[H^-] = \infty$. |
 | `formal/EstimatorIntegrity/Proposal.lean` | `sqrtProposal_sum`, `sqrtProposal_pos`, `secondMoment_ge_oracle`, `secondMoment_sqrtProposal_eq`, `sqrtProposal_ratio_bounds`, `oracle_ratio_of_relative_error`, `secondMoment_uniformMixture_le` | Pilot $\sigma$-algebra $\mathcal P$; conditional expectation tower property; inductive composition over random trees with $B_n$ decisions; empirical concentration probabilities $1 - \delta$. |
+| `formal/EstimatorIntegrity/ExponentialRate.lean` | Kernel/topology-factor positivity and model-objective AM–GM algebra, including `expKernelFactor_pos`, `topologyFactor_pos_of_pos`, `modelRateObjective_ge_amgm`, `modelRateObjective_at_optimum`, `modelObjective_eq_lower_bound_iff` | Differentiation of the stochastic full-tree objective, dominating integrable bounds, integral strict convexity and full-tree minimizer existence. |
+| `formal/EstimatorIntegrity/RateCertificate.lean` | `rateSelection_excess_le`, `rateSelection_excess_le_inf`, `upperLower_excess_le_inf`, `commonMean_variance_excess_le`, `global_lower_of_interval_and_exterior` | Finiteness and rate-invariant mean, killed-tree domination, tail and quadrature estimates, optimizer error, exterior topology bounds, concrete witnesses and program correctness. |
+| `formal/EstimatorIntegrity/AllenCahnBounds.lean` | `allenCahnBranchPolynomial_nonneg`, `allenCahnBranchPolynomial_mono`, `allenCahnMomentField_nonneg`, `allenCahnMomentField_mono`, `allenCahnMomentField_interval_upper`, `allenCahn_postfixed_box_slope` | Actual random-tree/code correspondence, terminal bounds, ODE existence/comparison, analytic integration, stochastic domination, rational-program soundness and concrete witness values. |
+| `formal/EstimatorIntegrity/ConvexEnclosure.lean` | `convexEnclosure_right`, `convexEnclosure_left`, `convexEnclosure_right_exterior`, `convexEnclosure_left_exterior`, `convexEnclosure_cell_lower_envelope`, plus two private helpers | Finite-moment/extended-value stochastic convexity, valid numerical endpoint bounds, cell-envelope minimization algorithm, rational program correctness and concrete objective certificates. |
+
+The sixteen public declarations in the last three rows, plus two private
+convex-enclosure helpers, passed the full `lake build`: 3,390 jobs completed
+without warnings. Their reported axiom dependencies were only `propext`,
+`Classical.choice` and `Quot.sound`; the five new public convex declarations'
+audits transitively cover their private helpers. The latest associated
+Python suite passed 226 tests with 14 slow tests deselected in 53.47 seconds,
+including nine new wave-certificate tests. These checks verify their
+specified scope and do not discharge the omitted stochastic/numerical
+soundness obligations listed above.
 
 ---
 
 ## Audit Checklist
 
-- [x] Every claim assigned a stable identifier (`PR-MOM-*`, `PR-DYM-*`, `PR-PROP-*`, `PR-SEC-*`, `PR-MM-*`).
+- [x] Every registered claim assigned a stable identifier (`PR-MOM-*`, `PR-MEAN-*`, `PR-DYM-*`, `PR-PROP-*`, `PR-RATE-*`, `PR-COST-*`, `PR-SEC-*`, `PR-MM-*`).
 - [x] Clear demarcation between complete proofs, conditional theorems, prior-art overlaps, and conjectures.
 - [x] Lean theorem names match exact declarations in `formal/EstimatorIntegrity/*.lean`.
 - [x] Omitted obligations explicitly stated for every formalized item.
