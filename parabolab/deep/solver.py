@@ -80,7 +80,10 @@ def train_deep_branching(
       grad_clip   clip the gradient norm before every Adam step
       lbfgs_steps full-batch L-BFGS iterations after the Adam epochs, run
                   in eval mode (BatchNorm uses its running statistics;
-                  they are not updated by the polish)
+                  they are not updated by the polish); the final `losses`
+                  entry is then the eval-mode loss after the polish,
+                  whereas the Adam entries are train-mode losses (they
+                  differ for BatchNorm nets)
     """
     if loss not in ("mse", "weighted_mse"):
         raise ValueError(f"unknown loss {loss!r}")

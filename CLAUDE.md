@@ -450,13 +450,14 @@
     (exp1, −10 %). Same mechanism makes the Fig-7 consistency statistic
     Σ((v−y)/stderr)²/N useless as an absolute number on ac1 (hundreds to
     thousands at L1 ≈ 1e-3): compare it across configurations, not to 1.
-41. **An L-BFGS polish after full-batch Adam is a float32 no-op.** From
-    Adam's endpoint (max |grad| ~ 2e-5, loss ~ 1e-3) `torch.optim.LBFGS`
-    with strong-Wolfe makes ~7 closure calls and returns with the loss
-    unchanged to every digit, for `tolerance_grad` 1e-7 and 1e-12 alike —
-    the line search finds no step that lowers the float32 loss. R8c's
-    numbers equal R5a's exactly for that reason, not because the optimum
-    is shared. Run it in float64 or not at all.
+41. **An L-BFGS polish after full-batch Adam does nothing useful in
+    float32.** From Adam's endpoint (max |grad| ~ 2e-5, loss ~ 1e-3)
+    `torch.optim.LBFGS` with strong-Wolfe accepts no step on 34 of 45
+    ablation runs (probe: 7 closure calls, loss unchanged, for
+    `tolerance_grad` 1e-7 and 1e-12 alike) and on the other 11 changes
+    the loss by ≤ 0.5 % and the grid L1 by ≤ 3.5 % with no systematic
+    sign; the summary metrics of R8c equal R5a's to three significant
+    figures. Run it in float64 or not at all.
 42. **`examples/*.csv` is git-ignored** (reference CSV overlays); the
     ablation ledger is un-ignored explicitly (`!examples/nn_ablation_results.csv`).
     A new results file under `examples/` needs the same line or `git add -f`.

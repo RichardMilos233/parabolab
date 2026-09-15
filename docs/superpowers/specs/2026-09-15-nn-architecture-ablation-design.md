@@ -163,7 +163,10 @@ mentioned are the paper's (6 × 20, tanh, BN, full-batch Adam lr 0.01 with
 
 "Best so far" = the rung with the lowest `n_outliers`, ties broken by
 `l1_median`, across the three benchmarks summed. A rung that improves one
-benchmark and worsens another is recorded as such and is not kept.
+benchmark and worsens another is recorded as such and is not kept. A
+change smaller than the benchmark's own seed spread (the min–max range of
+its 15 runs) is treated as unchanged rather than as improving or
+worsening that benchmark.
 
 Evidence per rung: 5 train seeds × 3 data seeds × 3 benchmarks = 45
 trainings, ≈ 20 s each at 6 × 20 on CPU (longer for R5), so ≈ 15–30 min per
@@ -215,7 +218,8 @@ All runs: `examples/nn_ablation_results.csv`; datasets in
 Columns: L1/L2 medians over 5 training seeds × 3 data seeds, L1 max,
 outlier runs (L1 > 3× median or non-finite), median consistency statistic.
 `+ens` rows = median of the five seed-nets per dataset (rung R9), so 3 runs.
-Machine: 32-core laptop CPU, torch 2.13 CPU; one training ≈ 9 s.
+Machine: 32-core laptop CPU, torch 2.13 CPU; one training ≈ 7 s on
+average (up to ≈ 10 s for the 64-wide nets).
 
 ### R0 — paper baseline on frozen data
 
@@ -322,7 +326,8 @@ liability rather than a help. Removing it (R3a) cuts Merton by a further
 32 % (3.66e-3 → 2.48e-3, worst run 3.47e-3); LayerNorm (R3b) improves
 both ac1 (−11 %) and Merton (−11 %). Neither adds outliers. The ac1 and
 exp1 differences between R2/R3a/R3b (≤ 3 %) are inside the seed spread of
-those benchmarks (±15 % and ±5 %), so they do not decide. Summed median
+those benchmarks (ac1 runs range −45 %…+39 % about their median across
+R2/R3a/R3b; exp1 −10 %…+7 %), so they do not decide. Summed median
 L1: R2 1.585e-2, R3a 1.490e-2, R3b 1.543e-2 → **kept: R3a** by the rule.
 The ac1 consistency statistic rises to 3364 for R3a (tails of the
 traveling wave fit less tightly without normalisation) while its grid L1
@@ -351,8 +356,9 @@ silu 1.445e-2, gelu 1.425e-2, sin 1.637e-2 → **kept: R4b (gelu)**. Gelu
 improves Merton by 17 % (2.48e-3 → 2.07e-3) and tightens its worst run
 (3.47e-3 → 2.80e-3); its ac1/exp1 changes are within seed spread. Silu
 has the lowest Merton median (1.93e-3) but a wider spread (max 3.76e-3)
-and ac1 +11 %. Sin is the best ac1 activation (7.81e-4, and the only one
-that pulls the ac1 consistency statistic down, 453) but the worst on
+and ac1 +11 %. Sin is the best ac1 activation (7.81e-4, and pulls the ac1 consistency
+statistic down furthest, 453 (silu 1701, gelu 1071, from R3a's 3364))
+but the worst on
 Merton (3.89e-3, max 7.70e-3), so it is recorded as benchmark-dependent
 and not kept.
 
@@ -401,7 +407,7 @@ Reading: no outliers anywhere. Summed median L1: 6×20 1.425e-2, 6×64
 exp1 −2 %) and tightens the Merton worst case to 2.38e-3, at the same
 ≈ 8 s per training on CPU. Width 128 is the best ac1 net (7.68e-4, and the
 lowest ac1 consistency so far, 322) but worse than 64 on Merton (2.49e-3):
-with 1000 full-batch targets at Merton's noise level, 66 k parameters start
+with 1000 full-batch targets at Merton's noise level, 83 k parameters (R5a: 21 k) start
 fitting the noise. Depth 8 is close to width 64 (1.371e-2) and depth 4 is
 the worst — the paper's 6 × 20 is under-, not over-parameterised for this
 data. Per-benchmark best sizes differ (ac1: 128; Merton: 64), so the rule
@@ -436,7 +442,7 @@ embedding only adds oscillatory capacity that must be trained away.
 | R5a | merton | 15 | 1.69e-03 | 4.70e-06 | 2.38e-03 | 0 | 2.42 |
 | R7 | merton | 15 | 2.10e-02 | 4.52e-04 | 2.23e-02 | 0 | 1.39 |
 
-Reading: a large, consistent (all 15 runs within 1 %) loss of accuracy
+Reading: a large loss of accuracy in every one of the 15 runs
 on ac1 (145×) and Merton (12×), and a 10 % gain on exp1. Inverse-variance
 weighting is the right estimator only when the model can represent the
 truth exactly; here the states with tiny stderr (ac1's saturated tails,
@@ -470,15 +476,20 @@ Reading. R8a (cosine): ac1 −5 %, Merton +5 % — improves one benchmark
 and worsens another, and its sum (1.367e-2) does not beat R5a
 (1.362e-2); not kept. R8b (grad-clip 1.0): Merton +22 %; the clipped
 early steps cost accuracy the schedule never recovers; not kept. R8c
-(200 L-BFGS iterations after Adam): results identical to R5a to every
-printed digit on ac1 and exp1 and within rounding on Merton, with no
-extra wall time. Diagnosed directly (scratch probe on Merton d0, s0, the
-R5a config): after the 3000 Adam epochs the max |gradient| is 1.8e-5 and
-the float32 loss 1.52e-3; L-BFGS makes 7 closure evaluations and returns
-with the loss unchanged, for `tolerance_grad` 1e-7 and 1e-12 alike — the
-strong-Wolfe line search cannot find a step that lowers the float32 loss
-from Adam's endpoint. The polish is a no-op at this precision; a float64
-polish would be the fair test and is out of scope. **Kept: none of R8.**
+(200 L-BFGS iterations after Adam): summary metrics agree with R5a to
+three significant figures on every benchmark and there is no extra wall
+time. Per run, the polish accepted no step on 34 of 45 trainings (all
+15 on ac1, 12 on exp1, 7 on Merton); on the other 11 the accepted steps
+changed the loss by ≤ 0.5 % (e.g. exp1 d1 s1: 1.5762e-3 → 1.5686e-3) and
+the grid L1 by ≤ 3.5 % with no systematic sign. Diagnosed directly
+(scratch probe on Merton d0, s0, the R5a config): after the 3000 Adam
+epochs the max |gradient| is 1.8e-5 and the float32 loss 1.52e-3;
+L-BFGS makes 7 closure evaluations and returns with the loss unchanged,
+for `tolerance_grad` 1e-7 and 1e-12 alike — on that run the strong-Wolfe
+line search finds no step that lowers the float32 loss from Adam's
+endpoint. At this precision the polish is a no-op at the level of the
+summary metrics; a float64 polish would be the fair test and is out of
+scope. **Kept: none of R8.**
 
 ### Kept path
 
@@ -489,7 +500,7 @@ targets, full-batch Adam with the paper's lr schedule, MSE on the MC means.
 
 | benchmark | paper (10 runs) | R0 on frozen data (15 runs) | R5a (15 runs) | R5a ensemble of 5 |
 |---|---|---|---|---|
-| ac1 | 1.32e-3 | 1.12e-3 (max 1.37e-3) | **8.31e-4** (max 9.41e-4) | 7.4e-4 |
+| ac1 | 1.32e-3 | 1.12e-3 (max 1.37e-3) | **8.31e-4** (max 9.41e-4) | 8.18e-4 |
 | exp1 | 1.17e-2 | 1.13e-2 (max 1.21e-2) | **1.11e-2** (max 1.18e-2) | 1.10e-2 |
 | merton | 8.49e-3, 1 anomalous run | 8.68e-3 (max 1.52e-1, 1 outlier) | **1.69e-3** (max 2.38e-3) | 1.64e-3 |
 
@@ -498,8 +509,8 @@ Attribution, Merton median L1: 8.68e-3 → 5.39e-3 (R1, −38 %) → 3.66e-3
 −18 %); overall 5.1× better than the paper's architecture and 5.0× better
 than its published number, with the worst of 15 runs at 2.38e-3 against
 the paper's own anomaly. Two preprocessing steps that change no
-parameter count account for 58 % of the log-reduction; removing BatchNorm
-another 20 %. ac1 improves 1.35× and stays capacity-limited (its best
+parameter count account for 53 % of the log-reduction; removing BatchNorm
+another 24 %. ac1 improves 1.35× and stays capacity-limited (its best
 individual rungs — sin activation, width 128, LayerNorm — were rejected
 for hurting Merton). exp1 is MC-noise-limited: nothing but averaging
 noise (the ensemble) or exact inverse-variance weighting (R7) moves it,
@@ -515,6 +526,6 @@ low-frequency); 1/stderr² weighting (near-zero-stderr states dominate;
 helps only the noise-limited exp1); L-BFGS polish (float32 no-op);
 grad-clip (slows the schedule); width 128 and depth 4 (worse on Merton).
 
-Cost of the study: 12 datasets-worth of MC (9 sets, ≈ 5 min), 600
-trainings + 120 ensembles ≈ 1.7 h CPU, all in
+Cost of the study: 9 frozen datasets (≈ 5 min of MC), 855
+trainings + 171 ensembles ≈ 1.7 h CPU (1026 CSV rows), all in
 `examples/nn_ablation_results.csv`.

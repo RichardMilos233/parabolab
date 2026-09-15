@@ -83,6 +83,8 @@ RUNG_DELTAS: Dict[str, Dict[str, dict]] = {
     "R8c": {"train": {"lbfgs_steps": 200}},
 }
 # factorial cell norm x activation (R34_<norm>_<act>)
+# The ladder runs only the {tanh, best-of-R4} columns of this cell; the
+# other cells are defined for completeness.
 for _norm in ("batch", "layer", "none"):
     for _act in ("tanh", "silu", "gelu", "sin"):
         RUNG_DELTAS[f"R34_{_norm}_{_act}"] = {
