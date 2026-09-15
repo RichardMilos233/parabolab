@@ -406,3 +406,45 @@ fitting the noise. Depth 8 is close to width 64 (1.371e-2) and depth 4 is
 the worst — the paper's 6 × 20 is under-, not over-parameterised for this
 data. Per-benchmark best sizes differ (ac1: 128; Merton: 64), so the rule
 picks the compromise.
+
+### R6 — random Fourier features (32, σ_B = 1 on scaled x) (parent R5a)
+
+| rung | benchmark | runs | L1 median | L2 median | L1 max | outliers | consistency |
+|---|---|---|---|---|---|---|---|
+| R5a | ac1 | 15 | 8.31e-04 | 1.40e-06 | 9.41e-04 | 0 | 840.00 |
+| R6 | ac1 | 15 | 9.48e-04 | 2.77e-06 | 1.13e-03 | 0 | 2911.78 |
+| R5a | exp1 | 15 | 1.11e-02 | 4.24e-04 | 1.18e-02 | 0 | 1.06 |
+| R6 | exp1 | 15 | 1.18e-02 | 4.79e-04 | 1.33e-02 | 0 | 1.06 |
+| R5a | merton | 15 | 1.69e-03 | 4.70e-06 | 2.38e-03 | 0 | 2.42 |
+| R6 | merton | 15 | 6.09e-03 | 5.51e-05 | 6.53e-03 | 0 | 2.29 |
+
+Reading: hurt on every benchmark (Merton 3.6× worse, ac1 +14 %, exp1
++6 %); no outliers. The targets here are smooth, low-frequency functions
+of x (a tanh front, a logistic profile, a near-linear Merton value), so
+the spectral-bias remedy has nothing to fix and the 65-wide periodic
+embedding only adds oscillatory capacity that must be trained away.
+**Kept: no.**
+
+### R7 — MSE weighted by 1/stderr² (parent R5a)
+
+| rung | benchmark | runs | L1 median | L2 median | L1 max | outliers | consistency |
+|---|---|---|---|---|---|---|---|
+| R5a | ac1 | 15 | 8.31e-04 | 1.40e-06 | 9.41e-04 | 0 | 840.00 |
+| R7 | ac1 | 15 | 1.21e-01 | 3.49e-02 | 1.66e-01 | 0 | 6924.32 |
+| R5a | exp1 | 15 | 1.11e-02 | 4.24e-04 | 1.18e-02 | 0 | 1.06 |
+| R7 | exp1 | 15 | 9.96e-03 | 3.28e-04 | 1.23e-02 | 0 | 1.02 |
+| R5a | merton | 15 | 1.69e-03 | 4.70e-06 | 2.38e-03 | 0 | 2.42 |
+| R7 | merton | 15 | 2.10e-02 | 4.52e-04 | 2.23e-02 | 0 | 1.39 |
+
+Reading: a large, consistent (all 15 runs within 1 %) loss of accuracy
+on ac1 (145×) and Merton (12×), and a 10 % gain on exp1. Inverse-variance
+weighting is the right estimator only when the model can represent the
+truth exactly; here the states with tiny stderr (ac1's saturated tails,
+where all 10⁵ samples agree; Merton's low-x end) receive weights orders of
+magnitude above the rest, and the net fits those to within their stderr
+while ignoring the transition region that the grid error measures. The
+consistency statistic drops (Merton 2.42 → 1.39) precisely because it is
+the objective being minimised. exp1 is the one benchmark whose stderr is
+roughly uniform and whose error is noise-limited, and there weighting
+helps as theory predicts. **Kept: no.** A capped weight (e.g. clip at
+10× the median) would be the fair follow-up; not part of this ladder.
