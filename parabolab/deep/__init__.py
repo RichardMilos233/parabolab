@@ -20,6 +20,7 @@ from .net import DeepBranchNet
 from .solver import (
     DeepBranchingResult,
     consistency_plot,
+    fit_scalers,
     grid_errors,
     train_deep_branching,
 )
@@ -30,6 +31,7 @@ __all__ = [
     "generate_training_data",
     "DeepBranchNet",
     "DeepBranchingResult",
+    "fit_scalers",
     "train_deep_branching",
     "grid_errors",
     "consistency_plot",

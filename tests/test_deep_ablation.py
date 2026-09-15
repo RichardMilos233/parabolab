@@ -135,3 +135,91 @@ def test_n_params_counts_trainable():
     net = deep.DeepBranchNet(d=1, hidden_layers=2, neurons=4, norm="none")
     # Linear(2,4)=12, Linear(4,4)=20, Linear(4,1)=5
     assert net.n_params == 37
+
+
+# ---------------------------------------------------------------------------
+# trainer
+# ---------------------------------------------------------------------------
+
+REF_LOSSES = [0.36384511, 0.09250513, 0.0514994, 0.04659879]   # from Step 1, current main trainer
+
+
+def _small_data(seed=5):
+    return deep.generate_training_data(
+        AC1, n_states=16, m_samples=8, seed=seed, x_lo=-2.0, x_hi=2.0)
+
+
+def test_default_training_is_unchanged():
+    data = _small_data()
+    torch.manual_seed(7)
+    net = deep.DeepBranchNet(d=1, hidden_layers=2, neurons=6)
+    res = deep.train_deep_branching(net, data, epochs=30, log_every=10)
+    np.testing.assert_allclose(res.losses, REF_LOSSES, rtol=0, atol=1e-7)
+
+
+def test_fit_scalers_fills_buffers_and_leaves_t_alone():
+    data = _small_data()
+    net = deep.DeepBranchNet(d=1, hidden_layers=2, neurons=6,
+                             scale_input=True, scale_output=True)
+    deep.fit_scalers(net, data)
+    assert float(net.in_std[0]) == 1.0          # tau == 0 has zero spread
+    assert float(net.in_mean[1]) == pytest.approx(data.x[:, 0].mean())
+    assert float(net.in_std[1]) == pytest.approx(data.x[:, 0].std())
+    assert float(net.out_mean) == pytest.approx(data.y.mean())
+    assert float(net.out_std) == pytest.approx(data.y.std())
+
+
+def test_fit_scalers_is_noop_without_flags():
+    data = _small_data()
+    net = deep.DeepBranchNet(d=1, hidden_layers=2, neurons=6)
+    deep.fit_scalers(net, data)
+    assert torch.all(net.in_mean == 0) and torch.all(net.in_std == 1)
+
+
+def test_weighted_mse_with_equal_stderr_equals_mse():
+    data = _small_data()
+    data.stderr[:] = 0.3
+    torch.manual_seed(7)
+    a = deep.DeepBranchNet(d=1, hidden_layers=2, neurons=6)
+    ra = deep.train_deep_branching(a, data, epochs=20, log_every=5,
+                                   loss="mse")
+    torch.manual_seed(7)
+    b = deep.DeepBranchNet(d=1, hidden_layers=2, neurons=6)
+    rb = deep.train_deep_branching(b, data, epochs=20, log_every=5,
+                                   loss="weighted_mse")
+    np.testing.assert_allclose(ra.losses, rb.losses, rtol=1e-6)
+
+
+def test_weighted_mse_ignores_infinite_stderr_rows():
+    data = _small_data()
+    data.stderr[3] = np.inf
+    net = deep.DeepBranchNet(d=1, hidden_layers=2, neurons=6)
+    res = deep.train_deep_branching(net, data, epochs=10, loss="weighted_mse")
+    assert np.isfinite(res.losses).all()
+
+
+def test_cosine_schedule_and_grad_clip_run():
+    data = _small_data()
+    net = deep.DeepBranchNet(d=1, hidden_layers=2, neurons=6)
+    res = deep.train_deep_branching(net, data, epochs=10, schedule="cosine",
+                                    grad_clip=1.0)
+    assert np.isfinite(res.losses).all()
+
+
+def test_lbfgs_polish_does_not_increase_loss():
+    data = _small_data()
+    torch.manual_seed(7)
+    net = deep.DeepBranchNet(d=1, hidden_layers=2, neurons=6, norm="none")
+    res = deep.train_deep_branching(net, data, epochs=30, log_every=10,
+                                    lbfgs_steps=20)
+    assert len(res.losses) == 5                 # 4 Adam logs + 1 L-BFGS
+    assert res.losses[-1] <= res.losses[-2] + 1e-12
+
+
+def test_unknown_loss_or_schedule_raises():
+    data = _small_data()
+    net = deep.DeepBranchNet(d=1, hidden_layers=2, neurons=6)
+    with pytest.raises(ValueError):
+        deep.train_deep_branching(net, data, epochs=1, loss="huber")
+    with pytest.raises(ValueError):
+        deep.train_deep_branching(net, data, epochs=1, schedule="step")
