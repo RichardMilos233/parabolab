@@ -13,6 +13,7 @@ from __future__ import annotations
 import dataclasses
 import functools
 import json
+import zipfile
 from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
@@ -196,7 +197,7 @@ def _load_instance(spec: InstanceSpec, path: Path) -> Optional[Instance]:
         if "spec" in str(exc):
             raise
         print(f"{path} unreadable ({exc}); regenerating", flush=True)
-    except (OSError, KeyError) as exc:
+    except (OSError, KeyError, EOFError, zipfile.BadZipFile) as exc:
         print(f"{path} unreadable ({exc}); regenerating", flush=True)
     return None
 
@@ -235,6 +236,11 @@ def collate(instances: Sequence[Instance], *, n_context: int, n_query: int,
     exact solution.  Rows are sampled with replacement when an instance has
     fewer finite rows than requested.
     """
+    for inst in instances:
+        if inst.y.shape[0] < 2:
+            raise ValueError(
+                "collate needs n_draws >= 2 for Noise2Noise targets (q_y); "
+                f"got an instance with n_draws={inst.y.shape[0]}")
     B = len(instances)
     d = instances[0].x.shape[1]
     P = len(instances[0].spec.params)
@@ -249,7 +255,7 @@ def collate(instances: Sequence[Instance], *, n_context: int, n_query: int,
         tx = np.column_stack([inst.t, inst.x])
         ctx_tx[b] = tx[ci]; ctx_y[b] = inst.y[0, ci]; ctx_se[b] = inst.stderr[0, ci]
         params[b] = inst.spec.params
-        q_tx[b] = tx[qi]; q_y[b] = inst.y[min(1, inst.y.shape[0] - 1), qi]
+        q_tx[b] = tx[qi]; q_y[b] = inst.y[1, qi]
         q_u[b] = inst.u_exact[qi]
     return {"ctx_tx": ctx_tx, "ctx_y": ctx_y, "ctx_se": ctx_se,
             "params": params, "q_tx": q_tx, "q_y": q_y, "q_u": q_u}

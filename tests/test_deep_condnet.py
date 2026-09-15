@@ -75,7 +75,7 @@ def test_autograd_derivatives_match_finite_differences(mode):
     # confirmed by an h-sweep where uxx sits at the bottom of the classic
     # truncation/roundoff V and the FD estimate converges to it as h grows.
     # h = 1e-2 keeps truncation error negligible while clearing the
-    # roundoff floor with margin (see p3-task-2-report.md).
+    # roundoff floor with margin.
     h = 1e-2
     tp = tx.clone(); tp[:, 1] += h
     tm = tx.clone(); tm[:, 1] -= h

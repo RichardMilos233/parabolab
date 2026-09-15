@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import dataclasses
 import time
 from dataclasses import dataclass
 from typing import Sequence
@@ -71,7 +70,7 @@ def train_set_denoiser(
         batch = _to_t(corpus.collate([instances[i] for i in idx],
                                      n_context=n_context, n_query=n_query,
                                      rng=rng), device)
-        mu, s = net.context_stats(batch["ctx_y"])
+        _, s = net.context_stats(batch["ctx_y"])
         pred = net(batch["ctx_tx"], batch["ctx_y"], batch["ctx_se"],
                    batch["params"], batch["q_tx"])
         loss = torch.mean(((pred - batch[key]) / s) ** 2)

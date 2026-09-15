@@ -75,7 +75,7 @@ def main(args):
     # load_or_generate_corpus's default min_finite=50 assumes the full-scale
     # n_states=500; --tiny draws only n_states=8 states, so cap the floor at
     # n_states or every tiny instance gets filtered out before training ever
-    # sees one (not present in the brief's snippet -- see task-5 report).
+    # sees one (the corpus loader's default min_finite=50 would drop every --tiny instance)
     min_finite = min(50, args.n_states)
     train = corpus.load_or_generate_corpus(train_specs, root, n_jobs=args.jobs,
                                            verbose=True, min_finite=min_finite)

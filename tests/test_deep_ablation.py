@@ -59,6 +59,18 @@ def test_corrupt_file_is_regenerated(tmp_path):
     np.testing.assert_array_equal(a.y, b.y)
 
 
+def test_truncated_cache_file_is_regenerated(tmp_path):
+    a = datasets.load_or_generate(TINY, tmp_path)
+    path = datasets.dataset_path(TINY, tmp_path)
+    data = path.read_bytes()
+    path.write_bytes(data[: len(data) // 2])          # half-written npz
+    b = datasets.load_or_generate(TINY, tmp_path)
+    np.testing.assert_array_equal(a.y, b.y)
+    path.write_bytes(b"")                              # empty file
+    c = datasets.load_or_generate(TINY, tmp_path)
+    np.testing.assert_array_equal(a.y, c.y)
+
+
 def test_factory_is_picklable():
     import pickle
     pickle.dumps(TINY.factory())

@@ -12,6 +12,7 @@ from __future__ import annotations
 import dataclasses
 import functools
 import json
+import zipfile
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable, Tuple
@@ -78,7 +79,7 @@ def load_or_generate(spec: DatasetSpec, root, *, n_jobs: int = 1,
             if "spec" in str(exc):
                 raise
             print(f"{path} unreadable ({exc}); regenerating", flush=True)
-        except (OSError, KeyError) as exc:
+        except (OSError, KeyError, EOFError, zipfile.BadZipFile) as exc:
             print(f"{path} unreadable ({exc}); regenerating", flush=True)
     if verbose:
         print(f"generating {path} ...", flush=True)

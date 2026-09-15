@@ -211,6 +211,25 @@ def test_derivative_instance_roundtrips(tmp_path):
     np.testing.assert_array_equal(a.deriv_exact, b.deriv_exact)
 
 
+def test_truncated_cache_file_is_regenerated(tmp_path):
+    spec = corpus.InstanceSpec("merton", (0.5, 0.03, 0.1), 8, 4, 25)
+    a = corpus.load_or_generate_corpus([spec], tmp_path, min_finite=1)[0]
+    path = corpus.instance_path(spec, tmp_path)
+    data = path.read_bytes()
+    path.write_bytes(data[: len(data) // 2])          # half-written npz
+    b = corpus.load_or_generate_corpus([spec], tmp_path, min_finite=1)[0]
+    np.testing.assert_array_equal(a.y, b.y)
+    path.write_bytes(b"")                              # empty file
+    c = corpus.load_or_generate_corpus([spec], tmp_path, min_finite=1)[0]
+    np.testing.assert_array_equal(a.y, c.y)
+
+
+def test_collate_requires_two_draws():
+    inst = corpus.generate_instance(corpus.InstanceSpec("merton", (0.5, 0.03, 0.1), 8, 4, 26, n_draws=1))
+    with pytest.raises(ValueError, match="n_draws"):
+        corpus.collate([inst], n_context=4, n_query=2, rng=np.random.default_rng(0))
+
+
 def test_loader_accepts_files_written_before_deriv_codes(tmp_path):
     """Corpora cached before the deriv_codes field existed (no key in the
     stored spec JSON) must still load as derivative-less instances."""

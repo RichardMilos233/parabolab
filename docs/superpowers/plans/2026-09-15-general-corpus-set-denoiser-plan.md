@@ -6,7 +6,7 @@
 
 **Architecture:** Two small hooks in existing code (`allen_cahn_nd(shift=)`, `generate_training_data(states=)`), then three new units under `parabolab/deep/`: `corpus.py` (families, instance specs, generation, on-disk cache, batch collation), `setnet.py` (the `SetDenoiser` transformer with per-instance scaling inside the model), `settrain.py` (training loop, grid evaluation, the two baselines). One driver `examples/set_denoiser_gonogo.py`. The ablation harness on this branch (`deep.ablation.build_net`, `deep.solver.train_deep_branching`, `grid_errors`) supplies the per-instance MLP baseline unchanged.
 
-**Tech Stack:** Python 3.11, numpy, torch 2.13 (CUDA wheel installed in Task 5), pytest. Conda env `parabolab`; run everything as `conda run -n parabolab --no-capture-output python ...` (PowerShell; plain `python`/`conda` may be missing from the Git-Bash PATH).
+**Tech Stack:** Python 3.11, numpy, torch (CUDA wheel installed in Task 5; ended as 2.11.0+cu128, see CLAUDE.md gotcha 44), pytest. Conda env `parabolab`; run everything as `conda run -n parabolab --no-capture-output python ...` (PowerShell; plain `python`/`conda` may be missing from the Git-Bash PATH).
 
 ## Global Constraints
 
