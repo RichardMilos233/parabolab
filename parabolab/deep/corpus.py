@@ -179,7 +179,11 @@ def _load_instance(spec: InstanceSpec, path: Path) -> Optional[Instance]:
     try:
         with np.load(path, allow_pickle=False) as f:
             stored = str(f["spec"])
-            if stored != spec.to_json():
+            # files written before deriv_codes existed lack the key: they
+            # are derivative-less instances, i.e. deriv_codes == ().
+            stored_dict = json.loads(stored)
+            stored_dict.setdefault("deriv_codes", [])
+            if json.dumps(stored_dict, sort_keys=True) != spec.to_json():
                 raise ValueError(f"{path} holds spec {stored}, requested "
                                  f"{spec.to_json()}")
             return Instance(spec, f["t"], f["x"], f["y"], f["stderr"],

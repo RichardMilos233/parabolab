@@ -209,3 +209,19 @@ def test_derivative_instance_roundtrips(tmp_path):
     b = corpus.load_or_generate_corpus([spec], tmp_path, min_finite=1)[0]
     np.testing.assert_array_equal(a.deriv, b.deriv)
     np.testing.assert_array_equal(a.deriv_exact, b.deriv_exact)
+
+
+def test_loader_accepts_files_written_before_deriv_codes(tmp_path):
+    """Corpora cached before the deriv_codes field existed (no key in the
+    stored spec JSON) must still load as derivative-less instances."""
+    spec = corpus.InstanceSpec("merton", (0.5, 0.03, 0.1), 8, 4, 24)
+    inst = corpus.generate_instance(spec)
+    path = corpus.instance_path(spec, tmp_path)
+    path.parent.mkdir(parents=True)
+    old_json = json.loads(spec.to_json()); del old_json["deriv_codes"]
+    np.savez(path, spec=json.dumps(old_json, sort_keys=True), t=inst.t, x=inst.x,
+             y=inst.y, stderr=inst.stderr, u_exact=inst.u_exact, grid=inst.grid,
+             u_grid=inst.u_grid, rate=inst.rate)
+    back = corpus.load_or_generate_corpus([spec], tmp_path, min_finite=1)[0]
+    np.testing.assert_array_equal(back.y, inst.y)
+    assert back.deriv is None
