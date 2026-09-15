@@ -264,3 +264,107 @@ def test_unknown_loss_or_schedule_raises():
         deep.train_deep_branching(net, data, epochs=1, loss="huber")
     with pytest.raises(ValueError):
         deep.train_deep_branching(net, data, epochs=1, schedule="step")
+
+
+# ---------------------------------------------------------------------------
+# ablation harness
+# ---------------------------------------------------------------------------
+
+from parabolab.deep import ablation
+
+
+def test_derive_rung_applies_one_delta_and_records_parent():
+    r1 = ablation.derive_rung("R1", ablation.BASELINE)
+    assert r1.parent == "R0"
+    assert r1.net.scale_input is True
+    assert r1.net == dataclasses.replace(ablation.BASELINE.net,
+                                         scale_input=True)
+    assert r1.train == ablation.BASELINE.train
+    r2 = ablation.derive_rung("R2", r1)
+    assert r2.parent == "R1" and r2.net.scale_input and r2.net.scale_output
+
+
+def test_every_delta_names_only_known_fields():
+    for name, delta in ablation.RUNG_DELTAS.items():
+        rung = ablation.derive_rung(name, ablation.BASELINE)
+        assert rung.name == name
+        for section, fields in delta.items():
+            assert section in ("net", "train")
+            cfg = getattr(rung, section)
+            for key, val in fields.items():
+                assert getattr(cfg, key) == val
+
+
+def test_build_net_is_seed_deterministic():
+    cfg = ablation.NetConfig(hidden_layers=2, neurons=4, norm="none")
+    a = ablation.build_net(cfg, d=1, seed=3)
+    b = ablation.build_net(cfg, d=1, seed=3)
+    x = torch.randn(2, 2)
+    torch.testing.assert_close(a(x), b(x))
+    assert a.n_params == 4 * 2 + 4 + 4 * 4 + 4 + 4 + 1
+
+
+def test_consistency_statistic_is_one_for_perfect_net_plus_noise():
+    data = _small_data()
+    net = deep.DeepBranchNet(d=1, hidden_layers=2, neurons=4, norm="none")
+    net.eval()
+    tx = torch.tensor(np.column_stack([data.t, data.x]), dtype=torch.float32)
+    with torch.no_grad():
+        pred = net(tx).numpy()
+    rng = np.random.default_rng(0)
+    data.stderr[:] = 0.2
+    data.y[:] = pred + 0.2 * rng.standard_normal(len(data))
+    stat = ablation.consistency_statistic(net, data)
+    assert 0.3 < stat < 3.0
+
+
+def test_run_rung_returns_one_record_per_seed(tmp_path):
+    data = _small_data()
+    cfg = ablation.RungConfig(
+        "T", None,
+        ablation.NetConfig(hidden_layers=2, neurons=4),
+        ablation.TrainConfig(epochs=5),
+    )
+    records, nets = ablation.run_rung(
+        cfg, benchmark="tiny", data_seed=5, data=data, pde=AC1(),
+        x_lo=-2.0, x_hi=2.0, train_seeds=[0, 1])
+    assert [r.train_seed for r in records] == [0, 1]
+    assert len(nets) == 2
+    for r in records:
+        assert r.rung == "T" and r.benchmark == "tiny" and r.data_seed == 5
+        assert np.isfinite([r.l1, r.l2, r.consistency, r.final_loss]).all()
+        assert r.n_params == nets[0].n_params
+        assert '"epochs": 5' in r.config_json
+    ens = ablation.ensemble_record(
+        cfg, nets, benchmark="tiny", data_seed=5, data=data, pde=AC1(),
+        x_lo=-2.0, x_hi=2.0)
+    assert ens.train_seed == -1 and np.isfinite(ens.l1)
+
+
+def test_append_records_is_idempotent(tmp_path):
+    path = tmp_path / "r.csv"
+    rec = ablation.RunRecord("R0", "ac1", 0, 0, 1e-3, 1e-6, 1.1, 2e-3,
+                             10.0, 100, "{}")
+    assert ablation.append_records(path, [rec]) == 1
+    assert ablation.append_records(path, [rec]) == 0
+    rec2 = dataclasses.replace(rec, train_seed=1, l1=np.inf)
+    assert ablation.append_records(path, [rec, rec2]) == 1
+    back = ablation.read_records(path)
+    assert len(back) == 2
+    assert back[1].l1 == np.inf and back[1].n_params == 100
+
+
+def test_summarise_counts_outliers_by_three_times_median():
+    def rec(seed, l1):
+        return ablation.RunRecord("R0", "ac1", 0, seed, l1, l1 ** 2, 1.0,
+                                  0.0, 1.0, 10, "{}")
+    recs = [rec(0, 1.0), rec(1, 1.0), rec(2, 1.2), rec(3, 4.0),
+            rec(4, np.inf)]
+    s = ablation.summarise(recs)[("R0", "ac1")]
+    assert s["n_runs"] == 5
+    assert s["l1_median"] == pytest.approx(1.2)
+    assert s["l1_max"] == np.inf
+    assert s["n_outliers"] == 2            # 4.0 and inf exceed 3 * 1.2
+    assert s["consistency_median"] == 1.0
+    table = ablation.format_table(ablation.summarise(recs))
+    assert "| R0 | ac1 |" in table
