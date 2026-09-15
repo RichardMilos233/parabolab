@@ -421,3 +421,42 @@
   Runtime is NOT the bottleneck for the JEQ figures (tiny trees at T ≤ 0.04:
   1e5 samples/point ≈ 0.15 s) — numba matters for T ~ 0.5 (Allen-Cahn-type,
   mean nodes > 1.5) and for d ≥ 2 sample counts.
+
+## Gotchas discovered (NN ablation, `research/nn-architecture`)
+38. **The Merton tanh anomaly (gotcha 27) is an input-scaling artefact, not
+    a property of deep branching.** The paper's net takes x ∈ [100, 200]
+    raw into tanh with BatchNorm; z-scoring the inputs alone
+    (`DeepBranchNet(scale_input=True)`) removes the anomaly (0 of 15 runs
+    across 3 frozen datasets × 5 seeds) and cuts the median L1 8.68e-3 →
+    5.39e-3. Standardising the targets too gives 3.66e-3, dropping
+    BatchNorm 2.48e-3, gelu 2.07e-3, width 64 1.69e-3 — 5× the paper's
+    8.49e-3 with the worst run at 2.38e-3. Full ladder, per-rung tables
+    and the rejected knobs: `docs/superpowers/specs/2026-09-15-nn-
+    architecture-ablation-design.md` §Results;
+    `examples/nn_ablation_results.csv`; rerun with `examples/nn_ablation.py`.
+39. **Ablation harness rule: freeze the MC data.** `deep.run_experiment`
+    welds the data seed to the training seed (`seed0 + run`), so it cannot
+    separate a bad draw from a bad optimisation. `deep.datasets` caches
+    `generate_training_data` output as `.npz` with its spec; `deep.ablation`
+    trains N seeds per dataset. Rows already in the CSV are skipped, so a
+    rung can be resumed — but the median-of-seeds ensemble row is only
+    written when all seeds trained in one invocation (the driver says so).
+40. **1/stderr² weighting of the MC targets is a trap for smooth
+    problems.** States where all M samples agree (Allen–Cahn's saturated
+    tails, Merton's low-x end) get stderr ≈ 0 and weights orders of
+    magnitude above the rest; the net then fits those and ignores the
+    transition region: ac1 L1 8e-4 → 1.2e-1, Merton 1.7e-3 → 2.1e-2. It
+    helps only where stderr is uniform and the error is noise-limited
+    (exp1, −10 %). Same mechanism makes the Fig-7 consistency statistic
+    Σ((v−y)/stderr)²/N useless as an absolute number on ac1 (hundreds to
+    thousands at L1 ≈ 1e-3): compare it across configurations, not to 1.
+41. **An L-BFGS polish after full-batch Adam is a float32 no-op.** From
+    Adam's endpoint (max |grad| ~ 2e-5, loss ~ 1e-3) `torch.optim.LBFGS`
+    with strong-Wolfe makes ~7 closure calls and returns with the loss
+    unchanged to every digit, for `tolerance_grad` 1e-7 and 1e-12 alike —
+    the line search finds no step that lowers the float32 loss. R8c's
+    numbers equal R5a's exactly for that reason, not because the optimum
+    is shared. Run it in float64 or not at all.
+42. **`examples/*.csv` is git-ignored** (reference CSV overlays); the
+    ablation ledger is un-ignored explicitly (`!examples/nn_ablation_results.csv`).
+    A new results file under `examples/` needs the same line or `git add -f`.
