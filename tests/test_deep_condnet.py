@@ -91,3 +91,81 @@ def test_autograd_derivatives_create_graph_allows_backward():
     _, ux, uxx = autograd_derivatives(lambda z: net(z, p), tx, create_graph=True)
     (ux.sum() + uxx.sum()).backward()
     assert any(q.grad is not None for q in net.parameters())
+
+
+# ---------------------------------------------------------------------------
+# training / evaluation / referee
+# ---------------------------------------------------------------------------
+
+from parabolab.deep import condtrain, corpus
+
+
+def _toy(n=3, n_states=30, m=20, seed=31, deriv=False):
+    specs = corpus.sample_instances("merton", n, seed, n_states=n_states, m_samples=m,
+                                    n_draws=1)
+    if deriv:
+        import dataclasses
+        specs = [dataclasses.replace(s, deriv_codes=("Dx1", "Dx2")) for s in specs]
+    return [corpus.generate_instance(s, n_jobs=2) for s in specs]
+
+
+def test_merton_policy_referee():
+    assert condtrain.merton_policy_exact((0.5, 0.03, 0.1)) == pytest.approx(6.0)
+    from parabolab.library import merton_hjb_derivatives
+    ux, uxx = merton_hjb_derivatives(T=0.1, mu=0.03, sigma=0.1, gamma=0.5, rho=0.01)
+    x = np.array([120.0, 150.0])
+    pol = condtrain.policy_from_derivatives(
+        np.array([ux(0.0, [v]) for v in x]), np.array([uxx(0.0, [v]) for v in x]),
+        x, 0.03, 0.1)
+    np.testing.assert_allclose(pol, 6.0, rtol=1e-12)
+
+
+def test_pooled_rows_and_scalers():
+    insts = _toy()
+    rows = condtrain.pooled_rows(insts)
+    assert rows["tx"].shape[1] == 2 and rows["params"].shape[1] == 3
+    assert rows["u"].shape[0] == rows["tx"].shape[0] <= 90
+    assert "ux" not in rows
+    from parabolab.deep.condnet import ConditionedNet
+    net = ConditionedNet(d=1, n_params=3, hidden_layers=2, neurons=8)
+    stats = condtrain.fit_conditioned_scalers(net, rows)
+    assert float(net.in_std[0]) == 1.0                # t == 0 has no spread
+    assert float(net.in_mean[1]) == pytest.approx(rows["tx"][:, 1].mean())
+    assert float(net.out_std) == pytest.approx(rows["u"].std())
+    assert stats == {"ux_std": 1.0, "uxx_std": 1.0}
+
+
+def test_train_conditioned_u_only_and_evaluate():
+    insts = _toy()
+    from parabolab.deep.condnet import ConditionedNet
+    torch.manual_seed(0)
+    net = ConditionedNet(d=1, n_params=3, hidden_layers=2, neurons=8)
+    res = condtrain.train_conditioned(net, insts, steps=30, batch_states=32,
+                                      log_every=10, lr=3e-3)
+    assert np.isfinite(res.losses).all() and res.losses[-1] < res.losses[0]
+    out = condtrain.evaluate_conditioned(net, insts)
+    assert len(out) == 3
+    for m in out:
+        assert set(m) == {"l1_u", "policy_err_interior", "policy_err_full"}
+        assert all(np.isfinite(v) for v in m.values())
+
+
+def test_train_conditioned_with_derivative_labels():
+    insts = _toy(n=2, n_states=20, m=10, seed=32, deriv=True)
+    rows = condtrain.pooled_rows(insts)
+    assert "ux" in rows and "uxx" in rows
+    from parabolab.deep.condnet import ConditionedNet
+    net = ConditionedNet(d=1, n_params=3, hidden_layers=2, neurons=8)
+    res = condtrain.train_conditioned(net, insts, steps=5, batch_states=16,
+                                      loss_weights=(1.0, 1.0, 1.0))
+    assert np.isfinite(res.losses).all()
+    with pytest.raises(ValueError):
+        condtrain.train_conditioned(net, _toy(n=1), steps=1,
+                                    loss_weights=(1.0, 1.0, 0.0))
+
+
+def test_per_instance_baseline_metrics():
+    inst = _toy(n=1, n_states=60, m=20, seed=33)[0]
+    m = condtrain.per_instance_baseline(inst, epochs=50)
+    assert set(m) == {"l1_u", "policy_err_interior", "policy_err_full"}
+    assert np.isfinite(m["l1_u"])
