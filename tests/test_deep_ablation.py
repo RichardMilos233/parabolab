@@ -420,3 +420,13 @@ def test_driver_tiny_end_to_end(tmp_path):
         [sys.executable, str(script), "--out", str(out), "--report"],
         check=True, capture_output=True, text=True).stdout
     assert "| R1 | ac1 |" in report and "| R0+ens | ac1 |" in report
+
+
+def test_driver_rejects_unknown_rung(tmp_path):
+    script = Path(__file__).resolve().parents[1] / "examples" / "nn_ablation.py"
+    proc = subprocess.run(
+        [sys.executable, str(script), "--rungs", "R99", "--parent", "R0",
+         "--out", str(tmp_path / "r.csv")],
+        capture_output=True, text=True)
+    assert proc.returncode != 0
+    assert "unknown rung 'R99'" in proc.stderr

@@ -71,6 +71,8 @@ def main(args):
         if name == "R0":
             rungs.append(ablation.BASELINE)
         else:
+            if name not in ablation.RUNG_DELTAS:
+                raise SystemExit(f"unknown rung {name!r}; known: {', '.join(sorted(ablation.RUNG_DELTAS))}")
             if args.parent is None:
                 raise SystemExit(f"--parent is required to derive {name}")
             rungs.append(ablation.derive_rung(
@@ -96,6 +98,8 @@ def main(args):
                         if (rung.name, key, ds, s) not in done]
                 if not todo:
                     print(f"skip {rung.name} {key} d{ds}: already in {args.out}")
+                    if args.ensemble:
+                        print(f"ensemble not written for {rung.name} {key} d{ds}: nets are not in memory on a resumed rung", flush=True)
                     continue
                 recs, nets = ablation.run_rung(
                     rung, benchmark=key, data_seed=ds, data=data, pde=pde,
@@ -106,6 +110,8 @@ def main(args):
                         rung, nets, benchmark=key, data_seed=ds, data=data,
                         pde=pde, x_lo=spec.x_lo, x_hi=spec.x_hi,
                         device=args.device))
+                elif args.ensemble:
+                    print(f"ensemble not written for {rung.name} {key} d{ds}: only {len(nets)}/{len(train_seeds)} seeds trained in this invocation", flush=True)
                 n = ablation.append_records(args.out, recs)
                 print(f"wrote {n} rows to {args.out}", flush=True)
 
