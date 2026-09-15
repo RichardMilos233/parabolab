@@ -169,3 +169,24 @@ def test_per_instance_baseline_metrics():
     m = condtrain.per_instance_baseline(inst, epochs=50)
     assert set(m) == {"l1_u", "policy_err_interior", "policy_err_full"}
     assert np.isfinite(m["l1_u"])
+
+
+# ---------------------------------------------------------------------------
+# driver
+# ---------------------------------------------------------------------------
+
+import csv
+import subprocess
+import sys
+from pathlib import Path
+
+
+def test_parametric_merton_driver_tiny(tmp_path):
+    script = Path(__file__).resolve().parents[1] / "examples" / "parametric_merton.py"
+    out = tmp_path / "res.csv"
+    subprocess.run([sys.executable, str(script), "--tiny", "--jobs", "1",
+                    "--corpus-root", str(tmp_path / "corpus"), "--out", str(out)],
+                   check=True, capture_output=True, text=True)
+    rows = list(csv.DictReader(out.open()))
+    assert {r["rung"] for r in rows} == {"C0", "C1", "C2", "C3"}
+    assert all(float(r["l1_u"]) >= 0 for r in rows)
