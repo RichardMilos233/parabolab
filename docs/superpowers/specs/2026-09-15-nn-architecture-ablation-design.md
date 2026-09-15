@@ -328,3 +328,30 @@ The ac1 consistency statistic rises to 3364 for R3a (tails of the
 traveling wave fit less tightly without normalisation) while its grid L1
 does not — the metric caveat from R0 again. The norm × activation cell
 (R34) re-examines this choice.
+
+### R4a / R4b / R4c — activation silu / gelu / sin (parent R3a)
+
+| rung | benchmark | runs | L1 median | L2 median | L1 max | outliers | consistency |
+|---|---|---|---|---|---|---|---|
+| R3a (tanh) | ac1 | 15 | 9.17e-04 | 1.66e-06 | 1.17e-03 | 0 | 3364.22 |
+| R4a (silu) | ac1 | 15 | 1.02e-03 | 1.88e-06 | 1.23e-03 | 0 | 1700.77 |
+| R4b (gelu) | ac1 | 15 | 8.83e-04 | 1.38e-06 | 1.17e-03 | 0 | 1070.93 |
+| R4c (sin) | ac1 | 15 | 7.81e-04 | 1.27e-06 | 9.84e-04 | 0 | 453.37 |
+| R3a | exp1 | 15 | 1.15e-02 | 4.31e-04 | 1.23e-02 | 0 | 1.23 |
+| R4a | exp1 | 15 | 1.15e-02 | 4.13e-04 | 1.25e-02 | 0 | 1.18 |
+| R4b | exp1 | 15 | 1.13e-02 | 4.13e-04 | 1.19e-02 | 0 | 1.12 |
+| R4c | exp1 | 15 | 1.17e-02 | 3.98e-04 | 1.31e-02 | 0 | 1.14 |
+| R3a | merton | 15 | 2.48e-03 | 1.16e-05 | 3.47e-03 | 0 | 2.49 |
+| R4a | merton | 15 | 1.93e-03 | 5.67e-06 | 3.76e-03 | 0 | 2.42 |
+| R4b | merton | 15 | 2.07e-03 | 7.96e-06 | 2.80e-03 | 0 | 2.44 |
+| R4c | merton | 15 | 3.89e-03 | 2.27e-05 | 7.70e-03 | 0 | 2.54 |
+
+Reading: no activation adds outliers. Summed median L1: tanh 1.490e-2,
+silu 1.445e-2, gelu 1.425e-2, sin 1.637e-2 → **kept: R4b (gelu)**. Gelu
+improves Merton by 17 % (2.48e-3 → 2.07e-3) and tightens its worst run
+(3.47e-3 → 2.80e-3); its ac1/exp1 changes are within seed spread. Silu
+has the lowest Merton median (1.93e-3) but a wider spread (max 3.76e-3)
+and ac1 +11 %. Sin is the best ac1 activation (7.81e-4, and the only one
+that pulls the ac1 consistency statistic down, 453) but the worst on
+Merton (3.89e-3, max 7.70e-3), so it is recorded as benchmark-dependent
+and not kept.
