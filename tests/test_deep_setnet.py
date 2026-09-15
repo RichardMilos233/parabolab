@@ -64,3 +64,51 @@ def test_constant_t_column_does_not_produce_nan():
     ctx_tx, ctx_y, ctx_se, _, q_tx = _batch(P=1)
     out = net(ctx_tx, ctx_y, ctx_se, torch.zeros(2, 1), q_tx)   # t == 0 everywhere
     assert torch.isfinite(out).all()
+
+
+# ---------------------------------------------------------------------------
+# training / evaluation / baselines
+# ---------------------------------------------------------------------------
+
+from parabolab.deep import corpus, settrain
+
+
+def _toy_corpus(n=4, n_states=40, m=4, seed=11):
+    specs = corpus.sample_instances("ac1", n, seed, n_states=n_states, m_samples=m)
+    return [corpus.generate_instance(s) for s in specs]
+
+
+def test_train_set_denoiser_decreases_loss_and_evaluates():
+    insts = _toy_corpus()
+    torch.manual_seed(0)
+    net = SetDenoiser(d=1, n_params=2, d_model=16, n_heads=2, n_layers=1)
+    res = settrain.train_set_denoiser(
+        net, insts, steps=30, batch_instances=2, n_context=16, n_query=8,
+        log_every=10, lr=1e-3)
+    assert np.isfinite(res.losses).all()
+    assert res.losses[-1] < res.losses[0]
+    l1 = settrain.evaluate_set_denoiser(net, insts, n_context=16)
+    assert l1.shape == (4,) and np.isfinite(l1).all()
+
+
+def test_train_set_denoiser_exact_target_and_bad_target():
+    insts = _toy_corpus(n=2)
+    net = SetDenoiser(d=1, n_params=2, d_model=16, n_heads=2, n_layers=1)
+    res = settrain.train_set_denoiser(net, insts, steps=3, batch_instances=2,
+                                      n_context=8, n_query=4, target="exact")
+    assert np.isfinite(res.losses).all()
+    with pytest.raises(ValueError):
+        settrain.train_set_denoiser(net, insts, steps=1, target="mse")
+
+
+def test_per_instance_mlp_baseline_runs():
+    inst = _toy_corpus(n=1, n_states=60, m=20)[0]
+    l1 = settrain.per_instance_mlp_l1(inst, epochs=50)
+    assert np.isfinite(l1) and l1 < 1.0
+
+
+def test_kernel_smoother_recovers_noiseless_instance():
+    inst = _toy_corpus(n=1, n_states=1000, m=2)[0]
+    inst.y[0] = inst.u_exact                     # no noise
+    inst.stderr[0] = 1e-3
+    assert settrain.kernel_smoother_l1(inst) < 5e-3
