@@ -63,3 +63,94 @@ def test_generator_states_hook_validates_shapes():
         deep.generate_training_data(
             AC1, n_states=3, m_samples=2, x_lo=-1.0, x_hi=1.0,
             states=(np.zeros(3), np.zeros((4, 1))))
+
+
+# ---------------------------------------------------------------------------
+# corpus
+# ---------------------------------------------------------------------------
+
+import dataclasses
+import json
+
+from parabolab.deep import corpus
+
+
+def test_families_build_picklable_factories():
+    import pickle
+    for key, fam in corpus.FAMILIES.items():
+        assert fam.key == key
+        params = tuple(0.5 * (lo + hi) for lo, hi in fam.ranges)
+        factory = fam.make_factory(params)
+        pickle.dumps(factory)
+        pde = factory()
+        assert pde.exact_solution is not None and pde.d == fam.d
+
+
+def test_sample_instances_is_deterministic_and_in_range():
+    a = corpus.sample_instances("merton", 5, seed=2, n_states=8, m_samples=4)
+    b = corpus.sample_instances("merton", 5, seed=2, n_states=8, m_samples=4)
+    assert a == b
+    assert [s.seed for s in a] == [2_000_000 + i for i in range(5)]
+    fam = corpus.FAMILIES["merton"]
+    for s in a:
+        assert s.family == "merton" and s.n_draws == 2
+        for p, (lo, hi) in zip(s.params, fam.ranges):
+            assert lo <= p <= hi
+    assert json.loads(a[0].to_json())["params"] == list(a[0].params)
+
+
+def _tiny_spec(seed=7, m=4, n=8, n_draws=2):
+    return corpus.InstanceSpec("ac1", (0.3, 0.5), n, m, seed, n_draws)
+
+
+def test_generate_instance_shapes_and_two_independent_draws():
+    inst = corpus.generate_instance(_tiny_spec())
+    assert inst.t.shape == (8,) and inst.x.shape == (8, 1)
+    assert inst.y.shape == (2, 8) and inst.stderr.shape == (2, 8)
+    assert inst.u_exact.shape == (8,) and inst.grid.shape == (101,) \
+        and inst.u_grid.shape == (101,)
+    assert not np.array_equal(inst.y[0], inst.y[1])      # independent draws
+    assert inst.grid[0] == -8.0 and inst.grid[-1] == 8.0
+    pde = corpus.FAMILIES["ac1"].make_factory((0.3, 0.5))()
+    assert inst.u_grid[50] == pytest.approx(pde.exact_solution(0.0, np.array([0.0])))
+    assert inst.finite.sum() == 8
+    assert inst.rate > 0
+
+
+def test_corpus_roundtrip_and_mismatch(tmp_path):
+    specs = [_tiny_spec(seed=1), _tiny_spec(seed=2)]
+    a = corpus.load_or_generate_corpus(specs, tmp_path)
+    assert corpus.instance_path(specs[0], tmp_path).exists()
+    b = corpus.load_or_generate_corpus(specs, tmp_path)
+    for ia, ib in zip(a, b):
+        np.testing.assert_array_equal(ia.y, ib.y)
+        np.testing.assert_array_equal(ia.u_grid, ib.u_grid)
+        assert ia.spec == ib.spec and ia.rate == ib.rate
+    bad = dataclasses.replace(specs[0], m_samples=5)   # same seed -> same file
+    with pytest.raises(ValueError, match="spec"):
+        corpus.load_or_generate_corpus([bad], tmp_path)
+
+
+def test_corpus_skips_instances_with_too_few_finite_rows(tmp_path, capsys):
+    inst = corpus.generate_instance(_tiny_spec(seed=3))
+    inst.y[0, :6] = np.nan
+    path = corpus.instance_path(inst.spec, tmp_path)
+    path.parent.mkdir(parents=True)
+    corpus._save_instance(inst, path)
+    out = corpus.load_or_generate_corpus([inst.spec], tmp_path, min_finite=5)
+    assert out == []
+    assert "finite" in capsys.readouterr().out
+
+
+def test_collate_shapes_and_nan_masking():
+    inst = corpus.generate_instance(_tiny_spec(seed=4))
+    inst.y[1, 2] = np.nan
+    rng = np.random.default_rng(0)
+    batch = corpus.collate([inst, inst], n_context=5, n_query=3, rng=rng)
+    assert batch["ctx_tx"].shape == (2, 5, 2) and batch["ctx_y"].shape == (2, 5)
+    assert batch["ctx_se"].shape == (2, 5) and batch["params"].shape == (2, 2)
+    assert batch["q_tx"].shape == (2, 3, 2) and batch["q_y"].shape == (2, 3) \
+        and batch["q_u"].shape == (2, 3)
+    for key in ("ctx_tx", "ctx_y", "ctx_se", "q_tx", "q_y", "q_u"):
+        assert np.isfinite(batch[key]).all()
+    assert batch["params"][0].tolist() == [0.3, 0.5]

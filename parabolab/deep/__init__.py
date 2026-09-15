@@ -13,7 +13,7 @@ All code is device-agnostic: pass device="cuda" (or "mps") to run on GPU;
 everything defaults to CPU.
 """
 
-from . import ablation, datasets
+from . import ablation, corpus, datasets
 from .experiments import ExperimentResult, run_experiment
 from .generator import TrainingData, generate_training_data
 from .net import DeepBranchNet
@@ -27,6 +27,7 @@ from .solver import (
 
 __all__ = [
     "ablation",
+    "corpus",
     "datasets",
     "TrainingData",
     "generate_training_data",

@@ -11,3 +11,5 @@ examples/nn_ablation_data/
 demo/*.png
 .vscode/
 !examples/nn_ablation_results.csv
+examples/nn_corpus/
+!examples/set_denoiser_gonogo.csv
