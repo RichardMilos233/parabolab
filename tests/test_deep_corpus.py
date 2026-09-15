@@ -154,3 +154,58 @@ def test_collate_shapes_and_nan_masking():
     for key in ("ctx_tx", "ctx_y", "ctx_se", "q_tx", "q_y", "q_u"):
         assert np.isfinite(batch[key]).all()
     assert batch["params"][0].tolist() == [0.3, 0.5]
+
+
+# ---------------------------------------------------------------------------
+# derivative labels
+# ---------------------------------------------------------------------------
+
+from parabolab.library import merton_hjb, merton_hjb_derivatives
+
+
+def test_merton_derivatives_match_finite_differences():
+    kw = dict(T=0.1, mu=0.04, sigma=0.15, gamma=0.6, rho=0.01)
+    pde = merton_hjb(**kw)
+    ux, uxx = merton_hjb_derivatives(**kw)
+    h = 1e-3
+    for t in (0.0, 0.05):
+        for x in (110.0, 150.0, 190.0):
+            u = lambda z: pde.exact_solution(t, np.array([z]))
+            fd1 = (u(x + h) - u(x - h)) / (2 * h)
+            fd2 = (u(x + h) - 2 * u(x) + u(x - h)) / h ** 2
+            assert ux(t, np.array([x])) == pytest.approx(fd1, rel=1e-5)
+            assert uxx(t, np.array([x])) == pytest.approx(fd2, rel=1e-3)
+
+
+def test_instance_with_derivative_labels():
+    spec = corpus.InstanceSpec("merton", (0.5, 0.03, 0.1), 40, 400, 21,
+                               n_draws=1, deriv_codes=("Dx1", "Dx2"))
+    inst = corpus.generate_instance(spec, n_jobs=2)
+    assert inst.y.shape == (1, 40) and inst.deriv.shape == (2, 40)
+    assert inst.deriv_stderr.shape == (2, 40) and inst.deriv_exact.shape == (2, 40)
+    ok = inst.finite
+    assert ok.sum() >= 38
+    z = (inst.deriv[:, ok] - inst.deriv_exact[:, ok]) / inst.deriv_stderr[:, ok]
+    assert np.abs(z).max() < 5.0   # heavy-ish tails at M = 400 (gotcha 15)
+    # the labels are the right size: u_x ~ 0.1..0.3 for these parameters
+    assert 0.05 < np.median(np.abs(inst.deriv_exact[0])) < 0.5
+
+
+def test_default_spec_has_no_derivatives_and_roundtrips(tmp_path):
+    spec = corpus.InstanceSpec("merton", (0.5, 0.03, 0.1), 8, 4, 22)
+    inst = corpus.generate_instance(spec)
+    assert inst.deriv is None and inst.deriv_exact is None
+    assert '"deriv_codes": []' in spec.to_json()
+    a = corpus.load_or_generate_corpus([spec], tmp_path, min_finite=1)[0]
+    b = corpus.load_or_generate_corpus([spec], tmp_path, min_finite=1)[0]
+    assert b.deriv is None
+    np.testing.assert_array_equal(a.y, b.y)
+
+
+def test_derivative_instance_roundtrips(tmp_path):
+    spec = corpus.InstanceSpec("merton", (0.5, 0.03, 0.1), 8, 4, 23,
+                               n_draws=1, deriv_codes=("Dx1",))
+    a = corpus.load_or_generate_corpus([spec], tmp_path, min_finite=1)[0]
+    b = corpus.load_or_generate_corpus([spec], tmp_path, min_finite=1)[0]
+    np.testing.assert_array_equal(a.deriv, b.deriv)
+    np.testing.assert_array_equal(a.deriv_exact, b.deriv_exact)

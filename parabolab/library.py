@@ -450,6 +450,36 @@ def merton_hjb(
     )
 
 
+def merton_hjb_derivatives(
+    T: float = 0.1,
+    mu: float = 0.03,
+    sigma: float = 0.1,
+    gamma: float = 0.5,
+    rho: float = 0.01,
+):
+    """(u_x, u_xx) of merton_hjb's closed form, same argument convention as
+    its exact_solution: u = x^{1-gamma} g(t) with
+    g = base^gamma / (1 - gamma), base = (1 + (a-1) e^{-a(T-t)}) / a."""
+    a = (2 * sigma**2 * gamma * rho - (1 - gamma) * mu**2) / (
+        2 * sigma**2 * gamma**2
+    )
+
+    def _g(t: float) -> float:
+        base = (1 + (a - 1) * math.exp(-a * (T - t))) / a
+        return base**gamma / (1 - gamma)
+
+    def _x(xv) -> float:
+        return float(xv[0]) if hasattr(xv, "__len__") else float(xv)
+
+    def ux(t: float, xv) -> float:
+        return (1 - gamma) * _x(xv) ** (-gamma) * _g(t)
+
+    def uxx(t: float, xv) -> float:
+        return -gamma * (1 - gamma) * _x(xv) ** (-gamma - 1) * _g(t)
+
+    return ux, uxx
+
+
 # ---------------------------------------------------------------------------
 # Stochastic-rate Merton extensions (Vasicek)
 # ---------------------------------------------------------------------------

@@ -21,8 +21,11 @@ from typing import Dict, List, Optional, Sequence, Tuple
 import numpy as np
 
 from .. import library
+from ..mechanism import DxN
 from .generator import generate_training_data
 from .solver import _grid_inputs
+
+DERIV_CODES = {"Dx1": DxN((1,)), "Dx2": DxN((2,))}
 
 
 @dataclass(frozen=True)
@@ -35,6 +38,7 @@ class Family:
     d: int
     factory_name: str
     fixed_kwargs: Tuple[Tuple[str, float], ...]
+    deriv_factory_name: Optional[str] = None
 
     def make_factory(self, params: Sequence[float]) -> functools.partial:
         kwargs = dict(self.fixed_kwargs)
@@ -48,7 +52,8 @@ FAMILIES: Dict[str, Family] = {
     "merton": Family("merton", ("gamma", "mu", "sigma"),
                      ((0.3, 0.8), (0.02, 0.06), (0.08, 0.2)),
                      100.0, 200.0, 1, "merton_hjb",
-                     (("T", 0.1), ("rho", 0.01))),
+                     (("T", 0.1), ("rho", 0.01)),
+                     "merton_hjb_derivatives"),
 }
 
 
@@ -60,6 +65,7 @@ class InstanceSpec:
     m_samples: int
     seed: int
     n_draws: int = 2
+    deriv_codes: Tuple[str, ...] = ()
 
     def to_json(self) -> str:
         return json.dumps(dataclasses.asdict(self), sort_keys=True)
@@ -88,10 +94,16 @@ class Instance:
     grid: np.ndarray       # (101,)
     u_grid: np.ndarray     # (101,)
     rate: float
+    deriv: Optional[np.ndarray] = None          # (n_codes, N)
+    deriv_stderr: Optional[np.ndarray] = None
+    deriv_exact: Optional[np.ndarray] = None
 
     @property
     def finite(self) -> np.ndarray:
-        return np.isfinite(self.y).all(axis=0) & np.isfinite(self.stderr).all(axis=0)
+        ok = np.isfinite(self.y).all(axis=0) & np.isfinite(self.stderr).all(axis=0)
+        if self.deriv is not None:
+            ok &= np.isfinite(self.deriv).all(axis=0) & np.isfinite(self.deriv_stderr).all(axis=0)
+        return ok
 
 
 def _draw_states(spec: InstanceSpec, fam: Family):
@@ -123,8 +135,27 @@ def generate_instance(spec: InstanceSpec, *,
                         for i in range(spec.n_states)])
     grid, xg, _ = _grid_inputs(fam.d, 0.0, fam.x_lo, fam.x_hi)
     u_grid = np.array([pde.exact_solution(0.0, xg[i]) for i in range(len(grid))])
+
+    deriv = deriv_se = deriv_exact = None
+    if spec.deriv_codes:
+        if fam.deriv_factory_name is None:
+            raise ValueError(f"family {fam.key!r} has no exact derivatives")
+        kwargs = dict(fam.fixed_kwargs); kwargs.update(zip(fam.param_names, spec.params))
+        dfuns = getattr(library, fam.deriv_factory_name)(**kwargs)
+        dvals, dses, dex = [], [], []
+        for k, name in enumerate(spec.deriv_codes):
+            data = generate_training_data(
+                factory, n_states=spec.n_states, m_samples=spec.m_samples,
+                seed=1000 * spec.seed + 100 + k, x_lo=fam.x_lo, x_hi=fam.x_hi,
+                states=(ts, xs), code=DERIV_CODES[name], executor=executor,
+                n_jobs=n_jobs)
+            dvals.append(data.y); dses.append(data.stderr)
+            fn = dfuns[("Dx1", "Dx2").index(name)]
+            dex.append(np.array([fn(0.0, xs[i]) for i in range(spec.n_states)]))
+        deriv, deriv_se, deriv_exact = np.array(dvals), np.array(dses), np.array(dex)
+
     return Instance(spec, ts, xs, np.array(ys), np.array(ses), u_exact,
-                    grid, u_grid, float(rate))
+                    grid, u_grid, float(rate), deriv, deriv_se, deriv_exact)
 
 
 def instance_path(spec: InstanceSpec, root) -> Path:
@@ -133,9 +164,14 @@ def instance_path(spec: InstanceSpec, root) -> Path:
 
 def _save_instance(inst: Instance, path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
+    extra = {}
+    if inst.deriv is not None:
+        extra["deriv"] = inst.deriv
+        extra["deriv_stderr"] = inst.deriv_stderr
+        extra["deriv_exact"] = inst.deriv_exact
     np.savez(path, spec=inst.spec.to_json(), t=inst.t, x=inst.x, y=inst.y,
              stderr=inst.stderr, u_exact=inst.u_exact, grid=inst.grid,
-             u_grid=inst.u_grid, rate=inst.rate)
+             u_grid=inst.u_grid, rate=inst.rate, **extra)
 
 
 def _load_instance(spec: InstanceSpec, path: Path) -> Optional[Instance]:
@@ -148,7 +184,10 @@ def _load_instance(spec: InstanceSpec, path: Path) -> Optional[Instance]:
                                  f"{spec.to_json()}")
             return Instance(spec, f["t"], f["x"], f["y"], f["stderr"],
                             f["u_exact"], f["grid"], f["u_grid"],
-                            float(f["rate"]))
+                            float(f["rate"]),
+                            f["deriv"] if "deriv" in f else None,
+                            f["deriv_stderr"] if "deriv_stderr" in f else None,
+                            f["deriv_exact"] if "deriv_exact" in f else None)
     except ValueError as exc:
         if "spec" in str(exc):
             raise
