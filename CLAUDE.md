@@ -121,9 +121,10 @@
 - Env: `conda activate parabolab` (python 3.11), built from
   `environment.yml` — python from conda, EVERYTHING ELSE from pip (see
   gotcha 36: conda's MKL numpy and pip's torch each ship their own Intel
-  OpenMP and the process aborts). Editable install of this repo. Torch CPU
-  build; all deep code is device-agnostic — pass device="cuda" on a GPU
-  machine, but for the JCP §4 budgets CPU is the right choice (see below).
+  OpenMP and the process aborts). Editable install of this repo. Torch: CPU
+  wheel by default, CUDA wheel via the one-liner in environment.yml; all
+  deep code is device-agnostic — pass device="cuda" on a GPU machine, but
+  for the JCP §4 budgets CPU is the right choice (see below).
 - The network solvers run at PAPER budget (N=1000, M=10 000, 3000 epochs)
   in well under a minute each on a 16-core laptop CPU: Allen–Cahn d=1 deep
   branching L1 1.89e-03 / 22 s, deep BSDE 5.68e-03 / 50 s, deep Galerkin
@@ -461,3 +462,11 @@
 42. **`examples/*.csv` is git-ignored** (reference CSV overlays); the
     ablation ledger is un-ignored explicitly (`!examples/nn_ablation_results.csv`).
     A new results file under `examples/` needs the same line or `git add -f`.
+43. **`load_or_generate_corpus`'s `min_finite=50` default silently empties a
+    tiny corpus.** It assumes the full-scale `n_states=500`; a smoke-test
+    corpus with `n_states` below 50 has no instance that can clear the
+    floor, so every instance is dropped (0 train/0 test) and downstream
+    training crashes on an empty list rather than on the real cause.
+    `examples/set_denoiser_gonogo.py --tiny` (`n_states=8`) passes
+    `min_finite=min(50, args.n_states)` explicitly for this reason — any
+    new small-`n_states` corpus caller needs the same.

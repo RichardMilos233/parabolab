@@ -25,5 +25,8 @@ dependencies:
       # build to run on GPU.  CPU is the right default even for the JCP
       # budgets: the nets are 6 x 20 neurons trained full batch, and the
       # expensive half (tree sampling) is numpy over worker processes.
+      # GPU: pip install --force-reinstall --no-deps torch --index-url
+      # https://download.pytorch.org/whl/cu124 (same version pin; numpy
+      # stays the pip build, gotcha 36).
       - torch
       - -e .

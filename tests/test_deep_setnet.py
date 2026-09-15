@@ -112,3 +112,28 @@ def test_kernel_smoother_recovers_noiseless_instance():
     inst.y[0] = inst.u_exact                     # no noise
     inst.stderr[0] = 1e-3
     assert settrain.kernel_smoother_l1(inst) < 5e-3
+
+
+# ---------------------------------------------------------------------------
+# driver
+# ---------------------------------------------------------------------------
+
+import csv
+import subprocess
+import sys
+from pathlib import Path
+
+
+def test_gonogo_driver_tiny(tmp_path):
+    script = Path(__file__).resolve().parents[1] / "examples" / "set_denoiser_gonogo.py"
+    out = tmp_path / "res.csv"
+    subprocess.run(
+        [sys.executable, str(script), "--family", "ac1", "--tiny",
+         "--corpus-root", str(tmp_path / "corpus"), "--out", str(out),
+         "--jobs", "1"],
+        check=True, capture_output=True, text=True)
+    rows = list(csv.DictReader(out.open()))
+    methods = {r["method"] for r in rows}
+    assert methods == {"d04_n2n", "d04_exact", "mlp_M", "mlp_10M", "kernel"}
+    assert all(float(r["l1"]) >= 0 for r in rows)
+    assert sum(r["method"] == "kernel" for r in rows) == 2   # 2 test instances
