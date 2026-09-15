@@ -78,7 +78,9 @@ def train_deep_branching(
                   rows with infinite stderr get weight 0)
       schedule    "multistep" (lr / 10 at P/3, 2P/3) | "cosine"
       grad_clip   clip the gradient norm before every Adam step
-      lbfgs_steps full-batch L-BFGS iterations after the Adam epochs
+      lbfgs_steps full-batch L-BFGS iterations after the Adam epochs, run
+                  in eval mode (BatchNorm uses its running statistics;
+                  they are not updated by the polish)
     """
     if loss not in ("mse", "weighted_mse"):
         raise ValueError(f"unknown loss {loss!r}")
@@ -97,7 +99,14 @@ def train_deep_branching(
     if loss == "weighted_mse":
         se = data.stderr[finite].astype(float)
         ok = np.isfinite(se)
-        eps = 1e-3 * np.median(se[ok]) if ok.any() else 1.0
+        if not ok.any():
+            raise ValueError(
+                "weighted_mse needs at least one state with finite stderr"
+            )
+        eps = 1e-3 * np.median(se[ok])
+        if eps <= 0:
+            positive = se[ok][se[ok] > 0]
+            eps = 1e-3 * positive.min() if positive.size else 1.0
         w = np.zeros_like(se)
         w[ok] = 1.0 / np.maximum(se[ok], eps) ** 2
         w /= w.mean()
@@ -135,6 +144,7 @@ def train_deep_branching(
                 print(f"  epoch {epoch}: loss {losses[-1]:.6f}", flush=True)
 
     if lbfgs_steps > 0:
+        net.eval()
         lbfgs = torch.optim.LBFGS(
             net.parameters(), lr=1.0, max_iter=lbfgs_steps,
             history_size=50, line_search_fn="strong_wolfe",

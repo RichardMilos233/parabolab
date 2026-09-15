@@ -198,6 +198,23 @@ def test_weighted_mse_ignores_infinite_stderr_rows():
     assert np.isfinite(res.losses).all()
 
 
+def test_weighted_mse_requires_a_finite_stderr():
+    data = _small_data()
+    data.stderr[:] = np.inf
+    net = deep.DeepBranchNet(d=1, hidden_layers=2, neurons=6)
+    with pytest.raises(ValueError, match="finite stderr"):
+        deep.train_deep_branching(net, data, epochs=1, loss="weighted_mse")
+
+
+def test_weighted_mse_zero_stderr_rows_get_finite_weight():
+    data = _small_data()
+    data.stderr[:] = 0.0
+    data.stderr[-2:] = 0.5
+    net = deep.DeepBranchNet(d=1, hidden_layers=2, neurons=6)
+    res = deep.train_deep_branching(net, data, epochs=5, loss="weighted_mse")
+    assert np.isfinite(res.losses).all()
+
+
 def test_cosine_schedule_and_grad_clip_run():
     data = _small_data()
     net = deep.DeepBranchNet(d=1, hidden_layers=2, neurons=6)
@@ -214,6 +231,30 @@ def test_lbfgs_polish_does_not_increase_loss():
                                     lbfgs_steps=20)
     assert len(res.losses) == 5                 # 4 Adam logs + 1 L-BFGS
     assert res.losses[-1] <= res.losses[-2] + 1e-12
+
+
+def test_lbfgs_polish_leaves_batchnorm_running_stats_alone():
+    data = _small_data()
+
+    def train(lbfgs_steps):
+        torch.manual_seed(7)
+        net = deep.DeepBranchNet(d=1, hidden_layers=2, neurons=6)
+        deep.train_deep_branching(net, data, epochs=30, lbfgs_steps=lbfgs_steps)
+        return net
+
+    plain, polished = train(0), train(20)
+    for a, b in zip(plain.bns, polished.bns):
+        torch.testing.assert_close(a.running_mean, b.running_mean)
+        torch.testing.assert_close(a.running_var, b.running_var)
+    finite = np.isfinite(data.y)
+    tx = torch.tensor(np.column_stack([data.t[finite], data.x[finite]]),
+                      dtype=torch.float32)
+    y = torch.tensor(data.y[finite], dtype=torch.float32)
+    with torch.no_grad():
+        plain.eval(); polished.eval()
+        before = float(torch.mean((plain(tx) - y) ** 2))
+        after = float(torch.mean((polished(tx) - y) ** 2))
+    assert after <= before + 1e-12
 
 
 def test_unknown_loss_or_schedule_raises():
