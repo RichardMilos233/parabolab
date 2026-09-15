@@ -1,0 +1,253 @@
+{
+  "ideas": [
+    {
+      "id": "D01",
+      "title": "Supersolution certificates and exact L^p horizons for fully nonlinear coding trees",
+      "gap": "JEQ2023 Prop. 4.2 certifies nothing at practical horizons (needs rho(T) >= 1/min q_c); Huang-Privault 2026 (arXiv 2502.17853v2) give sufficient L^1 criteria only for semilinear f(u) with their own binary mechanism, and their v1 title 'nonlinear PDEs' was narrowed to 'semilinear heat equations' in v2. No verifiable integrability certificate exists for the Faa-di-Bruno coding-tree estimator with derivative codes at the horizons the papers actually use.",
+      "hypothesis": "Because the exact p-moment V^{(p)} is the MINIMAL fixed point of Phi_p (Theorem 2.3; Lean picard_le_prefixed / picard_iSup_least), any explicit supersolution W >= Phi_p(W) is a machine-checkable certificate V^{(p)} <= W < infinity. For the finite code spaces of polynomial f (Allen-Cahn: {Id, f*, f'*, f''*, f'''*}) a grid Picard iteration computes V^{(1)}, V^{(2)} to quadrature accuracy and yields the exact horizon T*_p(rate) = sup{T : V^{(p)} < infinity}; for infinite code spaces (tan, cosine, log, Dym-free examples) a weighted-l^1 generating-function supersolution over derivative order gives a sufficient certificate. Claim to test: Allen-Cahn d=1 at T=0.5, rate 1 has finite second moment (certified), while at jcp_rate = -log(0.95)/T it does not.",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 100,
+      "rationale": {
+        "novelty": "Extends the majorant/supersolution technique of HLOT+19 Thm 3.5 and HP26 Props 2.5-2.6 from semilinear f(u) to derivative codes of arbitrary order and from sufficient L^1 bounds to exact L^p thresholds, using the minimality theorem already proved in this repo. Not a new mechanism; a specific, defensible extension with a clear difference (p arbitrary, fully nonlinear, exactness).",
+        "impact": "Every user of the JEQ/JCP coding-tree estimator needs to know whether the estimator at their (T, rate) has finite variance; today they rely on 'the plot looks fine'. A certificate answers the recurring question behind gotchas 5, 15, 19, 20 and 31.",
+        "effect": "Baseline: JEQ Prop. 4.2 (certifies no practical case) and HP26 (semilinear only). Target: certified finite L^1 and L^2 at the paper budgets (AC T=0.5 rate 1; tan T=0.01; cosine T=0.04; log T=0.02) and a proof that AC at jcp_rate, T=0.5 has infinite second moment. The probe below already shows V^{(2)} iterates 0.45, 0.55, 0.57, 0.61 (rate 1) versus 0.29, 0.89, 1.74, 33.6 (jcp_rate): from no guarantee to a sharp, rate-resolved guarantee is a step change in the strength of the guarantee."
+      },
+      "evidence": [
+        "arXiv:2502.17853v2 Huang-Privault, Stability analysis of a branching diffusion solver for semilinear heat equations (Mar 2026): Props 2.5-2.6 sufficient L^1 integrability via contact HJ equation; semilinear f(u) and binary mechanism only; v1 (Feb 2025) title said 'nonlinear PDEs'",
+        "arXiv:1603.01727 Henry-Labordere, Oudjane, Tan, Touzi, Warin: Thm 3.5 majorant ODE integrability for polynomial semilinear branching",
+        "docs/research/estimator-integrity/notation-and-moment-theorem.md Theorem 2.3 (minimal fixed point) and formal/EstimatorIntegrity/MomentIteration.lean picard_le_prefixed, picard_iSup_least",
+        "Probe run 2026-09-15: parabolab.moments.finite_depth_moment_1d, Allen-Cahn d=1 T=0.5, p=2, depths 0-3: rate 1 -> 0.454, 0.550, 0.567, 0.607; rate 0.1026 -> 0.290, 0.888, 1.741, 33.56; p=1 iterates identical for both rates (0.5, 0.668, 0.696)"
+      ],
+      "evidence_status": "searched",
+      "feasibility": {
+        "status": "feasible",
+        "reason": "Minimality theorem and its Lean lemma exist; code spaces are finite for polynomial f; the missing piece is a grid-based Picard iteration (the current finite_depth_moment_1d is tree-recursive with cost exponential in depth: depth 3 takes 1.4 s at 5x5 quadrature, depth 5 did not finish in 10 minutes) and explicit supersolution inequalities for the four JEQ examples.",
+        "first_test": "Implement a (t, x)-grid Picard iteration for the AC code system and check that V^{(2)} at rate 1, T=0.5 converges monotonically to a finite limit while at jcp_rate it exceeds 1e6 within 8 iterations; if rate-1 iterates also diverge, the certified-T=0.5 claim is refuted and the direction reduces to computing the true (smaller) horizon."
+      }
+    },
+    {
+      "id": "D02",
+      "title": "Optimal exponential rate theorem: T*_2(lambda) and the second-moment-minimizing lifetime rate",
+      "gap": "Gotchas 5 and 19 report empirically that rate 1 beats jcp_rate for small-|M| problems and the reverse for HJB d=100; Theorem 6.2 optimizes the first-event law but explicitly excludes optimization inside the exponential family. There is no theorem saying which lambda minimizes the second moment of the coding-tree estimator at fixed T.",
+      "hypothesis": "Under the exact recursion, lambda -> V^{(2)}_Id(0, x; lambda) is finite on an interval (lambda_-(T), lambda_+(T)) and, for the semilinear polynomial mechanism, has a unique interior minimizer lambda*(T) characterized by a stationarity condition on the fixed point; the work-normalized objective V^{(2)} x E[N_nodes] has a minimizer that shifts toward small lambda as |M| grows, explaining the d=100 flip.",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "Rate choice appears only as a heuristic in JCP2024 (rate = -log(0.95)/T) and in JEQ (rate 1); a variational characterization through the exact moment fixed point is new relative to those sources and to HP26 (fixed rho).",
+        "impact": "Every coding-tree run must pick lambda; both published defaults are wrong in some regime.",
+        "effect": "Baseline: the two published defaults. Target: the same 4x stderr reduction seen in gotcha 5 obtained by rule rather than trial, and a prediction of the regime flip; material but not a step change."
+      },
+      "evidence": [
+        "docs/research/estimator-integrity/adaptive-proposals.md Theorem 6.2 and section 'Why this is not exponential-rate optimization'",
+        "JCP2024 (doi:10.1016/j.jcp.2023.112712) rate = -log(0.95)/T; JEQ2023 Mathematica default rate 1; CLAUDE.md gotchas 5, 19, 31",
+        "Probe run 2026-09-15 (see D01): V^{(2)} iterates diverge at jcp_rate and stay bounded at rate 1 for AC d=1 T=0.5"
+      ],
+      "evidence_status": "searched",
+      "feasibility": {
+        "status": "feasible",
+        "reason": "Depends only on the D01 grid iteration; the stationarity analysis is finite-dimensional once the code space is finite.",
+        "first_test": "Sweep lambda in {0.05, 0.1, 0.25, 0.5, 1, 2, 4} for AC d=1 T=0.5 with the grid iteration; if V^{(2)} is monotone in lambda (no interior minimum) the uniqueness claim is refuted."
+      }
+    },
+    {
+      "id": "D03",
+      "title": "Tail index of the coding-tree estimator equals the L^p threshold: heavy-tail-corrected confidence intervals",
+      "gap": "Gotcha 20: the published HJB d=100 value 4.580340 +/- 0.001869 sits 5 of its own SDs below the exact 4.590162 because the Gaussian CI ignores an infinite-variance tail; gotcha 15 shows z-scores of 3.5-6.5 that shrink with N. Nothing in the papers or in this repo quantifies the tail or corrects the interval.",
+      "hypothesis": "The coding-tree functional satisfies a multiplicative distributional fixed-point equation on a random tree; under a Cramer-type condition, implicit renewal theory on trees (Jelenkovic-Olvera-Cravioto 2012; Kesten-Goldie) gives P(|H| > x) ~ C x^{-p*} with p* = sup{p : V^{(p)} < infinity} computable from the exact recursion. Then the sample mean converges at rate N^{1-1/p*} for p* in (1,2), and a p*-aware interval (or a median-of-means estimator) restores nominal coverage on the HJB d=100 and AC T=0.5 benchmarks.",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "Applying implicit renewal theory on trees to coding-tree estimators and identifying the tail index with the exact L^p threshold is a specific new combination; the underlying tail theory is classical.",
+        "impact": "Corrects the reported uncertainty of every heavy-tailed coding-tree result (Tables 2/5 of JEQ, Figs 8/9, the blow-up study).",
+        "effect": "Baseline: Gaussian stderr. Target: nominal 95% coverage where the Gaussian CI misses by 5 SD; a stronger guarantee rather than a step change in accuracy."
+      },
+      "evidence": [
+        "Jelenkovic and Olvera-Cravioto, Implicit renewal theory and power tails on trees, Adv. Appl. Probab. 44 (2012) 528-561 (known reference, not re-fetched in this search)",
+        "docs/research/estimator-integrity/secondary-candidates.md Candidate 6 (robust deep branching, prior art Holland-Ikeda 2019, Lugosi-Mendelson 2019)",
+        "CLAUDE.md gotchas 15 and 20; examples/jeq_table5_hjb_d100.py run data"
+      ],
+      "evidence_status": "searched",
+      "feasibility": {
+        "status": "conditional",
+        "reason": "The regular-variation proof requires a non-lattice Cramer condition on the log-weights that has not been verified for the exponential-lifetime / uniform-tuple law; the empirical part (Hill estimator on existing samples, median-of-means) is feasible now.",
+        "first_test": "Hill-plot the 5e5-sample HJB d=100 run and the AC T=0.5 jcp_rate run: if the estimated tail index is not below 2 where the D01 recursion says V^{(2)} = infinity, the identification is refuted."
+      }
+    },
+    {
+      "id": "D04",
+      "title": "Exact second-moment comparison of the Huang-Privault binary mechanism against the Faa-di-Bruno mechanism",
+      "gap": "HP26 introduce a binary-branching mechanism with normalized codes to avoid the 'exponentially explosive number of branches' of Faa di Bruno, then observe empirically that it is 'generally less stable numerically' than NPP23 (their Section 4) without explanation. The two mechanisms are different tree laws for the same PDE; no moment-level comparison exists.",
+      "hypothesis": "Implementing the binary mechanism in parabolab (semilinear f(u) only, as in HP26) and evaluating both mechanisms' exact V^{(2)} through the D01 grid iteration shows V^{(2)}_binary >= V^{(2)}_FdB at every (T, rate) for Allen-Cahn, with a provable reason: the binary mechanism spreads one Faa-di-Bruno product over a longer chain of branchings, each carrying its own 1/(q rho) likelihood factor.",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "Mechanism-versus-mechanism moment comparison is absent from HP26 and NPP23/24; the tool (exact recursion) is ours.",
+        "impact": "Answers the design question the authors themselves raise (which mechanism to use) and informs any future mechanism (e.g. state-dependent, D08).",
+        "effect": "Baseline: HP26's empirical observation. Target: an inequality plus quantified gap; this guides choices but does not itself improve any estimate."
+      },
+      "evidence": [
+        "arXiv:2502.17853v2 Definition 2.2 (binary mechanism), Remark 2.4, Section 4 bullet 'Our binary branching algorithm is generally less stable numerically'; Tables 1-8 (d up to 1000)",
+        "https://github.com/nprivaul/coding_trees_v2 (notebooks allen_cahn*, exp_example, branch/, DeepBSDE*; no README)"
+      ],
+      "evidence_status": "searched",
+      "feasibility": {
+        "status": "feasible",
+        "reason": "Binary mechanism is a finite table per code for polynomial f; parabolab's mechanism protocol (tuples/terminal/is_identically_zero) admits it directly; needs the D01 grid iteration.",
+        "first_test": "Reproduce HP26 Table 3 d=1 (binary -0.67528 vs NPP23 -0.67885, exact -0.67918) with our sampler for both mechanisms at matched work; if the binary mechanism's empirical variance is lower, the inequality direction is refuted."
+      }
+    },
+    {
+      "id": "D05",
+      "title": "Multilevel Picard iteration over the coded PDE system for fully nonlinear PDEs",
+      "gap": "Multilevel Picard (MLP) has polynomial-complexity proofs for semilinear PDEs with gradient-dependent nonlinearities (Hutzenthaler-Nguyen 2310.12545; Neufeld-Nguyen-Wu 2311.11579; Nguyen 2410.00203 in L^p) but nothing for fully nonlinear equations with derivatives of arbitrary order; coding trees cover that class but their estimator is non-integrable beyond short horizons (Dym: any T>0; AC: T ~ 1).",
+      "hypothesis": "The coding-tree construction rewrites the fully nonlinear PDE as a countable system of semilinear PDEs {u_c} with product nonlinearities (HP26 eq. (2.14) for their mechanism; our mechanism analogously). MLP applied to a truncated code system with locally Lipschitz product nonlinearities gives an L^2-convergent estimator whose cost is polynomial in 1/epsilon and in d, without requiring integrability of the single-tree functional; truncation error is controlled by factorial-growth assumptions on derivatives of phi and f.",
+      "novelty": 10,
+      "impact": 100,
+      "effect": 10,
+      "rationale": {
+        "novelty": "Combination of two existing constructions (MLP telescoping + code system); the combination is new but not a new mechanism class.",
+        "impact": "A dimension-robust, horizon-robust solver with a complexity proof for fully nonlinear PDEs with arbitrary-order derivatives would change what that whole class can achieve; it is exactly the open item HP26 retreated from.",
+        "effect": "Unknown magnitude: at short horizons coding trees are already fast; the gain is at horizons where the tree estimator has infinite variance. Without a working prototype the effect cannot be rated above material."
+      },
+      "evidence": [
+        "arXiv:2310.12545 Hutzenthaler-Nguyen, MLP for general semilinear parabolic PDEs with gradient-dependent nonlinearities (J. Numer. Math. 2025)",
+        "arXiv:2410.00203 Nguyen, MLP overcome the curse of dimensionality for gradient-dependent nonlinearities in L^p-sense",
+        "arXiv:2502.17853v2 eq. (2.14) coded PDE system and Prop. 5.2 mild-solution characterization",
+        "arXiv:2409.08526 Deep Picard iteration for high-dimensional nonlinear PDEs"
+      ],
+      "evidence_status": "searched",
+      "feasibility": {
+        "status": "conditional",
+        "reason": "Product nonlinearities are not globally Lipschitz (MLP proofs need Lipschitz or monotone f) and the code system is infinite for non-polynomial or derivative-dependent f; a truncation-with-error-bound lemma is unresolved.",
+        "first_test": "Run textbook MLP on the 5-code Allen-Cahn system (finite, polynomial) at T=1 and T=2 where single-tree sampling explodes (gotcha 31); if MLP error does not decrease like 1/sqrt(work) there, the route fails before any truncation question arises."
+      }
+    },
+    {
+      "id": "D06",
+      "title": "Moment-certified time patching: choosing patch length below the L^2 horizon with a network terminal condition",
+      "gap": "deep_branching_with_domain implements time patches (branch_patches) with the network as terminal condition but picks the patch count by hand; parabolab has no patching (gotcha 25c) and its single-shot estimator blows up at T ~ 1 for Allen-Cahn. No rule links patch length to estimator moments.",
+      "hypothesis": "If each patch has length h < T*_2 computed by D01 for the current terminal function, the patched deep-branching estimator has finite variance on every patch, and the total error is bounded by the sum of per-patch network errors times a stability constant of the coded system; the composed solver reaches T=2 for Allen-Cahn d=1 with L1 error below 1e-2.",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "Patching itself is the authors' (deep_branching_with_domain); the certificate-driven patch length and the error composition bound are new.",
+        "impact": "Extends the usable horizon of the deep branching solver, the main practical limitation of the method.",
+        "effect": "Baseline: the authors' hand-tuned patching already reaches long horizons; relative to that, the gain is a guarantee, not a new capability."
+      },
+      "evidence": [
+        "https://github.com/nguwijy/deep_branching_with_domain (branch_patches parameter; CLAUDE.md gotcha 25c)",
+        "CLAUDE.md gotcha 31 and examples/blowup_allen_cahn.py (blow-up at T ~ 1.0/1.1 at rate 1)"
+      ],
+      "evidence_status": "searched",
+      "feasibility": {
+        "status": "conditional",
+        "reason": "Requires the network (and its autograd derivatives for derivative codes) as terminal condition inside the M3 sampler, which was scoped out in M4/M5; and requires D01 first.",
+        "first_test": "Two patches of h=0.5 for AC d=1 T=1.0 with the net from patch 1 as terminal data: if the patch-2 tree samples show the same explosion signature as the unpatched T=1.0 run, the certified-h premise is wrong."
+      }
+    },
+    {
+      "id": "D07",
+      "title": "Non-smooth payoffs: mollification error versus moment blow-up for derivative-code estimators",
+      "gap": "The Dym non-integrability proof (Theorem 4.1) shows that a terminal condition with an unbounded derivative makes the coding-tree functional non-integrable at every T > 0. Finance payoffs (calls, digitals) have kinks, so any fully nonlinear pricing PDE whose nonlinearity involves derivatives (e.g. the Merton HJB's z1^2/z2) faces the same failure; neither JEQ/JCP nor HP26 address it.",
+      "hypothesis": "For phi with a kink (or the Dym |x|^{2/3}), the mollified problem phi_eps = phi * eta_eps has a coding-tree estimator with V^{(2)} <= C eps^{-a(T)} for an explicit a(T) from the recursion, while |u_eps - u| <= C' eps^b by PDE stability; the optimal eps balances the two and the resulting Monte Carlo error rate N^{-b/(2b+a)} is provably worse than N^{-1/2} but finite, turning a 'method fails' into a quantified regime.",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "Regularization is routine; the explicit moment-versus-bias trade-off through the exact recursion, and its application to the proven Dym failure, is a specific new statement.",
+        "impact": "Non-smooth terminal data is the norm in finance; the class of usable coding-tree problems widens.",
+        "effect": "Baseline: no estimate at all (infinite variance). Target: a convergent estimator with an explicit, slower rate; useful but not a step change in accuracy or cost."
+      },
+      "evidence": [
+        "docs/research/estimator-integrity/dym-nonintegrability.md Theorem 4.1, Corollary 4.2, 'Exact scope and sharpness'",
+        "examples/dym_nonintegrability.py (I_1(eps) ~ 2g(0) log(1/eps), I_{4/3} ~ eps^{-1/3})",
+        "arXiv:2502.17853v2 Remark 2.7 iv (only values of f^{(k)} on the range of phi matter) and Prop. 3.2 factorial growth assumptions on phi"
+      ],
+      "evidence_status": "searched",
+      "feasibility": {
+        "status": "feasible",
+        "reason": "All ingredients exist: dym_1d, the Dym integral asymptotics, finite_depth_moment_1d; the PDE-stability side for Dym needs a reference solution (the traveling wave is exact).",
+        "first_test": "Mollify the Dym phi with eps in {1e-1, 1e-2, 1e-3} and measure V^{(2)} at depth 2 and the empirical max|H| at 1e5 samples: if V^{(2)} does not scale as a power of 1/eps, the trade-off form is wrong."
+      }
+    },
+    {
+      "id": "D08",
+      "title": "Proved state-dependent representation theorem and completion of the Merton-Vasicek 2D solver",
+      "gap": "Candidate 4 (state-dependent arbitrary-jet representation) is a conditional theorem: the mechanism for f(x, jet u) is implemented (parabolab/state_dependent.py) and tested numerically on the reduced Merton-Vasicek problem, but existence of the classical solution, integrability of the functional and uniqueness of the code-indexed mild system are not proved. Stages 2-4 of the stochastic-rate Merton design (full V(t,x,y), reference comparison, correlation) are unfinished.",
+      "hypothesis": "HP26's Prop. 5.2/5.7 mild-system uniqueness argument extends to the state-dependent mechanism with the extra x-derivative codes, and the D01 supersolution certificate covers the Merton-Vasicek reduced problem at T=0.05 (exact u(0,0)=1.002503), giving the first fully proved and certified coding-tree representation of a stochastic-rate portfolio problem.",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "JCP2024 has no explicit x-dependence; the state-dependent mechanism plus a proved representation is a defensible extension.",
+        "impact": "Stochastic-rate portfolio problems are the finance narrative of the FYP; a proved representation is what a quant reviewer would ask for.",
+        "effect": "Baseline: Candidate 4 as a conditional theorem and stage-1 numerics. Target: proved theorem plus 2D solver validated against the reduced reference; a stronger guarantee on an existing benchmark."
+      },
+      "evidence": [
+        "docs/research/estimator-integrity/secondary-candidates.md Candidate 4",
+        "docs/superpowers/specs/2026-09-07-stochastic-rate-merton-design.md; parabolab/state_dependent.py; parabolab/library.py merton_vasicek_reduced, merton_vasicek_2d, vasicek_no_consumption_exact",
+        "arXiv:2502.17853v2 Props 5.2, 5.7 (mild-system uniqueness under uniform integrability)"
+      ],
+      "evidence_status": "searched",
+      "feasibility": {
+        "status": "feasible",
+        "reason": "Code and exact reference exist; the proof adapts a published argument; integrability certificate depends on D01.",
+        "first_test": "Run merton_vasicek_2d through CodingTreeMC at T=0.05 on the y=0 slice and compare with the reduced solution: disagreement beyond 3 stderr means the 2D mechanism is wrong before any theorem is attempted."
+      }
+    },
+    {
+      "id": "D09",
+      "title": "Learned state-dependent first-event proposals with multiple-importance-sampling safety (path guiding for coding trees)",
+      "gap": "Theorem 6.2 optimizes the leaf/branch-time law for a fixed state; Theorem 6.3 covers pilot/frozen tuple proposals. The graphics community's Monte Carlo PDE solvers (walk on spheres) now use learned, state-dependent proposals combined with uniform sampling via the balance heuristic (Path Guiding for Monte Carlo PDE Solvers, arXiv 2410.18944). Nothing analogous exists for branching-time and branch-position proposals in coding trees.",
+      "hypothesis": "A state-dependent first-event proposal rho(s | t, x, c) learned from pilot trees and mixed with the base exponential law by a one-sample balance-heuristic MIS keeps unbiasedness with a bounded likelihood ratio (a first-event analogue of Theorem 6.4) and reduces V^{(2)} x E[nodes] by at least 3x on the cosine (5.10) and log (5.11) examples where deep branches dominate.",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "Transfer of path guiding + MIS to branching-time proposals in coding trees, with a proof of the oracle bound; adaptive IS in general is classical.",
+        "impact": "Applies to every heavy-tailed coding-tree example (gotchas 13-15).",
+        "effect": "3x work-normalized variance is the hypothesis; the Merton-Vasicek pilot experiment gave only 0.049 -> 0.048 for tuple proposals, so a large effect is unproven."
+      },
+      "evidence": [
+        "arXiv:2410.18944 Path Guiding for Monte Carlo PDE Solvers (one-sample MIS with balance heuristic)",
+        "arXiv:2604.21717 Monte Carlo PDE Solvers for Nonlinear Radiative Boundary Conditions (2026)",
+        "docs/research/estimator-integrity/adaptive-proposals.md Theorems 6.2-6.4; examples/proposal_merton_vasicek.py result 0.049 -> 0.048"
+      ],
+      "evidence_status": "searched",
+      "feasibility": {
+        "status": "conditional",
+        "reason": "Changing the lifetime law changes tree topology and node cost (adaptive-proposals.md 'topology qualification'); the oracle bound for event-time proposals is not proved and the small tuple-proposal gain suggests the effect may be modest.",
+        "first_test": "Oracle experiment: use the exact solution to build the Theorem 6.2 optimal first-event law for the cosine example at T=0.04 and measure V^{(2)} x nodes against the exponential baseline; if the oracle gain is below 1.5x, learning cannot do better and the direction is dropped."
+      }
+    },
+    {
+      "id": "D10",
+      "title": "Measure-theoretic Lean formalization of the finite-depth moment recursion (Theorem 2.2)",
+      "gap": "The Lean development formalizes the abstract lattice part (momentStep on a finite code type, monotone Picard, least fixed point, prefixed-point bound) but not the probabilistic identity V_{n+1} = E|H^{[n]}|^p over Markov kernels, lifetimes and shared branch positions. Coelho's 2026 finance library (arXiv 2606.01356, BrownianMotion package, Feynman-Kac link) shows the Mathlib infrastructure now exists.",
+      "hypothesis": "Theorem 2.2 for a finite code space and a general Markov kernel can be stated and proved in Lean 4 / Mathlib using ProbabilityTheory.Kernel, Tonelli (lintegral_prod) and conditional independence, giving a machine-checked link from the sampler's law to the moment operator.",
+      "novelty": 1,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "Formalizing this repo's own proved theorem; no new mathematics.",
+        "impact": "Turns the certificate of D01 into an end-to-end machine-checked statement, which is the FYP's formal-verification story.",
+        "effect": "Baseline: prose proof plus abstract Lean lemmas. Target: sorry-free Theorem 2.2 for one depth step; a useful stronger guarantee, several weeks of Lean work."
+      },
+      "evidence": [
+        "arXiv:2606.01356 Coelho, A Formally Verified Library of Mathematical Finance in Lean 4 (Brownian motion, Ito, Feynman-Kac; Mathlib)",
+        "formal/EstimatorIntegrity/FiniteTree.lean, MomentIteration.lean (current coverage); docs/research/estimator-integrity/reproducibility.md section 4"
+      ],
+      "evidence_status": "searched",
+      "feasibility": {
+        "status": "feasible",
+        "reason": "Finite code space, one depth step, kernel Tonelli are all within current Mathlib; the shared-position conditional-independence step is the hardest but is a finite product of conditionally independent factors.",
+        "first_test": "Formalize the leaf term only (Fbar^{1-p} P_Delta |g|^p) as an lintegral identity for one kernel; if the Kernel API cannot express the lifetime/position product measure cleanly, the full theorem is out of reach for this project."
+      }
+    }
+  ]
+}

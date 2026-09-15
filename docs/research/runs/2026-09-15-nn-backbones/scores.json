@@ -1,0 +1,300 @@
+{
+  "ideas": [
+    {
+      "id": "D01",
+      "title": "Full-box, time-conditioned pointwise net for d-dimensional problems (Deep-Kolmogorov-style)",
+      "gap": "JCP2024 trains only on a 1-D segment at tau = 0 even for d = 5/100; the net never sees the box or other times. Poseidon's time-conditioned layers and the deep Kolmogorov single-sample loss show that training on (t, x) sampled over the whole domain is the standard way to get a usable whole-space surrogate.",
+      "hypothesis": "With states sampled in the full box and tau in (0, T), the kept R5a net (scaled I/O, gelu, 6x64) fits u(t, x) on Allen-Cahn d = 5 and the HJB d = 100 (Cole-Hopf exact) to the same L1 as the 1-D slice, and evaluation off the slice exposes the slice-trained net's failure.",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "Deep Kolmogorov / DBwD already train over boxes; applying it to coding-tree labels for fully nonlinear PDEs with time conditioning is a modest extension.",
+        "impact": "Any downstream operator or control use needs the whole box, not a slice; every later direction builds on this data interface.",
+        "effect": "Turns a slice surrogate into a whole-domain one at the same accuracy; material, not a step change."
+      },
+      "evidence": [
+        "arXiv:2508.17167 Cimpean, Do, Gonon, Jentzen, Popescu, Error analysis for the deep Kolmogorov method (2025): convergence in width/depth/sample count for MC-label regression over the domain",
+        "arXiv:2405.19101 Poseidon: time-conditioned layer norm and semigroup-based data scaling",
+        "docs/superpowers/specs/2026-09-15-nn-architecture-ablation-design.md Results: R5a configuration"
+      ],
+      "evidence_status": "searched",
+      "feasibility": {
+        "status": "feasible",
+        "reason": "generate_training_data already accepts t_range; only the state sampler (segment -> box) and the evaluation grid need extending; exact solutions exist for AC (any d), HJB d = 100, exp gradient.",
+        "first_test": "AC d = 5, N = 5000 box states, M = 1e4: if the box-trained net's L1 on the paper's slice is worse than 2x the slice-trained net's, the box formulation costs more than it gives at this budget."
+      },
+      "value": 1000,
+      "high_value": false
+    },
+    {
+      "id": "D02",
+      "title": "Parametric-family conditioned net: (t, x, theta) -> u and policy derivatives for Merton / Merton-Vasicek",
+      "gap": "One trained net per parameter set; a trader wants the value and the optimal policy (from u_x, u_xx) across gamma, sigma, mu, rate parameters at once. Berner-Grohs-Jentzen learned parametric Kolmogorov families from MC; nobody has done it for the fully nonlinear Merton HJB with branching labels.",
+      "hypothesis": "A FiLM- or hypernetwork-conditioned MLP trained on 500-2000 theta instances x 1000 states each (each instance costs ~10 s of MC) reaches per-instance R5a accuracy on held-out theta and gives policies pi*(t, x; theta) from autograd derivatives, with the closed-form Merton/Vasicek solutions as referee.",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "Parametric operator learning from branching MC labels for a fully nonlinear HJB is a specific new combination; conditioning mechanisms are standard.",
+        "impact": "The finance deliverable of the FYP: one surrogate for a family of portfolio problems, with policies.",
+        "effect": "Amortises training over the family; accuracy target = per-instance level, so the gain is cost and coverage, not accuracy."
+      },
+      "evidence": [
+        "arXiv:2011.04602 Berner, Dablander, Grohs, Numerically solving parametric families of high-dimensional Kolmogorov PDEs via deep learning",
+        "arXiv:2606.05900 Noguer i Alonso, Derivative-informed operator learning for finance (2026): Greeks as supervised targets, DeepONet / random-feature operators",
+        "parabolab/library.py merton_hjb, merton_vasicek_reduced, vasicek_no_consumption_exact"
+      ],
+      "evidence_status": "searched",
+      "feasibility": {
+        "status": "feasible",
+        "reason": "Instances are cheap (mechanism table depends on f only; theta enters f coefficients and phi), exact solutions exist for the referee, conditioning is a small change to DeepBranchNet.",
+        "first_test": "Train on 200 gamma values in [0.3, 0.8] for Merton; if held-out-gamma L1 is > 3x the per-instance R5a L1, conditioning is not interpolating and the direction needs a different encoder."
+      },
+      "value": 1000,
+      "high_value": false
+    },
+    {
+      "id": "D03",
+      "title": "Terminal-condition operator learning: phi -> u(t, .) with DeepONet / FNO / attention operators on coding-tree labels",
+      "gap": "Neural operators (DeepONet, FNO, GNOT/Transolver-type attention operators) learn maps between function spaces from PDE-solver data; all published ones use grid solvers for linear/semilinear PDEs in low d. No operator has been trained on branching-Monte-Carlo labels for fully nonlinear PDEs with arbitrary-order derivative terms, where grid solvers are unavailable in d > 3.",
+      "hypothesis": "For a phi-family with analytic derivatives (random Fourier / GP samples with chosen smoothness), coding-tree labels on 2000-10000 phi instances suffice to train an operator G: phi -> u(t, .) whose held-out error matches per-phi R5a nets, at < 1/10 the per-new-phi cost; comparing DeepONet, FNO (1-D grid) and a cross-attention operator on identical data tells which backbone the MC-label regime favours.",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 100,
+      "rationale": {
+        "novelty": "Combination of existing operator architectures with a new label source (branching MC for fully nonlinear PDEs); the architectures are not new.",
+        "impact": "Makes the fully nonlinear class amortisable: one operator per PDE, any terminal condition; the class that has no grid solver in high d.",
+        "effect": "Baseline: one MC run + one net per phi (minutes). Target: milliseconds per new phi at equal accuracy after a one-off training; a step change in the cost regime if held-out error holds."
+      },
+      "evidence": [
+        "arXiv:2302.14376 GNOT; arXiv:2511.06294 Transolver is a linear transformer (2025); arXiv:2607.24513 Physics Transformer (2026) -- attention operators with arbitrary query points",
+        "arXiv:2405.19101 Poseidon (operator transformer, semigroup training)",
+        "arXiv:2505.12940 Multi-level Monte Carlo training of neural operators (2025): noisy/multi-fidelity labels for operators",
+        "arXiv:2601.13256 Deep neural networks for solving high-dimensional parabolic PDEs (2026 review)"
+      ],
+      "evidence_status": "searched",
+      "feasibility": {
+        "status": "feasible",
+        "reason": "The mechanism table depends on f only, so phi-instances cost only the lazy derivative lambdification (~ms for Fourier-series phi) plus MC; 1-D reference solutions via finite differences or high-M MC; 8 GB GPU is enough for DeepONet/FNO/attention operators of <= 20 M parameters.",
+        "first_test": "Linear heat equation (exact u = heat kernel * phi) with 500 random Fourier phi: if a DeepONet cannot reach L1 1e-3 on held-out phi from MC labels, the label noise / phi-family design is the bottleneck before any nonlinear problem is attempted."
+      },
+      "value": 10000,
+      "high_value": true
+    },
+    {
+      "id": "D04",
+      "title": "Set-to-field Monte Carlo denoiser: attention over scattered noisy estimates, trained Noise2Noise across PDE instances",
+      "gap": "Every deep-branching net is trained from scratch on one PDE's noisy point estimates and learns nothing transferable about how MC noise looks. Graphics denoisers (Noise2Noise, nonlinear N2N 2025) show a network can learn to denoise MC output from noisy targets alone, unbiasedly under MSE. No such denoiser exists for PDE-solution estimates.",
+      "hypothesis": "A transformer that takes a set {(t_i, x_i, y_i, stderr_i)} of noisy coding-tree estimates (plus PDE/theta tokens) and answers queries (t, x) -> u, trained across thousands of cheap instances with Noise2Noise targets (independent second MC draw) or exact labels where available, reaches the accuracy of a per-instance net trained on 10x more samples; i.e. a 10x MC-budget reduction at deployment.",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 100,
+      "rationale": {
+        "novelty": "Noise2Noise + set/cross-attention are known; applying them to branching-MC PDE estimates as a learned, transferable estimator is a new combination.",
+        "impact": "Applies to every coding-tree problem: the sampler stays unchanged, the denoiser sits on top.",
+        "effect": "Baseline: per-instance R5a net at budget M. Target: same L1 at M/10 on held-out instances; a step change in sampling cost if it holds, and the heavy-tail regime (gotchas 15/20) is where it could fail."
+      },
+      "evidence": [
+        "arXiv:2512.24794 Nonlinear Noise2Noise for efficient Monte Carlo denoiser training (Dec 2025): noisy-target training is unbiased for MSE; nonlinear target maps bias it",
+        "arXiv:2302.14376 GNOT / arXiv:2511.06294: cross-attention from context points to query points",
+        "docs/superpowers/specs/2026-09-15-nn-architecture-ablation-design.md: per-state stderr already stored; R7 shows how stderr must NOT be used (as inverse-variance weights)"
+      ],
+      "evidence_status": "searched",
+      "feasibility": {
+        "status": "feasible",
+        "reason": "Data are unlimited and cheap (an instance-state set costs seconds); exact labels exist for AC/exp/Merton/HJB families for a clean first test; the user has built a transformer denoiser before; models of 5-20 M parameters fit an 8 GB GPU.",
+        "first_test": "Allen-Cahn d = 1 with T and the wave offset varied: train on 2000 instances at M = 1e3; if the denoiser's held-out L1 is not below a per-instance R5a net trained at M = 1e3 on the same states, there is no transferable structure to exploit and the direction stops."
+      },
+      "value": 10000,
+      "high_value": true
+    },
+    {
+      "id": "D05",
+      "title": "Time-autoregressive backbone (semigroup / patch stepping) with certified patch length",
+      "gap": "The single-shot tree estimator has infinite variance beyond T ~ 1 (gotcha 31); the authors' time patching is hand-tuned; Poseidon-style semigroup training and latent flow-matching solvers (2503.22600) treat time stepping as the learned object.",
+      "hypothesis": "A recurrent/transformer stepper u(t+h, .) -> u(t, .) trained on tree labels with h below the L2 horizon from the estimator-integrity programme reaches T = 2 on Allen-Cahn with error growing linearly in the number of patches.",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "Patching exists (deep_branching_with_domain); a certified patch length and a learned stepper are new in combination.",
+        "impact": "Extends the usable horizon of the whole method.",
+        "effect": "Reaches horizons the single-shot method cannot, but the authors' hand-tuned patching already does; the gain is a guarantee plus a better backbone."
+      },
+      "evidence": [
+        "arXiv:2503.22600 Generative latent neural PDE solver using flow matching (2025)",
+        "arXiv:2405.19101 Poseidon semigroup training",
+        "docs/research/runs/2026-09-15-post-integrity-directions/ideas.json D01/D06 (L2 horizon, moment-certified patching)"
+      ],
+      "evidence_status": "searched",
+      "feasibility": {
+        "status": "conditional",
+        "reason": "Needs the network (and its derivatives, for derivative codes) as terminal condition inside the sampler -- scoped out in M4 and still unbuilt.",
+        "first_test": "Semilinear AC (Id leaves only) with two patches of 0.5: if patch-2 labels show the T = 1 explosion signature, the stepping premise fails."
+      },
+      "value": 1000,
+      "high_value": false
+    },
+    {
+      "id": "D06",
+      "title": "Diffusion / flow-matching model of the tree-functional distribution for uncertainty quantification",
+      "gap": "Generative PDE solvers (DiffusionPDE, particle-guided diffusion 2026, PerFlow) model solution distributions; the coding-tree functional H has a heavy-tailed law that the mean-regression net discards.",
+      "hypothesis": "A conditional flow-matching model of H | (t, x) reproduces the tail index from the estimator-integrity programme and gives calibrated intervals for u.",
+      "novelty": 10,
+      "impact": 1,
+      "effect": 1,
+      "rationale": {
+        "novelty": "Generative modelling of branching-estimator laws is unexplored.",
+        "impact": "Diagnostic only; the solution itself is a mean and is better estimated directly.",
+        "effect": "No accuracy or cost gain for u; uncertain UQ benefit over the existing heavy-tail analysis."
+      },
+      "evidence": [
+        "arXiv:2601.23262 Particle-guided diffusion models for PDEs (2026)",
+        "arXiv:2605.03548 PerFlow: physics-embedded rectified flow for UQ (2026)",
+        "arXiv:2406.17763 DiffusionPDE"
+      ],
+      "evidence_status": "searched",
+      "feasibility": {
+        "status": "feasible",
+        "reason": "Per-state samples are available; flow matching in 1-D output is trivial to train.",
+        "first_test": "Fit H | x on HJB d = 100 at 1e5 samples; if the learned tail index disagrees with the Hill estimate by > 30 % the model is not capturing what matters."
+      },
+      "value": 10,
+      "high_value": false
+    },
+    {
+      "id": "D07",
+      "title": "Derivative-informed (Sobolev) training of the operator with DxN-rooted tree labels",
+      "gap": "The sampler gives unbiased labels for any partial derivative of u by rooting trees at DxN(mu) (gotcha 25d); derivative-informed operator learning (Noguer 2026; Sobolev training) uses such labels to cut error on the derivatives that matter (policies, Greeks).",
+      "hypothesis": "Adding u_x and u_xx labels to D02/D03 training reduces policy error by 2x at equal MC cost.",
+      "novelty": 1,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "Prior-art overlap (Candidate 5 of the integrity programme; Czarnecki 2017; Huge-Savine 2020; Noguer 2026).",
+        "impact": "Policies and hedges are derivatives; this is where finance accuracy is needed.",
+        "effect": "2x on derivative error is the published order of gain."
+      },
+      "evidence": [
+        "arXiv:2606.05900 Noguer i Alonso 2026 (delta/vega error -15 %/-40 % with derivative labels)",
+        "docs/research/estimator-integrity/secondary-candidates.md Candidate 5",
+        "parabolab/deep/generator.py generate_training_data(code=DxN(mu))"
+      ],
+      "evidence_status": "searched",
+      "feasibility": {
+        "status": "feasible",
+        "reason": "Labels already available; loss is a weighted sum.",
+        "first_test": "Merton with u_x labels: if policy L1 does not drop by 1.5x, skip."
+      },
+      "value": 100,
+      "high_value": false
+    },
+    {
+      "id": "D08",
+      "title": "Backbone bake-off on the fixed pointwise interface (MLP vs KAN vs SIREN vs residual variants)",
+      "gap": "The user's own diagnosis: on a pointwise (t, x) -> u interface every backbone is a function approximator of a smooth 1-D or d-D function; the ablation already showed preprocessing dominates.",
+      "hypothesis": "None of KAN, SIREN or deeper residual MLPs beats R5a by more than the seed spread on the three benchmarks.",
+      "novelty": 1,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "Pure comparison of known architectures.",
+        "impact": "Closes the question for the pointwise interface.",
+        "effect": "Expected null result; useful as a control, not as a gain."
+      },
+      "evidence": [
+        "arXiv:2510.23501 Training deep physics-informed Kolmogorov-Arnold networks (2025)",
+        "docs/superpowers/specs/2026-09-15-nn-architecture-ablation-design.md Results (sin activation, width 128 rejected)"
+      ],
+      "evidence_status": "searched",
+      "feasibility": {
+        "status": "feasible",
+        "reason": "Harness exists; two new net classes.",
+        "first_test": "KAN on Merton R5a data: if L1 within seed spread of R5a, record the null."
+      },
+      "value": 100,
+      "high_value": false
+    },
+    {
+      "id": "D09",
+      "title": "Multi-level Monte Carlo training: mixing cheap low-M and rare high-M labels for operators",
+      "gap": "MLMC training of neural operators (2025) shows gradient estimates from a hierarchy of label fidelities cut data cost; coding-tree labels have a natural fidelity ladder (M) and a known variance model (stderr).",
+      "hypothesis": "For D03/D04 training, an MLMC schedule over M in {1e2, 1e3, 1e4} reaches the accuracy of uniform M = 1e4 at 3x less MC work.",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "MLMC training exists for grid-solver operators; for branching MC with per-state variance it is a natural, specific extension.",
+        "impact": "Reduces the dominant cost of every data-hungry direction (D02-D04).",
+        "effect": "3x is the published order; material."
+      },
+      "evidence": [
+        "arXiv:2505.12940 Multi-level Monte Carlo training of neural operators (2025)",
+        "parabolab/deep/generator.py: stderr per state gives the level variances directly"
+      ],
+      "evidence_status": "searched",
+      "feasibility": {
+        "status": "feasible",
+        "reason": "Only the data schedule and loss weighting change.",
+        "first_test": "D02 Merton family: MLMC schedule vs uniform at equal total trees; if L1 is not better by 1.5x, drop."
+      },
+      "value": 1000,
+      "high_value": false
+    },
+    {
+      "id": "D10",
+      "title": "Foundation-style pretraining across (f, phi, theta) families with an operator transformer for fully nonlinear parabolic PDEs",
+      "gap": "PDE foundation models (Poseidon, DPOT, MORPH 2025, PDE-Transformer) pretrain on fluid-dynamics grids; none covers fully nonlinear parabolic PDEs with derivative nonlinearities or learns from Monte Carlo labels. The coding-tree sampler can generate that corpus.",
+      "hypothesis": "A 20-50 M parameter operator transformer pretrained on ~1e4 instances spanning nonlinearity families (polynomial, exp, HJB-type), phi families and parameters, fine-tunes to a new PDE with 10x fewer labels than training from scratch (D03).",
+      "novelty": 10,
+      "impact": 100,
+      "effect": 10,
+      "rationale": {
+        "novelty": "Foundation-model recipe applied to a new PDE class and label source; the recipe is not new.",
+        "impact": "Would make the fully nonlinear class -- unreachable by grid solvers in high d -- a fine-tuning target; broad if it works.",
+        "effect": "10x label efficiency is Poseidon's reported order; uncertain here."
+      },
+      "evidence": [
+        "arXiv:2405.19101 Poseidon; arXiv:2509.21670 MORPH (2025); arXiv:2607.24513 Physics Transformer (2026); arXiv:2509.05186 Probabilistic operator learning for foundation models of differential equations (2025)",
+        "CLAUDE.md gotcha 18 (d = 100 mechanism tables are cached per f; instance generation across families is dominated by MC, not symbolic work)"
+      ],
+      "evidence_status": "searched",
+      "feasibility": {
+        "status": "conditional",
+        "reason": "Corpus design across nonlinearity families with valid (integrable) horizons is unresolved (estimator-integrity D01 is the tool); compute on an 8 GB GPU limits models to ~50 M parameters and days of training.",
+        "first_test": "D03 must first show that a single-family operator learns from MC labels; pretraining across families only makes sense if D03's held-out error is at per-instance level."
+      },
+      "value": 10000,
+      "high_value": true
+    }
+  ],
+  "ranked": [
+    "D03",
+    "D04",
+    "D10",
+    "D01",
+    "D02",
+    "D05",
+    "D09",
+    "D07",
+    "D08",
+    "D06"
+  ],
+  "shortlist": [
+    "D03",
+    "D04"
+  ],
+  "provisional_candidates": [],
+  "conditional_candidates": [
+    "D10"
+  ],
+  "summary": {
+    "idea_count": 10,
+    "high_value_count": 3,
+    "shortlist_count": 2,
+    "provisional_candidate_count": 0,
+    "conditional_candidate_count": 1,
+    "top_limit": 3
+  }
+}

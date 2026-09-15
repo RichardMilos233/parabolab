@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "run_id": "2026-09-15-nn-backbones",
+  "skill_version": "0.2.0",
+  "mode": "ideate",
+  "status": "ideation_complete_plan_only",
+  "selected_direction": null,
+  "recommended_direction": "D04 then D03 (Stage 0 data interfaces first)",
+  "budget": null,
+  "project_revision": "b7849f1 (research/nn-architecture)",
+  "dirty_source_snapshot": "untracked: .agents/, .claude/, AGENTS.md, docs/research/runs/",
+  "stages": {"context": "done", "ideation": "done", "theory": "pending", "numerics": "pending", "lean": "pending", "correspondence_review": "pending", "presentation": "pending"},
+  "model_use": [{"task": "T00-ideation", "role": "research", "requested_model": "gpt-6-astra", "requested_effort": "max", "actual_model": "claude-opus-5", "actual_effort": "unknown", "note": "host does not expose model selection"}],
+  "commands_run": ["init_run.py --project . --slug nn-backbones", "score_ideas.py ideas.json --top 3 --output scores.json"],
+  "evidence": ["01-ideas.md#search-record", "scores.json"],
+  "blockers": ["CUDA torch wheel not installed"],
+  "next_action": "User decision on Stage 0/1 start order and on the ablation branch integration."
+}

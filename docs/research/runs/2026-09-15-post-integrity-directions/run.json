@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "run_id": "2026-09-15-post-integrity-directions",
+  "skill_version": "0.2.0",
+  "mode": "ideate",
+  "status": "ideation_complete_plan_only",
+  "selected_direction": null,
+  "recommended_direction": "D01",
+  "budget": null,
+  "project_revision": "40ecb51",
+  "dirty_source_snapshot": "untracked: .agents/, .claude/, AGENTS.md, docs/research/runs/2026-09-15-post-integrity-directions/",
+  "stages": {
+    "context": "done",
+    "ideation": "done",
+    "theory": "pending",
+    "numerics": "pending",
+    "lean": "pending",
+    "correspondence_review": "pending",
+    "presentation": "pending"
+  },
+  "model_use": [
+    {
+      "task": "T00-ideation",
+      "role": "research",
+      "requested_model": "gpt-6-astra",
+      "requested_effort": "max",
+      "actual_model": "claude-opus-5",
+      "actual_effort": "unknown",
+      "note": "Host does not expose model selection; skill routing not applied."
+    }
+  ],
+  "commands_run": [
+    "python .claude/skills/math-auto-research/scripts/init_run.py --project . --slug post-integrity-directions",
+    "python -c 'finite_depth_moment_1d(allen_cahn_wave_1d(T=0.5), 0, 0, p in {1,2}, max_depth 0..3, rate in {1.0, 0.1026}, MomentQuadrature(5,5)/(6,6))'  (probe; depth-5 8x8 run killed after 600 s)",
+    "python .claude/skills/math-auto-research/scripts/score_ideas.py docs/research/runs/2026-09-15-post-integrity-directions/ideas.json --top 3 --output .../scores.json"
+  ],
+  "evidence": [
+    "01-ideas.md#search-record",
+    "01-ideas.md#probe-evidence-recorded-during-ideation",
+    "scores.json"
+  ],
+  "blockers": [
+    "finite_depth_moment_1d cost is exponential in depth; grid iteration needed before D01 numerics",
+    "Python test suite and Lean build not rerun on this machine"
+  ],
+  "next_action": "User decision: execute D01 (start with task T01 grid Picard iteration) or choose another card."
+}
