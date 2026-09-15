@@ -374,3 +374,35 @@ next best R3b 1.543e-2). With gelu, BatchNorm is the worst choice on ac1
 as well (1.15e-3). LayerNorm is the best choice for ac1 alone under tanh
 (7.92e-4) — a per-benchmark preference, not a global one. **Kept: R4b
 (unchanged).**
+
+### R5a–d — width 64 / 128, depth 4 / 8 (parent R4b: 6 × 20 gelu, no norm)
+
+| rung | benchmark | runs | L1 median | L2 median | L1 max | outliers | consistency |
+|---|---|---|---|---|---|---|---|
+| R4b (6×20) | ac1 | 15 | 8.83e-04 | 1.38e-06 | 1.17e-03 | 0 | 1070.93 |
+| R5a (6×64) | ac1 | 15 | 8.31e-04 | 1.40e-06 | 9.41e-04 | 0 | 840.00 |
+| R5b (6×128) | ac1 | 15 | 7.68e-04 | 1.41e-06 | 9.34e-04 | 0 | 321.95 |
+| R5c (4×20) | ac1 | 15 | 8.40e-04 | 1.37e-06 | 1.05e-03 | 0 | 1698.17 |
+| R5d (8×20) | ac1 | 15 | 8.29e-04 | 1.30e-06 | 9.08e-04 | 0 | 666.34 |
+| R4b | exp1 | 15 | 1.13e-02 | 4.13e-04 | 1.19e-02 | 0 | 1.12 |
+| R5a | exp1 | 15 | 1.11e-02 | 4.24e-04 | 1.18e-02 | 0 | 1.06 |
+| R5b | exp1 | 15 | 1.10e-02 | 4.19e-04 | 1.14e-02 | 0 | 1.07 |
+| R5c | exp1 | 15 | 1.13e-02 | 3.89e-04 | 1.26e-02 | 0 | 1.17 |
+| R5d | exp1 | 15 | 1.11e-02 | 4.17e-04 | 1.18e-02 | 0 | 1.07 |
+| R4b | merton | 15 | 2.07e-03 | 7.96e-06 | 2.80e-03 | 0 | 2.44 |
+| R5a | merton | 15 | 1.69e-03 | 4.70e-06 | 2.38e-03 | 0 | 2.42 |
+| R5b | merton | 15 | 2.49e-03 | 1.02e-05 | 3.07e-03 | 0 | 2.41 |
+| R5c | merton | 15 | 2.72e-03 | 1.28e-05 | 3.17e-03 | 0 | 2.45 |
+| R5d | merton | 15 | 1.78e-03 | 5.32e-06 | 2.29e-03 | 0 | 2.42 |
+
+Reading: no outliers anywhere. Summed median L1: 6×20 1.425e-2, 6×64
+1.362e-2, 6×128 1.426e-2, 4×20 1.486e-2, 8×20 1.371e-2 → **kept: R5a
+(6 × 64)**. Width 64 improves every benchmark (Merton −18 %, ac1 −6 %,
+exp1 −2 %) and tightens the Merton worst case to 2.38e-3, at the same
+≈ 8 s per training on CPU. Width 128 is the best ac1 net (7.68e-4, and the
+lowest ac1 consistency so far, 322) but worse than 64 on Merton (2.49e-3):
+with 1000 full-batch targets at Merton's noise level, 66 k parameters start
+fitting the noise. Depth 8 is close to width 64 (1.371e-2) and depth 4 is
+the worst — the paper's 6 × 20 is under-, not over-parameterised for this
+data. Per-benchmark best sizes differ (ac1: 128; Merton: 64), so the rule
+picks the compromise.
