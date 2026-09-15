@@ -492,3 +492,15 @@
     "10× fewer samples" hope was wrong for this family. Numbers:
     `examples/set_denoiser_gonogo.csv`; spec §Results. N2N training
     itself works (loss unbiased, no stderr weighting needed).
+46. **Conditioning on θ beats per-instance training by ~5× on the Merton
+    family; FiLM > concat; derivative MC labels are heavy-tail noise.**
+    One FiLM-conditioned R5A net (`deep.condnet`, `deep.condtrain`)
+    trained on 500 θ-instances × 500 states at M = 1000 reaches held-out
+    u-L1 4.1e-3 vs 2.0e-2 for a per-instance net on the same labels
+    (wins 50/50), and its autograd Merton fraction is at 3 % median error
+    where per-instance nets give 54 %. Adding `DxN`-rooted derivative
+    labels with unit weights *destroys* the fit (u-L1 2.6e-2): the u_x
+    labels have RMS error 35× their reported stderr and the u_xx labels
+    16× the spread of the true values — the stderr of a derivative-code
+    tree estimate on a non-polynomial f is not an error measure.
+    Spec results: `docs/superpowers/specs/2026-09-15-parametric-merton-net-design.md`.

@@ -131,3 +131,61 @@ policy_err_full, seconds`. `if __name__ == "__main__"`. Un-ignore the CSV.
 Code + tests; `examples/parametric_merton.csv`; `## Results` section here
 with the C0–C3 table, the kept rung, the success/failure verdict, and one
 paragraph per rung; gotchas if any.
+
+## Results
+
+Corpus: 500 train / 50 held-out θ (γ, μ, σ uniform in the ranges), 500
+states, M = 1000, one draw (≈ 5 min to generate on 16 workers); C3's
+derivative corpus adds `Dx1`/`Dx2` roots for the 500 training instances
+(≈ 10 min). Training: 20 000 steps × 4096 pooled (instance, state) rows,
+Adam 1e-3 cosine, RTX 4060; C1 21 k params, C2/C3 71 k params. All rows
+in `examples/parametric_merton.csv` (200 rows). `seconds` is per-instance
+wall-clock for C0 and training time amortised over the 50 test instances
+for C1–C3.
+
+| rung | n | u-L1 median | u-L1 max | policy err interior (median) | policy err full | s/instance |
+|---|---|---|---|---|---|---|
+| C0 per-instance R5A, M = 1000 | 50 | 2.01e-02 | 9.04e-02 | 54.43 % | 61.63 % | 4.3 |
+| C1 concat, u only | 50 | 8.69e-03 | 2.58e-02 | 5.06 % | 5.65 % | 0.7 |
+| **C2 FiLM, u only** | 50 | **4.12e-03** | 1.81e-02 | **3.03 %** | 3.26 % | 1.3 |
+| C3 FiLM + derivative labels (1,1,1) | 50 | 2.57e-02 | 1.18e-01 | 3.63 % | 3.69 % | 3.4 |
+
+**Kept rung: C2.** Verdict against the fixed criteria: the accuracy
+criterion **passes** by a wide margin (C2's u-L1 is 0.20× C0's, not
+merely within 1.5×); the policy criterion **fails** (3.03 % > 2 %) with
+or without C3.
+
+C0 — per-instance nets at M = 1000. With 3× the label noise of the
+ablation's M = 10⁴ setting (median stderr 0.052 on |u| ≈ 22), a net fitted
+to one instance's 500 points reaches only 2.0e-2 and its autograd
+derivatives are useless for the policy: median error 54 %, p90 97 %. A
+fitted curve's second derivative is not something 500 noisy points
+determine.
+
+C1 vs C2 — conditioning works and FiLM is better. C1 (θ concatenated to
+the input) beats C0 on u by 2.3×; C2 (FiLM: θ modulates every hidden
+layer) by 4.9×, and beats C0 on all 50 held-out θ and C1 on 41 of 50.
+Pooling 250 000 noisy points across θ lets the net average noise that no
+single instance can (u-L1 4.1e-3 is 13× below the per-state stderr). The
+policy from C2's autograd derivatives is at 3.0 % median (p90 8.9 %; 40 of
+50 instances above 2 %): usable, not yet at the target.
+
+C3 — derivative labels hurt, and the reason is a finding. The MC labels
+for u_x and u_xx from `DxN`-rooted trees on the Merton problem
+(non-polynomial f with z₁²/z₂) are heavy-tailed at M = 1000: the u_x
+labels report a median stderr of 1.3e-3 but have RMS error 4.3e-2 against
+the closed form (35× their stderr; the pooled spread of true u_x is
+6.1e-2), and the u_xx labels have RMS error 2.7e-3 against a true spread
+of 1.6e-4 — 16× the signal, i.e. pure noise. Weighting each derivative
+term by its pooled std (weights 1, 1, 1) therefore lets the u_xx term
+dominate the loss with garbage, and u itself degrades 6× (2.57e-2) while
+the policy does not improve (3.6 %; better than C2 on 24/50). This is
+gotcha 15/20 in a new place: the per-state stderr of a derivative-code
+tree estimate is not a usable error measure. A fair follow-up is to
+weight derivative terms by their *measured* RMS error against exact
+labels where available, or to use u_x only (35× stderr but still 70 %
+signal), or to raise M for the derivative draws — a new decision, not
+part of this ladder.
+
+Cost: corpus ≈ 15 min; C0 3.6 min; C1/C2/C3 ≈ 0.6 / 1.1 / 2.8 min of GPU
+training each.
