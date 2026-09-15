@@ -99,6 +99,9 @@ def main(args):
             target=target, device=args.device, seed=args.seed, verbose=True)
         l1 = settrain.evaluate_set_denoiser(net, test, n_context=args.n_context,
                                             device=args.device)
+        # seconds for d04 rows = the ONE-OFF training time amortised over the
+        # test instances (inference itself is milliseconds); for the
+        # per-instance methods below it is that instance's own wall-clock.
         rows += [{"method": f"d04_{target}", "family": args.family,
                   "instance_seed": inst.spec.seed, "l1": v,
                   "seconds": res.seconds / len(test)}
@@ -121,12 +124,17 @@ def main(args):
                      "seconds": time.perf_counter() - t0})
     write_rows(args.out, rows)
 
-    print("\n| method | n | L1 median | L1 max | s/instance |")
+    print("\n| method | n | L1 median | L1 max | s/instance "
+          "(d04: training amortised) |")
     print("|---|---|---|---|---|")
     summary = {}
     for m in ("d04_n2n", "d04_exact", "mlp_M", "mlp_10M", "kernel"):
         v = np.array([r["l1"] for r in rows if r["method"] == m])
         s = np.array([r["seconds"] for r in rows if r["method"] == m])
+        if len(v) == 0:
+            print(f"| {m} | 0 | - | - | - |")
+            summary[m] = float("nan")
+            continue
         summary[m] = float(np.median(v))
         print(f"| {m} | {len(v)} | {np.median(v):.2e} | {v.max():.2e} | {s.mean():.1f} |")
     verdict = "PASS" if summary["d04_n2n"] < summary["mlp_M"] else "FAIL"
