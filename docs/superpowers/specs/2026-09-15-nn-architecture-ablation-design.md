@@ -279,3 +279,24 @@ and the seed spread from 3× to 1.7×; the anomaly does not appear in 15
 runs. ac1 improves 13 % (1.12e-3 → 9.70e-4); exp1 is unchanged, as
 expected at its MC-noise floor. A single R1 net now matches R0's
 five-net ensemble on Merton (5.39e-3 vs 7.64e-3 median). **Kept: yes.**
+
+### R2 — output standardisation (parent R1)
+
+| rung | benchmark | runs | L1 median | L2 median | L1 max | outliers | consistency |
+|---|---|---|---|---|---|---|---|
+| R1 | ac1 | 15 | 9.70e-04 | 2.21e-06 | 1.19e-03 | 0 | 809.65 |
+| R2 | ac1 | 15 | 8.91e-04 | 1.94e-06 | 1.20e-03 | 0 | 731.33 |
+| R1 | exp1 | 15 | 1.13e-02 | 4.43e-04 | 1.18e-02 | 0 | 1.10 |
+| R2 | exp1 | 15 | 1.13e-02 | 4.44e-04 | 1.17e-02 | 0 | 1.10 |
+| R1 | merton | 15 | 5.39e-03 | 4.31e-05 | 7.83e-03 | 0 | 2.67 |
+| R2 | merton | 15 | 3.66e-03 | 2.05e-05 | 4.74e-03 | 0 | 2.35 |
+| R2+ens | ac1 | 3 | 8.44e-04 | 1.92e-06 | 1.10e-03 | 0 | 279.35 |
+| R2+ens | exp1 | 3 | 1.11e-02 | 4.33e-04 | 1.13e-02 | 0 | 1.09 |
+| R2+ens | merton | 3 | 3.26e-03 | 1.78e-05 | 3.92e-03 | 0 | 2.34 |
+
+Reading: helped. Merton's targets are O(26) with a spread of a few units;
+fitting them standardised takes the median from 5.39e-3 to 3.66e-3 (0.43×
+the paper's 8.49e-3) and the worst run to 4.74e-3 — a 1.3× seed spread
+where R0 had 3× plus an anomaly. ac1 improves 8 %; exp1 unchanged. Two
+free preprocessing steps have so far more than halved the Merton error
+and removed the anomaly; no architecture change yet. **Kept: yes.**
