@@ -470,3 +470,13 @@
     `examples/set_denoiser_gonogo.py --tiny` (`n_states=8`) passes
     `min_finite=min(50, args.n_states)` explicitly for this reason — any
     new small-`n_states` corpus caller needs the same.
+44. **CUDA torch on this laptop = `cu128` wheel ≤ 2.11, not the newest.**
+    The NVIDIA driver is 566.36 (CUDA 12.7 class); `cu130` wheels
+    (torch 2.13/2.14) need driver ≥ 580 and `cu124` stops at torch 2.6.
+    `torch==2.11.0+cu128` runs on 566.36 through CUDA minor-version
+    compatibility (GPU matmul verified). Two side effects: (a) the
+    ablation's loss-regression guard was recorded on 2.13+cpu and the
+    2.11 float32 kernels drift ~2e-6, so its tolerance is 1e-5 — a real
+    change to the Adam path moves it by orders of magnitude more; (b) the
+    net-output guard (`REF_NET_OUT`, atol 1e-7) still passes. Updating
+    the driver to ≥ 580 allows `cu130` + torch 2.14.

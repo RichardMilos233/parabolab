@@ -154,7 +154,10 @@ def test_default_training_is_unchanged():
     torch.manual_seed(7)
     net = deep.DeepBranchNet(d=1, hidden_layers=2, neurons=6)
     res = deep.train_deep_branching(net, data, epochs=30, log_every=10)
-    np.testing.assert_allclose(res.losses, REF_LOSSES, rtol=0, atol=1e-7)
+    # atol 1e-5, not 1e-7: the reference was recorded on torch 2.13+cpu and
+    # float32 kernels drift ~2e-6 across torch builds (2.11+cu128 measured);
+    # a real change to the Adam path moves these by orders of magnitude.
+    np.testing.assert_allclose(res.losses, REF_LOSSES, rtol=0, atol=1e-5)
 
 
 def test_fit_scalers_fills_buffers_and_leaves_t_alone():
