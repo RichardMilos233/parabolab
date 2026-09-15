@@ -207,3 +207,53 @@ Existing `tests/test_deep.py` and `tests/test_solve.py` must stay green.
    helped, hurt, or did nothing, with the numbers.
 3. CLAUDE.md gotchas for anything non-obvious discovered (e.g. if input
    standardisation alone removes the Merton anomaly).
+
+## Results
+
+All runs: `examples/nn_ablation_results.csv`; datasets in
+`examples/nn_ablation_data/` (git-ignored, regenerable from `BENCHMARKS`).
+Columns: L1/L2 medians over 5 training seeds × 3 data seeds, L1 max,
+outlier runs (L1 > 3× median or non-finite), median consistency statistic.
+`+ens` rows = median of the five seed-nets per dataset (rung R9), so 3 runs.
+Machine: 32-core laptop CPU, torch 2.13 CPU; one training ≈ 9 s.
+
+### R0 — paper baseline on frozen data
+
+Datasets generated with the paper budgets (ac1 M = 10⁵: 50 s per set;
+exp1 M = 3·10⁴: 21 s; merton M = 10⁴: 12 s, 16 workers).
+
+| rung | benchmark | runs | L1 median | L2 median | L1 max | outliers | consistency |
+|---|---|---|---|---|---|---|---|
+| R0 | ac1 | 15 | 1.12e-03 | 2.72e-06 | 1.37e-03 | 0 | 1400.85 |
+| R0 | exp1 | 15 | 1.13e-02 | 4.58e-04 | 1.21e-02 | 0 | 1.11 |
+| R0 | merton | 15 | 8.68e-03 | 9.33e-05 | 1.52e-01 | 1 | 3.07 |
+| R0+ens | ac1 | 3 | 9.99e-04 | 2.33e-06 | 1.16e-03 | 0 | 637.89 |
+| R0+ens | exp1 | 3 | 1.12e-02 | 4.54e-04 | 1.16e-02 | 0 | 1.10 |
+| R0+ens | merton | 3 | 7.64e-03 | 8.07e-05 | 8.41e-03 | 0 | 2.85 |
+
+Reading. The reproduction criterion (median L1 within 2× of the paper) is
+met on all three: ac1 1.12e-3 vs 1.32e-3, exp1 1.13e-2 vs 1.17e-2, merton
+8.68e-3 vs 8.49e-3. The Merton anomaly of gotcha 27 reproduces on frozen
+data: run (d2, s2) trains to L1 1.52e-1 with consistency 159 while the other
+14 runs sit at 4.7e-3–1.5e-2 — same data as its four sibling seeds, so it
+is the optimiser, not the draw. Even the non-anomalous Merton runs spread
+3× across training seeds (4.7e-3 to 1.49e-2 on dataset 0), which is the
+robustness target for the ladder. The median-of-5 ensemble (R9) removes the
+outlier (7.64e-3, max 8.41e-3) at 5× the training cost — the floor every
+later rung is compared against.
+
+Two properties of the metrics, fixed by the data rather than by any rung:
+(i) on exp1 and merton the net sits inside the MC scatter (consistency
+1.1 and ≈3), so L1 is bounded below by target noise (median stderr 1.3e-2
+and 3.1e-2 on |y| ≈ 1.9 and 26) and accuracy gains must come from
+averaging noise, not from capacity; (ii) on ac1 the consistency statistic
+is in the hundreds–thousands although L1 ≈ 1e-3: the traveling wave
+saturates at ±1 for |x| ≳ 4, where all 10⁵ samples agree and stderr is
+≈ 0, so a 1e-4 fitting error there is hundreds of standard errors. On ac1
+the statistic therefore measures net capacity in the flat tails, not
+detachment from the data; compare it across rungs, not against 1.
+
+Plan amendment recorded during implementation: the L-BFGS polish (R8c)
+runs with the net in eval mode so BatchNorm running statistics are not
+updated by the line search; the weighted loss (R7) raises if no state has
+a finite stderr.

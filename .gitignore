@@ -10,3 +10,4 @@ examples/*.csv
 examples/nn_ablation_data/
 demo/*.png
 .vscode/
+!examples/nn_ablation_results.csv
