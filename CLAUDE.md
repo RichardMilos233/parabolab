@@ -480,3 +480,15 @@
     change to the Adam path moves it by orders of magnitude more; (b) the
     net-output guard (`REF_NET_OUT`, atol 1e-7) still passes. Updating
     the driver to ≥ 580 allows `cu130` + torch 2.14.
+45. **A set-to-field transformer (D04) ties, not beats, a per-instance
+    MLP on the Allen–Cahn family.** 500 train instances, Noise2Noise
+    targets, 0.9 M params: held-out median L1 1.91e-3 vs 1.77e-3 for the
+    ablation's R5A net trained per instance on the same M = 1000 labels
+    (paired 25/50, ratio 0.99); it beats a leave-one-out kernel smoother
+    39/50 and is more robust (max 5.1e-3 vs 1.4e-2), but the exact-label
+    upper bound is only 1.18e-3 while the per-instance net at 10M reaches
+    5.8e-4. A 1-D two-parameter front is nearly determined by 500 noisy
+    points, so there is little cross-instance structure to transfer; the
+    "10× fewer samples" hope was wrong for this family. Numbers:
+    `examples/set_denoiser_gonogo.csv`; spec §Results. N2N training
+    itself works (loss unbiased, no stderr weighting needed).
