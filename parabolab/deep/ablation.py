@@ -125,19 +125,33 @@ def consistency_statistic(net: DeepBranchNet, data: TrainingData,
     """JCP Fig. 7 as a number: mean of ((v(tau_i, X_i) - y_i) / stderr_i)^2
     over states with finite target and finite positive stderr.  About 1
     when the net sits inside the Monte Carlo scatter."""
-    ok = np.isfinite(data.y) & np.isfinite(data.stderr) & (data.stderr > 0)
-    if not ok.any():
-        return float("nan")
     net.eval()
-    tx = torch.tensor(np.column_stack([data.t[ok], data.x[ok]]),
+    tx = torch.tensor(np.column_stack([data.t, data.x]),
                       dtype=torch.float32, device=device)
     pred = net(tx).cpu().numpy()
-    z = (pred - data.y[ok]) / data.stderr[ok]
-    return float(np.mean(z ** 2))
+    return _consistency_from_predictions(pred, data.y, data.stderr)
 
 
 def _safe(x: float) -> float:
     return float(x) if np.isfinite(x) else float("inf")
+
+
+def _require_exact(pde) -> None:
+    if getattr(pde, "exact_solution", None) is None:
+        raise ValueError(
+            "the ablation harness scores nets against pde.exact_solution; "
+            f"{type(pde).__name__} has none")
+
+
+def _consistency_from_predictions(pred: np.ndarray, y: np.ndarray,
+                                  stderr: np.ndarray) -> float:
+    """JCP Fig. 7 as a number, over states with finite target and finite
+    positive stderr; nan when no such state exists."""
+    ok = np.isfinite(y) & np.isfinite(stderr) & (stderr > 0)
+    if not ok.any():
+        return float("nan")
+    z = (pred[ok] - y[ok]) / stderr[ok]
+    return float(np.mean(z ** 2))
 
 
 def run_rung(
@@ -153,6 +167,7 @@ def run_rung(
     device: str = "cpu",
     verbose: bool = False,
 ) -> Tuple[List[RunRecord], List[DeepBranchNet]]:
+    _require_exact(pde)
     d = data.x.shape[1]
     records, nets = [], []
     for seed in train_seeds:
@@ -195,6 +210,7 @@ def ensemble_record(
     device: str = "cpu",
 ) -> RunRecord:
     """Median over the nets' grid predictions (spec rung R9)."""
+    _require_exact(pde)
     d = data.x.shape[1]
     grid, xs, tx = _grid_inputs(d, 0.0, x_lo, x_hi)
     preds = np.median([net_on_grid(n, tx, device=device) for n in nets],
@@ -202,11 +218,10 @@ def ensemble_record(
     true = np.array([pde.exact_solution(0.0, xs[i]) for i in range(len(grid))])
     err = np.abs(preds - true)
     # consistency of the median net on the training states
-    ok = np.isfinite(data.y) & np.isfinite(data.stderr) & (data.stderr > 0)
-    ttx = np.column_stack([data.t[ok], data.x[ok]])
+    ttx = np.column_stack([data.t, data.x])
     tpred = np.median([net_on_grid(n, ttx, device=device) for n in nets],
                       axis=0)
-    cons = float(np.mean(((tpred - data.y[ok]) / data.stderr[ok]) ** 2))
+    cons = _consistency_from_predictions(tpred, data.y, data.stderr)
     return RunRecord(
         rung=rung.name, benchmark=benchmark, data_seed=data_seed,
         train_seed=-1, l1=_safe(err.mean()), l2=_safe((err ** 2).mean()),
@@ -270,13 +285,20 @@ def summarise(records: Sequence[RunRecord]) -> Dict[Tuple[str, str], dict]:
         l1 = np.array([r.l1 for r in recs])
         l2 = np.array([r.l2 for r in recs])
         cons = np.array([r.consistency for r in recs])
-        med = float(np.median(l1))
+        l1_median = float(np.median(l1))
+        finite = np.isfinite(l1)
+        if finite.any():
+            finite_median = np.median(l1[finite])
+            n_outliers = int((~finite).sum()) + int(
+                (finite & (l1 > 3.0 * finite_median)).sum())
+        else:
+            n_outliers = len(l1)
         out[key] = {
             "n_runs": len(recs),
-            "l1_median": med,
+            "l1_median": l1_median,
             "l2_median": float(np.median(l2)),
             "l1_max": float(l1.max()),
-            "n_outliers": int(np.sum(l1 > 3.0 * med)),
+            "n_outliers": n_outliers,
             "consistency_median": float(np.median(cons)),
         }
     return out

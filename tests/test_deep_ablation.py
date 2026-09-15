@@ -368,3 +368,27 @@ def test_summarise_counts_outliers_by_three_times_median():
     assert s["consistency_median"] == 1.0
     table = ablation.format_table(ablation.summarise(recs))
     assert "| R0 | ac1 |" in table
+
+
+def test_summarise_all_nonfinite_runs_are_outliers():
+    def rec(seed, l1):
+        return ablation.RunRecord("R0", "ac1", 0, seed, l1, l1, 1.0, 0.0,
+                                  1.0, 10, "{}")
+    s = ablation.summarise([rec(0, np.inf), rec(1, np.inf), rec(2, np.inf)])
+    s = s[("R0", "ac1")]
+    assert s["n_outliers"] == 3 and s["l1_median"] == np.inf
+
+
+def test_run_rung_requires_exact_solution():
+    data = _small_data()
+    cfg = ablation.RungConfig("T", None,
+                              ablation.NetConfig(hidden_layers=2, neurons=4),
+                              ablation.TrainConfig(epochs=1))
+    pde = AC1()
+    pde.exact_solution = None
+    with pytest.raises(ValueError, match="exact_solution"):
+        ablation.run_rung(cfg, benchmark="tiny", data_seed=5, data=data,
+                          pde=pde, x_lo=-2.0, x_hi=2.0, train_seeds=[0])
+    with pytest.raises(ValueError, match="exact_solution"):
+        ablation.ensemble_record(cfg, [], benchmark="tiny", data_seed=5,
+                                 data=data, pde=pde, x_lo=-2.0, x_hi=2.0)
