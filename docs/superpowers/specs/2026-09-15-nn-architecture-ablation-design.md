@@ -448,3 +448,73 @@ the objective being minimised. exp1 is the one benchmark whose stderr is
 roughly uniform and whose error is noise-limited, and there weighting
 helps as theory predicts. **Kept: no.** A capped weight (e.g. clip at
 10× the median) would be the fair follow-up; not part of this ladder.
+
+### R8a / R8b / R8c — cosine schedule / grad-clip 1.0 / L-BFGS polish (parent R5a)
+
+| rung | benchmark | runs | L1 median | L2 median | L1 max | outliers | consistency |
+|---|---|---|---|---|---|---|---|
+| R5a | ac1 | 15 | 8.31e-04 | 1.40e-06 | 9.41e-04 | 0 | 840.00 |
+| R8a | ac1 | 15 | 7.92e-04 | 1.39e-06 | 1.01e-03 | 0 | 382.58 |
+| R8b | ac1 | 15 | 8.07e-04 | 1.40e-06 | 9.16e-04 | 0 | 840.00 |
+| R8c | ac1 | 15 | 8.31e-04 | 1.40e-06 | 9.41e-04 | 0 | 840.00 |
+| R5a | exp1 | 15 | 1.11e-02 | 4.24e-04 | 1.18e-02 | 0 | 1.06 |
+| R8a | exp1 | 15 | 1.11e-02 | 4.31e-04 | 1.17e-02 | 0 | 1.06 |
+| R8b | exp1 | 15 | 1.10e-02 | 4.29e-04 | 1.17e-02 | 0 | 1.06 |
+| R8c | exp1 | 15 | 1.11e-02 | 4.24e-04 | 1.18e-02 | 0 | 1.06 |
+| R5a | merton | 15 | 1.69e-03 | 4.70e-06 | 2.38e-03 | 0 | 2.42 |
+| R8a | merton | 15 | 1.78e-03 | 4.79e-06 | 2.43e-03 | 0 | 2.42 |
+| R8b | merton | 15 | 2.06e-03 | 6.75e-06 | 2.37e-03 | 0 | 2.41 |
+| R8c | merton | 15 | 1.69e-03 | 4.65e-06 | 2.38e-03 | 0 | 2.42 |
+
+Reading. R8a (cosine): ac1 −5 %, Merton +5 % — improves one benchmark
+and worsens another, and its sum (1.367e-2) does not beat R5a
+(1.362e-2); not kept. R8b (grad-clip 1.0): Merton +22 %; the clipped
+early steps cost accuracy the schedule never recovers; not kept. R8c
+(200 L-BFGS iterations after Adam): results identical to R5a to every
+printed digit on ac1 and exp1 and within rounding on Merton, with no
+extra wall time. Diagnosed directly (scratch probe on Merton d0, s0, the
+R5a config): after the 3000 Adam epochs the max |gradient| is 1.8e-5 and
+the float32 loss 1.52e-3; L-BFGS makes 7 closure evaluations and returns
+with the loss unchanged, for `tolerance_grad` 1e-7 and 1e-12 alike — the
+strong-Wolfe line search cannot find a step that lowers the float32 loss
+from Adam's endpoint. The polish is a no-op at this precision; a float64
+polish would be the fair test and is out of scope. **Kept: none of R8.**
+
+### Kept path
+
+R0 (paper) → R1 input standardisation → R2 output standardisation →
+R3a no normalisation → R4b gelu → **R5a width 64**. Final configuration:
+6 hidden layers × 64, gelu, no normalisation, standardised inputs and
+targets, full-batch Adam with the paper's lr schedule, MSE on the MC means.
+
+| benchmark | paper (10 runs) | R0 on frozen data (15 runs) | R5a (15 runs) | R5a ensemble of 5 |
+|---|---|---|---|---|
+| ac1 | 1.32e-3 | 1.12e-3 (max 1.37e-3) | **8.31e-4** (max 9.41e-4) | 7.4e-4 |
+| exp1 | 1.17e-2 | 1.13e-2 (max 1.21e-2) | **1.11e-2** (max 1.18e-2) | 1.10e-2 |
+| merton | 8.49e-3, 1 anomalous run | 8.68e-3 (max 1.52e-1, 1 outlier) | **1.69e-3** (max 2.38e-3) | 1.64e-3 |
+
+Attribution, Merton median L1: 8.68e-3 → 5.39e-3 (R1, −38 %) → 3.66e-3
+(R2, −32 %) → 2.48e-3 (R3a, −32 %) → 2.07e-3 (R4b, −17 %) → 1.69e-3 (R5a,
+−18 %); overall 5.1× better than the paper's architecture and 5.0× better
+than its published number, with the worst of 15 runs at 2.38e-3 against
+the paper's own anomaly. Two preprocessing steps that change no
+parameter count account for 58 % of the log-reduction; removing BatchNorm
+another 20 %. ac1 improves 1.35× and stays capacity-limited (its best
+individual rungs — sin activation, width 128, LayerNorm — were rejected
+for hurting Merton). exp1 is MC-noise-limited: nothing but averaging
+noise (the ensemble) or exact inverse-variance weighting (R7) moves it,
+and R7's gain there does not survive the other two benchmarks.
+
+Robustness: after R1 no configuration in the ladder produced an outlier
+run (0 of 15 on every rung except R0), so the paper's tanh anomaly is a
+consequence of feeding x ∈ [100, 200] unscaled into tanh with BatchNorm
+running statistics, not an intrinsic property of the method.
+
+Rejected with a reason worth keeping: Fourier features (targets are
+low-frequency); 1/stderr² weighting (near-zero-stderr states dominate;
+helps only the noise-limited exp1); L-BFGS polish (float32 no-op);
+grad-clip (slows the schedule); width 128 and depth 4 (worse on Merton).
+
+Cost of the study: 12 datasets-worth of MC (9 sets, ≈ 5 min), 600
+trainings + 120 ensembles ≈ 1.7 h CPU, all in
+`examples/nn_ablation_results.csv`.
