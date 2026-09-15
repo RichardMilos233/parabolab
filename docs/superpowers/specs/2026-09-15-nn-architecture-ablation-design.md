@@ -257,3 +257,25 @@ Plan amendment recorded during implementation: the L-BFGS polish (R8c)
 runs with the net in eval mode so BatchNorm running statistics are not
 updated by the line search; the weighted loss (R7) raises if no state has
 a finite stderr.
+
+### R1 — input standardisation of (t, x) (parent R0)
+
+| rung | benchmark | runs | L1 median | L2 median | L1 max | outliers | consistency |
+|---|---|---|---|---|---|---|---|
+| R0 | ac1 | 15 | 1.12e-03 | 2.72e-06 | 1.37e-03 | 0 | 1400.85 |
+| R1 | ac1 | 15 | 9.70e-04 | 2.21e-06 | 1.19e-03 | 0 | 809.65 |
+| R0 | exp1 | 15 | 1.13e-02 | 4.58e-04 | 1.21e-02 | 0 | 1.11 |
+| R1 | exp1 | 15 | 1.13e-02 | 4.43e-04 | 1.18e-02 | 0 | 1.10 |
+| R0 | merton | 15 | 8.68e-03 | 9.33e-05 | 1.52e-01 | 1 | 3.07 |
+| R1 | merton | 15 | 5.39e-03 | 4.31e-05 | 7.83e-03 | 0 | 2.67 |
+| R1+ens | ac1 | 3 | 8.81e-04 | 1.94e-06 | 1.03e-03 | 0 | 165.70 |
+| R1+ens | exp1 | 3 | 1.12e-02 | 4.39e-04 | 1.15e-02 | 0 | 1.08 |
+| R1+ens | merton | 3 | 4.74e-03 | 3.32e-05 | 6.17e-03 | 0 | 2.63 |
+
+Reading: helped, on both axes. Merton — the benchmark whose raw inputs are
+x ∈ [100, 200] fed straight into tanh — drops from median 8.68e-3 to
+5.39e-3 (below the paper's 8.49e-3), the worst run from 1.52e-1 to 7.83e-3,
+and the seed spread from 3× to 1.7×; the anomaly does not appear in 15
+runs. ac1 improves 13 % (1.12e-3 → 9.70e-4); exp1 is unchanged, as
+expected at its MC-noise floor. A single R1 net now matches R0's
+five-net ensemble on Merton (5.39e-3 vs 7.64e-3 median). **Kept: yes.**
