@@ -229,11 +229,15 @@ def _grad_rows(d: int):
                  for i in range(d))
 
 
-def allen_cahn_nd(d: int, T: float = 0.5) -> FullyNonlinearPDEnD:
+def allen_cahn_nd(d: int, T: float = 0.5, shift: float = 0.0) -> FullyNonlinearPDEnD:
     """Allen-Cahn traveling wave in d dimensions, JEQ2023 eqs. (5.2)-(5.3):
 
         du/dt + (1/2) Lap u + u - u^3 = 0,
-        u(t, x) = -1/2 - (1/2) tanh( (3/4)(T-t) - sum_i x_i / (2 sqrt d) ).
+        u(t, x) = -1/2 - (1/2) tanh( (3/4)(T-t) - (sum_i x_i / (2 sqrt d) - shift) ).
+
+    ``shift`` translates the wave (the PDE is translation invariant); the
+    default 0 is the paper's wave.  Used by deep.corpus to build a family of
+    instances with different fronts.
 
     The paper's Fig. 1 uses d = 5 with T = 0.5 and d = 100 with T = 0.3
     (settings from the authors' coding_trees notebook, cells
@@ -241,9 +245,9 @@ def allen_cahn_nd(d: int, T: float = 0.5) -> FullyNonlinearPDEnD:
     s in [-8, 8], 1e5 samples.
 
     phi is written in the logistic form -1 + 1/(1 + e^{-2 y}),
-    y = sum x_i/(2 sqrt d), identical to -1/2 - tanh(-y)/2: sympy's FIRST
-    derivative of tanh(100-term Add) takes ~3 minutes (pathological cache
-    warm-up), the exp form differentiates in milliseconds.
+    y = sum x_i/(2 sqrt d) - shift, identical to -1/2 - tanh(-y)/2: sympy's
+    FIRST derivative of tanh(100-term Add) takes ~3 minutes (pathological
+    cache warm-up), the exp form differentiates in milliseconds.
     """
     import sympy as sp
 
@@ -253,15 +257,22 @@ def allen_cahn_nd(d: int, T: float = 0.5) -> FullyNonlinearPDEnD:
 
     def exact(t: float, xv) -> float:
         return -0.5 - 0.5 * math.tanh(
-            0.75 * (T - t) - inv * float(sum(xv))
+            0.75 * (T - t) - (inv * float(sum(xv)) - shift)
         )
+
+    name = (f"allen_cahn_nd(d={d}, T={T})" if shift == 0.0
+            else f"allen_cahn_nd(d={d}, T={T}, shift={shift})")
+    if shift == 0.0:
+        phi_expr = -1 + 1 / (1 + sp.exp(-2 * inv * sum(xs)))
+    else:
+        phi_expr = -1 + 1 / (1 + sp.exp(-2 * (inv * sum(xs) - shift)))
 
     return FullyNonlinearPDEnD(
         T=T, d=d, deriv_map=((0,) * d,),
         f_expr=z[0] - z[0] ** 3,
-        phi_expr=-1 + 1 / (1 + sp.exp(-2 * inv * sum(xs))),
+        phi_expr=phi_expr,
         exact_solution=exact,
-        name=f"allen_cahn_nd(d={d}, T={T})",
+        name=name,
     )
 
 

@@ -94,6 +94,7 @@ def generate_training_data(
     outlier_multiplier: float = 1000.0,
     n_jobs: int = 1,
     executor: Optional[ProcessPoolExecutor] = None,
+    states: Optional[tuple] = None,
 ) -> TrainingData:
     """Draw N states and their M-sample MC targets (JCP2024 Alg. 2 input).
 
@@ -104,20 +105,34 @@ def generate_training_data(
     ``code`` optionally roots every tree at a non-Id code (e.g. DxN(mu) to
     learn d^mu u instead of u) -- the authors' repo trains u only, but the
     generator supports per-root-code families for free.
+
+    ``states=(ts, xs)`` skips the state draw and uses the given states
+    (tree seeds still derive from ``seed``); ``n_states`` is then ignored.
     """
     pde = pde_factory()
     if rate is None:
         rate = jcp_rate(pde.T)
     d = getattr(pde, "d", 1)
 
-    rng = np.random.default_rng(seed)
-    t_lo, t_hi = t_range
-    ts = rng.uniform(t_lo, t_hi, size=n_states) if t_hi > t_lo \
-        else np.full(n_states, float(t_lo))
-    margin = overtrain_rate * (x_hi - x_lo)
-    x_mid = 0.5 * (x_lo + x_hi)
-    xs = np.full((n_states, d), x_mid)
-    xs[:, 0] = rng.uniform(x_lo - margin, x_hi + margin, size=n_states)
+    if states is None:
+        rng = np.random.default_rng(seed)
+        t_lo, t_hi = t_range
+        ts = rng.uniform(t_lo, t_hi, size=n_states) if t_hi > t_lo \
+            else np.full(n_states, float(t_lo))
+        margin = overtrain_rate * (x_hi - x_lo)
+        x_mid = 0.5 * (x_lo + x_hi)
+        xs = np.full((n_states, d), x_mid)
+        xs[:, 0] = rng.uniform(x_lo - margin, x_hi + margin, size=n_states)
+    else:
+        ts, xs = states
+        ts = np.asarray(ts, dtype=float)
+        xs = np.asarray(xs, dtype=float)
+        if ts.ndim != 1 or xs.ndim != 2 or xs.shape[0] != ts.shape[0] \
+                or xs.shape[1] != d:
+            raise ValueError(
+                f"states must be (ts (N,), xs (N, {d})); got "
+                f"{ts.shape} and {xs.shape}")
+        n_states = len(ts)
 
     seeds = np.random.SeedSequence(seed).spawn(n_states)
     jobs = [
