@@ -300,3 +300,31 @@ the paper's 8.49e-3) and the worst run to 4.74e-3 — a 1.3× seed spread
 where R0 had 3× plus an anomaly. ac1 improves 8 %; exp1 unchanged. Two
 free preprocessing steps have so far more than halved the Merton error
 and removed the anomaly; no architecture change yet. **Kept: yes.**
+
+### R3a / R3b — normalisation none / LayerNorm (parent R2)
+
+| rung | benchmark | runs | L1 median | L2 median | L1 max | outliers | consistency |
+|---|---|---|---|---|---|---|---|
+| R2 | ac1 | 15 | 8.91e-04 | 1.94e-06 | 1.20e-03 | 0 | 731.33 |
+| R3a | ac1 | 15 | 9.17e-04 | 1.66e-06 | 1.17e-03 | 0 | 3364.22 |
+| R3b | ac1 | 15 | 7.92e-04 | 1.72e-06 | 1.10e-03 | 0 | 718.78 |
+| R2 | exp1 | 15 | 1.13e-02 | 4.44e-04 | 1.17e-02 | 0 | 1.10 |
+| R3a | exp1 | 15 | 1.15e-02 | 4.31e-04 | 1.23e-02 | 0 | 1.23 |
+| R3b | exp1 | 15 | 1.14e-02 | 4.29e-04 | 1.19e-02 | 0 | 1.13 |
+| R2 | merton | 15 | 3.66e-03 | 2.05e-05 | 4.74e-03 | 0 | 2.35 |
+| R3a | merton | 15 | 2.48e-03 | 1.16e-05 | 3.47e-03 | 0 | 2.49 |
+| R3b | merton | 15 | 3.24e-03 | 1.73e-05 | 4.04e-03 | 0 | 2.45 |
+| R3a+ens | ac1 / exp1 / merton | 3 | 8.59e-04 / 1.13e-02 / 2.40e-03 | | | 0 | |
+| R3b+ens | ac1 / exp1 / merton | 3 | 7.03e-04 / 1.11e-02 / 2.96e-03 | | | 0 | |
+
+Reading: once inputs and outputs are standardised, BatchNorm is a
+liability rather than a help. Removing it (R3a) cuts Merton by a further
+32 % (3.66e-3 → 2.48e-3, worst run 3.47e-3); LayerNorm (R3b) improves
+both ac1 (−11 %) and Merton (−11 %). Neither adds outliers. The ac1 and
+exp1 differences between R2/R3a/R3b (≤ 3 %) are inside the seed spread of
+those benchmarks (±15 % and ±5 %), so they do not decide. Summed median
+L1: R2 1.585e-2, R3a 1.490e-2, R3b 1.543e-2 → **kept: R3a** by the rule.
+The ac1 consistency statistic rises to 3364 for R3a (tails of the
+traveling wave fit less tightly without normalisation) while its grid L1
+does not — the metric caveat from R0 again. The norm × activation cell
+(R34) re-examines this choice.
