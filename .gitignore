@@ -7,5 +7,6 @@ dist/
 build/
 examples/*.png
 examples/*.csv
+examples/nn_ablation_data/
 demo/*.png
 .vscode/
