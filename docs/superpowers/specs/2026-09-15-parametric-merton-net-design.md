@@ -170,22 +170,39 @@ single instance can (u-L1 4.1e-3 is 13× below the per-state stderr). The
 policy from C2's autograd derivatives is at 3.0 % median (p90 8.9 %; 40 of
 50 instances above 2 %): usable, not yet at the target.
 
-C3 — derivative labels hurt, and the reason is a finding. The MC labels
-for u_x and u_xx from `DxN`-rooted trees on the Merton problem
-(non-polynomial f with z₁²/z₂) are heavy-tailed at M = 1000: the u_x
-labels report a median stderr of 1.3e-3 but have RMS error 4.3e-2 against
-the closed form (35× their stderr; the pooled spread of true u_x is
-6.1e-2), and the u_xx labels have RMS error 2.7e-3 against a true spread
-of 1.6e-4 — 16× the signal, i.e. pure noise. Weighting each derivative
-term by its pooled std (weights 1, 1, 1) therefore lets the u_xx term
-dominate the loss with garbage, and u itself degrades 6× (2.57e-2) while
-the policy does not improve (3.6 %; better than C2 on 24/50). This is
-gotcha 15/20 in a new place: the per-state stderr of a derivative-code
-tree estimate is not a usable error measure. A fair follow-up is to
-weight derivative terms by their *measured* RMS error against exact
-labels where available, or to use u_x only (35× stderr but still 70 %
-signal), or to raise M for the derivative draws — a new decision, not
-part of this ladder.
+C3 — derivative labels hurt, and the reason is a finding (corrected after
+review: the first write-up blamed miscalibrated stderr; the corpus says
+otherwise). Over the 500-instance derivative corpus (250 000 rows) the
+per-state standard errors of the `DxN`-rooted labels are *calibrated*:
+z = (label − exact)/stderr has RMS 1.03 (u_x) and 1.00 (u_xx), |z| p99 =
+2.4 / 2.1, max 6.0 / 4.4. What breaks C3 is heteroscedasticity: the
+stderr of u_x ranges from 1.2e-3 (median) to 0.12 (p99) and 0.97 (max),
+and the 1 % of states with the largest stderr carry 77 % (u_x) / 73 %
+(u_xx) of the total squared label error. Relative to the spread of the
+true values (u_x std 6.1e-2, u_xx std 1.6e-4) the RMS label errors are
+2.7e-2 and 1.8e-3 — so u_xx's labels are on average 11× noisier than the
+signal they carry, u_x's about half as noisy. Scaling each derivative
+term by its pooled std and weighting it 1 therefore lets a few hundred
+states of near-pure noise dominate the loss; u itself degrades 6×
+(2.57e-2) and the policy does not improve (3.6 %; better than C2 on
+24/50). The right follow-up is the opposite of gotcha 40's lesson for
+u: because the derivative stderrs *are* calibrated, 1/stderr² weighting
+of the derivative terms (or dropping the top-stderr states) is justified
+here — a new rung, not part of this ladder.
+
+The label whose stderr is *not* calibrated in this corpus is u: RMS z =
+4.57, |z| p99 = 19.7, max 79 — the tail-missing signature of gotchas
+15/20 on the Id-rooted Merton trees at M = 1000. Pooling 250 000 such
+rows still let C2 average through it (u-L1 4.1e-3); a per-instance net
+cannot.
+
+Commands that produced the table (two invocations, C3's mode chosen
+after C1/C2):
+`python examples/parametric_merton.py --rungs C0 C1 C2 --steps 20000 --device cuda --jobs 16`
+then `python examples/parametric_merton.py --rungs C3 --c3-mode film --steps 20000 --device cuda --jobs 16`.
+The `mlp_10M` baseline of the D04 experiment shares its first 1000 tree
+draws per state with the M = 1000 labels (same instance seed); no
+conclusion depends on their independence.
 
 Cost: corpus ≈ 15 min; C0 3.6 min; C1/C2/C3 ≈ 0.6 / 1.1 / 2.8 min of GPU
 training each.

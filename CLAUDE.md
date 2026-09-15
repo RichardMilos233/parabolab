@@ -493,14 +493,16 @@
     `examples/set_denoiser_gonogo.csv`; spec §Results. N2N training
     itself works (loss unbiased, no stderr weighting needed).
 46. **Conditioning on θ beats per-instance training by ~5× on the Merton
-    family; FiLM > concat; derivative MC labels are heavy-tail noise.**
-    One FiLM-conditioned R5A net (`deep.condnet`, `deep.condtrain`)
-    trained on 500 θ-instances × 500 states at M = 1000 reaches held-out
-    u-L1 4.1e-3 vs 2.0e-2 for a per-instance net on the same labels
-    (wins 50/50), and its autograd Merton fraction is at 3 % median error
-    where per-instance nets give 54 %. Adding `DxN`-rooted derivative
-    labels with unit weights *destroys* the fit (u-L1 2.6e-2): the u_x
-    labels have RMS error 35× their reported stderr and the u_xx labels
-    16× the spread of the true values — the stderr of a derivative-code
-    tree estimate on a non-polynomial f is not an error measure.
-    Spec results: `docs/superpowers/specs/2026-09-15-parametric-merton-net-design.md`.
+    family; FiLM > concat; derivative MC labels are calibrated but wildly
+    heteroscedastic.** One FiLM-conditioned R5A net (`deep.condnet`,
+    `deep.condtrain`) trained on 500 θ-instances × 500 states at M = 1000
+    reaches held-out u-L1 4.1e-3 vs 2.0e-2 for a per-instance net on the
+    same labels (wins 50/50), and its autograd Merton fraction is at 3 %
+    median error where per-instance nets give 54 %. Adding `DxN`-rooted
+    derivative labels with unit weights *destroys* the fit (u-L1 2.6e-2):
+    not because their stderr lies (per-state z has RMS 1.0) but because
+    the top 1 % of states by stderr carry ~75 % of the squared label
+    error, so an unweighted MSE is dominated by noise — 1/stderr² weighting
+    is justified for these terms (unlike u, gotcha 40). The Id-rooted u
+    labels are the miscalibrated ones at M = 1000 (RMS z 4.6, max 79:
+    gotcha 15/20). Spec results: `docs/superpowers/specs/2026-09-15-parametric-merton-net-design.md`.
