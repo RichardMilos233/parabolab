@@ -355,3 +355,22 @@ and ac1 +11 %. Sin is the best ac1 activation (7.81e-4, and the only one
 that pulls the ac1 consistency statistic down, 453) but the worst on
 Merton (3.89e-3, max 7.70e-3), so it is recorded as benchmark-dependent
 and not kept.
+
+### R34 — norm × activation cell (parent R4b for the new configs)
+
+The six configurations of {batch, layer, none} × {tanh, gelu}; four were
+already run as R2, R3b, R3a, R4b.
+
+| norm \ activation | tanh (median L1 ac1 / exp1 / merton) | gelu |
+|---|---|---|
+| batch | R2: 8.91e-4 / 1.13e-2 / 3.66e-3 | R34_batch_gelu: 1.15e-3 / 1.13e-2 / 3.90e-3 (max 5.78e-3) |
+| layer | R3b: 7.92e-4 / 1.14e-2 / 3.24e-3 | R34_layer_gelu: 8.26e-4 / 1.14e-2 / 3.40e-3 (max 4.97e-3) |
+| none | R3a: 9.17e-4 / 1.15e-2 / 2.48e-3 | **R4b: 8.83e-4 / 1.13e-2 / 2.07e-3 (max 2.80e-3)** |
+
+No outliers in any cell. Reading: no interaction overturns the ladder —
+"no normalisation" is best for both activations on Merton, and gelu
+without normalisation is the best cell overall (summed median 1.425e-2;
+next best R3b 1.543e-2). With gelu, BatchNorm is the worst choice on ac1
+as well (1.15e-3). LayerNorm is the best choice for ac1 alone under tanh
+(7.92e-4) — a per-benchmark preference, not a global one. **Kept: R4b
+(unchanged).**
