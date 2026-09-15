@@ -1,0 +1,66 @@
+"""Tests for the set-to-field denoiser."""
+
+import numpy as np
+import pytest
+
+torch = pytest.importorskip("torch")
+
+from parabolab.deep.setnet import SetDenoiser
+
+
+def _batch(B=2, N=12, Q=5, d=1, P=2, seed=0):
+    g = torch.Generator().manual_seed(seed)
+    ctx_tx = torch.cat([torch.zeros(B, N, 1), torch.randn(B, N, d, generator=g)], -1)
+    ctx_y = torch.randn(B, N, generator=g) * 3 + 20
+    ctx_se = torch.rand(B, N, generator=g) * 0.1
+    params = torch.rand(B, P, generator=g)
+    q_tx = torch.cat([torch.zeros(B, Q, 1), torch.randn(B, Q, d, generator=g)], -1)
+    return ctx_tx, ctx_y, ctx_se, params, q_tx
+
+
+def test_output_shape_and_finite():
+    torch.manual_seed(0)
+    net = SetDenoiser(d=1, n_params=2, d_model=16, n_heads=2, n_layers=1)
+    out = net(*_batch())
+    assert out.shape == (2, 5)
+    assert torch.isfinite(out).all()
+    assert net.n_params_total > 0
+
+
+def test_context_permutation_invariance():
+    torch.manual_seed(0)
+    net = SetDenoiser(d=1, n_params=2, d_model=16, n_heads=2, n_layers=2).eval()
+    ctx_tx, ctx_y, ctx_se, params, q_tx = _batch()
+    perm = torch.randperm(ctx_tx.shape[1])
+    with torch.no_grad():
+        a = net(ctx_tx, ctx_y, ctx_se, params, q_tx)
+        b = net(ctx_tx[:, perm], ctx_y[:, perm], ctx_se[:, perm], params, q_tx)
+    torch.testing.assert_close(a, b, atol=1e-5, rtol=1e-5)
+
+
+def test_scale_and_shift_equivariance_in_y():
+    torch.manual_seed(0)
+    net = SetDenoiser(d=1, n_params=2, d_model=16, n_heads=2, n_layers=2).eval()
+    ctx_tx, ctx_y, ctx_se, params, q_tx = _batch()
+    with torch.no_grad():
+        a = net(ctx_tx, ctx_y, ctx_se, params, q_tx)
+        b = net(ctx_tx, 7 * ctx_y + 3, 7 * ctx_se, params, q_tx)
+    torch.testing.assert_close(b, 7 * a + 3, atol=1e-4, rtol=1e-4)
+
+
+def test_context_stats_and_param_buffers():
+    net = SetDenoiser(d=1, n_params=2, d_model=16, n_heads=2, n_layers=1,
+                      param_mean=[0.5, 1.0], param_std=[0.25, 2.0])
+    assert net.param_mean.tolist() == [0.5, 1.0]
+    assert "param_std" in net.state_dict()
+    _, ctx_y, *_ = _batch()
+    mu, s = net.context_stats(ctx_y)
+    assert mu.shape == (2, 1) and s.shape == (2, 1)
+    torch.testing.assert_close(mu[:, 0], ctx_y.mean(1))
+
+
+def test_constant_t_column_does_not_produce_nan():
+    net = SetDenoiser(d=1, n_params=1, d_model=16, n_heads=2, n_layers=1)
+    ctx_tx, ctx_y, ctx_se, _, q_tx = _batch(P=1)
+    out = net(ctx_tx, ctx_y, ctx_se, torch.zeros(2, 1), q_tx)   # t == 0 everywhere
+    assert torch.isfinite(out).all()
