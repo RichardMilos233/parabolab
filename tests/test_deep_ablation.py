@@ -392,3 +392,31 @@ def test_run_rung_requires_exact_solution():
     with pytest.raises(ValueError, match="exact_solution"):
         ablation.ensemble_record(cfg, [], benchmark="tiny", data_seed=5,
                                  data=data, pde=pde, x_lo=-2.0, x_hi=2.0)
+
+
+# ---------------------------------------------------------------------------
+# driver
+# ---------------------------------------------------------------------------
+
+import subprocess
+import sys
+from pathlib import Path
+
+
+def test_driver_tiny_end_to_end(tmp_path):
+    script = Path(__file__).resolve().parents[1] / "examples" / "nn_ablation.py"
+    out = tmp_path / "res.csv"
+    cmd = [sys.executable, str(script), "--rungs", "R0", "R1",
+           "--parent", "R0", "--benchmarks", "ac1", "--data-seeds", "0",
+           "--train-seeds", "2", "--data-root", str(tmp_path / "data"),
+           "--out", str(out), "--tiny", "--epochs", "5", "--ensemble",
+           "--jobs", "1"]
+    subprocess.run(cmd, check=True, capture_output=True, text=True)
+    recs = ablation.read_records(out)
+    assert {r.rung for r in recs} == {"R0", "R1"}
+    assert sum(r.train_seed == -1 for r in recs) == 2   # one ensemble per rung
+    assert len(recs) == 2 * (2 + 1)
+    report = subprocess.run(
+        [sys.executable, str(script), "--out", str(out), "--report"],
+        check=True, capture_output=True, text=True).stdout
+    assert "| R1 | ac1 |" in report and "| R0+ens | ac1 |" in report
