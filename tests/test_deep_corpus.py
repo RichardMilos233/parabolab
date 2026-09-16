@@ -244,3 +244,52 @@ def test_loader_accepts_files_written_before_deriv_codes(tmp_path):
     back = corpus.load_or_generate_corpus([spec], tmp_path, min_finite=1)[0]
     np.testing.assert_array_equal(back.y, inst.y)
     assert back.deriv is None
+
+
+# ---------------------------------------------------------------------------
+# Fourier terminal conditions and the FD reference
+# ---------------------------------------------------------------------------
+
+from parabolab.library import (allen_cahn_fourier_1d, fd_reference_1d,
+                               fourier_phi_expr, fourier_phi_numpy,
+                               heat_fourier_1d)
+
+COEFFS = (0.7, 0.5, -0.3, 0.2, 0.1, -0.4, 0.25, 0.0, 0.05)   # A, a1..a4, b1..b4
+
+
+def test_fourier_phi_expr_matches_numpy():
+    import sympy as sp
+    from parabolab.pde import x_symbols
+    expr = fourier_phi_expr(COEFFS)
+    fn = sp.lambdify(x_symbols(1), expr, "math")
+    xs = np.linspace(-8, 8, 7)
+    np.testing.assert_allclose([fn(x) for x in xs], fourier_phi_numpy(COEFFS, xs), rtol=1e-12)
+
+
+def test_heat_fourier_exact_matches_fd_reference():
+    pde = heat_fourier_1d(0.3, COEFFS)
+    xq = np.linspace(-8, 8, 101)
+    exact = np.array([pde.exact_solution(0.0, np.array([x])) for x in xq])
+    fd = fd_reference_1d(pde, xq)
+    assert np.abs(fd - exact).max() < 1e-3
+    assert np.abs(exact - fourier_phi_numpy(COEFFS, xq)).max() > 1e-2   # T = 0.3 actually damps
+
+
+def test_fd_reference_matches_allen_cahn_wave():
+    from parabolab.library import allen_cahn_nd
+    pde = allen_cahn_nd(d=1, T=0.3)
+    xq = np.linspace(-8, 8, 101)
+    exact = np.array([pde.exact_solution(0.0, np.array([x])) for x in xq])
+    assert np.abs(fd_reference_1d(pde, xq) - exact).max() < 1e-4
+
+
+def test_fd_reference_rejects_gradient_nonlinearity():
+    from parabolab.library import merton_hjb
+    with pytest.raises(ValueError, match="deriv_map"):
+        fd_reference_1d(merton_hjb(), np.linspace(100, 200, 5))
+
+
+def test_allen_cahn_fourier_builder():
+    pde = allen_cahn_fourier_1d(0.3, COEFFS)
+    assert pde.exact_solution is None and pde.d == 1 and pde.T == 0.3
+    assert float(pde.phi_mu((0,))(1.0)) == pytest.approx(fourier_phi_numpy(COEFFS, np.array([1.0]))[0])
