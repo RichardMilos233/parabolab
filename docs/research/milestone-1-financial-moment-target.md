@@ -1,15 +1,20 @@
 # First research milestone: a financial coding-tree moment theorem
 
-**Historical note — application decision superseded on 12 September 2026.**
-The user has dropped multidimensional Merton as the FYP application. The active
-direction is [reliable lambda and tuple-proposal selection](lambda-q-optimization-summary.md).
-The analysis and check artifacts below are retained for provenance; the
-recommendation and application-specific work plan in this note are no longer
-the current project decision.
+> **Historical milestone; application inactive — reviewed 16 September 2026.**
+> The multidimensional Merton application decision was superseded on
+> 12 September. The mathematical analysis and check artifacts are retained;
+> the “Proceed” recommendation and two-week/week-eight schedule below are
+> historical and create no current tasks or deadlines. The active scope is
+> [branching-PDE algorithms, scalar lambda, q, and mathematical guarantees](README.md).
+> See also the [documentation map](../documentation-map.md).
+> Implementation snapshots, dirty-file notes, registry corrections, test
+> counts, and literature-version assessments describe the original audit,
+> not the current checkout. This status review did not rerun the old checks
+> or repeat the literature search.
 
 Date: 12 September 2026. Programme: **Reliable branching Monte Carlo for nonlinear portfolio control: moment bounds, adaptive sampling, and policy accuracy.**
 
-## Decision and evidence boundary
+## Original decision and evidence boundary (application decision superseded)
 
 **Proceed, with the theorem restricted to affine opportunity factors and a quadratic log-value driver.** The main analytical obstruction can be resolved for this class: high spatial derivative codes vanish **pathwise**, leaving a finite graded system. Below is an explicit second-moment majorant over the entire factor space, not a conditional assertion that a supersolution would suffice. A rational two-factor financial instance has a certified interval $0\le T-t\le 1/100$. The bound is conservative; it does not certify the assessment's $T=0.4$ experiment.
 
@@ -19,7 +24,7 @@ These are **ordinary mathematical proofs developed and independently reviewed in
 
 Mathematical development/review used GPT-6 Astra Max subagents; bounded implementation and numerical/symbolic execution used GPT-5.6 Sol High. Both requested combinations were accepted. Existing dirty files (`demo/README.md`, `parabolab/solve.py`, `tests/test_solve.py`, `demo/dym.py`) are outside this change. No reproduction campaign, solver rewrite, dependency installation, or work in wavelab is part of this milestone.
 
-## 1. Existing results and remaining obligations
+## 1. Results and obligations at the 12 September audit
 
 Audited inputs: [assessment](../../../research/quant_fyp_assessment_2026-09-12/assessment.md) in the sibling FYP research directory, its verification inventory and log-factor results, [proof registry](proof-registry.md), and the underlying notes linked below. The assessment files live outside this repository and must accompany it to rerun their imported checks. The registry's word “authoritative” is not an evidentiary premise. Its last-reviewed hash and some implementation pointers are stale.
 
@@ -31,7 +36,7 @@ Audited inputs: [assessment](../../../research/quant_fyp_assessment_2026-09-12/a
 | Clocks, PR-RATE-1–4 | [Local convexity, topology kernels and binary Riccati oracle](estimator-integrity/exponential-rate-optimization.md) are useful completed results. The actual note numbers are Theorems 7.1, 7.2, 7.4 and 7.5, not the master table's 1.1–4.1. | The full-recursive short-time law needs uniform expansions and domination. Its nonzero terminal-leaf premise fails for log-value terminal data $u(T)=0$. |
 | Financial derivation, PR-MM-1–4 | [Hamiltonian optimization, CRRA substitution, no-fixed-linear-index test, and Riccati coefficient matching](multifactor-merton-proofs.md) are sound algebra/PDE results under the displayed hypotheses. | They do not establish control admissibility, a verification theorem, or unrestricted tree integrability. “No fixed linear index” does not imply nonseparability, no closed form, or high-dimensional hardness. |
 | Mechanism, PR-MM-5–7 | The wealth-domain obstruction is valid. The explicit-state/full-covariance source identity follows from the displayed second-order chain rule, including the mixed covariance term. | MM-7 remains conditional for the general class. The theorem below discharges its moment and uniqueness issues only in the finite graded specialization. |
-| Current implementation | `StateDependentPDEnD` and `StateDependentMechanismND` exist in `parabolab/state_dependent.py`; drift-as-source and exact support pruning already work. Positive-definite constant covariance can be whitened. | Native full covariance is not implemented. `finite_depth_moment_1d` and `finite_depth_moment_derivatives_1d` are one-dimensional and are not certified quadrature. The registry's `iterate_moments` and `optimal_tuple_proposal` names do not match the current API (`sqrt_optimal_probabilities` is the latter). |
+| Implementation at that audit | `StateDependentPDEnD` and `StateDependentMechanismND` exist in `parabolab/state_dependent.py`; drift-as-source and exact support pruning already work. Positive-definite constant covariance can be whitened. | Native full covariance is not implemented. `finite_depth_moment_1d` and `finite_depth_moment_derivatives_1d` are one-dimensional and are not certified quadrature. The registry's `iterate_moments` and `optimal_tuple_proposal` names did not match the audited API (`sqrt_optimal_probabilities` is the latter). |
 | Existing verification | The assessment records 17 targeted moment/proposal/rate tests, 6 state-dependent tests, and a successful existing Lean build. Its log-factor checks support algebra, coordinate mapping and ODE consistency. | Those are historical targeted runs, not a fresh full-suite run in this milestone. ODE-method agreement and residuals are not validated numerical error bounds or moment proofs. |
 | Lean boundary | `FiniteTree.lean` defines a finite algebraic operator; `MomentIteration.lean` proves order/iteration properties; Dym, proposal and rate files formalize selected substatements. | Brownian construction, spatial/time integration, random-tree exhaustion, the financial model and this milestone's proofs are not formalized there. A build verifies the statements written, not these omitted obligations. |
 
@@ -411,7 +416,13 @@ Execution limitation: an initial run was interrupted after approximately 120 sec
 
 The rational inequality in (11) supplies the actual upper certificate. Floating-point coefficient norms, ODE-method agreement, and finite-depth moment approximations do not. The generated report also contains a cruder automated rational horizon; use its explicitly named `conservative_T_1_over_100_certificate` for (11). The obstruction uses exact row membership plus the ordinary Tonelli/Jensen proof, not a numerically exploding Picard sequence.
 
-## 8. Two-week work plan and week-eight gate
+## 8. Historical two-week work plan and week-eight gate (inactive)
+
+The application was dropped after this plan was written. The dates and
+targets below are preserved to explain the original decision criteria;
+they are not current deadlines or outstanding work. The retained theorem
+and obstruction can be cited within their stated scope without restarting
+the financial programme.
 
 Theorem M1 and obstruction M1-O provide one focused research story: characterize when the selected portfolio estimator is a legitimate expectation, improve sampling inside that supported regime, and measure the resulting policy error. They do not justify adding further financial domains.
 

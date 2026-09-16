@@ -213,7 +213,7 @@ omissions. Classical axioms reported by the Lean audit were only
 `propext`, `Classical.choice` and `Quot.sound`; no project-specific axioms
 or proof holes were introduced in these modules.
 
-The latest root verification ran `python -m pytest -q`: **226 passed,
+At this original checkpoint, verification ran `python -m pytest -q`: **226 passed,
 14 deselected**, in 53.47 seconds, including nine new wave-certificate
 tests. The full `lake build`, including the new convex-enclosure module,
 completed **3,390 jobs without warnings**. Its five public declarations

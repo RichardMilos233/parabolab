@@ -1,14 +1,15 @@
 # Demos
 
-One PDE per script: define the equation, solve with multiple methods or
-sampling settings, print a comparison table, and save a figure. This remains
-the demo workflow as research improves the branching estimator through
-`lambda` and `q_c(Z)`.
+The solution demos define one PDE, solve it with multiple methods or sampling
+settings, print a comparison table, and save a figure. The separate rate
+sweep compares sampling diagnostics across several PDE configurations.
+Current research concerns recursive moment control, rate selection and tuple
+probabilities `q_c(Z)`; runtime is a supporting measurement.
 
 ```bash
 python demo/allen_cahn.py        # Allen-Cahn d=1 (JCP2024 Table 1 / Fig. 1)
 python demo/variance_reduction.py # Allen-Cahn: baseline / selected rate / terminal q / both
-python demo/rate_variance.py     # Var(H)-lambda convex sweet spot & optimal rate verification
+python demo/rate_variance.py     # finite-depth rate diagnostics + binary Riccati control
 python demo/merton.py            # Merton HJB d=1 (JCP2024 eq. (4.6), Table 5)
 python demo/merton_vasicek.py     # retained stochastic-rate Merton example (d=1 reduced)
 python demo/dym.py               # Dym non-integrability diagnostic (JEQ Fig. 6)
@@ -58,24 +59,43 @@ estimation algorithms to evaluate, not guaranteed improvements on every PDE.
 For node counts and pointwise variance-times-work diagnostics, use
 [`examples/sampling_tuning.py`](../examples/sampling_tuning.py).
 
-## Rate sensitivity and strictly convex variance curves across PDEs
+## Rate sensitivity diagnostics
 
-`rate_variance.py` systematically demonstrates the generalizability of the
-theoretical optimal rate formula $\lambda_{\mathrm{theory}}(x) \approx |f(\phi(x))|/|\phi(x)|$
-(Theorem 7.4) across multiple PDE families, spatial states, and nonlinearities:
-- **(a) Allen–Cahn Traveling Wave ($x = 0.0$)**: Cubic nonlinearity $f(u) = u - u^3$,
-  symmetric baseline ($\lambda_{\mathrm{theory}} = 0.7500 \approx \lambda^* = 0.7305$, 2.6% error).
-- **(b) Allen–Cahn Traveling Wave ($x = -1.0$)**: Shifted spatial state
-  demonstrating state-dependent generalizability ($\phi = -0.7311$, $\lambda_{\mathrm{theory}} = 0.4656 \approx \lambda^* = 0.4787$, 2.8% error, 66% variance reduction).
-- **(c) Fisher–KPP Logistic Equation ($\phi = 0.5$)**: Quadratic-linear nonlinearity
-  $f(u) = u - u^2$ ($\lambda_{\mathrm{theory}} = 0.5000 \approx \lambda^* = 0.4937$, 1.3% error, 98% variance reduction).
-- **(d) Binary Riccati Control ($\phi \equiv 1$)**: Pure quadratic nonlinearity
-  $f(u) = u^2$ with standard binary branching and exact Riccati second-moment formula
-  ($\lambda_{\mathrm{theory}} = 1.0000 \approx \lambda^* = 1.0258$, 2.6% error).
+`rate_variance.py` compares the short-time approximation
+$\lambda_{\mathrm{short}}(x)=|f(\phi(x))|/|\phi(x)|$ with a numerical selector
+and full-tree Monte Carlo samples at `T=0.05`. This formula is the leading
+short-horizon rule for the specified scalar semilinear root, not an exact
+finite-horizon optimum. The four panels are:
 
-Each panel presents a strictly convex $\operatorname{Var}(H) - \lambda$ U-shape
-(high at both ends, clear sweet spot minimum in the center), overlaying deterministic
-quadrature / Riccati formulas against empirical Monte Carlo trials with error bars.
+- Allen–Cahn wave at `x=0` and at `x=-1`, illustrating that the starting state
+  affects the rate objective;
+- spatially constant Fisher–KPP with terminal value `0.5`;
+- binary Riccati control with terminal value `1`, whose explicitly binary
+  mechanism has a closed-form full-tree second moment.
+
+For the first three panels, the default deterministic curve is depth-two
+second-moment quadrature minus the exact PDE mean squared. This is a proxy
+for full-tree variance, not a certified enclosure or the variance of the
+killed-depth estimator. Its numerical minimizer is constrained to a supplied
+rate interval. The binary panel instead evaluates the exact Riccati formula
+and numerically locates its stationary rate.
+
+The current plot and table labels use “optimal”, “strict convexity” and
+“verification”; read them within these scopes. A plotted U-shape and Monte
+Carlo agreement do not prove convexity or certify a global optimum. The
+variance error bars are plug-in estimates using the sample fourth moment,
+not rigorous confidence bounds. The displayed variance reduction compares
+the nearest sampled rates to `1` and to the selected rate, and clips negative
+reductions to zero; it is not an exact comparison at those two rates.
+
+For actual full-tree bounds, use the separate
+[certified-rate report](../docs/research/results/certified-rate-checkpoint.md)
+and [profile report](../docs/research/results/profile-efficiency-checkpoint.md).
+The profile method chooses one common rate for several **starting states**;
+it does not change the rate within a tree. It is optional when the research
+question concerns only one starting state. Python selects and checks the
+rates; Lean currently verifies selected mathematical lemmas, not the entire
+sampler or numerical verifier.
 
 The original Merton demos remain benchmarks. Multifactor Merton is no longer
 the active research roadmap. Dym is a negative control: its specified
@@ -97,4 +117,6 @@ runtimes depend on the environment, seed, and budget.
 
 Full multi-run paper reproduction scripts are located in `examples/`.
 The [research guide](../docs/research/README.md) records current claims,
-implementation limits, and next steps.
+implementation limits, and next steps. The
+[documentation map](../docs/documentation-map.md) distinguishes current
+guidance, dated results and inactive research.

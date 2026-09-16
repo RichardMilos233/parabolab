@@ -1,8 +1,19 @@
 # Dym coding-tree non-integrability
 
-**Mathematical status:** proved theorem.
+**Mathematical status:** conventional theorem for the real-extension
+estimator and support assumptions stated below.
 **Priority status:** not established; the bounded literature audit in the
 design specification did not locate this Dym-specific result.
+
+**Verification scope (16 September 2026):**
+[`Dym.lean`](../../../formal/EstimatorIntegrity/Dym.lean) formalizes the
+coefficient identity and singular-integral substatements, not the entire
+five-particle probability argument. The
+[truncated-integral experiment](../../../examples/dym_nonintegrability.py)
+and [`demo/dym.py`](../../../demo/dym.py) are numerical diagnostics;
+finite samples cannot establish divergence or a stable optimal rate.
+The later Allen–Cahn finiteness and rate certificates do not transfer to
+this Dym functional, whose absolute first moment diverges as proved below.
 
 This note proves that the coding-tree random variable used for the Dym
 example is not integrable at any positive horizon. The obstruction already

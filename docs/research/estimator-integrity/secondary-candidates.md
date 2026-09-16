@@ -1,5 +1,17 @@
 # Seven secondary candidates for branching-estimator integrity
 
+> **Historical candidate ledger — status reviewed 16 September 2026.**
+> This records Candidates 4–10 from the 9 September programme, not seven
+> active projects or a requirement to implement them all. Mathematical
+> statements keep their displayed assumptions and proof status; novelty
+> judgments retain the scope of that original bounded literature audit.
+> Neural training, financial applications, elliptic regularization, and the
+> companion wave-equation direction are deferred/background ideas here.
+> Current priorities are branching-PDE estimator algorithms, scalar lambda,
+> tuple probabilities q, and mathematical guarantees: see the
+> [research index](../README.md), [proof registry](../proof-registry.md), and
+> [documentation map](../../documentation-map.md).
+
 This note is a claim ledger for Candidates 4--10 in the estimator-integrity
 programme. Each candidate uses the same eight-part template. Its `Status`
 field is the status of the candidate contribution as a whole; a complete
@@ -627,7 +639,7 @@ separately.
   Its asymptotic bias is \(m_\alpha-m\), which is generally nonzero for a
   skewed tree-label law and persists when \(\alpha\) is fixed.
 
-* **The current percentile filter.** If its empirical \(1\%\) and \(99\%\)
+* **The percentile filter examined in the original audit.** If its empirical \(1\%\) and \(99\%\)
   quantiles converge to \(Q_{.01}\) and \(Q_{.99}\), its multiplier \(c\)
   produces limiting thresholds
   \[
@@ -694,7 +706,7 @@ empirical variance: A deviation study* (2012),
 Bias from trimming is studied, for example, by Danielak and Rychlik (2003),
 [DOI 10.1111/1467-842X.00262](https://doi.org/10.1111/1467-842X.00262).
 
-The current deep-branching filter is documented in the implementation of
+The deep-branching filter examined in this historical comparison is documented in the implementation of
 Nguwi, Penent, and Privault's method,
 [DOI 10.1016/j.jcp.2023.112712](https://doi.org/10.1016/j.jcp.2023.112712).
 Huang and Privault's

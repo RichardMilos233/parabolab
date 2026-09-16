@@ -5,6 +5,21 @@ finite-topology kernels; proved conditional theorem for the unrestricted
 moment under the stated topology-disintegration and properness hypotheses;
 analytic control for the binary Riccati model.
 
+**Implementation status (16 September 2026):**
+[`rate_optimization.py`](../../../parabolab/rate_optimization.py) propagates
+first and second rate derivatives through the finite-depth child recursion
+with the tuple proposal held fixed. The local frozen-continuation objective
+below is not substituted for those recursive derivatives. Separate exact
+rational verifiers now bound full-tree objective excess for the saved flat,
+wave-root and five-point profile Allen–Cahn benchmarks; see the
+[certificate checkpoint](../results/certified-rate-checkpoint.md) and
+[profile checkpoint](../results/profile-efficiency-checkpoint.md). The
+[mean-identification theorem](allen-cahn-mean-identification.md) justifies
+their variance interpretation. These are benchmark-specific certificates,
+not a general error guarantee for finite-depth quadrature or a universal
+optimal-rate formula. Lean covers the explicitly listed algebraic and
+order substatements in the [proof registry](../proof-registry.md).
+
 This note studies the rate \(\lambda>0\) of the exponential lifetime law
 
 \[
@@ -552,6 +567,11 @@ full moments are proper and the displayed nondegeneracy conditions hold.
 The common moment theorem is the required integrability gate: empirical
 stability by itself is not a proof that condition 1 holds.
 
+For the saved flat and traveling-wave Allen–Cahn examples at `T=1/20`,
+the [six-code moment certificates](../results/certified-rate-checkpoint.md)
+now supply finite incumbents. This closes that hypothesis for these stated
+examples; it does not establish finiteness for arbitrary horizons or proposals.
+
 The Harry Dym example lies on the other side of that gate. The
 [Dym non-integrability theorem](dym-nonintegrability.md#theorem-41-infinite-absolute-first-moment)
 proves, for every \(\lambda>0\), every positive horizon, and every
@@ -821,6 +841,14 @@ fixed horizon, but the literal asymptotic comparison has the direction
 shown in (7.52)--(7.53).
 
 ## Exact binary Riccati control
+
+The oracle in this section belongs to the explicit `Id → (Id,Id)` mechanism.
+It is not the second moment of the default derivative-coded tree for the
+same PDE. The [binary audit](../results/binary-benchmark-audit.md) corrects
+the old mismatched numerical comparison; the original CSV and figure are
+historical diagnostics, not oracle validation. The current binary driver
+uses matching mechanisms. Its numerical stationary rates are not rigorous
+interval enclosures of the exact minimizing rate.
 
 Consider the standard binary branching representation of
 

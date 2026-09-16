@@ -33,6 +33,8 @@ integrability assumptions.
 
 Start with [demos](demo/README.md) for the existing solver workflow and the
 [research guide](docs/research/README.md) for current results and open work.
+The [documentation map](docs/documentation-map.md) separates current guidance
+from dated experiments and inactive directions.
 Multifactor Merton research is retained as historical material; the original
 Merton benchmarks and general multidimensional PDE support remain available.
 
@@ -41,11 +43,12 @@ Merton benchmarks and general multidimensional PDE support remain available.
 ```bash
 conda env create -f environment.yml     # or: conda env update -f environment.yml
 conda activate parabolab
-pytest                                  # fast suite (~30 s)
+pytest                                  # default suite (slow tests excluded)
 pytest -m 'slow or not slow'            # + paper-budget validation (minutes)
 python demo/allen_cahn.py               # start here: one PDE, several
 python demo/merton.py                   #   methods (see demo/README.md)
 python demo/variance_reduction.py       # same workflow: baseline / lambda / q / both
+python demo/rate_variance.py            # rate diagnostics and binary Riccati control
 python demo/dym.py                      # non-integrability diagnostic
 python examples/jeq_allen_cahn_1d.py    # paper reproductions (see examples/)
 python examples/jeq_fig6_dym.py         # M2: JEQ Figs 6-9 reproductions
@@ -113,21 +116,41 @@ mc = CodingTreeMC(n_samples=10_000, seed=0).solve(pde, grid)
 compare(pde, mc).table().plot("allen_cahn.png")
 ```
 
-`CodingTreeMC` is a pointwise expectation and costs about a second for the
-whole profile; the three network solvers train and want real budgets
-(JCP2024 quotes 28–184 GPU-minutes per run). Runnable versions of the
-above are in `demo/`. The seven profile scripts in `examples/` use the
-same interface; the rest (multi-run tables, the three-way comparison,
-the blow-up and rate sweeps) keep their own shape because their output
-is a statistic, not a curve.
+`CodingTreeMC` estimates pointwise expectations; the three network solvers
+train approximations to the solution. Runnable versions are in `demo/`.
+Profile examples use the same interface. Multi-run tables, the three-way
+comparison, blow-up diagnostics and rate sweeps keep separate drivers
+because their output is a statistic rather than a solution curve. Runtime
+depends on the PDE, mechanism, sampling policy, hardware and budget.
 
 ## Current research: branching variance reduction
 
 Selecting `lambda` and `q_c(Z)` changes how the same branching estimator is
 sampled. Exact inverse-probability weights preserve its represented mean when
-the estimator is integrable. Compare empirical variance, standard error,
-estimation error, and computation time; a single accurate curve does not
-establish finite variance or optimal sampling.
+the estimator is integrable. The research priority is recursive optimization,
+variance control and mathematical guarantees. Runtime comparisons support
+these questions; a single accurate curve does not establish finite variance
+or optimal sampling.
+
+Three complementary components are implemented:
+
+- **Pointwise rate selection:** finite-depth moment quadrature differentiates
+  the recursive child contributions and chooses a candidate rate on a supplied
+  interval. The short-time rule is an approximation, not a finite-time optimum.
+- **Full-tree certification:** separate exact-rational programs bound the
+  candidate second moment from above and the global optimum from below for
+  specified raw-uniform Allen–Cahn settings. Their difference bounds the
+  objective gap; the corresponding mean-identification argument makes this
+  also a variance gap. See the [certified-rate report](docs/research/results/certified-rate-checkpoint.md).
+- **Shared-profile selection:** an optional weighted extension chooses one
+  common scalar rate for several starting states. For the five-point wave
+  benchmark at `T=0.05`, the cheap rule is certified within 1.60% of optimal
+  weighted variance. This is neither an error bound on the rate itself nor
+  a rate that adapts inside each tree. See the [profile report](docs/research/results/profile-efficiency-checkpoint.md).
+
+The mathematical arguments, Python selectors/verifiers and Lean lemmas have
+separate scopes. Lean does not formally verify the full stochastic solver or
+the numerical certificate programs; consult the [proof registry](docs/research/proof-registry.md).
 
 `TerminalTupleProposal(pde, floor_mass=0.1)` provides a cheap, support-preserving
 terminal-data proxy for `q_c` at each branching decision. Pass the same proposal
@@ -149,21 +172,31 @@ For pointwise variance and timing diagnostics, run:
 conda run --no-capture-output -n parabolab python examples/sampling_tuning.py
 ```
 
-This is **opt-in heuristic tuning**, not a universal formula or a certified
+The generic rate/proposal tuning above is **opt-in heuristic tuning**, not a universal formula or a certified
 full-tree optimum: the rate objective uses finite-depth numerical quadrature,
 and the proposal uses terminal values at the parent-birth state, not exact
 continuation moments. The full-tree continuation second moments themselves
 depend on `lambda`; the frozen-continuation local theorem does not supply them
 for free. A positive proposal floor does not prove integrability. Defaults and
-tree draw order are unchanged. Measure tuning overhead and sampling runtime as
-well as variance before deciding that a configuration is faster. See the
+tree draw order are unchanged. Measure tuning overhead and sampling runtime
+when making a speedup claim, separately from the algorithmic variance result. See the
 [research checkpoint](docs/research/lambda-q-optimization-summary.md) for the
 precise claims and remaining work.
 
-## Results at a glance
+`demo/rate_variance.py` adds rate-sensitivity plots for Allen–Cahn, Fisher–KPP
+and binary Riccati. Its first three curves use finite-depth approximations;
+only the specified binary control uses a closed-form full-tree moment.
+Empirical error bars and U-shaped plots are diagnostics, not proofs of
+strict convexity or optimality. See the [demo interpretation notes](demo/README.md#rate-sensitivity-diagnostics).
 
-All numbers are from this repo's scripts on a laptop CPU; "paper" =
-published values (GPU where applicable).
+## Historical reproduction results
+
+The following records describe the completed M1–M5 reproduction runs, not
+fresh results on every later source revision. Numbers came from this repo's
+scripts on a laptop CPU; "paper" denotes published values (GPU where
+applicable). Cross-hardware runtimes are descriptive, not controlled speedup
+measurements. Current source verification is recorded separately in the
+[integration record](docs/research/results/integration-2026-09-16.md).
 
 | reproduction | ours | reference |
 |---|---|---|
@@ -174,7 +207,7 @@ published values (GPU where applicable).
 | JCP Table 3: deep branching exponential d = 1 L1 | 1.25e-2 | 1.17e-2 (42 GPU-min) |
 | JCP Table 5: deep branching Merton HJB L1 | median 1.0e-2 + the paper's tanh anomaly reproduced (Fig 7) | 8.49e-3 (54 GPU-min) |
 | JCP Tables 1/3/5 three-way (vs vendored deep BSDE / DGM) | table below | Tables 1/3/5 columns |
-| JCP Fig 2 blow-up study | integrability edges: T ≈ 0.8–0.9 (jcp rate), T ≈ 1.0–1.1 (rate 1); authors' CSVs inside our seed spread | `coding_trees` blow_up_analysis CSVs |
+| JCP Fig 2 blow-up study | empirical precision-loss thresholds: T ≈ 0.8–0.9 (jcp rate), T ≈ 1.0–1.1 (rate 1); authors' CSVs inside the recorded seed spread | `coding_trees` blow_up_analysis CSVs |
 
 ### Three-way comparison (M5, reduced budget: 3 runs, CPU)
 
@@ -189,11 +222,10 @@ the published full-budget GPU values:
 | exponential d = 1 (Table 3) | 2.11e-2 (4.8e-3), 22 s — paper 1.17e-2 | 1.39e-2 (3.2e-3), 55 s — paper 1.39e-2 | 2.56e-2 (1.3e-2), 58 s — paper 2.53e-2 |
 | Merton HJB d = 1 (Table 5) | 2.14e-2 (7.3e-4), 9 s — paper 8.49e-3 | **1.61e+0** (1.0e-1) — paper **1.61e+0** (fails) | inapplicable (loss divides by the net's 2nd derivative) — as in the paper |
 
-The paper's qualitative rankings reproduce exactly (deep BSDE matches to
-3 digits on AC d = 5, exponential, and its Merton *failure* level); the
-branch column trails its own paper values slightly where the reduced
-sample budget (M = 10k/3k/1k vs 100k/30k/10k) bites — the `--full`
-budget closes the gap (see the M4 milestone summary).
+These reduced-budget runs recover the main reported qualitative behavior,
+including the poor deep-BSDE Merton result. They use different budgets from
+the paper and do not establish a universal ranking of the methods. The full
+M4 reproduction values are recorded above.
 
 ## Layout
 
@@ -207,9 +239,12 @@ budget closes the gap (see the M4 milestone summary).
 | `parabolab/proposals.py` | nonuniform tuple probabilities, pilot-frozen proposals, and the terminal-data proxy |
 | `parabolab/moments.py` | deterministic finite-depth absolute-moment quadrature |
 | `parabolab/rate_optimization.py` | finite-depth rate derivatives, bracket-constrained rate selection, and the binary Riccati oracle |
+| `parabolab/profile_rates.py` | short-time weighted-profile rule and finite-depth selection of one common rate |
+| `parabolab/rate_certificate.py`, `wave_certificate.py`, `profile_certificate.py` | exact-rational full-tree bounds for the specified Allen–Cahn flat, wave and profile settings |
+| `parabolab/rate_variance.py` | finite-depth/MC rate diagnostics and a separate binary Riccati control; not a certificate verifier |
 | `parabolab/solve.py` | uniform solver interface: `CodingTreeMC`, `DeepBranching`, `DeepBSDE`, `DeepGalerkin`, all `Solver(**budget).solve(pde, grid) -> Curve`, plus `compare(...)` for the table and figure; pins the grid convention and keeps torch out of the top-level import |
 | `parabolab/parallel.py` | `estimate_parallel`: sample batches over worker processes (n_jobs-independent results; pure-Python `estimate` stays the reference) |
-| `parabolab/profiles.py` | profile estimation over an x-grid (+ d-dim embedding) + Fig-style plotting |
+| `parabolab/profiles.py` | profile estimation over an x-grid and d-dimensional embedding; plotting is in `solve.py` |
 | `parabolab/library.py` | Allen–Cahn (5.1)–(5.4) incl. d-dim; Dym (5.7), tan (5.8), cosine (5.10), log (5.11); exponential gradient (5.5); HJB (5.9) with Cole–Hopf exact value; Merton HJB (JCP 4.6, non-polynomial f) |
 | `parabolab/deep/` | M4 deep branching solver (JCP2024 Alg. 2): `generator.py` (batched (τ,X,H̄) training data over worker processes, optional root codes), `net.py` (residual tanh net (3.2)–(3.3)), `solver.py` (Adam training loop, grid errors, Fig-7 consistency plot), `experiments.py` (repeated-run driver) |
 | `parabolab/vendor/` | M5 vendored baselines: the authors' deep BSDE (`bsde.py`) and deep Galerkin (`galerkin.py`) solvers, verbatim from [deep_branching](https://github.com/nguwijy/deep_branching) @ `c06bef2` (MIT), plus our thin `adapters.py` (index mapping + sympy→torch lambdify — no solver logic of ours) |
@@ -251,67 +286,63 @@ budget closes the gap (see the M4 milestone summary).
   including the paper's negative findings (deep BSDE fails on Merton at
   L1 ≈ 1.6, DGM inapplicable to Merton).  The blow-up study
   (`examples/blowup_allen_cahn.py`, machinery in `parabolab/blowup.py`)
-  maps the end of the integrability window for Allen–Cahn d = 1/10 —
-  see "The blow-up story" below.
+  records empirical loss of precision for Allen–Cahn d = 1/10 — see
+  the diagnostic interpretation below.
 
-## The blow-up story (M5 centerpiece)
+## Interpreting the historical blow-up diagnostics
 
 `examples/blowup_allen_cahn_d{1,10}.png`: pointwise estimate of
 u(0,0) for Allen–Cahn as the horizon T grows from 0.1 to 2.0
 (3 seeds × 10⁵ samples, both ρ rates), overlaid on the authors'
-`coding_trees` blow-up CSVs.  The representation u = E[H] holds only
-while H is integrable (JEQ2023 Prop. 4.2), and the sweep shows **how the
-window closes depends on the ρ rate**:
+`coding_trees` blow-up CSVs. The representation requires integrability, but
+these finite-sample sweeps do not locate a mathematical integrability or
+second-moment boundary. They measure how empirical precision deteriorates
+under two sampling rates:
 
 - **JCP rate −log(0.95)/T** (authors' choice, tiny trees, heavy leaf
   weights): no dramatic explosion — instead the *sample SD grows
   smoothly* until the estimator stops resolving the solution.  Our
   5 %-relative-stderr edge: **T ≈ 0.8 (d = 1), T ≈ 0.9 (d = 10)**.  The
-  authors' single-seed curve drifts systematically past T ≈ 0.5; our
-  3-seed spread shows that "drift" is just one draw from a
-  by-then-huge sampling distribution (their curve sits inside our seed
-  spread everywhere).
-- **rate = 1** (our default, good at small T): *sharper and more honest*
-  — stderr stays ≲1 % out to T ≈ 0.9/1.0, then E[H²] leaves the window
-  and the estimate explodes violently (max |H| reaches 7.6e9 at
+  authors' single-seed curve falls within the recorded three-seed spread.
+  This is consistent with substantial sampling variability; it does not
+  establish bias or the existence of moments.
+- **rate = 1** (the package default): recorded stderr stays ≲1 % out to
+  T ≈ 0.9/1.0, followed by much larger observed weights (max |H| reaches 7.6e9 at
   T = 2, d = 1; estimates land at ±10³–10⁴).  Edge: **T ≈ 1.0 (d = 1),
-  T ≈ 1.1 (d = 10)**.
-- Same mechanism, different dress, as the earlier findings: the Dym
-  example's divergence at *every* rate (M2), and the HJB d = 100 tail
-  anatomy where under-sampled tails produce deceptively tight but biased
-  estimates (M3).  Practical summary: **inside the window the pointwise
-  MC estimator is unbeatable for its cost; the window's edge is visible
-  in the diagnostics (stderr growth, max |H|, seed spread) *before* the
-  numbers go visibly wrong — if you look.**
+  T ≈ 1.1 (d = 10)** under the recorded diagnostic rule.
+
+Standard-error growth, maximum weights and seed spread are useful warning
+signs. Their absence is not an integrability proof. The separate Dym
+non-integrability theorem and the exact Allen–Cahn certificates supply
+mathematical conclusions for their own explicitly stated settings.
 
 ## Notes
 
 - ρ is Exp(rate); the package default is **rate = 1** (the "standard
   exponential" of JEQ2023's Mathematica appendix). JCP2024's choice
-  `-log(0.95)/T` (`parabolab.jcp_rate`) yields heavier-tailed weights: at
-  T = 0.5 its empirical mean shows a visible systematic deviation — also
-  present in the authors' own logs. See `CLAUDE.md` for gotchas.
-- **The optimal rate flips at large d**: with a big reduced mechanism
+  `-log(0.95)/T` (`parabolab.jcp_rate`) showed larger sampling variability
+  in the recorded one-dimensional Allen–Cahn runs. This observation is not
+  a bias theorem or a universal comparison. See `CLAUDE.md` for gotchas.
+- **Rate choice depends on the mechanism**: with a big reduced mechanism
   (HJB d = 100: |ℳ(f*)| = 20 000) every branching multiplies the weight by
-  |ℳ|·e^{λτ}/λ, so frequent branching (rate 1) compounds catastrophically
-  — the sparse `jcp_rate` is *essential* there, the opposite of the d = 1
-  recommendation.
+  |ℳ|·e^{λτ}/λ. The sparse `jcp_rate` performed better than rate 1 in the
+  recorded high-dimensional HJB runs. Neither rate is thereby proved optimal.
 - **Table 5 tail anatomy (HJB d = 100)**: 10⁵-sample runs that miss the
   rare large-weight branches cluster at ≈ 4.580 with deceptively small
   stderr — precisely the paper's published 4.580340 ± 0.001869, which is
   5 of its own SDs below the exact 4.590162. Runs that catch monsters
   report honestly large stderr and centre on the exact value; our 5-run
   mean is 4.590153.
-- The method is short-time by nature: integrability of $\mathcal H$
-  (JEQ2023 Prop. 4.2) can fail for large T; Allen–Cahn at T ≲ 0.5 is safely
-  inside the window.
-- **Why our M4 runs are ~30x faster than the paper's GPU runs at the same
-  sample budgets**: the authors' torch sampler evaluates the RAW mechanism
+- Integrability and second-moment assumptions must be checked for the
+  specified PDE, horizon, mechanism and sampling proposal. The saved
+  Allen–Cahn certificates at `T=0.05` do not certify every benchmark horizon.
+- **M4 implementation difference**: the authors' torch sampler evaluates the RAW mechanism
   (whose zero members dominate) with autograd-computed φ-derivatives on
   masked full-size tensors; our sampler walks the reduced mechanism with
-  lambdified closed-form derivatives. Same estimator distribution, far
-  fewer operations. The deep branching runtime is dominated by data
-  generation; training (P = 3000 full-batch epochs, N = 1000) is ~10 s.
+  lambdified closed-form derivatives. Removing zero tuples and adjusting
+  probabilities preserves the represented mean under the required
+  integrability assumptions; it can change the sample distribution and
+  variance. Historical CPU/GPU timing differences do not isolate this effect.
 - **The JCP Fig-7 anomaly reproduces**: at full Merton budget one of our
   10 tanh runs (run 9) trains to L1 6.8e-2 while the other nine give
   5e-3–1.8e-2 — and the Fig-7 consistency plot (MC targets vs net) makes

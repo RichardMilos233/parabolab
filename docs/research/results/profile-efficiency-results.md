@@ -1,5 +1,12 @@
 # Profile-rate efficiency and policy reuse: completed benchmark
 
+**Recorded experiment: 14 September 2026; documentation review: 16 September.**
+This is supporting performance evidence. Current research prioritizes
+algorithmic variance reduction and mathematical guarantees; the timing
+outcome below does not settle those broader questions. See the
+[research guide](../README.md) and
+[integration record](integration-2026-09-16.md) for current status.
+
 The cheap grid short-time rule gave the lowest observed profile RMSE under
 both calibrated predicted budgets. The numerical grid selector improved
 fixed-sample accuracy over the point selector, but its setup cost was not
@@ -242,10 +249,12 @@ claim, population-variance confidence interval, or universal claim across
 horizons, grids, proposals, hardware or reuse counts beyond 1 and 10. A
 numerical selector's convergence flag alone is not a full-tree certificate.
 
-The practical next step is to keep the cheap grid rule as the incumbent
-baseline and use its small certified remaining profile-variance gap to
-assess whether further tuning can repay setup. Larger reuse experiments are justified only if
-the attainable variance-cost improvement can plausibly repay setup.
+For this practical workload, keep the cheap grid rule as a reference
+baseline and use its certified profile-variance gap when interpreting
+further tuning. A larger reuse experiment would address an additional
+performance question. Neither this timing result nor its limited variance
+headroom determines the value of studying recursive algorithms, different
+objectives or broader mathematical guarantees.
 Unequal point allocation is a separate target, since the leftmost state
 still accounts for substantial error; it changes the objective and needs
 its own frozen protocol. None of these follow-up experiments was run here.
@@ -274,18 +283,26 @@ The driver refuses to overwrite a nonempty directory. Reproducing sampling
 requires a new directory. Existing plots and summaries can be rebuilt
 without samples using `--report-only`.
 
-Predeclared hashes match the executed driver and current sources:
+Predeclared hashes match the executed driver and source snapshot preserved
+at `ff58620`. Later changes to `library.py` and `rate_optimization.py` mean
+that they are not all hashes of current main; see the integration record.
 
 - Protocol: `0df97adfa09e50921af026f7496b33426ca28aa614252e9c0a0b4301d6555da4`.
 - Driver: `7a9091fe5446f3fc8abb1251dff954d41805ea1f61962e18ba57af9446c33aef`.
 
 The independent [archive audit](profile-efficiency/validate_archive.py)
-passes all 22 recorded checks in
+passed all 22 recorded checks against that source snapshot, saved in
 [validation.json](profile-efficiency/validation.json). It recomputes the
 full schedule and ordering, unique seeds, median calibration, integer
 allocations, exact analytic solution, curve/point errors, unpooled workload
 losses, one-time setup charges, comparisons and completed tree counts.
 This checks arithmetic and provenance, not stochastic correctness.
+The validator requires matching source bytes, including an original
+absolute driver path stored in the metadata. Running it on a later
+checkout or another machine may therefore fail a provenance check even
+when the raw archive is unchanged. The commands below describe the
+recorded verification environment; do not rewrite the frozen hashes to
+make a newer checkout pass.
 
 ```sh
 /opt/miniconda3/envs/parabolab/bin/python -m py_compile examples/profile_efficiency_benchmark.py

@@ -132,7 +132,13 @@ Calibration itself cost `1.5564` seconds and is reported as benchmark
 measurement overhead, rather than a required production tuning step. The
 whole benchmark took `30.2290` seconds before figure/report generation.
 
-## Interpretation and next experiment
+## Interpretation and the subsequently completed follow-up
+
+The points below record the interpretation of the original experiment.
+Its proposed profile-objective/reuse follow-up is now complete in the
+[profile study](profile-efficiency-results.md). The current research
+priority is algorithmic and mathematical; these timing findings remain
+supporting performance evidence.
 
 1. Keep the inexpensive short-time rate as a required baseline in future
    certification and cost comparisons. This initial workload supplies no

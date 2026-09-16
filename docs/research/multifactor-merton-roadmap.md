@@ -1,16 +1,26 @@
 # Multifactor Merton Research and Literature Roadmap
 
-**Status:** historical roadmap; multidimensional/multifactor Merton is inactive
-as a research application (confirmed 14 September 2026). The active direction
-is [branching-estimator variance reduction](README.md). The recommendations
-and implementation plans below are retained for provenance and are superseded
-as the current work plan. Existing Merton PDE examples remain available.
+> **Historical roadmap; application inactive — reviewed 16 September 2026.**
+> Multidimensional/multifactor Merton is not the active research application.
+> The recommendations, selected routes, and milestones below preserve the
+> original 9 September proposal; they are not the current work plan. Existing
+> Merton PDE examples remain available. Follow the [current research index](README.md)
+> for branching-PDE algorithms, scalar lambda, q, and mathematical guarantees,
+> and the [documentation map](../documentation-map.md) for document status.
 
-**Last-reviewed commit:** `ce2949330fcff1a3faf56c8a0ff36628586b242d`
+**Original mathematical review commit:** `ce2949330fcff1a3faf56c8a0ff36628586b242d`
 **Companion documents:**
-- Primary proofs: `docs/research/multifactor-merton-proofs.md`
-- Authoritative claim registry: `docs/research/proof-registry.md`
-- Design specification: `docs/superpowers/specs/2026-09-09-multifactor-merton-proof-record-design.md`
+
+- [Retained mathematical proofs](multifactor-merton-proofs.md)
+- [Current claim registry](proof-registry.md)
+- [Archived design specification](../superpowers/specs/2026-09-09-multifactor-merton-proof-record-design.md)
+- [Later specialized financial moment theorem](milestone-1-financial-moment-target.md),
+  also retained under the inactive application
+
+The later financial moment note discharges a restricted finite-graded case;
+the original open-obligation list below is not a current gap inventory.
+Literature assessments retain their original search scope and do not
+establish publication priority.
 
 ---
 
@@ -22,7 +32,8 @@ The project previously implemented a single-factor prototype: Merton portfolio c
 2. **Artificial wealth diffusion and domain violation:** Unreduced coding trees that assign a non-degenerate Brownian motion to wealth $X_t$ inevitably reach negative values ($X_T \le 0$) with strictly positive probability at every horizon $T > 0$ (`PR-MM-5`). For fractional CRRA risk aversion, $x^{1-\gamma}$ is not real-valued on negative numbers. Replacing $x^{1-\gamma}$ with $|x|^{1-\gamma}$ alters the PDE and changes the economic problem.
 3. **Decoupling controls from state dimension:** Having $n$ risky assets introduces an $n$-dimensional control vector $\pi \in \mathbb R^n$, but without stochastic opportunity factors, wealth remains the sole state and the HJB collapses to an ODE (`PR-MM-2.1`). High-dimensional portfolio choice requires high-dimensional **opportunity states** $Y \in \mathbb R^m$.
 
-This roadmap establishes the literature-backed mathematical path to an irreducible, genuinely multidimensional Merton benchmark with closed-form ground truth.
+This roadmap recorded a proposed mathematical path to an irreducible,
+genuinely multidimensional Merton benchmark with closed-form ground truth.
 
 ---
 
@@ -215,7 +226,7 @@ To select the mathematically sound and numerically tractable formulation for the
 
 ---
 
-## 9. Dependency-Ordered Implementation and Research Roadmap
+## 9. Historical implementation and research roadmap (inactive)
 
 ```
                     ┌───────────────────────────────────────────────┐

@@ -1,4 +1,44 @@
-# Research plan after the approximate branching-rate sweet spot
+# Research directions after the approximate branching-rate sweet spot
+
+**Status reviewed: 16 September 2026.** This file retains the ten-direction
+literature sweep and original plan from 14 September. The main certificate
+work and its profile/cost follow-up are now implemented and integrated.
+The original schedule below is historical, not an outstanding task list.
+For the active question, implementations and claim boundaries, use the
+[research guide](README.md) and [proof registry](proof-registry.md).
+
+The current priority is **algorithmic and mathematical progress**: full
+recursive rate optimization, useful moment and optimality-gap bounds,
+systematic approximation-error control, and improved tuple proposals.
+Measured tuning/runtime overhead is supporting evidence; a lack of speedup
+does not close an algorithmic or theoretical direction. Choosing one rate
+for a weighted grid is an optional change of objective, not a prerequisite
+for solving the single-starting-state problem.
+
+## Current disposition of the ten directions
+
+| Direction | Status after the completed work |
+|---|---|
+| 1. Certified rate selection | Completed for specified flat/wave Allen–Cahn cases, including a five-point profile; general horizons, mechanisms and numerical-program soundness remain open |
+| 2. Total computational efficiency | Two completed supporting experiments; measured costs do not define the primary research goal |
+| 3. Continuation-aware q | Open for the current Allen–Cahn λ study; older finite-depth Merton pilot code and reported results are historical, not a certificate for this study |
+| 4. Rates across states/codes/time | One shared weighted-grid rate implemented; separate root policies and rates varying within trees remain distinct extensions |
+| 5. Other lifetime laws | Deferred option; no new clock family implemented in this research |
+| 6. Tree representation | Standard-binary oracle mismatch corrected; revised mechanisms were reviewed in the literature, not implemented as a new comparison |
+| 7. Conditional expectation/control variates | Deferred; no new validated variance-reduction construction |
+| 8. Horizon extension | Deferred; current certificates remain at their stated short horizon |
+| 9. Honest uncertainty | Independent evaluation and full-run reporting used; no new robust confidence theorem or robust estimator implemented |
+| 10. High-dimensional/deep integration | Deferred; existing reproduction support is not a demonstrated transfer of the new certificates |
+
+Evidence: [certified-rate checkpoint](results/certified-rate-checkpoint.md),
+[profile checkpoint](results/profile-efficiency-checkpoint.md),
+[binary correction](results/binary-benchmark-audit.md), and
+[integration checks](results/integration-2026-09-16.md). The literature
+coverage below is the original dated search, not a new search performed
+during this documentation review. No universal optimum or novelty claim
+is inferred from the completed benchmark results.
+
+## Original recommendation — 14 September 2026
 
 The recommended next milestone is **a practically certified rate selector for the existing branching PDE estimator, evaluated by solution accuracy per total computation cost**. Start with the current Allen–Cahn family. Develop better tuple proposals as a controlled extension once the rate-only result is credible.
 
@@ -6,13 +46,13 @@ The central research question is: **Can we select a sampling policy that has a u
 
 This document proposes future work. Existing repository results and published literature supply the evidence; the proposed experiments, implementations and new mathematical arguments remain to be undertaken.
 
-## Current evidence and its limits
+## Evidence available when the original plan was written
 
 Here, λ is the rate of the exponential particle lifetime distribution, not a PDE coefficient. Its optimum depends on the tree representation, tuple probabilities, root code, starting state and remaining time. The active project concerns branching estimation of nonlinear PDE solutions; the multifactor Merton application remains inactive.
 
 The latest checkpoint selects λ ≈ 0.73055 for uniform tuples and λ ≈ 0.73049 for the terminal-data proposal, at the Allen–Cahn wave root `(t,x)=(0,0)` with `T=0.05`. This uses depth-2 moment quadrature of order 4 on `[0.2,2]`. The older sweep records approximately 0.72347 at the same horizon using a depth-1 objective. These are different approximations, not competing certified values of the unrestricted optimum. [Checkpoint](lambda-q-optimization-summary.md), [older sweep](../../examples/exponential_rate_sweet_spot.py).
 
-On the latest 21-point grid diagnostic, the recorded mean empirical variances are 0.00745281 for the default, 0.00474964 for rate-only tuning, 0.00739695 for proposal-only tuning and 0.00458153 for combined tuning. These are one-seed observations. The earlier 2,000-tree, one-state comparison reports approximately 26% lower empirical variance for combined tuning, but explicitly establishes neither an incremental proposal benefit nor an end-to-end speedup. Both records are preliminary evidence, not population-moment certificates. [Recorded evidence](lambda-q-optimization-summary.md#repository-integration-check-14-september-2026).
+On the historical 21-point grid diagnostic, the recorded mean empirical variances are 0.00745281 for the default, 0.00474964 for rate-only tuning, 0.00739695 for proposal-only tuning and 0.00458153 for combined tuning. These are one-seed observations. The earlier 2,000-tree, one-state comparison reports approximately 26% lower empirical variance for combined tuning, but explicitly establishes neither an incremental proposal benefit nor an end-to-end speedup. Both records are preliminary evidence, not population-moment certificates. [Recorded evidence](lambda-q-optimization-summary.md#historical-repository-integration-check-14-september-2026).
 
 The repository already contains conditional mathematical results on full-tree minimizer existence, convergence of exact cutoff minimizers, an all-code tilted-moment majorant and an additive rate-selection error bound. It also contains the classical local square-root proposal rule. These results should be treated as the starting point. The implementation does not yet certify its quadrature error or the unrestricted moment at its selected rate. [General rate-selection note](estimator-integrity/general-rate-selection.md), [proposal note](estimator-integrity/adaptive-proposals.md).
 
@@ -28,7 +68,11 @@ Other proposed extensions also have substantial precedent. General lifetime laws
 
 For later solver comparisons, the field extends beyond the original deep BSDE and Galerkin baselines. Multilevel Picard methods have complexity guarantees under specified semilinear assumptions. A July 2026 preprint introduces D2SRM for Hessian-dependent equations under restrictive regularity and weak-coupling conditions. These are possible comparators on overlapping problem classes, not universal replacements. [Neufeld–Nguyen–Wu][S10], [Zhao–Long][S11].
 
-## Ten potential directions
+## Ten potential directions — original descriptions
+
+Priorities and future-tense statements in this section record the original
+proposal. The disposition table above gives their current status and the
+updated algorithm-first emphasis.
 
 ### 1. Make the approximate λ selector practically certifiable
 
@@ -166,7 +210,7 @@ Proposed work: extend the validated policy through a serializable interface, the
 
 **Risk and fallback:** high-dimensional deterministic moment quadrature can become more expensive than sampling. Use compact, validated approximations before attempting a large learned policy. Compare with deep branching's existing framework, MLP on compatible semilinear cases and, only if Hessian-dependent benchmarks enter scope, D2SRM. [S2][S2], [S10][S10], [S11][S11].
 
-## Recommended sequence and decision criteria
+## Original sequence and decision criteria
 
 Directions 1 and 2 should define the main milestone. Direction 9 supplies the evaluation discipline. Direction 3 is the first optional algorithmic extension. Direction 6 warrants an early compatibility review so that the project does not optimize an unsuitable representation by default. The remaining directions are alternatives for later work, not ten projects to undertake simultaneously.
 
@@ -174,9 +218,12 @@ This ordering is a research judgment based on current gaps, implementation readi
 
 The proposed working title is **“Reliable and cost-effective sampling selection for recursive coding-tree PDE solvers.”** The narrow initial scope is one semilinear family, one explicitly fixed mechanism and scalar exponential rates. State-dependent hazards, high-dimensional applications and new financial models should not be prerequisites for completing that contribution.
 
-## Proposed eight-week research plan
+## Original proposed eight-week research plan
 
-The schedule assumes one primary researcher using the existing codebase. It is an indicative sequence rather than a promised duration. All listed research and experiments are future work.
+The schedule assumed one primary researcher using the existing codebase.
+It was an indicative sequence rather than a promised duration. Read it as
+the original proposal; completed stages and deferred alternatives are
+identified in the current disposition table above.
 
 ### Week 1: Lock the estimator, claims and evaluation protocol
 

@@ -1,12 +1,17 @@
 """Rate sensitivity and variance analysis tools for branching Monte Carlo.
 
-Provides diagnostic and experimental machinery to analyze how estimator
-variance Var(H) varies with the exponential branching clock rate lambda:
-* Evaluating the theoretical short-horizon optimal rate lambda_theory(x) ~= |f(phi(x))|/|phi(x)|.
-* Computing the strictly convex continuous variance curve via deterministic quadrature
-  (or closed-form Riccati oracle for binary control).
-* Running empirical Monte Carlo trials across candidate rates with exact standard errors.
-* Comparing sweet-spot agreement and variance reduction across PDE families.
+Provides numerical diagnostics for exponential branching-clock rates:
+* Evaluate the leading short-time rate |f(phi(x))|/|phi(x)| where nondegenerate.
+* Compare finite-depth moment quadrature minus a reference mean square,
+  or the matching standard-binary Riccati moment oracle.
+* Draw complete Monte Carlo trees and report empirical variance with a
+  plug-in fourth-moment standard-error estimate, not an exact confidence bound.
+* Compare candidate rates across the supplied PDE configurations.
+
+Finite-depth quadrature does not certify full-tree variance or global
+optimality. A plotted U-shape does not prove strict convexity. Historical
+field and display names such as ``optimal_rate`` refer to the selected
+numerical/oracle candidate; see demo/README.md for interpretation limits.
 """
 
 from __future__ import annotations
@@ -34,7 +39,16 @@ from .tree import sample_tree
 
 @dataclass(frozen=True)
 class RateVarianceSweep:
-    """Outcome of a rate-variance sweep for a single PDE configuration."""
+    """Diagnostics for one PDE configuration, not a full-tree certificate.
+
+    ``optimal_rate`` names the finite-depth numerical candidate, or the
+    matching binary-oracle rate. ``optimal_variance`` and ``quad_variance``
+    subtract the chosen reference mean square from that moment calculation;
+    outside the oracle case they need not equal full-tree variances.
+    ``diff_pct`` compares the short-time rate with that candidate.
+    ``var_reduction_pct`` is a descriptive nearest-MC-grid comparison
+    clipped at zero, so zero does not establish absence of deterioration.
+    """
 
     pde: ParabolicPDE
     x: float
@@ -218,7 +232,19 @@ def sweep_rate_variance(
     use_riccati: bool = False,
     max_depth: int = 2,
 ) -> RateVarianceSweep:
-    """Run a deterministic and Monte Carlo rate-variance sweep for a PDE at state (t, x)."""
+    """Compare a numerical moment proxy and complete-tree MC at state (t, x).
+
+    The usual deterministic curve is a finite-depth second-moment
+    approximation minus the reference mean square, not a certified full-tree
+    variance. If ``exact_solution`` is absent, terminal phi is used as the
+    reference and adds a separate approximation. ``mc_stderr`` is an
+    empirical plug-in uncertainty diagnostic that requires tail assumptions
+    for statistical interpretation.
+
+    ``use_riccati`` requires the matching standard-binary constant-terminal
+    control; the current oracle path uses pde.T and is intended for t=0.
+    The Boolean flag does not validate those representation assumptions.
+    """
     if mechanism is None:
         mechanism = getattr(pde, "mechanism", None)
 

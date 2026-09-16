@@ -1,11 +1,22 @@
 # General rate selection: existence, cutoff consistency, and certificates
 
-Date: 12 September 2026.
+Initial derivation: 12 September 2026. Implementation status reviewed:
+16 September 2026.
 
-**Status:** conventional arguments under the explicit hypotheses below,
-independently reviewed by GPT-6 Astra MAX. No new Lean formalization or claim
-of publication novelty. This is not an automatic certified optimizer for every
-PDE supported by the software.
+**Status:** conventional arguments under the explicit hypotheses below.
+Five deterministic certificate-transfer and coverage lemmas are now
+formalized in [`RateCertificate.lean`](../../../formal/EstimatorIntegrity/RateCertificate.lean).
+The stochastic representation, depth-tail and analytic bounds below remain
+conventional proofs. Publication novelty is unestablished. This is not an
+automatic certified optimizer for every PDE supported by the software.
+
+The [flat/wave certificate checkpoint](../results/certified-rate-checkpoint.md)
+and [weighted-profile checkpoint](../results/profile-efficiency-checkpoint.md)
+now provide concrete exact-rational bounds for the stated Allen–Cahn
+examples. Their all-code envelopes and
+[mean-identification proof](allen-cahn-mean-identification.md) close the
+needed finiteness and common-mean obligations for those examples. They do
+not certify the general quadrature error `delta` in (12).
 
 This extends the [exponential-rate note](exponential-rate-optimization.md),
 using the [underlying moment model](notation-and-moment-theorem.md).
@@ -280,8 +291,13 @@ near one rate need not cover that entire region.
 Current quadrature does not certify `delta`. A tilted second moment also does
 not alone provide concentration for squared-weight samples, which can require
 fourth moments or another bounded envelope. Finite pilots do not certify the
-unrestricted tree or unbounded state weights. The code in this checkpoint is
-a heuristic tuning aid, not an implementation of (12).
+unrestricted tree or unbounded state weights. The generic finite-depth
+selector is a numerical tuning method, not an implementation of (12).
+The separate flat verifier uses exact moment enclosures and exterior bounds;
+the wave and profile verifiers control the full moment directly through
+polynomial residuals and convex bounds. Their accepted witnesses implement
+the upper-minus-global-lower route above without claiming a verified error
+for the old time/Gaussian quadrature.
 
 ## 6. Prior work and the research boundary
 
@@ -299,6 +315,10 @@ Theorem 2 is a direct monotone-objective/equicoercivity argument, not an
 invention of optimizer consistency. Whether sharp practical certificates for
 the implemented family provide a publishable increment remains open.
 
-Next: sharpen and numerically certify the bounds, use the same proposal while
-tuning and sampling, and measure variance together with cost. No
-multidimensional Merton application is selected by this result.
+The stated Allen–Cahn certificate specialization is complete. Remaining
+algorithmic questions include generalizing useful error control to other
+PDEs/horizons and changed proposals, and evaluating continuation-aware tuple
+selection. Hold the same proposal fixed when comparing rate objectives and
+sampling. Variance reduction and mathematical guarantees are primary;
+measured cost is supporting evidence. No multidimensional Merton application
+is selected by this result.

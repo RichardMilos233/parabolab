@@ -232,8 +232,9 @@ its omitted obligations. Lean does not verify the random-tree/PDE
 correspondence, the rational Python verifier, concrete witness values,
 floating sampler or measured cost model.
 
-The final Python suite passed **248 tests, with 14 slow tests deselected,
-in 46.32 seconds**. All certificate and benchmark source hashes match;
+At the original checkpoint, the Python suite passed **248 tests, with
+14 slow tests deselected, in 46.32 seconds**. All certificate and benchmark
+source hashes matched the source snapshot now preserved at `ff58620`;
 the independent experiment archive audit passed all 22 checks. Focused
 profile tests cover weighted derivative
 evaluation, optimizer behavior, exact exp/logistic intervals, signed
@@ -241,15 +242,19 @@ polynomial evaluation, common-horizon enforcement and policy interpolation.
 Independent audits reconstructed all 14 profile intervals, five actual
 policy bounds and 20 allocation rows from exact archived data, and
 checked source/archive/metadata digests.
+For the later integrated source checks and source-hash changes, use the
+[integration record](integration-2026-09-16.md).
 
 Recheck the certificate without sampling:
 
 ```sh
 /opt/miniconda3/envs/parabolab/bin/python examples/certified_profile_rate.py \
   --verify docs/research/results/profile-certificate/witnesses.json.gz
-/opt/miniconda3/envs/parabolab/bin/python \
-  docs/research/results/profile-efficiency/validate_archive.py
 ```
+
+The separate benchmark archive audit is source-snapshot dependent; its
+requirements are explained in the
+[empirical report](profile-efficiency-results.md#reproducibility-and-verification).
 
 To reconstruct the summary and exact allocation comparisons from the
 same witnesses, use `--from-witnesses` instead of `--verify`, add
@@ -304,8 +309,12 @@ error, broader guarantees or improved proposals. The grid objective is an
 optional extension for multiple starting states sharing one rate, not a
 prerequisite for the single-state problem.
 
-Continuation-aware q is **deferred as optional and untested**. The prior
-terminal-proxy experiment does not test a continuation-moment proposal.
+Continuation-aware q is **an optional extension, not yet evaluated or
+certified for this Allen–Cahn λ study**. The prior Allen–Cahn terminal-proxy
+experiment does not test a continuation-moment proposal. Earlier finite-depth
+Merton pilot tooling and reported results remain
+[historical evidence](../estimator-integrity/reproducibility.md#merton--vasicek-adaptive-proposal-experiment-task-8),
+with the original CSV/PNG outputs absent from this checkout.
 If pursued, the next finite project should freeze a small code/time
 table with positive support, compare uniform/terminal/continuation q at
 a common λ, then reoptimize λ with each q held fixed. It must charge
@@ -317,4 +326,5 @@ separately using full cost accounting.
 The main plan's certification and cost directions, evaluation discipline,
 one profile/reuse extension and consolidation are complete. Other
 directions remain alternatives. The completed result is integrated into
-local `main`; no continuation-proposal experiment has been run.
+local `main`; no continuation-proposal experiment has been run for this
+Allen–Cahn study.

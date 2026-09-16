@@ -172,7 +172,7 @@ adds five public lemmas: `convexEnclosure_right`, `convexEnclosure_left`,
 `convexEnclosure_cell_lower_envelope`, plus two private algebraic helpers.
 The full `lake build` completed 3,390 jobs without warnings. Each public
 theorem's axiom audit listed only `propext`, `Classical.choice` and
-`Quot.sound`, transitively covering the helpers. The current Python suite
+`Quot.sound`, transitively covering the helpers. The Python suite at this checkpoint
 passed 226 tests with 14 slow tests deselected.
 
 The formal statements assume convexity and valid finite real endpoint
@@ -199,9 +199,10 @@ phase. That study did not evaluate this new residual certificate's
 construction cost or the `0.7375` candidate. No new practical speedup is
 established by obtaining a mathematical guarantee.
 
-Next work should preserve the certificate while testing prespecified policy
-reuse/larger workloads, grid-averaged or spatial rate selection, and
-continuation-aware proposals with their costs included. Nonuniform
+The proposed shared-grid and one/ten-request reuse follow-up was subsequently
+completed in the [profile checkpoint](profile-efficiency-checkpoint.md).
+Separate root-dependent rates and continuation-aware proposals remain
+optional algorithmic extensions; runtime is supporting evidence. Nonuniform
 proposal certificates, other horizons/states, production roundoff,
 uncertainty under heavy tails, alternate lifetimes/representations,
 long-horizon extensions and high-dimensional transfer remain open parts

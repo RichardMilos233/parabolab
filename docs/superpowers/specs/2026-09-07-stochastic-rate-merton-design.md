@@ -1,6 +1,15 @@
 # Stochastic-rate Merton extension
 
-Status: approved in chat on 2026-09-07.
+> **Archived design — status reviewed 16 September 2026.**
+> The state-dependent PDE and Vasicek example support described here now exists.
+> Statements about what the algorithm “currently” cannot do refer to the
+> pre-implementation state on 7 September. Existing examples are retained;
+> further financial-application development is inactive. This document does
+> not certify every proposed evaluation or stochastic representation.
+> Navigation: [archive index](../README.md), [current research](../../research/README.md),
+> [documentation map](../../documentation-map.md).
+
+Original approval date: 2026-09-07.
 
 ## Goal
 

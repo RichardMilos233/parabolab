@@ -1,6 +1,20 @@
 # Branching Clock Rate Optimization Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **Archived implementation plan — status reviewed 16 September 2026.**
+> Scalar-rate theory and finite-depth numerical selection are implemented.
+> Later research added full-tree moment certificates and corrected the binary
+> benchmark's estimator mismatch. This plan's unchecked boxes, model ownership,
+> dirty-file exclusions, and formalization targets are historical; they are
+> not a current task queue or a record of completed Lean coverage.
+> Use the [binary audit](../../research/results/binary-benchmark-audit.md),
+> [rate checkpoint](../../research/results/certified-rate-checkpoint.md), and
+> [proof registry](../../research/proof-registry.md) for current evidence.
+> Navigation: [archive index](../README.md), [current research](../../research/README.md),
+> [documentation map](../../documentation-map.md).
+
+> **Original workflow metadata (inactive):** This plan originally requested
+> superpowers:subagent-driven-development or superpowers:executing-plans.
+> Its checkbox syntax is preserved as a historical planning record.
 
 **Goal:** Mathematically analyze, formalize in Lean 4, and numerically optimize the branching clock rate $\lambda > 0$ for coding-tree Monte Carlo, establishing strict convexity, unique interior sweet-spots for $L^2$-integrable PDEs, the $T \downarrow 0$ scaling law, and the pathology of non-integrable equations.
 
@@ -8,7 +22,7 @@
 
 **Tech Stack:** Python 3.11, NumPy, SymPy, Matplotlib, PyTest, `conda run -n parabolab`, Lean 4.33.0, Mathlib `v4.33.0`.
 
-## Global Constraints
+## Original execution constraints (historical)
 
 - Design document: `docs/superpowers/specs/2026-09-10-exponential-rate-optimization-design.md`.
 - Mathematical derivation, theory documents, and Lean 4 formalization are owned by **GPT 5.6 Sol Max**.

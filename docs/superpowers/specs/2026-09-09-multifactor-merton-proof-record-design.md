@@ -1,6 +1,15 @@
 # Multifactor Merton proof record and research roadmap
 
-Status: approved in chat on 2026-09-09.
+> **Archived design; financial application inactive — reviewed 16 September 2026.**
+> The proof registry, multifactor mathematical notes, and historical roadmap
+> were produced. The proposed multifactor-Merton implementation programme is
+> inactive, and its tasks are not outstanding requirements for current work.
+> The evidence-recording conventions remain useful; historical implementation
+> and Lean descriptions must be checked against the current proof registry.
+> Navigation: [archive index](../README.md), [current research](../../research/README.md),
+> [documentation map](../../documentation-map.md).
+
+Original approval date: 2026-09-09.
 
 ## Goal
 

@@ -1,6 +1,16 @@
 # Branching estimator integrity research programme
 
-Status: approved in chat on 2026-09-09.
+> **Archived design — status reviewed 16 September 2026.**
+> The moment, Dym, proposal, and finite Lean foundations were developed under
+> this design. Current research centers on branching-PDE estimator algorithms,
+> scalar lambda, tuple probabilities q, and their mathematical guarantees.
+> The finance-led twelve-week programme and secondary-candidate ranking below
+> are historical proposals, not the current work plan. Refer to the proof
+> registry for what was actually proved and formalized.
+> Navigation: [archive index](../README.md), [current research](../../research/README.md),
+> [documentation map](../../documentation-map.md).
+
+Original approval date: 2026-09-09.
 
 ## Goal
 

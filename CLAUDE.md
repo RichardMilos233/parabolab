@@ -3,8 +3,11 @@
 ## Current direction
 - The project remains a PDE solver/reproduction framework. Active research
   improves branching estimation through the exponential clock rate `lambda`
-  and tuple probabilities `q_c(Z)`. Start at `docs/research/README.md` and
-  `docs/research/lambda-q-optimization-summary.md`.
+  and tuple probabilities `q_c(Z)`. Prioritize recursive dependencies,
+  variance reduction, approximation-error control and mathematical guarantees.
+  Runtime is supporting evidence, not the main criterion for choosing a
+  research direction. Start at [the documentation map](docs/documentation-map.md)
+  and [the current research guide](docs/research/README.md).
 - Multidimensional/multifactor Merton is inactive research. Keep its proofs,
   symbolic checks, existing examples, and general multidimensional support;
   do not resume that roadmap as the default next task.
@@ -16,14 +19,35 @@
   Rate selection is explicit precomputation; a rate tuned at one point is
   not automatically optimal elsewhere on a profile. Proposal callbacks are
   not supported by the multiprocessing or deep-solver paths.
+- `profile_rates.py` optionally chooses one shared scalar rate for a weighted
+  set of starting states. It changes the objective, not the tree's branching
+  law or its within-tree rate policy. Do not describe the five-point rate as
+  a correction of the center-point rate or as solving a new recursion problem.
 - Keep exact theory separate from approximations: `A_0=P_delta(|g_c|^2)` is
   terminal data averaged over the diffusion, while full-tree `A_lambda(s)`
   contains rate-dependent child second moments. The local rate theorem
   freezes continuation; full-tree differentiation includes child derivatives.
   Finite-depth quadrature and terminal tuple scores are practical proxies,
   not certified full-tree or jointly optimal `lambda,q` solutions.
-- Compare variance/error and total cost (including tuning). Dym is a
-  non-integrability diagnostic, not a successful variance-reduction benchmark.
+- Separate exact numerical certificates now cover specified raw-uniform
+  Allen–Cahn flat, wave-root and five-point wave-profile settings at `T=0.05`.
+  Candidate upper bounds plus global optimum lower bounds certify objective
+  excess, not rate error. The mathematical stochastic correspondence, rational
+  Python verifier and selected Lean lemmas have distinct scopes; do not claim
+  end-to-end formal verification. See the research guide and proof registry.
+- Rate-sensitivity plots are diagnostics. The current `rate_variance.py`
+  “optimal” labels denote finite-depth interval-constrained candidates except
+  for its binary closed-form control. Its variance error bars use an empirical
+  fourth-moment estimate; visual convexity and numerical agreement are not
+  proof. The demo guide documents the plotted quantity and comparison limits.
+- Dym is a non-integrability diagnostic, not a successful variance-reduction
+  benchmark. Empirical blow-up thresholds elsewhere are precision diagnostics,
+  not established integrability boundaries. Include tuning cost when making
+  speedup claims, without using it to dismiss mathematical research questions.
+- Preserve raw records, hash-bound notes and execution snapshots. Correct
+  current interpretation in navigation or a dated addendum when editing an
+  archived source would invalidate its recorded provenance. Historical branch
+  and test counts are not current repository state.
 
 ## Workspace
 - Sessions for THIS project open this repo directly as the workspace
@@ -42,7 +66,22 @@
   clone them next to `parabolab/` to enable the golden tests and
   CSV overlays.
 
-## Project state
+## Implemented capabilities and historical milestones
+
+M1–M6 below summarize the completed reproduction work. Their numerical
+results and timings are historical observations. They are not new test runs
+or current research priorities. The certificate/profile work is integrated
+into local `main`; [the integration record](docs/research/results/integration-2026-09-16.md)
+records the source revision and checks performed on 16 September 2026.
+
+- **Current research implementation:** `moments.py` and `rate_optimization.py`
+  implement finite-depth moments, recursive rate derivatives and bracketed
+  selection; `proposals.py` implements terminal-data tuple proposals;
+  `profile_rates.py` implements the optional weighted objective. Separate
+  `rate_certificate.py`, `wave_certificate.py` and `profile_certificate.py`
+  implement the exact-rational Allen–Cahn certificates. `rate_variance.py`
+  provides exploratory sweeps. Coverage and open mathematical obligations
+  are tracked in `docs/research/proof-registry.md`.
 - **M1 complete**: semilinear coding-tree Monte Carlo (JEQ2023 §2 mechanism,
   JCP2024 Alg. 1 sampler), d = 1, pure Python/numpy. Allen–Cahn validated
   against the closed forms (5.3)/(5.4) at 1e5–1e6 samples, T ≤ 0.5, and
@@ -54,8 +93,7 @@
   `FullyNonlinearMechanism1D` (per-PDE memoized, exact zero-tuple
   reduction), `FullyNonlinearPDE1D` (sympy f/phi, lazy lambdified
   derivative caches). Four JEQ §5 examples in library.py reproduce
-  Figs 6–9 at paper budgets (examples/jeq_fig6..9_*.py). 64 tests green
-  (`pytest -m 'slow or not slow'`, ~35 s).
+  Figs 6–9 at paper budgets (examples/jeq_fig6..9_*.py).
 - **M3 complete**: multidimensional extension (JCP2024 §2).
   `FullyNonlinearPDEnD` (deriv_map jets, diffusion σ² = authors' `nu`,
   polynomial-support zero detection), `DxN(mu)` codes,
@@ -77,8 +115,8 @@
   the paper's residual net (first plain + 5 residual hidden layers of
   20, tanh, batchnorm after activation). `solver.py` = full-batch Adam,
   lr 0.01 ÷10 every ⌊P/3⌋, P = 3000; grid_errors implements the paper's
-  101-point L1/L2 protocol; consistency_plot = JCP Fig 7. Reproduced (on
-  CPU, minutes instead of the paper's GPU-hours): Table 1/Fig 1 (AC
+  101-point L1/L2 protocol; consistency_plot = JCP Fig 7. Reproduced on
+  CPU: Table 1/Fig 1 (AC
   d = 1, 5), Table 3 (exp d = 1), Table 5 + Fig 7 (Merton HJB (4.6),
   new library entry `merton_hjb`, non-polynomial f) — including the
   paper's own tanh training anomaly (our run 9 ≙ their third run).
@@ -102,13 +140,9 @@
   facade over profiles.py / deep/ / vendor/ -- no new numerics. Exported
   from the top level; `demo/` showcases the interface for PDEs and sampling
   variants. Tests are in `tests/test_solve.py`.
-  The seven PROFILE examples were migrated onto it (jeq_fig1/4/6/7/8/9 +
-  jeq_allen_cahn_1d), verified numerically identical row-for-row except
-  jeq_allen_cahn_1d, whose hand-rolled seed scheme
-  (`seed + 1000*i + int(100t)`) was replaced by the library's `seed + i`
-  per curve -- a different draw of the same distribution, flagged in the
-  script. The other SEVEN examples were deliberately NOT migrated: their
-  deliverable is not a curve. `jeq_table2/table5_d100` report mean/SD of
+  Profile examples use this interface. The other experiment drivers keep
+  separate shapes because their deliverable is not a curve:
+  `jeq_table2/table5_d100` report mean/SD of
   a single point over runs AND share one ProcessPoolExecutor across them
   (migrating would rebuild the d=100 mechanism table per call, gotcha 22);
   `jcp_table1/3/5_deep` report multi-run L1/L2 plus consistency plots
@@ -116,21 +150,16 @@
   three-way report with paper columns and `--full`; `blowup_allen_cahn`
   sweeps T; `rate_study_dym` sweeps the rho rate. Do not "finish the job"
   by forcing these onto `.solve(pde, grid)`.
-  `profiles.plot_profile` lost its last caller in the migration and is now
-  dead code (untested, unexported) -- left in place pending a decision.
+  `profiles.py` handles estimation; tables and plotting live in `solve.py`.
 - Env: `conda activate parabolab` (python 3.11), built from
   `environment.yml` — python from conda, EVERYTHING ELSE from pip (see
   gotcha 36: conda's MKL numpy and pip's torch each ship their own Intel
   OpenMP and the process aborts). Editable install of this repo. Torch CPU
   build; all deep code is device-agnostic — pass device="cuda" on a GPU
-  machine, but for the JCP §4 budgets CPU is the right choice (see below).
-- The network solvers run at PAPER budget (N=1000, M=10 000, 3000 epochs)
-  in well under a minute each on a 16-core laptop CPU: Allen–Cahn d=1 deep
-  branching L1 1.89e-03 / 22 s, deep BSDE 5.68e-03 / 50 s, deep Galerkin
-  5.31e-03 / 35 s; Merton deep branching 1.12e-02 / 22 s. The paper's
-  "28–184 GPU-minutes" is their raw-mechanism torch sampler (gotcha 25b),
-  not the training. `demo/allen_cahn.py` and `demo/merton.py` run exactly
-  these by default.
+  machine. Choose hardware according to the actual workload.
+- Historical demo timings and errors are retained in `demo/README.md`.
+  Script defaults are defined by the current scripts; budget equivalence and
+  cross-hardware speedups must not be inferred from those old timings.
 
 ## Conventions
 - Terminal-value problem u_t + (1/2)u_xx + f(u) = 0, u(T,·) = φ. The 1/2
@@ -155,9 +184,11 @@
   `DeepBranching`) require the factory and raise `TypeError` naming the fix
   when given an instance -- PDE objects hold lambdified sympy callables and
   local closures and are genuinely unpicklable (verified). (b) The grid
-  convention is `s -> (s, x_mid, ..., x_mid)` via the single `_point_map`,
+  default convention is `s -> (s, x_mid, ..., x_mid)` via `_point_map`,
   matching `deep/solver.py::_grid_inputs`, NOT
   `profiles.last_coordinate_embedding`'s `(0, ..., 0, s)` -- see gotcha 33.
+  An explicit `embed` overrides the default; comparisons use the states
+  recorded in each `Curve`.
   (c) torch is imported inside the three network `.solve()` bodies only, so
   `import parabolab` stays torch-free (subprocess-tested).
 - rng: pass `seed=` or a `np.random.Generator`. Tests rely on the exact draw
@@ -182,13 +213,17 @@
    only to the horizon: W ~ N(0, T − t_birth), NOT N(0, τ).
 4. **Interior weight** is 1/(q_c(I_c)·ρ(τ)) with q uniform ⇒ |M(c)|/ρ(τ),
    using the particle's own lifetime τ.
-5. **Rate choice matters more than the papers suggest.** JCP2024's
-   ρ rate = −log(0.95)/T gives mean tree size ~1.05 but rare branch events
-   carry weight ~2e^{λτ}/λ ≈ 20+ ⇒ heavy tails: at T = 0.5 (Allen–Cahn) the
-   empirical mean is systematically off (≈ −0.687 vs exact −0.679 at 1e5;
+5. **Rate choice affects sampling variability.** JCP2024's
+   ρ rate = −log(0.95)/T gives the root a 5% branching probability;
+   this does not determine the mean size of the whole tree. In the
+   T = 0.5 Allen–Cahn comparison, rare branch events carry weight
+   ~2e^{λτ}/λ ≈ 20+, contributing to large observed fluctuations. The
+   recorded empirical mean differs from exact (≈ −0.687 vs −0.679 at 1e5;
    the authors' own 1e6-sample log shows −0.6851) and stderr underestimates
-   the error. rate = 1 (JEQ Mathematica default) is unbiased-in-practice with
-   ~4x smaller stderr at the same N. Package default: rate = 1.
+   the error in those runs. Rate 1 had about four times smaller recorded
+   stderr at the same N. These observations are not bias or optimality
+   proofs; unbiasedness requires the representation's assumptions. Package
+   default: rate = 1.
 6. **Exact zero-code pruning**: for polynomial f, a code (a·f^{(k)})* with
    f^{(k)} ≡ 0 spawns a subtree whose H ≡ 0 a.s. (every tuple in M(g*)
    contains a descendant of g). `prune_zero=True` returns 0 immediately and
@@ -254,12 +289,13 @@
     (HJB |M(f*)| = 20 000 in ~1 s). The authors sample the RAW set — for
     HJB ~98% of their branch draws are identically-zero samples with the
     full 1.01e6 weight multiplier.
-19. **The optimal ρ rate flips at large d** (vs gotcha 5): each branching
+19. **Rate comparisons depend on the mechanism** (vs gotcha 5): each branching
     multiplies H by |M(c)| e^{λτ}/λ; with |M| = 2e4 (HJB) frequent
-    branching at rate 1 compounds to exploding variance AND 184 min/1e5
-    samples. The authors' jcp_rate(T) = −log(0.95)/T keeps branchings rare
-    (mean nodes 1.05, 11 s/1e5, sane variance). Rate 1 stays better for
-    small-|M| problems (d = 1, Fig-1/4 profiles).
+    branching at rate 1 compounds to large observed weights AND 184 min/1e5
+    samples in the historical runs. The authors' jcp_rate(T) = −log(0.95)/T
+    gave rare branching and smaller empirical variation in that comparison.
+    The opposite ordering occurred in the recorded small-|M| examples.
+    Neither comparison establishes the optimal rate or finite variance.
 20. **Table 5 heavy-tail anatomy**: at 1e5 samples, HJB runs bifurcate —
     tail-missing runs cluster at ≈4.580 with stderr ≈0.0037 (the paper's
     published 4.580340 ± 0.001869 is exactly this cluster, 5 of its own
@@ -287,25 +323,27 @@
 ## Gotchas discovered (M4)
 24. **The paper's eq. (3.6) vs branch.py**: the paper writes the loss over
     individual tree samples H_{i,j}; the authors' code regresses on the
-    per-state (outlier-filtered) MEAN over the M samples. Same argmin
-    (the losses differ by a v-independent variance term); we follow the
-    code (cheaper: N targets instead of N·M). The outlier filter is
-    percentile-based: keep [lo − 1000(hi−lo), hi + 1000(hi−lo)] with
+    per-state (outlier-filtered) MEAN over the M samples. For a fixed retained
+    sample set, averaging the squared losses or fitting its mean gives the
+    same argmin. Filtering changes that sample set and may change the target;
+    it is not an unbiasedness guarantee. The percentile filter keeps
+    [lo − 1000(hi−lo), hi + 1000(hi−lo)] with
     (lo, hi) the (1, 99) percentiles of the M values, plus drop NaNs.
-25. **Deliberate deviations from branch.py** (all validated harmless):
-    (a) no antithetic Brownian variates (we forego a ~2x variance saving);
+25. **Deliberate deviations from branch.py**:
+    (a) no antithetic Brownian variates; any variance benefit of adding them
+    would need to be evaluated for the target estimator;
     (b) our tree samples come from the M3 reduced-mechanism sympy sampler,
-    not their torch autograd sampler over the RAW mechanism — same
-    distribution (tested), orders of magnitude faster: Merton full budget
-    N=1000, M=10,000 costs us ~13 s datagen on 6 CPU cores vs their 54
-    GPU-minutes; (c) time patching (`branch_patches`) NOT implemented —
+    not their torch autograd sampler over the RAW mechanism. Removing zero
+    tuples and reweighting preserves the represented mean under the relevant
+    integrability assumptions, but can change distribution and variance;
+    (c) time patching (`branch_patches`) NOT implemented —
     it is in their code (default 1, unused in all JCP §4 experiments,
     central only in the successor deep_branching_with_domain repo);
     doing it properly needs net-as-terminal-condition inside the sampler
-    (autograd ∂^μ of the net at leaves) — scoped out to M5+.
+    (autograd ∂^μ of the net at leaves); it is not a scheduled next milestone.
     (d) the authors train u only (root code Id); we also train u only,
-    but generate_training_data(code=DxN(mu)) gives ∂^μu families for
-    free (tested against the exact Allen–Cahn du/dx).
+    but generate_training_data(code=DxN(mu)) supports derivative targets
+    (tested against the exact Allen–Cahn du/dx).
 26. **Merton HJB (4.6) fits the sympy pipeline despite non-polynomial f**
     (z1²/z2 and z1^{1−1/γ} terms; possibly_nonzero falls back to safe
     degree analysis). Its exact solution needs the numerator and α^γ
@@ -316,11 +354,10 @@
     (M=10,000, 10 runs) our run 9 trains to L1 6.8e-2 (9 other runs:
     5e-3–1.8e-2, median ≈ 1e-2 ≙ paper's 8.49e-3) with the net visibly
     detaching from the MC scatter for x ≳ 180 — exactly the paper's Fig 7
-    (their anomaly was on the third run). The Fig-7 consistency check
-    (MC targets ARE unbiased pointwise estimates of u) catches it; that
-    diagnostic is unavailable to deep BSDE/Galerkin. Batchnorm running
-    stats + full-batch training make the anomaly a pure optimization
-    pathology, not a data problem.
+    (their anomaly was on the third run). The Fig-7 consistency check shows
+    disagreement between the fitted network and its MC targets. That
+    diagnoses the fit; it does not certify the targets, which use filtering,
+    or isolate a unique cause such as batchnorm statistics.
 
 ## Gotchas discovered (M5)
 28. **The deep BSDE f-input layout is FIXED**, independent of the
@@ -345,11 +382,13 @@
     jcp_rate the sample SD grows SMOOTHLY (stderr > 5%·|u| past
     T ≈ 0.8/0.9) and the authors' single-seed "systematic drift" curve
     lies inside our 3-seed spread — it is one draw from a huge sampling
-    distribution, not a bias law; at rate = 1 the estimator is sharper
+    distribution, not evidence of a bias law; at rate = 1 the estimator is sharper
     until T ≈ 1.0/1.1 and then explodes outright (max|H| ~ 7.6e9,
     estimates ±10³–10⁴ at T = 2). `integrability_edge` therefore checks
     BOTH persistent drift AND relative precision loss — the drift test
-    alone never fires (the error bars balloon along with the error).
+    alone never fires (the error bars balloon along with the error). Despite
+    the helper name, this is an empirical precision-loss diagnostic, not a
+    proof of a boundary for first or second moments.
 32. **conda run captures output**: `conda run ... > log` writes the log
     only at process exit (use --no-capture-output to stream). Long
     comparison runs look "empty" until they finish.
@@ -362,8 +401,9 @@
     (the paper's evaluation grid, `x_mid` = grid midpoint). Identical at
     d = 1, silently different for d >= 2 -- an MC profile and a network
     curve plotted together would be sampling different states. `solve.py`
-    pins the `_grid_inputs` convention for everything and
-    `tests/test_solve.py` asserts the two agree elementwise.
+    defaults to the `_grid_inputs` convention, permits explicit `embed`
+    overrides and records actual curve states for comparison. Check the
+    embedding when reproducing a paper figure or combining curves.
 34. **`estimate_profile` needs an explicit `embed` for every
     `FullyNonlinearPDEnD`, including d = 1**: its phi is lambdified over a
     d-vector, so passing a float raises a bare
@@ -400,24 +440,23 @@
     the guard the child hits `.solve()` again and the pool nests until
     the machine dies. Imports, `partial(...)` factories, and grid setup
     at module level are cheap and fine; only the code that *starts a
-    pool* has to sit under the guard. `def main()` was just an extra
-    hop and is gone from `demo/` and `examples/`. This is a different
+    pool* has to sit under the guard. A `main()` function is optional;
+    both layouts exist in the current examples. This is a different
     problem from the unpicklable-PDE factory (gotcha 22 / solve.py
     contract a). Demo and example scripts run clean production budgets
     directly, while fast smoke validation is handled by `pytest`.
 
-## Paper pointers (M2 done, for M3)
+## Paper pointers for implemented mechanisms
 - General mechanism: JEQ2023 Def. 2.2, eqs. (2.4)–(2.5); multivariate Faà di
   Bruno constants k_q^j, l_j (Prop. 1.1) — implemented in `fdb.py` as
   multisets of blocks (l, q, mult), coeff = k!/Π(mult!·(l!)^mult).
 - |M(g*)| = 1 + Σ_{k=1..n} |fdb(n+1, k)| + (n+1)² (confirmed against the
   Mathematica appendix variable `l1`).
-- Integrability / short-time: JEQ2023 Prop. 4.2 (sufficient, very
-  conservative: needs K < 1 bounds and ρ(T) ≥ 1/min q_c — unattainable for
-  the semilinear mechanism at T = 0.5 with any Exp rate, yet MC is fine).
-- M3 (multidimensional) needs: d-dim codes ∂^μ with μ ∈ N^d (fdb.py's block
-  sizes l become multi-indices — the authors' fdb_nd already supports this
-  via `ks`), d-dim Brownian moves, and the JCP2024 p.4 d-dim mechanism.
-  Runtime is NOT the bottleneck for the JEQ figures (tiny trees at T ≤ 0.04:
-  1e5 samples/point ≈ 0.15 s) — numba matters for T ~ 0.5 (Allen-Cahn-type,
-  mean nodes > 1.5) and for d ≥ 2 sample counts.
+- Integrability / short-time: JEQ2023 Prop. 4.2 provides sufficient conditions.
+  Failure of a sufficient condition neither disproves integrability nor lets
+  an accurate MC run establish it. Use the estimator-specific moment notes
+  and explicit certificates for the bounds actually discharged here.
+- The multidimensional implementation uses codes ∂^μ with μ ∈ N^d,
+  multi-index Faà di Bruno enumeration, d-dimensional Brownian moves and the
+  JCP2024 d-dimensional mechanism. M3 is complete; this is reference material,
+  not an outstanding implementation roadmap.
