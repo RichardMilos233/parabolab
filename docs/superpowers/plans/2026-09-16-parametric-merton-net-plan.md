@@ -42,7 +42,7 @@
 - Test: `tests/test_deep_corpus.py`
 
 **Interfaces:**
-- Produces: `library.merton_hjb_derivatives(T=0.1, mu=0.03, sigma=0.1, gamma=0.5, rho=0.01) -> tuple[Callable, Callable]` — `(ux, uxx)`, each `(t: float, xv) -> float` with the same argument convention as `merton_hjb().exact_solution`.
+- Produces: `deep.families.merton_hjb_derivatives(T=0.1, mu=0.03, sigma=0.1, gamma=0.5, rho=0.01) -> tuple[Callable, Callable]` — `(ux, uxx)`, each `(t: float, xv) -> float` with the same argument convention as `merton_hjb().exact_solution`.
 - `Family` gains `deriv_factory_name: Optional[str] = None` (set to `"merton_hjb_derivatives"` for `merton`, `None` for `ac1`).
 - `InstanceSpec` gains `deriv_codes: Tuple[str, ...] = ()`; `DERIV_CODES = {"Dx1": DxN((1,)), "Dx2": DxN((2,))}` in `corpus.py`.
 - `Instance` gains `deriv: Optional[np.ndarray] = None` `(n_codes, N)`, `deriv_stderr`, `deriv_exact` (same shape); `finite` also requires finite `deriv`/`deriv_stderr` when present.

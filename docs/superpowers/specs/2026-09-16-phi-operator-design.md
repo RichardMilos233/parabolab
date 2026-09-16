@@ -67,9 +67,9 @@ the Fourier series differentiates in milliseconds if ever needed.
 - `Instance` gains `phi_grid: Optional[np.ndarray]` (101,), filled for
   every instance from `pde.phi_mu((0,))` (cheap; `None` only for files
   written before the field existed — loader tolerant as for `deriv`).
-- `library.heat_fourier_1d(T, coeffs)`, `library.allen_cahn_fourier_1d(T,
+- `deep.families.heat_fourier_1d(T, coeffs)`, `deep.families.allen_cahn_fourier_1d(T,
   coeffs)` (`coeffs` = `(A, a_1..a_K, b_1..b_K)`), and
-  `library.fd_reference_1d(pde, grid, *, dx=0.02, x_pad=4.0) -> u_grid`
+  `deep.families.fd_reference_1d(pde, grid, *, dx=0.02, x_pad=4.0) -> u_grid`
   (explicit FD for `f_expr` a function of `u` only; raises otherwise).
 - `sample_instances` uses `Family.param_sampler`.
 

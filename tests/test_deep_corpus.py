@@ -165,7 +165,8 @@ def test_collate_shapes_and_nan_masking():
 # derivative labels
 # ---------------------------------------------------------------------------
 
-from parabolab.library import merton_hjb, merton_hjb_derivatives
+from parabolab.library import merton_hjb
+from parabolab.deep.families import merton_hjb_derivatives
 
 
 def test_merton_derivatives_match_finite_differences():
@@ -255,9 +256,9 @@ def test_loader_accepts_files_written_before_deriv_codes(tmp_path):
 # Fourier terminal conditions and the FD reference
 # ---------------------------------------------------------------------------
 
-from parabolab.library import (allen_cahn_fourier_1d, fd_reference_1d,
-                               fourier_phi_expr, fourier_phi_numpy,
-                               heat_fourier_1d)
+from parabolab.deep.families import (allen_cahn_fourier_1d, fd_reference_1d,
+                                     fourier_phi_expr, fourier_phi_numpy,
+                                     heat_fourier_1d)
 
 COEFFS = (0.7, 0.5, -0.3, 0.2, 0.1, -0.4, 0.25, 0.0, 0.05)   # A, a1..a4, b1..b4
 

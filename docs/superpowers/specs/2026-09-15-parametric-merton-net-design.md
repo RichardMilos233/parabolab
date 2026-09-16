@@ -50,7 +50,7 @@ untouched; a derivative corpus lives under its own root (`<root>/deriv`)
 because `instance_path` keys on family and seed only. Exact derivatives
 come from a family hook `Family.deriv_factory_name` naming a library
 function that returns `(u_x, u_xx)` callables; for Merton
-(`library.merton_hjb_derivatives`) by hand from the closed form:
+(`deep.families.merton_hjb_derivatives`) by hand from the closed form:
 \(u = x^{1-\gamma} g(t)\), \(u_x = (1-\gamma)x^{-\gamma} g\),
 \(u_{xx} = -\gamma(1-\gamma)x^{-\gamma-1} g\).
 

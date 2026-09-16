@@ -23,10 +23,21 @@ import numpy as np
 
 from .. import library
 from ..mechanism import DxN
+from . import families
 from .generator import generate_training_data
 from .solver import _grid_inputs
 
 DERIV_CODES = {"Dx1": DxN((1,)), "Dx2": DxN((2,))}
+
+
+def _resolve(name: str):
+    """Look up a PDE builder / reference-solution function by name, trying
+    the NN-corpus-only families module before the shared library."""
+    if hasattr(families, name):
+        return getattr(families, name)
+    if hasattr(library, name):
+        return getattr(library, name)
+    raise AttributeError(f"no PDE builder named {name!r} in deep.families or library")
 
 
 @dataclass(frozen=True)
@@ -49,7 +60,7 @@ class Family:
             kwargs["coeffs"] = tuple(float(p) for p in params)
         else:
             kwargs.update(zip(self.param_names, (float(p) for p in params)))
-        return functools.partial(getattr(library, self.factory_name), **kwargs)
+        return functools.partial(_resolve(self.factory_name), **kwargs)
 
 
 FAMILIES: Dict[str, Family] = {
@@ -74,7 +85,7 @@ def sample_fourier_params(rng: np.random.Generator, K: int = 4, target_amp: floa
     a = [float(rng.normal(0.0, 1.0 / (1 + k))) for k in range(1, K + 1)]
     b = [float(rng.normal(0.0, 1.0 / (1 + k))) for k in range(1, K + 1)]
     xs = np.linspace(x_lo, x_hi, 1001)
-    peak = np.abs(library.fourier_phi_numpy((1.0, *a, *b), xs, x_lo, x_hi)).max()
+    peak = np.abs(families.fourier_phi_numpy((1.0, *a, *b), xs, x_lo, x_hi)).max()
     return (float(target_amp / peak), *a, *b)
 
 
@@ -164,7 +175,7 @@ def generate_instance(spec: InstanceSpec, *,
                             for i in range(spec.n_states)])
         u_grid = np.array([pde.exact_solution(0.0, xg[i]) for i in range(len(grid))])
     elif fam.reference_name is not None:
-        ref = getattr(library, fam.reference_name)
+        ref = _resolve(fam.reference_name)
         u_exact = ref(pde, xs[:, 0])
         u_grid = ref(pde, grid)
     else:
@@ -175,7 +186,7 @@ def generate_instance(spec: InstanceSpec, *,
         if fam.deriv_factory_name is None:
             raise ValueError(f"family {fam.key!r} has no exact derivatives")
         kwargs = dict(fam.fixed_kwargs); kwargs.update(zip(fam.param_names, spec.params))
-        dfuns = getattr(library, fam.deriv_factory_name)(**kwargs)
+        dfuns = _resolve(fam.deriv_factory_name)(**kwargs)
         dvals, dses, dex = [], [], []
         for k, name in enumerate(spec.deriv_codes):
             data = generate_training_data(

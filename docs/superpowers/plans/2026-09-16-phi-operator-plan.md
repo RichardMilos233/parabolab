@@ -272,7 +272,7 @@ def sample_fourier_params(rng: np.random.Generator, K: int = 4, target_amp: floa
     a = [float(rng.normal(0.0, 1.0 / (1 + k))) for k in range(1, K + 1)]
     b = [float(rng.normal(0.0, 1.0 / (1 + k))) for k in range(1, K + 1)]
     xs = np.linspace(x_lo, x_hi, 1001)
-    peak = np.abs(library.fourier_phi_numpy((1.0, *a, *b), xs, x_lo, x_hi)).max()
+    peak = np.abs(deep.families.fourier_phi_numpy((1.0, *a, *b), xs, x_lo, x_hi)).max()
     return (float(target_amp / peak), *a, *b)
 ```
 `Family`: add `param_sampler: Optional[str] = None`, `reference_name: Optional[str] = None`; in `make_factory`, if `self.param_sampler == "fourier"`: `kwargs["coeffs"] = tuple(float(p) for p in params)` instead of zipping `param_names`. Families:

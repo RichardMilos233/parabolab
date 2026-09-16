@@ -111,7 +111,7 @@ def _toy(n=3, n_states=30, m=20, seed=31, deriv=False):
 
 def test_merton_policy_referee():
     assert condtrain.merton_policy_exact((0.5, 0.03, 0.1)) == pytest.approx(6.0)
-    from parabolab.library import merton_hjb_derivatives
+    from parabolab.deep.families import merton_hjb_derivatives
     ux, uxx = merton_hjb_derivatives(T=0.1, mu=0.03, sigma=0.1, gamma=0.5, rho=0.01)
     x = np.array([120.0, 150.0])
     pol = condtrain.policy_from_derivatives(
