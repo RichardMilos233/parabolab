@@ -14,3 +14,4 @@ demo/*.png
 examples/nn_corpus/
 !examples/set_denoiser_gonogo.csv
 !examples/parametric_merton.csv
+!examples/phi_operator.csv

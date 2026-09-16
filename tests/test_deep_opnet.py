@@ -122,3 +122,24 @@ def test_train_operator_decreases_loss_and_evaluates(name):
 def test_per_phi_baseline_runs():
     inst = _toy(n=1, seed=42)[0]
     assert np.isfinite(optrain.per_phi_baseline(inst, epochs=30))
+
+
+# ---------------------------------------------------------------------------
+# driver
+# ---------------------------------------------------------------------------
+
+import csv
+import subprocess
+import sys
+from pathlib import Path
+
+
+def test_phi_operator_driver_tiny(tmp_path):
+    script = Path(__file__).resolve().parents[1] / "examples" / "phi_operator.py"
+    out = tmp_path / "res.csv"
+    subprocess.run([sys.executable, str(script), "--family", "heat_phi", "--tiny", "--jobs", "1",
+                    "--corpus-root", str(tmp_path / "corpus"), "--out", str(out)],
+                   check=True, capture_output=True, text=True)
+    rows = list(csv.DictReader(out.open()))
+    assert {r["backbone"] for r in rows} == {"deeponet", "fno", "attn", "per_phi"}
+    assert {int(r["n_train"]) for r in rows if r["backbone"] != "per_phi"} == {2, 3}
