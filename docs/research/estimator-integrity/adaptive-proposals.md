@@ -1,7 +1,24 @@
 # Safe adaptive branching proposals
 
-**Mathematical status:** proved under the support, measurability, and
+**Mathematical status:** conventional proofs under the support, measurability, and
 integrability hypotheses stated below.
+
+**Implementation status (16 September 2026):**
+[`proposals.py`](../../../parabolab/proposals.py) implements finite-table
+square-root probabilities, frozen pilot tables and a terminal-data proxy.
+The proxy is not the true continuation-moment oracle. A general sampler for
+Theorem 6.2's unrestricted event-time law and a certified continuation-aware
+proposal are not implemented. The saved Allen–Cahn certificates use fixed
+uniform tuple probabilities; changing `q` requires new moment verification.
+During scalar rate differentiation, `q` stays fixed while the descendant
+moments still vary with `lambda`.
+
+[`Proposal.lean`](../../../formal/EstimatorIntegrity/Proposal.lean) checks
+finite-table algebra, including the square-root objective and mixture/error
+bounds. Conditional expectations, full-tree unbiasedness, the pilot
+concentration event and composition over a random tree remain conventional
+arguments under their written hypotheses. Finite-sample agreement with a
+reference is not a proof of these hypotheses or of unbiasedness.
 
 This note separates three questions that are often conflated in adaptive
 branching Monte Carlo:

@@ -1,6 +1,17 @@
 # Branching Estimator Integrity Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **Archived implementation plan — status reviewed 16 September 2026.**
+> The moment, Dym, proposal, and finite Lean foundations now have implementation
+> and research records. This original plan is not a live checklist or evidence
+> that every proposed study was completed. The old finance programme, model
+> assignments, unavailable-model gate, branch/worktree setup, dirty-file
+> snapshots, and expected test counts are superseded session history.
+> Navigation: [archive index](../README.md), [current research](../../research/README.md),
+> [documentation map](../../documentation-map.md).
+
+> **Original workflow metadata (inactive):** This plan originally requested
+> superpowers:subagent-driven-development or superpowers:executing-plans.
+> Its checkbox syntax is preserved as a historical planning record.
 
 **Goal:** Prove three estimator-integrity results for coding-tree Monte Carlo, verify their finite and numerical consequences, formalize their finite/algebraic cores in Lean, and present seven further candidate contributions with honest proof and novelty status.
 
@@ -8,7 +19,7 @@
 
 **Tech Stack:** Python 3.11, NumPy, SymPy, Matplotlib, PyTest, the `parabolab` Conda environment, Lean 4.33.0, Mathlib tag `v4.33.0`.
 
-## Global Constraints
+## Original execution constraints (historical)
 
 - Approved design:
   `docs/superpowers/specs/2026-09-09-branching-estimator-integrity-design.md`.
@@ -1555,7 +1566,7 @@ Do not say “breakthrough” unless a later expert literature review supports i
 
 ---
 
-## Execution Order and Gates
+## Original execution order and gates (historical)
 
 1. Task 1 must complete before any file implementation.
 2. Tasks 2 and 4 may proceed as mathematical work once the clean worktree
@@ -1568,5 +1579,6 @@ Do not say “breakthrough” unless a later expert literature review supports i
 8. Task 11 may run after the three deep theorem statements are frozen.
 9. Task 12 is the only completion gate.
 
-Python tasks 1, 3, 5, 7, 8, and 12 remain blocked until Gemini is available.
-No other model may implement them.
+The original session blocked Python tasks 1, 3, 5, 7, 8, and 12 until
+Gemini was available. That session-specific ownership gate is inactive; it
+does not constrain present work.

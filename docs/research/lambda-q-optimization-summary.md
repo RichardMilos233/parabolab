@@ -1,7 +1,12 @@
 # Research checkpoint: selecting the branching rate and tuple proposals
 
 Initial checkpoint: 12 September 2026. Direction and integration updated:
-14 September 2026. [Research navigation](README.md).
+16 September 2026. [Research navigation](README.md).
+
+The completed rate-certification and profile work is included in local
+`main`. See the [integration record](results/integration-2026-09-16.md)
+for current checks and historical source hashes. The dated numerical runs
+later in this document remain historical records, not new experiments.
 
 ## Current decision, in plain language
 
@@ -27,10 +32,12 @@ for an arbitrary PDE.** A rate is attached to a particular estimator,
 starting state, horizon, root code, and fixed proposal rule. Numerical
 optimization and error control are still required in general.
 
-The intended deliverable is a procedure that chooses useful sampling rules,
-explains how trustworthy those choices are, and measures their effect on PDE
-estimation accuracy and cost. The current rate selector and proposal proxy
-are the first implementations of that procedure.
+The deliverable is a procedure that chooses useful sampling rules and
+explains how trustworthy those choices are. The current implementation has
+finite-depth rate selectors, a terminal-data proposal proxy, and separate
+full-tree rate certificates for specified Allen–Cahn benchmarks. Algorithmic
+variance reduction and mathematical guarantees are the primary research
+goals. Runtime comparisons provide supporting evidence.
 
 ## What the formulas do and do not say
 
@@ -52,6 +59,11 @@ current 1D implementation approximates them by finite-depth quadrature; strict
 convexity supplies uniqueness under its hypotheses, not free coefficients or
 a universal closed-form optimal rate.
 
+The separate exact-rational certificate code checks upper and lower bounds
+for the full moment. It can bound a candidate's objective excess without
+knowing the exact minimizing rate. It does not turn the selector's finite-depth
+convergence flag into a universal certificate.
+
 For the identity-root coding tree, a short-horizon starting approximation is
 
 $$
@@ -64,6 +76,22 @@ The formula requires nonzero numerator and denominator and suitable uniform
 short-time moment/derivative expansions. It is not an arbitrary-horizon
 formula or a proof of integrability. At an Allen--Cahn terminal value of
 `0.5`, it gives `|0.5 - 0.5^3| / 0.5 = 0.75`.
+
+If several starting positions must use one common rate, the objective can
+instead be `sum_j w_j M(lambda;x_j)`, with fixed nonnegative weights summing
+to one. For a semilinear identity root the same short-time calculation gives
+
+$$
+\lambda_{\rm start,grid}
+=\sqrt{\frac{\sum_j w_j f(\phi(x_j))^2}
+                   {\sum_j w_j \phi(x_j)^2}}.
+$$
+
+This chooses one rate for several independent starting-state problems;
+it does not introduce different rates inside a tree or remove the child
+dependence on that common rate. The one-point objective is still appropriate
+when only one starting state matters. The grid extension is a change of
+loss, not a correction to the original pointwise formula.
 
 For a fixed tuple decision, if the true conditional continuation second moments
 satisfy `0 < A_Z < infinity` for every live alternative, the exact local oracle is
@@ -85,7 +113,8 @@ nor does it repair infinite absolute moments.
 
 - The existing [moment theorem](estimator-integrity/notation-and-moment-theorem.md)
   identifies exact absolute moments through killed-depth exhaustion. Its
-  finite-depth moments are **lower approximations**, not upper certificates.
+  exact finite-depth moments are **lower approximations**, not upper
+  certificates; floating quadrature can err in either direction.
 - The existing [rate note](estimator-integrity/exponential-rate-optimization.md)
   proves local strict convexity, gives a conditional full-tree topology
   argument, a conditional full-recursive short-time law, and an exact
@@ -101,14 +130,29 @@ nor does it repair infinite absolute moments.
   records the class-wide development: full-tree minimizer existence, exact
   cutoff-minimizer consistency, an explicit all-code tilted-moment bound for a
   semilinear class, and a quantitative rate-selection error inequality.
-- These new arguments are **ordinary mathematical proofs under their written
-  hypotheses**, independently reviewed by GPT-6 Astra MAX. They are not newly
-  Lean-checked stochastic theorems or a completed certified numerical solver.
+- Separate [flat and wave-root certificates](results/certified-rate-checkpoint.md)
+  now verify complete-tree bounds using rational witnesses. The wave-root
+  certificate at `T=1/20,x=0` bounds the rounded rate `0.73055`'s global
+  additive variance excess by `6.130773e-6`.
+- The [profile certificate](results/profile-efficiency-checkpoint.md) covers
+  the five equally weighted positions `[-2,-1,0,1,2]` at the same horizon.
+  Its cheap rate near `0.475` is within `1.60%` of the optimal weighted
+  variance over all positive common scalar rates. The rational candidate
+  `0.5` is within `0.93%`. These are objective-gap guarantees, not errors
+  in the minimizing rate or in each PDE value.
+- The [mean-identification proof](estimator-integrity/allen-cahn-mean-identification.md)
+  supplies a common PDE mean for the saved uniform Allen–Cahn estimators,
+  so their additive second-moment gaps equal variance gaps.
+- These analytic/stochastic bridges are **conventional proofs under their
+  written hypotheses**. Twenty-six public Lean lemmas added across the two
+  certificate checkpoints verify deterministic algebra, order and convexity
+  substatements; neither the whole stochastic argument nor Python program
+  correctness is formalized. See the [proof registry](proof-registry.md).
 - The previous [financial milestone](milestone-1-financial-moment-target.md)
   and its symbolic-check artifacts are retained as historical work. Its
   recommendation to proceed with multifactor Merton has been superseded.
 
-## Engineering application in this checkpoint
+## Implemented selection and verification
 
 The implementation is deliberately opt-in and reuses the existing sampler:
 
@@ -128,13 +172,22 @@ The implementation is deliberately opt-in and reuses the existing sampler:
    Custom proposals require `n_jobs=1`; multiprocessing and neural training
    do not yet accept this opt-in proposal. Existing sampling defaults remain
    unchanged.
+4. [`profile_rates.py`](../../parabolab/profile_rates.py) implements the
+   cheap weighted formula and weighted finite-depth numerical selection.
+   It returns one common rate for the requested starting positions.
+5. [`rate_certificate.py`](../../parabolab/rate_certificate.py),
+   [`wave_certificate.py`](../../parabolab/wave_certificate.py) and
+   [`profile_certificate.py`](../../parabolab/profile_certificate.py) check
+   exact-rational bounds for the saved Allen–Cahn settings. This is
+   verification code alongside selection code; the underlying tree
+   simulation rules are unchanged.
 
 No expensive tuning takes place inside particle spawning. The proposal uses
 only deterministic terminal evaluations; rate optimization is a separate
-precomputation. Per-branch evaluation overhead may outweigh variance savings,
-so runtime and variance must both be measured. The proposal must be held fixed
+precomputation. The proposal must be held fixed
 while taking rate derivatives; a callback that changes with lambda invalidates
-those derivatives. Nonfinite parent-state terminal scores fail explicitly;
+those derivatives. Holding `q` fixed does not freeze child moments: recursive
+derivatives include their dependence on lambda. Nonfinite parent-state terminal scores fail explicitly;
 this proxy can therefore be inapplicable even when random leaf scores are
 almost surely finite. A uniform-proposal moment bound does not transfer
 unchanged: floor mass `epsilon` gives the conservative replacement `B/epsilon`.
@@ -160,28 +213,30 @@ recursive coding-tree rate selection**, not the existence of a U-shaped plot,
 the square-root rule, generic convex optimization, or a universal best lambda.
 Publication novelty remains unestablished.
 
-## Next research checks
+## Completed checks and remaining algorithmic questions
 
-First reproduce small optimizer checks, verify the exact mechanism/proposal
-being optimized, and sharpen the scalar certificate using
-code-dependent bounds. Test cutoff sensitivity and the effect of zero terminal
-values; do not interpret finite sample variances as upper bounds.
+Mechanism matching, the binary correction, six-code moment bounds, saved
+Allen–Cahn certificates, and replicated rate/proposal and profile comparisons
+are complete in the linked checkpoints. The general finite-depth quadrature
+still has no certified numerical-error bound. New PDEs, horizons, nonuniform
+proposals and zero-terminal regimes require their own applicability checks.
 
-Then compare default, rate-only, proposal-only, and combined tuning
-on one controlled semilinear family using the existing demo workflow. Use
-separate evaluation randomness, record precomputation and sampling costs,
-and compare both fixed-sample variance and
-fixed-budget accuracy across the solution grid. A rate selected at one state
-is not automatically optimal at every state. Establish estimator assumptions
-before making variance or confidence-interval claims for a chosen PDE.
+The main remaining algorithmic questions are how to obtain useful full-tree
+error control more broadly and whether continuation-aware `q` improves on
+the existing terminal proxy. That optional extension should first compare
+proposals at a common lambda, then reoptimize lambda with each proposal held
+fixed, while preserving support and rechecking moments. No continuation-aware
+q study is claimed complete for the current Allen–Cahn λ benchmarks. The
+[historical finite-depth Merton pilot](estimator-integrity/reproducibility.md#merton--vasicek-adaptive-proposal-experiment-task-8)
+does not establish that result. A rate selected for one root is not globally
+best across all roots; the weighted-profile extension is optional when the
+research target is a single starting state.
 
-For the research contribution, require a precise theorem beyond a routine
-prior-art restatement, a practically useful certificate or clearly delimited
-failure result, and reproducible gains or informative limitations against
-strong baselines. Otherwise narrow the estimator class or the certification
-claim; do not compensate by adding unrelated financial models.
+Assess future contributions by their mathematical guarantees, variance
+behavior and explicit limitations against matching baselines. A runtime
+disadvantage in one workload does not invalidate an algorithmic contribution.
 
-## Repository integration check: 14 September 2026
+## Historical repository integration check: 14 September 2026
 
 The solver/demo integration preserves the existing PDE and comparison
 interfaces. `CodingTreeMC` forwards an optional tuple proposal to the serial
@@ -287,6 +342,7 @@ incremental benefit. Millisecond sampling timings are particularly noisy.
 The fixed-rate configurations' diagnostic time is optional moment evaluation,
 not required baseline tuning. At this batch size the rate-optimization cost
 exceeds the observed sampling-time saving, so **no end-to-end speedup is
-demonstrated**. Larger amortized workloads and replicated fixed-budget tests
-remain future work. Empirical standard errors and finite-depth numerical
-moments are not upper certificates for the unrestricted estimator.
+demonstrated** in this historical run. Replicated cost and profile-reuse
+studies were subsequently completed in the linked checkpoints. Empirical
+standard errors and finite-depth numerical moments remain distinct from
+the separate full-tree exact-rational certificates.

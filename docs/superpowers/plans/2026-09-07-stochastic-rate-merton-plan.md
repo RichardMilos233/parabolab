@@ -1,6 +1,16 @@
 # Stochastic-Rate Merton Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **Archived implementation plan — status reviewed 16 September 2026.**
+> State-dependent PDE support and the Vasicek examples are implemented.
+> This is the original plan, not a live checklist or a completion ledger.
+> Further financial-application development is inactive. The branch, dirty-file
+> snapshot, commands, and agent workflow below describe the original session.
+> Navigation: [archive index](../README.md), [current research](../../research/README.md),
+> [documentation map](../../documentation-map.md).
+
+> **Original workflow metadata (inactive):** This plan originally requested
+> superpowers:subagent-driven-development or superpowers:executing-plans.
+> Its checkbox syntax is preserved as a historical planning record.
 
 **Goal:** Implement stochastic-interest-rate Merton HJB support via a state-dependent coding-tree mechanism, provide exact closed-form benchmark controls, and deliver a two-stage evaluation pipeline (Stage 1: fast runnable smoke code; Stage 2: full quality/error evaluation script).
 
@@ -12,7 +22,7 @@
 
 **Tech Stack:** Python 3.11, NumPy, SymPy, PyTest, PyTorch (optional deep branching).
 
-## Global Constraints
+## Original execution constraints (historical)
 - Target branch: `feature/stochastic-rate-merton`.
 - Never touch, overwrite, or commit existing changes in `demo/merton.py`.
 - No modification to existing `tree.py` RNG drawing order or `test_tree.py` golden expectations.

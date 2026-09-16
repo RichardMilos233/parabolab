@@ -2,7 +2,8 @@
 
 Generates:
 1. Panel 1: Deterministic second moment U-curves for the binary control problem
-   u_t + 1/2 u_xx + u^2 = 0 against Riccati ground truth, showing the sweet spot lambda*(T)
+   u_t + 1/2 u_xx + u^2 = 0 using the standard binary mechanism, distinguishing
+   the full-tree Riccati optimum from the finite-depth numerical optimum
    and contrasting it with the JCP heuristic lambda_JCP(T) = -ln(0.95)/T.
 2. Panel 2: Allen-Cahn (d = 1) deterministic second moment curves across lambda,
    identifying the optimal rate lambda*(T) and evaluating empirical variance reduction.
@@ -12,6 +13,9 @@ Generates:
 Outputs:
 - examples/exponential_rate_sweet_spot.png
 - examples/exponential_rate_sweet_spot.csv
+
+Use --binary-only --output-dir PATH for a separate corrected control report
+without running the Allen-Cahn or Dym experiments.
 """
 
 from __future__ import annotations
@@ -26,6 +30,8 @@ import numpy as np
 import sympy as sp
 
 from parabolab.library import allen_cahn_wave_1d, dym_1d
+from parabolab.mechanism import Id
+from parabolab.moments import MomentQuadrature
 from parabolab.pde import FullyNonlinearPDE1D, z_symbols
 from parabolab.rate_optimization import (
     finite_depth_moment_derivatives_1d,
@@ -33,6 +39,26 @@ from parabolab.rate_optimization import (
     riccati_binary_second_moment,
 )
 from parabolab.tree import jcp_rate, sample_tree
+
+
+class BinaryControlMechanism:
+    """Standard binary representation of u^2 with terminal value one.
+
+    The symbolic PDE's default derivative-coded mechanism represents the same
+    PDE but has a different second moment. Pass this mechanism explicitly.
+    """
+
+    @staticmethod
+    def tuples(code):
+        return ((Id(), Id()),)
+
+    @staticmethod
+    def terminal(code, pde, x):
+        return 1.0
+
+    @staticmethod
+    def is_identically_zero(code, pde):
+        return False
 
 
 def _binary_control_pde(T: float) -> FullyNonlinearPDE1D:
@@ -43,6 +69,116 @@ def _binary_control_pde(T: float) -> FullyNonlinearPDE1D:
         phi_expr=sp.Integer(1),
         T=T,
     )
+
+
+def _binary_oracle_optimum(T: float, bracket=(0.2, 4.0)) -> float:
+    """Numerically locate the stationary rate of the exact full-tree formula.
+
+    The control horizons use a bracket wholly inside the finite-moment domain.
+    On that domain the moment is strictly convex; its derivative has the sign
+    of T*rate*(rate**2 + 1) - 2*expm1(rate*T).
+    """
+    lo, hi = bracket
+    if not all(math.isfinite(riccati_binary_second_moment(T, rate)) for rate in bracket):
+        raise ValueError("Oracle bracket must lie in the finite-moment domain")
+
+    def stationarity(rate):
+        return T * rate * (rate**2 + 1.0) - 2.0 * math.expm1(rate * T)
+
+    if not stationarity(lo) < 0.0 < stationarity(hi):
+        raise ValueError("Oracle bracket must enclose the stationary rate")
+    while hi - lo > 1e-12:
+        mid = (lo + hi) / 2.0
+        if stationarity(mid) < 0.0:
+            lo = mid
+        else:
+            hi = mid
+    return (lo + hi) / 2.0
+
+
+def _binary_control_experiment(T: float):
+    pde = _binary_control_pde(T)
+    # Spatial integration is exact with one node for this constant control.
+    settings = dict(max_depth=2, mechanism=BinaryControlMechanism,
+                    quadrature=MomentQuadrature(time_order=8, normal_order=1))
+    opt = optimize_exponential_rate_1d(pde, 0.0, 0.0, bracket=(0.2, 4.0),
+                                     tol=1e-9, **settings)
+    if not opt.converged:
+        raise RuntimeError(f"Binary depth-2 optimization did not converge at T={T}")
+    oracle_rate = _binary_oracle_optimum(T)
+    lam_jcp = jcp_rate(T)
+    lambda_grid = np.linspace(0.2, 3.5, 34)
+    data = {
+        "lambda_grid": lambda_grid,
+        "v_riccati": [riccati_binary_second_moment(T, rate) for rate in lambda_grid],
+        "v_quad": [finite_depth_moment_derivatives_1d(
+            pde, 0.0, 0.0, rate=rate, **settings).value for rate in lambda_grid],
+        "opt_rate": opt.rate,
+        "opt_val": opt.second_moment,
+        "oracle_rate": oracle_rate,
+        "oracle_val": riccati_binary_second_moment(T, oracle_rate),
+        "lam_jcp": lam_jcp,
+    }
+    record = {
+        "experiment": "standard_binary_control",
+        "T": T,
+        "mechanism": "Id -> (Id, Id); terminal=1; q=1",
+        "max_depth": settings["max_depth"],
+        "time_order": settings["quadrature"].time_order,
+        "normal_order": settings["quadrature"].normal_order,
+        "finite_depth_optimal_rate": opt.rate,
+        "finite_depth_optimal_second_moment": opt.second_moment,
+        "full_tree_at_finite_depth_rate": riccati_binary_second_moment(T, opt.rate),
+        "full_tree_optimal_rate": oracle_rate,
+        "full_tree_optimal_second_moment": data["oracle_val"],
+        "jcp_rate": lam_jcp,
+        "full_tree_jcp_second_moment": riccati_binary_second_moment(T, lam_jcp),
+        "finite_depth_jcp_second_moment": finite_depth_moment_derivatives_1d(
+            pde, 0.0, 0.0, rate=lam_jcp, **settings).value,
+        "full_tree_rate_1_second_moment": riccati_binary_second_moment(T, 1.0),
+        "finite_depth_d_rate": opt.d_rate,
+        "notes": "Full-tree formula evaluated exactly; its stationary rate solved numerically. "
+                 "Finite depth kills branches at the cutoff; comparisons must use one objective.",
+    }
+    return data, record
+
+
+def _plot_binary_control(ax, panel_data):
+    for T, color in zip(panel_data, ["tab:blue", "tab:orange", "tab:green"]):
+        data = panel_data[T]
+        ax.plot(data["lambda_grid"], data["v_riccati"], "-", color=color,
+                label=f"T={T:.2f}: full tree")
+        ax.plot(data["lambda_grid"], data["v_quad"], ":", color=color,
+                label=f"T={T:.2f}: depth 2")
+        ax.plot(data["oracle_rate"], data["oracle_val"], "*", color=color, markersize=11)
+        ax.plot(data["opt_rate"], data["opt_val"], "o", color=color, markersize=5)
+        ax.axvline(data["lam_jcp"], linestyle="--", color=color, alpha=0.4,
+                   label="JCP rates" if T == next(iter(panel_data)) else None)
+    ax.set_xlabel("Branching clock rate $\\lambda$")
+    ax.set_ylabel("Second moment")
+    ax.set_title("Standard binary control: full-tree (*) and depth-2 (o) optima")
+    ax.grid(True, linestyle=":", alpha=0.6)
+    ax.legend(fontsize=8)
+
+
+def run_binary_experiments(output_dir: Path):
+    """Write separate artifacts; never overwrite the historical three-panel files."""
+    output_dir.mkdir(parents=True, exist_ok=True)
+    panel_data, records = {}, []
+    for T in (0.05, 0.10, 0.15):
+        panel_data[T], record = _binary_control_experiment(T)
+        records.append(record)
+    csv_path = output_dir / "standard_binary_rate_audit.csv"
+    with csv_path.open("w", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(records[0]))
+        writer.writeheader()
+        writer.writerows(records)
+    fig, ax = plt.subplots(figsize=(9, 5.2))
+    _plot_binary_control(ax, panel_data)
+    fig.tight_layout()
+    fig.savefig(output_dir / "standard_binary_rate_audit.png", dpi=180)
+    plt.close(fig)
+    print(f"Corrected binary-only report saved to {output_dir}")
 
 
 def run_experiments(output_dir: Path):
@@ -58,39 +194,10 @@ def run_experiments(output_dir: Path):
     # ---------------------------------------------------------
     print("Evaluating Panel 1: Binary Riccati Control...")
     T_binary_list = [0.05, 0.10, 0.15]
-    lambda_grid_binary = np.linspace(0.2, 3.5, 34)
-
     panel1_data = {}
     for T in T_binary_list:
-        pde = _binary_control_pde(T)
-        opt = optimize_exponential_rate_1d(pde, 0.0, 0.0, max_depth=2, bracket=(0.2, 4.0))
-        lam_jcp = jcp_rate(T)
-
-        v_riccati = [riccati_binary_second_moment(T, lam) for lam in lambda_grid_binary]
-        v_quad = [
-            finite_depth_moment_derivatives_1d(pde, 0.0, 0.0, max_depth=2, rate=lam).value
-            for lam in lambda_grid_binary
-        ]
-
-        panel1_data[T] = {
-            "lambda_grid": lambda_grid_binary,
-            "v_riccati": v_riccati,
-            "v_quad": v_quad,
-            "opt_rate": opt.rate,
-            "opt_val": opt.second_moment,
-            "lam_jcp": lam_jcp,
-            "v_jcp": riccati_binary_second_moment(T, lam_jcp),
-        }
-
-        records.append({
-            "experiment": "binary_control_optimum",
-            "T": T,
-            "optimal_rate": opt.rate,
-            "optimal_second_moment": opt.second_moment,
-            "jcp_rate": lam_jcp,
-            "jcp_second_moment": panel1_data[T]["v_jcp"],
-            "notes": "Riccati exact control",
-        })
+        panel1_data[T], record = _binary_control_experiment(T)
+        records.append(record)
 
     # ---------------------------------------------------------
     # Panel 2: Allen-Cahn (d = 1) Deterministic Rate Sweet Spot
@@ -173,20 +280,7 @@ def run_experiments(output_dir: Path):
 
     # Save CSV
     print(f"Writing CSV report to {csv_path}...")
-    fieldnames = [
-        "experiment",
-        "T",
-        "samples",
-        "rate",
-        "optimal_rate",
-        "optimal_second_moment",
-        "jcp_rate",
-        "jcp_second_moment",
-        "rate_1_second_moment",
-        "empirical_second_moment",
-        "max_sample_magnitude",
-        "notes",
-    ]
+    fieldnames = list(dict.fromkeys(key for record in records for key in record))
     with open(csv_path, "w", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
         writer.writeheader()
@@ -199,19 +293,7 @@ def run_experiments(output_dir: Path):
     # Panel 1
     ax1 = axes[0]
     colors_p1 = ["tab:blue", "tab:orange", "tab:green"]
-    for idx, T in enumerate(T_binary_list):
-        d = panel1_data[T]
-        col = colors_p1[idx]
-        ax1.plot(d["lambda_grid"], d["v_riccati"], "-", color=col, label=f"T={T:.2f} (Riccati)")
-        ax1.plot(d["lambda_grid"], d["v_quad"], ":", color=col, alpha=0.7)
-        ax1.plot(d["opt_rate"], d["opt_val"], "o", color=col, markersize=8, label=f"λ*={d['opt_rate']:.2f}")
-        ax1.axvline(d["lam_jcp"], linestyle="--", color=col, alpha=0.4)
-
-    ax1.set_xlabel("Branching Clock Rate $\\lambda$", fontsize=12)
-    ax1.set_ylabel("Second Moment $V(T; \\lambda)$", fontsize=12)
-    ax1.set_title("Binary Control ($u^2$): Riccati Ground Truth vs Quadrature", fontsize=13)
-    ax1.grid(True, linestyle=":", alpha=0.6)
-    ax1.legend(loc="upper right", fontsize=9)
+    _plot_binary_control(ax1, panel1_data)
 
     # Panel 2
     ax2 = axes[1]
@@ -249,6 +331,8 @@ def run_experiments(output_dir: Path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--binary-only", action="store_true",
+                        help="Run only the corrected standard-binary control.")
     parser.add_argument(
         "--output-dir",
         type=Path,
@@ -256,4 +340,7 @@ if __name__ == "__main__":
         help="Directory to store figures and csv results.",
     )
     args = parser.parse_args()
-    run_experiments(args.output_dir)
+    if args.binary_only:
+        run_binary_experiments(args.output_dir)
+    else:
+        run_experiments(args.output_dir)

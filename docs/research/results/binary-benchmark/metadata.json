@@ -1,0 +1,63 @@
+{
+  "date": "2026-09-14",
+  "branch": "codex/research-certified-rate",
+  "base_commit": "0afcb3c4ba446d20ff9337e4a4e1f2124bda5730",
+  "source_state": "Uncommitted research changes; no merge or user result approval",
+  "python": "3.11.15",
+  "numpy": "2.4.6",
+  "command": "MPLBACKEND=Agg MPLCONFIGDIR=/tmp/parabolab-matplotlib XDG_CACHE_HOME=/tmp/parabolab-cache /opt/miniconda3/envs/parabolab/bin/python examples/exponential_rate_sweet_spot.py --binary-only --output-dir docs/research/results/binary-benchmark",
+  "mechanism": {
+    "root": "Id",
+    "offspring": [
+      "Id",
+      "Id"
+    ],
+    "tuple_probability": 1,
+    "terminal": 1,
+    "lifetime": "Exponential(rate)",
+    "diffusion_variance": 1
+  },
+  "optimizer": {
+    "max_depth": 2,
+    "time_order": 8,
+    "normal_order": 1,
+    "rate_bracket": [
+      0.2,
+      4.0
+    ],
+    "tol": 1e-09
+  },
+  "oracle": {
+    "formula": "rate^2 exp(rate T) / (rate^2+1-exp(rate T))",
+    "stationarity": "T rate (rate^2+1)-2 expm1(rate T)=0",
+    "root_bracket_width_tolerance": 1e-12,
+    "validated_horizons": [
+      0.05,
+      0.1,
+      0.15
+    ]
+  },
+  "mc": {
+    "max_depth": null,
+    "clipping": false,
+    "tuple_proposal": null,
+    "samples_per_rate": 120000,
+    "seeds": [
+      2026091401,
+      2026091402
+    ],
+    "reproduction": "See ../binary-benchmark-audit.md for executed Python command",
+    "stderr_scope": "Finite-fourth-moment control at both tested rates; ordinary empirical standard errors are diagnostics, not certified bounds"
+  },
+  "tests": {
+    "command": "/opt/miniconda3/envs/parabolab/bin/python -m pytest tests/test_rate_optimization.py -q",
+    "result": "14 passed in 1.15s (final verification; first run 14 passed in 16.15s including cache setup)"
+  },
+  "sha256": {
+    "examples/exponential_rate_sweet_spot.py": "0b50cfcc5f2182ac350155365574881bb1ec03a993a463ab9c0add4aee2bb1bc",
+    "tests/test_rate_optimization.py": "1b81ba6349bcfd4c6bdbddeae36a9cdef05f9493aaf9d44e745332595a793e94",
+    "parabolab/rate_optimization.py": "6e06580736d8e95ac6665d6ef9fff8956fcde268fb0a79ee541310b8bfb250cc",
+    "parabolab/tree.py": "e93b36fd8653c83ff1ceaea81c7553637ce3fa158f289cf9f11041b181aa795d"
+  },
+  "historical_artifacts": "examples/exponential_rate_sweet_spot.csv and .png remain unchanged and contain the old mismatched binary comparison"
+}

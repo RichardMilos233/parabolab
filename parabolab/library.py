@@ -89,6 +89,70 @@ def allen_cahn_flat(phi0: float = 0.5, T: float = 0.5) -> ParabolicPDE:
     )
 
 
+def fisher_kpp_1d(T: float = 0.05, phi0: float = 0.5) -> ParabolicPDE:
+    """Fisher-KPP semilinear equation: u_t + (1/2) u_xx + u(1 - u) = 0.
+
+    f(u) = u - u^2. For spatially flat terminal condition phi(x) == phi0, the
+    solution is independent of space: u(t) = e^{T - t} / ( (1/phi0 - 1) + e^{T - t} ).
+    """
+    if phi0 <= 0.0 or phi0 >= 1.0:
+        raise ValueError("phi0 must be in (0, 1) for standard logistic form")
+
+    c = 1.0 / phi0 - 1.0
+
+    def exact(t: float, x: float) -> float:
+        tau = T - t
+        return math.exp(tau) / (c + math.exp(tau))
+
+    return ParabolicPDE(
+        T=T,
+        f=lambda z: z - z ** 2,
+        f_derivatives=(
+            lambda z: 1.0 - 2.0 * z,
+            lambda z: -2.0,
+        ),
+        phi=lambda x: phi0,
+        phi_derivatives=(lambda x: 0.0,),
+        exact_solution=exact,
+        name=f"fisher_kpp_1d(phi0={phi0}, T={T})",
+    )
+
+
+class BinaryControlMechanism:
+    """Standard binary representation of u^2 with terminal value one."""
+
+    @staticmethod
+    def tuples(code):
+        from .mechanism import Id
+
+        return ((Id(), Id()),)
+
+    @staticmethod
+    def terminal(code, pde, x):
+        return 1.0
+
+    @staticmethod
+    def is_identically_zero(code, pde):
+        return False
+
+
+def binary_control_1d(T: float = 0.05) -> FullyNonlinearPDE1D:
+    """Standard binary control problem u_t + (1/2) u_xx + u^2 = 0 with phi == 1."""
+    import sympy as sp
+
+    z = z_symbols(0)
+    pde = FullyNonlinearPDE1D(
+        n=0,
+        f_expr=z[0] ** 2,
+        phi_expr=sp.Integer(1),
+        T=T,
+        exact_solution=lambda t, x: 1.0 / (1.0 - (T - t)),
+        name=f"binary_control_1d(T={T})",
+    )
+    pde._mechanism = BinaryControlMechanism
+    return pde
+
+
 # --------------------------------------------------------------------------
 # Fully nonlinear examples, JEQ2023 Section 5 (d = 1) -- M2
 # --------------------------------------------------------------------------

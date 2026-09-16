@@ -1,6 +1,16 @@
 # Branching clock exponential rate optimization design
 
-Status: approved in chat on 2026-09-10.
+> **Archived design — status reviewed 16 September 2026.**
+> This specification preceded the implemented scalar-rate theory and optimizer.
+> Later work corrected the binary-estimator comparison and added full-tree
+> certificates. The scoped [theory note](../../research/estimator-integrity/exponential-rate-optimization.md),
+> [binary audit](../../research/results/binary-benchmark-audit.md), and
+> [proof registry](../../research/proof-registry.md) supersede its original
+> mathematical and formalization targets as statements of current evidence.
+> Navigation: [archive index](../README.md), [current research](../../research/README.md),
+> [documentation map](../../documentation-map.md).
+
+Original approval date: 2026-09-10.
 
 ## Goal
 
@@ -8,7 +18,7 @@ Investigate the mathematical existence, convexity, asymptotic scaling, and numer
 
 The research separates two fundamental settings:
 1. **The local single-event horizon objective $J_{\exp}(\lambda)$**, which treats continuation variance as a fixed density and admits a strictly convex, unique global minimizer;
-2. **The full recursive coding-tree second moment $V(t, x; \lambda)$**, whose topology expansion establishes strict convexity and a true U-curve with an interior minimum for $L^2$-integrable equations (such as semilinear $u^2$ and Allen--Cahn), while proving that non-integrable problems (such as the Harry Dym equation) have $V \equiv +\infty$ for all $\lambda > 0$ and possess no finite variance-minimizing rate.
+2. **The full recursive coding-tree second moment $V(t, x; \lambda)$**, whose topology expansion supports convexity under the stated disintegration assumptions. A unique interior minimum additionally requires properness and positive leaf and branching contributions; finite variance alone is not enough. The specified Harry Dym estimator instead has $V \equiv +\infty$ for all $\lambda > 0$ and possesses no finite variance-minimizing rate.
 
 ## Terminology and classification policy
 
@@ -66,20 +76,21 @@ h_{B, L}''(\lambda) = h_{B, L}(\lambda) \left[ \left( L - \frac{B}{\lambda} \rig
 Consequently:
 - Each finite-depth moment $V_{c, K}(t, x; \lambda)$ is strictly convex in $\lambda$ whenever a non-trivial branch topology is live;
 - The unrestricted moment $V_c(t, x; \lambda) = \sup_K V_{c, K}(t, x; \lambda)$ is lower-semicontinuous, convex, and strictly convex on its domain of finiteness;
-- For $L^2$-integrable equations, $V_c(\lambda) \to \infty$ as $\lambda \downarrow 0$ and $\lambda \to \infty$, proving the existence of a unique global interior minimum $\lambda^*$.
+- Under properness, a positive root-survival coefficient, and a positive branching-topology contribution, $V_c(\lambda) \to \infty$ as $\lambda \downarrow 0$ and $\lambda \to \infty$, giving a unique global interior minimum. These are explicit hypotheses in the final theory note's Corollary 7.3.
 - For non-integrable problems like the Harry Dym equation, $V_c(\lambda) \equiv +\infty$ for all $\lambda > 0$.
 
 ### 3. Short-horizon scaling ($T \downarrow 0$) vs. the JCP heuristic
 
-As $T \downarrow 0$, Taylor expansion of the first-event and first-branch terms yields:
+Under positive leading coefficients and the uniform expansion and domination
+hypotheses of the final theory note's Theorem 7.4, the short-time limit is:
 \[
 \lambda^*(T) \longrightarrow \sqrt{\frac{B_c(x)}{G_c(x)}} = \frac{|f(J\phi(x))|}{|\phi(x)|} = O(1).
 \]
-In contrast, the paper's heuristic $\lambda_{\text{JCP}}(T) = -\frac{\ln(0.95)}{T} = O(1/T)$ blows up as $T \to 0$. While $\lambda_{\text{JCP}}$ bounds the expected tree size to $\approx 1.05$ nodes, it incurs an unnecessary $e^{0.051} \approx 1.05$ variance penalty compared to the variance-minimizing rate $\lambda^*(T)$.
+In contrast, the heuristic $\lambda_{\text{JCP}}(T) = -\frac{\ln(0.95)}{T} = O(1/T)$ keeps the root branching probability at $5\%$. This probability alone does not give a universal expected-tree-size bound. Under the displayed short-time hypotheses, the local leading **second-moment** ratio approaches $1/0.95$; this is not a multiplicative ratio of centered variances. See the final theory note for the additive variance interpretation.
 
 ### 4. Analytic Riccati control
 
-For the semilinear equation $u_t + \frac{1}{2}u_{xx} + u^2 = 0$ with $\phi \equiv 1$, the exact second moment of the binary tree is obtained by solving $Y'(r) = \frac{e^{\lambda r}}{\lambda} Y(r)^2$ with $Y(0) = 1$:
+For the semilinear equation $u_t + \frac{1}{2}u_{xx} + u^2 = 0$ with $\phi \equiv 1$, the exact second moment of the one-type `Id -> (Id, Id)` binary tree is obtained by solving $Y'(r) = \frac{e^{\lambda r}}{\lambda} Y(r)^2$ with $Y(0) = 1$:
 \[
 V(T; \lambda) = \frac{\lambda^2 e^{\lambda T}}{\lambda^2 + 1 - e^{\lambda T}} \quad \text{for } \lambda^2 > e^{\lambda T} - 1.
 \]
@@ -87,17 +98,29 @@ The unique variance-minimizing rate satisfies:
 \[
 2(e^{\lambda T} - 1) = T \lambda (\lambda^2 + 1), \qquad \lambda^*(T) = 1 + \frac{T}{2} + \frac{7T^2}{24} + O(T^3).
 \]
-This provides an analytical ground truth to validate the numerical optimizer to machine precision.
+This is an analytic oracle for that one-type estimator. It is not the moment
+of the derivative-coded mechanism merely because both represent the same
+PDE. A finite-depth optimizer also targets its truncated moment, so matching
+the full-tree oracle to machine precision is not a general acceptance
+criterion. The later binary audit records both distinctions.
 
-## Lean 4 formalization boundary
+## Original Lean 4 targets and actual coverage
 
-Formalized in `formal/EstimatorIntegrity/ExponentialRate.lean`:
+The following were **proposed targets**, not a list of completed theorems in
+`formal/EstimatorIntegrity/ExponentialRate.lean`:
 - Definition of kernel $w(\lambda, s) = \frac{e^{\lambda s}}{\lambda}$;
 - Formulas for first and second derivatives of $w(\lambda, s)$ and $h_{B, L}(\lambda) = \lambda^{-B} e^{\lambda L}$;
 - Direct algebraic proof of positivity: $[(\lambda s - 1)^2 + 1] > 0$ and $[(L - B/\lambda)^2 + B/\lambda^2] > 0$;
 - Continuity and differentiability of $J_{\exp}(\lambda)$ on $(0, \infty)$ for continuous positive integrand $A(s)$;
 - Proof of strict convexity via positive second derivative;
 - Existence and uniqueness of the minimizer $\lambda^*$ on $(0, \infty)$.
+
+As reviewed on 16 September 2026, that module proves positivity of the
+displayed algebraic factors and the AM–GM optimization of $a\lambda+b/\lambda$,
+including its equality condition. It does not formalize the integrated
+objective's derivative interchange or its complete minimizer theorem. Later
+certificate modules add separate finite algebraic and convex-enclosure
+lemmas; consult the proof registry for exact names and omitted bridges.
 
 Deliberately outside Lean scope:
 - Full continuous-time measure disintegration of random tree topologies;
@@ -119,7 +142,7 @@ Deliberately outside Lean scope:
    - Evaluates short-horizon scaling of $\lambda^*(T)$ vs. $\lambda_{\text{JCP}}(T)$ and package default $\lambda = 1.0$;
    - Runs Dym rate sweeps demonstrating failure to stabilize with increasing $N$.
 
-## Ownership and execution protocol
+## Original ownership and execution protocol (historical)
 
 - **GPT 5.6 Sol Max (Subagents):**
   - Mathematical proof documentation (`docs/research/estimator-integrity/exponential-rate-optimization.md`);

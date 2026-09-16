@@ -1,0 +1,114 @@
+{
+  "scope": "ideal real-arithmetic raw SemilinearMechanism, uniform q, 1D Allen-Cahn",
+  "certificate_type": "exact rational time-step enclosures; conventional tree correspondence",
+  "horizon": "1/20",
+  "flat_phi": "1/2",
+  "rate_interval": [
+    "1/5",
+    "2"
+  ],
+  "steps": 200,
+  "precision_bits": 48,
+  "max_splits": 160,
+  "selected_rate_exact": "1907/2560",
+  "selected_rate": 0.744921875,
+  "incumbent_upper_exact": "75820673137583/281474976710656",
+  "incumbent_upper": 0.2693691425917528,
+  "optimum_lower_exact": "18948168212961/70368744177664",
+  "optimum_lower": 0.26926966559359755,
+  "excess_bound_exact": "28000285739/281474976710656",
+  "excess_bound": 9.947699815526789e-05,
+  "tolerance": "0.0001",
+  "tolerance_met": true,
+  "outside_interval_lower_exact": [
+    "73/256",
+    "11/40"
+  ],
+  "global_lower_optimum_exact": "18948168212961/70368744177664",
+  "global_excess_bound_exact": "28000285739/281474976710656",
+  "global_excess_bound": 9.947699815526789e-05,
+  "global_tolerance_met": true,
+  "cells": 45,
+  "flat_selection_seconds": 9.590637709014118,
+  "all_flat_witnesses_verified": true,
+  "rate_one_baseline": {
+    "moment_lower_exact": "76067401120743/281474976710656",
+    "moment_upper_exact": "38034810448917/140737488355328",
+    "variance_reduction_lower_exact": "30840997895/35184372088832",
+    "variance_reduction_lower": 0.0008765538807153916,
+    "meaning": "additive reduction vs rate one; common PDE mean proved in allen-cahn-mean-identification.md"
+  },
+  "independent_floating_ode": {
+    "role": "diagnostic, not certificate",
+    "method": "DOP853 + bounded scalar minimization",
+    "rate": 0.7436702617586541,
+    "second_moment": 0.26936547704392283,
+    "selected_second_moment": 0.26936550530286013,
+    "selected_within_enclosure": true,
+    "exact_solution_squared": 0.26921434944631023,
+    "selected_variance": 0.0001511558565499005,
+    "optimal_variance": 0.0001511275976125992,
+    "rate_one_variance": 0.0010352880820679866
+  },
+  "wave": [
+    {
+      "tilt": "1",
+      "rate_interval": [
+        "7/10",
+        "4/5"
+      ],
+      "root_upper_exact": "297372020821519/281474976710656",
+      "root_upper": 1.056477646065158,
+      "factorial_tail_upper": {
+        "2": 0.003377007903672302,
+        "4": 0.00017726271528155772,
+        "6": 4.44445410673696e-06,
+        "8": 6.49781147430928e-08,
+        "10": 6.217609329115196e-10
+      },
+      "witnesses_verified": true
+    },
+    {
+      "tilt": "2",
+      "rate_interval": [
+        "7/10",
+        "4/5"
+      ],
+      "root_upper_exact": "307426758639711/281474976710656",
+      "root_upper": 1.0921992506486013,
+      "factorial_tail_upper": {
+        "2": 0.02125147176438854,
+        "4": 0.002798463554017595,
+        "6": 0.0001768254362545616,
+        "8": 6.517437430124972e-06,
+        "10": 1.5722940056742926e-07
+      },
+      "witnesses_verified": true
+    }
+  ],
+  "inconclusive": [
+    {
+      "tilt": 4,
+      "status": "inconclusive",
+      "reason": "upper box grew too large at step 171"
+    }
+  ],
+  "witness_archive_sha256": "4bfd628a04bc3fb956c8134b7db718e475b72bd4acc2188e5a57dbc8dbf69d5e",
+  "source_sha256": {
+    "parabolab/rate_certificate.py": "9843be2680ea6bbf6e79003dbd3250c1ccc666cb441c2945d692fd2f83d69322",
+    "parabolab/mechanism.py": "353c15c4fefd8fa8b817f94565eb83382c901a271fd0007f0a505e49fcf0c4af",
+    "parabolab/library.py": "a9aa56ea9220b21a51f1ef7d587dc5df33109bd9a953c25dad74d13a5bf4bed4",
+    "examples/certified_allen_cahn_rate.py": "398fb4b0ddf81e78749b803b41f4de53c838619a5daab20d5d78a46655a2d042",
+    "docs/research/estimator-integrity/allen-cahn-codewise-certificate.md": "4527fee3b58b5ed0555d7df4c088e3e1778d27330c27a21df1ea38162d7391b6",
+    "docs/research/estimator-integrity/allen-cahn-mean-identification.md": "3c1105e4f9f38e4647a1a5036f6dbc8800aa9aadb1e935c106bf5785b86274d2"
+  },
+  "base_commit": "0afcb3c4ba446d20ff9337e4a4e1f2124bda5730",
+  "python": "3.11.15",
+  "not_covered": [
+    "Gaussian quadrature error for traveling-wave rate selection",
+    "floating-point production sampler roundoff",
+    "nonuniform tuple proposals",
+    "global optimality of traveling-wave rate selection",
+    "Lean formalization of the stochastic moment correspondence"
+  ]
+}

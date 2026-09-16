@@ -1,0 +1,183 @@
+{
+  "status": "complete",
+  "date": "2026-09-14",
+  "declared_branch": "codex/research-profile-efficiency",
+  "base_commit_from_coordinator": "05012ffe711e19f2839d6a868ccf843d713fe44d",
+  "python": "3.11.15",
+  "numpy": "2.4.6",
+  "platform": "macOS-26.3-arm64-arm-64bit",
+  "command": [
+    "/opt/miniconda3/envs/parabolab/bin/python",
+    "examples/profile_efficiency_benchmark.py",
+    "--run",
+    "--output-dir",
+    "docs/research/results/profile-efficiency",
+    "--base-commit",
+    "05012ffe711e19f2839d6a868ccf843d713fe44d",
+    "--timing-context",
+    "Coordinator reported full Python suite and Lean build finished, with no known other root or agent CPU jobs running. Coordinator restricted itself to reading and writing during calibration and evaluation. Outside processes were not controlled or continuously monitored; perfect machine isolation is not claimed."
+  ],
+  "timing_context": "Coordinator reported full Python suite and Lean build finished, with no known other root or agent CPU jobs running. Coordinator restricted itself to reading and writing during calibration and evaluation. Outside processes were not controlled or continuously monitored; perfect machine isolation is not claimed.",
+  "source_sha256": {
+    "/Users/michael/Desktop/NTU/fyp/parabolab/examples/profile_efficiency_benchmark.py": "7a9091fe5446f3fc8abb1251dff954d41805ea1f61962e18ba57af9446c33aef",
+    "docs/research/results/profile-efficiency-protocol.md": "0df97adfa09e50921af026f7496b33426ca28aa614252e9c0a0b4301d6555da4",
+    "parabolab/profile_rates.py": "465d23662b9338ecc8d331db7b649aac257d068daffc5bdb854d1c382d8eee59",
+    "parabolab/rate_optimization.py": "6e06580736d8e95ac6665d6ef9fff8956fcde268fb0a79ee541310b8bfb250cc",
+    "parabolab/tree.py": "e93b36fd8653c83ff1ceaea81c7553637ce3fa158f289cf9f11041b181aa795d",
+    "parabolab/solve.py": "45aeaa7e124630ed7dc1ad1a91a414022c9336e0fed2a3253b10a6ef740e23d0",
+    "parabolab/profiles.py": "e9e142eab72b20ed2ac355dc8858c4cc247b2503b4b2b588016b8ba0a63469fc",
+    "parabolab/mc.py": "b8a45f4a9fb8eb875ee9bc72deb3a31b42bbf9317a1d82506aabe0214ac0f926",
+    "parabolab/mechanism.py": "353c15c4fefd8fa8b817f94565eb83382c901a271fd0007f0a505e49fcf0c4af",
+    "parabolab/library.py": "a9aa56ea9220b21a51f1ef7d587dc5df33109bd9a953c25dad74d13a5bf4bed4"
+  },
+  "protocol": "docs/research/results/profile-efficiency-protocol.md",
+  "entropy": 202609143,
+  "grid": [
+    -2.0,
+    -1.0,
+    0.0,
+    1.0,
+    2.0
+  ],
+  "weights": [
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2
+  ],
+  "horizon": 0.05,
+  "replicates": 20,
+  "setup_trials": 5,
+  "calibration_trials": 5,
+  "reuse_counts": [
+    1,
+    10
+  ],
+  "fixed_samples_per_point": 10000,
+  "variants": [
+    "default_uniform",
+    "point_short_uniform",
+    "point_selected_uniform",
+    "grid_short_uniform",
+    "grid_selected_uniform"
+  ],
+  "seed_plan": {
+    "unique_point_seeds": 11125,
+    "setup_constructions": 25,
+    "calibration_profiles": 25,
+    "evaluation_workloads": 400,
+    "evaluation_profiles": 2200,
+    "fixed_evaluation_trees": 55000000
+  },
+  "selector": {
+    "depth": 2,
+    "time_order": 4,
+    "normal_order": 4,
+    "bracket": [
+      0.2,
+      2.0
+    ],
+    "tol": 1e-05
+  },
+  "seed_definition": "uint64 SeedSequence(entropy,spawn_key=(phase,R,replicate,variant,curve)); point seed = integer + grid index",
+  "cost_definition": "sum of actual .solve wall times + one median policy setup charge per workload",
+  "budget_rule": "B_R=max_i(h_i+R*N*c_i); n_i,R=floor((B_R-h_i)/(R*c_i))",
+  "offline_certificate_included": false,
+  "max_depth": null,
+  "clipping": false,
+  "workers": 1,
+  "protocol_deviations": [],
+  "setup": [
+    {
+      "variant": "default_uniform",
+      "variant_index": 0,
+      "rate": 1.0,
+      "setup_charge_seconds": 9.707873687148094e-06,
+      "min_setup_seconds": 3.209104761481285e-06,
+      "max_setup_seconds": 1.995800994336605e-05
+    },
+    {
+      "variant": "point_short_uniform",
+      "variant_index": 1,
+      "rate": 0.75,
+      "setup_charge_seconds": 5.500158295035362e-06,
+      "min_setup_seconds": 4.708999767899513e-06,
+      "max_setup_seconds": 1.0916031897068024e-05
+    },
+    {
+      "variant": "point_selected_uniform",
+      "variant_index": 2,
+      "rate": 0.7305486297108235,
+      "setup_charge_seconds": 0.0538267910014838,
+      "min_setup_seconds": 0.053207374876365066,
+      "max_setup_seconds": 0.05919316713698208
+    },
+    {
+      "variant": "grid_short_uniform",
+      "variant_index": 3,
+      "rate": 0.47496956016576375,
+      "setup_charge_seconds": 4.379195161163807e-05,
+      "min_setup_seconds": 2.3541972041130066e-05,
+      "max_setup_seconds": 6.154202856123447e-05
+    },
+    {
+      "variant": "grid_selected_uniform",
+      "variant_index": 4,
+      "rate": 0.49226499651590583,
+      "setup_charge_seconds": 0.27009108290076256,
+      "min_setup_seconds": 0.2663749591447413,
+      "max_setup_seconds": 0.2850879579782486
+    }
+  ],
+  "calibration_coefficients": [
+    6.767800007946789e-06,
+    6.621254188939929e-06,
+    6.887783389538527e-06,
+    6.564658391289413e-06,
+    6.552287517115474e-06
+  ],
+  "predicted_workload_budgets": {
+    "1": 0.3356139580719173,
+    "10": 0.9253198346123099
+  },
+  "budget_samples_per_point": {
+    "1": [
+      49588,
+      50686,
+      40911,
+      51117,
+      10000
+    ],
+    "10": [
+      13672,
+      13974,
+      12652,
+      14094,
+      9999
+    ]
+  },
+  "predicted_allocated_costs": {
+    "1": [
+      0.33561137466775254,
+      0.33561038997890424,
+      0.3356128972508945,
+      0.3356094349391526,
+      0.3356139580719173
+    ],
+    "10": [
+      0.9253033249601722,
+      0.9252595605207606,
+      0.9252691454458982,
+      0.9252667456199415,
+      0.9252543117371388
+    ]
+  },
+  "calibration_solve_seconds": 1.6876144197303802,
+  "repeated_setup_measurement_seconds": 1.6344737077597529,
+  "benchmark_wall_seconds": 195.42647466692142,
+  "completed_workloads": 400,
+  "completed_profiles": 2200,
+  "fixed_evaluation_trees": 55000000,
+  "budget_evaluation_trees": 84621200
+}

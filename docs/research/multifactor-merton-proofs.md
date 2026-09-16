@@ -2,10 +2,15 @@
 
 **Status:** conventional mathematical proofs recorded on 2026-09-09.
 
-**Application status:** historical; multidimensional/multifactor Merton is
-inactive as a research application (confirmed 14 September 2026). These
-proofs and their stated limitations are retained. Current implementation
-work follows the [branching variance-reduction direction](README.md).
+> **Application inactive; proofs retained — reviewed 16 September 2026.**
+> Multidimensional/multifactor Merton is not the active research application.
+> The mathematical statements and limitations below remain available as
+> supporting results. Section 9 is a historical opportunity list, not a task
+> queue. Follow the [current research index](README.md) and
+> [documentation map](../documentation-map.md) for active scope.
+> The later [financial moment note](milestone-1-financial-moment-target.md)
+> treats one finite-graded specialization; it does not turn the general
+> conditional representation theorem here into an unconditional theorem.
 
 This note contains the mathematical core needed for a genuinely
 multidimensional Merton coding-tree benchmark. It deliberately separates
@@ -1070,7 +1075,7 @@ model. In particular:
   established;
 - no result in this note is presently formalized end-to-end in Lean.
 
-## 8. What the search supports
+## 8. What the original bounded search supports
 
 The following prior-art boundaries are important.
 
@@ -1110,7 +1115,12 @@ The bounded search did not locate a source combining:
 This is evidence for a candidate contribution, not proof of publication
 priority.
 
-## 9. Ranked theorem opportunities
+## 9. Historical ranked theorem opportunities (inactive application)
+
+These were the priorities proposed on 9 September. In particular, the later
+financial moment note addresses a restricted instance of item 2. No item in
+this list is a present implementation commitment or an established novelty
+claim.
 
 1. **Full-covariance explicit-state arbitrary-jet representation.**
    Theorem MM-6 gives the algebra; the research task is to discharge useful

@@ -1,6 +1,17 @@
 # Common notation and the exact coding-tree moment theorem
 
-**Status:** proved theorem.
+**Status:** conventional theorems under (H1)–(H7) below. The related Lean
+modules formalize a finite algebraic moment operator and its order properties;
+they do not formalize the continuous-time random-tree representation.
+
+**Implementation and later certificates (16 September 2026):**
+[`finite_depth_moment_1d`](../../../parabolab/moments.py) numerically
+approximates the killed-depth recursion. Exact killed moments increase from
+below; finite quadrature values are not automatically rigorous lower bounds.
+The separate [Allen–Cahn certificate checkpoint](../results/certified-rate-checkpoint.md)
+constructs verified full-tree upper and lower bounds, and the
+[profile checkpoint](../results/profile-efficiency-checkpoint.md) combines
+spatial objectives. Neither changes the theorem or its hypotheses below.
 
 This note gives a self-contained model for a continuous-time coding tree and
 identifies its absolute \(p\)-moment as the minimal nonnegative solution of an
