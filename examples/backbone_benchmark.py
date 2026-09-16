@@ -88,7 +88,8 @@ def run_precheck(a):
 
 
 def run_report(a):
-    records = read_existing(a.out)
+    records = [r for r in read_existing(a.out)
+               if r["backbone"] == "per_phi" or r["backbone"] in a.backbones]
     for r in records:
         r["n_train"] = int(r["n_train"])
         r["l1"] = float(r["l1"])

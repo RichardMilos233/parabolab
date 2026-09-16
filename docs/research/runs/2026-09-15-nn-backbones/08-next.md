@@ -21,3 +21,16 @@
 Broad backbone benchmark across the sampler's supported nonlinear PDE
 class (D10-lite): same comparison on every family, pick the best overall
 backbone, then tune it. New branch `research/nn-backbone-benchmark`.
+
+## Update (17 September 2026): benchmark executed
+- `research/nn-backbone-benchmark`: six families (two excluded by the
+  calibration pre-check), four backbones, two curve points. **FNO-1D**
+  wins the pre-registered score (0.74, no failure family); coefficient
+  FiLM MLP second (0.77). Results: `docs/research/nn-fitting/backbone-benchmark.md`.
+- Findings for the integrity line: `expgrad_phi` (T = 0.05, α = 10, jcp
+  rate) and `log_phi` (T = 0.02, α = 5, rate 1) have M = 1000 stderr that
+  understates the M = 10⁴ spread by 2–3×.
+- Post hoc: attention conditioned on θ only is the best backbone on all
+  families (five-family score 0.69, Merton 0.23); FNO is the pre-registered
+  winner. Next: tuning spec with a confirmatory first gate; sharpen the
+  cosine reference.

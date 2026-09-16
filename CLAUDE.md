@@ -9,7 +9,7 @@
   research direction. Start at [the documentation map](docs/documentation-map.md)
   and [the current research guide](docs/research/README.md).
 - A parallel research line studies the neural-network stage on top of the
-  sampler (`docs/research/nn-fitting/README.md`, gotchas 38–47). It is
+  sampler (`docs/research/nn-fitting/README.md`, gotchas 38–48). It is
   confined to `parabolab/deep/` — its PDE builders live in
   `deep/families.py`, not `library.py` — so it never conflicts with sampler,
   mechanism or rate work. Keep that isolation when extending it.
@@ -568,3 +568,32 @@ records the source revision and checks performed on 16 September 2026.
     baseline must score against `Instance.u_grid` (FD reference for
     `ac_phi`), not `pde.exact_solution` (commit `1d5593e`). Spec results:
     `docs/superpowers/specs/2026-09-16-phi-operator-design.md`.
+48. **One backbone across six nonlinear families: the FNO-1D wins by never
+    being bad, and a redundant conditioning input can wreck a large model.**
+    Pre-registered benchmark (`examples/backbone_benchmark.py`, spec
+    `2026-09-16-backbone-benchmark-design.md`, results
+    `docs/research/nn-fitting/backbone-benchmark.md`): heat, Allen–Cahn,
+    KPP, JEQ tan and cosine with random Fourier φ, plus Merton θ; 1000
+    training instances, M = 1000. FNO-1D: geometric-mean ratio to the
+    per-instance net 0.74, no family above 1.5×, worst 1.13× (KPP);
+    coefficient FiLM MLP 0.77 but 2.0× on heat; DeepONet 1.00; attention
+    1.33 with four failures. The best backbone still flips per family
+    (attention wins Merton at 0.23×, the FNO is last there at 0.61×).
+    Two lessons: (a) handing every backbone the 9 Fourier coefficients as
+    a `cond` vector "for informational parity" let the 0.9 M-parameter
+    attention operator memorise instances — same training loss as the
+    FNO, 20× the held-out error, 4.2× on heat where D03 without `cond`
+    had 1.0×; the post-hoc `*_nocond` arm confirms it and reverses the
+    picture: attention conditioned on θ only beats the per-instance net
+    on all five φ-families (five-family score 0.69 vs the FNO's 0.77,
+    worst 0.98×, best worst-case L1) and already wins Merton, so the
+    tuning spec starts with a confirmatory gate on fresh seeds before
+    choosing between them. Conditioning policy: give an operator the
+    PDE's parameters θ, never a re-encoding of an input it already sees; (b) the label-calibration
+    pre-check (M = 1000 vs 10⁴ on shared states, *independent* tree
+    seeds — nested seeds make the z-test meaningless) excluded
+    `expgrad_phi` (stderr ratio 1.43 instead of √10) and `log_phi`
+    (0.97): their M = 1000 stderr understates the spread — gotcha 15/20
+    for random φ. Also: MC grid references at M = 10⁵ put `cosine_phi`'s
+    whole column at the reference-noise floor (stderr 1.5e-2 vs L1
+    2–3e-2), so its ratios rank denoising, not accuracy.

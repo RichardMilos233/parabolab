@@ -367,8 +367,10 @@ mathematical conclusions for their own explicitly stated settings.
 an ablation of the paper's net (5× the paper's Merton accuracy from input/
 output scaling alone), corpora of many PDE instances, a parameter-
 conditioned net for the Merton family (policies within 0.2 % of the closed
-form), and terminal-condition operators (FNO, DeepONet, cross-attention)
-trained on coding-tree labels. Findings, evidence and code map:
+form), terminal-condition operators (FNO, DeepONet, cross-attention)
+trained on coding-tree labels, and a six-family backbone benchmark
+(FNO-1D the pre-registered winner; attention with θ-only conditioning the
+post-hoc one). Findings, evidence and code map:
 [docs/research/nn-fitting/README.md](docs/research/nn-fitting/README.md).
 Import `parabolab.deep` explicitly; the top-level package stays torch-free.
 

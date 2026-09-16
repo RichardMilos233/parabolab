@@ -3,7 +3,7 @@
   "run_id": "2026-09-15-nn-backbones",
   "skill_version": "0.2.0",
   "mode": "ideate",
-  "status": "stages_0_1_2_3_executed_see_08-next",
+  "status": "stages_0_1_2_3_and_benchmark_executed_see_08-next",
   "selected_direction": null,
   "recommended_direction": "D04 then D03 (Stage 0 data interfaces first)",
   "budget": null,
@@ -14,5 +14,5 @@
   "commands_run": ["init_run.py --project . --slug nn-backbones", "score_ideas.py ideas.json --top 3 --output scores.json"],
   "evidence": ["01-ideas.md#search-record", "scores.json"],
   "blockers": ["CUDA torch wheel not installed"],
-  "next_action": "Broad backbone benchmark on research/nn-backbone-benchmark (see 08-next.md)."
+  "next_action": "Tuning spec (attention with theta-only conditioning vs the FNO-1D control, confirmatory first gate on fresh seeds) (see 08-next.md and docs/research/nn-fitting/backbone-benchmark.md)."
 }

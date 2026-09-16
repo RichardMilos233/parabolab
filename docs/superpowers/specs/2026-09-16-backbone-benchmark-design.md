@@ -144,3 +144,18 @@ pre-check outcomes, and the chosen backbone for the tuning spec.
 - **MC references** reuse `generate_training_data(states=grid)` at
   M = 10⁵ (with its outlier filter, as for every label in this line);
   the per-point stderr is stored in `Instance.ref_stderr`.
+
+## Results (17 September 2026)
+
+Executed as planned on six families (`expgrad_phi` and `log_phi` excluded
+by the pre-check). **FNO-1D wins** (S = 0.743, no failure family, worst
+ratio 1.13 on `kpp_phi`); the coefficient FiLM MLP is second (0.770, fails
+`heat_phi`); DeepONet 1.00; the attention operator 1.33 with four failure
+families — its collapse relative to D03 is the `cond` vector letting a
+0.9 M-parameter model memorise instances (exploratory `*_nocond` arm).
+The post-hoc `*_nocond` arm reverses the attention verdict (five-family
+score 0.69 vs the FNO's 0.77, no failure); the tuning spec therefore opens
+with a confirmatory gate. Full tables, figure, noise-floor caveats and the
+recommendation:
+[`docs/research/nn-fitting/backbone-benchmark.md`](../../research/nn-fitting/backbone-benchmark.md).
+Ledger `examples/backbone_benchmark.csv`, pre-check `examples/backbone_benchmark_precheck.json`.
