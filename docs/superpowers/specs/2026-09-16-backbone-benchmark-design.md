@@ -32,7 +32,7 @@ Fourier family of the φ-operator study (K = 4, max|φ| = 0.9, segment
 | `heat_phi` | \(f \equiv 0\) | linear | 0.3 | — | closed form | done (D03) |
 | `ac_phi` | \(f = u - u^3\) | semilinear | 0.3 | — | FD | done (D03) |
 | `kpp_phi` | Fisher–KPP \(f = u(1-u)\) | semilinear | 0.3 | — | FD | new (builder via `library.fisher_kpp_1d`'s f) |
-| `expgrad_phi` | \(f = \alpha u_x + e^{-u} - 2e^{-2u}\), α = 10 | gradient nonlinearity | 0.05 | — | FD extended to first-order terms (upwind) | new |
+| `expgrad_phi` | \(f = \alpha u_x + e^{-u} - 2e^{-2u}\), α = 10 | gradient nonlinearity | 0.05 | — | FD extended to first-order terms (central differences) | new |
 | `tan_phi` | quasilinear tan \(f = \alpha u_x + u_{xx}/(1+u^2) - u_{xx}/2 - 2u\), α = 10 | fully nonlinear, 2nd order | 0.01 | — | MC, M = 10⁵ per grid point | new (nD-class rebuild) |
 | `cosine_phi` | \(f = \alpha u_x + u - (u''/12)^2 + \cos(\pi u''''/24) - u''/2\), α = 10 | fully nonlinear, 4th order | 0.04 | — | MC, M = 10⁵ | new (nD-class rebuild) |
 | `log_phi` | \(f = \alpha u_x + \log(u''^2 + u'''^2) - u''/2\), α = 5 | fully nonlinear, 3rd order | 0.02 | — | MC, M = 10⁵ | **conditional**: random φ can bring \(u''^2+u'''^2\) near 0; include only if the label-calibration pre-check passes |

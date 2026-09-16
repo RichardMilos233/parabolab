@@ -6,7 +6,6 @@ shared Monte Carlo library.
 
 from __future__ import annotations
 
-import functools
 import math
 
 import numpy as np
@@ -161,9 +160,10 @@ def mc_reference_1d(factory, xq, *, m_samples: int = 100_000, seed: int = 0,
     """u(0, xq) and its standard error by the sampler itself (M trees per
     point, the generator's outlier filter as for every label in this line)."""
     xq = np.asarray(xq, dtype=float)
+    # n_states/x_lo/x_hi are ignored by generate_training_data whenever
+    # states= is given (it derives n_states from the states themselves).
     data = generate_training_data(
-        factory, n_states=len(xq), m_samples=m_samples, seed=seed, rate=rate,
-        x_lo=float(xq.min()), x_hi=float(xq.max()),
+        factory, m_samples=m_samples, seed=seed, rate=rate,
         states=(np.zeros(len(xq)), xq[:, None]), n_jobs=n_jobs, executor=executor)
     return data.y, data.stderr
 

@@ -1,5 +1,5 @@
 """Scoring for the phi -> u backbone benchmark (spec
-2026-09-16-phi-operator-design, task 4).
+2026-09-16-backbone-benchmark-design, task 4).
 
 A benchmark *record* is a plain dict with keys ``family``, ``backbone``,
 ``n_train``, ``instance_seed``, ``l1``, ``seconds``. Baseline (per-instance
@@ -92,12 +92,30 @@ def overall_scores(ratios: Dict[RatioKey, dict], n_train: int = 1000
     return out
 
 
+def family_coverage(ratios: Dict[RatioKey, dict], n_train: int = 1000) -> Dict[str, int]:
+    """Number of distinct families each backbone has a ratio entry for, at
+    ``n_train``. Used by ``report_table`` to warn when backbones were not
+    all scored over the same family set (e.g. a partial/resumed run).
+    """
+    by_backbone: Dict[str, set] = defaultdict(set)
+    for (family, backbone, n) in ratios:
+        if n == n_train:
+            by_backbone[backbone].add(family)
+    return {b: len(fs) for b, fs in by_backbone.items()}
+
+
 def report_table(ratios: Dict[RatioKey, dict], *, n_train: int = 1000,
                   slope_n_lo: int = 250, slope_n_hi: int = 1000) -> str:
     """Markdown report: a per-family table of backbones at ``n_train``, the
     ranked list of overall scores, the robustness winner (lowest worst-case
     ratio_median across families) and a learning-curve-slope table of
     ``log(S(slope_n_lo) / S(slope_n_hi))`` per backbone present at both.
+
+    If backbones at ``n_train`` were scored over different family sets (a
+    partial or resumed run), the ranked section is prefixed with a warning
+    line naming each backbone's family count -- otherwise ``overall_scores``
+    would silently compare geometric means computed over unequal family
+    sets, which is not an apples-to-apples ranking.
     """
     families = sorted({family for (family, _, _) in ratios})
     backbones = sorted({backbone for (_, backbone, n) in ratios if n == n_train})
@@ -112,7 +130,12 @@ def report_table(ratios: Dict[RatioKey, dict], *, n_train: int = 1000,
         lines.append(f"| {family} | " + " | ".join(cells) + " |")
 
     ranked = overall_scores(ratios, n_train=n_train)
-    lines += ["", "## Ranked"]
+    coverage = family_coverage(ratios, n_train=n_train)
+    lines += [""]
+    if len(set(coverage.values())) > 1:
+        lines.append("warning: backbones scored over different family sets: "
+                     + ", ".join(f"{b} ({coverage[b]})" for b in sorted(coverage)))
+    lines += ["## Ranked"]
     for backbone, S, max_ratio, failures in ranked:
         fail_str = ", ".join(failures) if failures else "none"
         lines.append(f"- {backbone}: S={S:.3g}, max_ratio={max_ratio:.3g}, failures={fail_str}")

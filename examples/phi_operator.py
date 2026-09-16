@@ -79,7 +79,12 @@ def main(a):
         subset = train[:n]
         for name in a.backbones:
             torch.manual_seed(a.seed)
-            net = opnet.make_operator(name, grid, n_cond=n_cond, **tiny_kw.get(name, {}))
+            # D03's CSV was produced WITHOUT a conditioning vector; the
+            # benchmark later showed the coefficient vector makes the
+            # attention operator memorise instances instead of reading phi
+            # (see docs/research/nn-fitting/backbone-benchmark.md), so build
+            # the *_nocond variant to reproduce that result here.
+            net = opnet.make_operator(f"{name}_nocond", grid, n_cond=n_cond, **tiny_kw.get(name, {}))
             print(f"{a.family} {name} n_train={len(subset)}: {net.n_params_total} params", flush=True)
             res = optrain.train_operator(net, subset, steps=a.steps, device=a.device, seed=a.seed, verbose=True)
             l1 = optrain.evaluate_operator(net, test, device=a.device)

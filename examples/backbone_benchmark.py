@@ -1,4 +1,5 @@
-"""D03 benchmark: phi -> u operator backbones across eight PDE families.
+"""Universal-backbone benchmark (spec 2026-09-16-backbone-benchmark-design):
+four backbones over the PDE families that pass the calibration pre-check.
 
     python examples/backbone_benchmark.py --curve 250 1000 --steps 20000 \
         --device cuda --jobs 16
@@ -89,7 +90,8 @@ def run_precheck(a):
 
 def run_report(a):
     records = [r for r in read_existing(a.out)
-               if r["backbone"] == "per_phi" or r["backbone"] in a.backbones]
+               if r["family"] in a.families
+               and (r["backbone"] == "per_phi" or r["backbone"] in a.backbones)]
     for r in records:
         r["n_train"] = int(r["n_train"])
         r["l1"] = float(r["l1"])

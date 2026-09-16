@@ -13,6 +13,7 @@ from __future__ import annotations
 import dataclasses
 import functools
 import json
+import os
 import zipfile
 from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass
@@ -252,6 +253,11 @@ def instance_path(spec: InstanceSpec, root) -> Path:
 
 
 def _save_instance(inst: Instance, path: Path) -> None:
+    """Write the instance atomically: np.savez to a sibling .tmp.npz file,
+    then os.replace it onto ``path``. A crash or kill mid-write then leaves
+    only the stale (or absent) tmp file, never a truncated ``path`` that
+    _load_instance would have to detect and regenerate from.
+    """
     path.parent.mkdir(parents=True, exist_ok=True)
     extra = {}
     if inst.deriv is not None:
@@ -260,9 +266,13 @@ def _save_instance(inst: Instance, path: Path) -> None:
         extra["deriv_exact"] = inst.deriv_exact
     if inst.ref_stderr is not None:
         extra["ref_stderr"] = inst.ref_stderr
-    np.savez(path, spec=inst.spec.to_json(), t=inst.t, x=inst.x, y=inst.y,
+    # already ends in .npz, so np.savez writes exactly this name (it only
+    # appends .npz itself when the given name lacks the suffix).
+    tmp_path = path.with_suffix(".tmp.npz")
+    np.savez(tmp_path, spec=inst.spec.to_json(), t=inst.t, x=inst.x, y=inst.y,
              stderr=inst.stderr, u_exact=inst.u_exact, grid=inst.grid,
              u_grid=inst.u_grid, rate=inst.rate, phi_grid=inst.phi_grid, **extra)
+    os.replace(tmp_path, path)
 
 
 def _load_instance(spec: InstanceSpec, path: Path) -> Optional[Instance]:

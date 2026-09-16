@@ -1,4 +1,4 @@
-"""Tests for parabolab.deep.benchmark (spec 2026-09-16-phi-operator-design,
+"""Tests for parabolab.deep.benchmark (spec 2026-09-16-backbone-benchmark-design,
 task 4) and examples/backbone_benchmark.py (task 5)."""
 
 import numpy as np
@@ -50,6 +50,29 @@ def test_report_table_has_learning_curve_slope_section():
     r = benchmark.family_ratios(recs)
     table = benchmark.report_table(r)
     assert "learning-curve slope" in table.lower()
+
+
+def test_report_table_warns_on_uneven_family_coverage():
+    # x is scored on both A and B, y only on A (e.g. a resumed run that
+    # skipped B for y) -- ranking them against each other is comparing
+    # geometric means over different family sets, so report_table must warn.
+    recs = (_rec("A", "per_phi", 0, [1, 1, 1]) + _rec("B", "per_phi", 0, [1, 1, 1])
+            + _rec("A", "x", 1000, [0.5, 0.5, 0.5]) + _rec("B", "x", 1000, [0.5, 0.5, 0.5])
+            + _rec("A", "y", 1000, [0.5, 0.5, 0.5]))
+    r = benchmark.family_ratios(recs)
+    assert benchmark.family_coverage(r, n_train=1000) == {"x": 2, "y": 1}
+    table = benchmark.report_table(r)
+    assert "warning: backbones scored over different family sets" in table
+    assert "x (2)" in table and "y (1)" in table
+
+
+def test_report_table_no_warning_on_even_family_coverage():
+    recs = (_rec("A", "per_phi", 0, [1, 1, 1]) + _rec("B", "per_phi", 0, [1, 1, 1])
+            + _rec("A", "x", 1000, [0.5, 0.5, 0.5]) + _rec("B", "x", 1000, [0.5, 0.5, 0.5])
+            + _rec("A", "y", 1000, [0.5, 0.5, 0.5]) + _rec("B", "y", 1000, [0.5, 0.5, 0.5]))
+    r = benchmark.family_ratios(recs)
+    table = benchmark.report_table(r)
+    assert "warning" not in table.lower()
 
 
 # ---------------------------------------------------------------------------

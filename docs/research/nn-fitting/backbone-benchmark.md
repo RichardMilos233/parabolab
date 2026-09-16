@@ -85,7 +85,7 @@ the FNO; the per-instance nets' numbers are `per_phi` rows in the CSV.
    D03 observation (gotcha 47) confirmed on six families. The FNO wins by
    never being bad, not by being best.
 2. **Merton is a different problem.** There θ = (γ, μ, σ) *is* the PDE,
-   and every backbone beats the per-instance net by 2.5–4× — the D02
+   and every backbone beats the per-instance net by 1.6–4.3× — the D02
    result (gotcha 46) reproduced under the operator interface. The
    attention operator wins it (0.23), the FNO is last (0.61): a
    Fourier-basis prior on x ∈ [100, 200] with a power-law φ is the wrong
@@ -94,9 +94,10 @@ the FNO; the per-instance nets' numbers are `per_phi` rows in the CSV.
    per-instance baseline is unusually good there (1.8e-2 median) relative
    to the label noise, and only the FiLM-MLP improves on it.
 4. **Two families are scored near the reference-noise floor.** The MC
-   references (M = 10⁵ on the 101-grid, `Instance.ref_stderr`) have a
-   mean grid stderr of 1.5e-3 (max 2.9e-3) on `tan_phi` and 1.5e-2
-   (max 4.0e-2) on `cosine_phi`. The FNO's tan L1 (2.6e-3) is within 2×
+   references (M = 10⁵ on the 101-grid, `Instance.ref_stderr`) have,
+   as the median over the 50 held-out instances of the per-instance mean
+   grid stderr (max over instances in brackets), 1.5e-3 (max 2.9e-3) on
+   `tan_phi` and 1.5e-2 (max 4.0e-2) on `cosine_phi`. The FNO's tan L1 (2.6e-3) is within 2×
    of that floor, and *every* cosine cell (2.0e-2–3.2e-2) sits at the
    floor — the cosine column ranks backbones by how well they average the
    reference noise, and its ratios below 1 mean "the pooled net is a
