@@ -509,3 +509,17 @@
     labels are the miscalibrated ones at M = 1000 (RMS z 4.6, max 79:
     gotcha 15/20), so 1/stderr² on u stays wrong (gotcha 40). Spec results:
     `docs/superpowers/specs/2026-09-15-parametric-merton-net-design.md`.
+47. **Operator learning from coding-tree labels works, and the best
+    backbone depends on the PDE.** φ ↦ u(0,·) for random Fourier
+    terminal conditions (`deep.opnet`, `deep.optrain`, families
+    `heat_phi`/`ac_phi` in `deep.corpus`), 1000 training φ at M = 1000:
+    on the linear heat equation the FNO wins (0.64× the per-φ net's
+    error, 49/50 held-out φ) because its spectral layers are the
+    solution operator's own basis; on Allen–Cahn the cross-attention
+    operator (`SetDenoiser` re-used with φ samples as tokens) wins
+    (0.81×, 41/50, half the worst-case error) and the FNO only ties.
+    The DeepONet is worst on both. All curves still descend at 1000 φ —
+    data-limited, and φ-instances cost ≈ 1 s each. The per-instance
+    baseline must score against `Instance.u_grid` (FD reference for
+    `ac_phi`), not `pde.exact_solution` (commit `1d5593e`). Spec results:
+    `docs/superpowers/specs/2026-09-16-phi-operator-design.md`.

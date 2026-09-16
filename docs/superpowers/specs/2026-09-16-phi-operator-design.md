@@ -148,3 +148,88 @@ l1, seconds`. Un-ignore the CSV.
 Code + tests; `examples/phi_operator.csv`; `## Results` here with the
 Step 1 gate outcome, the Step 2 table and learning curves, the kept
 backbone, and the per-backbone reading; gotchas if any.
+
+## Results
+
+Corpora: per family 1000 train / 50 held-out random Fourier φ (K = 4,
+max|φ| = 0.9), 500 states, M = 1000, one draw; operators trained on the
+first 250 / 500 / 1000 training φ (20 000 steps × 32 instances × 64
+queries, Adam 1e-3 cosine, RTX 4060); per-φ baseline = R5A net on each
+held-out φ's own 500 labels (3000 epochs). Backbone sizes: DeepONet
+63 k, FNO-1D 74 k, attention operator 911 k parameters. Rows in
+`examples/phi_operator.csv`. Training rows restricted to the sensor
+range \([-8, 8]\) for all backbones (the FNO clamps outside its grid).
+Commands: `python examples/phi_operator.py --family <heat_phi|ac_phi>
+--steps 20000 --device cuda --jobs 16`.
+
+### Step 1 — `heat_phi` (linear heat, exact reference)
+
+Held-out MC labels: median stderr 6.0e-3 on |u| ≈ 0.3.
+
+| backbone | n_train | L1 median | L1 max | wins vs per-φ (of 50) |
+|---|---|---|---|---|
+| per-φ R5A net | — | 1.26e-03 | 2.51e-03 | — |
+| DeepONet | 250 / 500 / 1000 | 5.60e-03 / 2.46e-03 / 1.71e-03 | 1.88e-02 / 1.19e-02 / 7.70e-03 | 13 |
+| attention operator | 250 / 500 / 1000 | 1.96e-03 / 1.29e-03 / 1.24e-03 | 6.26e-03 / 2.81e-03 / 2.90e-03 | 39 |
+| **FNO-1D** | 250 / 500 / 1000 | 1.60e-03 / 1.12e-03 / **8.12e-04** | 4.18e-03 / 2.63e-03 / **2.19e-03** | **49** |
+
+**Gate: PASS** — all three backbones are within 1.5× of the per-φ
+baseline at n = 1000 (ratios 0.64 / 0.98 / 1.36), so label noise and the
+φ-family are not the bottleneck. Reading: the FNO, whose spectral layers
+are the heat equation's natural basis (each Fourier mode is damped
+independently), beats a network trained on each φ's own labels on 49 of
+50 held-out φ, at 0.64× the error — the operator averages label noise
+across instances that share modes. The attention operator ties the
+baseline (0.98×) and its curve has flattened between 500 and 1000; the
+DeepONet is worst but still improving steeply (5.6 → 2.5 → 1.7e-3), i.e.
+data-limited at this size. A new φ costs one forward pass instead of a
+500 × 1000-tree MC run plus 3000 epochs.
+
+### Step 2 — `ac_phi` (Allen–Cahn, FD reference)
+
+Held-out MC labels: median stderr 1.4e-2 on |u| ≈ 0.4 (the nonlinearity
+more than doubles the label noise of Step 1 at the same M). The first
+run of this step crashed in the per-φ baseline (`grid_errors` needs
+`pde.exact_solution`, which `ac_phi` lacks); the baseline now scores
+against the instance's stored grid reference — identical numbers for
+every family with a closed form (commit `1d5593e`).
+
+| backbone | n_train | L1 median | L1 max | wins vs per-φ (of 50) |
+|---|---|---|---|---|
+| per-φ R5A net | — | 5.55e-03 | 1.82e-02 | — |
+| DeepONet | 250 / 500 / 1000 | 1.89e-02 / 1.12e-02 / 9.73e-03 | 3.72e-02 / 2.61e-02 / 1.63e-02 | 5 |
+| FNO-1D | 250 / 500 / 1000 | 1.42e-02 / 8.56e-03 / 5.31e-03 | 3.39e-02 / 2.95e-02 / 1.73e-02 | 31 |
+| **attention operator** | 250 / 500 / 1000 | 9.20e-03 / 6.68e-03 / **4.47e-03** | 1.86e-02 / 1.62e-02 / **9.24e-03** | **41** |
+
+**Verdict: PASS** for the attention operator (0.81× the baseline) and
+the FNO (0.96×); the DeepONet fails the 1.5× criterion (1.75×).
+**Kept backbone: the cross-attention operator** (lowest median at
+n = 1000 and, by a factor of two, the best worst case: 9.2e-3 against
+1.7e-2 for the FNO and 1.8e-2 for a per-φ net).
+
+Reading. The ranking reverses between the two steps, and the reversal
+is the finding. On the linear heat equation the FNO's spectral layers
+are the exact solution operator's own basis (mode-wise damping), so it
+wins outright and its 74 k parameters suffice. Allen–Cahn's \(u - u^3\)
+couples modes; the FNO's fixed 16-mode truncation and pointwise
+nonlinearity still fit it (0.96×), but the attention operator — which
+lets every query attend to the whole φ profile — generalises best and
+most robustly. All three learning curves are still descending steeply at
+n = 1000 (attention 9.2 → 6.7 → 4.5e-3; FNO 14 → 8.6 → 5.3e-3), so the
+operators are data-limited, not capacity-limited: more φ, which cost
+≈ 1 s each to generate, would improve every backbone; the per-φ
+baseline cannot improve at all without more samples per φ. The
+DeepONet's fixed-size branch embedding of a 101-point φ is the weakest
+inductive bias for both problems.
+
+What the amortisation buys: a per-φ answer costs a 500 × 1000-tree MC run
+(≈ 1 s on 16 workers) plus a 3000-epoch fit (≈ 8 s); an operator answers
+a new φ in one forward pass (< 1 ms) after a one-off ≈ 15 min corpus and
+≈ 10 min of training, with better accuracy than the per-φ fit on
+41/50 held-out φ. Step 3 (fully nonlinear families with derivative codes)
+remains open: it needs a φ-family with controlled higher derivatives and
+a high-M MC reference, both outside this spec.
+
+Cost of the study: corpora ≈ 25 min of MC + FD; baselines 2 × 50 × 8 s;
+18 trainings ≈ 1.6 h GPU (the attention operator dominates at ≈ 10 min
+each).
