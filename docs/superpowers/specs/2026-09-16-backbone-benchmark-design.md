@@ -1,6 +1,6 @@
 # Universal-backbone benchmark across the sampler's nonlinear PDE class
 
-Status: draft for confirmation, 2026-09-16. Branch
+Status: confirmed in chat on 2026-09-16 (PDE set, two curve points, four backbones). Branch
 `research/nn-backbone-benchmark` (from `main` at `9b02157`, which contains
 the merged NN line). Follows `docs/research/nn-fitting/README.md` §Next.
 
@@ -127,3 +127,20 @@ pre-check outcomes, and the chosen backbone for the tuning spec.
    constant φ) is excluded as a poor fit for a φ-family.
 2. Two curve points (250, 1000) instead of three — acceptable?
 3. Four backbones — add any (e.g. a U-Net on the grid) before the run?
+
+## Amendments at plan time (2026-09-16)
+
+- **Conditioning vector.** Every backbone receives the instance's full
+  `params` vector as its conditioning input `cond` (Fourier coefficients
+  for φ-families, θ for `merton_theta`), alongside `phi_grid`. The
+  operators therefore see the coefficients as well as the sampled φ —
+  redundant but harmless, and it makes the four backbones informationally
+  identical. Signature for all four: `net(phi_grid (B,S), cond (B,P),
+  q_tx (B,Q,2)) -> (B,Q)`.
+- **Rates.** The fully nonlinear families (`tan_phi`, `cosine_phi`,
+  `log_phi`) use rate 1 (the JEQ examples' convention, gotcha 5/19) via a
+  new `Family.rate`; the others keep the generator's jcp default as in
+  D02/D03.
+- **MC references** reuse `generate_training_data(states=grid)` at
+  M = 10⁵ (with its outlier filter, as for every label in this line);
+  the per-point stderr is stored in `Instance.ref_stderr`.
