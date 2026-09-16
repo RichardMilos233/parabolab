@@ -788,3 +788,88 @@ if __name__ == "__main__":
 - [ ] **Step 2:** pick `--c3-mode` = the better of C1/C2 by the kept-rung rule; `... --rungs C3 --c3-mode <mode> --steps 20000 --device cuda --jobs 16` (derivative corpus ≈ 10 min: two extra codes).
 - [ ] **Step 3:** append `## Results` to the spec: the printed table, the kept rung, the success/failure verdict against the fixed criteria, one paragraph per rung (C0: what per-instance autograd policies look like; C1 vs C2; C3 effect of derivative labels), and cost. Add a CLAUDE.md gotcha if anything non-obvious.
 - [ ] **Step 4:** commit `exp: parametric Merton net C0-C3 -- <verdict>` + trailer with the CSV and docs.
+
+---
+
+### Task 6: Follow-up rungs C4/C5 — inverse-variance-weighted derivative labels
+
+Motivation (spec §Results, corrected C3 paragraph): the derivative labels' per-state stderr is calibrated (RMS z ≈ 1) but spans three orders of magnitude across states, so the unweighted derivative MSE of C3 was dominated by a few hundred noise-only states. Inverse-variance weighting of the *derivative* terms is therefore justified (unlike u, gotcha 40).
+
+**Files:** modify `parabolab/deep/condtrain.py`, `examples/parametric_merton.py`; test `tests/test_deep_condnet.py`.
+
+**Interfaces:**
+- `pooled_rows` additionally returns `ux_se`, `uxx_se` `(R,)` when the corpus has derivatives.
+- `train_conditioned(..., deriv_weighting="pooled")` gains the keyword; `"pooled"` = current behaviour (each derivative term scaled by its pooled std, uniform row weights); `"inverse_variance"` = per-row weights \(w_i = 1/\max(\text{se}_i, \epsilon)^2\) with \(\epsilon = 10^{-3}\cdot\text{median}(\text{se})\) per derivative term, normalised to mean 1 over the corpus, applied inside the mean: term\(_k\) = \(w_k \cdot \text{mean}_i\big(w_i\,((\hat d_i - d_i)/s_k)^2\big)\). Unknown value → `ValueError`. The u term is never row-weighted.
+- Driver: rungs `C4` = `--c3-mode` net, weights `(1, 1, 1)`, `deriv_weighting="inverse_variance"`; `C5` = same with weights `(1, 1, 0)` (u_x labels only). Both use the derivative corpus under `<root>/deriv`. Summary table lists C0–C5.
+
+- [ ] **Step 1: Failing tests** — append to `tests/test_deep_condnet.py`:
+
+```python
+def test_pooled_rows_carry_derivative_stderr():
+    insts = _toy(n=2, n_states=20, m=10, seed=34, deriv=True)
+    rows = condtrain.pooled_rows(insts)
+    assert rows["ux_se"].shape == rows["ux"].shape and rows["uxx_se"].shape == rows["uxx"].shape
+    assert (rows["ux_se"] > 0).all()
+
+
+def test_inverse_variance_equals_pooled_for_constant_stderr():
+    insts = _toy(n=2, n_states=20, m=10, seed=35, deriv=True)
+    for inst in insts:
+        inst.deriv_stderr[:] = 0.3
+    from parabolab.deep.condnet import ConditionedNet
+    res = []
+    for weighting in ("pooled", "inverse_variance"):
+        torch.manual_seed(0)
+        net = ConditionedNet(d=1, n_params=3, hidden_layers=2, neurons=8)
+        r = condtrain.train_conditioned(net, insts, steps=6, batch_states=16,
+                                        loss_weights=(1.0, 1.0, 1.0), seed=3,
+                                        deriv_weighting=weighting)
+        res.append(r.losses)
+    np.testing.assert_allclose(res[0], res[1], rtol=1e-5)
+
+
+def test_bad_deriv_weighting_raises():
+    insts = _toy(n=1, n_states=20, m=10, seed=36, deriv=True)
+    from parabolab.deep.condnet import ConditionedNet
+    net = ConditionedNet(d=1, n_params=3, hidden_layers=2, neurons=8)
+    with pytest.raises(ValueError, match="deriv_weighting"):
+        condtrain.train_conditioned(net, insts, steps=1, loss_weights=(1.0, 1.0, 0.0),
+                                    deriv_weighting="huber")
+```
+and extend `test_parametric_merton_driver_tiny`'s rung assertion to `{"C0","C1","C2","C3","C4","C5"}` (the `--tiny` default `--rungs` must include C4 and C5).
+
+- [ ] **Step 2:** run → fail (`KeyError: 'ux_se'`, `TypeError: deriv_weighting`).
+
+- [ ] **Step 3: Implement.** In `pooled_rows`, alongside `ux`/`uxx` collect `inst.deriv_stderr[0, ok]` / `[1, ok]` into `ux_se`/`uxx_se`. In `train_conditioned` add the keyword `deriv_weighting: str = "pooled"`, validate it (`ValueError(f"unknown deriv_weighting {deriv_weighting!r}")`), and after `T = {...}` build
+
+```python
+    W = {}
+    if deriv_weighting == "inverse_variance" and "ux" in rows:
+        for key in ("ux", "uxx"):
+            se = rows[key + "_se"].astype(float)
+            eps = 1e-3 * np.median(se)
+            w = 1.0 / np.maximum(se, eps) ** 2
+            W[key] = torch.as_tensor(w / w.mean(), dtype=torch.float32, device=device)
+```
+and in the derivative branch replace the two derivative terms by
+```python
+            for key, pred, w_k in (("ux", ux, w1), ("uxx", uxx, w2)):
+                if w_k > 0:
+                    sq = ((pred - T[key][idx]) / stats[key + "_std"]) ** 2
+                    if key in W:
+                        sq = sq * W[key][idx]
+                    loss = loss + w_k * torch.mean(sq)
+```
+(so a zero weight skips the term entirely — C5 never computes the u_xx penalty). Driver: default `--rungs` becomes `C0 C1 C2 C3 C4 C5`; `run_cond` gains a `deriv_weighting="pooled"` argument passed through; add
+```python
+    if "C4" in a.rungs or "C5" in a.rungs:
+        dspecs = [...]  # as for C3 (reuse the same list; load once)
+        dtrain = ...
+    if "C4" in a.rungs: run_cond("C4", a.c3_mode, dtrain, (1.0, 1.0, 1.0), deriv_weighting="inverse_variance")
+    if "C5" in a.rungs: run_cond("C5", a.c3_mode, dtrain, (1.0, 1.0, 0.0), deriv_weighting="inverse_variance")
+```
+and list C4, C5 in the summary loop. Update the module docstring.
+
+- [ ] **Step 4:** `pytest tests/test_deep_condnet.py -q` → all pass, no warnings.
+- [ ] **Step 5:** commit `feat(deep): inverse-variance derivative weighting; rungs C4/C5` + trailer.
+- [ ] **Step 6 (controller):** run `--rungs C4 C5 --c3-mode film --steps 20000 --device cuda --jobs 16`; append to the spec's Results; update gotcha 46 if the conclusion changes; commit.
