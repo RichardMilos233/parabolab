@@ -1,8 +1,12 @@
 # Verified full-tree rate certificate for the Allen–Cahn wave
 
 14 September 2026. Research branch `codex/research-certified-rate`, based on
-`0afcb3c4ba446d20ff9337e4a4e1f2124bda5730`. User result verification and
-merge approval remain pending.
+`0afcb3c4ba446d20ff9337e4a4e1f2124bda5730`.
+
+Integration update, 16 September 2026: the result is included in local
+`main`, with user authorization confirmed. See the
+[integration record](integration-2026-09-16.md). Numerical evidence below
+retains its original run provenance.
 
 **The historical rounded rate `λ=0.73055` now has a verified global
 full-tree variance-excess bound below `6.130773×10^-6`.** Among ten

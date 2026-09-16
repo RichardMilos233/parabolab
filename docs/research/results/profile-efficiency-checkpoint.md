@@ -3,9 +3,12 @@
 14 September 2026. Consolidated research result on
 `codex/research-profile-efficiency`, based on
 `05012ffe711e19f2839d6a868ccf843d713fe44d` from
-`codex/research-certified-rate`. Both research branches remain unmerged;
-user verification is required before merging. Main remains at
-`0afcb3c4ba446d20ff9337e4a4e1f2124bda5730`.
+`codex/research-certified-rate`.
+
+**Integration update, 16 September 2026:** this checkpoint was committed
+as `ff58620` and is included in local `main`; the user has authorized
+integration. See the [integration record](integration-2026-09-16.md) for
+current verification and the distinction from historical run provenance.
 
 The approximate sweet spot depends on the loss being optimized. For the
 five-point Allen–Cahn wave profile, a cheap short-time formula gives
@@ -288,11 +291,18 @@ unequal sample allocation, state-dependent lifetimes, other horizons,
 high dimensions, deep-network training or nonuniform-proposal
 certification. Production roundoff is also outside the exact guarantee.
 
-**Decision:** retain the cheap grid short-time rule as the practical
+**Practical decision from the recorded experiment:** retain the cheap grid short-time rule as the practical
 incumbent for this benchmark. The remaining scalar-rate variance
 headroom is bounded, and the tested numerical selectors spend more
 setup than the saved samples justify. The certificate remains useful
 for validating the cheap policy and quantifying that headroom.
+
+**Research priority update, 16 September 2026:** the user prioritizes
+algorithmic and mathematical contributions. The practical timing result
+does not close the questions of full recursive optimization, approximation
+error, broader guarantees or improved proposals. The grid objective is an
+optional extension for multiple starting states sharing one rate, not a
+prerequisite for the single-state problem.
 
 Continuation-aware q is **deferred as optional and untested**. The prior
 terminal-proxy experiment does not test a continuation-moment proposal.
@@ -300,10 +310,11 @@ If pursued, the next finite project should freeze a small code/time
 table with positive support, compare uniform/terminal/continuation q at
 a common λ, then reoptimize λ with each q held fixed. It must charge
 training, storage and evaluation costs and recheck integrability under
-the changed probabilities. A demonstrated benefit over the cheap grid
-baseline is the gate for further implementation.
+the changed probabilities. Assess algorithmic value through variance
+reduction, analytical scope and error control; assess practical speedup
+separately using full cost accounting.
 
 The main plan's certification and cost directions, evaluation discipline,
 one profile/reuse extension and consolidation are complete. Other
-directions remain alternatives. No additional experiment or merge is
-needed to make this result ready for user review.
+directions remain alternatives. The completed result is integrated into
+local `main`; no continuation-proposal experiment has been run.

@@ -1,8 +1,11 @@
 # Certified-rate research checkpoint
 
 14 September 2026. Research branch: `codex/research-certified-rate`, based on
-`0afcb3c4ba446d20ff9337e4a4e1f2124bda5730`. Results await user verification;
-nothing in this checkpoint is approved for merging to main.
+`0afcb3c4ba446d20ff9337e4a4e1f2124bda5730`.
+
+**Integration update, 16 September 2026:** commits `2f26313` and `05012ff`
+are included in local `main`, with user authorization confirmed. See the
+[integration record](integration-2026-09-16.md) for current checks.
 
 The prescribed profile/reuse follow-up is now complete in the
 [profile-efficiency checkpoint](profile-efficiency-checkpoint.md).
@@ -234,5 +237,6 @@ now discharges the variance interpretation for these benchmarks. Practical next 
 a prespecified amortization or profile-objective comparison against the
 inexpensive short-time baseline, with continuation-aware proposals and
 the other research directions still open. This checkpoint does not
-complete the entire research plan. User verification remains required
-before any merge.
+complete the entire research plan on its own. Its prescribed follow-up
+was subsequently completed in the profile-efficiency checkpoint; the
+dated integration update above supersedes the original merge hold.

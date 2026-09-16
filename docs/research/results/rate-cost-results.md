@@ -1,7 +1,9 @@
 # Rate/proposal accuracy versus total cost: initial replicated result
 
-Date: 2026-09-14. Branch: `codex/research-certified-rate`. Results await user
-verification; no merge to main. The [protocol](rate-cost-protocol.md) was
+Date: 2026-09-14. Original branch: `codex/research-certified-rate`.
+Integration update, 16 September 2026: the result is included in local
+`main`, with user authorization confirmed; see the
+[integration record](integration-2026-09-16.md). The [protocol](rate-cost-protocol.md) was
 written before calibration and evaluation; its original hash is unchanged.
 
 **The initial replicated study does not demonstrate an end-to-end gain from

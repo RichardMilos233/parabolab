@@ -1,8 +1,12 @@
 # Standard-binary benchmark correction and numerical audit
 
 Date: 2026-09-14. Branch: `codex/research-certified-rate`. Base commit:
-`0afcb3c4ba446d20ff9337e4a4e1f2124bda5730`. These are research results awaiting
-user verification; nothing was merged to main.
+`0afcb3c4ba446d20ff9337e4a4e1f2124bda5730`.
+
+Integration update, 16 September 2026: this correction is included in
+local `main`, with user authorization confirmed. See the
+[integration record](integration-2026-09-16.md). The audit below records
+the original experiment.
 
 ## What was corrected
 
@@ -178,4 +182,5 @@ for rate, seed in [(1., 2026091401), (opt, 2026091402)]:
 The figure was rendered and visually inspected. No Allen–Cahn or Dym
 experiment was rerun. This audit does not add a Lean proof; the mathematical
 derivation above identifies the exact statements to connect to the
-parallel formal-certification work. User verification is still pending.
+parallel formal-certification work. The current integration status is
+recorded in the dated note at the top.

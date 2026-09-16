@@ -2,16 +2,21 @@
 
 **Status:** navigation and claim inventory for the `parabolab` research programme; entries must be checked against their underlying proofs.
 **Last-reviewed commit:** `ce2949330fcff1a3faf56c8a0ff36628586b242d`
-**Certificate checkpoint review:** 14 September 2026, unmerged research work
-on `codex/research-profile-efficiency`, based on certificate checkpoint
-`05012ffe711e19f2839d6a868ccf843d713fe44d` on `codex/research-certified-rate`.
-Main remains at `0afcb3c4ba446d20ff9337e4a4e1f2124bda5730`. The earlier reviewed commit above
-is retained as historical provenance; new entries have the scopes below.
+**Certificate checkpoint review:** 14 September 2026; research commits
+`05012ff` and `ff58620` originated on `codex/research-certified-rate` and
+`codex/research-profile-efficiency` respectively.
+**Integration status (16 September 2026):** both checkpoints are included
+in local `main`, with user authorization to integrate confirmed. The
+[integration record](results/integration-2026-09-16.md) records current
+checks and historical source provenance. The earlier reviewed commit
+above is retained as historical provenance; claim scopes remain below.
 **Scope:** all mathematical theorems, conditional representations, Lean-formalized lemmas, conjectures, and priority claims across estimator integrity and multifactor Merton research.
 
-**Current decision (14 September 2026):** the active FYP improves branching
+**Current decision (16 September 2026):** the active FYP improves branching
 Monte Carlo PDE estimation through exponential-rate and tuple-proposal
 selection. The existing solver/demo comparison workflow remains the same.
+Algorithmic progress and mathematical guarantees are the primary goals;
+measured runtime is supporting evidence rather than a gate for theoretical work.
 Multidimensional Merton is inactive as a research application; its records
 below are historical. See the [research index](README.md),
 [certified-rate checkpoint](results/certified-rate-checkpoint.md),

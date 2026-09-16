@@ -1,10 +1,16 @@
 # Research: reducing branching-estimator variance
 
-Current direction, 14 September 2026: improve the estimation of nonlinear PDE
+Current direction, 16 September 2026: improve the estimation of nonlinear PDE
 solutions using branching Monte Carlo. Choosing the exponential clock rate
 `lambda` and the tuple probabilities `q_c(Z)` are algorithmic choices within
 that solver. The PDE-solving purpose and the existing demo workflow remain
 the same.
+
+The completed certificate and profile-selection work is integrated into
+local `main`, with user authorization confirmed on 16 September 2026.
+See the [integration record](results/integration-2026-09-16.md). Current
+research prioritizes algorithms, recursive moment control and mathematical
+guarantees; measured setup/runtime comparisons are supporting evidence.
 
 The demos continue to solve one PDE with several methods, collect solution
 curves, and compare them with the available reference solution. Default,
@@ -40,7 +46,7 @@ and [variance-reduction demo](../../demo/variance_reduction.py).
 |---|---|---|
 | Rate `lambda` | Exact-rational global excess certificates for flat Allen–Cahn, the wave root and the five-point wave profile at `T=0.05`; cheap profile rate within 1.60% of optimal weighted variance | Transfer to other horizons or mechanisms requires new bounds |
 | Tuple proposal `q_c(Z)` | Local square-root theorem; `TerminalTupleProposal` with a positive uniform mixture and exact inverse-probability weighting | Estimate continuation moments more accurately and establish an incremental benefit over rate tuning alone |
-| PDE estimation/demo | Existing solver interface; two replicated cost studies, including one/ten-request reuse; cheap grid rate wins the latest frozen expected-MSE allocation comparison | Continuation proposals are optional and must repay overhead against the cheap grid baseline |
+| PDE estimation/demo | Existing solver interface; two replicated cost studies, including one/ten-request reuse; cheap grid rate wins the latest frozen expected-MSE allocation comparison | Assess continuation proposals through variance reduction, integrability and approximation guarantees; report runtime separately |
 | Integrability | Exact moment recursion, rational six-code Allen–Cahn envelopes and factorial depth tails, plus the Dym counterexample | Discharge remaining estimator-specific assumptions; nonuniform proposals and production roundoff remain separate |
 | Formal verification | Twenty-six checked public certificate/profile/cost lemmas across the two research checkpoints, plus two private helpers; full Lean build passed | Stochastic correspondence, analytic comparison/existence and numerical-program soundness |
 
@@ -114,15 +120,21 @@ Current implementation entry points:
 
 ## Next checks
 
-The main certification and cost milestone, including the conditional
-grid-objective/reuse extension, is complete and remains unmerged for user
-review. The [latest cost study](results/profile-efficiency-results.md)
-supports retaining the cheap grid rule as the reference policy. Further
-scalar-rate precision has at most 1.60% relative variance headroom in this
-specific profile. A continuation-aware proposal is an optional next
-algorithmic direction; it needs a common-rate ablation, support/integrability
-checks and its full overhead included before any speedup claim. Offline
-rational certification was not a timed benchmark variant.
+The completed work is integrated into `main`. The main mathematical result
+is a computable full-tree objective-gap guarantee; the grid selector is a
+weighted extension of the single-point objective. Selecting one common
+rate for a profile is optional when the research question concerns a
+single starting state.
+
+Further algorithmic work can address recursive rate optimization,
+systematic approximation-error control, broader certificate scope and
+continuation-aware tuple proposals. The cheap grid rule has at most 1.60%
+relative variance excess in this specific profile and provides a useful
+baseline. The [cost study](results/profile-efficiency-results.md) is an
+auxiliary practical result; its measured tuning overhead is not a reason
+to close these mathematical questions. Any later speedup claim still
+requires complete cost accounting. Offline rational certification was
+not a timed benchmark variant.
 
 Continue separating deterministic selection from evaluation randomness,
 charging tuning cost, and recording actual runtime when allocating samples
@@ -137,6 +149,9 @@ and the checkpoint's [captured tuning record](sampling-tuning-check.json)
 describe particular historical runs; they are not current-environment or
 end-to-end speedup certificates. [Secondary candidates](estimator-integrity/secondary-candidates.md)
 are retained as research ideas, outside the current implementation plan.
+Hash-bound derivations and experiment records retain their original dated
+status text; the integration record supersedes their old merge status
+without changing the evidence or claiming that later code has old hashes.
 
 Multidimensional/multifactor Merton is **inactive as a research application**.
 Its [roadmap](multifactor-merton-roadmap.md),
