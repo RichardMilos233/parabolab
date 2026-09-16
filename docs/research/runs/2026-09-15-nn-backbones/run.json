@@ -3,7 +3,7 @@
   "run_id": "2026-09-15-nn-backbones",
   "skill_version": "0.2.0",
   "mode": "ideate",
-  "status": "ideation_complete_plan_only",
+  "status": "stages_0_1_2_3_executed_see_08-next",
   "selected_direction": null,
   "recommended_direction": "D04 then D03 (Stage 0 data interfaces first)",
   "budget": null,
@@ -14,5 +14,5 @@
   "commands_run": ["init_run.py --project . --slug nn-backbones", "score_ideas.py ideas.json --top 3 --output scores.json"],
   "evidence": ["01-ideas.md#search-record", "scores.json"],
   "blockers": ["CUDA torch wheel not installed"],
-  "next_action": "User decision on Stage 0/1 start order and on the ablation branch integration."
+  "next_action": "Broad backbone benchmark on research/nn-backbone-benchmark (see 08-next.md)."
 }

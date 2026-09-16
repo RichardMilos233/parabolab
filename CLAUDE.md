@@ -8,6 +8,11 @@
   Runtime is supporting evidence, not the main criterion for choosing a
   research direction. Start at [the documentation map](docs/documentation-map.md)
   and [the current research guide](docs/research/README.md).
+- A parallel research line studies the neural-network stage on top of the
+  sampler (`docs/research/nn-fitting/README.md`, gotchas 38–47). It is
+  confined to `parabolab/deep/` — its PDE builders live in
+  `deep/families.py`, not `library.py` — so it never conflicts with sampler,
+  mechanism or rate work. Keep that isolation when extending it.
 - Multidimensional/multifactor Merton is inactive research. Keep its proofs,
   symbolic checks, existing examples, and general multidimensional support;
   do not resume that roadmap as the default next task.

@@ -21,6 +21,15 @@ mathematical investigation was performed in this documentation cleanup.
 | [Research guide](research/README.md) | Main question, achieved guarantees, code mapping and open algorithmic questions |
 | [Proof registry](research/proof-registry.md) | Exact mathematical status, hypotheses, code links and Lean coverage |
 | [Formal guide](../formal/README.md) | Building the pinned Lean project and understanding its limits |
+| [Neural-network fitting guide](research/nn-fitting/README.md) | The parallel NN research line: what network sits on the sampler and what it maps; findings, code map, limits |
+
+## Neural-network fitting line (parallel research)
+
+Confined to `parabolab/deep/`; does not change the sampler. The
+[NN fitting guide](research/nn-fitting/README.md) lists the established
+findings, their specs with `## Results`, the CSV evidence and the code map.
+The four dated specs under `superpowers/specs/2026-09-15…` and `…09-16…`
+are the records of those runs.
 
 ## Mathematical notes and implementation context
 

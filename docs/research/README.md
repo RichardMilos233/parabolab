@@ -91,6 +91,11 @@ settings. Custom tuple proposals currently require serial sampling.
 Existing paper reproductions, network solvers and Merton examples retain
 their roles as supported examples, not new certificate claims.
 
+A separate line studies the neural-network stage on top of the sampler
+(what to fit, over which family, with which backbone); see the
+[NN fitting guide](nn-fitting/README.md). It is isolated in
+`parabolab/deep/` and makes no claims about the estimator itself.
+
 ## Open algorithmic questions
 
 - Make recursive optimization and its approximation error more systematic

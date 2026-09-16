@@ -360,3 +360,15 @@ mathematical conclusions for their own explicitly stated settings.
   solve the PDE — the correct values are b = 3/8, c = 1/16, e = 257/256;
   (ii) the paper text says α = 5 for the log example (5.11) while the
   authors' notebook uses α = 10 (we follow the paper).
+
+## Neural-network fitting research
+
+`parabolab/deep/` also hosts a research line on the network stage itself:
+an ablation of the paper's net (5× the paper's Merton accuracy from input/
+output scaling alone), corpora of many PDE instances, a parameter-
+conditioned net for the Merton family (policies within 0.2 % of the closed
+form), and terminal-condition operators (FNO, DeepONet, cross-attention)
+trained on coding-tree labels. Findings, evidence and code map:
+[docs/research/nn-fitting/README.md](docs/research/nn-fitting/README.md).
+Import `parabolab.deep` explicitly; the top-level package stays torch-free.
+
