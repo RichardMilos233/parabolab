@@ -503,6 +503,9 @@
     not because their stderr lies (per-state z has RMS 1.0) but because
     the top 1 % of states by stderr carry ~75 % of the squared label
     error, so an unweighted MSE is dominated by noise — 1/stderr² weighting
-    is justified for these terms (unlike u, gotcha 40). The Id-rooted u
+    of those terms (rung C4) fixes it: policy error 0.19 % median / 0.53 %
+    worst of 50 held-out θ, at the cost of u-L1 7.65e-3 vs 4.12e-3 (a
+    value net and a policy net want different losses). The Id-rooted u
     labels are the miscalibrated ones at M = 1000 (RMS z 4.6, max 79:
-    gotcha 15/20). Spec results: `docs/superpowers/specs/2026-09-15-parametric-merton-net-design.md`.
+    gotcha 15/20), so 1/stderr² on u stays wrong (gotcha 40). Spec results:
+    `docs/superpowers/specs/2026-09-15-parametric-merton-net-design.md`.

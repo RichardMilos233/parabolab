@@ -206,3 +206,38 @@ conclusion depends on their independence.
 
 Cost: corpus ≈ 15 min; C0 3.6 min; C1/C2/C3 ≈ 0.6 / 1.1 / 2.8 min of GPU
 training each.
+
+### C4 / C5 — inverse-variance-weighted derivative labels (follow-up, plan Task 6)
+
+Same corpus and FiLM net as C3; the derivative loss terms now carry
+per-state weights \(1/\max(\text{stderr}_i, \epsilon)^2\) (normalised to
+mean 1, \(\epsilon = 10^{-3}\cdot\)median), justified by the calibration
+finding above. C4 uses \(u_x\) and \(u_{xx}\) labels, C5 \(u_x\) only.
+Commands: `--rungs C4 C5 --c3-mode film --steps 20000 --device cuda --jobs 16`.
+
+| rung | n | u-L1 median | u-L1 max | policy err interior (median / p90 / max) | policy err full | s/instance |
+|---|---|---|---|---|---|---|
+| C2 FiLM, u only | 50 | 4.12e-03 | 1.81e-02 | 3.03 % / 8.86 % / 15.1 % | 3.26 % | 1.3 |
+| C3 + derivatives, unit weights | 50 | 2.57e-02 | 1.18e-01 | 3.63 % | 3.69 % | 3.4 |
+| **C4 + derivatives, 1/stderr² weights** | 50 | 7.65e-03 | 3.17e-02 | **0.19 % / 0.30 % / 0.53 %** | 0.21 % | 3.5 |
+| C5 + u_x only, 1/stderr² weights | 50 | 6.40e-03 | 2.19e-02 | 0.38 % / 0.64 % / 0.77 % | 0.40 % | 2.7 |
+
+Reading. Weighting the derivative terms by their (calibrated) inverse
+variance turns C3's failure into the best policy net of the study: C4's
+Merton fraction is within 0.19 % of the closed form at the median and
+within 0.53 % on the *worst* of 50 held-out θ (C2: 15 %), beating C2 on
+all 50 instances. The price is on \(u\): 7.65e-3 vs C2's 4.12e-3 (C4 is
+better on only 9/50) — the derivative terms pull capacity toward the
+shape of \(u\) rather than its level, and the \(u_{xx}\) labels are still
+11× noisier than their signal on average. C5 (drop \(u_{xx}\)) recovers
+some \(u\) accuracy (6.40e-3) at 2× the policy error of C4 (0.38 %, still
+far inside the 2 % target); C4 beats C5 on policy on 48/50.
+
+Verdicts against the fixed criteria: C4 and C5 both satisfy *both*
+(u-L1 ≤ 1.5× C0 = 3.0e-2; policy ≤ 2 %). The kept-rung rule as written
+(lowest u-L1 first) still selects C2, which fails the policy criterion —
+the rule did not anticipate a u/policy trade-off, and that trade-off is
+the finding: **a value-function net and a policy net want different
+losses.** For value estimation keep C2; for policies use C4. A rung that
+serves both — larger net, or a two-headed net trained with C4's loss —
+is the natural next step and is not run here.
