@@ -1,0 +1,37 @@
+{
+  "kpp_phi": {
+    "frac_within_4se": 0.9995,
+    "stderr_ratio": 2.2147682025070563,
+    "passed": true,
+    "n_states_used": 4000,
+    "frac_nonfinite": 0.0
+  },
+  "expgrad_phi": {
+    "frac_within_4se": 0.9995,
+    "stderr_ratio": 1.4251679914849522,
+    "passed": false,
+    "n_states_used": 4000,
+    "frac_nonfinite": 0.0
+  },
+  "tan_phi": {
+    "frac_within_4se": 0.998,
+    "stderr_ratio": 3.0255177635361394,
+    "passed": true,
+    "n_states_used": 4000,
+    "frac_nonfinite": 0.0
+  },
+  "cosine_phi": {
+    "frac_within_4se": 0.9995,
+    "stderr_ratio": 1.8985427782117092,
+    "passed": true,
+    "n_states_used": 4000,
+    "frac_nonfinite": 0.0
+  },
+  "log_phi": {
+    "frac_within_4se": 0.99975,
+    "stderr_ratio": 0.9736884980931886,
+    "passed": false,
+    "n_states_used": 4000,
+    "frac_nonfinite": 0.0
+  }
+}

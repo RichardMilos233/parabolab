@@ -50,6 +50,7 @@ def parse_args():
     p.add_argument("--precheck", action="store_true")
     p.add_argument("--precheck-out", default="examples/backbone_benchmark_precheck.json")
     p.add_argument("--report", action="store_true")
+    p.add_argument("--figure", default=None, help="with --report: write the per-family learning-curve figure here")
     p.add_argument("--tiny", action="store_true")
     a = p.parse_args()
     if a.tiny:
@@ -91,7 +92,38 @@ def run_report(a):
     for r in records:
         r["n_train"] = int(r["n_train"])
         r["l1"] = float(r["l1"])
-    print(benchmark.report_table(benchmark.family_ratios(records)))
+    ratios = benchmark.family_ratios(records)
+    print(benchmark.report_table(ratios))
+    if a.figure:
+        plot_curves(ratios, a.figure)
+
+
+def plot_curves(ratios, path):
+    """One panel per family: median L1 ratio to the per-instance baseline vs
+    n_train, one line per backbone (log-log; the dashed line is the baseline)."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    families = sorted({f for (f, _, _) in ratios})
+    backbones = sorted({b for (_, b, _) in ratios})
+    ncol = min(3, len(families))
+    nrow = (len(families) + ncol - 1) // ncol
+    fig, axes = plt.subplots(nrow, ncol, figsize=(4 * ncol, 3 * nrow), squeeze=False)
+    for ax, family in zip(axes.flat, families):
+        for b in backbones:
+            pts = sorted((n, v["ratio_median"]) for (f, bb, n), v in ratios.items() if f == family and bb == b)
+            if pts:
+                ax.plot([p[0] for p in pts], [p[1] for p in pts], "o-", label=b)
+        ax.axhline(1.0, color="k", ls="--", lw=0.8)
+        ax.set_xscale("log"); ax.set_yscale("log")
+        ax.set_title(family); ax.set_xlabel("n_train"); ax.set_ylabel("median L1 / per-instance")
+    for ax in list(axes.flat)[len(families):]:
+        ax.axis("off")
+    axes.flat[0].legend(fontsize=8)
+    fig.tight_layout()
+    fig.savefig(path, dpi=130)
+    print(f"wrote {path}", flush=True)
 
 
 def main(a):
