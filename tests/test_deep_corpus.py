@@ -77,13 +77,18 @@ from parabolab.deep import corpus
 
 def test_families_build_picklable_factories():
     import pickle
+    rng = np.random.default_rng(0)
     for key, fam in corpus.FAMILIES.items():
         assert fam.key == key
-        params = tuple(0.5 * (lo + hi) for lo, hi in fam.ranges)
+        if fam.param_sampler == "fourier":
+            params = corpus.sample_fourier_params(rng)
+        else:
+            params = tuple(0.5 * (lo + hi) for lo, hi in fam.ranges)
         factory = fam.make_factory(params)
         pickle.dumps(factory)
         pde = factory()
-        assert pde.exact_solution is not None and pde.d == fam.d
+        assert pde.d == fam.d
+        assert pde.exact_solution is not None or fam.reference_name is not None
 
 
 def test_sample_instances_is_deterministic_and_in_range():
@@ -293,3 +298,49 @@ def test_allen_cahn_fourier_builder():
     pde = allen_cahn_fourier_1d(0.3, COEFFS)
     assert pde.exact_solution is None and pde.d == 1 and pde.T == 0.3
     assert float(pde.phi_mu((0,))(1.0)) == pytest.approx(fourier_phi_numpy(COEFFS, np.array([1.0]))[0])
+
+
+# ---------------------------------------------------------------------------
+# phi-families
+# ---------------------------------------------------------------------------
+
+def test_sample_fourier_params_normalises_amplitude():
+    rng = np.random.default_rng(0)
+    p = corpus.sample_fourier_params(rng)
+    assert len(p) == 9
+    xs = np.linspace(-8, 8, 1001)
+    assert np.abs(fourier_phi_numpy(p, xs)).max() == pytest.approx(0.9, rel=1e-9)
+
+
+def test_phi_family_instances_have_phi_grid_and_reference():
+    specs = corpus.sample_instances("heat_phi", 2, 3, n_states=30, m_samples=200, n_draws=1)
+    assert specs[0].params != specs[1].params and len(specs[0].params) == 9
+    inst = corpus.generate_instance(specs[0], n_jobs=2)
+    assert inst.phi_grid.shape == (101,)
+    np.testing.assert_allclose(inst.phi_grid, fourier_phi_numpy(specs[0].params, inst.grid), rtol=1e-10)
+    ok = inst.finite
+    z = (inst.y[0, ok] - inst.u_exact[ok]) / inst.stderr[0, ok]
+    assert np.mean(np.abs(z) < 4.0) >= 0.95
+
+
+def test_ac_phi_uses_fd_reference():
+    spec = corpus.sample_instances("ac_phi", 1, 4, n_states=8, m_samples=4, n_draws=1)[0]
+    inst = corpus.generate_instance(spec)
+    pde = corpus.FAMILIES["ac_phi"].make_factory(spec.params)()
+    assert pde.exact_solution is None
+    np.testing.assert_allclose(inst.u_grid, fd_reference_1d(pde, inst.grid), rtol=1e-12)
+    np.testing.assert_allclose(inst.u_exact, fd_reference_1d(pde, inst.x[:, 0]), rtol=1e-12)
+
+
+def test_phi_grid_roundtrips_and_old_files_load(tmp_path):
+    spec = corpus.sample_instances("heat_phi", 1, 5, n_states=8, m_samples=4, n_draws=1)[0]
+    a = corpus.load_or_generate_corpus([spec], tmp_path, min_finite=1)[0]
+    b = corpus.load_or_generate_corpus([spec], tmp_path, min_finite=1)[0]
+    np.testing.assert_array_equal(a.phi_grid, b.phi_grid)
+    # a file without phi_grid (pre-field) still loads with phi_grid None
+    path = corpus.instance_path(spec, tmp_path)
+    with np.load(path, allow_pickle=False) as f:
+        keep = {k: f[k] for k in f.files if k != "phi_grid"}
+    np.savez(path, **keep)
+    c = corpus.load_or_generate_corpus([spec], tmp_path, min_finite=1)[0]
+    assert c.phi_grid is None

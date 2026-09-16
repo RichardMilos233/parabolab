@@ -40,10 +40,15 @@ class Family:
     factory_name: str
     fixed_kwargs: Tuple[Tuple[str, float], ...]
     deriv_factory_name: Optional[str] = None
+    param_sampler: Optional[str] = None
+    reference_name: Optional[str] = None
 
     def make_factory(self, params: Sequence[float]) -> functools.partial:
         kwargs = dict(self.fixed_kwargs)
-        kwargs.update(zip(self.param_names, (float(p) for p in params)))
+        if self.param_sampler == "fourier":
+            kwargs["coeffs"] = tuple(float(p) for p in params)
+        else:
+            kwargs.update(zip(self.param_names, (float(p) for p in params)))
         return functools.partial(getattr(library, self.factory_name), **kwargs)
 
 
@@ -55,7 +60,22 @@ FAMILIES: Dict[str, Family] = {
                      100.0, 200.0, 1, "merton_hjb",
                      (("T", 0.1), ("rho", 0.01)),
                      "merton_hjb_derivatives"),
+    "heat_phi": Family("heat_phi", ("A", "a1", "a2", "a3", "a4", "b1", "b2", "b3", "b4"), (),
+                       -8.0, 8.0, 1, "heat_fourier_1d", (("T", 0.3),), None,
+                       "fourier", None),
+    "ac_phi": Family("ac_phi", ("A", "a1", "a2", "a3", "a4", "b1", "b2", "b3", "b4"), (),
+                     -8.0, 8.0, 1, "allen_cahn_fourier_1d", (("T", 0.3),), None,
+                     "fourier", "fd_reference_1d"),
 }
+
+
+def sample_fourier_params(rng: np.random.Generator, K: int = 4, target_amp: float = 0.9,
+                          x_lo: float = -8.0, x_hi: float = 8.0) -> Tuple[float, ...]:
+    a = [float(rng.normal(0.0, 1.0 / (1 + k))) for k in range(1, K + 1)]
+    b = [float(rng.normal(0.0, 1.0 / (1 + k))) for k in range(1, K + 1)]
+    xs = np.linspace(x_lo, x_hi, 1001)
+    peak = np.abs(library.fourier_phi_numpy((1.0, *a, *b), xs, x_lo, x_hi)).max()
+    return (float(target_amp / peak), *a, *b)
 
 
 @dataclass(frozen=True)
@@ -78,7 +98,10 @@ def sample_instances(family: str, n: int, seed: int, *, n_states: int,
     rng = np.random.default_rng(seed)
     specs = []
     for i in range(n):
-        params = tuple(float(rng.uniform(lo, hi)) for lo, hi in fam.ranges)
+        if fam.param_sampler == "fourier":
+            params = sample_fourier_params(rng)
+        else:
+            params = tuple(float(rng.uniform(lo, hi)) for lo, hi in fam.ranges)
         specs.append(InstanceSpec(family, params, n_states, m_samples,
                                   1_000_000 * seed + i, n_draws))
     return specs
@@ -98,6 +121,7 @@ class Instance:
     deriv: Optional[np.ndarray] = None          # (n_codes, N)
     deriv_stderr: Optional[np.ndarray] = None
     deriv_exact: Optional[np.ndarray] = None
+    phi_grid: Optional[np.ndarray] = None       # (101,) terminal condition on grid
 
     @property
     def finite(self) -> np.ndarray:
@@ -132,10 +156,19 @@ def generate_instance(spec: InstanceSpec, *,
         ys.append(data.y)
         ses.append(data.stderr)
         rate = data.rate
-    u_exact = np.array([pde.exact_solution(0.0, xs[i])
-                        for i in range(spec.n_states)])
     grid, xg, _ = _grid_inputs(fam.d, 0.0, fam.x_lo, fam.x_hi)
-    u_grid = np.array([pde.exact_solution(0.0, xg[i]) for i in range(len(grid))])
+    phi = pde.phi_mu((0,))
+    phi_grid = np.array([float(phi(xg[i][0])) for i in range(len(grid))])
+    if pde.exact_solution is not None:
+        u_exact = np.array([pde.exact_solution(0.0, xs[i])
+                            for i in range(spec.n_states)])
+        u_grid = np.array([pde.exact_solution(0.0, xg[i]) for i in range(len(grid))])
+    elif fam.reference_name is not None:
+        ref = getattr(library, fam.reference_name)
+        u_exact = ref(pde, xs[:, 0])
+        u_grid = ref(pde, grid)
+    else:
+        raise ValueError(f"family {fam.key!r} has neither exact_solution nor reference_name")
 
     deriv = deriv_se = deriv_exact = None
     if spec.deriv_codes:
@@ -156,7 +189,8 @@ def generate_instance(spec: InstanceSpec, *,
         deriv, deriv_se, deriv_exact = np.array(dvals), np.array(dses), np.array(dex)
 
     return Instance(spec, ts, xs, np.array(ys), np.array(ses), u_exact,
-                    grid, u_grid, float(rate), deriv, deriv_se, deriv_exact)
+                    grid, u_grid, float(rate), deriv, deriv_se, deriv_exact,
+                    phi_grid)
 
 
 def instance_path(spec: InstanceSpec, root) -> Path:
@@ -172,7 +206,7 @@ def _save_instance(inst: Instance, path: Path) -> None:
         extra["deriv_exact"] = inst.deriv_exact
     np.savez(path, spec=inst.spec.to_json(), t=inst.t, x=inst.x, y=inst.y,
              stderr=inst.stderr, u_exact=inst.u_exact, grid=inst.grid,
-             u_grid=inst.u_grid, rate=inst.rate, **extra)
+             u_grid=inst.u_grid, rate=inst.rate, phi_grid=inst.phi_grid, **extra)
 
 
 def _load_instance(spec: InstanceSpec, path: Path) -> Optional[Instance]:
@@ -192,7 +226,8 @@ def _load_instance(spec: InstanceSpec, path: Path) -> Optional[Instance]:
                             float(f["rate"]),
                             f["deriv"] if "deriv" in f else None,
                             f["deriv_stderr"] if "deriv_stderr" in f else None,
-                            f["deriv_exact"] if "deriv_exact" in f else None)
+                            f["deriv_exact"] if "deriv_exact" in f else None,
+                            f["phi_grid"] if "phi_grid" in f else None)
     except ValueError as exc:
         if "spec" in str(exc):
             raise
