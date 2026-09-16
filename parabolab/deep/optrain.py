@@ -13,6 +13,7 @@ identical data.
 
 from __future__ import annotations
 
+import dataclasses
 import time
 from dataclasses import dataclass
 from typing import Dict, Sequence
@@ -137,3 +138,59 @@ def evaluate_operator(net, instances, *, device="cpu") -> np.ndarray:
 
 def per_phi_baseline(inst: corpus.Instance, *, device="cpu", seed=0, epochs=3000) -> float:
     return per_instance_mlp_l1(inst, device=device, seed=seed, epochs=epochs)
+
+
+def calibration_precheck(family, *, n=20, n_states=200, m_lo=1000, m_hi=10_000,
+                         seed=123, n_jobs=1) -> dict:
+    """Check that the sampler's reported stderr is calibrated, by comparing
+    labels drawn at two sample budgets (``m_lo``, ``m_hi``) on the SAME
+    states (``sample_instances`` derives the state draw only from ``seed``,
+    not ``m_samples``).
+
+    If the stderr is calibrated: (a) the two noisy estimates should mostly
+    agree within a few combined stderrs -- ``frac_within_4se`` should be
+    high; (b) since stderr ~ 1/sqrt(m_samples), the low-budget stderr should
+    be about sqrt(m_hi/m_lo) times the high-budget one -- ``stderr_ratio``
+    (median over states) should land near that value (default
+    sqrt(10) ~= 3.16, checked against a 2x band).
+
+    ``corpus.MC_REFERENCE_SAMPLES`` is temporarily shrunk: an MC-referenced
+    family (tan_phi/cosine_phi/log_phi) would otherwise spend a full
+    MC_REFERENCE_SAMPLES-sample grid reference per instance just to fill
+    Instance.u_grid/ref_stderr, which this label-only calibration check
+    never reads.
+    """
+    specs_lo = corpus.sample_instances(family, n, seed, n_states=n_states,
+                                       m_samples=m_lo, n_draws=1)
+    specs_hi = [dataclasses.replace(spec, m_samples=m_hi) for spec in specs_lo]
+
+    old_ref_samples = corpus.MC_REFERENCE_SAMPLES
+    corpus.MC_REFERENCE_SAMPLES = 100
+    try:
+        insts_lo = [corpus.generate_instance(s, n_jobs=n_jobs) for s in specs_lo]
+        insts_hi = [corpus.generate_instance(s, n_jobs=n_jobs) for s in specs_hi]
+    finally:
+        corpus.MC_REFERENCE_SAMPLES = old_ref_samples
+
+    z_parts, ratio_parts = [], []
+    n_total = 0
+    for lo, hi in zip(insts_lo, insts_hi):
+        ok = lo.finite & hi.finite
+        n_total += ok.size
+        y_lo, y_hi = lo.y[0, ok], hi.y[0, ok]
+        se_lo, se_hi = lo.stderr[0, ok], hi.stderr[0, ok]
+        z_parts.append(np.abs(y_lo - y_hi) / np.sqrt(se_lo ** 2 + se_hi ** 2))
+        ratio_parts.append(se_lo / se_hi)
+    z = np.concatenate(z_parts) if z_parts else np.array([])
+    ratio = np.concatenate(ratio_parts) if ratio_parts else np.array([])
+
+    frac_within_4se = float(np.mean(z <= 4)) if z.size else float("nan")
+    stderr_ratio = float(np.median(ratio)) if ratio.size else float("nan")
+    lo_bound, hi_bound = np.sqrt(10) / 2, 2 * np.sqrt(10)
+    passed = bool(np.isfinite(frac_within_4se) and np.isfinite(stderr_ratio)
+                  and frac_within_4se >= 0.95 and lo_bound <= stderr_ratio <= hi_bound)
+    n_states_used = int(z.size)
+    frac_nonfinite = 1.0 - n_states_used / n_total if n_total else float("nan")
+    return {"frac_within_4se": frac_within_4se, "stderr_ratio": stderr_ratio,
+            "passed": passed, "n_states_used": n_states_used,
+            "frac_nonfinite": frac_nonfinite}

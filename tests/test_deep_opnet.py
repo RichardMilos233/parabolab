@@ -223,3 +223,14 @@ def test_per_phi_baseline_works_without_closed_form():
     """ac_phi has no exact_solution; the baseline must score against u_grid."""
     inst = _toy(n=1, seed=43, family="ac_phi")[0]
     assert np.isfinite(optrain.per_phi_baseline(inst, epochs=30))
+
+
+# ---------------------------------------------------------------------------
+# calibration pre-check
+# ---------------------------------------------------------------------------
+
+
+def test_calibration_precheck_smoke():
+    result = optrain.calibration_precheck("heat_phi", n=2, n_states=10, m_lo=20, m_hi=200)
+    assert {"frac_within_4se", "stderr_ratio", "passed"} <= result.keys()
+    assert isinstance(result["passed"], bool)
