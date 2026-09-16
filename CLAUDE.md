@@ -514,8 +514,9 @@
     terminal conditions (`deep.opnet`, `deep.optrain`, families
     `heat_phi`/`ac_phi` in `deep.corpus`), 1000 training φ at M = 1000:
     on the linear heat equation the FNO wins (0.64× the per-φ net's
-    error, 49/50 held-out φ) because its spectral layers are the
-    solution operator's own basis; on Allen–Cahn the cross-attention
+    error, 49/50 held-out φ) — plausibly because the heat operator is
+    diagonal in the Fourier basis its layers use (interpretation, not
+    tested by ablation); on Allen–Cahn the cross-attention
     operator (`SetDenoiser` re-used with φ samples as tokens) wins
     (0.81×, 41/50, half the worst-case error) and the FNO only ties.
     The DeepONet is worst on both. All curves still descend at 1000 φ —

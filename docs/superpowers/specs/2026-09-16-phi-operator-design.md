@@ -208,17 +208,21 @@ n = 1000 and, by a factor of two, the best worst case: 9.2e-3 against
 1.7e-2 for the FNO and 1.8e-2 for a per-φ net).
 
 Reading. The ranking reverses between the two steps, and the reversal
-is the finding. On the linear heat equation the FNO's spectral layers
-are the exact solution operator's own basis (mode-wise damping), so it
-wins outright and its 74 k parameters suffice. Allen–Cahn's \(u - u^3\)
-couples modes; the FNO's fixed 16-mode truncation and pointwise
-nonlinearity still fit it (0.96×), but the attention operator — which
-lets every query attend to the whole φ profile — generalises best and
-most robustly. All three learning curves are still descending steeply at
-n = 1000 (attention 9.2 → 6.7 → 4.5e-3; FNO 14 → 8.6 → 5.3e-3), so the
-operators are data-limited, not capacity-limited: more φ, which cost
-≈ 1 s each to generate, would improve every backbone; the per-φ
-baseline cannot improve at all without more samples per φ. The
+is the finding. The tables establish *that* it reverses; the *why* below
+is an interpretation, not a tested mechanism (no ablation of FNO mode
+count or inspection of learned spectral weights was run). On the linear
+heat equation the solution operator is diagonal in the Fourier basis
+(mode-wise damping), which the FNO's spectral layers represent directly —
+a plausible reason it wins outright with 74 k parameters. Allen–Cahn's
+\(u - u^3\) couples modes; the FNO's fixed 16-mode truncation and
+pointwise nonlinearity still fit it (0.96×), while the attention operator
+— which lets every query attend to the whole φ profile — generalises
+best and most robustly. All three learning curves are still descending
+at n = 1000 (attention 9.2 → 6.7 → 4.5e-3; FNO 14 → 8.6 → 5.3e-3) with
+no sign of saturation, consistent with a data-limited regime (though
+capacity was not varied at fixed n, so this is not proof): more φ, at
+≈ 1 s each to generate, would likely improve every backbone, whereas the
+per-φ baseline cannot improve without more samples per φ. The
 DeepONet's fixed-size branch embedding of a 101-point φ is the weakest
 inductive bias for both problems.
 
