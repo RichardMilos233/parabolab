@@ -60,6 +60,109 @@ def riccati_binary_second_moment(
     return (rate**2 * exp_term) / denom
 
 
+def riccati_binary_optimal_rate(
+    T: float,
+    bracket: tuple[float, float] = (0.2, 4.0),
+) -> float:
+    """Numerically locate the stationary rate lambda* of the exact full-tree binary Riccati formula.
+
+    The second moment is strictly convex on its finite domain, and its derivative
+    has the sign of T*rate*(rate**2 + 1) - 2*(exp(rate*T) - 1).
+    """
+    lo, hi = bracket
+    if not all(math.isfinite(riccati_binary_second_moment(T, rate)) for rate in bracket):
+        raise ValueError(f"Oracle bracket {bracket} must lie in the finite-moment domain")
+
+    def stationarity(rate: float) -> float:
+        return T * rate * (rate**2 + 1.0) - 2.0 * math.expm1(rate * T)
+
+    if not (stationarity(lo) < 0.0 < stationarity(hi)):
+        raise ValueError(f"Oracle bracket {bracket} must enclose the stationary rate")
+
+    while hi - lo > 1e-12:
+        mid = (lo + hi) / 2.0
+        if stationarity(mid) < 0.0:
+            lo = mid
+        else:
+            hi = mid
+    return (lo + hi) / 2.0
+
+
+def short_time_rate_1d(
+    pde: ParabolicPDE,
+    x: float = 0.0,
+    *,
+    code: Code = Id(),
+    mechanism=None,
+    tuple_proposal: Optional[TupleProposal] = None,
+) -> float:
+    """Theoretical leading-order short-horizon optimal branching clock rate.
+
+    Computes lambda^*(x) ~= sqrt(B_c(x) / G_c(x)) as T -> 0 (Theorem 7.4).
+    For the identity root code on a 1D semilinear PDE, this specializes to
+    exactly |f(phi(x))| / |phi(x)|.
+
+    Parameters
+    ----------
+    pde : ParabolicPDE
+        The 1D parabolic PDE instance.
+    x : float
+        Spatial state (scalar, default 0.0).
+    code : Code
+        Root code (default Id()).
+    mechanism : optional mechanism provider.
+    tuple_proposal : optional proposal generator for tuple probabilities q_c(Z).
+        If None, uniform tuple probabilities are used.
+    """
+    if isinstance(x, (np.ndarray, list, tuple)):
+        arr_x = np.asarray(x)
+        if arr_x.ndim > 0 and arr_x.size > 1:
+            raise ValueError(
+                f"short_time_rate_1d only supports scalar 1D problems, got {arr_x.shape}"
+            )
+        x_val = float(arr_x.item())
+    else:
+        x_val = float(x)
+
+    if getattr(pde, "d", 1) > 1:
+        raise ValueError(
+            f"short_time_rate_1d only supports 1D problems, got pde.d={pde.d}"
+        )
+
+    if mechanism is None:
+        mechanism = getattr(pde, "mechanism", None) or SemilinearMechanism
+
+    g_c = mechanism.terminal(code, pde, x_val)
+    G_c = float(g_c) ** 2
+    if G_c <= 0.0 or not math.isfinite(G_c):
+        raise ValueError(
+            f"Degenerate leaf score G_c={G_c}: leading short-time rate requires strictly positive |phi(x)|"
+        )
+
+    tpls = mechanism.tuples(code)
+    if not tpls:
+        raise ValueError(f"Mechanism table M({code!r}) is empty")
+
+    if tuple_proposal is not None:
+        probs = _validate_proposal(tuple_proposal(code, pde, x_val), len(tpls))
+    else:
+        probs = [1.0 / len(tpls)] * len(tpls)
+
+    B_c = 0.0
+    for tpl, q in zip(tpls, probs):
+        prod_sq = 1.0
+        for z in tpl:
+            prod_sq *= float(mechanism.terminal(z, pde, x_val)) ** 2
+        B_c += (1.0 / q) * prod_sq
+
+    if B_c <= 0.0 or not math.isfinite(B_c):
+        raise ValueError(
+            f"Degenerate branch score B_c={B_c}: leading short-time rate requires strictly positive |f(phi(x))|"
+        )
+
+    return math.sqrt(B_c / G_c)
+
+
 def finite_depth_moment_derivatives_1d(
     pde: ParabolicPDE,
     t: float,

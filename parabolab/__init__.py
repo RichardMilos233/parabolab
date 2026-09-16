@@ -53,7 +53,15 @@ from .rate_optimization import (
     RateOptimizationResult,
     finite_depth_moment_derivatives_1d,
     optimize_exponential_rate_1d,
+    riccati_binary_optimal_rate,
     riccati_binary_second_moment,
+    short_time_rate_1d,
+)
+from .rate_variance import (
+    RateVarianceComparison,
+    RateVarianceSweep,
+    compare_rate_variance,
+    sweep_rate_variance,
 )
 from .integrability import truncated_normal_inverse_power
 from .proposals import (
@@ -96,6 +104,7 @@ __all__ = [
     "TerminalTupleProposal",
     "TuplePilotResult",
     "compare",
+    "compare_rate_variance",
     "default_rate",
     "estimate",
     "estimate_parallel",
@@ -111,10 +120,15 @@ __all__ = [
     "optimize_exponential_rate_1d",
     "RateMomentDerivatives",
     "RateOptimizationResult",
+    "RateVarianceComparison",
+    "RateVarianceSweep",
+    "riccati_binary_optimal_rate",
     "riccati_binary_second_moment",
     "sample_tree",
     "second_moment_objective",
+    "short_time_rate_1d",
     "sqrt_optimal_probabilities",
+    "sweep_rate_variance",
     "sweep_T",
     "truncated_normal_inverse_power",
     "validate_probabilities",

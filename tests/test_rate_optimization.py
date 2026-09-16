@@ -15,6 +15,7 @@ from parabolab.rate_optimization import (
     finite_depth_moment_derivatives_1d,
     optimize_exponential_rate_1d,
     riccati_binary_second_moment,
+    short_time_rate_1d,
 )
 
 
@@ -200,3 +201,76 @@ def test_rate_optimizer_short_horizon_asymptotics():
     assert opt.converged
     # Should be close to 1.0 within O(T)
     assert opt.rate == pytest.approx(1.0, abs=0.03)
+
+
+def test_short_time_rate_1d_evaluations():
+    from parabolab.library import allen_cahn_wave_1d, allen_cahn_flat
+
+    # Binary control with phi == 1, f(u) = u^2: |f(phi)| / |phi| = 1/1 = 1.0
+    pde_bin = _binary_control_pde(T=0.05)
+    r_bin = short_time_rate_1d(pde_bin, 0.0, mechanism=BinaryControlMechanism)
+    assert r_bin == pytest.approx(1.0, rel=1e-12)
+
+    # Allen-Cahn wave at x = 0: phi(0) = -0.5, f(-0.5) = -0.375 => 0.375 / 0.5 = 0.75
+    pde_ac = allen_cahn_wave_1d(T=0.05)
+    r_ac = short_time_rate_1d(pde_ac, 0.0)
+    assert r_ac == pytest.approx(0.75, rel=1e-12)
+
+    # Check across multiple x points matches |f(phi(x))| / |phi(x)|
+    for x in (-1.5, -0.5, 0.0, 0.5, 1.5):
+        val_phi = float(pde_ac.phi(x))
+        val_f = float(pde_ac.f(val_phi))
+        expected = abs(val_f) / abs(val_phi)
+        assert short_time_rate_1d(pde_ac, x) == pytest.approx(expected, rel=1e-12)
+
+    # Allen-Cahn flat: phi == 0.5, f(0.5) = 0.375 => 0.75
+    pde_flat = allen_cahn_flat(T=0.05)
+    assert short_time_rate_1d(pde_flat, 0.0) == pytest.approx(0.75, rel=1e-12)
+
+
+def test_short_time_rate_allen_cahn_convergence():
+    from parabolab.library import allen_cahn_wave_1d
+
+    # Verify that as T -> 0, the numerical optimizer converges to short_time_rate_1d(x=0) = 0.75
+    theoretical_rate = 0.75
+    rates = []
+    for T in (0.1, 0.05, 0.02, 0.01):
+        pde = allen_cahn_wave_1d(T=T)
+        opt = optimize_exponential_rate_1d(
+            pde, 0.0, 0.0, max_depth=2, bracket=(0.2, 2.0),
+            quadrature=MomentQuadrature(time_order=6, normal_order=6),
+        )
+        assert opt.converged
+        rates.append(opt.rate)
+
+    # Errors should strictly decrease towards 0.75
+    errors = [abs(r - theoretical_rate) for r in rates]
+    for e1, e2 in zip(errors, errors[1:]):
+        assert e2 < e1
+    # At T=0.01, error is under 1%
+    assert abs(rates[-1] - theoretical_rate) / theoretical_rate < 0.01
+
+
+def test_short_time_rate_fisher_kpp():
+    from parabolab.pde import ParabolicPDE
+
+    # Fisher-KPP: f(u) = u(1 - u) = u - u^2, phi0 = 0.5
+    # f(0.5) = 0.25 => lambda = 0.25 / 0.5 = 0.50
+    pde_kpp = ParabolicPDE(
+        T=0.05,
+        f=lambda z: z - z**2,
+        f_derivatives=[lambda z: 1.0 - 2.0 * z, lambda z: -2.0],
+        phi=lambda x: 0.5,
+        phi_derivatives=[lambda x: 0.0],
+    )
+    th_rate = short_time_rate_1d(pde_kpp, 0.0)
+    assert th_rate == pytest.approx(0.5, rel=1e-12)
+
+    opt = optimize_exponential_rate_1d(
+        pde_kpp, 0.0, 0.0, max_depth=2, bracket=(0.1, 1.5),
+        quadrature=MomentQuadrature(time_order=4, normal_order=4),
+    )
+    assert opt.converged
+    # Discrepancy is within 2% at T = 0.05
+    assert abs(opt.rate - th_rate) / th_rate < 0.02
+

@@ -8,6 +8,7 @@ the demo workflow as research improves the branching estimator through
 ```bash
 python demo/allen_cahn.py        # Allen-Cahn d=1 (JCP2024 Table 1 / Fig. 1)
 python demo/variance_reduction.py # Allen-Cahn: baseline / selected rate / terminal q / both
+python demo/rate_variance.py     # Var(H)-lambda convex sweet spot & optimal rate verification
 python demo/merton.py            # Merton HJB d=1 (JCP2024 eq. (4.6), Table 5)
 python demo/merton_vasicek.py     # retained stochastic-rate Merton example (d=1 reduced)
 python demo/dym.py               # Dym non-integrability diagnostic (JEQ Fig. 6)
@@ -56,6 +57,25 @@ proposal uses terminal data, not exact child second moments. These are
 estimation algorithms to evaluate, not guaranteed improvements on every PDE.
 For node counts and pointwise variance-times-work diagnostics, use
 [`examples/sampling_tuning.py`](../examples/sampling_tuning.py).
+
+## Rate sensitivity and strictly convex variance curves across PDEs
+
+`rate_variance.py` systematically demonstrates the generalizability of the
+theoretical optimal rate formula $\lambda_{\mathrm{theory}}(x) \approx |f(\phi(x))|/|\phi(x)|$
+(Theorem 7.4) across multiple PDE families, spatial states, and nonlinearities:
+- **(a) Allen–Cahn Traveling Wave ($x = 0.0$)**: Cubic nonlinearity $f(u) = u - u^3$,
+  symmetric baseline ($\lambda_{\mathrm{theory}} = 0.7500 \approx \lambda^* = 0.7305$, 2.6% error).
+- **(b) Allen–Cahn Traveling Wave ($x = -1.0$)**: Shifted spatial state
+  demonstrating state-dependent generalizability ($\phi = -0.7311$, $\lambda_{\mathrm{theory}} = 0.4656 \approx \lambda^* = 0.4787$, 2.8% error, 66% variance reduction).
+- **(c) Fisher–KPP Logistic Equation ($\phi = 0.5$)**: Quadratic-linear nonlinearity
+  $f(u) = u - u^2$ ($\lambda_{\mathrm{theory}} = 0.5000 \approx \lambda^* = 0.4937$, 1.3% error, 98% variance reduction).
+- **(d) Binary Riccati Control ($\phi \equiv 1$)**: Pure quadratic nonlinearity
+  $f(u) = u^2$ with standard binary branching and exact Riccati second-moment formula
+  ($\lambda_{\mathrm{theory}} = 1.0000 \approx \lambda^* = 1.0258$, 2.6% error).
+
+Each panel presents a strictly convex $\operatorname{Var}(H) - \lambda$ U-shape
+(high at both ends, clear sweet spot minimum in the center), overlaying deterministic
+quadrature / Riccati formulas against empirical Monte Carlo trials with error bars.
 
 The original Merton demos remain benchmarks. Multifactor Merton is no longer
 the active research roadmap. Dym is a negative control: its specified
