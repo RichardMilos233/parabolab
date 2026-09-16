@@ -1,5 +1,5 @@
 """Tests for parabolab.deep.benchmark (spec 2026-09-16-phi-operator-design,
-task 4)."""
+task 4) and examples/backbone_benchmark.py (task 5)."""
 
 import numpy as np
 import pytest
@@ -50,3 +50,42 @@ def test_report_table_has_learning_curve_slope_section():
     r = benchmark.family_ratios(recs)
     table = benchmark.report_table(r)
     assert "learning-curve slope" in table.lower()
+
+
+# ---------------------------------------------------------------------------
+# driver (examples/backbone_benchmark.py)
+# ---------------------------------------------------------------------------
+
+import csv
+import json
+import subprocess
+import sys
+from pathlib import Path
+
+pytest.importorskip("torch")
+
+SCRIPT = Path(__file__).resolve().parents[1] / "examples" / "backbone_benchmark.py"
+
+
+def test_backbone_benchmark_driver_tiny(tmp_path):
+    out = tmp_path / "bb.csv"
+    subprocess.run([sys.executable, str(SCRIPT), "--tiny", "--families", "heat_phi",
+                    "--jobs", "1", "--corpus-root", str(tmp_path / "corpus"), "--out", str(out)],
+                   check=True, capture_output=True, text=True)
+    rows = list(csv.DictReader(out.open()))
+    assert {r["backbone"] for r in rows} == {"per_phi", "deeponet", "fno", "attn", "coeffmlp"}
+    assert {int(r["n_train"]) for r in rows if r["backbone"] != "per_phi"} == {2, 3}
+
+    result = subprocess.run([sys.executable, str(SCRIPT), "--report", "--out", str(out)],
+                            check=True, capture_output=True, text=True)
+    assert "Ranked" in result.stdout
+
+
+def test_backbone_benchmark_driver_precheck(tmp_path):
+    pc_out = tmp_path / "pc.json"
+    subprocess.run([sys.executable, str(SCRIPT), "--precheck", "--tiny", "--families", "heat_phi",
+                    "--precheck-out", str(pc_out)],
+                   check=True, capture_output=True, text=True)
+    result = json.loads(pc_out.read_text())
+    assert "heat_phi" in result
+    assert isinstance(result["heat_phi"]["passed"], bool)
