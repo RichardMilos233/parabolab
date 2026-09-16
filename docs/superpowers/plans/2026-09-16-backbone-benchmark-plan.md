@@ -190,8 +190,7 @@ def test_mc_reference_family_instance(tmp_path):
         corpus.MC_REFERENCE_SAMPLES = saved
     assert inst.ref_stderr is not None and inst.ref_stderr.shape == (101,)
     assert np.isfinite(inst.u_grid).all() and inst.rate == 1.0
-    a = corpus.load_or_generate_corpus([spec], tmp_path, min_finite=1)   # cached? no: generate again is slow
-    # instead round-trip the instance we have
+    assert inst.u_exact.shape == (8,)          # interpolated from the grid reference
     corpus._save_instance(inst, corpus.instance_path(spec, tmp_path))
     b = corpus._load_instance(spec, corpus.instance_path(spec, tmp_path))
     np.testing.assert_array_equal(b.ref_stderr, inst.ref_stderr)
@@ -207,7 +206,7 @@ def test_family_rate_reaches_the_generator():
     assert inst.rate == 1.0
 ```
 
-(Remove the stray `a = corpus.load_or_generate_corpus(...)` line in the second test before running — it is a note, not a step: use only the explicit save/load round trip. `MC_REFERENCE_SAMPLES = 100_000` is a module-level constant so tests can shrink it.)
+(`MC_REFERENCE_SAMPLES = 100_000` is a module-level constant so tests can shrink it; `generate_instance` must read it at call time, not bind it as a default argument.)
 
 - [ ] **Step 2: Run to fail.**
 - [ ] **Step 3: Implement** as specified: `MC_REFERENCE_SAMPLES = 100_000`; `Family.rate`; `Instance.ref_stderr`; `generate_instance` passes `rate=fam.rate` to all label draws and branches on `reference_name == "mc_reference_1d"` (factory-based call) vs. other references (pde-based call, unchanged); `_save_instance`/`_load_instance` handle `ref_stderr`; register the five families (fixed kwargs: kpp `T=0.3`; expgrad `T=0.05`; tan `T=0.01`; cosine `T=0.04`; log `T=0.02`).
