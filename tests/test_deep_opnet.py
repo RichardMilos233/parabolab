@@ -257,3 +257,24 @@ def test_calibration_precheck_stderr_ratio_not_degenerate():
     # independent draws that degeneracy disappears.
     result = optrain.calibration_precheck("heat_phi", n=1, n_states=6, m_lo=20, m_hi=20, seed=11)
     assert result["stderr_ratio"] != 1.0
+
+
+@pytest.mark.parametrize("name", ["deeponet_nocond", "fno_nocond", "attn_nocond"])
+def test_nocond_variants_ignore_cond(name):
+    """Exploratory arm: the *_nocond nets are built with n_cond=0 and drop the
+    cond vector they are handed (same output for any cond)."""
+    torch.manual_seed(0)
+    kw = {"attn_nocond": {"d_model": 16, "n_layers": 1}, "fno_nocond": {"width": 8, "modes": 4, "n_layers": 2},
+          "deeponet_nocond": {"p": 8, "width": 16}}[name]
+    net = opnet.make_operator(name, GRID, n_cond=5, **kw).eval()
+    assert net.drop_cond and net.cond_mean.numel() == 0
+    phi, q = _batch(B=2)[0], _batch(B=2)[1]
+    with torch.no_grad():
+        a = net(phi, torch.zeros(2, 5), q); b = net(phi, torch.ones(2, 5), q)
+    torch.testing.assert_close(a, b)
+    assert a.shape == (2, q.shape[1])
+
+
+def test_coeffmlp_nocond_rejected():
+    with pytest.raises(ValueError):
+        opnet.make_operator("coeffmlp_nocond", GRID, n_cond=3)

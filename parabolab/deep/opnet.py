@@ -28,6 +28,11 @@ from .setnet import SetDenoiser
 
 class _OperatorBase(nn.Module):
     needs_grid = False
+    # Exploratory "<name>_nocond" arm (make_operator): the net is built with
+    # n_cond = 0 and drops the conditioning vector it is handed, so it sees
+    # phi_grid only. Complete information for the phi-families (the
+    # coefficients only determine phi_grid), not for merton (theta is the PDE).
+    drop_cond = False
 
     def _register_scalers(self, n_cond: int) -> None:
         self.register_buffer("phi_scale", torch.ones(()))
@@ -41,6 +46,11 @@ class _OperatorBase(nn.Module):
     @property
     def n_params_total(self) -> int:
         return sum(p.numel() for p in self.parameters() if p.requires_grad)
+
+    def _scaled_cond(self, cond):
+        if self.drop_cond:
+            cond = cond[:, :0]
+        return (cond - self.cond_mean) / self.cond_std
 
 
 def _mlp(sizes):
@@ -60,7 +70,7 @@ class DeepONet(_OperatorBase):
         self.bias = nn.Parameter(torch.zeros(()))
 
     def forward(self, phi_grid, cond, q_tx):
-        c = (cond - self.cond_mean) / self.cond_std
+        c = self._scaled_cond(cond)
         b = self.branch(torch.cat([phi_grid / self.phi_scale, c], -1))    # (B,p)
         t = torch.nn.functional.gelu(self.trunk((q_tx - self.in_mean) / self.in_std))  # (B,Q,p)
         out = (t * b.unsqueeze(1)).sum(-1) + self.bias
@@ -101,7 +111,7 @@ class FNO1d(_OperatorBase):
     def on_grid(self, phi_grid, cond):            # (B,S) -> (B,S) scaled-output units
         B, S = phi_grid.shape
         xs = (self.grid / self.grid.abs().max()).expand(B, S)
-        c = (cond - self.cond_mean) / self.cond_std
+        c = self._scaled_cond(cond)
         c_grid = c.unsqueeze(1).expand(B, S, -1)
         base = torch.stack([phi_grid / self.phi_scale, xs], -1)          # (B,S,2)
         h = self.lift(torch.cat([base, c_grid], -1)).permute(0, 2, 1)    # (B,W,S)
@@ -138,7 +148,7 @@ class AttnOperator(_OperatorBase):
         if self.n_cond == 0:
             c = torch.zeros(B, 1, dtype=phi.dtype, device=phi.device)
         else:
-            c = (cond - self.cond_mean) / self.cond_std
+            c = self._scaled_cond(cond)
         return self.core(ctx_tx, phi, torch.zeros_like(phi), c, q_tx)
 
     def forward(self, phi_grid, cond, q_tx):
@@ -180,6 +190,12 @@ class CoeffMLP(_OperatorBase):
 
 
 def make_operator(name: str, grid, *, n_cond: int, **kw):
+    if name.endswith("_nocond"):
+        net = make_operator(name[: -len("_nocond")], grid, n_cond=0, **kw)
+        if isinstance(net, CoeffMLP):
+            raise ValueError("coeffmlp_nocond would be a per-family constant")
+        net.drop_cond = True
+        return net
     if name == "deeponet":
         return DeepONet(n_sensors=len(grid), n_cond=n_cond, **kw)
     if name == "fno":
@@ -188,4 +204,4 @@ def make_operator(name: str, grid, *, n_cond: int, **kw):
         return AttnOperator(grid, n_cond=n_cond, **kw)
     if name == "coeffmlp":
         return CoeffMLP(n_cond=n_cond, **kw)
-    raise ValueError(f"unknown operator {name!r}; use deeponet, fno, attn or coeffmlp")
+    raise ValueError(f"unknown operator {name!r}; use deeponet, fno, attn, coeffmlp or <name>_nocond")

@@ -179,7 +179,7 @@ def main(a):
                     print(f"skip {family} {name} n_train={n}: already in {a.out}", flush=True)
                     continue
                 torch.manual_seed(a.seed)
-                net = opnet.make_operator(name, grid, n_cond=n_cond, **tiny_kw.get(name, {}))
+                net = opnet.make_operator(name, grid, n_cond=n_cond, **tiny_kw.get(name.replace("_nocond", ""), {}))
                 print(f"{family} {name} n_train={len(subset)}: {net.n_params_total} params", flush=True)
                 res = optrain.train_operator(net, subset, steps=a.steps, device=a.device, seed=a.seed, verbose=True)
                 l1 = optrain.evaluate_operator(net, test, device=a.device)
