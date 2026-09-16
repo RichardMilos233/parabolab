@@ -21,6 +21,8 @@ import numpy as np
 import torch
 
 from . import corpus
+from .condtrain import fit_conditioned_scalers
+from .opnet import CoeffMLP
 from .settrain import per_instance_mlp_l1
 
 
@@ -38,9 +40,27 @@ def pooled_operator_rows(instances: Sequence[corpus.Instance]) -> Dict[str, np.n
 
 
 def fit_operator_scalers(net, rows) -> float:
-    """Fill the buffers the net has; return the pooled u std (used for the loss)."""
+    """Fill the buffers the net has; return the pooled u std (used for the loss).
+
+    CoeffMLP's own phi_scale/in_*/out_*/cond_* stay at identity -- its
+    forward never reads them (see opnet.CoeffMLP.forward). The wrapped
+    ConditionedNet core scales (t, x), u and theta through its OWN buffers
+    instead, so the fitted statistics land in net.core.* there: in_*/out_*
+    via condtrain.fit_conditioned_scalers (its row layout -- "tx", "u" --
+    matches these rows), and param_mean/param_std (which that routine does
+    not fill; ConditionedNet's other callers pass them in at construction
+    time instead) from the pooled cond rows, with the same std floor as the
+    outer cond_mean/cond_std path below.
+    """
     u_std = float(rows["u"].std()) or 1.0
     with torch.no_grad():
+        if isinstance(net, CoeffMLP):
+            fit_conditioned_scalers(net.core, rows)
+            mean, std = rows["cond"].mean(0), rows["cond"].std(0)
+            std[std < 1e-12] = 1.0
+            net.core.param_mean.copy_(torch.as_tensor(mean, dtype=torch.float32))
+            net.core.param_std.copy_(torch.as_tensor(std, dtype=torch.float32))
+            return u_std
         if hasattr(net, "phi_scale"):
             net.phi_scale.fill_(float(rows["phi"].std()) or 1.0)
         if hasattr(net, "in_mean"):

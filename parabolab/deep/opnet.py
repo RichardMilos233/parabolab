@@ -155,22 +155,24 @@ class CoeffMLP(_OperatorBase):
         self.n_cond = n_cond
         self.core = ConditionedNet(d=1, n_params=n_cond, mode="film",
                                    hidden_layers=hidden_layers, neurons=neurons)
-        # ConditionedNet zero-inits its FiLM output layer so a net trained
-        # from scratch starts as the plain (cond-invariant) trunk -- the
-        # right choice for training stability. CoeffMLP is instead a
-        # benchmark backbone that must depend on cond immediately (parity
-        # with the other three backbones, and required by
-        # test_coeffmlp_ignores_phi_and_uses_cond), so re-init that layer.
-        self.core.film[-1].reset_parameters()
+        # CoeffMLP is exactly the D02 FiLM net, INCLUDING its zero-initialised
+        # FiLM output layer -- do not re-init it here. A freshly constructed
+        # CoeffMLP is therefore exactly cond-invariant (it starts as the
+        # plain trunk); it only starts depending on cond once trained (see
+        # test_coeffmlp_fresh_is_cond_invariant / test_operators_depend_on_cond
+        # in tests/test_deep_opnet.py, which perturb the FiLM layer by hand
+        # to exercise the cond-dependent path pre-training).
 
     def forward(self, phi_grid, cond, q_tx):
-        # ConditionedNet already scales (t, x), the output and cond through
-        # its OWN buffers (in_mean/in_std, out_mean/out_std, param_mean/
-        # param_std -- identity by default). This backbone's own phi_scale/
-        # in_*/out_*/cond_mean/cond_std buffers exist only so optrain's
-        # scaler-fitting code can treat every backbone uniformly; applying
-        # them here too would double-scale, so they are left untouched and
-        # phi_grid is ignored, cond is forwarded raw.
+        # ConditionedNet scales (t, x), the output and cond through its OWN
+        # buffers (core.in_mean/in_std, core.out_mean/out_std,
+        # core.param_mean/param_std). This backbone's own phi_scale/
+        # in_*/out_*/cond_mean/cond_std buffers (inherited from
+        # _OperatorBase) exist only so every backbone exposes the same
+        # attributes; optrain.fit_operator_scalers special-cases CoeffMLP to
+        # leave them at identity and write scaler stats into net.core.*
+        # instead, so applying them here too would double-scale. phi_grid is
+        # ignored, cond is forwarded raw (scaled inside self.core).
         B, Q, _ = q_tx.shape
         tx = q_tx.reshape(-1, 2)
         c = cond.repeat_interleave(Q, dim=0)

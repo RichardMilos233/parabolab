@@ -70,8 +70,14 @@ def test_make_operator_rejects_unknown():
 
 
 def test_coeffmlp_ignores_phi_and_uses_cond():
+    # ConditionedNet zero-inits its FiLM output layer (see condnet.py), so a
+    # freshly constructed CoeffMLP is exactly cond-invariant (that's covered
+    # separately below). Perturb the FiLM output layer by hand to exercise
+    # the cond-dependent path this test is actually about.
     torch.manual_seed(0)
     net = opnet.CoeffMLP(n_cond=3, hidden_layers=2, neurons=8).eval()
+    with torch.no_grad():
+        torch.nn.init.normal_(net.core.film[-1].weight)
     phi, q = _batch(B=2)[0], _batch(B=2)[1]
     cond = torch.randn(2, 3)
     with torch.no_grad():
@@ -81,12 +87,32 @@ def test_coeffmlp_ignores_phi_and_uses_cond():
     assert not torch.allclose(a, c)
 
 
-@pytest.mark.parametrize("name", ["deeponet", "fno", "attn"])
+def test_coeffmlp_fresh_is_cond_invariant():
+    # ConditionedNet's zero-initialised FiLM output layer means a freshly
+    # constructed CoeffMLP starts as the plain, cond-invariant trunk -- it
+    # only starts depending on cond once trained (or, as in the test above,
+    # once the FiLM layer is perturbed by hand).
+    torch.manual_seed(0)
+    net = opnet.CoeffMLP(n_cond=3, hidden_layers=2, neurons=8).eval()
+    phi, q = _batch(B=2)[0], _batch(B=2)[1]
+    with torch.no_grad():
+        a = net(phi, torch.zeros(2, 3), q)
+        b = net(phi, torch.randn(2, 3), q)
+    torch.testing.assert_close(a, b)
+
+
+@pytest.mark.parametrize("name", ["deeponet", "fno", "attn", "coeffmlp"])
 def test_operators_depend_on_cond(name):
     torch.manual_seed(0)
     kw = {"attn": {"d_model": 16, "n_layers": 1}, "fno": {"width": 8, "modes": 4, "n_layers": 2},
-          "deeponet": {"p": 8, "width": 16}}[name]
+          "deeponet": {"p": 8, "width": 16}, "coeffmlp": {"hidden_layers": 2, "neurons": 8}}[name]
     net = opnet.make_operator(name, GRID, n_cond=2, **kw).eval()
+    if name == "coeffmlp":
+        # see test_coeffmlp_fresh_is_cond_invariant: a fresh CoeffMLP is
+        # cond-invariant by construction, so perturb the FiLM output layer
+        # to exercise the cond-dependent path.
+        with torch.no_grad():
+            torch.nn.init.normal_(net.core.film[-1].weight)
     phi, q = _batch(B=2)[0], _batch(B=2)[1]
     with torch.no_grad():
         a = net(phi, torch.zeros(2, 2), q); b = net(phi, torch.ones(2, 2), q)
@@ -124,6 +150,20 @@ def test_pooled_operator_rows_and_scalers():
     assert float(net.in_std[0]) == 1.0 and float(net.out_std) == pytest.approx(rows["u"].std())
 
 
+def test_fit_operator_scalers_fills_coeffmlp_core():
+    # CoeffMLP.forward ignores its own outer cond_*/in_*/out_*/phi_scale
+    # buffers (ConditionedNet scales (t, x)/u/cond through its own core.*
+    # buffers instead), so fit_operator_scalers must land the fitted
+    # statistics in net.core.* and leave the outer buffers at identity.
+    insts = _toy()
+    rows = optrain.pooled_operator_rows(insts)
+    n_cond = len(insts[0].spec.params)
+    net = opnet.CoeffMLP(n_cond=n_cond, hidden_layers=2, neurons=8)
+    optrain.fit_operator_scalers(net, rows)
+    assert not torch.allclose(net.core.param_std, torch.ones(n_cond))
+    assert torch.allclose(net.cond_std, torch.ones(n_cond))
+
+
 def test_pooled_operator_rows_stays_within_sensor_grid():
     insts = _toy()
     rows = optrain.pooled_operator_rows(insts)
@@ -131,12 +171,12 @@ def test_pooled_operator_rows_stays_within_sensor_grid():
     assert rows["tx"][:, 1].min() >= grid[0] and rows["tx"][:, 1].max() <= grid[-1]
 
 
-@pytest.mark.parametrize("name", ["deeponet", "fno", "attn"])
+@pytest.mark.parametrize("name", ["deeponet", "fno", "attn", "coeffmlp"])
 def test_train_operator_decreases_loss_and_evaluates(name):
     insts = _toy()
     torch.manual_seed(0)
     kw = {"attn": {"d_model": 16, "n_layers": 1}, "fno": {"width": 8, "modes": 4, "n_layers": 2},
-          "deeponet": {"p": 8, "width": 16}}[name]
+          "deeponet": {"p": 8, "width": 16}, "coeffmlp": {"hidden_layers": 2, "neurons": 8}}[name]
     n_cond = len(insts[0].spec.params)
     net = opnet.make_operator(name, insts[0].grid, n_cond=n_cond, **kw)
     # steps=500, not the brief's 40: with only 3 toy instances and 16
