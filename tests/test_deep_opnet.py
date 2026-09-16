@@ -234,3 +234,26 @@ def test_calibration_precheck_smoke():
     result = optrain.calibration_precheck("heat_phi", n=2, n_states=10, m_lo=20, m_hi=200)
     assert {"frac_within_4se", "stderr_ratio", "passed"} <= result.keys()
     assert isinstance(result["passed"], bool)
+
+
+def test_precheck_draws_are_independent():
+    # Regression test for the nested-sample bug: calling generate_instance
+    # twice with the same seed and different m_samples gave the SAME label
+    # seed (1000*spec.seed + draw 0) for both budgets, so the hi-budget run
+    # started with the lo-budget run's samples verbatim. _precheck_draws
+    # must use two distinct label seeds even when m_lo == m_hi, so the two
+    # draws differ despite drawing on the identical shared states.
+    fam = corpus.FAMILIES["heat_phi"]
+    [spec] = corpus.sample_instances("heat_phi", 1, seed=7, n_states=6, m_samples=20, n_draws=1)
+    data_lo, data_hi = optrain._precheck_draws(spec, fam, m_lo=20, m_hi=20, n_jobs=1)
+    assert np.array_equal(data_lo.t, data_hi.t) and np.array_equal(data_lo.x, data_hi.x)
+    assert not np.array_equal(data_lo.y, data_hi.y)
+
+
+def test_calibration_precheck_stderr_ratio_not_degenerate():
+    # With the nested-sample bug, m_lo == m_hi runs (through the old
+    # generate_instance path) would compare a draw against an exact copy of
+    # itself: z == 0 everywhere and stderr_ratio == 1.0 exactly. With
+    # independent draws that degeneracy disappears.
+    result = optrain.calibration_precheck("heat_phi", n=1, n_states=6, m_lo=20, m_hi=20, seed=11)
+    assert result["stderr_ratio"] != 1.0

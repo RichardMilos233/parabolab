@@ -13,16 +13,16 @@ identical data.
 
 from __future__ import annotations
 
-import dataclasses
 import time
 from dataclasses import dataclass
-from typing import Dict, Sequence
+from typing import Dict, Sequence, Tuple
 
 import numpy as np
 import torch
 
 from . import corpus
 from .condtrain import fit_conditioned_scalers
+from .generator import TrainingData, generate_training_data
 from .opnet import CoeffMLP
 from .settrain import per_instance_mlp_l1
 
@@ -140,12 +140,49 @@ def per_phi_baseline(inst: corpus.Instance, *, device="cpu", seed=0, epochs=3000
     return per_instance_mlp_l1(inst, device=device, seed=seed, epochs=epochs)
 
 
+def _precheck_draws(spec: corpus.InstanceSpec, fam: corpus.Family, m_lo: int, m_hi: int,
+                    n_jobs: int = 1) -> Tuple[TrainingData, TrainingData]:
+    """Draw the lo/hi-budget label sets for one calibration instance on shared
+    states, with INDEPENDENT tree streams.
+
+    Both draws share the same states (``corpus._draw_states`` depends only on
+    ``spec.seed``, not on the sample budget) but use distinct label seeds
+    (``1000*spec.seed`` vs ``1000*spec.seed + 500``) passed straight to
+    ``generate_training_data``. That keeps their per-state RNG streams
+    (``np.random.SeedSequence(seed).spawn(n_states)`` inside
+    ``generate_training_data``) from overlapping. Going through
+    ``corpus.generate_instance`` twice (varying only ``m_samples``) does NOT
+    give independence: both calls resolve to the same draw-0 seed
+    ``1000*spec.seed + 0``, so the hi-budget run's first ``m_lo`` tree
+    samples are bit-identical to the whole lo-budget run -- nested samples,
+    not independent ones, which damps and biases the combined-stderr z-test
+    toward passing.
+    """
+    factory = fam.make_factory(spec.params)
+    ts, xs = corpus._draw_states(spec, fam)
+    data_lo = generate_training_data(
+        factory, n_states=spec.n_states, m_samples=m_lo, seed=1000 * spec.seed,
+        rate=fam.rate, x_lo=fam.x_lo, x_hi=fam.x_hi, states=(ts, xs), n_jobs=n_jobs)
+    data_hi = generate_training_data(
+        factory, n_states=spec.n_states, m_samples=m_hi, seed=1000 * spec.seed + 500,
+        rate=fam.rate, x_lo=fam.x_lo, x_hi=fam.x_hi, states=(ts, xs), n_jobs=n_jobs)
+    return data_lo, data_hi
+
+
 def calibration_precheck(family, *, n=20, n_states=200, m_lo=1000, m_hi=10_000,
                          seed=123, n_jobs=1) -> dict:
     """Check that the sampler's reported stderr is calibrated, by comparing
     labels drawn at two sample budgets (``m_lo``, ``m_hi``) on the SAME
-    states (``sample_instances`` derives the state draw only from ``seed``,
-    not ``m_samples``).
+    states (``corpus._draw_states`` derives the state draw only from
+    ``spec.seed``, not ``m_samples``).
+
+    The two label draws must be statistically INDEPENDENT given the shared
+    states, or the z-test below is meaningless (nested samples agree by
+    construction, not because the stderr is calibrated). ``_precheck_draws``
+    guarantees this by calling ``generate_training_data`` directly with two
+    label seeds, ``1000*spec.seed`` and ``1000*spec.seed + 500``, that never
+    collide -- unlike two ``corpus.generate_instance`` calls differing only
+    in ``m_samples``, which both land on seed ``1000*spec.seed + 0``.
 
     If the stderr is calibrated: (a) the two noisy estimates should mostly
     agree within a few combined stderrs -- ``frac_within_4se`` should be
@@ -153,32 +190,20 @@ def calibration_precheck(family, *, n=20, n_states=200, m_lo=1000, m_hi=10_000,
     be about sqrt(m_hi/m_lo) times the high-budget one -- ``stderr_ratio``
     (median over states) should land near that value (default
     sqrt(10) ~= 3.16, checked against a 2x band).
-
-    ``corpus.MC_REFERENCE_SAMPLES`` is temporarily shrunk: an MC-referenced
-    family (tan_phi/cosine_phi/log_phi) would otherwise spend a full
-    MC_REFERENCE_SAMPLES-sample grid reference per instance just to fill
-    Instance.u_grid/ref_stderr, which this label-only calibration check
-    never reads.
     """
-    specs_lo = corpus.sample_instances(family, n, seed, n_states=n_states,
-                                       m_samples=m_lo, n_draws=1)
-    specs_hi = [dataclasses.replace(spec, m_samples=m_hi) for spec in specs_lo]
-
-    old_ref_samples = corpus.MC_REFERENCE_SAMPLES
-    corpus.MC_REFERENCE_SAMPLES = 100
-    try:
-        insts_lo = [corpus.generate_instance(s, n_jobs=n_jobs) for s in specs_lo]
-        insts_hi = [corpus.generate_instance(s, n_jobs=n_jobs) for s in specs_hi]
-    finally:
-        corpus.MC_REFERENCE_SAMPLES = old_ref_samples
+    fam = corpus.FAMILIES[family]
+    specs = corpus.sample_instances(family, n, seed, n_states=n_states,
+                                    m_samples=m_lo, n_draws=1)
 
     z_parts, ratio_parts = [], []
     n_total = 0
-    for lo, hi in zip(insts_lo, insts_hi):
-        ok = lo.finite & hi.finite
+    for spec in specs:
+        data_lo, data_hi = _precheck_draws(spec, fam, m_lo, m_hi, n_jobs=n_jobs)
+        ok = (np.isfinite(data_lo.y) & np.isfinite(data_lo.stderr)
+              & np.isfinite(data_hi.y) & np.isfinite(data_hi.stderr))
         n_total += ok.size
-        y_lo, y_hi = lo.y[0, ok], hi.y[0, ok]
-        se_lo, se_hi = lo.stderr[0, ok], hi.stderr[0, ok]
+        y_lo, y_hi = data_lo.y[ok], data_hi.y[ok]
+        se_lo, se_hi = data_lo.stderr[ok], data_hi.stderr[ok]
         z_parts.append(np.abs(y_lo - y_hi) / np.sqrt(se_lo ** 2 + se_hi ** 2))
         ratio_parts.append(se_lo / se_hi)
     z = np.concatenate(z_parts) if z_parts else np.array([])
