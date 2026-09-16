@@ -14,58 +14,89 @@ def _batch(B=3, Q=7, seed=0):
     g = torch.Generator().manual_seed(seed)
     phi = torch.randn(B, 101, generator=g) * 0.5
     q = torch.cat([torch.zeros(B, Q, 1), -8 + 16 * torch.rand(B, Q, 1, generator=g)], -1)
-    return phi, q
+    cond = torch.randn(B, 3)
+    return phi, q, cond
 
 
 @pytest.mark.parametrize("name", ["deeponet", "fno", "attn"])
 def test_operator_shapes_and_finite(name):
     torch.manual_seed(0)
-    net = opnet.make_operator(name, GRID, **({"d_model": 16, "n_layers": 1} if name == "attn" else
+    net = opnet.make_operator(name, GRID, n_cond=3, **({"d_model": 16, "n_layers": 1} if name == "attn" else
                                             {"width": 8, "modes": 4, "n_layers": 2} if name == "fno" else
                                             {"p": 8, "width": 16}))
-    phi, q = _batch()
-    out = net(phi, q)
+    phi, q, cond = _batch()
+    out = net(phi, cond, q)
     assert out.shape == (3, 7) and torch.isfinite(out).all()
     assert net.n_params_total > 0
 
 
 def test_fno_interpolation_reproduces_grid_values():
     torch.manual_seed(0)
-    net = opnet.FNO1d(GRID, width=8, modes=4, n_layers=2).eval()
-    phi, _ = _batch(B=2)
+    net = opnet.FNO1d(GRID, n_cond=3, width=8, modes=4, n_layers=2).eval()
+    phi, _, cond = _batch(B=2)
     q = torch.cat([torch.zeros(2, 101, 1), torch.as_tensor(GRID, dtype=torch.float32).expand(2, 101).unsqueeze(-1)], -1)
     with torch.no_grad():
-        at_grid = net(phi, q)
-        direct = net.on_grid(phi)
+        at_grid = net(phi, cond, q)
+        direct = net.on_grid(phi, cond)
     torch.testing.assert_close(at_grid, direct, atol=1e-5, rtol=1e-5)
 
 
 def test_attn_operator_permutation_invariant_in_phi_tokens():
     torch.manual_seed(0)
-    net = opnet.AttnOperator(d_model=16, n_heads=2, n_layers=1).eval()
-    phi, q = _batch(B=2)
+    net = opnet.AttnOperator(n_cond=3, d_model=16, n_heads=2, n_layers=1).eval()
+    phi, q, cond = _batch(B=2)
     perm = torch.randperm(101)
     with torch.no_grad():
-        a = net(phi, q)
-        b = net.forward_tokens(torch.as_tensor(GRID, dtype=torch.float32)[perm].expand(2, 101), phi[:, perm], q)
+        a = net(phi, cond, q)
+        b = net.forward_tokens(torch.as_tensor(GRID, dtype=torch.float32)[perm].expand(2, 101), phi[:, perm], cond, q)
     torch.testing.assert_close(a, b, atol=1e-5, rtol=1e-5)
 
 
 @pytest.mark.parametrize("name", ["deeponet", "fno"])
 def test_output_scaler_applies(name):
     torch.manual_seed(0)
-    net = opnet.make_operator(name, GRID, **({"width": 8, "modes": 4, "n_layers": 2} if name == "fno" else {"p": 8, "width": 16})).eval()
-    phi, q = _batch(B=2)
+    net = opnet.make_operator(name, GRID, n_cond=3, **({"width": 8, "modes": 4, "n_layers": 2} if name == "fno" else {"p": 8, "width": 16})).eval()
+    phi, q, cond = _batch(B=2)
     with torch.no_grad():
-        a = net(phi, q)
+        a = net(phi, cond, q)
         net.out_mean.fill_(3.0); net.out_std.fill_(2.0)
-        b = net(phi, q)
+        b = net(phi, cond, q)
     torch.testing.assert_close(b, 2 * a + 3)
 
 
 def test_make_operator_rejects_unknown():
     with pytest.raises(ValueError):
-        opnet.make_operator("unet", GRID)
+        opnet.make_operator("unet", GRID, n_cond=0)
+
+
+def test_coeffmlp_ignores_phi_and_uses_cond():
+    torch.manual_seed(0)
+    net = opnet.CoeffMLP(n_cond=3, hidden_layers=2, neurons=8).eval()
+    phi, q = _batch(B=2)[0], _batch(B=2)[1]
+    cond = torch.randn(2, 3)
+    with torch.no_grad():
+        a = net(phi, cond, q); b = net(torch.zeros_like(phi), cond, q)
+        c = net(phi, cond + 1.0, q)
+    torch.testing.assert_close(a, b)
+    assert not torch.allclose(a, c)
+
+
+@pytest.mark.parametrize("name", ["deeponet", "fno", "attn"])
+def test_operators_depend_on_cond(name):
+    torch.manual_seed(0)
+    kw = {"attn": {"d_model": 16, "n_layers": 1}, "fno": {"width": 8, "modes": 4, "n_layers": 2},
+          "deeponet": {"p": 8, "width": 16}}[name]
+    net = opnet.make_operator(name, GRID, n_cond=2, **kw).eval()
+    phi, q = _batch(B=2)[0], _batch(B=2)[1]
+    with torch.no_grad():
+        a = net(phi, torch.zeros(2, 2), q); b = net(phi, torch.ones(2, 2), q)
+    assert not torch.allclose(a, b)
+
+
+def test_operators_accept_zero_cond():
+    net = opnet.make_operator("attn", GRID, n_cond=0, d_model=16, n_layers=1)
+    phi, q = _batch(B=2)[0], _batch(B=2)[1]
+    assert torch.isfinite(net(phi, torch.zeros(2, 0), q)).all()
 
 
 # ---------------------------------------------------------------------------
@@ -85,7 +116,9 @@ def test_pooled_operator_rows_and_scalers():
     rows = optrain.pooled_operator_rows(insts)
     assert rows["phi"].shape == (3, 101) and rows["tx"].shape[1] == 2
     assert rows["u"].shape == rows["inst_idx"].shape and rows["inst_idx"].max() == 2
-    net = opnet.DeepONet(p=8, width=16)
+    n_cond = len(insts[0].spec.params)
+    assert rows["cond"].shape == (3, n_cond)
+    net = opnet.DeepONet(n_cond=n_cond, p=8, width=16)
     optrain.fit_operator_scalers(net, rows)
     assert float(net.phi_scale) == pytest.approx(rows["phi"].std())
     assert float(net.in_std[0]) == 1.0 and float(net.out_std) == pytest.approx(rows["u"].std())
@@ -104,7 +137,8 @@ def test_train_operator_decreases_loss_and_evaluates(name):
     torch.manual_seed(0)
     kw = {"attn": {"d_model": 16, "n_layers": 1}, "fno": {"width": 8, "modes": 4, "n_layers": 2},
           "deeponet": {"p": 8, "width": 16}}[name]
-    net = opnet.make_operator(name, insts[0].grid, **kw)
+    n_cond = len(insts[0].spec.params)
+    net = opnet.make_operator(name, insts[0].grid, n_cond=n_cond, **kw)
     # steps=500, not the brief's 40: with only 3 toy instances and 16
     # samples/step, the raw per-step training-batch loss is dominated by
     # which 2-instance/8-query subset got drawn (batch-selection noise), not

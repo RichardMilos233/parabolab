@@ -62,6 +62,7 @@ def main(a):
     train = corpus.load_or_generate_corpus(train_specs, root, n_jobs=a.jobs, verbose=True, min_finite=mf)
     test = corpus.load_or_generate_corpus(test_specs, root, n_jobs=a.jobs, verbose=True, min_finite=mf)
     grid = test[0].grid
+    n_cond = len(test[0].spec.params)
     tiny_kw = {"attn": {"d_model": 16, "n_layers": 1}, "fno": {"width": 8, "modes": 4, "n_layers": 2},
                "deeponet": {"p": 8, "width": 16}} if a.tiny else {}
     rows = []
@@ -78,7 +79,7 @@ def main(a):
         subset = train[:n]
         for name in a.backbones:
             torch.manual_seed(a.seed)
-            net = opnet.make_operator(name, grid, **tiny_kw.get(name, {}))
+            net = opnet.make_operator(name, grid, n_cond=n_cond, **tiny_kw.get(name, {}))
             print(f"{a.family} {name} n_train={len(subset)}: {net.n_params_total} params", flush=True)
             res = optrain.train_operator(net, subset, steps=a.steps, device=a.device, seed=a.seed, verbose=True)
             l1 = optrain.evaluate_operator(net, test, device=a.device)

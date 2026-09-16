@@ -26,13 +26,14 @@ from .settrain import per_instance_mlp_l1
 
 def pooled_operator_rows(instances: Sequence[corpus.Instance]) -> Dict[str, np.ndarray]:
     phi = np.stack([inst.phi_grid for inst in instances])
+    cond = np.stack([np.asarray(inst.spec.params, dtype=float) for inst in instances])
     tx, u, idx = [], [], []
     for i, inst in enumerate(instances):
         ok = inst.finite & (inst.x[:, 0] >= inst.grid[0]) & (inst.x[:, 0] <= inst.grid[-1])
         tx.append(np.column_stack([inst.t, inst.x])[ok])
         u.append(inst.y[0, ok])
         idx.append(np.full(int(ok.sum()), i))
-    return {"phi": phi, "tx": np.concatenate(tx), "u": np.concatenate(u),
+    return {"phi": phi, "cond": cond, "tx": np.concatenate(tx), "u": np.concatenate(u),
             "inst_idx": np.concatenate(idx)}
 
 
@@ -50,6 +51,11 @@ def fit_operator_scalers(net, rows) -> float:
         if hasattr(net, "out_mean"):
             net.out_mean.fill_(float(rows["u"].mean()))
             net.out_std.fill_(u_std)
+        if hasattr(net, "cond_mean") and net.cond_mean.numel() > 0:
+            mean, std = rows["cond"].mean(0), rows["cond"].std(0)
+            std[std < 1e-12] = 1.0
+            net.cond_mean.copy_(torch.as_tensor(mean, dtype=torch.float32))
+            net.cond_std.copy_(torch.as_tensor(std, dtype=torch.float32))
     return u_std
 
 
@@ -66,6 +72,7 @@ def train_operator(net, instances, *, steps=20_000, batch_instances=32, n_query=
     u_std = fit_operator_scalers(net, rows)
     net = net.to(device).train()
     phi = torch.as_tensor(rows["phi"], dtype=torch.float32, device=device)
+    cond = torch.as_tensor(rows["cond"], dtype=torch.float32, device=device)
     tx = torch.as_tensor(rows["tx"], dtype=torch.float32, device=device)
     u = torch.as_tensor(rows["u"], dtype=torch.float32, device=device)
     per_inst = [np.flatnonzero(rows["inst_idx"] == i) for i in range(len(instances))]
@@ -77,7 +84,8 @@ def train_operator(net, instances, *, steps=20_000, batch_instances=32, n_query=
         bi = rng.choice(len(instances), size=min(batch_instances, len(instances)), replace=False)
         qi = np.stack([rng.choice(per_inst[i], size=n_query, replace=len(per_inst[i]) < n_query) for i in bi])
         qi_t = torch.as_tensor(qi, device=device)
-        pred = net(phi[torch.as_tensor(bi, device=device)], tx[qi_t])
+        bi_t = torch.as_tensor(bi, device=device)
+        pred = net(phi[bi_t], cond[bi_t], tx[qi_t])
         loss = torch.mean(((pred - u[qi_t]) / u_std) ** 2)
         if not torch.isfinite(loss):
             raise RuntimeError(f"non-finite loss at step {step}")
@@ -98,9 +106,10 @@ def evaluate_operator(net, instances, *, device="cpu") -> np.ndarray:
     out = []
     for inst in instances:
         phi = torch.as_tensor(inst.phi_grid, dtype=torch.float32, device=device)[None]
+        cond = torch.as_tensor(np.asarray(inst.spec.params, dtype=float), dtype=torch.float32, device=device)[None]
         q = torch.as_tensor(np.column_stack([np.zeros_like(inst.grid), inst.grid]),
                             dtype=torch.float32, device=device)[None]
-        pred = net(phi, q)[0].cpu().numpy()
+        pred = net(phi, cond, q)[0].cpu().numpy()
         err = np.abs(pred - inst.u_grid)
         out.append(float(err.mean()) if np.isfinite(err).all() else float("inf"))
     return np.array(out)
