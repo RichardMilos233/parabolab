@@ -387,3 +387,37 @@ def test_mc_reference_matches_closed_form():
     exact = np.array([factory().exact_solution(0.0, np.array([x])) for x in xq])
     assert u.shape == se.shape == (5,)
     assert np.all(np.abs(u - exact) < 4.5 * se)
+
+
+def test_benchmark_families_registered():
+    for key, ref, rate in (("kpp_phi", "fd_reference_1d", None), ("expgrad_phi", "fd_reference_1d", None),
+                           ("tan_phi", "mc_reference_1d", 1.0), ("cosine_phi", "mc_reference_1d", 1.0),
+                           ("log_phi", "mc_reference_1d", 1.0)):
+        fam = corpus.FAMILIES[key]
+        assert fam.param_sampler == "fourier" and fam.reference_name == ref and fam.rate == rate
+
+
+def test_mc_reference_family_instance(tmp_path):
+    spec = corpus.sample_instances("tan_phi", 1, 6, n_states=8, m_samples=4, n_draws=1)[0]
+    # small reference budget for the test: patch via the module constant
+    corpus.MC_REFERENCE_SAMPLES, saved = 200, corpus.MC_REFERENCE_SAMPLES
+    try:
+        inst = corpus.generate_instance(spec, n_jobs=2)
+    finally:
+        corpus.MC_REFERENCE_SAMPLES = saved
+    assert inst.ref_stderr is not None and inst.ref_stderr.shape == (101,)
+    assert np.isfinite(inst.u_grid).all() and inst.rate == 1.0
+    assert inst.u_exact.shape == (8,)          # interpolated from the grid reference
+    corpus._save_instance(inst, corpus.instance_path(spec, tmp_path))
+    b = corpus._load_instance(spec, corpus.instance_path(spec, tmp_path))
+    np.testing.assert_array_equal(b.ref_stderr, inst.ref_stderr)
+
+
+def test_family_rate_reaches_the_generator():
+    spec = corpus.sample_instances("tan_phi", 1, 7, n_states=4, m_samples=2, n_draws=1)[0]
+    corpus.MC_REFERENCE_SAMPLES, saved = 50, corpus.MC_REFERENCE_SAMPLES
+    try:
+        inst = corpus.generate_instance(spec)
+    finally:
+        corpus.MC_REFERENCE_SAMPLES = saved
+    assert inst.rate == 1.0

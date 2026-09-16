@@ -29,6 +29,10 @@ from .solver import _grid_inputs
 
 DERIV_CODES = {"Dx1": DxN((1,)), "Dx2": DxN((2,))}
 
+# MC grid reference sample budget; a module-level constant (not a default
+# argument) so tests can shrink it before calling generate_instance.
+MC_REFERENCE_SAMPLES = 100_000
+
 
 def _resolve(name: str):
     """Look up a PDE builder / reference-solution function by name, trying
@@ -53,6 +57,7 @@ class Family:
     deriv_factory_name: Optional[str] = None
     param_sampler: Optional[str] = None
     reference_name: Optional[str] = None
+    rate: Optional[float] = None
 
     def make_factory(self, params: Sequence[float]) -> functools.partial:
         kwargs = dict(self.fixed_kwargs)
@@ -77,6 +82,31 @@ FAMILIES: Dict[str, Family] = {
     "ac_phi": Family("ac_phi", ("A", "a1", "a2", "a3", "a4", "b1", "b2", "b3", "b4"), (),
                      -8.0, 8.0, 1, "allen_cahn_fourier_1d", (("T", 0.3),), None,
                      "fourier", "fd_reference_1d"),
+    "kpp_phi": Family(
+        key="kpp_phi", param_names=("A", "a1", "a2", "a3", "a4", "b1", "b2", "b3", "b4"),
+        ranges=(), x_lo=-8.0, x_hi=8.0, d=1, factory_name="kpp_fourier_1d",
+        fixed_kwargs=(("T", 0.3),), deriv_factory_name=None, param_sampler="fourier",
+        reference_name="fd_reference_1d", rate=None),
+    "expgrad_phi": Family(
+        key="expgrad_phi", param_names=("A", "a1", "a2", "a3", "a4", "b1", "b2", "b3", "b4"),
+        ranges=(), x_lo=-8.0, x_hi=8.0, d=1, factory_name="expgrad_fourier_1d",
+        fixed_kwargs=(("T", 0.05),), deriv_factory_name=None, param_sampler="fourier",
+        reference_name="fd_reference_1d", rate=None),
+    "tan_phi": Family(
+        key="tan_phi", param_names=("A", "a1", "a2", "a3", "a4", "b1", "b2", "b3", "b4"),
+        ranges=(), x_lo=-8.0, x_hi=8.0, d=1, factory_name="tan_fourier_1d",
+        fixed_kwargs=(("T", 0.01),), deriv_factory_name=None, param_sampler="fourier",
+        reference_name="mc_reference_1d", rate=1.0),
+    "cosine_phi": Family(
+        key="cosine_phi", param_names=("A", "a1", "a2", "a3", "a4", "b1", "b2", "b3", "b4"),
+        ranges=(), x_lo=-8.0, x_hi=8.0, d=1, factory_name="cosine_fourier_1d",
+        fixed_kwargs=(("T", 0.04),), deriv_factory_name=None, param_sampler="fourier",
+        reference_name="mc_reference_1d", rate=1.0),
+    "log_phi": Family(
+        key="log_phi", param_names=("A", "a1", "a2", "a3", "a4", "b1", "b2", "b3", "b4"),
+        ranges=(), x_lo=-8.0, x_hi=8.0, d=1, factory_name="log_fourier_1d",
+        fixed_kwargs=(("T", 0.02),), deriv_factory_name=None, param_sampler="fourier",
+        reference_name="mc_reference_1d", rate=1.0),
 }
 
 
@@ -133,6 +163,7 @@ class Instance:
     deriv_stderr: Optional[np.ndarray] = None
     deriv_exact: Optional[np.ndarray] = None
     phi_grid: Optional[np.ndarray] = None       # (101,) terminal condition on grid
+    ref_stderr: Optional[np.ndarray] = None     # (101,) stderr of an MC grid reference
 
     @property
     def finite(self) -> np.ndarray:
@@ -163,17 +194,24 @@ def generate_instance(spec: InstanceSpec, *,
         data = generate_training_data(
             factory, n_states=spec.n_states, m_samples=spec.m_samples,
             seed=1000 * spec.seed + draw, x_lo=fam.x_lo, x_hi=fam.x_hi,
-            states=(ts, xs), executor=executor, n_jobs=n_jobs)
+            states=(ts, xs), rate=fam.rate, executor=executor, n_jobs=n_jobs)
         ys.append(data.y)
         ses.append(data.stderr)
         rate = data.rate
     grid, xg, _ = _grid_inputs(fam.d, 0.0, fam.x_lo, fam.x_hi)
     phi = pde.phi_mu((0,))
     phi_grid = np.array([float(phi(xg[i][0])) for i in range(len(grid))])
+    ref_stderr = None
     if pde.exact_solution is not None:
         u_exact = np.array([pde.exact_solution(0.0, xs[i])
                             for i in range(spec.n_states)])
         u_grid = np.array([pde.exact_solution(0.0, xg[i]) for i in range(len(grid))])
+    elif fam.reference_name == "mc_reference_1d":
+        u_grid, ref_stderr = families.mc_reference_1d(
+            factory, grid, m_samples=MC_REFERENCE_SAMPLES,
+            seed=1000 * spec.seed + 999, rate=fam.rate,
+            executor=executor, n_jobs=n_jobs)
+        u_exact = np.interp(xs[:, 0], grid, u_grid)
     elif fam.reference_name is not None:
         ref = _resolve(fam.reference_name)
         u_exact = ref(pde, xs[:, 0])
@@ -192,8 +230,8 @@ def generate_instance(spec: InstanceSpec, *,
             data = generate_training_data(
                 factory, n_states=spec.n_states, m_samples=spec.m_samples,
                 seed=1000 * spec.seed + 100 + k, x_lo=fam.x_lo, x_hi=fam.x_hi,
-                states=(ts, xs), code=DERIV_CODES[name], executor=executor,
-                n_jobs=n_jobs)
+                states=(ts, xs), code=DERIV_CODES[name], rate=fam.rate,
+                executor=executor, n_jobs=n_jobs)
             dvals.append(data.y); dses.append(data.stderr)
             fn = dfuns[("Dx1", "Dx2").index(name)]
             dex.append(np.array([fn(0.0, xs[i]) for i in range(spec.n_states)]))
@@ -201,7 +239,7 @@ def generate_instance(spec: InstanceSpec, *,
 
     return Instance(spec, ts, xs, np.array(ys), np.array(ses), u_exact,
                     grid, u_grid, float(rate), deriv, deriv_se, deriv_exact,
-                    phi_grid)
+                    phi_grid, ref_stderr)
 
 
 def instance_path(spec: InstanceSpec, root) -> Path:
@@ -215,6 +253,8 @@ def _save_instance(inst: Instance, path: Path) -> None:
         extra["deriv"] = inst.deriv
         extra["deriv_stderr"] = inst.deriv_stderr
         extra["deriv_exact"] = inst.deriv_exact
+    if inst.ref_stderr is not None:
+        extra["ref_stderr"] = inst.ref_stderr
     np.savez(path, spec=inst.spec.to_json(), t=inst.t, x=inst.x, y=inst.y,
              stderr=inst.stderr, u_exact=inst.u_exact, grid=inst.grid,
              u_grid=inst.u_grid, rate=inst.rate, phi_grid=inst.phi_grid, **extra)
@@ -238,7 +278,8 @@ def _load_instance(spec: InstanceSpec, path: Path) -> Optional[Instance]:
                             f["deriv"] if "deriv" in f else None,
                             f["deriv_stderr"] if "deriv_stderr" in f else None,
                             f["deriv_exact"] if "deriv_exact" in f else None,
-                            f["phi_grid"] if "phi_grid" in f else None)
+                            f["phi_grid"] if "phi_grid" in f else None,
+                            f["ref_stderr"] if "ref_stderr" in f else None)
     except ValueError as exc:
         if "spec" in str(exc):
             raise
