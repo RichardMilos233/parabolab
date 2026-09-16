@@ -1,10 +1,13 @@
 """D02: one net for the Merton family (t, x, theta) -> u, policies by autograd.
 
-    python examples/parametric_merton.py --rungs C0 C1 C2 C3 --steps 20000 \
+    python examples/parametric_merton.py --rungs C0 C1 C2 C3 C4 C5 --steps 20000 \
         --device cuda --jobs 16
 
 Rungs: C0 per-instance R5A baseline; C1 concat conditioning; C2 FiLM;
-C3 best of C1/C2 (--c3-mode) plus derivative labels (weights 1, 1).
+C3 best of C1/C2 (--c3-mode) plus derivative labels (weights 1, 1), pooled-std
+weighting; C4 same as C3 but with per-row inverse-variance weighting of the
+derivative terms (weights 1, 1, 1); C5 like C4 with u_x labels only
+(weights 1, 1, 0) -- both C4/C5 reuse the C3 derivative corpus.
 """
 
 from __future__ import annotations
@@ -27,7 +30,7 @@ FIELDS = ["rung", "instance_seed", "l1_u", "policy_err_interior",
 def parse_args():
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("--rungs", nargs="*", default=["C0", "C1", "C2", "C3"])
+    p.add_argument("--rungs", nargs="*", default=["C0", "C1", "C2", "C3", "C4", "C5"])
     p.add_argument("--c3-mode", default="concat", choices=["concat", "film"])
     p.add_argument("--n-train", type=int, default=500)
     p.add_argument("--n-test", type=int, default=50)
@@ -81,29 +84,33 @@ def main(a):
             ms.append(condtrain.per_instance_baseline(inst, device=a.device, seed=a.seed, epochs=mlp_epochs))
         record("C0", ms, (time.perf_counter() - t0) / len(test))
 
-    def run_cond(rung, mode, instances, weights):
+    def run_cond(rung, mode, instances, weights, deriv_weighting="pooled"):
         import torch
         torch.manual_seed(a.seed)
         net = ConditionedNet(d=fam.d, n_params=len(fam.ranges), mode=mode,
                              param_mean=p_mean, param_std=p_std)
-        print(f"{rung}: {mode}, weights {weights}, {net.n_params_total} params", flush=True)
+        print(f"{rung}: {mode}, weights {weights}, deriv_weighting {deriv_weighting}, "
+              f"{net.n_params_total} params", flush=True)
         res = condtrain.train_conditioned(net, instances, steps=a.steps,
                                           batch_states=a.batch_states, loss_weights=weights,
-                                          device=a.device, seed=a.seed, verbose=True)
+                                          device=a.device, seed=a.seed, verbose=True,
+                                          deriv_weighting=deriv_weighting)
         record(rung, condtrain.evaluate_conditioned(net, test, device=a.device),
                res.seconds / len(test))
 
     if "C1" in a.rungs: run_cond("C1", "concat", train, (1.0, 0.0, 0.0))
     if "C2" in a.rungs: run_cond("C2", "film", train, (1.0, 0.0, 0.0))
-    if "C3" in a.rungs:
+    if "C3" in a.rungs or "C4" in a.rungs or "C5" in a.rungs:
         dspecs = [dataclasses.replace(s, deriv_codes=("Dx1", "Dx2")) for s in train_specs]
         dtrain = corpus.load_or_generate_corpus(dspecs, root / "deriv", n_jobs=a.jobs, verbose=True, min_finite=mf)
-        run_cond("C3", a.c3_mode, dtrain, (1.0, 1.0, 1.0))
+    if "C3" in a.rungs: run_cond("C3", a.c3_mode, dtrain, (1.0, 1.0, 1.0))
+    if "C4" in a.rungs: run_cond("C4", a.c3_mode, dtrain, (1.0, 1.0, 1.0), deriv_weighting="inverse_variance")
+    if "C5" in a.rungs: run_cond("C5", a.c3_mode, dtrain, (1.0, 1.0, 0.0), deriv_weighting="inverse_variance")
 
     write_rows(a.out, rows)
     print("\n| rung | n | u-L1 median | u-L1 max | policy err interior (median) | policy err full | s/instance |")
     print("|---|---|---|---|---|---|---|")
-    for rung in ("C0", "C1", "C2", "C3"):
+    for rung in ("C0", "C1", "C2", "C3", "C4", "C5"):
         rr = [r for r in rows if r["rung"] == rung]
         if not rr:
             continue

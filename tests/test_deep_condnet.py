@@ -164,6 +164,38 @@ def test_train_conditioned_with_derivative_labels():
                                     loss_weights=(1.0, 1.0, 0.0))
 
 
+def test_pooled_rows_carry_derivative_stderr():
+    insts = _toy(n=2, n_states=20, m=10, seed=34, deriv=True)
+    rows = condtrain.pooled_rows(insts)
+    assert rows["ux_se"].shape == rows["ux"].shape and rows["uxx_se"].shape == rows["uxx"].shape
+    assert (rows["ux_se"] > 0).all()
+
+
+def test_inverse_variance_equals_pooled_for_constant_stderr():
+    insts = _toy(n=2, n_states=20, m=10, seed=35, deriv=True)
+    for inst in insts:
+        inst.deriv_stderr[:] = 0.3
+    from parabolab.deep.condnet import ConditionedNet
+    res = []
+    for weighting in ("pooled", "inverse_variance"):
+        torch.manual_seed(0)
+        net = ConditionedNet(d=1, n_params=3, hidden_layers=2, neurons=8)
+        r = condtrain.train_conditioned(net, insts, steps=6, batch_states=16,
+                                        loss_weights=(1.0, 1.0, 1.0), seed=3,
+                                        deriv_weighting=weighting)
+        res.append(r.losses)
+    np.testing.assert_allclose(res[0], res[1], rtol=1e-5)
+
+
+def test_bad_deriv_weighting_raises():
+    insts = _toy(n=1, n_states=20, m=10, seed=36, deriv=True)
+    from parabolab.deep.condnet import ConditionedNet
+    net = ConditionedNet(d=1, n_params=3, hidden_layers=2, neurons=8)
+    with pytest.raises(ValueError, match="deriv_weighting"):
+        condtrain.train_conditioned(net, insts, steps=1, loss_weights=(1.0, 1.0, 0.0),
+                                    deriv_weighting="huber")
+
+
 def test_per_instance_baseline_metrics():
     inst = _toy(n=1, n_states=60, m=20, seed=33)[0]
     m = condtrain.per_instance_baseline(inst, epochs=50)
@@ -188,5 +220,5 @@ def test_parametric_merton_driver_tiny(tmp_path):
                     "--corpus-root", str(tmp_path / "corpus"), "--out", str(out)],
                    check=True, capture_output=True, text=True)
     rows = list(csv.DictReader(out.open()))
-    assert {r["rung"] for r in rows} == {"C0", "C1", "C2", "C3"}
+    assert {r["rung"] for r in rows} == {"C0", "C1", "C2", "C3", "C4", "C5"}
     assert all(float(r["l1_u"]) >= 0 for r in rows)

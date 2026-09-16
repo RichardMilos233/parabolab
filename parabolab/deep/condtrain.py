@@ -20,7 +20,7 @@ INTERIOR = (110.0, 190.0)
 
 
 def pooled_rows(instances: Sequence[corpus.Instance]) -> Dict[str, np.ndarray]:
-    tx, params, u, ux, uxx = [], [], [], [], []
+    tx, params, u, ux, uxx, ux_se, uxx_se = [], [], [], [], [], [], []
     has_deriv = all(inst.deriv is not None for inst in instances)
     for inst in instances:
         ok = inst.finite
@@ -29,10 +29,12 @@ def pooled_rows(instances: Sequence[corpus.Instance]) -> Dict[str, np.ndarray]:
         u.append(inst.y[0, ok])
         if has_deriv:
             ux.append(inst.deriv[0, ok]); uxx.append(inst.deriv[1, ok])
+            ux_se.append(inst.deriv_stderr[0, ok]); uxx_se.append(inst.deriv_stderr[1, ok])
     rows = {"tx": np.concatenate(tx), "params": np.concatenate(params),
             "u": np.concatenate(u)}
     if has_deriv:
         rows["ux"], rows["uxx"] = np.concatenate(ux), np.concatenate(uxx)
+        rows["ux_se"], rows["uxx_se"] = np.concatenate(ux_se), np.concatenate(uxx_se)
     return rows
 
 
@@ -57,7 +59,10 @@ class CondTrainResult:
 
 def train_conditioned(net, instances, *, steps=20_000, batch_states=4096,
                       lr=1e-3, loss_weights=(1.0, 0.0, 0.0), device="cpu",
-                      seed=0, log_every=100, verbose=False) -> CondTrainResult:
+                      seed=0, log_every=100, verbose=False,
+                      deriv_weighting: str = "pooled") -> CondTrainResult:
+    if deriv_weighting not in ("pooled", "inverse_variance"):
+        raise ValueError(f"unknown deriv_weighting {deriv_weighting!r}")
     w_u, w1, w2 = loss_weights
     rows = pooled_rows(instances)
     if (w1 > 0 or w2 > 0) and "ux" not in rows:
@@ -66,6 +71,13 @@ def train_conditioned(net, instances, *, steps=20_000, batch_states=4096,
     net = net.to(device).train()
     T = {k: torch.as_tensor(v, dtype=torch.float32, device=device) for k, v in rows.items()}
     out_std = net.out_std.clone()
+    W = {}
+    if deriv_weighting == "inverse_variance" and "ux" in rows:
+        for key in ("ux", "uxx"):
+            se = rows[key + "_se"].astype(float)
+            eps = 1e-3 * np.median(se)
+            w = 1.0 / np.maximum(se, eps) ** 2
+            W[key] = torch.as_tensor(w / w.mean(), dtype=torch.float32, device=device)
     rng = np.random.default_rng(seed); torch.manual_seed(seed)
     opt = torch.optim.Adam(net.parameters(), lr=lr)
     sched = torch.optim.lr_scheduler.CosineAnnealingLR(opt, T_max=steps)
@@ -76,8 +88,12 @@ def train_conditioned(net, instances, *, steps=20_000, batch_states=4096,
         if w1 > 0 or w2 > 0:
             u, ux, uxx = autograd_derivatives(lambda z: net(z, p), tx, create_graph=True)
             loss = w_u * torch.mean(((u - T["u"][idx]) / out_std) ** 2)
-            loss = loss + w1 * torch.mean(((ux - T["ux"][idx]) / stats["ux_std"]) ** 2)
-            loss = loss + w2 * torch.mean(((uxx - T["uxx"][idx]) / stats["uxx_std"]) ** 2)
+            for key, pred, w_k in (("ux", ux, w1), ("uxx", uxx, w2)):
+                if w_k > 0:
+                    sq = ((pred - T[key][idx]) / stats[key + "_std"]) ** 2
+                    if key in W:
+                        sq = sq * W[key][idx]
+                    loss = loss + w_k * torch.mean(sq)
         else:
             loss = w_u * torch.mean(((net(tx, p) - T["u"][idx]) / out_std) ** 2)
         if not torch.isfinite(loss):
