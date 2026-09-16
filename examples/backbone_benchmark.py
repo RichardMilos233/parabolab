@@ -140,6 +140,8 @@ def main(a):
 
         for n in a.curve:
             subset = train[:n]
+            if len(subset) < n:
+                print(f"warning: {family} has only {len(subset)} usable training instances for n_train={n}", flush=True)
             for name in a.backbones:
                 if (family, name, n) in done_ops:
                     print(f"skip {family} {name} n_train={n}: already in {a.out}", flush=True)
@@ -149,7 +151,7 @@ def main(a):
                 print(f"{family} {name} n_train={len(subset)}: {net.n_params_total} params", flush=True)
                 res = optrain.train_operator(net, subset, steps=a.steps, device=a.device, seed=a.seed, verbose=True)
                 l1 = optrain.evaluate_operator(net, test, device=a.device)
-                new_rows = [{"family": family, "backbone": name, "n_train": len(subset),
+                new_rows = [{"family": family, "backbone": name, "n_train": n,
                              "instance_seed": inst.spec.seed, "l1": v, "seconds": res.seconds / len(test)}
                             for inst, v in zip(test, l1)]
                 write_rows(a.out, new_rows)
