@@ -338,13 +338,13 @@ def test_phi_grid_roundtrips_and_old_files_load(tmp_path):
     a = corpus.load_or_generate_corpus([spec], tmp_path, min_finite=1)[0]
     b = corpus.load_or_generate_corpus([spec], tmp_path, min_finite=1)[0]
     np.testing.assert_array_equal(a.phi_grid, b.phi_grid)
-    # a file without phi_grid (pre-field) still loads with phi_grid None
+    # a file without phi_grid (pre-field) loads with phi_grid filled from the spec
     path = corpus.instance_path(spec, tmp_path)
     with np.load(path, allow_pickle=False) as f:
         keep = {k: f[k] for k in f.files if k != "phi_grid"}
     np.savez(path, **keep)
     c = corpus.load_or_generate_corpus([spec], tmp_path, min_finite=1)[0]
-    assert c.phi_grid is None
+    np.testing.assert_allclose(c.phi_grid, a.phi_grid)
 
 
 # ---------------------------------------------------------------------------
@@ -421,3 +421,18 @@ def test_family_rate_reaches_the_generator():
     finally:
         corpus.MC_REFERENCE_SAMPLES = saved
     assert inst.rate == 1.0
+
+
+def test_load_upgrades_cache_files_without_phi_grid(tmp_path):
+    """Files written before phi_grid existed (the D02 Merton corpus) are
+    filled in from the spec on load and rewritten, not regenerated."""
+    spec = corpus.sample_instances("merton", 1, 11, n_states=4, m_samples=2, n_draws=1)[0]
+    inst = corpus.generate_instance(spec)
+    path = corpus.instance_path(spec, tmp_path)
+    path.parent.mkdir(parents=True)
+    np.savez(path, spec=spec.to_json(), t=inst.t, x=inst.x, y=inst.y, stderr=inst.stderr,
+             u_exact=inst.u_exact, grid=inst.grid, u_grid=inst.u_grid, rate=inst.rate)
+    loaded = corpus._load_instance(spec, path)
+    np.testing.assert_allclose(loaded.phi_grid, inst.phi_grid)
+    with np.load(path, allow_pickle=False) as f:
+        assert "phi_grid" in f

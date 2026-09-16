@@ -242,6 +242,11 @@ def generate_instance(spec: InstanceSpec, *,
                     phi_grid, ref_stderr)
 
 
+def _phi_on_grid(pde, xg) -> np.ndarray:
+    phi = pde.phi_mu((0,))
+    return np.array([float(phi(xg[i][0])) for i in range(len(xg))])
+
+
 def instance_path(spec: InstanceSpec, root) -> Path:
     return Path(root) / spec.family / f"{spec.seed}.npz"
 
@@ -272,7 +277,7 @@ def _load_instance(spec: InstanceSpec, path: Path) -> Optional[Instance]:
             if json.dumps(stored_dict, sort_keys=True) != spec.to_json():
                 raise ValueError(f"{path} holds spec {stored}, requested "
                                  f"{spec.to_json()}")
-            return Instance(spec, f["t"], f["x"], f["y"], f["stderr"],
+            inst = Instance(spec, f["t"], f["x"], f["y"], f["stderr"],
                             f["u_exact"], f["grid"], f["u_grid"],
                             float(f["rate"]),
                             f["deriv"] if "deriv" in f else None,
@@ -280,6 +285,15 @@ def _load_instance(spec: InstanceSpec, path: Path) -> Optional[Instance]:
                             f["deriv_exact"] if "deriv_exact" in f else None,
                             f["phi_grid"] if "phi_grid" in f else None,
                             f["ref_stderr"] if "ref_stderr" in f else None)
+        if inst.phi_grid is None:
+            # files written before phi_grid existed (the D02 Merton corpus):
+            # phi is a deterministic function of the spec, so fill it in and
+            # upgrade the file in place rather than regenerating the labels.
+            fam = FAMILIES[spec.family]
+            _, xg, _ = _grid_inputs(fam.d, 0.0, fam.x_lo, fam.x_hi)
+            inst = dataclasses.replace(inst, phi_grid=_phi_on_grid(fam.make_factory(spec.params)(), xg))
+            _save_instance(inst, path)
+        return inst
     except ValueError as exc:
         if "spec" in str(exc):
             raise
