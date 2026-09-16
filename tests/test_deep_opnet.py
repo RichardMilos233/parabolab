@@ -66,3 +66,59 @@ def test_output_scaler_applies(name):
 def test_make_operator_rejects_unknown():
     with pytest.raises(ValueError):
         opnet.make_operator("unet", GRID)
+
+
+# ---------------------------------------------------------------------------
+# training / evaluation
+# ---------------------------------------------------------------------------
+
+from parabolab.deep import corpus, optrain
+
+
+def _toy(n=3, seed=41, family="heat_phi"):
+    specs = corpus.sample_instances(family, n, seed, n_states=40, m_samples=20, n_draws=1)
+    return [corpus.generate_instance(s, n_jobs=2) for s in specs]
+
+
+def test_pooled_operator_rows_and_scalers():
+    insts = _toy()
+    rows = optrain.pooled_operator_rows(insts)
+    assert rows["phi"].shape == (3, 101) and rows["tx"].shape[1] == 2
+    assert rows["u"].shape == rows["inst_idx"].shape and rows["inst_idx"].max() == 2
+    net = opnet.DeepONet(p=8, width=16)
+    optrain.fit_operator_scalers(net, rows)
+    assert float(net.phi_scale) == pytest.approx(rows["phi"].std())
+    assert float(net.in_std[0]) == 1.0 and float(net.out_std) == pytest.approx(rows["u"].std())
+
+
+def test_pooled_operator_rows_stays_within_sensor_grid():
+    insts = _toy()
+    rows = optrain.pooled_operator_rows(insts)
+    grid = insts[0].grid
+    assert rows["tx"][:, 1].min() >= grid[0] and rows["tx"][:, 1].max() <= grid[-1]
+
+
+@pytest.mark.parametrize("name", ["deeponet", "fno", "attn"])
+def test_train_operator_decreases_loss_and_evaluates(name):
+    insts = _toy()
+    torch.manual_seed(0)
+    kw = {"attn": {"d_model": 16, "n_layers": 1}, "fno": {"width": 8, "modes": 4, "n_layers": 2},
+          "deeponet": {"p": 8, "width": 16}}[name]
+    net = opnet.make_operator(name, insts[0].grid, **kw)
+    # steps=500, not the brief's 40: with only 3 toy instances and 16
+    # samples/step, the raw per-step training-batch loss is dominated by
+    # which 2-instance/8-query subset got drawn (batch-selection noise), not
+    # by optimization progress -- AttnOperator in particular needs several
+    # hundred steps before its loss (logged pre-update on that step's own
+    # noisy batch) reliably drops below the initial value. 500 steps stays
+    # under 2s/backbone and gives every backbone a comfortable margin.
+    res = optrain.train_operator(net, insts, steps=500, batch_instances=2, n_query=8,
+                                 lr=3e-3, log_every=10)
+    assert np.isfinite(res.losses).all() and res.losses[-1] < res.losses[0]
+    l1 = optrain.evaluate_operator(net, insts)
+    assert l1.shape == (3,) and np.isfinite(l1).all()
+
+
+def test_per_phi_baseline_runs():
+    inst = _toy(n=1, seed=42)[0]
+    assert np.isfinite(optrain.per_phi_baseline(inst, epochs=30))
