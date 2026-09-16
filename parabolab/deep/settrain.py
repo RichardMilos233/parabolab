@@ -13,7 +13,7 @@ from . import corpus
 from .ablation import NetConfig, build_net
 from .generator import TrainingData
 from .setnet import SetDenoiser
-from .solver import _grid_inputs, grid_errors, train_deep_branching
+from .solver import _grid_inputs, net_on_grid, train_deep_branching
 
 # the ablation's kept configuration (spec 2026-09-15-nn-architecture-ablation)
 R5A = NetConfig(neurons=64, activation="gelu", norm="none",
@@ -126,15 +126,18 @@ def per_instance_mlp_l1(inst: corpus.Instance, *, draw: int = 0,
                         epochs: int = 3000) -> float:
     """The ablation's kept net (R5A) trained on this instance alone."""
     fam = corpus.FAMILIES[inst.spec.family]
-    pde = fam.make_factory(inst.spec.params)()
     net = build_net(R5A, d=fam.d, seed=seed)
     train_deep_branching(net, _as_training_data(inst, draw), epochs=epochs,
                          device=device)
+    # score against the instance's stored reference on the 101-grid: the
+    # closed form where one exists, the FD reference otherwise (ac_phi).
+    _, _, tx = _grid_inputs(fam.d, 0.0, fam.x_lo, fam.x_hi)
     try:
-        l1, *_ = grid_errors(net, pde, x_lo=fam.x_lo, x_hi=fam.x_hi, device=device)
+        pred = net_on_grid(net, tx, device=device)
     except (ValueError, RuntimeError):
         return float("inf")
-    return float(l1) if np.isfinite(l1) else float("inf")
+    err = np.abs(pred - inst.u_grid)
+    return float(err.mean()) if np.isfinite(err).all() else float("inf")
 
 
 def kernel_smoother_l1(inst: corpus.Instance, *, draw: int = 0) -> float:

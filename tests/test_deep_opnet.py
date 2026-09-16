@@ -143,3 +143,9 @@ def test_phi_operator_driver_tiny(tmp_path):
     rows = list(csv.DictReader(out.open()))
     assert {r["backbone"] for r in rows} == {"deeponet", "fno", "attn", "per_phi"}
     assert {int(r["n_train"]) for r in rows if r["backbone"] != "per_phi"} == {2, 3}
+
+
+def test_per_phi_baseline_works_without_closed_form():
+    """ac_phi has no exact_solution; the baseline must score against u_grid."""
+    inst = _toy(n=1, seed=43, family="ac_phi")[0]
+    assert np.isfinite(optrain.per_phi_baseline(inst, epochs=30))
