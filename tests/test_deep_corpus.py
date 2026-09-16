@@ -345,3 +345,45 @@ def test_phi_grid_roundtrips_and_old_files_load(tmp_path):
     np.savez(path, **keep)
     c = corpus.load_or_generate_corpus([spec], tmp_path, min_finite=1)[0]
     assert c.phi_grid is None
+
+
+# ---------------------------------------------------------------------------
+# benchmark families and references
+# ---------------------------------------------------------------------------
+
+from parabolab.deep import families as fam_mod
+
+
+def test_new_fourier_families_build_with_expected_jets():
+    expect = {"kpp_fourier_1d": 1, "expgrad_fourier_1d": 2, "tan_fourier_1d": 3,
+              "cosine_fourier_1d": 5, "log_fourier_1d": 4}
+    for name, n_jet in expect.items():
+        pde = getattr(fam_mod, name)(0.02, COEFFS)
+        assert pde.d == 1 and len(pde.deriv_map) == n_jet and pde.exact_solution is None
+        assert float(pde.phi_mu((0,))(0.3)) == pytest.approx(fourier_phi_numpy(COEFFS, np.array([0.3]))[0])
+
+
+def test_fd_reference_with_gradient_term_matches_advected_heat():
+    """f = a u_x on the heat equation: u(0, x) = E phi(x + a T + W_T), i.e. the
+    heat solution shifted by a T (check against heat_fourier_1d's closed form)."""
+    import sympy as sp
+    from parabolab.pde import FullyNonlinearPDEnD, z_symbols
+    z = z_symbols(1)
+    a, T = 3.0, 0.05
+    pde = FullyNonlinearPDEnD(T=T, d=1, deriv_map=((0,), (1,)), f_expr=a * z[1],
+                              phi_expr=fourier_phi_expr(COEFFS), exact_solution=None, name="adv")
+    heat = heat_fourier_1d(T, COEFFS)
+    xq = np.linspace(-6, 6, 61)
+    ref = fd_reference_1d(pde, xq, dx=0.01)
+    exact = np.array([heat.exact_solution(0.0, np.array([x + a * T])) for x in xq])
+    assert np.abs(ref - exact).max() < 2e-3
+
+
+def test_mc_reference_matches_closed_form():
+    import functools
+    factory = functools.partial(fam_mod.heat_fourier_1d, 0.3, COEFFS)
+    xq = np.linspace(-8, 8, 5)
+    u, se = fam_mod.mc_reference_1d(factory, xq, m_samples=4000, seed=1, n_jobs=2)
+    exact = np.array([factory().exact_solution(0.0, np.array([x])) for x in xq])
+    assert u.shape == se.shape == (5,)
+    assert np.all(np.abs(u - exact) < 4.5 * se)
