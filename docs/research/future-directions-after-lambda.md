@@ -21,12 +21,12 @@ for solving the single-starting-state problem.
 |---|---|
 | 1. Certified rate selection | Completed for specified flat/wave Allen–Cahn cases, including a five-point profile; general horizons, mechanisms and numerical-program soundness remain open |
 | 2. Total computational efficiency | Two completed supporting experiments; measured costs do not define the primary research goal |
-| 3. Continuation-aware q | Open for the current Allen–Cahn λ study; older finite-depth Merton pilot code and reported results are historical, not a certificate for this study |
+| 3. Continuation-aware q | New full-tree safety theorem, exact nonuniform certificates, strict nonzero wave improvement and flat explosion law; large certified nonconstant-data gains and comparison against the terminal proxy remain open |
 | 4. Rates across states/codes/time | One shared weighted-grid rate implemented; separate root policies and rates varying within trees remain distinct extensions |
 | 5. Other lifetime laws | Deferred option; no new clock family implemented in this research |
 | 6. Tree representation | Standard-binary oracle mismatch corrected; revised mechanisms were reviewed in the literature, not implemented as a new comparison |
 | 7. Conditional expectation/control variates | Deferred; no new validated variance-reduction construction |
-| 8. Horizon extension | Deferred; current certificates remain at their stated short horizon |
+| 8. Horizon extension | Tuple-policy run derives the exact raw-flat threshold and a 37.84% increase after separate rate optimization; restarting and nonconstant-data horizon extension remain deferred |
 | 9. Honest uncertainty | Independent evaluation and full-run reporting used; no new robust confidence theorem or robust estimator implemented |
 | 10. High-dimensional/deep integration | Deferred; existing reproduction support is not a demonstrated transfer of the new certificates |
 
@@ -37,6 +37,15 @@ Evidence: [certified-rate checkpoint](results/certified-rate-checkpoint.md),
 coverage below is the original dated search, not a new search performed
 during this documentation review. No universal optimum or novelty claim
 is inferred from the completed benchmark results.
+
+The later [16 September tuple-policy continuation](runs/2026-09-16-certified-tuple-policy/07-report.md)
+has its own bounded primary-source review and preserved ten-direction
+scorecards. It proves an infinite-to-finite variance transition at flat
+T=.5, lambda=.75 and at least 53.42% lower variance at lambda=1. The wave
+improvement is strictly positive, with a much smaller diagnostic magnitude.
+See its [next experiment](runs/2026-09-16-certified-tuple-policy/08-next.md)
+for the remaining nonconstant-data target. This does not rewrite the
+historical plan or its evidence below.
 
 ## Original recommendation — 14 September 2026
 

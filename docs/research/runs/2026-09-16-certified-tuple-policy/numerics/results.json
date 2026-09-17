@@ -1,0 +1,551 @@
+{
+  "scope": "raw 1D Allen-Cahn static tuple policies at predeclared rates and horizons",
+  "certificate": "exact rational postfixed boxes; flat two-sided, wave spatial-supremum upper only",
+  "all_witnesses_valid": true,
+  "certificate_counts": {
+    "certified": 38,
+    "inconclusive": 14
+  },
+  "comparisons": [
+    {
+      "family": "flat",
+      "horizon": "1/20",
+      "rate": "3/4",
+      "steps": 200,
+      "baseline_status": "certified",
+      "candidate_status": "certified",
+      "certified_separation": true,
+      "baseline_lower_minus_candidate_upper_exact": "23667426536733/576460752303423488",
+      "baseline_lower_minus_candidate_upper": 4.1056440429227195e-05,
+      "meaning": "two-sided root second-moment separation"
+    },
+    {
+      "family": "flat",
+      "horizon": "1/20",
+      "rate": "3/4",
+      "steps": 400,
+      "baseline_status": "certified",
+      "candidate_status": "certified",
+      "certified_separation": true,
+      "baseline_lower_minus_candidate_upper_exact": "25595350144363/576460752303423488",
+      "baseline_lower_minus_candidate_upper": 4.4400854771272855e-05,
+      "meaning": "two-sided root second-moment separation"
+    },
+    {
+      "family": "flat",
+      "horizon": "1/20",
+      "rate": "1",
+      "steps": 200,
+      "baseline_status": "certified",
+      "candidate_status": "certified",
+      "certified_separation": true,
+      "baseline_lower_minus_candidate_upper_exact": "4489612434285/288230376151711744",
+      "baseline_lower_minus_candidate_upper": 1.557647217558314e-05,
+      "meaning": "two-sided root second-moment separation"
+    },
+    {
+      "family": "flat",
+      "horizon": "1/20",
+      "rate": "1",
+      "steps": 400,
+      "baseline_status": "certified",
+      "candidate_status": "certified",
+      "certified_separation": true,
+      "baseline_lower_minus_candidate_upper_exact": "22352551653037/1152921504606846976",
+      "baseline_lower_minus_candidate_upper": 1.9387748050253735e-05,
+      "meaning": "two-sided root second-moment separation"
+    },
+    {
+      "family": "flat",
+      "horizon": "1/5",
+      "rate": "3/4",
+      "steps": 200,
+      "baseline_status": "certified",
+      "candidate_status": "certified",
+      "certified_separation": true,
+      "baseline_lower_minus_candidate_upper_exact": "3344424638925923/1152921504606846976",
+      "baseline_lower_minus_candidate_upper": 0.0029008259673900276,
+      "meaning": "two-sided root second-moment separation"
+    },
+    {
+      "family": "flat",
+      "horizon": "1/5",
+      "rate": "3/4",
+      "steps": 400,
+      "baseline_status": "certified",
+      "candidate_status": "certified",
+      "certified_separation": true,
+      "baseline_lower_minus_candidate_upper_exact": "3466041104900413/1152921504606846976",
+      "baseline_lower_minus_candidate_upper": 0.0030063114366856688,
+      "meaning": "two-sided root second-moment separation"
+    },
+    {
+      "family": "flat",
+      "horizon": "1/5",
+      "rate": "1",
+      "steps": 200,
+      "baseline_status": "certified",
+      "candidate_status": "certified",
+      "certified_separation": true,
+      "baseline_lower_minus_candidate_upper_exact": "43137855295691/36028797018963968",
+      "baseline_lower_minus_candidate_upper": 0.0011973160045556097,
+      "meaning": "two-sided root second-moment separation"
+    },
+    {
+      "family": "flat",
+      "horizon": "1/5",
+      "rate": "1",
+      "steps": 400,
+      "baseline_status": "certified",
+      "candidate_status": "certified",
+      "certified_separation": true,
+      "baseline_lower_minus_candidate_upper_exact": "371752672416689/288230376151711744",
+      "baseline_lower_minus_candidate_upper": 0.001289776176196692,
+      "meaning": "two-sided root second-moment separation"
+    },
+    {
+      "family": "flat",
+      "horizon": "1/2",
+      "rate": "3/4",
+      "steps": 200,
+      "baseline_status": "inconclusive",
+      "candidate_status": "certified"
+    },
+    {
+      "family": "flat",
+      "horizon": "1/2",
+      "rate": "3/4",
+      "steps": 400,
+      "baseline_status": "inconclusive",
+      "candidate_status": "certified"
+    },
+    {
+      "family": "flat",
+      "horizon": "1/2",
+      "rate": "1",
+      "steps": 200,
+      "baseline_status": "certified",
+      "candidate_status": "certified",
+      "certified_separation": true,
+      "baseline_lower_minus_candidate_upper_exact": "100403617483890845/1152921504606846976",
+      "baseline_lower_minus_candidate_upper": 0.08708625616115043,
+      "meaning": "two-sided root second-moment separation"
+    },
+    {
+      "family": "flat",
+      "horizon": "1/2",
+      "rate": "1",
+      "steps": 400,
+      "baseline_status": "certified",
+      "candidate_status": "certified",
+      "certified_separation": true,
+      "baseline_lower_minus_candidate_upper_exact": "53543694073730483/576460752303423488",
+      "baseline_lower_minus_candidate_upper": 0.0928835031002205,
+      "meaning": "two-sided root second-moment separation"
+    },
+    {
+      "family": "wave",
+      "horizon": "1/20",
+      "rate": "3/4",
+      "steps": 200,
+      "baseline_status": "certified",
+      "candidate_status": "certified",
+      "envelope_upper_improvement_exact": "2335536262969/1152921504606846976",
+      "envelope_upper_improvement": 2.025754792183733e-06,
+      "meaning": "spatial-supremum envelope comparison only; does not prove actual-moment reduction"
+    },
+    {
+      "family": "wave",
+      "horizon": "1/20",
+      "rate": "3/4",
+      "steps": 400,
+      "baseline_status": "certified",
+      "candidate_status": "certified",
+      "envelope_upper_improvement_exact": "2297147447063/1152921504606846976",
+      "envelope_upper_improvement": 1.992457802100188e-06,
+      "meaning": "spatial-supremum envelope comparison only; does not prove actual-moment reduction"
+    },
+    {
+      "family": "wave",
+      "horizon": "1/20",
+      "rate": "1",
+      "steps": 200,
+      "baseline_status": "certified",
+      "candidate_status": "certified",
+      "envelope_upper_improvement_exact": "362671666647/576460752303423488",
+      "envelope_upper_improvement": 6.291350542041857e-07,
+      "meaning": "spatial-supremum envelope comparison only; does not prove actual-moment reduction"
+    },
+    {
+      "family": "wave",
+      "horizon": "1/20",
+      "rate": "1",
+      "steps": 400,
+      "baseline_status": "certified",
+      "candidate_status": "certified",
+      "envelope_upper_improvement_exact": "22342019877/36028797018963968",
+      "envelope_upper_improvement": 6.201156221019577e-07,
+      "meaning": "spatial-supremum envelope comparison only; does not prove actual-moment reduction"
+    },
+    {
+      "family": "wave",
+      "horizon": "1/5",
+      "rate": "3/4",
+      "steps": 200,
+      "baseline_status": "inconclusive",
+      "candidate_status": "inconclusive"
+    },
+    {
+      "family": "wave",
+      "horizon": "1/5",
+      "rate": "3/4",
+      "steps": 400,
+      "baseline_status": "inconclusive",
+      "candidate_status": "inconclusive"
+    },
+    {
+      "family": "wave",
+      "horizon": "1/5",
+      "rate": "1",
+      "steps": 200,
+      "baseline_status": "certified",
+      "candidate_status": "certified",
+      "envelope_upper_improvement_exact": "4825589482946611/576460752303423488",
+      "envelope_upper_improvement": 0.008371063361494268,
+      "meaning": "spatial-supremum envelope comparison only; does not prove actual-moment reduction"
+    },
+    {
+      "family": "wave",
+      "horizon": "1/5",
+      "rate": "1",
+      "steps": 400,
+      "baseline_status": "certified",
+      "candidate_status": "certified",
+      "envelope_upper_improvement_exact": "4162060891516733/576460752303423488",
+      "envelope_upper_improvement": 0.007220024736959036,
+      "meaning": "spatial-supremum envelope comparison only; does not prove actual-moment reduction"
+    },
+    {
+      "family": "wave",
+      "horizon": "1/2",
+      "rate": "3/4",
+      "steps": 200,
+      "baseline_status": "inconclusive",
+      "candidate_status": "inconclusive"
+    },
+    {
+      "family": "wave",
+      "horizon": "1/2",
+      "rate": "3/4",
+      "steps": 400,
+      "baseline_status": "inconclusive",
+      "candidate_status": "inconclusive"
+    },
+    {
+      "family": "wave",
+      "horizon": "1/2",
+      "rate": "1",
+      "steps": 200,
+      "baseline_status": "inconclusive",
+      "candidate_status": "inconclusive"
+    },
+    {
+      "family": "wave",
+      "horizon": "1/2",
+      "rate": "1",
+      "steps": 400,
+      "baseline_status": "inconclusive",
+      "candidate_status": "inconclusive"
+    }
+  ],
+  "nonzero_wave_policy_comparisons": [
+    {
+      "horizon": "1/20",
+      "rate": "3/4",
+      "steps": 200,
+      "baseline_status": "certified",
+      "candidate_status": "certified",
+      "actual_nonincrease_basis": "separate exact R>2 analytic gate from the predeclared amendment",
+      "envelope_upper_improvement_exact": "47220444794779/576460752303423488",
+      "envelope_upper_improvement": 8.191441413156995e-05,
+      "envelope_interpretation": "upper-envelope comparison; it does not by itself prove the amount of actual-moment reduction"
+    },
+    {
+      "horizon": "1/20",
+      "rate": "3/4",
+      "steps": 400,
+      "baseline_status": "certified",
+      "candidate_status": "certified",
+      "actual_nonincrease_basis": "separate exact R>2 analytic gate from the predeclared amendment",
+      "envelope_upper_improvement_exact": "93297726747137/1152921504606846976",
+      "envelope_upper_improvement": 8.092287842176391e-05,
+      "envelope_interpretation": "upper-envelope comparison; it does not by itself prove the amount of actual-moment reduction"
+    },
+    {
+      "horizon": "1/20",
+      "rate": "1",
+      "steps": 200,
+      "baseline_status": "certified",
+      "candidate_status": "certified",
+      "actual_nonincrease_basis": "separate exact R>2 analytic gate from the predeclared amendment",
+      "envelope_upper_improvement_exact": "34142928694331/1152921504606846976",
+      "envelope_upper_improvement": 2.961426997232907e-05,
+      "envelope_interpretation": "upper-envelope comparison; it does not by itself prove the amount of actual-moment reduction"
+    },
+    {
+      "horizon": "1/20",
+      "rate": "1",
+      "steps": 400,
+      "baseline_status": "certified",
+      "candidate_status": "certified",
+      "actual_nonincrease_basis": "separate exact R>2 analytic gate from the predeclared amendment",
+      "envelope_upper_improvement_exact": "16884805716289/576460752303423488",
+      "envelope_upper_improvement": 2.9290468863353916e-05,
+      "envelope_interpretation": "upper-envelope comparison; it does not by itself prove the amount of actual-moment reduction"
+    }
+  ],
+  "independent_flat_references": {
+    "flat/uniform_baseline/T=1/20/lambda=3/4": {
+      "role": "floating noncertified diagnostic",
+      "status": "completed",
+      "method": "SciPy solve_ivp DOP853, rtol=2e-12, atol=2e-14",
+      "root_second_moment": 0.2693661948736807,
+      "common_solution_squared": 0.26921434944631023,
+      "variance_reference": 0.00015184542737045614,
+      "enclosures": [
+        {
+          "steps": 200,
+          "contained": true
+        },
+        {
+          "steps": 400,
+          "contained": true
+        }
+      ]
+    },
+    "flat/uniform_baseline/T=1/20/lambda=1": {
+      "role": "floating noncertified diagnostic",
+      "status": "completed",
+      "method": "SciPy solve_ivp DOP853, rtol=2e-12, atol=2e-14",
+      "root_second_moment": 0.270249637528379,
+      "common_solution_squared": 0.26921434944631023,
+      "variance_reference": 0.0010352880820687638,
+      "enclosures": [
+        {
+          "steps": 200,
+          "contained": true
+        },
+        {
+          "steps": 400,
+          "contained": true
+        }
+      ]
+    },
+    "flat/uniform_baseline/T=1/5/lambda=3/4": {
+      "role": "floating noncertified diagnostic",
+      "status": "completed",
+      "method": "SciPy solve_ivp DOP853, rtol=2e-12, atol=2e-14",
+      "root_second_moment": 0.3384280682124565,
+      "common_solution_squared": 0.3321199730756749,
+      "variance_reference": 0.0063080951367816,
+      "enclosures": [
+        {
+          "steps": 200,
+          "contained": true
+        },
+        {
+          "steps": 400,
+          "contained": true
+        }
+      ]
+    },
+    "flat/uniform_baseline/T=1/5/lambda=1": {
+      "role": "floating noncertified diagnostic",
+      "status": "completed",
+      "method": "SciPy solve_ivp DOP853, rtol=2e-12, atol=2e-14",
+      "root_second_moment": 0.3417257009573259,
+      "common_solution_squared": 0.3321199730756749,
+      "variance_reference": 0.009605727881650983,
+      "enclosures": [
+        {
+          "steps": 200,
+          "contained": true
+        },
+        {
+          "steps": 400,
+          "contained": true
+        }
+      ]
+    },
+    "flat/uniform_baseline/T=1/2/lambda=3/4": {
+      "role": "floating noncertified diagnostic",
+      "status": "inconclusive",
+      "reason": "Required step size is less than spacing between numbers."
+    },
+    "flat/uniform_baseline/T=1/2/lambda=1": {
+      "role": "floating noncertified diagnostic",
+      "status": "completed",
+      "method": "SciPy solve_ivp DOP853, rtol=2e-12, atol=2e-14",
+      "root_second_moment": 0.6428311803559088,
+      "common_solution_squared": 0.4753668864186717,
+      "variance_reference": 0.1674642939372371,
+      "enclosures": [
+        {
+          "steps": 200,
+          "contained": true
+        },
+        {
+          "steps": 400,
+          "contained": true
+        }
+      ]
+    },
+    "flat/flat_safe/T=1/20/lambda=3/4": {
+      "role": "floating noncertified diagnostic",
+      "status": "completed",
+      "method": "SciPy solve_ivp DOP853, rtol=2e-12, atol=2e-14",
+      "root_second_moment": 0.26931844855142634,
+      "common_solution_squared": 0.26921434944631023,
+      "variance_reference": 0.00010409910511610665,
+      "enclosures": [
+        {
+          "steps": 200,
+          "contained": true
+        },
+        {
+          "steps": 400,
+          "contained": true
+        }
+      ]
+    },
+    "flat/flat_safe/T=1/20/lambda=1": {
+      "role": "floating noncertified diagnostic",
+      "status": "completed",
+      "method": "SciPy solve_ivp DOP853, rtol=2e-12, atol=2e-14",
+      "root_second_moment": 0.27022643803762836,
+      "common_solution_squared": 0.26921434944631023,
+      "variance_reference": 0.0010120885913181277,
+      "enclosures": [
+        {
+          "steps": 200,
+          "contained": true
+        },
+        {
+          "steps": 400,
+          "contained": true
+        }
+      ]
+    },
+    "flat/flat_safe/T=1/5/lambda=3/4": {
+      "role": "floating noncertified diagnostic",
+      "status": "completed",
+      "method": "SciPy solve_ivp DOP853, rtol=2e-12, atol=2e-14",
+      "root_second_moment": 0.3353159109233725,
+      "common_solution_squared": 0.3321199730756749,
+      "variance_reference": 0.003195937847697561,
+      "enclosures": [
+        {
+          "steps": 200,
+          "contained": true
+        },
+        {
+          "steps": 400,
+          "contained": true
+        }
+      ]
+    },
+    "flat/flat_safe/T=1/5/lambda=1": {
+      "role": "floating noncertified diagnostic",
+      "status": "completed",
+      "method": "SciPy solve_ivp DOP853, rtol=2e-12, atol=2e-14",
+      "root_second_moment": 0.3403433323624984,
+      "common_solution_squared": 0.3321199730756749,
+      "variance_reference": 0.008223359286823495,
+      "enclosures": [
+        {
+          "steps": 200,
+          "contained": true
+        },
+        {
+          "steps": 400,
+          "contained": true
+        }
+      ]
+    },
+    "flat/flat_safe/T=1/2/lambda=3/4": {
+      "role": "floating noncertified diagnostic",
+      "status": "completed",
+      "method": "SciPy solve_ivp DOP853, rtol=2e-12, atol=2e-14",
+      "root_second_moment": 0.5322471106623936,
+      "common_solution_squared": 0.4753668864186717,
+      "variance_reference": 0.05688022424372191,
+      "enclosures": [
+        {
+          "steps": 200,
+          "contained": true
+        },
+        {
+          "steps": 400,
+          "contained": true
+        }
+      ]
+    },
+    "flat/flat_safe/T=1/2/lambda=1": {
+      "role": "floating noncertified diagnostic",
+      "status": "completed",
+      "method": "SciPy solve_ivp DOP853, rtol=2e-12, atol=2e-14",
+      "root_second_moment": 0.5436257433531205,
+      "common_solution_squared": 0.4753668864186717,
+      "variance_reference": 0.06825885693444883,
+      "enclosures": [
+        {
+          "steps": 200,
+          "contained": true
+        },
+        {
+          "steps": 400,
+          "contained": true
+        }
+      ]
+    }
+  },
+  "timing_seconds": {
+    "certificate_setup": 7.188005417119712,
+    "direct_exact_verification": 0.7560298331081867,
+    "archive_roundtrip_verification": 1.286916125100106,
+    "floating_references": 0.4897097498178482
+  },
+  "archive": "docs/research/runs/2026-09-16-certified-tuple-policy/numerics/witnesses.json.gz",
+  "archive_sha256": "a432313cdeb715bd843e6bb6a239801db5f23c6f6454573f5ebef0f68ce85ad1",
+  "protocol_sha256": "17220e13e8ab1c53ed2bb2979a6238f40554a21bcad52224c3b335b10645643b",
+  "protocol_amendment_sha256": "92fc1237b30010592018526a5322b9e176eaccf6bb92d3cb38c16e1da009d5f4",
+  "source_sha256": {
+    "parabolab/tuple_certificate.py": "2ffac9d445c79dc55489362a6cddd940fe3799758e87df80aa8a06065ab928ff",
+    "parabolab/rate_certificate.py": "9843be2680ea6bbf6e79003dbd3250c1ccc666cb441c2945d692fd2f83d69322",
+    "parabolab/mechanism.py": "353c15c4fefd8fa8b817f94565eb83382c901a271fd0007f0a505e49fcf0c4af",
+    "parabolab/tree.py": "e93b36fd8653c83ff1ceaea81c7553637ce3fa158f289cf9f11041b181aa795d",
+    "tests/test_tuple_certificate.py": "155e8ab1280e56e4a5b73358d8c1f19f86f0dbe2daa3f075465dad4f95d03452",
+    "examples/certified_tuple_policy.py": "c7f65a7cdf6bbdebb461cf850e52429e4aaf206c0be655654184d25a67647398",
+    "docs/research/runs/2026-09-16-certified-tuple-policy/numerics/protocol.json": "17220e13e8ab1c53ed2bb2979a6238f40554a21bcad52224c3b335b10645643b",
+    "docs/research/runs/2026-09-16-certified-tuple-policy/numerics/protocol-amendment-wave-q1.json": "92fc1237b30010592018526a5322b9e176eaccf6bb92d3cb38c16e1da009d5f4"
+  },
+  "environment": {
+    "python": "3.11.15",
+    "platform": "macOS-26.3-arm64-arm-64bit",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1"
+  },
+  "command": "MPLCONFIGDIR=/tmp/parabolab-mpl /opt/miniconda3/envs/parabolab/bin/python examples/certified_tuple_policy.py",
+  "verification_command": "/opt/miniconda3/envs/parabolab/bin/python examples/certified_tuple_policy.py --verify docs/research/runs/2026-09-16-certified-tuple-policy/numerics/witnesses.json.gz",
+  "test_command": "MPLCONFIGDIR=/tmp/parabolab-mpl /opt/miniconda3/envs/parabolab/bin/python -m pytest -q tests/test_tuple_certificate.py",
+  "base_commit": "ff2fa5f4858c695dd125c3b1ca7cfe63372398e7",
+  "limitations": [
+    "no universal or global tuple-policy optimality claim",
+    "no runtime speedup claim",
+    "wave envelope comparisons do not establish actual-moment reduction",
+    "the floating ODE and closed-form mean references are noncertified diagnostics",
+    "a failed finite box search is inconclusive, not evidence of divergence",
+    "the callback is valid only for the documented raw Allen-Cahn mechanism",
+    "exact rational policies and their production float callbacks differ by roundoff"
+  ]
+}

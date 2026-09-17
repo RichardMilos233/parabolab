@@ -6,10 +6,18 @@ control and verifiable approximation error. Algorithmic and mathematical
 contributions are primary. Runtime measurements support practical claims;
 they do not determine whether a theoretical question is worth studying.
 
-The completed work is on local `main`. The
+The earlier certificate/profile work is on local `main`. The
 [integration record](results/integration-2026-09-16.md) records the last
 code/test/witness checks. For every documentation area and its status, use
 [the repository documentation map](../documentation-map.md).
+
+The latest [tuple-policy research run](runs/2026-09-16-certified-tuple-policy/07-report.md)
+adds an exact flat-data second-moment explosion threshold, a 37.84% increase
+in the rate-optimized horizon threshold, certified flat variance reductions,
+and a strict wave improvement theorem. Its code and evidence are local
+working-tree additions on the integrated baseline. The
+[claim ledger](runs/2026-09-16-certified-tuple-policy/03-claims.md) separates
+the conventional proofs, exact numerical checks and five Lean sublemmas.
 
 ## The central problem
 
@@ -49,6 +57,8 @@ nor produces a rate that is individually optimal at every location.
    common rate for a prescribed weighted grid; its cost experiment is separate evidence.
 7. [Directions and their disposition](future-directions-after-lambda.md):
    ten earlier research options, completed work and deferred alternatives.
+8. [Tuple-policy continuation](runs/2026-09-16-certified-tuple-policy/07-report.md):
+   supported whole-tree improvement and the exact flat variance boundary.
 
 The [theory index](estimator-integrity/README.md) and
 [results index](results/README.md) give the complete collections and mark
@@ -62,8 +72,9 @@ which documents are frozen parts of numerical certificates.
 | Flat Allen–Cahn certificate | At phi=1/2 and T=1/20, selected 1907/2560 has global additive variance excess below 1e-4 | Specified raw 1D mechanism and uniform tuples; not a tight relative-variance result |
 | Wave-root certificate | At x=0,T=1/20, rounded historical rate 0.73055 has global additive excess below 6.130773e-6 | Separate rational residual verifier; does not certify the old quadrature algorithm |
 | Weighted-profile certificate | At five equally weighted points, lambda=1/2 has relative variance excess below 0.93%; implemented short-time rule about 0.475 is within 1.60% | Bounds concern weighted variance, not error in lambda or every PDE value; actual grid candidates are not strictly ordered by the saved intervals |
-| Tuple proposal | Support-preserving terminal proxy, inverse-probability weighting, and historical finite-depth Merton pilot tooling | Continuation-aware q has not been evaluated or certified for the current Allen–Cahn λ study; a support floor alone does not prove integrability |
-| Lean | 26 public certificate/profile/cost lemmas across the two recent checkpoints, plus two private helpers | Not a formal verification of the stochastic solver, Python verifier or concrete witness values |
+| Tuple proposal | Full-tree policy-improvement theorem, exact nonuniform six-code certificates and safe nonzero wave update; at flat T=.5, lambda=1, p=.95 lowers variance by at least 53.42% versus uniform | Wave magnitude remains diagnostic; no certified joint optimizer or improvement over the terminal proxy; support alone does not prove integrability |
+| Flat variance boundary | Exact threshold log(1+lambda² p C)/lambda; p=.95 versus .5 increases the rate-optimized threshold by sqrt(1.9) | Raw 1D Allen–Cahn, flat phi=.5, common first-label p; conventional proof and exact rational checks, not Lean formalization |
+| Lean | 26 prior certificate/profile/cost public lemmas plus five new tuple-policy algebra/order lemmas, and two prior private helpers | Not a formal verification of the stochastic solver, Python verifier, explosion theorem or concrete witness values |
 
 The wave candidate 0.7375 has a tighter saved excess bound than 0.73055;
 overlapping point intervals do not prove it has smaller true variance.
@@ -82,6 +93,7 @@ certificates through conventional mathematics.
 | Wave residual verification | [wave_certificate.py](../../parabolab/wave_certificate.py) |
 | Exact profile coordinates, aggregation and policy interpolation | [profile_certificate.py](../../parabolab/profile_certificate.py) |
 | Tuple proposals | [proposals.py](../../parabolab/proposals.py) |
+| Nonuniform tuple certificates and interval acceptance | [tuple_certificate.py](../../parabolab/tuple_certificate.py), [runnable example](../../examples/certified_tuple_policy.py) |
 | Solver workflow and diagnostic limits | [demo guide](../../demo/README.md), [solve.py](../../parabolab/solve.py) |
 | Lean build and claim boundaries | [formal guide](../../formal/README.md) |
 
@@ -97,8 +109,10 @@ their roles as supported examples, not new certificate claims.
   across horizons, states, mechanisms and nonlinearities.
 - Extend useful full-tree moment and objective-gap guarantees beyond the
   saved cases; handle nonuniform proposals and numerical soundness explicitly.
-- Test continuation-aware q for the current Allen–Cahn study at a common lambda before attributing an effect
-  to joint tuning; retain support and recheck integrability.
+- Extend the proved safe wave tuple update to a materially larger certified
+  gain on nonconstant data, at a common lambda and against the terminal proxy;
+  retain support and recheck integrability. The latest run's wave sign is
+  proved, while its estimated short-horizon effect is about 0.30% at lambda=.75.
 - Evaluate representation changes, other lifetime laws or conditional
   expectation only as separately specified extensions.
 

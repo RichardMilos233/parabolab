@@ -37,6 +37,15 @@ The separate conventional Allen–Cahn mean-identification theorem now
 discharges common-mean invariance for the saved flat/wave certificates;
 their additive global moment gaps are therefore variance gaps as well.
 
+**Tuple continuation (16 September 2026):** the
+[new local run](runs/2026-09-16-certified-tuple-policy/07-report.md) adds
+`PR-PROP-5`–`PR-PROP-12` below. Its exact flat moment-explosion law and
+wave policy comparison have conventional proofs and independent review.
+Five new Lean lemmas verify only finite algebra/order steps; the full build
+completed 3,392 jobs. The new Python regression run passed 263 tests with
+14 slow tests deselected. These additions do not broaden the assumptions
+of the older uniform-policy certificates.
+
 ---
 
 ## Registry Design and Category Discipline
@@ -69,6 +78,14 @@ This registry provides a durable, atomic record of every mathematical claim acro
 | `PR-PROP-2` | Unconstrained Event-Time Optimizer | Proved Theorem | `adaptive-proposals.md` §Thm 6.2 | None (continuous-time measure decomposition) | No executed unrestricted-event sampler registered | Classical importance-sampling square-root rule on a mixed measure |
 | `PR-PROP-3` | Pilot/Frozen Proposal Exact Unbiasedness | Conventional theorem under conditional and unconditional integrability hypotheses | `adaptive-proposals.md` §Thm 6.3 | None (pilot $\sigma$-algebra / tower property) | Historical 5-seed Merton-Vasicek diagnostic does not prove unbiasedness | Established multi-stage Monte Carlo |
 | `PR-PROP-4` | Multiplicative Finite-Depth Oracle Bound | Proved under the simultaneous relative-error hypotheses | `adaptive-proposals.md` §Thm 6.4 | Finite algebra in `Proposal.lean`; tree composition omitted | Unit controls for finite objectives and ratio formula; no certified pilot concentration event | Tree-depth composition specialization; novelty unestablished |
+| `PR-PROP-5` | Full-Tree Policy Improvement | Conventional theorem under C1's support, nonexplosion and finite-old-moment assumptions | Tuple run `04-theory.md` C1 | Two complete-lattice order lemmas in `TuplePolicy.lean`; stochastic bridge omitted | Exact controls; independent proof review | Recursive importance-sampling specialization; priority unestablished |
+| `PR-PROP-6` | Sign-Aware Interval Acceptance | Exact finite algebra | Tuple run C2 | Binary and robust binary lemmas | 1,962 rational binary controls and generic gate tests | Specific computable safety criterion, not a new generic comparison principle |
+| `PR-PROP-7` | Proxy/Upper-Envelope Counterexamples | Exact refutations | Tuple run C3 | None | True objective 4 versus 12.1 under misleading proxy; constant-map counterexample | Corrects invalid proof shortcuts |
+| `PR-PROP-8` | Joint Static Rate/Probability Log-Convexity | Conventional whole-tree theorem under C4 assumptions | Tuple run C4 | None | 1,000 finite-kernel floating stress checks; no optimizer | Generic convex importance-sampling precedent |
+| `PR-PROP-9` | Nonuniform Six-Code Moment Certificates | Conventional closure/comparison plus exact rational witnesses | Tuple run C5 | Existing/new order algebra only | 38 stored witnesses verified; 14 search failures retained | Extension of this raw-mechanism certificate; not a new sampler |
+| `PR-PROP-10` | Policy-Invariant Allen–Cahn Mean | Conventional theorem with one finite uniform all-code envelope and supported policies | Tuple run C6 | None | Flat exact mean-square bounds transfer moment gaps to variance gaps | Extends the prior uniform-only correspondence note |
+| `PR-PROP-11` | Strict Nonzero Wave Policy Improvement | Conventional all-state comparison and positivity proof | Tuple run C7 | `two_thirds_policy_improvement` covers the final algebra | Two exact ratio gates; root percentage remains a floating diagnostic | Specific nonzero-branch application, optimality unclaimed |
+| `PR-PROP-12` | Exact Flat Moment-Explosion Threshold | Conventional theorem including Id-root divergence and optimized-horizon scaling | Tuple run C8 | None | Exact reciprocal-cubic and exponential bounds; independent rational calculation | New to inspected project record; ODE-horizon precedent, worldwide priority unestablished |
 | `PR-RATE-1` | Local Exponential Rate Strict Convexity | Proved Theorem | `exponential-rate-optimization.md` §Thm 7.1 | `ExponentialRate.lean` (`expKernelFactor_pos`, `modelRateObjective_ge_amgm`, `modelRateObjective_at_optimum`, `modelObjective_eq_lower_bound_iff`) | Quadrature derivatives vs finite differences | Related to classical importance-sampling convexity |
 | `PR-RATE-2` | Tree Topology Rate Convexity | Conditional full-tree theorem | `exponential-rate-optimization.md` §Thm 7.2 | `ExponentialRate.lean` (`topologyFactor_pos_of_pos`) only | Deterministic recursive derivatives | Topology-level coding tree convexity; finite variance separate |
 | `PR-RATE-3` | Short-Horizon $O(1)$ Scaling Law | Local theorem; full recursion conditional | `exponential-rate-optimization.md` §Thm 7.4 | None (Taylor asymptotic analysis) | 1D Allen-Cahn / Riccati quadrature sweeps | Requires nonzero terminal terms and uniform expansions |
@@ -301,6 +318,40 @@ This registry provides a durable, atomic record of every mathematical claim acro
 - **Empirical / Symbolic Evidence:** Finite-objective tests do not certify the random-tree oracle inequality's hypotheses. The theorem bounds second moments, not the same multiplicative ratio of centered variances.
 - **Novelty / Prior Art:** Multiplicative tree-depth specialization of importance-sampling bounds; novelty unestablished.
 - **Dependencies & Open Obligations:** Explains why adaptive gains can degrade if pilot error compounds over deep trees.
+
+---
+
+### Tuple-Policy Checkpoint (16 September 2026)
+
+The atomic records for `PR-PROP-5`–`PR-PROP-12` are C1–C8 respectively in
+the [claim ledger](runs/2026-09-16-certified-tuple-policy/03-claims.md), with
+complete statements/assumptions in
+[theory](runs/2026-09-16-certified-tuple-policy/04-theory.md), an
+[independent audit](runs/2026-09-16-certified-tuple-policy/09-independent-review.md),
+[numerical evidence](runs/2026-09-16-certified-tuple-policy/05-numerics.md)
+and [formal scope](runs/2026-09-16-certified-tuple-policy/06-formalization.md).
+Those linked records are part of this registry; they keep each claim's
+proof status, implementation, exact assumptions and omitted obligations
+together without duplicating the full proofs here.
+
+The concrete new results use the raw 1D Allen–Cahn mechanism, positive
+label probabilities and the exact inverse likelihoods. In flat data
+phi=1/2, common first-label p at F0–F2 gives the exact Id moment threshold
+`T*=log(1+lambda² p C)/lambda`, with C the reciprocal-cubic integral in C8.
+The boundary diverges. At T=.5/lambda=.75, uniform p=.5 has infinite
+variance while p=.95 is finite with the same mean. At lambda=1 both are
+finite and exact bounds give at least 53.42% variance reduction. Separately
+optimizing lambda for the threshold gives the exact ratio sqrt(1.9), a
+37.84% horizon increase. These conclusions do not apply the scalar
+reduction to nonconstant terminal data.
+
+For the traveling wave, C7 certifies a strict reduction at all finite x
+through T=.05, at lambda=.75 and 1, for F1 probability 2/3 with F0 uniform
+and optional F2 probability .95. The observed root percentages are
+unvalidated finite-difference diagnostics. No certificate against the
+terminal proxy, universal optimal q, sampling speedup, or formal Lean
+explosion theorem is claimed. The flat candidate already matches the
+existing terminal proxy at floor_mass=.1.
 
 ---
 
@@ -903,8 +954,10 @@ For every claim touching Lean 4, the exact boundary between formalized mathemati
 | `formal/EstimatorIntegrity/AllenCahnBounds.lean` | `allenCahnBranchPolynomial_nonneg`, `allenCahnBranchPolynomial_mono`, `allenCahnMomentField_nonneg`, `allenCahnMomentField_mono`, `allenCahnMomentField_interval_upper`, `allenCahn_postfixed_box_slope` | Actual random-tree/code correspondence, terminal bounds, ODE existence/comparison, analytic integration, stochastic domination, rational-program soundness and concrete witness values. |
 | `formal/EstimatorIntegrity/ConvexEnclosure.lean` | `convexEnclosure_right`, `convexEnclosure_left`, `convexEnclosure_right_exterior`, `convexEnclosure_left_exterior`, `convexEnclosure_cell_lower_envelope`, plus two private helpers | Finite-moment/extended-value stochastic convexity, valid numerical endpoint bounds, cell-envelope minimization algorithm, rational program correctness and concrete objective certificates. |
 | `formal/EstimatorIntegrity/ProfileEfficiency.lean` | `amortizedProfileLoss_lt_iff`, `amortizedProfileLoss_break_even`, `amortizedProfileLoss_reuse_break_even`, `continuousBudget_profileLoss`, `weightedProfile_convexOn`, `weightedProfile_enclosure`, `weightedProfile_excess_le`, `weightedProfile_variance_shift`, `weightedProfile_variance_excess_eq`, `convexProfile_upper_interpolation` | Stochastic profile-MSE identity, independence, all integrability and analytic bridges, concrete rational bounds, integer sample allocation, measured cost model and production roundoff. |
+| `formal/EstimatorIntegrity/TuplePolicy.lean` | `binary_policy_improvement`, `robust_binary_policy_improvement`, `two_thirds_policy_improvement`, `prefixed_policy_bounds_iterates`, `policy_improvement_iSup` | Random-tree/iteration correspondence, conditional semigroups, nonuniform ODE closure, wave dominance/strictness, common means, scalar explosion/optimized horizon, concrete bounds and Python checker soundness. |
 
-The twenty-six public declarations in the last four rows, plus two private
+The twenty-six public declarations in RateCertificate, AllenCahnBounds,
+ConvexEnclosure and ProfileEfficiency, plus two private
 convex-enclosure helpers, passed the full `lake build`: 3,391 jobs completed
 without warnings. Reported axiom dependencies for all public declarations
 were only `propext`, `Classical.choice` and `Quot.sound`; the public convex
@@ -914,6 +967,13 @@ checkpoint records that historical Python verification; the
 checkout checks. These checks verify
 their specified scope and do not discharge the omitted stochastic/numerical
 soundness obligations listed above.
+
+The later tuple run additionally built all five TuplePolicy declarations
+and the full library (3,392 jobs). Their
+[axiom log](runs/2026-09-16-certified-tuple-policy/lean/axioms.log) contains
+only `propext`, `Classical.choice` and `Quot.sound`; the order declarations
+do not require `Classical.choice`. No scalar explosion or stochastic
+statement is inferred from this algebra/order audit.
 
 ---
 

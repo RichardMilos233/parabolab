@@ -1,0 +1,164 @@
+{
+  "direct_all_witnesses_valid": true,
+  "direct_verification_seconds": 0.7560298331081867,
+  "roundtrip": {
+    "archive": "docs/research/runs/2026-09-16-certified-tuple-policy/numerics/witnesses.json.gz",
+    "certificates_checked": 38,
+    "all_witnesses_valid": true,
+    "verification_seconds": 1.286916125100106,
+    "checks": [
+      {
+        "key": "flat/uniform_baseline/T=1/20/lambda=3/4/steps=200",
+        "valid": true
+      },
+      {
+        "key": "flat/uniform_baseline/T=1/20/lambda=3/4/steps=400",
+        "valid": true
+      },
+      {
+        "key": "flat/uniform_baseline/T=1/20/lambda=1/steps=200",
+        "valid": true
+      },
+      {
+        "key": "flat/uniform_baseline/T=1/20/lambda=1/steps=400",
+        "valid": true
+      },
+      {
+        "key": "flat/uniform_baseline/T=1/5/lambda=3/4/steps=200",
+        "valid": true
+      },
+      {
+        "key": "flat/uniform_baseline/T=1/5/lambda=3/4/steps=400",
+        "valid": true
+      },
+      {
+        "key": "flat/uniform_baseline/T=1/5/lambda=1/steps=200",
+        "valid": true
+      },
+      {
+        "key": "flat/uniform_baseline/T=1/5/lambda=1/steps=400",
+        "valid": true
+      },
+      {
+        "key": "flat/uniform_baseline/T=1/2/lambda=1/steps=200",
+        "valid": true
+      },
+      {
+        "key": "flat/uniform_baseline/T=1/2/lambda=1/steps=400",
+        "valid": true
+      },
+      {
+        "key": "flat/flat_safe/T=1/20/lambda=3/4/steps=200",
+        "valid": true
+      },
+      {
+        "key": "flat/flat_safe/T=1/20/lambda=3/4/steps=400",
+        "valid": true
+      },
+      {
+        "key": "flat/flat_safe/T=1/20/lambda=1/steps=200",
+        "valid": true
+      },
+      {
+        "key": "flat/flat_safe/T=1/20/lambda=1/steps=400",
+        "valid": true
+      },
+      {
+        "key": "flat/flat_safe/T=1/5/lambda=3/4/steps=200",
+        "valid": true
+      },
+      {
+        "key": "flat/flat_safe/T=1/5/lambda=3/4/steps=400",
+        "valid": true
+      },
+      {
+        "key": "flat/flat_safe/T=1/5/lambda=1/steps=200",
+        "valid": true
+      },
+      {
+        "key": "flat/flat_safe/T=1/5/lambda=1/steps=400",
+        "valid": true
+      },
+      {
+        "key": "flat/flat_safe/T=1/2/lambda=3/4/steps=200",
+        "valid": true
+      },
+      {
+        "key": "flat/flat_safe/T=1/2/lambda=3/4/steps=400",
+        "valid": true
+      },
+      {
+        "key": "flat/flat_safe/T=1/2/lambda=1/steps=200",
+        "valid": true
+      },
+      {
+        "key": "flat/flat_safe/T=1/2/lambda=1/steps=400",
+        "valid": true
+      },
+      {
+        "key": "wave/uniform_baseline/T=1/20/lambda=3/4/steps=200",
+        "valid": true
+      },
+      {
+        "key": "wave/uniform_baseline/T=1/20/lambda=3/4/steps=400",
+        "valid": true
+      },
+      {
+        "key": "wave/uniform_baseline/T=1/20/lambda=1/steps=200",
+        "valid": true
+      },
+      {
+        "key": "wave/uniform_baseline/T=1/20/lambda=1/steps=400",
+        "valid": true
+      },
+      {
+        "key": "wave/uniform_baseline/T=1/5/lambda=1/steps=200",
+        "valid": true
+      },
+      {
+        "key": "wave/uniform_baseline/T=1/5/lambda=1/steps=400",
+        "valid": true
+      },
+      {
+        "key": "wave/wave_safe/T=1/20/lambda=3/4/steps=200",
+        "valid": true
+      },
+      {
+        "key": "wave/wave_safe/T=1/20/lambda=3/4/steps=400",
+        "valid": true
+      },
+      {
+        "key": "wave/wave_safe/T=1/20/lambda=1/steps=200",
+        "valid": true
+      },
+      {
+        "key": "wave/wave_safe/T=1/20/lambda=1/steps=400",
+        "valid": true
+      },
+      {
+        "key": "wave/wave_safe/T=1/5/lambda=1/steps=200",
+        "valid": true
+      },
+      {
+        "key": "wave/wave_safe/T=1/5/lambda=1/steps=400",
+        "valid": true
+      },
+      {
+        "key": "wave/wave_safe_nonzero/T=1/20/lambda=3/4/steps=200",
+        "valid": true
+      },
+      {
+        "key": "wave/wave_safe_nonzero/T=1/20/lambda=3/4/steps=400",
+        "valid": true
+      },
+      {
+        "key": "wave/wave_safe_nonzero/T=1/20/lambda=1/steps=200",
+        "valid": true
+      },
+      {
+        "key": "wave/wave_safe_nonzero/T=1/20/lambda=1/steps=400",
+        "valid": true
+      }
+    ]
+  }
+}

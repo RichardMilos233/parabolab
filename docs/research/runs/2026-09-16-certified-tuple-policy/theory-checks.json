@@ -1,0 +1,21 @@
+{
+  "exact_binary_gate_cases": 1962,
+  "minimum_exact_margin": "0",
+  "finite_kernel_convexity_trials": 1000,
+  "maximum_logconvexity_residual": -0.0014084523129795912,
+  "minimum_kernel_scaled_hessian_eigenvalue": -7.404841190019428e-14,
+  "proxy_counterexample": {
+    "true_A": 1,
+    "true_B": 1,
+    "proxy_scores": [
+      100,
+      1
+    ],
+    "baseline": 4,
+    "candidate": "121/10"
+  },
+  "seed": 20260916,
+  "scope": "Exact finite binary algebra plus floating finite likelihood-kernel checks, not stochastic theorem proof",
+  "elapsed_seconds": 0.18841133289970458,
+  "script_sha256": "5d05c4182e40631553ba0b4bd0e3272109eb0400a1ab4d0e53697512c1c5d82a"
+}

@@ -1,0 +1,309 @@
+{
+  "schema_version": 1,
+  "scope": "C8 scalar explosion reduction for flat raw 1D Allen-Cahn moments",
+  "exact_certificate": {
+    "integral_enclosure": {
+      "R": "8",
+      "rectangles": 65536,
+      "step": "1/8192",
+      "rounding_bits": 60,
+      "finite_lower": {
+        "exact": "902244306422331020717/590295810358705651712",
+        "float": 1.5284613080246383
+      },
+      "finite_upper": {
+        "exact": "7222053556306477311655/4722366482869645213696",
+        "float": 1.529329327256669
+      },
+      "tail_lower": {
+        "exact": "256/215081",
+        "float": 0.001190249254931863
+      },
+      "tail_upper": {
+        "exact": "1/768",
+        "float": 0.0013020833333333333
+      },
+      "C_lower": {
+        "exact": "194206723397073206913671349/126961413187760770275868672",
+        "float": 1.5296515572795701
+      },
+      "C_upper": {
+        "exact": "21684607412993141486581/14167099448608935641088",
+        "float": 1.5306314105900025
+      },
+      "width": {
+        "exact": "2985685464220898147215685/3047073916506258486620848128",
+        "float": 0.0009798533104324074
+      }
+    },
+    "monotonicity": {
+      "derivative": "P'(v)=1/16+9*v+18*v^2",
+      "strictly_positive_for_v_ge_0": true,
+      "use": "right rectangles lower-bound and left rectangles upper-bound the finite integral"
+    },
+    "identity": {
+      "statement": "P_p(p*v)=P(v) for common proposal p",
+      "coefficient_checks": [
+        {
+          "policy": "1/2",
+          "substituted_coefficients": [
+            "9/64",
+            "1/16",
+            "9/2",
+            "6"
+          ],
+          "target_coefficients": [
+            "9/64",
+            "1/16",
+            "9/2",
+            "6"
+          ],
+          "match": true
+        },
+        {
+          "policy": "19/20",
+          "substituted_coefficients": [
+            "9/64",
+            "1/16",
+            "9/2",
+            "6"
+          ],
+          "target_coefficients": [
+            "9/64",
+            "1/16",
+            "9/2",
+            "6"
+          ],
+          "match": true
+        }
+      ],
+      "exact_grid_points_checked": 131074,
+      "all_checks_passed": true
+    },
+    "exponential_degree": 30,
+    "exponential_tail_lemma": "For 0<=x<=1, e^x lies between S_30 and S_30+(x^31/31!)/(1-x/32).",
+    "classification_rule": {
+      "finite": "theta_upper<pC_lower",
+      "divergent": "theta_lower>=pC_upper"
+    },
+    "cases": [
+      {
+        "policy": "1/2",
+        "rate": "3/4",
+        "horizon": "1/2",
+        "theta_lower": {
+          "exact": "10412237502456507532872217138199886536240547108898907/12872514528755436706311430899809338027294064640000000",
+          "float": 0.8088736259879135
+        },
+        "theta_upper": {
+          "exact": "81663178731766388580316799014901710103734610976471622673/100959131449028890087600552547204638148067348971520000000",
+          "float": 0.8088736259879135
+        },
+        "pC_lower": {
+          "exact": "194206723397073206913671349/253922826375521540551737344",
+          "float": 0.7648257786397851
+        },
+        "pC_upper": {
+          "exact": "21684607412993141486581/28334198897217871282176",
+          "float": 0.7653157052950013
+        },
+        "classification": "divergent",
+        "explosion_time_lower": {
+          "exact": "477/1000",
+          "float": 0.477
+        },
+        "explosion_time_upper": {
+          "exact": "239/500",
+          "float": 0.478
+        },
+        "explosion_time_width": {
+          "exact": "1/1000",
+          "float": 0.001
+        },
+        "bracket_checks": {
+          "lower_theta_upper_lt_pC_lower": true,
+          "upper_theta_lower_gt_pC_upper": true
+        }
+      },
+      {
+        "policy": "1/2",
+        "rate": "1",
+        "horizon": "1/2",
+        "theta_lower": {
+          "exact": "184764309342821830251272840355163822840981/284813089515958324736640819941867520000000",
+          "float": 0.6487212707001282
+        },
+        "theta_upper": {
+          "exact": "14433787845861241379229434288545397840337437/22249598552986664328426380853858690662400000",
+          "float": 0.6487212707001282
+        },
+        "pC_lower": {
+          "exact": "194206723397073206913671349/253922826375521540551737344",
+          "float": 0.7648257786397851
+        },
+        "pC_upper": {
+          "exact": "21684607412993141486581/28334198897217871282176",
+          "float": 0.7653157052950013
+        },
+        "classification": "finite",
+        "explosion_time_lower": {
+          "exact": "71/125",
+          "float": 0.568
+        },
+        "explosion_time_upper": {
+          "exact": "569/1000",
+          "float": 0.569
+        },
+        "explosion_time_width": {
+          "exact": "1/1000",
+          "float": 0.001
+        },
+        "bracket_checks": {
+          "lower_theta_upper_lt_pC_lower": true,
+          "upper_theta_lower_gt_pC_upper": true
+        }
+      },
+      {
+        "policy": "19/20",
+        "rate": "3/4",
+        "horizon": "1/2",
+        "theta_lower": {
+          "exact": "10412237502456507532872217138199886536240547108898907/12872514528755436706311430899809338027294064640000000",
+          "float": 0.8088736259879135
+        },
+        "theta_upper": {
+          "exact": "81663178731766388580316799014901710103734610976471622673/100959131449028890087600552547204638148067348971520000000",
+          "float": 0.8088736259879135
+        },
+        "pC_lower": {
+          "exact": "3689927744544390931359755631/2539228263755215405517373440",
+          "float": 1.4531689794155915
+        },
+        "pC_upper": {
+          "exact": "412007540846869688245039/283341988972178712821760",
+          "float": 1.4540998400605023
+        },
+        "classification": "finite",
+        "explosion_time_lower": {
+          "exact": "199/250",
+          "float": 0.796
+        },
+        "explosion_time_upper": {
+          "exact": "797/1000",
+          "float": 0.797
+        },
+        "explosion_time_width": {
+          "exact": "1/1000",
+          "float": 0.001
+        },
+        "bracket_checks": {
+          "lower_theta_upper_lt_pC_lower": true,
+          "upper_theta_lower_gt_pC_upper": true
+        }
+      },
+      {
+        "policy": "19/20",
+        "rate": "1",
+        "horizon": "1/2",
+        "theta_lower": {
+          "exact": "184764309342821830251272840355163822840981/284813089515958324736640819941867520000000",
+          "float": 0.6487212707001282
+        },
+        "theta_upper": {
+          "exact": "14433787845861241379229434288545397840337437/22249598552986664328426380853858690662400000",
+          "float": 0.6487212707001282
+        },
+        "pC_lower": {
+          "exact": "3689927744544390931359755631/2539228263755215405517373440",
+          "float": 1.4531689794155915
+        },
+        "pC_upper": {
+          "exact": "412007540846869688245039/283341988972178712821760",
+          "float": 1.4540998400605023
+        },
+        "classification": "finite",
+        "explosion_time_lower": {
+          "exact": "897/1000",
+          "float": 0.897
+        },
+        "explosion_time_upper": {
+          "exact": "449/500",
+          "float": 0.898
+        },
+        "explosion_time_width": {
+          "exact": "1/1000",
+          "float": 0.001
+        },
+        "bracket_checks": {
+          "lower_theta_upper_lt_pC_lower": true,
+          "upper_theta_lower_gt_pC_upper": true
+        }
+      }
+    ]
+  },
+  "floating_diagnostics": {
+    "role": "floating diagnostic; no mathematical status",
+    "scipy_quad_C": 1.5301212285131,
+    "scipy_reported_error": 1.698757162449193e-14,
+    "quad_inside_exact_enclosure": true,
+    "cases": [
+      {
+        "policy": "1/2",
+        "rate": "3/4",
+        "theta_at_horizon": 0.8088736259879136,
+        "p_times_C": 0.76506061425655,
+        "explosion_time": 0.4772223858571896
+      },
+      {
+        "policy": "1/2",
+        "rate": "1",
+        "theta_at_horizon": 0.6487212707001282,
+        "p_times_C": 0.76506061425655,
+        "explosion_time": 0.5681850321505608
+      },
+      {
+        "policy": "19/20",
+        "rate": "3/4",
+        "theta_at_horizon": 0.8088736259879136,
+        "p_times_C": 1.453615167087445,
+        "explosion_time": 0.7967322021982924
+      },
+      {
+        "policy": "19/20",
+        "rate": "1",
+        "theta_at_horizon": 0.6487212707001282,
+        "p_times_C": 1.453615167087445,
+        "explosion_time": 0.8975625153636201
+      }
+    ]
+  },
+  "provenance": {
+    "source_sha256": {
+      "flat_explosion_check.py": "a59bdb47f6da2cb256f10998dd77e9e141394d183efafd2b5a88cc55977c54f3",
+      "flat-explosion-protocol.json": "6bbfb77e9ad76487486e100cecd423b14b920f0093cbb3dc5a058bcafdf8a827"
+    },
+    "environment": {
+      "python": "3.11.15",
+      "platform": "macOS-26.3-arm64-arm-64bit",
+      "scipy": "1.17.1"
+    },
+    "environment_sha256": "06de6a5e02b90680c74c34b49573e76adb6d473c092186b94f82944f344dd1ee",
+    "commands": {
+      "generate": "MPLCONFIGDIR=/tmp/parabolab-mpl /opt/miniconda3/envs/parabolab/bin/python docs/research/runs/2026-09-16-certified-tuple-policy/numerics/flat_explosion_check.py",
+      "verify": "MPLCONFIGDIR=/tmp/parabolab-mpl /opt/miniconda3/envs/parabolab/bin/python docs/research/runs/2026-09-16-certified-tuple-policy/numerics/flat_explosion_check.py --verify docs/research/runs/2026-09-16-certified-tuple-policy/numerics/flat-explosion-checks.json"
+    },
+    "commands_sha256": "b510550eb7b774183bf33e6c6b71da5d416d2696ccd8033c8c1a3974e67196cb"
+  },
+  "execution_log": [
+    "Protocol file existed before evaluation.",
+    "Each reciprocal was rounded outward to the 2^-60 grid before summation.",
+    "All P_p(pv)=P(v) coefficient and declared-grid checks passed exactly.",
+    "Every finite/divergent classification used separated rational intervals.",
+    "Old postfixed-box failures were not used as evidence."
+  ],
+  "limitations": [
+    "The scalar-reduction theorem is established in separate mathematical review.",
+    "No Lean proof of the integral or exponential bounds is claimed.",
+    "Floating diagnostics are not inputs to any classification."
+  ]
+}

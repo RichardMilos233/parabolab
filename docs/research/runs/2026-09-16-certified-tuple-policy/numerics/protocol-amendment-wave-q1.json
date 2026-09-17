@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "frozen_before_candidate_evaluation": true,
+  "reason": "A separate analytic interval gate establishes a nonzero safe F1 policy at the short horizon.",
+  "candidate_name": "wave_safe_nonzero",
+  "candidate_q": ["1/2", "2/3", "19/20"],
+  "family": "wave",
+  "horizon": "1/20",
+  "rates": ["3/4", "1"],
+  "certificate_steps": [200, 400],
+  "precision_bits": 60,
+  "analytic_gate": {
+    "statement": "For the F1 alternatives A=F0*F2 and B=D^2*F3/4, prove A>=R*B with R=4*exp(-(lambda+Bbar_F1/lambda)*T)>2; then q1=2/3 cannot increase the actual local second-moment source relative to q1=1/2.",
+    "rational_lower_bound": "R >= 4*(1-(lambda+Bbar_F1/lambda)*T)",
+    "dependency": "The baseline uniform wave all-six all-time/all-space envelope supplies Bbar_F1; the exact gate is recorded separately by the theory task."
+  },
+  "numerical_interpretation": "The wave box still compares spatial-supremum upper envelopes only. The analytic gate, rather than an envelope difference, supports actual nonincrease.",
+  "failure_rule": "A failed box search is inconclusive, never divergence or policy harm.",
+  "excluded_claims": [
+    "strict actual root-moment reduction",
+    "universal or global tuple-policy optimality",
+    "runtime speedup"
+  ]
+}

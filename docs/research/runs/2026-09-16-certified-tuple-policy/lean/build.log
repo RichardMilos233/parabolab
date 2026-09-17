@@ -1,0 +1,16 @@
+$ cd /Users/michael/Desktop/NTU/fyp/parabolab/formal
+$ /Users/michael/.elan/bin/lake env lean EstimatorIntegrity/TuplePolicy.lean
+[exit 0; no output]
+
+$ /Users/michael/.elan/bin/lake build EstimatorIntegrity.TuplePolicy
+✔ [1151/1151] Built EstimatorIntegrity.TuplePolicy (6.8s)
+Build completed successfully (1151 jobs).
+[exit 0]
+
+$ /Users/michael/.elan/bin/lake env lean EstimatorIntegrity.lean
+[exit 0; no output]
+
+$ /Users/michael/.elan/bin/lake build EstimatorIntegrity
+✔ [3391/3392] Built EstimatorIntegrity (61s)
+Build completed successfully (3392 jobs).
+[exit 0]

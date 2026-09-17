@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "frozen_before_evaluation": true,
+  "claim": "C8 scalar reduction for the spatially flat raw 1D Allen-Cahn normalized moment system",
+  "terminal_phi": "1/2",
+  "polynomial": "P(v)=9/64+v/16+(9/2)v^2+6v^3",
+  "integral": "C=int_0^infinity 1/P(v) dv",
+  "quadrature": {
+    "R": "8",
+    "rectangles": 65536,
+    "step": "1/8192",
+    "rounding_denominator": "2^60",
+    "lower": "right rectangles with each 1/P(jh) rounded down before summation, plus the rational lower tail",
+    "upper": "left rectangles with each 1/P(jh) rounded up before summation, plus the rational upper tail"
+  },
+  "tail_bounds": {
+    "lower": "1/(2*R^2*(6+(9/2)/R+(1/16)/R^2+(9/64)/R^3))",
+    "upper": "1/(12*R^2)"
+  },
+  "exponential_enclosure": {
+    "degree": 30,
+    "lower": "S_n=sum_{k=0}^n x^k/k!",
+    "upper": "S_n+(x^(n+1)/(n+1)!)/(1-x/(n+2))",
+    "domain": "0<=x<=1"
+  },
+  "policies": ["1/2", "19/20"],
+  "rates": ["3/4", "1"],
+  "classification_horizon": "1/2",
+  "classification": {
+    "finite": "theta_upper(T)<p*C_lower",
+    "divergent": "theta_lower(T)>=p*C_upper",
+    "otherwise": "inconclusive",
+    "theta": "(exp(lambda*T)-1)/lambda^2"
+  },
+  "explosion_time_grid": {
+    "interval": ["0", "2"],
+    "step": "1/1000",
+    "lower_endpoint": "largest grid time with theta_upper<p*C_lower",
+    "upper_endpoint": "smallest grid time with theta_lower>p*C_upper"
+  },
+  "diagnostics": "SciPy quad and logarithmic closed-form values are floating diagnostics with no mathematical status.",
+  "verification": "The --verify command recomputes all exact rectangle, tail, classification, identity, and time-bracket outputs and rejects any mismatch.",
+  "limitations": [
+    "The analytical scalar-reduction theorem is reviewed separately.",
+    "No Lean proof is claimed for the exponential or integral inequalities.",
+    "An earlier failed postfixed-box search is not itself evidence of divergence."
+  ]
+}

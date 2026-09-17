@@ -1,0 +1,395 @@
+{
+  "schema_version": 1,
+  "run_id": "2026-09-16-certified-tuple-policy",
+  "skill_version": "0.2.0",
+  "mode": "resume",
+  "status": "completed",
+  "completion_scope": "Bounded direction-3 investigation: C1-C8 conventional proofs/counterexamples, numerical checks, five explicitly scoped Lean lemmas, independent correspondence review and presentation. Broader research and listed formal coverage gaps remain open.",
+  "selected_direction": {
+    "id": "D03",
+    "title": "Certify continuation-aware tuple improvements",
+    "source": "Existing ten-direction research programme; selected as a continuation, before post-result promotion."
+  },
+  "budget": null,
+  "project_revision": "ff2fa5f4858c695dd125c3b1ca7cfe63372398e7",
+  "initial_working_tree": "clean",
+  "final_working_tree": "Local uncommitted source, formalization, evidence and navigation additions; historical frozen evidence preserved.",
+  "dirty_source_snapshot": "Content hashes in evidence and source_hashes below identify the completed local artifacts; no new commit created.",
+  "stages": {
+    "context": "completed",
+    "ideation": "completed",
+    "theory": "completed",
+    "numerics": "completed",
+    "lean": "completed",
+    "correspondence_review": "completed",
+    "presentation": "completed"
+  },
+  "formal_coverage": {
+    "declarations": 5,
+    "scope": "C1 abstract order and C2/C7 binary algebra only",
+    "outside_lean": [
+      "Random-tree correspondence and nonexplosion",
+      "Nonuniform six-code ODE closure and comparison",
+      "Wave semigroup dominance and strictness",
+      "Common-mean PDE identification",
+      "C8 scalar reduction, explosion and rate-optimized horizon",
+      "Concrete witness values and Python checker soundness"
+    ]
+  },
+  "model_use": [
+    {
+      "role": "root research, integration and reporting",
+      "model": "GPT-6 family; exact model/effort not exposed",
+      "reasoning_effort": null,
+      "tasks": "Theory, claim ledger, protocols, exact falsification controls, integration tests, scoring and checkpoint"
+    },
+    {
+      "role": "independent research review",
+      "agent": "/root/research_frontier",
+      "model": "gpt-6-astra",
+      "reasoning_effort": "max",
+      "tasks": [
+        "T01 primary-source and policy-framework review",
+        "T05 wave comparison and scalar-explosion independent review"
+      ]
+    },
+    {
+      "role": "certificate implementation",
+      "agent": "/root/tuple_certificate",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "xhigh",
+      "tasks": [
+        "T02 certificate module, sampler correspondence tests and exact matrix",
+        "T06 scalar-integral threshold checks"
+      ]
+    },
+    {
+      "role": "formal implementation",
+      "agent": "/root/lean_policy",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "xhigh",
+      "tasks": [
+        "T03 five Lean lemmas, module/import/full build and axiom audit"
+      ]
+    },
+    {
+      "role": "independent numerical implementation and figure",
+      "agent": "/root/wave_diagnostic",
+      "model": "gpt-5.6-sol",
+      "reasoning_effort": "xhigh",
+      "tasks": [
+        "T04 independent wave moment PDE diagnostic",
+        "T07 exact-enclosure horizon figure"
+      ]
+    }
+  ],
+  "commands_run": [
+    {
+      "command": "python examples/certified_tuple_policy.py",
+      "result": "52 attempts: 38 verified witnesses, 14 retained inconclusive searches"
+    },
+    {
+      "command": "python examples/certified_tuple_policy.py --verify docs/research/runs/2026-09-16-certified-tuple-policy/numerics/witnesses.json.gz",
+      "result": "All 38 archived witnesses passed"
+    },
+    {
+      "command": "python docs/research/runs/2026-09-16-certified-tuple-policy/numerics/derive_variance_bounds.py",
+      "result": "22 flat witnesses rechecked; exact common mean-square and variance reduction bounds"
+    },
+    {
+      "command": "python3 docs/research/runs/2026-09-16-certified-tuple-policy/wave_gate_check.py",
+      "result": "Two exact all-state wave ratio gates generated and checked"
+    },
+    {
+      "command": "python3 docs/research/runs/2026-09-16-certified-tuple-policy/wave_gate_check.py --verify",
+      "result": "Passed; tampered ratio and rehashed endpoint rejected in separate controls"
+    },
+    {
+      "command": "python docs/research/runs/2026-09-16-certified-tuple-policy/check_theory.py",
+      "result": "1962 exact binary cases and 1000 floating finite-kernel checks"
+    },
+    {
+      "command": "python docs/research/runs/2026-09-16-certified-tuple-policy/wave_moment_diagnostic.py",
+      "result": "24 floating diagnostic rows; first absolute F3 tolerance failed, scale-aware analysis change retained"
+    },
+    {
+      "command": "python docs/research/runs/2026-09-16-certified-tuple-policy/numerics/flat_explosion_check.py",
+      "result": "Exact C interval and four threshold classifications/brackets generated and checked"
+    },
+    {
+      "command": "python docs/research/runs/2026-09-16-certified-tuple-policy/numerics/flat_explosion_check.py --verify docs/research/runs/2026-09-16-certified-tuple-policy/numerics/flat-explosion-checks.json",
+      "result": "Independent recomputation passed; altered C endpoint rejected in a separate control"
+    },
+    {
+      "command": "python docs/research/runs/2026-09-16-certified-tuple-policy/plot_flat_horizon.py",
+      "result": "Figure generated and visually inspected"
+    },
+    {
+      "command": "/opt/miniconda3/envs/parabolab/bin/python -m pytest -q",
+      "result": "263 passed, 14 deselected in 60.05s; python-tests.log"
+    },
+    {
+      "cwd": "formal",
+      "command": "/Users/michael/.elan/bin/lake env lean EstimatorIntegrity/TuplePolicy.lean",
+      "result": "Passed"
+    },
+    {
+      "cwd": "formal",
+      "command": "/Users/michael/.elan/bin/lake build EstimatorIntegrity.TuplePolicy",
+      "result": "Passed"
+    },
+    {
+      "cwd": "formal",
+      "command": "/Users/michael/.elan/bin/lake env lean EstimatorIntegrity.lean",
+      "result": "Passed"
+    },
+    {
+      "cwd": "formal",
+      "command": "/Users/michael/.elan/bin/lake build EstimatorIntegrity",
+      "result": "Passed; 3392 jobs"
+    },
+    {
+      "cwd": "formal",
+      "command": "/Users/michael/.elan/bin/lake env lean /Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-16-certified-tuple-policy/lean/TuplePolicyAxioms.lean",
+      "result": "Only standard logical axioms"
+    },
+    {
+      "command": "skill scripts/score_ideas.py applied separately to ideas.json and ideas-after-results.json --top 3",
+      "result": "Initial no high-value direction; post-result only D03 exceeds 1000"
+    }
+  ],
+  "command_environment": {
+    "python": "/opt/miniconda3/envs/parabolab/bin/python unless python3 is specified",
+    "lean": "leanprover/lean4:v4.33.0",
+    "mathlib_revision": "db584cd6d46c92f209a44c0f1c829460d327499d",
+    "monetary_cost_and_tokens": "Unavailable; not estimated"
+  },
+  "outcomes": {
+    "flat_threshold": "T*(lambda,p)=log(1+lambda^2*p*C)/lambda; finite exactly below threshold; boundary diverges",
+    "rate_optimized_horizon_ratio": "sqrt(19/10) for p=19/20 versus p=1/2; approximately 37.84% increase",
+    "finite_infinite_transition": "At flat phi=1/2,T=1/2,lambda=3/4: p=1/2 infinite variance, p=19/20 finite with the same mean",
+    "certified_variance_decrease": "At flat phi=1/2,T=1/2,lambda=1: at least 53.42% for p=19/20 versus uniform",
+    "wave": "Strict decrease for finite x, 0<remaining time<=.05, lambda=.75 or 1, first probabilities (.5,2/3,.95); root magnitudes only floating diagnostics",
+    "novelty": "New to inspected project record; bounded primary-source review, publication priority unestablished"
+  },
+  "retained_failures": [
+    "Two failed flat baseline box searches now classified divergent by separate C8 theorem and exact check",
+    "Twelve failed wave box searches remain inconclusive",
+    "Initial absolute F3 diagnostic tolerance failed; later scale-aware criterion documented without changing solver or mesh"
+  ],
+  "blockers": [],
+  "open_questions": [
+    "Larger quantitatively certified improvement on nonconstant data against the terminal proxy",
+    "Validated joint rate/probability optimizer",
+    "Formalization of C8 and the stochastic/analytic correspondence",
+    "Numerical-program soundness and exact-to-floating production transfer"
+  ],
+  "next_action": "Follow 08-next.md: certify conditional continuation intervals for nonconstant data and compare the resulting supported policy with the terminal proxy at a fixed rate. No background task scheduled.",
+  "source_hashes": {
+    "parabolab/tuple_certificate.py": "2ffac9d445c79dc55489362a6cddd940fe3799758e87df80aa8a06065ab928ff",
+    "parabolab/rate_certificate.py": "9843be2680ea6bbf6e79003dbd3250c1ccc666cb441c2945d692fd2f83d69322",
+    "parabolab/mechanism.py": "353c15c4fefd8fa8b817f94565eb83382c901a271fd0007f0a505e49fcf0c4af",
+    "parabolab/proposals.py": "cc4dfb6be1b8aa1c09bd981bad7dda95098223d31cbf824b9f036ebad01f9319",
+    "examples/certified_tuple_policy.py": "c7f65a7cdf6bbdebb461cf850e52429e4aaf206c0be655654184d25a67647398",
+    "tests/test_tuple_certificate.py": "155e8ab1280e56e4a5b73358d8c1f19f86f0dbe2daa3f075465dad4f95d03452",
+    "formal/EstimatorIntegrity/TuplePolicy.lean": "159e5976a4403512bbf39d8c0714d0cb717f47a6b90e30e6cc992ae1efde4695",
+    "formal/EstimatorIntegrity.lean": "5c17a9076bc9540a9b0660bbe4456c7aa3e2a0b18756e9732e9eb4db186c03f6"
+  },
+  "evidence": [
+    {
+      "path": "00-context.md",
+      "sha256": "8ac0064efd46456717480fa4e3e5c5673d71fc6567ca0de8fc7cc43221eac339",
+      "bytes": 2958
+    },
+    {
+      "path": "01-ideas.md",
+      "sha256": "8fb64cf4951389b5457b63119bb1250767cc6e7a6266b55501b05f3d1d5e189b",
+      "bytes": 10203
+    },
+    {
+      "path": "02-plan.md",
+      "sha256": "a5f9a013aa2bf987a28337c36528368f060c31aa5a9a2b3b76d09feac253561e",
+      "bytes": 2355
+    },
+    {
+      "path": "03-claims.md",
+      "sha256": "49351bfb7762e07771dbb16c9f2765208f43f4d2b6188640d46b3640c23617c5",
+      "bytes": 8639
+    },
+    {
+      "path": "04-theory.md",
+      "sha256": "2eaeefd5464345b516dcbac71071a3d6eeefdd3e9758b5e376ed88a190616ca6",
+      "bytes": 17872
+    },
+    {
+      "path": "05-numerics.md",
+      "sha256": "9791ac7722b3ef37a088c64028e55b235f9c71e801951f2b36bf88e0b6f61b11",
+      "bytes": 8203
+    },
+    {
+      "path": "06-formalization.md",
+      "sha256": "783646582cdb99517f0a6460c5649edd06ceb151c0230cc18138c9bafcb498de",
+      "bytes": 3266
+    },
+    {
+      "path": "07-report.md",
+      "sha256": "e6eab5a897c65512f5334995f665b26eb5742ea11a210d655f1a208b508f55f6",
+      "bytes": 9352
+    },
+    {
+      "path": "08-next.md",
+      "sha256": "2f5e10ce32427ce9281769ec12c9c2e2ce45612966703fdb5fc66421cd507808",
+      "bytes": 4555
+    },
+    {
+      "path": "09-independent-review.md",
+      "sha256": "df5412313b19dbd2405b36acc942eaab56265a04015baf890d9b7ebe9f8202be",
+      "bytes": 30043
+    },
+    {
+      "path": "check_theory.py",
+      "sha256": "5d05c4182e40631553ba0b4bd0e3272109eb0400a1ab4d0e53697512c1c5d82a",
+      "bytes": 3434
+    },
+    {
+      "path": "flat-horizon.png",
+      "sha256": "9e8258940a5d79a35873d475656ea895705176293ffd2d20eb0aabb64841315f",
+      "bytes": 251500
+    },
+    {
+      "path": "ideas-after-results.json",
+      "sha256": "21f37dc7d23be589abc7efbf2a9ec062579643e42da9583e28b19afd8bee6628",
+      "bytes": 15336
+    },
+    {
+      "path": "ideas.json",
+      "sha256": "3d706647485be836a4a6a6da4ae52a9ef4c4523315c958c0becaf810526f29ad",
+      "bytes": 14569
+    },
+    {
+      "path": "lean/TuplePolicyAxioms.lean",
+      "sha256": "a8b44ad91ff40300bf0391bc4cfee8ba8ef8209066cdfd927fdcacdf9c2c1d77",
+      "bytes": 349
+    },
+    {
+      "path": "lean/axioms.log",
+      "sha256": "cd9b87ba4a796b4d491c6635e57b1e682e36daf6b913f9d70cd8cd8f81ab12a9",
+      "bytes": 734
+    },
+    {
+      "path": "lean/build.log",
+      "sha256": "07361e997bf829e47e19a471154dc897d66419e801476bfc4beffa30d78bf5ff",
+      "bytes": 573
+    },
+    {
+      "path": "numerics/derive-variance-bounds.log",
+      "sha256": "a9ee42e715e0faad08f2a0cb09f999ead5e00996fb849a17e0414cd2c5b7f1ae",
+      "bytes": 2134
+    },
+    {
+      "path": "numerics/derive_variance_bounds.py",
+      "sha256": "91c45dcf96e81c554bac8324cfb7a00bdbd99dfabc632e825d812fe058d02a07",
+      "bytes": 7969
+    },
+    {
+      "path": "numerics/flat-explosion-checks.json",
+      "sha256": "f66849970f2c3233e55fe8f882dcf8f010ef05d42ef0b609731f32f93b2134d1",
+      "bytes": 10144
+    },
+    {
+      "path": "numerics/flat-explosion-protocol.json",
+      "sha256": "6bbfb77e9ad76487486e100cecd423b14b920f0093cbb3dc5a058bcafdf8a827",
+      "bytes": 1928
+    },
+    {
+      "path": "numerics/flat_explosion_check.py",
+      "sha256": "a59bdb47f6da2cb256f10998dd77e9e141394d183efafd2b5a88cc55977c54f3",
+      "bytes": 14887
+    },
+    {
+      "path": "numerics/protocol-amendment-wave-q1.json",
+      "sha256": "92fc1237b30010592018526a5322b9e176eaccf6bb92d3cb38c16e1da009d5f4",
+      "bytes": 1270
+    },
+    {
+      "path": "numerics/protocol.json",
+      "sha256": "17220e13e8ab1c53ed2bb2979a6238f40554a21bcad52224c3b335b10645643b",
+      "bytes": 1419
+    },
+    {
+      "path": "numerics/results.json",
+      "sha256": "69fabec485fb82afb385910b9b535c4f148303ba599edfa4f6e2e7664fd065da",
+      "bytes": 19472
+    },
+    {
+      "path": "numerics/variance-bounds.json",
+      "sha256": "94f74d9d38769857b94fba8cf96fd79e5da61b17896835d698484067a20b6f71",
+      "bytes": 23006
+    },
+    {
+      "path": "numerics/verifier.json",
+      "sha256": "c00db31e3df500daad156c71459c1a8e9a3a045e389b046b24d0bb54c1623322",
+      "bytes": 4229
+    },
+    {
+      "path": "numerics/witnesses.json.gz",
+      "sha256": "a432313cdeb715bd843e6bb6a239801db5f23c6f6454573f5ebef0f68ce85ad1",
+      "bytes": 1244287
+    },
+    {
+      "path": "plot_flat_horizon.py",
+      "sha256": "7cabbcf3bdffb394c061ed43bf5df83080f394a8ac1b276ee98caa3a6f7d66a4",
+      "bytes": 4928
+    },
+    {
+      "path": "python-tests.log",
+      "sha256": "ccf04a48008a9bc7284fdfbae6cd0f92a7e1449fac2e3364c349c9f66e1e504b",
+      "bytes": 366
+    },
+    {
+      "path": "scores-after-results.json",
+      "sha256": "b8e2a2d80b8b33748a1f2c7083268d4b582288ffce085125a0c77069695612da",
+      "bytes": 16220
+    },
+    {
+      "path": "scores.json",
+      "sha256": "ce9c6349cc72f128c0c1a5492bb7c71097642f7fb273f6ff1e905dc050310b96",
+      "bytes": 15440
+    },
+    {
+      "path": "theory-checks.json",
+      "sha256": "96e32aaf4dc6b7b5985435295d62823371117b8bb875ffcd2a2050afed2269b1",
+      "bytes": 667
+    },
+    {
+      "path": "wave-diagnostic-protocol.json",
+      "sha256": "41d9f52a1a36fe6b485707a3a35ebda484f34688619b2636f95d34d32efa6a83",
+      "bytes": 2941
+    },
+    {
+      "path": "wave-diagnostic-results.json",
+      "sha256": "55a6c785686c65059f80dba2c6105d544328c17fac8972fa551849c0c6cd65a6",
+      "bytes": 31277
+    },
+    {
+      "path": "wave-gate-checks.json",
+      "sha256": "3403349c3b1a537fc3d4b47e6b10064067dea98490b21ac0ef739c6b5425c854",
+      "bytes": 160981
+    },
+    {
+      "path": "wave-policy.png",
+      "sha256": "2669161a58af85712c05b69c68bb0d475953fdb03fc27376efb7527805a91d20",
+      "bytes": 162360
+    },
+    {
+      "path": "wave_gate_check.py",
+      "sha256": "9ba99ab303e2e2838c0502205b6c77111c952ffc3cdc53bef429f117762b3801",
+      "bytes": 6249
+    },
+    {
+      "path": "wave_moment_diagnostic.py",
+      "sha256": "63477c9da7d9dca2bb8acb58b5f413dc5aac78bf8f05db3c958b71c157378858",
+      "bytes": 15410
+    }
+  ]
+}

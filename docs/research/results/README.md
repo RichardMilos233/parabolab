@@ -20,6 +20,12 @@ The [research guide](../README.md) describes open questions and the
    weighted-grid objective, exact policy bounds and associated cost algebra.
 5. [Main integration checks](integration-2026-09-16.md): code ancestry,
    Python/Lean checks and rechecked witnesses on the later source.
+6. [Tuple-policy research run](../runs/2026-09-16-certified-tuple-policy/07-report.md):
+   exact flat moment-explosion threshold and optimized-horizon scaling,
+   certified finite-variance reductions, and a strict nonzero wave update.
+   These local additions passed 263 Python tests and the full Lean build;
+   only five algebra/order sublemmas are formalized. The scalar explosion
+   and spatial wave arguments remain conventional mathematics.
 
 ## Supporting performance investigations
 

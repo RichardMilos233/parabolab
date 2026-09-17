@@ -1,0 +1,329 @@
+{
+  "mode": "resume_existing_slate",
+  "note": "Post-result reassessment; initial ideas.json and scores.json are preserved. D03 promoted only after C8 proof, independent review and exact interval verification.",
+  "ideas": [
+    {
+      "id": "D01",
+      "title": "Extend full-tree certificates beyond saved cases",
+      "gap": "Current exact witnesses are short-horizon and uniform-q.",
+      "hypothesis": "Codewise residual and nonuniform envelopes can cover more parameters.",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "Joint certificate construction is a specific extension; no new generic comparison principle.",
+        "impact": "Addresses current exact witnesses are short-horizon and uniform-q.",
+        "effect": "Baseline: Current raw-uniform short-horizon certificates. Target: A useful bound for a genuinely changed supported tuple policy; a research target, not an observed speedup."
+      },
+      "evidence": [
+        "https://arxiv.org/html/2502.17853v2"
+      ],
+      "evidence_status": "searched",
+      "feasibility": {
+        "status": "feasible",
+        "reason": "Positive polynomial closure and exact boxes already exist.",
+        "first_test": "Check the nonuniform closure against raw labelled tuples."
+      },
+      "baseline": "Current raw-uniform short-horizon certificates",
+      "success_criterion": "A useful bound for a genuinely changed supported tuple policy",
+      "cost": "Bounded proof/control experiment first; implementation cost uncertain outside current run.",
+      "fallback": "Retain the simpler baseline and record the failed mechanism or missing bound.",
+      "value": 1000,
+      "high_value": false
+    },
+    {
+      "id": "D02",
+      "title": "Optimize total computation cost",
+      "gap": "Variance improvement does not determine cost at fixed error.",
+      "hypothesis": "Cost-aware selection can beat a variance-only policy after setup.",
+      "novelty": 1,
+      "impact": 10,
+      "effect": 1,
+      "rationale": {
+        "novelty": "Cost/variance tradeoffs are established.",
+        "impact": "Addresses variance improvement does not determine cost at fixed error.",
+        "effect": "Baseline: Two completed cost studies. Target: Lower total cost at matched error, magnitude unknown; a research target, not an observed speedup."
+      },
+      "evidence": [
+        "https://arxiv.org/abs/1603.01727"
+      ],
+      "evidence_status": "provisional",
+      "feasibility": {
+        "status": "conditional",
+        "reason": "A stable cost model and new useful policy are needed.",
+        "first_test": "Measure setup and complete-batch sampling separately."
+      },
+      "baseline": "Two completed cost studies",
+      "success_criterion": "Lower total cost at matched error, magnitude unknown",
+      "cost": "Bounded proof/control experiment first; implementation cost uncertain outside current run.",
+      "fallback": "Retain the simpler baseline and record the failed mechanism or missing bound.",
+      "value": 10,
+      "high_value": false
+    },
+    {
+      "id": "D03",
+      "title": "Certify continuation-aware tuple improvements",
+      "gap": "Proxy scores lack a full-tree no-worsening guarantee.",
+      "hypothesis": "Signed interval gates on old continuation moments yield unrestricted-tree improvement.",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 100,
+      "rationale": {
+        "novelty": "A specific derivative-coded full-tree safety/certification extension and explicit raw-flat threshold; ODE majorants and importance sampling are classical. Bounded primary-source comparison supports a scoped extension, not worldwide priority.",
+        "impact": "The general support-safe policy-improvement framework addresses the recurring recursive-variance bottleneck; the exact explosion law is currently restricted to flat Allen-Cahn. Impact 10 describes that framework, not a claim of broad empirical transfer.",
+        "effect": "Baseline: same raw flat Allen-Cahn estimator with uniform q. C8 and exact interval checks establish infinite variance at T=.5, lambda=.75 versus finite variance for supported p=.95; optimizing the rate separately gives an exact sqrt(1.9) horizon-threshold gain. This is a concrete capability change in a narrow benchmark, not a broad speedup."
+      },
+      "evidence": [
+        "https://stanford.edu/~boyd/papers/pdf/adaMC.pdf",
+        "https://web.stanford.edu/~glynn/papers/2013/AwadGRubinstein13.pdf",
+        "https://arxiv.org/abs/1603.01727",
+        "https://arxiv.org/html/2201.03882v3"
+      ],
+      "evidence_status": "searched",
+      "feasibility": {
+        "status": "feasible",
+        "reason": "The order comparison and exact binary control have a bounded proof/verification path.",
+        "first_test": "Attempt a counterexample to the gate; verify supported nonuniform flat controls."
+      },
+      "baseline": "Terminal proxy and raw uniform q",
+      "success_criterion": "Replace heuristic acceptance with a useful sufficient variance-dominance certificate",
+      "cost": "Bounded proof/control experiment first; implementation cost uncertain outside current run.",
+      "fallback": "Retain the simpler baseline and record the failed mechanism or missing bound.",
+      "result_links": [
+        "04-theory.md#c8-exact-flat-data-variance-explosion-time",
+        "numerics/flat-explosion-checks.json",
+        "09-independent-review.md"
+      ],
+      "value": 10000,
+      "high_value": true
+    },
+    {
+      "id": "D04",
+      "title": "Rates varying by code or time within a tree",
+      "gap": "One shared scalar rate cannot adapt to local continuation needs.",
+      "hypothesis": "A supported local-rate policy can reduce moments in heterogeneous code regimes.",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "Specific coded extension possible; general adaptive intensity sampling is known.",
+        "impact": "Addresses one shared scalar rate cannot adapt to local continuation needs.",
+        "effect": "Baseline: One common rate. Target: Material reduction from within-tree rate allocation, unmeasured; a research target, not an observed speedup."
+      },
+      "evidence": [
+        "https://arxiv.org/abs/1307.2218"
+      ],
+      "evidence_status": "provisional",
+      "feasibility": {
+        "status": "conditional",
+        "reason": "Sampler and nonexplosion/moment proof need a new clock contract.",
+        "first_test": "Solve a two-code exact control before modifying the production sampler."
+      },
+      "baseline": "One common rate",
+      "success_criterion": "Material reduction from within-tree rate allocation, unmeasured",
+      "cost": "Bounded proof/control experiment first; implementation cost uncertain outside current run.",
+      "fallback": "Retain the simpler baseline and record the failed mechanism or missing bound.",
+      "value": 1000,
+      "high_value": false
+    },
+    {
+      "id": "D05",
+      "title": "Alternative lifetime distributions",
+      "gap": "Exponential clocks may poorly match branch-time contributions.",
+      "hypothesis": "A bounded clock family can improve the measured moment at a fixed representation.",
+      "novelty": 1,
+      "impact": 10,
+      "effect": 1,
+      "rationale": {
+        "novelty": "Other lifetime distributions are already standard branching literature.",
+        "impact": "Addresses exponential clocks may poorly match branch-time contributions.",
+        "effect": "Baseline: Exponential clock. Target: Magnitude unknown; require improvement at equal estimator target; a research target, not an observed speedup."
+      },
+      "evidence": [
+        "https://arxiv.org/abs/1603.01727"
+      ],
+      "evidence_status": "provisional",
+      "feasibility": {
+        "status": "conditional",
+        "reason": "Density/survival likelihood and integrability comparison need rederivation.",
+        "first_test": "Compare a non-exponential exact control with its matching oracle."
+      },
+      "baseline": "Exponential clock",
+      "success_criterion": "Magnitude unknown; require improvement at equal estimator target",
+      "cost": "Bounded proof/control experiment first; implementation cost uncertain outside current run.",
+      "fallback": "Retain the simpler baseline and record the failed mechanism or missing bound.",
+      "value": 10,
+      "high_value": false
+    },
+    {
+      "id": "D06",
+      "title": "Change tree representation",
+      "gap": "Raw derivatives can create expensive or high-weight alternatives.",
+      "hypothesis": "Normalized or reduced mechanisms can enlarge the finite-moment regime.",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "Recent normalized-code stability work is close; difference needs a fresh detailed comparison.",
+        "impact": "Addresses raw derivatives can create expensive or high-weight alternatives.",
+        "effect": "Baseline: Raw semilinear coding tree. Target: A materially larger certifiable horizon; a research target, not an observed speedup."
+      },
+      "evidence": [
+        "https://arxiv.org/html/2502.17853v2"
+      ],
+      "evidence_status": "provisional",
+      "feasibility": {
+        "status": "conditional",
+        "reason": "New representation must be distinguished from changing sampling of the old one.",
+        "first_test": "Compare one polynomial PDE using matched explicit moment systems."
+      },
+      "baseline": "Raw semilinear coding tree",
+      "success_criterion": "A materially larger certifiable horizon",
+      "cost": "Bounded proof/control experiment first; implementation cost uncertain outside current run.",
+      "fallback": "Retain the simpler baseline and record the failed mechanism or missing bound.",
+      "value": 1000,
+      "high_value": false
+    },
+    {
+      "id": "D07",
+      "title": "Conditional expectation or control variates",
+      "gap": "Random choices with computable conditionals add avoidable variance.",
+      "hypothesis": "Integrating selected branch randomness can lower variance with explicit weights.",
+      "novelty": 1,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "Rao–Blackwellization and branching variance reduction are established.",
+        "impact": "Addresses random choices with computable conditionals add avoidable variance.",
+        "effect": "Baseline: Current raw tree draw. Target: Material variance decrease, total cost unresolved; a research target, not an observed speedup."
+      },
+      "evidence": [
+        "https://arxiv.org/abs/1701.07660"
+      ],
+      "evidence_status": "provisional",
+      "feasibility": {
+        "status": "conditional",
+        "reason": "An economical conditional expectation and matched implementation are needed.",
+        "first_test": "One-step exact control with unbiased conditional replacement."
+      },
+      "baseline": "Current raw tree draw",
+      "success_criterion": "Material variance decrease, total cost unresolved",
+      "cost": "Bounded proof/control experiment first; implementation cost uncertain outside current run.",
+      "fallback": "Retain the simpler baseline and record the failed mechanism or missing bound.",
+      "value": 100,
+      "high_value": false
+    },
+    {
+      "id": "D08",
+      "title": "Extend horizon with controlled restarting",
+      "gap": "Current certificates do not establish a broad useful time window.",
+      "hypothesis": "Certified local solves and controlled restart can extend usable horizons.",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "Local polynomial/Picard branching extensions already exist.",
+        "impact": "Addresses current certificates do not establish a broad useful time window.",
+        "effect": "Baseline: Single-horizon branching estimator. Target: Material longer horizon with a rigorous error budget; a research target, not an observed speedup."
+      },
+      "evidence": [
+        "https://arxiv.org/abs/1612.06790"
+      ],
+      "evidence_status": "provisional",
+      "feasibility": {
+        "status": "conditional",
+        "reason": "Boundary-value approximation errors must propagate with controlled bias.",
+        "first_test": "Two-slab exact control with explicitly tracked interface error."
+      },
+      "baseline": "Single-horizon branching estimator",
+      "success_criterion": "Material longer horizon with a rigorous error budget",
+      "cost": "Bounded proof/control experiment first; implementation cost uncertain outside current run.",
+      "fallback": "Retain the simpler baseline and record the failed mechanism or missing bound.",
+      "value": 1000,
+      "high_value": false
+    },
+    {
+      "id": "D09",
+      "title": "Honest uncertainty under heavy tails",
+      "gap": "Empirical standard errors can miss rare weights.",
+      "hypothesis": "Moment certificates plus robust estimation can yield honest finite-sample bounds.",
+      "novelty": 1,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "Robust mean bounds are well-established; coding-tree packaging alone is modest.",
+        "impact": "Addresses empirical standard errors can miss rare weights.",
+        "effect": "Baseline: Uncertified empirical standard error. Target: A useful coverage guarantee rather than merely narrower bars; a research target, not an observed speedup."
+      },
+      "evidence": [
+        "https://arxiv.org/html/1906.04280v1"
+      ],
+      "evidence_status": "provisional",
+      "feasibility": {
+        "status": "feasible",
+        "reason": "Existing finite second-moment bounds support standard robust-mean constructions.",
+        "first_test": "Check confidence radius against a certified heavy-tail control."
+      },
+      "baseline": "Uncertified empirical standard error",
+      "success_criterion": "A useful coverage guarantee rather than merely narrower bars",
+      "cost": "Bounded proof/control experiment first; implementation cost uncertain outside current run.",
+      "fallback": "Retain the simpler baseline and record the failed mechanism or missing bound.",
+      "value": 100,
+      "high_value": false
+    },
+    {
+      "id": "D10",
+      "title": "Transfer tuned trees into high-dimensional deep training",
+      "gap": "Short-horizon 1D guarantees have not transferred to training labels.",
+      "hypothesis": "Certified or safer labels can improve deep-branching accuracy under matched budgets.",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 1,
+      "rationale": {
+        "novelty": "Potential specific combination, but no broad novelty claim is justified.",
+        "impact": "Addresses short-horizon 1d guarantees have not transferred to training labels.",
+        "effect": "Baseline: Existing reproduced deep-branching baseline. Target: Effect is presently unknown; a research target, not an observed speedup."
+      },
+      "evidence": [
+        "https://arxiv.org/abs/2203.03234"
+      ],
+      "evidence_status": "provisional",
+      "feasibility": {
+        "status": "conditional",
+        "reason": "Dimensional moment bounds and training-error separation are missing.",
+        "first_test": "Small fixed network with independent tuning/evaluation labels."
+      },
+      "baseline": "Existing reproduced deep-branching baseline",
+      "success_criterion": "Effect is presently unknown",
+      "cost": "Bounded proof/control experiment first; implementation cost uncertain outside current run.",
+      "fallback": "Retain the simpler baseline and record the failed mechanism or missing bound.",
+      "value": 100,
+      "high_value": false
+    }
+  ],
+  "ranked": [
+    "D03",
+    "D01",
+    "D04",
+    "D06",
+    "D08",
+    "D07",
+    "D09",
+    "D10",
+    "D02",
+    "D05"
+  ],
+  "shortlist": [
+    "D03"
+  ],
+  "provisional_candidates": [],
+  "conditional_candidates": [],
+  "summary": {
+    "idea_count": 10,
+    "high_value_count": 1,
+    "shortlist_count": 1,
+    "provisional_candidate_count": 0,
+    "conditional_candidate_count": 0,
+    "top_limit": 3
+  }
+}

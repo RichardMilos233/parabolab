@@ -1,0 +1,7 @@
+import EstimatorIntegrity.TuplePolicy
+
+#print axioms EstimatorIntegrity.binary_policy_improvement
+#print axioms EstimatorIntegrity.two_thirds_policy_improvement
+#print axioms EstimatorIntegrity.robust_binary_policy_improvement
+#print axioms EstimatorIntegrity.prefixed_policy_bounds_iterates
+#print axioms EstimatorIntegrity.policy_improvement_iSup

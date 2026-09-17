@@ -1,0 +1,8 @@
+$ cd /Users/michael/Desktop/NTU/fyp/parabolab/formal
+$ /Users/michael/.elan/bin/lake env lean /Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-16-certified-tuple-policy/lean/TuplePolicyAxioms.lean
+'EstimatorIntegrity.binary_policy_improvement' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.two_thirds_policy_improvement' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.robust_binary_policy_improvement' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.prefixed_policy_bounds_iterates' depends on axioms: [propext, Quot.sound]
+'EstimatorIntegrity.policy_improvement_iSup' depends on axioms: [propext, Quot.sound]
+[exit 0]
