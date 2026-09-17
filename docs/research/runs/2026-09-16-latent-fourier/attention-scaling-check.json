@@ -1,0 +1,30 @@
+{
+  "scope": "Untrained architecture identity and analytic initial-time derivative; no training or rollout",
+  "torch_version": "2.13.0",
+  "seed": 17,
+  "dtype": "float64",
+  "model": {
+    "d_model": 16,
+    "n_heads": 4,
+    "n_layers": 1,
+    "sensors": 101
+  },
+  "alpha": 1.7,
+  "beta": 0.12,
+  "encoder_max_abs_difference": 6.661338147750939e-16,
+  "affine_prediction_max_abs_residual": 2.7755575615628914e-17,
+  "allen_cahn_initial_derivative": [
+    {
+      "amplitude": 0.2,
+      "measured_cos3_derivative": -0.0020000000000000126,
+      "analytic_cos3_derivative": -0.0020000000000000005
+    },
+    {
+      "amplitude": 0.4,
+      "measured_cos3_derivative": -0.016000000000000018,
+      "analytic_cos3_derivative": -0.016000000000000004
+    }
+  ],
+  "cos3_derivative_ratio_a04_over_a02": 7.999999999999958,
+  "homogeneous_architecture_prediction_ratio": 2.0
+}

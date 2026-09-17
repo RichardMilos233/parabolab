@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "run_id": "2026-09-16-latent-fourier",
+  "skill_version": "0.2.0",
+  "mode": "focused-feasibility",
+  "status": "literature-and-feasibility-complete",
+  "selected_direction": "PDE latent spectral interpretation and intervention, grounded in latest main operator models",
+  "project_revision": "9b02157",
+  "budget": null,
+  "stages": {
+    "context": "complete",
+    "literature": "bounded-primary-source-search-complete",
+    "theory": "elementary-arguments-and-counterexamples-reviewed",
+    "numerics": "one-architecture-identity-and-initial-derivative-check-complete",
+    "model_training": "not-requested-or-run",
+    "lean": "out-of-scope",
+    "correspondence_review": "complete-with-stated-limits",
+    "presentation": "complete"
+  },
+  "model_use": [
+    {"task_id": "root", "role": "research-synthesis-code-inspection-small-diagnostic", "model": "gpt-6-astra", "reasoning_effort": "inherited"},
+    {"task_id": "T01/T04", "role": "PDE-literature-and-independent-latest-main-code-review", "model": "gpt-6-astra", "reasoning_effort": "max"},
+    {"task_id": "T02", "role": "GAN-literature-and-identifiability-review", "model": "gpt-6-astra", "reasoning_effort": "max"},
+    {"task_id": "T03/T05", "role": "translation-theory-and-final-independent-report-review", "model": "gpt-6-astra", "reasoning_effort": "max"}
+  ],
+  "routing_note": "No production implementation or training was commissioned; root performed the small corroborative architecture check alongside the mathematical investigation.",
+  "commands_run": [
+    "git switch -c codex/preserve-tuple-policy-2026-09-16",
+    "git fetch origin main",
+    "git worktree add /private/tmp/parabolab-latest-main-2026-09-16 main",
+    "git merge --ff-only origin/main (in the independent worktree)",
+    "git switch -c codex/latent-fourier-research (in the independent worktree)",
+    "git worktree move /private/tmp/parabolab-latest-main-2026-09-16 /Users/michael/Desktop/NTU/fyp/parabolab-latent-fourier",
+    "SHA-256 preservation comparison: all 49 original dirty files unchanged",
+    "python3 check_attention_scaling.py --repo <latest checkout>: failed because system Python lacked matplotlib",
+    "/opt/miniconda3/envs/parabolab/bin/python check_attention_scaling.py --repo <latest checkout>: succeeded; torch 2.13.0; matplotlib used temporary cache"
+  ],
+  "evidence": ["07-report.md", "03-claims.md", "check_attention_scaling.py", "attention-scaling-check.json", "09-independent-review.md"],
+  "unresolved_for_next_phase": ["Obtain trained checkpoints", "Validate periodic Allen-Cahn reference", "Execute held-out latent interventions and amplitude scans"],
+  "next_action": "Use 08-next.md for a separately scoped implementation phase; current requested literature report is complete."
+}
