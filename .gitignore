@@ -17,3 +17,4 @@ examples/nn_corpus/
 !examples/phi_operator.csv
 !examples/backbone_benchmark.csv
 !examples/backbone_benchmark_precheck.json
+examples/latent_modal_control_run/

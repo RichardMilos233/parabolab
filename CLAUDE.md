@@ -1,18 +1,29 @@
 # parabolab — agent notes
 
+## Worktree responsibility
+- This checkout, on `research/nn-latent-fourier`, owns the stage after Monte
+  Carlo label generation: NN regression, backbone comparison, training and
+  evaluation, operator learning, encoder/decoder design, and latent/Fourier
+  representation or control experiments.
+- Branching Monte Carlo mechanisms and mathematical theory are upstream and
+  belong in `../parabolab` on `local/mc-tuple-policy`: estimator laws, moments,
+  integrability, rate/tuple policies, certificates, proofs and Lean coverage.
+- If NN work needs a new MC capability, specify the producer contract, change
+  and verify it in the MC worktree, then update the consumer here separately.
+  Do not develop or revise MC mathematical claims on this branch.
+
 ## Current direction
-- The project remains a PDE solver/reproduction framework. Active research
-  improves branching estimation through the exponential clock rate `lambda`
-  and tuple probabilities `q_c(Z)`. Prioritize recursive dependencies,
-  variance reduction, approximation-error control and mathematical guarantees.
-  Runtime is supporting evidence, not the main criterion for choosing a
-  research direction. Start at [the documentation map](docs/documentation-map.md)
-  and [the current research guide](docs/research/README.md).
-- A parallel research line studies the neural-network stage on top of the
-  sampler (`docs/research/nn-fitting/README.md`, gotchas 38–48). It is
-  confined to `parabolab/deep/` — its PDE builders live in
-  `deep/families.py`, not `library.py` — so it never conflicts with sampler,
-  mechanism or rate work. Keep that isolation when extending it.
+- Active research in this worktree studies the neural-network stage on top of
+  the sampler (`docs/research/nn-fitting/README.md`, gotchas 38–48): regression
+  backbones, operator learning and latent/Fourier modal control. Most NN code
+  remains confined to `parabolab/deep/`; keep its data/label boundary with the
+  upstream MC implementation explicit.
+- The inherited sampler, mechanisms and mathematical records provide the MC
+  labels and provenance. Read them when interpreting data reliability, but
+  make new MC theory or estimator changes in the sibling MC worktree.
+- The remaining MC-specific bullets below are inherited interface and
+  interpretation constraints for consuming labels; they are not active
+  research directions in this worktree.
 - Multidimensional/multifactor Merton is inactive research. Keep its proofs,
   symbolic checks, existing examples, and general multidimensional support;
   do not resume that roadmap as the default next task.

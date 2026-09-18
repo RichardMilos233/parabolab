@@ -1,9 +1,14 @@
 # parabolab
 
+> Worktree scope: `research/nn-latent-fourier` owns NN fitting after Monte
+> Carlo label generation, including backbones, operator learning and
+> latent/Fourier modal control. Branching Monte Carlo mathematics is developed
+> in the sibling `../parabolab` checkout on `local/mc-tuple-policy`.
+
 Coding-tree Monte Carlo and deep branching solvers for fully nonlinear
 parabolic PDEs. The paper reproductions and common solver interface are
-implemented; current research improves the branching estimator by selecting
-the clock rate $\lambda$ and tuple probabilities $q_c(Z)$ to reduce variance.
+implemented; this branch uses that MC layer as the upstream source of labels
+for its neural-network research.
 The PDE-solving workflow stays the same: define a PDE, choose solver or
 sampling settings, and compare estimates on a common grid.
 
@@ -373,4 +378,3 @@ trained on coding-tree labels, and a six-family backbone benchmark
 post-hoc one). Findings, evidence and code map:
 [docs/research/nn-fitting/README.md](docs/research/nn-fitting/README.md).
 Import `parabolab.deep` explicitly; the top-level package stays torch-free.
-

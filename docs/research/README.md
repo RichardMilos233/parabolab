@@ -1,15 +1,23 @@
 # Research: reliable branching-estimator algorithms
 
-**Current scope, 16 September 2026:** improve branching Monte Carlo PDE
-estimation through exponential-rate selection, tuple proposals, moment
-control and verifiable approximation error. Algorithmic and mathematical
-contributions are primary. Runtime measurements support practical claims;
-they do not determine whether a theoretical question is worth studying.
+> Worktree routing, 17 September 2026: this is the inherited MC research
+> guide and remains the authority for interpreting label reliability. New MC
+> mathematics is developed in sibling `../parabolab` on
+> `local/mc-tuple-policy`. The active work in this checkout is documented in
+> the [NN fitting guide](nn-fitting/README.md) and belongs to
+> `research/nn-latent-fourier`.
 
-The completed work is on local `main`. The
-[integration record](results/integration-2026-09-16.md) records the last
-code/test/witness checks. For every documentation area and its status, use
-[the repository documentation map](../documentation-map.md).
+The MC scope is branching Monte Carlo PDE estimation through exponential-rate
+selection, tuple proposals, moment control and verifiable approximation error.
+Algorithmic and mathematical contributions are primary. Runtime measurements
+support practical claims; they do not determine whether a theoretical question
+is worth studying.
+
+The MC baseline incorporated into this branch is documented by the
+[integration record](results/integration-2026-09-16.md), which records its
+code/test/witness checks. Current MC development state lives in the sibling
+worktree. For every documentation area and its status, use the
+[repository documentation map](../documentation-map.md).
 
 ## The central problem
 

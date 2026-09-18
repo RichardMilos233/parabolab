@@ -18,12 +18,28 @@ see its forward for why).
 
 from __future__ import annotations
 
+from dataclasses import dataclass, replace
+
 import numpy as np
 import torch
 from torch import nn
 
 from .condnet import ConditionedNet
 from .setnet import SetDenoiser
+
+
+@dataclass(frozen=True)
+class DeepONetState:
+    latent: torch.Tensor
+
+    @property
+    def physical_scale(self) -> torch.Tensor:
+        return torch.ones(
+            self.latent.shape[0], 1, dtype=self.latent.dtype,
+            device=self.latent.device)
+
+    def with_latent(self, latent: torch.Tensor) -> "DeepONetState":
+        return replace(self, latent=latent)
 
 
 class _OperatorBase(nn.Module):
@@ -69,12 +85,18 @@ class DeepONet(_OperatorBase):
         self.trunk = _mlp([2, width, width, p])
         self.bias = nn.Parameter(torch.zeros(()))
 
-    def forward(self, phi_grid, cond, q_tx):
+    def encode(self, phi_grid, cond) -> DeepONetState:
         c = self._scaled_cond(cond)
         b = self.branch(torch.cat([phi_grid / self.phi_scale, c], -1))    # (B,p)
+        return DeepONetState(b)
+
+    def decode(self, state: DeepONetState, q_tx):
         t = torch.nn.functional.gelu(self.trunk((q_tx - self.in_mean) / self.in_std))  # (B,Q,p)
-        out = (t * b.unsqueeze(1)).sum(-1) + self.bias
+        out = (t * state.latent.unsqueeze(1)).sum(-1) + self.bias
         return out * self.out_std + self.out_mean
+
+    def forward(self, phi_grid, cond, q_tx):
+        return self.decode(self.encode(phi_grid, cond), q_tx)
 
 
 class SpectralConv1d(nn.Module):
@@ -142,18 +164,27 @@ class AttnOperator(_OperatorBase):
         grid = np.linspace(-8.0, 8.0, 101) if grid is None else np.asarray(grid, dtype=float)
         self.register_buffer("grid", torch.as_tensor(grid, dtype=torch.float32))
 
-    def forward_tokens(self, xs, phi, cond, q_tx):     # xs (B,S), phi (B,S)
+    def encode_tokens(self, xs, phi, cond):
         B, S = phi.shape
         ctx_tx = torch.stack([torch.zeros_like(xs), xs], -1)
         if self.n_cond == 0:
             c = torch.zeros(B, 1, dtype=phi.dtype, device=phi.device)
         else:
             c = self._scaled_cond(cond)
-        return self.core(ctx_tx, phi, torch.zeros_like(phi), c, q_tx)
+        return self.core.encode(ctx_tx, phi, torch.zeros_like(phi), c)
+
+    def decode(self, state, q_tx):
+        return self.core.decode(state, q_tx)
+
+    def forward_tokens(self, xs, phi, cond, q_tx):     # xs (B,S), phi (B,S)
+        return self.decode(self.encode_tokens(xs, phi, cond), q_tx)
+
+    def encode(self, phi_grid, cond):
+        xs = self.grid.expand(phi_grid.shape[0], -1)
+        return self.encode_tokens(xs, phi_grid, cond)
 
     def forward(self, phi_grid, cond, q_tx):
-        xs = self.grid.expand(phi_grid.shape[0], -1)
-        return self.forward_tokens(xs, phi_grid, cond, q_tx)
+        return self.decode(self.encode(phi_grid, cond), q_tx)
 
 
 class CoeffMLP(_OperatorBase):

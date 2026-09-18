@@ -1,10 +1,13 @@
 # Documentation map and status
 
-Reviewed 16 September 2026. The active research concerns **branching Monte
-Carlo algorithms and mathematical guarantees**: recursive moments, scalar
-rate selection, tuple proposals, integrability and approximation error.
-Runtime is supporting evidence. Multifactor Merton is an inactive research
-application; its examples and historical mathematical records are retained.
+Reviewed 17 September 2026. This worktree's active research concerns
+**neural-network fitting after Monte Carlo label generation**: regression
+backbones, operator learning, encoder/decoder design and latent/Fourier modal
+control. The inherited branching Monte Carlo implementation and mathematical
+records remain necessary provenance for label reliability. New MC estimator
+theory belongs in the sibling `parabolab` worktree on `local/mc-tuple-policy`.
+Multifactor Merton remains an inactive mathematical research application; its
+examples and historical records are retained.
 
 Use the current guides for decisions and interfaces. Read dated reports as
 evidence for the specified run, and archived plans as provenance rather
@@ -18,12 +21,12 @@ mathematical investigation was performed in this documentation cleanup.
 | [Repository README](../README.md) | Installation, solver workflow, current research and historical paper reproductions |
 | [Agent/project notes](../CLAUDE.md) | Current scope and conventions, followed by labeled historical implementation notes |
 | [Demo guide](../demo/README.md) | Runnable examples and interpretation limits for numerical plots |
-| [Research guide](research/README.md) | Main question, achieved guarantees, code mapping and open algorithmic questions |
+| [MC research guide](research/README.md) | Inherited MC theory and label-reliability authority; new MC work belongs in the sibling worktree |
 | [Proof registry](research/proof-registry.md) | Exact mathematical status, hypotheses, code links and Lean coverage |
 | [Formal guide](../formal/README.md) | Building the pinned Lean project and understanding its limits |
-| [Neural-network fitting guide](research/nn-fitting/README.md) | The parallel NN research line: what network sits on the sampler and what it maps; findings, code map, limits |
+| [Neural-network fitting guide](research/nn-fitting/README.md) | Active worktree guide: what network sits on the sampler and what it maps; findings, code map, limits |
 
-## Neural-network fitting line (parallel research)
+## Neural-network fitting line (active in this worktree)
 
 Confined to `parabolab/deep/`; does not change the sampler. The
 [NN fitting guide](research/nn-fitting/README.md) lists the established

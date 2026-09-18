@@ -1,13 +1,17 @@
 # Neural-network fitting research line
 
-**Status, 17 September 2026.** A second research line, parallel to the
-branching-estimator work in [the research guide](../README.md): what
-network should sit on top of the coding-tree sampler, and what should it be
-asked to map. It lives entirely in `parabolab/deep/` (plus the
-backwards-compatible `allen_cahn_nd(shift=)` parameter in `library.py`);
-it does not change the sampler, mechanisms, rates or proposals. Branches:
-`research/nn-architecture` (merged), `research/nn-backbone-benchmark` (the
-six-family backbone benchmark, the last row below).
+**Status, 17 September 2026.** This worktree is the active home of the stage
+after Monte Carlo label generation: what network should sit on top of the
+coding-tree sampler, what it should map, and whether its latent representation
+supports meaningful modal control. The current branch is
+`research/nn-latent-fourier`; earlier `research/nn-architecture` and
+`research/nn-backbone-benchmark` work is incorporated here.
+
+NN code lives primarily in `parabolab/deep/` (plus the backwards-compatible
+`allen_cahn_nd(shift=)` parameter in `library.py`). The sibling `../parabolab`
+checkout on `local/mc-tuple-policy` owns the sampler, mechanisms, rates,
+proposals and their mathematical theory. Changes crossing that boundary use an
+explicit MC producer contract and a separate NN consumer change.
 
 ## What is established
 
@@ -60,7 +64,20 @@ specs into the git-ignored `examples/nn_corpus/`.
 
 ## Next
 
-Tuning spec (pending confirmation): the cross-attention operator with
+The research objective is now accepted, independently of backbone and training:
+accurate PDE prediction with a latent representation whose Fourier modal
+edits have quantitative effects predictable before decoding. Require fixed,
+reusable control rules on unseen samples, and distinguish output-field edits
+from the response to changed PDE conditions. See the
+[current target](latent-modal-control-target.md), especially sections 0 and 8.
+The [first implementation plan](latent-modal-control-plan.md) specifies an
+analytic heat-equation experiment, explicit latent interfaces and checkpoints,
+fixed post-training control calibration, held-out intervention checks, and
+evidence gates before MC labels or nonlinear PDE extensions. Its implementation
+and tiny CPU smoke are complete; GPU pilot and scientific training have not run.
+Permanent architecture changes remain evidence-dependent.
+
+Earlier tuning candidates (deferred while modal control is evaluated): the cross-attention operator with
 θ-only conditioning, with the FNO-1D — the pre-registered winner — as the
 control at every rung and a confirmatory first gate on fresh held-out
 seeds; sharpen the cosine reference (M ≈ 10⁶); find a

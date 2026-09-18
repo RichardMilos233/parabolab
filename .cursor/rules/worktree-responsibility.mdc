@@ -1,0 +1,21 @@
+---
+description: Keep neural-network fitting here and Monte Carlo mathematics in the parabolab worktree
+alwaysApply: true
+---
+
+# Worktree responsibility
+
+This checkout is the source of truth for neural-network fitting after Monte
+Carlo label generation. Its active branch is `research/nn-latent-fourier`.
+
+- Work here on regression backbones, training and evaluation, operator
+  learning, encoder/decoder design, latent representations, Fourier/modal
+  control, NN datasets and NN research reports.
+- Treat branching Monte Carlo sampling and mathematical theory as an upstream
+  producer owned by `../parabolab` on `local/mc-tuple-policy`.
+- Do not change mechanisms, estimator laws, moment or integrability theory,
+  rate/tuple-policy optimization, certificates, proofs or Lean results here.
+- If NN work needs a new MC capability, define the required producer contract,
+  implement and verify it in `../parabolab`, then update the consumer here in
+  a separate change. Do not silently merge unrelated MC branch work into this
+  branch.

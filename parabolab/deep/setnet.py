@@ -14,8 +14,29 @@ of the context and equivariant to affine changes of the y scale.
 
 from __future__ import annotations
 
+from dataclasses import dataclass, replace
+
 import torch
 from torch import nn
+
+
+@dataclass(frozen=True)
+class SetLatentState:
+    """Encoded context plus every statistic needed to decode it."""
+
+    latent: torch.Tensor
+    mu_x: torch.Tensor
+    s_x: torch.Tensor
+    mu_y: torch.Tensor
+    s_y: torch.Tensor
+    params: torch.Tensor
+
+    @property
+    def physical_scale(self) -> torch.Tensor:
+        return self.s_y
+
+    def with_latent(self, latent: torch.Tensor) -> "SetLatentState":
+        return replace(self, latent=latent)
 
 
 class SetDenoiser(nn.Module):
@@ -66,9 +87,8 @@ class SetDenoiser(nn.Module):
         s = ctx_y.std(dim=1, keepdim=True).clamp_min(1e-8)
         return mu, s
 
-    def forward(self, ctx_tx, ctx_y, ctx_se, params, q_tx):
+    def encode(self, ctx_tx, ctx_y, ctx_se, params) -> SetLatentState:
         B, N, _ = ctx_tx.shape
-        Q = q_tx.shape[1]
         mu_x = ctx_tx.mean(dim=1, keepdim=True)
         s_x = ctx_tx.std(dim=1, keepdim=True).clamp_min(1e-6)   # (B,1,d+1)
         mu_y, s_y = self.context_stats(ctx_y)                    # (B,1)
@@ -81,11 +101,17 @@ class SetDenoiser(nn.Module):
             p.unsqueeze(1).expand(B, N, -1),
         ], dim=-1)
         h = self.encoder(self.ctx_embed(ctx))                    # (B,N,D)
+        return SetLatentState(h, mu_x, s_x, mu_y, s_y, p)
 
-        q = self.q_embed(torch.cat([(q_tx - mu_x) / s_x,
-                                    p.unsqueeze(1).expand(B, Q, -1)], dim=-1))
-        hn = self.norm_c(h)
+    def decode(self, state: SetLatentState, q_tx):
+        B, Q, _ = q_tx.shape
+        q = self.q_embed(torch.cat([(q_tx - state.mu_x) / state.s_x,
+                                    state.params.unsqueeze(1).expand(B, Q, -1)], dim=-1))
+        hn = self.norm_c(state.latent)
         attn, _ = self.cross(self.norm_q(q), hn, hn)
         q = q + attn
         out = self.head(q).squeeze(-1)                           # (B,Q) scaled
-        return out * s_y + mu_y
+        return out * state.s_y + state.mu_y
+
+    def forward(self, ctx_tx, ctx_y, ctx_se, params, q_tx):
+        return self.decode(self.encode(ctx_tx, ctx_y, ctx_se, params), q_tx)
