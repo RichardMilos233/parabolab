@@ -1,10 +1,13 @@
 # Documentation map and status
 
-Reviewed 16 September 2026. The active research concerns **branching Monte
-Carlo algorithms and mathematical guarantees**: recursive moments, scalar
-rate selection, tuple proposals, integrability and approximation error.
+Reviewed 17 September 2026. This worktree's active research concerns
+**branching Monte Carlo algorithms and mathematical guarantees**: recursive
+moments, scalar rate selection, tuple proposals, integrability and
+approximation error.
 Runtime is supporting evidence. Multifactor Merton is an inactive research
 application; its examples and historical mathematical records are retained.
+NN fitting and latent/Fourier research are assigned to the sibling
+`parabolab-latent-fourier` worktree rather than developed here.
 
 Use the current guides for decisions and interfaces. Read dated reports as
 evidence for the specified run, and archived plans as provenance rather

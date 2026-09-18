@@ -1,10 +1,16 @@
 # Research: reliable branching-estimator algorithms
 
-**Current scope, 16 September 2026:** improve branching Monte Carlo PDE
+**Current scope, 17 September 2026:** this worktree owns branching Monte Carlo
+and its mathematical theory. Improve branching Monte Carlo PDE
 estimation through exponential-rate selection, tuple proposals, moment
 control and verifiable approximation error. Algorithmic and mathematical
 contributions are primary. Runtime measurements support practical claims;
 they do not determine whether a theoretical question is worth studying.
+
+Neural-network fitting, backbone comparison, operator learning and
+latent/Fourier work now live in the sibling `parabolab-latent-fourier`
+checkout on `research/nn-latent-fourier`. Keep MC data and interfaces usable
+for that consumer, but do not develop the NN research line in this worktree.
 
 The earlier certificate/profile work is on local `main`. The
 [integration record](results/integration-2026-09-16.md) records the last

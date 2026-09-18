@@ -1,5 +1,17 @@
 # parabolab — agent notes
 
+## Worktree responsibility
+- This checkout, on `local/mc-tuple-policy`, owns branching Monte Carlo and
+  its mathematical theory: mechanisms, moments, integrability, variance and
+  rate/tuple-policy optimization, certificates, proofs and Lean coverage.
+- New NN fitting, backbone, operator-learning and latent/Fourier work belongs
+  in the sibling checkout `../parabolab-latent-fourier` on
+  `research/nn-latent-fourier`. Keep historical NN reproductions working, but
+  do not extend that research line here.
+- For a change that spans both areas, specify and verify the MC-side producer
+  contract here, then make the NN consumer change separately in the sibling
+  worktree. Preserve the branch boundary rather than merging unrelated work.
+
 ## Current direction
 - The project remains a PDE solver/reproduction framework. Active research
   improves branching estimation through the exponential clock rate `lambda`
