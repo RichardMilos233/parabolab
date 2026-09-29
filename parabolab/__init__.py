@@ -52,6 +52,15 @@ from .majority import (
     majority_branch,
     sample_majority,
 )
+from .tilted import (
+    SemilinearProblem,
+    SupEnvelope,
+    TiltedSamples,
+    TiltedSupersolutionMC,
+    build_supersolution,
+    majorant_horizon,
+    sample_tilted,
+)
 from .blowup import TSweep, integrability_edge, sweep_T
 from .moments import MomentQuadrature, finite_depth_moment_1d
 from .rate_optimization import (
@@ -103,6 +112,13 @@ __all__ = [
     "Id",
     "MCResult",
     "MajoritySamples",
+    "SemilinearProblem",
+    "SupEnvelope",
+    "TiltedSamples",
+    "TiltedSupersolutionMC",
+    "build_supersolution",
+    "majorant_horizon",
+    "sample_tilted",
     "MomentQuadrature",
     "ParabolicPDE",
     "SemilinearMechanism",
