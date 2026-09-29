@@ -1,0 +1,257 @@
+{
+  "scope": "Final research deliverables, current production/formal sources and integration documentation; manifest excludes itself and Python bytecode caches. Historical initial-evidence limitations are recorded in 05-numerics.md.",
+  "files": {
+    "docs/research/README.md": {
+      "sha256": "2be6b034d1a9f644fb55b5eb7a83298acda40ce51da9322a7e7f84967fab38af",
+      "bytes": 10675
+    },
+    "docs/research/proof-registry.md": {
+      "sha256": "01e7739a7a593a53c8883dfdf73427ed1f39eb9cc8cf910ede55f77745b68ca4",
+      "bytes": 91569
+    },
+    "docs/research/runs/2026-09-25-long-horizon/00-context.md": {
+      "sha256": "3729b32c6596a9eef34a2cb7ebbed0874a197102e6409fb07e5cd2cb1e9226e2",
+      "bytes": 2883
+    },
+    "docs/research/runs/2026-09-25-long-horizon/01-ideas.md": {
+      "sha256": "93f7d6f69cda0067c0d0a1f31ab391961b282eeb02e0feb64aadd3ce1b81a2cd",
+      "bytes": 14962
+    },
+    "docs/research/runs/2026-09-25-long-horizon/02-plan.md": {
+      "sha256": "0ce2896975d5b7a22a7e848bb037202c4881876660cb7557ab5c9128ae234679",
+      "bytes": 1951
+    },
+    "docs/research/runs/2026-09-25-long-horizon/03-claims.md": {
+      "sha256": "2839807c02981ad8525a84f55b4e966f114370f00d3b064675741ca813dd0e22",
+      "bytes": 4044
+    },
+    "docs/research/runs/2026-09-25-long-horizon/04-theory.md": {
+      "sha256": "cc2e6163aa1545fa69d6ec22ebd026521727d2aadae82f893b47007b29637727",
+      "bytes": 10980
+    },
+    "docs/research/runs/2026-09-25-long-horizon/05-numerics.md": {
+      "sha256": "0ac8a0f1048e9495593f8f49043777d1b0cc5ecda992ef2f97aebd8027930da6",
+      "bytes": 11036
+    },
+    "docs/research/runs/2026-09-25-long-horizon/06-formalization.md": {
+      "sha256": "e4402db11363cbaf4214491641f514728ada394080e944525e61dc2d5978990e",
+      "bytes": 3351
+    },
+    "docs/research/runs/2026-09-25-long-horizon/07-report.md": {
+      "sha256": "ce1fe1973359af7b06070c386c44c7d56c15e020c411519c4f425b37151564d5",
+      "bytes": 11019
+    },
+    "docs/research/runs/2026-09-25-long-horizon/08-next.md": {
+      "sha256": "e57ae66f2a4a3a569bad669923ef51443c4d86203d8e75819d09d10aee891cd6",
+      "bytes": 4293
+    },
+    "docs/research/runs/2026-09-25-long-horizon/09-independent-theory-review.md": {
+      "sha256": "74f15b218e7372852bb25ecf00984b40842cf084097e00dfc72ca5a5a33d9f79",
+      "bytes": 18703
+    },
+    "docs/research/runs/2026-09-25-long-horizon/10-correspondence-review.md": {
+      "sha256": "efde1e039fc337b5ff8c1387c7ccd29e220f0cdfec9ecaae2087beff0eaaffa9",
+      "bytes": 9239
+    },
+    "docs/research/runs/2026-09-25-long-horizon/ideas.json": {
+      "sha256": "49a47a0b782718440b77f3c49396516b4677b126714869683375a3a6f44b161a",
+      "bytes": 26256
+    },
+    "docs/research/runs/2026-09-25-long-horizon/initial-user-changes.patch": {
+      "sha256": "3d79bb6278305d292681cd548749d487375028fc11bd1d1c61857155604f5d20",
+      "bytes": 7471
+    },
+    "docs/research/runs/2026-09-25-long-horizon/lean/LongHorizonAxioms.lean": {
+      "sha256": "d5acb1ace15e109b8e4fadcba9c0b99584113c10591cb1cd740686af5bcdccda",
+      "bytes": 720
+    },
+    "docs/research/runs/2026-09-25-long-horizon/lean/algebra-build.log": {
+      "sha256": "97ce3c3f6b49b75864c6a94961707969b80fce25dada9845dbd1e6769b8c86dc",
+      "bytes": 362
+    },
+    "docs/research/runs/2026-09-25-long-horizon/lean/axioms.log": {
+      "sha256": "7277eb6dfc86278c8823c6b3585f04537dd9675196f5466c83d3d81c38667b9a",
+      "bytes": 1428
+    },
+    "docs/research/runs/2026-09-25-long-horizon/lean/build.log": {
+      "sha256": "3d0624b9dd770bf8935affc22f60807c19679d0c484a2c8721e562f29a361244",
+      "bytes": 1039
+    },
+    "docs/research/runs/2026-09-25-long-horizon/lean/toolchain.log": {
+      "sha256": "d105323b9d571110fe11d5943d2b918014405b3b9b17b358f6ac59bd1c52a3ea",
+      "bytes": 856
+    },
+    "docs/research/runs/2026-09-25-long-horizon/long-horizon-overview.pdf": {
+      "sha256": "97ba5b619c3081cad8506c527cf56c62a7c8b7cccc4963f12f84ae01a1f1b628",
+      "bytes": 45962
+    },
+    "docs/research/runs/2026-09-25-long-horizon/long-horizon-overview.png": {
+      "sha256": "832e3d454e967fbf41e2bb3fcc44b866bb1c2a69ea93be74acb233c0783933bf",
+      "bytes": 368127
+    },
+    "docs/research/runs/2026-09-25-long-horizon/numerics/audit_bounded.py": {
+      "sha256": "016dee44c43e1fc180c5ecc7dc40e494f8a0bc68694c3495fac98ea4dd349229",
+      "bytes": 8607
+    },
+    "docs/research/runs/2026-09-25-long-horizon/numerics/boundary-certificates.json": {
+      "sha256": "35c155e6c4a99738bb844f59ce722c52844785fb97c69183df624728d5acc53a",
+      "bytes": 7530
+    },
+    "docs/research/runs/2026-09-25-long-horizon/numerics/bounded-audit-reproducible.json": {
+      "sha256": "dc64cda2a9ecbfe6f5c55712cba3656baef3f6257aa2004cea57270bc762a711",
+      "bytes": 1999
+    },
+    "docs/research/runs/2026-09-25-long-horizon/numerics/bounded-audit-reproducible.log": {
+      "sha256": "0ee403462d5a1c0ce23b853a7b66be2e5c307ffa6ff807f6bd4bb467c00a6762",
+      "bytes": 250
+    },
+    "docs/research/runs/2026-09-25-long-horizon/numerics/bounded-audit.json": {
+      "sha256": "3205375990d84094980696368b3190221e2a07d563b382819ca20f9561ff74fb",
+      "bytes": 898
+    },
+    "docs/research/runs/2026-09-25-long-horizon/numerics/bounded-execution.log": {
+      "sha256": "59157b6f36b98469649981abfbcaa9d3dcac8e74bcee0966b768085640bf2f4c",
+      "bytes": 9138
+    },
+    "docs/research/runs/2026-09-25-long-horizon/numerics/bounded-initial-execution-manifest.json": {
+      "sha256": "409d947760161c6c8f5a9699da06ba913e12f093b57443ea80e1aee565dccd07",
+      "bytes": 1150
+    },
+    "docs/research/runs/2026-09-25-long-horizon/numerics/bounded-raw.npz": {
+      "sha256": "a05f404895daf22a02abb4056c15975b41d414ef3b5ec0cd4267199c30e4b74a",
+      "bytes": 972703
+    },
+    "docs/research/runs/2026-09-25-long-horizon/numerics/bounded-results.json": {
+      "sha256": "a6788084236680b2fdae919c8d3582259895be69ed247be336cda866c2b28fea",
+      "bytes": 72833
+    },
+    "docs/research/runs/2026-09-25-long-horizon/numerics/bounded-theory-checks.json": {
+      "sha256": "6f9a8dde10f0c12467fd23b0585e3f526907bfc02834d9958b5bb5f9f08e864e",
+      "bytes": 5200
+    },
+    "docs/research/runs/2026-09-25-long-horizon/numerics/bounded-theory-checks.log": {
+      "sha256": "71be37553171c8e4d0917ff8e789b787b83ebcfbe70beaa915f0e48c52ab45ec",
+      "bytes": 471
+    },
+    "docs/research/runs/2026-09-25-long-horizon/numerics/bounded_experiment.py": {
+      "sha256": "a95d3b369c94f50451db55b1e4b1851fa435f326b8f5c20f1e309fac5bb59db7",
+      "bytes": 9009
+    },
+    "docs/research/runs/2026-09-25-long-horizon/numerics/check_bounded_theory.py": {
+      "sha256": "85ab07ccdef67702afd697dee21c13bca7ad8dbe10abaf70e47bd459814ee717",
+      "bytes": 4117
+    },
+    "docs/research/runs/2026-09-25-long-horizon/numerics/prior-flat-verify.log": {
+      "sha256": "e4577758e0d21925d0eaa6b0c8187261160f71c0f2d1ae58461c5d0d451f4e4a",
+      "bytes": 271
+    },
+    "docs/research/runs/2026-09-25-long-horizon/numerics/protocol-amendment-before-code.md": {
+      "sha256": "f5d9f1bd54d279f4060d0aca4b0b141d34069cc14389546cf663c20693d3a124",
+      "bytes": 625
+    },
+    "docs/research/runs/2026-09-25-long-horizon/numerics/protocol.json": {
+      "sha256": "bc5f3bc10162d726bf52a3ae548614fe8c632edbae3d316fa8ae2bb40bc60ddf",
+      "bytes": 3343
+    },
+    "docs/research/runs/2026-09-25-long-horizon/numerics/raw-experiment.log": {
+      "sha256": "f874bea761f483603a3eb7e5a7d8aca54776bbdddc717c6bd4818c570a08795c",
+      "bytes": 3189
+    },
+    "docs/research/runs/2026-09-25-long-horizon/numerics/raw-results.json": {
+      "sha256": "8da1bd5ae952e8fcb7f97862cfb168e115a281be7d12f8daf70fb76a5f8612d7",
+      "bytes": 192183
+    },
+    "docs/research/runs/2026-09-25-long-horizon/numerics/raw-samples.npz": {
+      "sha256": "7a3990ad4aa4a62e34951655ce2e253dd0b1b8dbb11af0357d24ce0abde734a5",
+      "bytes": 47504
+    },
+    "docs/research/runs/2026-09-25-long-horizon/numerics/raw-verify.log": {
+      "sha256": "1b0a8427e6e6522c617f486fc6cf3f83eba8f4dc9a50e4cf809171092c4331ba",
+      "bytes": 623
+    },
+    "docs/research/runs/2026-09-25-long-horizon/numerics/raw_experiment.py": {
+      "sha256": "fdd7603a87a5bc472fadcdd8fd8aa2ed0cabe8dc141170a6a2ae14153f2693dc",
+      "bytes": 52603
+    },
+    "docs/research/runs/2026-09-25-long-horizon/numerics/wave-protocol.json": {
+      "sha256": "d1dc77b7d04b8bd4af45d1b6e72ecf473c74b26446f07132cb6796471063214d",
+      "bytes": 1296
+    },
+    "docs/research/runs/2026-09-25-long-horizon/numerics/wave-results.json": {
+      "sha256": "e2360f67b883044a9542bccec5de5b37dcf55f5eb7e281413878eacb3eb5de05",
+      "bytes": 75089
+    },
+    "docs/research/runs/2026-09-25-long-horizon/plot.log": {
+      "sha256": "5907d29f4db9462fa0a49f4bb2979807e4a3d70a10777effacc647c53ad55be1",
+      "bytes": 110
+    },
+    "docs/research/runs/2026-09-25-long-horizon/plot_raw_rates.py": {
+      "sha256": "4b291cd91973191acfb313ed092ac871e33a3e475b6b6e0fad4f5682694e4b13",
+      "bytes": 2356
+    },
+    "docs/research/runs/2026-09-25-long-horizon/plot_results.py": {
+      "sha256": "8dc5fef7a01f2a280ce90731d88e7e2ebbcd0033c07d7ea81dab78290897ca59",
+      "bytes": 4151
+    },
+    "docs/research/runs/2026-09-25-long-horizon/python-tests.log": {
+      "sha256": "c73da61c0880c375a1a63b7c7a112cabb7cd7e4218b83e0d24c5f84810fd4264",
+      "bytes": 356
+    },
+    "docs/research/runs/2026-09-25-long-horizon/raw-rate-long-horizon.pdf": {
+      "sha256": "46f6cdbc4e1f594c4d4ac7b657cda6da6460b44c860633be78631784443eeabd",
+      "bytes": 36304
+    },
+    "docs/research/runs/2026-09-25-long-horizon/raw-rate-long-horizon.png": {
+      "sha256": "22de7e69b7a8a50a591cbfa0faad204236052f9ecddde6b484ad55260e4f1611",
+      "bytes": 189203
+    },
+    "docs/research/runs/2026-09-25-long-horizon/raw-rate-plot.log": {
+      "sha256": "d65843949c819d0bad0f9cb76fd7adda24af274e8f52c242f63fe6503e8910c6",
+      "bytes": 110
+    },
+    "docs/research/runs/2026-09-25-long-horizon/run.json": {
+      "sha256": "93d45406acbb23b3cc516c3d4907c3ce16ab22c71b2fbfb5326f62cde9fe3445",
+      "bytes": 9223
+    },
+    "docs/research/runs/2026-09-25-long-horizon/scores.json": {
+      "sha256": "bd68ee7075586e552c672b37b099245e4681e6ec8c8aeb937aca378821f1393e",
+      "bytes": 27984
+    },
+    "formal/EstimatorIntegrity/LongHorizon.lean": {
+      "sha256": "d16e308bbcda7fbcc5bcfc1706b0f428b147873e26ed7853f55a85a2d5874b8f",
+      "bytes": 3756
+    },
+    "formal/EstimatorIntegrity/LongHorizonAlgebra.lean": {
+      "sha256": "639f2c38008f02e1c37d2c435d79c0f355afffe2d6e4d76d3bfb044b05ec3d14",
+      "bytes": 3170
+    },
+    "formal/EstimatorIntegrity.lean": {
+      "sha256": "be577b8be0ead3b506bc7dc27cd4fcd31a8e95ab4760e2f94fa9673ad89e5d1b",
+      "bytes": 432
+    },
+    "formal/README.md": {
+      "sha256": "6e2d70ce1b59342638a08807c26db1ecbbd9220819d6550d7b2d0174cbafef08",
+      "bytes": 2771
+    },
+    "parabolab/__init__.py": {
+      "sha256": "16f522f56b0c2d898a383c43d24f561cac85b2347ff39b06b40546c7ea1bf953",
+      "bytes": 3496
+    },
+    "parabolab/library.py": {
+      "sha256": "b37aebf5940be5832ed30986165cc53dc9d7bdade13faa37919a262c92612638",
+      "bytes": 21961
+    },
+    "parabolab/majority.py": {
+      "sha256": "00a8fa89bbf318b17bc5f587892b8237741f712a845951abffc7e7f8df42e3a3",
+      "bytes": 9729
+    },
+    "parabolab/pde.py": {
+      "sha256": "3aa55239626e5bd09a0520aa09225361a2bd296be3054ebfa28be1e468a7ea52",
+      "bytes": 14304
+    },
+    "tests/test_majority.py": {
+      "sha256": "9e1397bfc1da476e5f86716d0ab3d7de67f009700740f12530c01336b4d4e308",
+      "bytes": 6705
+    }
+  }
+}

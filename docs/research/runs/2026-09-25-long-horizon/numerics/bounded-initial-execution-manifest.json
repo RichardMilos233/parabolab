@@ -1,0 +1,14 @@
+{
+  "status": "retained provenance limitation",
+  "initial_execution_started_log_time_utc": "2026-09-25T17:05:49.424447+00:00",
+  "initial_execution_completed_log_time_utc": "2026-09-25T17:05:57.256995+00:00",
+  "initial_reported_total_seconds_rounded": 7.818,
+  "rows": 60,
+  "samples_per_row": 2048,
+  "completed_roots": 122880,
+  "initial_raw_sha256": "a05f404895daf22a02abb4056c15975b41d414ef3b5ec0cd4267199c30e4b74a",
+  "canonical_raw_sha256": "a05f404895daf22a02abb4056c15975b41d414ef3b5ec0cd4267199c30e4b74a",
+  "raw_archives_byte_identical": true,
+  "intervening_source_change": "Added finite-positive PDE terminal-time validation and documented the trusted reaction marker and global terminal-bound contracts; valid scheduled draws were unchanged.",
+  "limitation": "The canonical rerun overwrote the initial JSON and execution log before the instruction to retain them arrived. Exact initial per-row timings and the initial JSON bytes cannot be reconstructed and are not fabricated. The complete first-run console output remains in the task transcript. The deterministic raw archive hash was printed by both executions and is identical."
+}

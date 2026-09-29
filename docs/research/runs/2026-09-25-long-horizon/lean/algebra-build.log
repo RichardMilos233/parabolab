@@ -1,0 +1,9 @@
+Command: lake build EstimatorIntegrity.LongHorizonAlgebra
+Working directory: /Users/michael/Desktop/NTU/fyp/parabolab/formal
+Date: 2026-09-25
+
+✔ [3006/3006] Built EstimatorIntegrity.LongHorizonAlgebra (42s)
+Build completed successfully (3006 jobs).
+
+Audit: no `sorry` and no `IsRawAbsoluteTrajectory` declaration in
+EstimatorIntegrity/LongHorizonAlgebra.lean.

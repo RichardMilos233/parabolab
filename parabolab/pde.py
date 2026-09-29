@@ -52,6 +52,9 @@ class ParabolicPDE:
     d: int = 1
     exact_solution: Optional[Callable[[float, float], float]] = None
     name: str = field(default="")
+    # Explicit compatibility marker for representation-specific solvers.
+    # Generic callbacks are deliberately not classified by numerical probes.
+    reaction_kind: Optional[str] = None
 
     def __post_init__(self) -> None:
         if self.d != 1:

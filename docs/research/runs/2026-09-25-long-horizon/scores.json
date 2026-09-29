@@ -1,0 +1,354 @@
+{
+  "search_date": "2026-09-25",
+  "rubric": "value = novelty * impact * effect, each in {1,10,100}; high value strictly >1000",
+  "selection_note": "Conservative initial slate. D01 is the strongest bounded project investigation, but no idea is simultaneously searched, feasible and strictly above 1000. The automated high-value shortlist must remain empty. Execution of the user-directed long-horizon study is distinguished from a high-value selection.",
+  "ideas": [
+    {
+      "id": "D01",
+      "title": "Exact proposal-independent absolute-integrability ceiling for the raw flat coding tree",
+      "gap": "The prior exact L2 threshold covers common exponential lambda and static tuple probabilities; it does not tell whether adaptive or nonexponential proposals can remove the raw expansion's long-time obstruction.",
+      "hypothesis": "For flat Allen-Cahn phi=1/2, all proper nonexplosive full-support proposals for the same completed raw tree expansion have the same absolute first moment, whose exact critical time is the reciprocal-cubic integral from s'=3/8+s/4+3s²/2+s³; the Id root diverges at that boundary.",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "A narrow exact necessary-and-sufficient benchmark reduction beyond the inspected sufficient coding-tree criteria; change-of-measure invariance and scalar ODE moment control themselves are established. Historical priority is unestablished.",
+        "impact": "Decides whether an entire family of raw clock and tuple optimizers can fix the recurring integrability problem, while the explicit threshold is limited to the flat benchmark.",
+        "effect": "A materially stronger decision guarantee than the existing fixed-exponential L2 ceiling. No new solvable horizon or measured algorithmic improvement follows from the obstruction alone, so effect 100 is not justified."
+      },
+      "evidence": [
+        "https://arxiv.org/pdf/2201.03882",
+        "https://arxiv.org/pdf/2502.17853",
+        "https://arxiv.org/pdf/2502.10644",
+        "https://arxiv.org/pdf/1603.01727"
+      ],
+      "evidence_status": "searched",
+      "closest_prior_work": "Nguwi-Penent-Privault Theorem 4.2/Proposition 4.3; Huang-Privault 2026 Propositions 2.5-2.6 and Remark 2.4; prior local run C8 exact L2 reduction.",
+      "prerequisites": "Completed-tree density cancellation, positive least-fixed-point identification, flat code closure, scalar ODE separation, rational integral bounds.",
+      "hardest_obstacle": "Prove divergence of the actual root and cover proposal support/completion precisely, rather than infer explosion from a failed envelope or descendant bound.",
+      "feasibility": {
+        "status": "feasible",
+        "reason": "The previous C8 proof supplies the finite-code reduction pattern and rational verifier infrastructure; no unknown spatial continuation is needed.",
+        "first_test": "Reconstruct every absolute-weight coefficient directly from the raw mechanism and check the resulting cubic against independent symbolic algebra."
+      },
+      "measurable_success": "An independently reviewed iff threshold, a certified strict horizon enclosure, and a precise theorem scope including clocks/tuples covered and representation changes excluded.",
+      "cost_range": "One to three focused proof/formalization iterations; scalar numerical checks should take seconds to minutes on CPU, with conventional stochastic correspondence dominating uncertainty.",
+      "failure_fallback": "If the all-proposal statement cannot be justified, retain the exact common-clock result and explicitly report the missing support or least-solution step.",
+      "value": 1000,
+      "high_value": false
+    },
+    {
+      "id": "D02",
+      "title": "Bounded ternary conditional voting with certified variance versus work rate selection",
+      "gap": "Known majority voting removes variance explosion for bounded Allen-Cahn data, but a cheapest bounded clock is not automatically the clock minimizing variance times computational work.",
+      "hypothesis": "For F_lambda=(1+1/lambda)(x1+x2+x3)/3-x1x2x3/lambda, prove the sharp boundedness threshold lambda>=2, monotone second moments in lambda, and characterize a useful fixed-budget rate objective.",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "The possible extension is the conditional-vote moment/work comparison, not the established all-horizon voting representation. Closest optimization literature remains incomplete, so the score is provisional.",
+        "impact": "Supplies a bounded comparator for flat and nonconstant Allen-Cahn and potentially related invariant-interval polynomial reactions.",
+        "effect": "Against the already known lambda=2 voting baseline, the target is a material fixed-budget gain, presently unmeasured. Infinite-to-finite variance versus the raw tree is inherited prior art and cannot justify the new part's effect score."
+      },
+      "evidence": [
+        "https://arxiv.org/pdf/1607.07563",
+        "https://arxiv.org/pdf/2209.03435"
+      ],
+      "evidence_status": "provisional",
+      "closest_prior_work": "Etheridge-Freeman-Penington Theorem 2.2; An-Henderson-Ryzhik Theorem 3.2 and adjustable Bernstein voting probabilities.",
+      "prerequisites": "Bounded terminal data, matching diffusion normalization, conditionally independent children, finite-cost moment equations and a complete closest-prior comparison.",
+      "hardest_obstacle": "Increasing lambda can reduce variance while expected nodes grow exponentially; boundedness alone supplies no optimum for their product.",
+      "feasibility": {
+        "status": "conditional",
+        "reason": "Boundedness and mean identity are straightforward, but a validated full variance/work objective and novelty comparison remain unresolved.",
+        "first_test": "Derive the moment source independently and test whether lambda=2 actually minimizes variance times expected nodes in a nonconstant wave case."
+      },
+      "measurable_success": "A proved order relation and a validated rate interval or a retained counterexample to a proposed optimum, compared at equal total work with the known lambda=2 method.",
+      "cost_range": "Two to five research iterations plus a bounded CPU experiment of roughly 1e4-1e6 root estimates; long horizons must first be screened by expected node cost.",
+      "failure_fallback": "Implement lambda=2 only as a clearly attributed comparator and leave rate optimization open.",
+      "value": 1000,
+      "high_value": false
+    },
+    {
+      "id": "D03",
+      "title": "Certified restart composition with continuation-error propagation",
+      "gap": "Short-time certified lambda/q policies do not currently compose into a long-time error guarantee when terminal data at a restart are approximated.",
+      "hypothesis": "A restart grid with certified local moments and a stability modulus yields an explicit global error budget combining continuation bias and Monte Carlo variance, with local rates chosen under that budget.",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "Local polynomial/Picard time slicing is established; the proposed extension is a certificate compatible with this derivative-coded producer and its local rate/tuple policy.",
+        "impact": "Addresses long-horizon reuse of existing short-time estimators for a meaningful PDE class without requiring a new learned solver.",
+        "effect": "Targets a verified global tolerance beyond the one-shot certified horizon. No such bound or measured cost has yet been established here, so no exceptional effect claim is warranted."
+      },
+      "evidence": [
+        "https://arxiv.org/pdf/1612.06790",
+        "https://arxiv.org/pdf/1701.07660"
+      ],
+      "evidence_status": "searched",
+      "closest_prior_work": "Bouchard-Tan-Warin-Zou Remark 2.3 and Theorem 2.4, including clipping and local explosion bounds.",
+      "prerequisites": "Validated continuation function and derivatives on all reachable states, a stability modulus, independent product factors or an explicit bias analysis.",
+      "hardest_obstacle": "The current derivative-coded tree needs continuation derivatives as well as values; noisy reuse inside nonlinear products creates bias.",
+      "feasibility": {
+        "status": "conditional",
+        "reason": "A certified continuation representation is missing; a pointwise Monte Carlo cache cannot supply it.",
+        "first_test": "Compose two slabs for the nonconstant wave using exact continuation first, then perturb it by a known deterministic envelope and check the proposed error bound."
+      },
+      "measurable_success": "A two-slab rigorous end-to-end error bound with all continuation/derivative errors included, followed by a horizon beyond the baseline certificate.",
+      "cost_range": "Several proof and discretization iterations; tens of minutes to hours of CPU for validated spatial continuation, strongly dimension dependent.",
+      "failure_fallback": "Retain a conditional composition theorem with explicit missing continuation hypotheses; do not present noisy interpolation as an unbiased restart.",
+      "value": 1000,
+      "high_value": false
+    },
+    {
+      "id": "D04",
+      "title": "Code- and time-dependent hazard policy with full recursive moment control",
+      "gap": "Current rate tuning selects one scalar lambda. Different codes and remaining horizons have different branching contributions and terminal survival costs.",
+      "hypothesis": "A certified finite-state hazard policy can improve the full-tree variance/cost frontier before the absolute-integrability ceiling while retaining correct likelihood weights and descendant dependence.",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "Different value/gradient lifetime laws already appear in Warin. The extension would be an explicit policy-improvement certificate for this derivative-coded full recursion.",
+        "impact": "Improves the main project's clock-selection problem over a range of integrable states and codes.",
+        "effect": "Targets a material gain over the best common scalar rate; cannot exceed a proposal-independent absolute ceiling and has no established quantitative gain yet."
+      },
+      "evidence": [
+        "https://arxiv.org/pdf/1701.07660",
+        "https://arxiv.org/pdf/1603.01727",
+        "https://arxiv.org/pdf/2502.10644"
+      ],
+      "evidence_status": "searched",
+      "closest_prior_work": "Warin §2.1.3 mixed lifetime laws; general-lifetime branching constructions and current full-tree tuple policy comparison.",
+      "prerequisites": "Integrated hazard likelihood, positivity/support, nonexplosion, and validated all-code moment bounds for every policy decision.",
+      "hardest_obstacle": "Changing a hazard changes both survival and every descendant; the existing frozen-continuation local lambda theorem is insufficient.",
+      "feasibility": {
+        "status": "conditional",
+        "reason": "The sampling API and validated operator must be extended together after a correct policy theorem is fixed.",
+        "first_test": "Solve a two-code flat system with two constant rates and check independent tree-density differentiation before introducing time dependence."
+      },
+      "measurable_success": "A certified full-tree objective decrease relative to reoptimized common lambda under the same mean, support and cost convention.",
+      "cost_range": "Two to six focused iterations; small ODE optimization costs minutes, but all-state validation may be substantially larger.",
+      "failure_fallback": "Publish a two-rate diagnostic and the exact obstruction to extending the local theorem, without claiming a certified adaptive optimum.",
+      "value": 1000,
+      "high_value": false
+    },
+    {
+      "id": "D05",
+      "title": "Continuation-aware tuple policy with a certified nonconstant gain",
+      "gap": "The prior nonconstant wave gate proves only a small short-time gain; terminal proxies do not capture long continuation dependence.",
+      "hypothesis": "Sharper continuation-product intervals can certify a meaningful full-tree improvement over the existing terminal proxy at a larger, still integrable horizon.",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "The exact policy comparison is established in the previous run; a new contribution would be a nonconstant validated continuation construction and material certified result.",
+        "impact": "Directly advances the active tuple-policy research and reusable certificate machinery.",
+        "effect": "Targets at least a 10 percent certified variance decrease over the terminal proxy at the same rate in a nonconstant regime; this remains a falsifiable target, not evidence."
+      },
+      "evidence": [
+        "https://arxiv.org/pdf/1603.01727",
+        "https://arxiv.org/pdf/2502.17853"
+      ],
+      "evidence_status": "searched",
+      "closest_prior_work": "Prior run C1-C7, plus positive moment majorants in Henry-Labordere et al. and Huang-Privault.",
+      "prerequisites": "A finite old-policy all-code envelope and certified lower/upper continuation-product bounds before the shared branch position is observed.",
+      "hardest_obstacle": "Near explosion, envelope widths become large, and gates may reject every proposed change even when a floating calculation looks favorable.",
+      "feasibility": {
+        "status": "conditional",
+        "reason": "The required long-horizon all-code continuation enclosure is not available.",
+        "first_test": "Attempt a rigorous two-label F1 gate beyond T=.05 using one fixed incumbent envelope and retain all inconclusive instances."
+      },
+      "measurable_success": "A root-level certified variance reduction against the terminal proxy, including uncertainty in both policies and the common mean.",
+      "cost_range": "Several enclosure-design iterations; seconds to hours per validated spatial matrix depending on horizon and mesh.",
+      "failure_fallback": "Report a gate conservatism result or inability to enclose, without interpreting a rejected witness as absence of improvement or infinite variance.",
+      "value": 1000,
+      "high_value": false
+    },
+    {
+      "id": "D06",
+      "title": "Nonexponential lifetime comparison within the raw representation",
+      "gap": "The current exact certificates are exponential-clock specific; alternative waiting-time densities can change second moments and tree cost before any absolute ceiling.",
+      "hypothesis": "A small admissible family of lifetimes can improve a fixed-horizon second-moment/work objective relative to the best exponential member, with correct survival and density factors.",
+      "novelty": 1,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "Arbitrary lifetime densities, gamma clocks and tailored mixed densities are explicit in the inspected literature. Merely adding them is a reproduction/engineering extension.",
+        "impact": "Would test how much the exponential restriction costs in branching estimators.",
+        "effect": "A material gain is possible before the L1 ceiling but unmeasured; no lifetime choice can repair a divergent unchanged absolute expansion."
+      },
+      "evidence": [
+        "https://arxiv.org/pdf/1603.01727",
+        "https://arxiv.org/pdf/1701.07660",
+        "https://arxiv.org/pdf/2502.10644"
+      ],
+      "evidence_status": "searched",
+      "closest_prior_work": "Henry-Labordere et al. §2; Warin mixed exponential/gamma laws; Huang-Privault §8 lifetime examples.",
+      "prerequisites": "Exact or validated densities and survival functions, a Volterra moment solver, sampler support/nonexplosion, and cost accounting.",
+      "hardest_obstacle": "Leaving exponential clocks loses the current finite-dimensional autonomous moment ODE and its rational certificate structure.",
+      "feasibility": {
+        "status": "conditional",
+        "reason": "Sampler modifications are routine but a validated Volterra objective is a new dependency.",
+        "first_test": "Check a binary scalar nonlinearity with an analytically tractable alternative lifetime, including its survival contribution."
+      },
+      "measurable_success": "A validated fixed-cost comparison against reoptimized exponential clocks; a negative result is acceptable.",
+      "cost_range": "One to four implementation/proof iterations; seconds to minutes for scalar diagnostics, longer for certified renewal integrals.",
+      "failure_fallback": "Keep the comparison diagnostic and the density-cancellation theorem; do not infer universal horizon extension from finite samples.",
+      "value": 100,
+      "high_value": false
+    },
+    {
+      "id": "D07",
+      "title": "Exact resummation of unary or known linear contributions",
+      "gap": "Raw tree weights can accumulate large contributions that cancel only after averaging. Changing a proposal cannot alter this total variation, but regrouping analytically equivalent terms can.",
+      "hypothesis": "A Feynman-Kac treatment of a selected linear part and a reduced residual branching expansion lowers the absolute-moment growth while preserving the PDE and code correspondence.",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "Linear Feynman-Kac absorption and renormalization are established. A distinct raw functional-code regrouping with a certified changed absolute threshold could be an extension, but closest prior comparison remains incomplete.",
+        "impact": "Could address the representation-level obstruction instead of optimizing within it.",
+        "effect": "Targets a provably larger integrability interval than the raw tree; no quantitative gain or general construction has yet been established."
+      },
+      "evidence": [
+        "https://arxiv.org/pdf/1701.07660",
+        "https://arxiv.org/pdf/2502.17853"
+      ],
+      "evidence_status": "provisional",
+      "closest_prior_work": "Warin §2.2 renormalization; classical linear Feynman-Kac term and functional-code reorganization in Huang-Privault.",
+      "prerequisites": "An exact regrouping identity, code derivative transformation, integrability justification for exchanging sums, and new moment equations.",
+      "hardest_obstacle": "Formal cancellation of a non-absolutely convergent expansion is not by itself a valid interchange; equivalence must be established through the PDE or a convergent construction.",
+      "feasibility": {
+        "status": "conditional",
+        "reason": "No concrete closed reduced mechanism has yet been fixed for the desired nonconstant data.",
+        "first_test": "Derive the flat resummed system and compare its exact absolute critical time with D01 before changing the sampler."
+      },
+      "measurable_success": "A rigorous mean identity plus a strictly larger certified absolute-integrability interval for a named raw baseline.",
+      "cost_range": "Several theoretical iterations; scalar tests are cheap, but code closure and formal correspondence are uncertain.",
+      "failure_fallback": "Retain the exact transformed PDE and a negative result showing that its absolute majorant did not improve.",
+      "value": 1000,
+      "high_value": false
+    },
+    {
+      "id": "D08",
+      "title": "Deterministic reference residual as a branching control variate",
+      "gap": "The full solution may be large while a well-chosen residual is small; current raw proposals do not exploit a deterministic approximate solution with a known residual.",
+      "hypothesis": "Writing u=v+w for a deterministic reference v yields a residual PDE whose forcing and nonlinear coefficients can be bounded, allowing smaller branching moments without hiding approximation bias.",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "Control variates and subtraction/renormalization are established; a derivative-coded residual certificate may be a scoped extension but direct closest literature has not been completed.",
+        "impact": "Could transfer cheap PDE information into a reusable unbiased correction estimator without entering the sibling NN research line.",
+        "effect": "Targets a material variance reduction or certified horizon extension against the uncentered raw tree, conditional on measured residual bounds."
+      },
+      "evidence": [
+        "https://arxiv.org/pdf/1701.07660",
+        "https://arxiv.org/pdf/1612.06790"
+      ],
+      "evidence_status": "provisional",
+      "closest_prior_work": "Warin terminal subtraction and renormalization; local polynomial/Picard continuation approximations in Bouchard et al. A dedicated residual-tree literature comparison is still required.",
+      "prerequisites": "A fixed reference v with computable PDE residual, terminal error, derivatives, and independent training/tuning data if stochastic fitting is introduced later.",
+      "hardest_obstacle": "Small pointwise residual does not guarantee small derivative-code moments; reference construction and its cost must enter the comparison.",
+      "feasibility": {
+        "status": "conditional",
+        "reason": "No nontrivial reference with rigorous derivative residual bounds is currently available.",
+        "first_test": "Use a deliberately imperfect analytic reference with known nonzero residual; verify exact correction against the flat or wave solution."
+      },
+      "measurable_success": "A certified variance/cost gain after reference construction, with nonzero correction and the same target PDE mean.",
+      "cost_range": "Two to six iterations plus a modest deterministic reference calculation; uncertified surrogate development is outside the bounded first test.",
+      "failure_fallback": "Expose the failed derivative bound or a residual counterexample rather than using the exact solution as a trivial zero-variance benchmark.",
+      "value": 1000,
+      "high_value": false
+    },
+    {
+      "id": "D09",
+      "title": "Multilevel Picard baseline for globally controlled long-horizon semilinear problems",
+      "gap": "One-shot raw coding-tree tuning may not be the right estimator class after its moment barrier; the project needs a principled recursive baseline with an explicit approximation-error budget.",
+      "hypothesis": "A literature-faithful multilevel Picard baseline on an appropriately bounded/Lipschitz Allen-Cahn formulation provides a meaningful comparison of attainable accuracy and total work at larger horizons.",
+      "novelty": 1,
+      "impact": 10,
+      "effect": 100,
+      "rationale": {
+        "novelty": "This is a reproduction of an established algorithm, not a new direction in stochastic representation theory.",
+        "impact": "Provides a useful semilinear alternative and an external baseline for judging whether raw-clock research remains worthwhile.",
+        "effect": "The known method changes the applicable estimator class and supplies approximation/complexity guarantees under its assumptions; this large established capability does not make a reproduction novel, nor imply polynomial dependence on horizon."
+      },
+      "evidence": [
+        "https://arxiv.org/pdf/1607.03295",
+        "https://link.springer.com/article/10.1007/s42985-021-00089-5"
+      ],
+      "evidence_status": "searched",
+      "closest_prior_work": "E-Hutzenthaler-Jentzen-Kruse, multilevel Picard; published Corollaries 3.18-3.19 under smoothness and derivative-growth assumptions.",
+      "prerequisites": "A formulation satisfying the chosen theorem's assumptions, an explicit truncation/discretization error budget, and faithful multilevel sampling.",
+      "hardest_obstacle": "Raw cubic Allen-Cahn is not globally Lipschitz on R; boundedness of the true solution alone does not justify unexamined clipping of all random iterates.",
+      "feasibility": {
+        "status": "feasible",
+        "reason": "A bounded reproduction is credible from inspected primary formulas, but it is a separate estimator and does not optimize existing raw lambda.",
+        "first_test": "Reproduce one published semilinear example with a known solution and verify the assumed coefficient regularity before adapting Allen-Cahn."
+      },
+      "measurable_success": "A fixed-tolerance, total-cost baseline with all bias and sampling errors reported, including constants that grow with time.",
+      "cost_range": "Several implementation iterations; benchmark costs range from minutes to hours depending on multilevel depth and tolerance.",
+      "failure_fallback": "Retain a documented applicability comparison instead of presenting an unsupported raw-cubic complexity theorem.",
+      "value": 1000,
+      "high_value": false
+    },
+    {
+      "id": "D10",
+      "title": "Validated upper and lower explosion boundaries for nonconstant moments",
+      "gap": "The exact flat law does not locate the traveling-wave integrability or variance boundary, and failed spatial upper envelopes remain inconclusive.",
+      "hypothesis": "A positive spatial subsolution can certify divergence while an independently validated supersolution certifies finiteness, giving a bracket for a nonconstant root moment boundary.",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "Positive moment comparison is established; a sharp root-level nonconstant bracket for this code system would be a specific extension beyond current sufficient bounds.",
+        "impact": "Would make the most relevant nonconstant long-horizon benchmark mathematically interpretable and guide policies before optimization.",
+        "effect": "Targets a useful certified boundary bracket, rather than a noisy empirical blow-up threshold; no narrow bracket or practical gain is established yet."
+      },
+      "evidence": [
+        "https://arxiv.org/pdf/1603.01727",
+        "https://arxiv.org/pdf/2502.17853"
+      ],
+      "evidence_status": "searched",
+      "closest_prior_work": "Henry-Labordere et al. positive ODE moment bounds; Huang-Privault derivative-growth criteria; prior wave envelopes and strictness proof.",
+      "prerequisites": "A global spatial comparison principle, certified lower subsolutions and upper supersolutions, boundary treatment and root propagation of divergence.",
+      "hardest_obstacle": "Diffusion transports mass; descendant explosion or a spatially averaged ODE is not automatically root divergence at a requested finite point.",
+      "feasibility": {
+        "status": "conditional",
+        "reason": "No validated root-level lower blow-up comparison is currently available for the wave.",
+        "first_test": "Construct and test one analytic spatial subsolution whose positive cone is invariant under the full shared-position moment operator."
+      },
+      "measurable_success": "A rigorous finite/infinite horizon bracket at a specified nonconstant root, with mesh and tail effects enclosed separately.",
+      "cost_range": "Potentially many mathematical iterations; validated PDE calculations may take hours, and the lower comparison could fail independently of compute.",
+      "failure_fallback": "Retain a one-sided finiteness result and explicitly keep the opposite boundary unknown.",
+      "value": 1000,
+      "high_value": false
+    }
+  ],
+  "ranked": [
+    "D01",
+    "D02",
+    "D03",
+    "D04",
+    "D05",
+    "D07",
+    "D08",
+    "D09",
+    "D10",
+    "D06"
+  ],
+  "shortlist": [],
+  "provisional_candidates": [],
+  "conditional_candidates": [],
+  "summary": {
+    "idea_count": 10,
+    "high_value_count": 0,
+    "shortlist_count": 0,
+    "provisional_candidate_count": 0,
+    "conditional_candidate_count": 0,
+    "top_limit": 3
+  }
+}

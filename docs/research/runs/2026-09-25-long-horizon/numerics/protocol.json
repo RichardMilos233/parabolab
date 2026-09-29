@@ -1,0 +1,45 @@
+{
+  "frozen_before_numerical_implementation": true,
+  "sequence": "Conventional proofs, then Lean build/axiom audit, then implement and execute this protocol",
+  "theoretical_targets": ["raw flat absolute integrability boundary", "raw common-rate second-moment feasibility", "bounded all-horizon ternary estimator", "variance versus exponential work"],
+  "raw_flat": {
+    "phi": 0.5,
+    "p": [0.5, 0.95],
+    "horizons": [0.05, 0.1, 0.25, 0.5, 0.65, 0.7, 0.75, 0.9, 0.95, 1.0, 1.5, 2.0],
+    "rate_baselines": ["1", "0.745", "-log(0.95)/T", "numerical full-moment optimum on its exact finite interval"],
+    "moment_method": "six-code flat ODE; analytical prior threshold classifies infeasible rates before solving; optimization is floating diagnostic, not a new certificate",
+    "checks": ["reuse/recheck prior exact rational C enclosure", "independent improper quadrature", "ODE tolerance refinement", "closed-form new absolute threshold vs quadrature", "scalar-ODE vs six-code continuation"]
+  },
+  "bounded_sampling": {
+    "problems": ["flat phi=0.5", "existing traveling wave"],
+    "wave_grid": [-2.0, 0.0, 2.0],
+    "additional_wave_state": "x=1.5*T, the moving front with exact u=-0.5, so long-time accuracy cannot be explained solely by saturation near -1",
+    "flat_grid": [0.0],
+    "rate2_horizons": [0.05, 0.25, 0.5, 1.0, 1.5, 2.0],
+    "additional_rates": [2.5, 3.0],
+    "additional_rate_horizons": [0.25, 0.5, 1.0],
+    "n_samples_per_point": 2048,
+    "scheduled_rows": 60,
+    "seed_base": 20260925,
+    "tree": "full untruncated ternary Brownian tree, shared child birth position; no depth/node truncation, no outlier removal, complete each prescheduled root",
+    "leaf": "phi at Brownian terminal position; conditional expectation of spin votes",
+    "outputs": ["all root values and node counts", "mean", "sample variance", "normal-approximation stderr (diagnostic)", "Hoeffding 95% interval", "simultaneous union-bound interval", "exact PDE value", "observed root branching fraction", "wall time", "mean/max node count", "expected node count (3 exp(2 rate T)-1)/2"],
+    "uncertainty": "bounded iid roots give radius sqrt(2 log(2/alpha)/N) for exact arithmetic; simultaneous intervals use alpha divided by number of scheduled rows; floating evaluation error is not enclosed",
+    "cost": "compare node costs and variance times expected nodes; do not claim runtime/variance superiority against raw trees across invalid moment regimes"
+  },
+  "raw_sampling_diagnostic": {
+    "horizons": [0.05, 0.5, 0.7, 1.0, 1.5, 2.0],
+    "rate": 1.0,
+    "n_samples": 4096,
+    "policy": "raw uniform with existing exact-zero-code pruning",
+    "problem": "flat phi=0.5",
+    "seed_base": 40260925,
+    "purpose": "show why small empirical variance cannot certify integrability; record overflow rather than discard it",
+    "confidence": "no normal confidence coverage claims in infinite-variance/nonintegrable regimes"
+  },
+  "resource_rules": {
+    "estimated_budget": "tens of millions of nodes, minutes of CPU; batch independent roots for bounded memory",
+    "on_budget_problem": "record failed scheduled configuration and amend transparently before rerunning; never drop a difficult tree while keeping easy roots",
+    "retained_failures": "all test/verification failures and substantive protocol amendments recorded"
+  }
+}

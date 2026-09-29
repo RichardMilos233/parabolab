@@ -1,0 +1,2 @@
+2026-09-25T17:17:43.513520+00:00 start strict bounded raw-data audit
+2026-09-25T17:17:43.581232+00:00 PASS rows=60 roots=122880 sampled_nodes=60696849 pointwise_cover=60/60 simultaneous_cover=60/60 one_ulp_outside=3 source_hashes=4 raw_hash=verified

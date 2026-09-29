@@ -1,0 +1,216 @@
+{
+  "schema_version": 1,
+  "run_id": "2026-09-25-long-horizon",
+  "skill_version": "0.2.0",
+  "mode": "full user-directed long-horizon investigation",
+  "status": "completed",
+  "sequence_override": "User requested theory -> Lean -> code; numerical implementation waits for successful scoped formal stage.",
+  "selected_direction": {
+    "id": "D01",
+    "title": "Exact raw-tree absolute-integrability boundary with a known bounded long-time comparator",
+    "value": 1000,
+    "high_value": false,
+    "selection_reason": "Strongest feasible bounded continuation of explicitly requested long-horizon investigation; no candidate was inflated above strict high-value threshold."
+  },
+  "project_revision": "65dca46e42db1c80cdf9ddd8eed6a415148c37f3",
+  "initial_dirty_files": [
+    "demo/rate_variance.py",
+    "parabolab/rate_variance.py",
+    "tests/test_rate_variance.py"
+  ],
+  "stages": {
+    "context": "completed",
+    "ideation": "completed",
+    "theory": "completed with independent conventional review",
+    "lean": "completed: 11 declarations, full build 3394 jobs, standard axioms only",
+    "numerics": "completed: exact boundaries, 24 flat rows, 6 raw batches, 72 wave rows, 60 bounded rows",
+    "correspondence_review": "completed: independent theory and sampler reviews, retained corrections, raw and bounded audits passed",
+    "presentation": "completed: Chinese report, numerical record, two scientific figures in PNG/PDF"
+  },
+  "model_use": [
+    {
+      "task": "root",
+      "role": "research/integration/report",
+      "model": "inherited GPT-6 family; exact serving identifier unavailable"
+    },
+    {
+      "task": "R01 long_horizon_literature",
+      "role": "primary literature and ten directions",
+      "requested_model": "gpt-6-astra",
+      "requested_effort": "max"
+    },
+    {
+      "task": "R02 horizon_theory",
+      "role": "independent theoretical derivation",
+      "requested_model": "gpt-6-astra",
+      "requested_effort": "max"
+    },
+    {
+      "task": "I01 lean_long_horizon",
+      "role": "cube/finite-tree formal proof and audit",
+      "requested_model": "gpt-5.6-sol",
+      "requested_effort": "xhigh"
+    },
+    {
+      "task": "I03 lean_algebra",
+      "role": "parallel fixed scalar/branch algebra",
+      "requested_model": "gpt-5.6-sol",
+      "requested_effort": "xhigh"
+    },
+    {
+      "task": "I02 majority_implementation",
+      "role": "bounded sampler and predeclared experiment; read-only design until Lean gate",
+      "requested_model": "gpt-5.6-sol",
+      "requested_effort": "xhigh"
+    },
+    {
+      "task": "I04 lean_algebra continuation",
+      "role": "raw flat/wave numerical implementation",
+      "requested_model": "gpt-5.6-sol",
+      "requested_effort": "xhigh"
+    }
+  ],
+  "commands_run": [
+    {
+      "cwd": ".",
+      "command": "/opt/miniconda3/envs/parabolab/bin/python docs/research/runs/2026-09-25-long-horizon/numerics/raw_experiment.py",
+      "evidence": "docs/research/runs/2026-09-25-long-horizon/numerics/raw-experiment.log"
+    },
+    {
+      "cwd": ".",
+      "command": "/opt/miniconda3/envs/parabolab/bin/python docs/research/runs/2026-09-25-long-horizon/numerics/raw_experiment.py --verify",
+      "evidence": "docs/research/runs/2026-09-25-long-horizon/numerics/raw-verify.log"
+    },
+    {
+      "cwd": ".",
+      "command": "/opt/miniconda3/envs/parabolab/bin/python docs/research/runs/2026-09-16-certified-tuple-policy/numerics/flat_explosion_check.py --verify docs/research/runs/2026-09-16-certified-tuple-policy/numerics/flat-explosion-checks.json",
+      "evidence": "docs/research/runs/2026-09-25-long-horizon/numerics/prior-flat-verify.log"
+    },
+    {
+      "cwd": ".",
+      "command": "/opt/miniconda3/envs/parabolab/bin/python docs/research/runs/2026-09-25-long-horizon/numerics/bounded_experiment.py",
+      "evidence": "docs/research/runs/2026-09-25-long-horizon/numerics/bounded-execution.log"
+    },
+    {
+      "cwd": ".",
+      "command": "/opt/miniconda3/envs/parabolab/bin/python docs/research/runs/2026-09-25-long-horizon/numerics/check_bounded_theory.py",
+      "evidence": "docs/research/runs/2026-09-25-long-horizon/numerics/bounded-theory-checks.log"
+    },
+    {
+      "cwd": ".",
+      "command": "/opt/miniconda3/envs/parabolab/bin/python docs/research/runs/2026-09-25-long-horizon/numerics/audit_bounded.py",
+      "evidence": "docs/research/runs/2026-09-25-long-horizon/numerics/bounded-audit-reproducible.log"
+    },
+    {
+      "cwd": ".",
+      "command": "/opt/miniconda3/envs/parabolab/bin/python -m pytest -q",
+      "evidence": "docs/research/runs/2026-09-25-long-horizon/python-tests.log"
+    },
+    {
+      "cwd": ".",
+      "command": "MPLCONFIGDIR=/tmp/parabolab-long-mpl /opt/miniconda3/envs/parabolab/bin/python docs/research/runs/2026-09-25-long-horizon/plot_results.py",
+      "evidence": "docs/research/runs/2026-09-25-long-horizon/plot.log"
+    },
+    {
+      "cwd": ".",
+      "command": "MPLCONFIGDIR=/tmp/parabolab-long-mpl /opt/miniconda3/envs/parabolab/bin/python docs/research/runs/2026-09-25-long-horizon/plot_raw_rates.py",
+      "evidence": "docs/research/runs/2026-09-25-long-horizon/raw-rate-plot.log"
+    },
+    {
+      "cwd": "formal",
+      "command": "/Users/michael/.elan/bin/lake env lean EstimatorIntegrity/LongHorizonAlgebra.lean",
+      "evidence": "docs/research/runs/2026-09-25-long-horizon/lean/build.log"
+    },
+    {
+      "cwd": "formal",
+      "command": "/Users/michael/.elan/bin/lake build EstimatorIntegrity.LongHorizonAlgebra",
+      "evidence": "docs/research/runs/2026-09-25-long-horizon/lean/build.log"
+    },
+    {
+      "cwd": "formal",
+      "command": "/Users/michael/.elan/bin/lake env lean EstimatorIntegrity/LongHorizon.lean",
+      "evidence": "docs/research/runs/2026-09-25-long-horizon/lean/build.log"
+    },
+    {
+      "cwd": "formal",
+      "command": "/Users/michael/.elan/bin/lake build EstimatorIntegrity.LongHorizon",
+      "evidence": "docs/research/runs/2026-09-25-long-horizon/lean/build.log"
+    },
+    {
+      "cwd": "formal",
+      "command": "/Users/michael/.elan/bin/lake env lean EstimatorIntegrity.lean",
+      "evidence": "docs/research/runs/2026-09-25-long-horizon/lean/build.log"
+    },
+    {
+      "cwd": "formal",
+      "command": "/Users/michael/.elan/bin/lake build EstimatorIntegrity",
+      "evidence": "docs/research/runs/2026-09-25-long-horizon/lean/build.log"
+    },
+    {
+      "cwd": "formal",
+      "command": "rg -n \"\\b(sorry|admit)\\b\" EstimatorIntegrity/LongHorizonAlgebra.lean EstimatorIntegrity/LongHorizon.lean",
+      "evidence": "docs/research/runs/2026-09-25-long-horizon/lean/build.log"
+    }
+  ],
+  "limitations": [
+    "No high-value direction passed the strict rubric",
+    "Majority voting is established prior art",
+    "Lean coverage is deliberately deterministic, not an end-to-end stochastic/PDE proof",
+    "Global finite moments do not imply affordable exponential tree growth"
+  ],
+  "execution_dates": [
+    "2026-09-25",
+    "2026-09-26"
+  ],
+  "completed_at_utc": "2026-09-25T17:29:27.306824+00:00",
+  "sequence_evidence": {
+    "required_order": "theory -> Lean -> numerical implementation",
+    "theory": "04-theory.md and 09-independent-theory-review.md",
+    "lean": "lean/build.log and lean/axioms.log",
+    "numerical_protocol": "numerics/protocol.json; moving-front amendment before code",
+    "numerical_execution": "numerics/raw-experiment.log and numerics/bounded-execution.log"
+  },
+  "verification": {
+    "python": {
+      "passed": 274,
+      "deselected": 14,
+      "seconds": 51.83
+    },
+    "lean": {
+      "checked_theorems": 11,
+      "aggregate_dependency_jobs": 3394,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "admitted_proofs": 0
+    },
+    "raw_verifier": {
+      "passed": 16,
+      "failed": 0
+    },
+    "bounded_audit": {
+      "strict_assertions_passed": true,
+      "rows": 60,
+      "completed_roots": 122880,
+      "nodes": 60696849
+    },
+    "initial_user_patch_preserved": true,
+    "git_diff_check": "passed",
+    "final_report_review": "independent read-only quantitative/source consistency review passed after correcting runtime measurement semantics"
+  },
+  "retained_limitations": [
+    "T_abs exact rational interval narrower than binary64; two strict floating containment checks are false and explained",
+    "Twelve raw-wave safety stops and 28 unreached rows are numerical diagnostics, not divergence proofs",
+    "Initial independent scalar Id check failed and was corrected; prior hashes/discrepancy retained, not prior full file bytes",
+    "Initial bounded timing JSON/log were overwritten by canonical source-bound rerun; raw archives are byte-identical and incomplete timing provenance is explicit",
+    "Three bounded outputs were one ulp below -1; floating evaluation error is not enclosed",
+    "Four raw batches have infinite second moment; two also lack absolute integrability despite all realized samples being finite"
+  ],
+  "artifact_manifest": "artifact-manifest.json",
+  "token_usage": {
+    "available": false,
+    "note": "Per-worker serving/usage metadata unavailable; requested model routing is recorded above without inventing usage."
+  }
+}

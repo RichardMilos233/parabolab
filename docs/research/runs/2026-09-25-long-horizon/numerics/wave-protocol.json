@@ -1,0 +1,13 @@
+{
+  "frozen_before_execution": true,
+  "purpose": "Extend the existing nonconstant-wave full-moment PDE diagnostic beyond T=.05; separate numerical failure from mathematical divergence",
+  "horizons": [0.05, 0.1, 0.25, 0.5, 0.75, 1.0],
+  "rates": [0.75, 1.0, 2.0],
+  "policies": {"uniform": [0.5, 0.5, 0.5], "static-supported": [0.95, 0.95, 0.95]},
+  "space_domain": [-12.0, 12.0],
+  "mesh_spacing": [0.1, 0.05],
+  "method": "independent six-component moment PDE, centered Laplacian, explicit RK4 at dt<=.2 dx², terminal and tail data inherited from previous diagnostic; integrate once to largest horizon per configuration, store exact horizon hits",
+  "safety_stop": "stop a deterministic configuration if a component exceeds 1e12 or becomes nonfinite; retain every later requested horizon as not reached; this is a numerical failure indicator, never a proof of infinite moments",
+  "outputs": ["root second moment and variance", "maximum field component", "F3 analytical error", "runtime", "mesh discrepancy", "stopping time and cause"],
+  "interpretation": "static-supported policy is not the spatial terminal proxy and has no general dominance guarantee on wave data; comparisons are diagnostics, not validated certificates; best among three tested rates is not a continuous-rate optimum"
+}

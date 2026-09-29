@@ -1,6 +1,6 @@
 # Research: reliable branching-estimator algorithms
 
-**Current scope, 17 September 2026:** this worktree owns branching Monte Carlo
+**Current scope, 26 September 2026:** this worktree owns branching Monte Carlo
 and its mathematical theory. Improve branching Monte Carlo PDE
 estimation through exponential-rate selection, tuple proposals, moment
 control and verifiable approximation error. Algorithmic and mathematical
@@ -17,13 +17,23 @@ The earlier certificate/profile work is on local `main`. The
 code/test/witness checks. For every documentation area and its status, use
 [the repository documentation map](../documentation-map.md).
 
-The latest [tuple-policy research run](runs/2026-09-16-certified-tuple-policy/07-report.md)
+The [tuple-policy research run](runs/2026-09-16-certified-tuple-policy/07-report.md)
 adds an exact flat-data second-moment explosion threshold, a 37.84% increase
 in the rate-optimized horizon threshold, certified flat variance reductions,
 and a strict wave improvement theorem. Its code and evidence are local
 working-tree additions on the integrated baseline. The
 [claim ledger](runs/2026-09-16-certified-tuple-policy/03-claims.md) separates
 the conventional proofs, exact numerical checks and five Lean sublemmas.
+
+The [long-horizon investigation](runs/2026-09-25-long-horizon/07-report.md)
+extends this question beyond short times. Its exact raw-flat absolute-moment
+ceiling is `(3*pi-2*log(3))/5`, independent of supported nonexplosive importance
+proposals on the same expansion. A separately attributed bounded ternary
+Allen–Cahn representation is the long-time comparator; its exponential tree
+cost remains material. The [claim ledger](runs/2026-09-25-long-horizon/03-claims.md)
+separates conventional probability/PDE arguments, eleven deterministic Lean
+declarations, exact scalar checks and floating experiments. This does not
+extend the raw-wave certificate or solve arbitrary fully nonlinear PDEs.
 
 ## The central problem
 
@@ -65,6 +75,9 @@ nor produces a rate that is individually optimal at every location.
    ten earlier research options, completed work and deferred alternatives.
 8. [Tuple-policy continuation](runs/2026-09-16-certified-tuple-policy/07-report.md):
    supported whole-tree improvement and the exact flat variance boundary.
+9. [Long-horizon investigation](runs/2026-09-25-long-horizon/07-report.md):
+   longer-time rate selection, the raw absolute-integrability ceiling, and
+   bounded ternary sampling with nonconstant data through T=2.
 
 The [theory index](estimator-integrity/README.md) and
 [results index](results/README.md) give the complete collections and mark

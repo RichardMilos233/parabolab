@@ -59,6 +59,7 @@ def allen_cahn_wave_1d(T: float = 0.5) -> ParabolicPDE:
         phi_derivatives=(phi_prime,),
         exact_solution=exact,
         name=f"allen_cahn_wave_1d(T={T})",
+        reaction_kind="allen_cahn",
     )
 
 
@@ -86,6 +87,7 @@ def allen_cahn_flat(phi0: float = 0.5, T: float = 0.5) -> ParabolicPDE:
         phi_derivatives=(lambda x: 0.0,),
         exact_solution=exact,
         name=f"allen_cahn_flat(phi0={phi0}, T={T})",
+        reaction_kind="allen_cahn",
     )
 
 
@@ -652,5 +654,4 @@ def merton_vasicek_2d(
         exact_solution=exact if not consumption else None,
         name=f"merton_vasicek_2d(T={T}, consumption={consumption})",
     )
-
 

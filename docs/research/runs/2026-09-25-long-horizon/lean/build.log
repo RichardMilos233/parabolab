@@ -1,0 +1,28 @@
+Recorded 2026-09-26 (Asia/Jakarta).
+Working directory: /Users/michael/Desktop/NTU/fyp/parabolab/formal
+
+$ /Users/michael/.elan/bin/lake env lean EstimatorIntegrity/LongHorizonAlgebra.lean
+[exit 0; no stdout or stderr]
+
+$ /Users/michael/.elan/bin/lake build EstimatorIntegrity.LongHorizonAlgebra
+Build completed successfully (3006 jobs).
+[exit 0]
+
+$ /Users/michael/.elan/bin/lake env lean EstimatorIntegrity/LongHorizon.lean
+[exit 0; no stdout or stderr]
+
+$ /Users/michael/.elan/bin/lake build EstimatorIntegrity.LongHorizon
+✔ [3007/3007] Built EstimatorIntegrity.LongHorizon (39s)
+Build completed successfully (3007 jobs).
+[exit 0]
+
+$ /Users/michael/.elan/bin/lake env lean EstimatorIntegrity.lean
+[exit 0; no stdout or stderr]
+
+$ /Users/michael/.elan/bin/lake build EstimatorIntegrity
+✔ [3393/3394] Built EstimatorIntegrity (44s)
+Build completed successfully (3394 jobs).
+[exit 0]
+
+$ rg -n "\b(sorry|admit)\b" EstimatorIntegrity/LongHorizonAlgebra.lean EstimatorIntegrity/LongHorizon.lean
+[exit 1; no matches and no stdout or stderr]

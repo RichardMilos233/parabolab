@@ -1,0 +1,15 @@
+Command, run from /Users/michael/Desktop/NTU/fyp/parabolab/formal:
+
+$ /Users/michael/.elan/bin/lake env lean /Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-25-long-horizon/lean/LongHorizonAxioms.lean
+'EstimatorIntegrity.longHorizonPolynomial_factorization' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.longHorizonPolynomial_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.longHorizonPolynomial_reciprocal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.boundedReaction_diagonal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.boundedReaction_corner_le_one_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.boundedReaction_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.boundedReaction_convex_decomposition' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.boundedReaction_two_mem_Icc' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.ternaryAverage_mem_Icc' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.boundedReaction_mem_Icc' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.BoundedTernaryTree.eval_mem_Icc' depends on axioms: [propext, Classical.choice, Quot.sound]
+[exit 0]

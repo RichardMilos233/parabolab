@@ -1,0 +1,12 @@
+{
+  "scope": "Exact finite-support conditional-law checks; floating flat moment ODE references, not a validated certificate",
+  "discrete_laws": 120,
+  "exact_kernel_evaluations": 9720,
+  "seed": 9262026,
+  "corner_counterexamples_below_rate_two": 3,
+  "all_checks_passed": true,
+  "max_refinement_gap": 7.03263003387633e-10,
+  "seconds": 0.11700170813128352,
+  "python": "3.11.15",
+  "script_sha256": "85ab07ccdef67702afd697dee21c13bca7ad8dbe10abaf70e47bd459814ee717"
+}

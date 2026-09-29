@@ -1,0 +1,32 @@
+{
+  "rows": 60,
+  "roots": 122880,
+  "sampled_nodes": 60696849,
+  "stats_recomputed_exactly": true,
+  "finite_values": true,
+  "full_ternary_node_counts": true,
+  "root_branch_flags_match_counts": true,
+  "outside_exact_interval_count": 3,
+  "outside_samples": [
+    [
+      26,
+      472
+    ],
+    [
+      26,
+      536
+    ],
+    [
+      26,
+      918
+    ]
+  ],
+  "min_value": -1.0000000000000002,
+  "max_value": 0.9999999999999696,
+  "max_interval_overshoot": 2.220446049250313e-16,
+  "roundoff_note": "Floating branch evaluation can exceed the ideal interval by one ulp; no clipping was applied. Exact-arithmetic Hoeffding theory does not itself certify floating error.",
+  "all_pointwise_95_cover_exact": true,
+  "all_simultaneous_95_cover_exact": true,
+  "max_realized_mean_error": 0.0074756232413158985,
+  "raw_sha256": "a05f404895daf22a02abb4056c15975b41d414ef3b5ec0cd4267199c30e4b74a"
+}

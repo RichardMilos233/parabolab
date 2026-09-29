@@ -1,0 +1,22 @@
+{
+  "checks": {
+    "absolute_cross_checks_passed": true,
+    "boundary_checks_passed": true,
+    "boundary_exact_recomputed": true,
+    "boundary_hash": true,
+    "boundary_source_hashes": true,
+    "five_field_scalar_check_passed": true,
+    "flat_rows_complete": true,
+    "npz_array_count": true,
+    "npz_shapes": true,
+    "raw_samples_hash": true,
+    "raw_sampling_rows_complete": true,
+    "raw_source_hashes": true,
+    "wave_hash": true,
+    "wave_rows_complete": true,
+    "wave_source_hashes": true,
+    "wave_timestep_checks_passed": true
+  },
+  "valid": true,
+  "verified_at_completion_date": "2026-09-26"
+}

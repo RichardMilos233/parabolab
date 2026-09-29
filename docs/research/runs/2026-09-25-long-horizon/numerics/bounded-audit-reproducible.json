@@ -1,0 +1,47 @@
+{
+  "all_pointwise_95_cover_exact": true,
+  "all_simultaneous_95_cover_exact": true,
+  "all_strict_assertions_passed": true,
+  "audit_script": "audit_bounded.py",
+  "audit_script_sha256": "016dee44c43e1fc180c5ecc7dc40e494f8a0bc68694c3495fac98ea4dd349229",
+  "clipping_applied_by_audit": false,
+  "finite_values": true,
+  "full_ternary_node_counts": true,
+  "input_raw": "bounded-raw.npz",
+  "input_results": "bounded-results.json",
+  "input_results_sha256": "a6788084236680b2fdae919c8d3582259895be69ed247be336cda866c2b28fea",
+  "max_interval_overshoot": 2.220446049250313e-16,
+  "max_realized_mean_error": 0.0074756232413158985,
+  "max_value": 0.9999999999999696,
+  "min_value": -1.0000000000000002,
+  "outside_exact_interval_count": 3,
+  "outside_samples": [
+    [
+      26,
+      472
+    ],
+    [
+      26,
+      536
+    ],
+    [
+      26,
+      918
+    ]
+  ],
+  "raw_sha256": "a05f404895daf22a02abb4056c15975b41d414ef3b5ec0cd4267199c30e4b74a",
+  "reference_audit": "bounded-audit.json",
+  "reference_audit_sha256": "3205375990d84094980696368b3190221e2a07d563b382819ca20f9561ff74fb",
+  "root_branch_flags_match_counts": true,
+  "roots": 122880,
+  "roundoff_note": "Floating branch evaluation can exceed the ideal interval by one ulp; no clipping was applied. Exact-arithmetic Hoeffding theory does not itself certify floating error.",
+  "rows": 60,
+  "sampled_nodes": 60696849,
+  "stats_recomputed_exactly": true,
+  "verified_source_sha256": {
+    "docs/research/runs/2026-09-25-long-horizon/numerics/bounded_experiment.py": "a95d3b369c94f50451db55b1e4b1851fa435f326b8f5c20f1e309fac5bb59db7",
+    "docs/research/runs/2026-09-25-long-horizon/numerics/protocol-amendment-before-code.md": "f5d9f1bd54d279f4060d0aca4b0b141d34069cc14389546cf663c20693d3a124",
+    "docs/research/runs/2026-09-25-long-horizon/numerics/protocol.json": "bc5f3bc10162d726bf52a3ae548614fe8c632edbae3d316fa8ae2bb40bc60ddf",
+    "parabolab/majority.py": "00a8fa89bbf318b17bc5f587892b8237741f712a845951abffc7e7f8df42e3a3"
+  }
+}

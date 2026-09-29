@@ -1,5 +1,22 @@
 # Formal and Conventional Proof Registry
 
+**Long-horizon continuation (26 September 2026):** the
+[new investigation](runs/2026-09-25-long-horizon/03-claims.md) registers
+`PR-HORIZON-1` (L1: the exact raw-flat absolute-integrability ceiling),
+`PR-HORIZON-2` (L2: proposal-independent second-moment lower bound),
+`PR-HORIZON-3` (B1: bounded ternary Allen–Cahn representation),
+`PR-HORIZON-4` (B2: admissible clock and expected node count), and
+`PR-HORIZON-5` (B3: bounded-family variance monotonicity in the rate).
+L3 reuses the prior common-rate flat L2 threshold and studies its longer-time
+feasible region. These probability/analysis arguments are conventional;
+majority voting has explicit prior-art attribution. Eleven deterministic
+declarations in `LongHorizonAlgebra` and `LongHorizon` prove scalar/branch
+identities, cube preservation and all-finite-tree boundedness. The
+[formal inventory](runs/2026-09-25-long-horizon/06-formalization.md) records
+the fresh 3,394-job aggregate build, standard-axiom audit and omitted
+stochastic/analytic/roundoff obligations. A definition of the exact horizon
+constant is not a Lean proof of the improper integral or explosion theorem.
+
 **Status:** navigation and claim inventory for the `parabolab` research programme; entries must be checked against their underlying proofs.
 **Historical reviewed commit:** `ce2949330fcff1a3faf56c8a0ff36628586b242d`
 **Certificate checkpoint review:** 14 September 2026; research commits

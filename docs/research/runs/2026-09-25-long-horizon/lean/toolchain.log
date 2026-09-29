@@ -1,0 +1,13 @@
+$ /Users/michael/.elan/bin/lean --version
+Lean (version 4.33.0, arm64-apple-darwin24.6.0, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)
+
+$ git -C .lake/packages/mathlib rev-parse HEAD
+db584cd6d46c92f209a44c0f1c829460d327499d
+
+$ git -C .lake/packages/mathlib describe --tags --always
+master-2026-08-10
+
+$ shasum -a 256 formal/EstimatorIntegrity/LongHorizonAlgebra.lean formal/EstimatorIntegrity/LongHorizon.lean docs/research/runs/2026-09-25-long-horizon/lean/LongHorizonAxioms.lean
+639f2c38008f02e1c37d2c435d79c0f355afffe2d6e4d76d3bfb044b05ec3d14  formal/EstimatorIntegrity/LongHorizonAlgebra.lean
+d16e308bbcda7fbcc5bcfc1706b0f428b147873e26ed7853f55a85a2d5874b8f  formal/EstimatorIntegrity/LongHorizon.lean
+d5acb1ace15e109b8e4fadcba9c0b99584113c10591cb1cd740686af5bcdccda  docs/research/runs/2026-09-25-long-horizon/lean/LongHorizonAxioms.lean

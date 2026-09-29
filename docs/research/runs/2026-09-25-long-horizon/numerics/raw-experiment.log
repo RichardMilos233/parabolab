@@ -1,0 +1,55 @@
+run_date=2026-09-25
+completion_date=2026-09-26
+Lean gate passed before implementation: aggregate 3394 jobs; 11 standard axioms; no sorry.
+exact boundary certificates: passed
+flat p=0.5 T=0.05: optimizer=computed
+flat p=0.5 T=0.1: optimizer=computed
+flat p=0.5 T=0.25: optimizer=computed
+flat p=0.5 T=0.5: optimizer=computed
+flat p=0.5 T=0.65: optimizer=computed
+flat p=0.5 T=0.7: optimizer=computed
+flat p=0.5 T=0.75: optimizer=infeasible
+flat p=0.5 T=0.9: optimizer=infeasible
+flat p=0.5 T=0.95: optimizer=infeasible
+flat p=0.5 T=1: optimizer=infeasible
+flat p=0.5 T=1.5: optimizer=infeasible
+flat p=0.5 T=2: optimizer=infeasible
+flat p=0.95 T=0.05: optimizer=computed
+flat p=0.95 T=0.1: optimizer=computed
+flat p=0.95 T=0.25: optimizer=computed
+flat p=0.95 T=0.5: optimizer=computed
+flat p=0.95 T=0.65: optimizer=computed
+flat p=0.95 T=0.7: optimizer=computed
+flat p=0.95 T=0.75: optimizer=computed
+flat p=0.95 T=0.9: optimizer=computed
+flat p=0.95 T=0.95: optimizer=computed
+flat p=0.95 T=1: optimizer=infeasible
+flat p=0.95 T=1.5: optimizer=infeasible
+flat p=0.95 T=2: optimizer=infeasible
+five-field/scalar max relative difference=2.61687208e-09
+raw sample T=0.05: finite=4096/4096, nodes_mean=1.0478515625, finite_variance_certified=True
+raw sample T=0.5: finite=4096/4096, nodes_mean=1.7421875, finite_variance_certified=True
+raw sample T=0.7: finite=4096/4096, nodes_mean=2.2412109375, finite_variance_certified=False
+raw sample T=1: finite=4096/4096, nodes_mean=3.15283203125, finite_variance_certified=False
+raw sample T=1.5: finite=4096/4096, nodes_mean=5.71923828125, finite_variance_certified=False
+raw sample T=2: finite=4096/4096, nodes_mean=10.1669921875, finite_variance_certified=False
+wave rate=0.75 policy=uniform dx=0.1: stop=component_exceeded_1e12 at 0.386
+wave rate=0.75 policy=uniform dx=0.05: stop=component_exceeded_1e12 at 0.383
+wave rate=0.75 policy=static-supported dx=0.1: stop=component_exceeded_1e12 at 0.51
+wave rate=0.75 policy=static-supported dx=0.05: stop=component_exceeded_1e12 at 0.507
+wave rate=1 policy=uniform dx=0.1: stop=component_exceeded_1e12 at 0.466
+wave rate=1 policy=uniform dx=0.05: stop=component_exceeded_1e12 at 0.465
+wave rate=1 policy=static-supported dx=0.1: stop=component_exceeded_1e12 at 0.594
+wave rate=1 policy=static-supported dx=0.05: stop=component_exceeded_1e12 at 0.592
+wave rate=2 policy=uniform dx=0.1: stop=component_exceeded_1e12 at 0.606
+wave rate=2 policy=uniform dx=0.05: stop=component_exceeded_1e12 at 0.604
+wave rate=2 policy=static-supported dx=0.1: stop=component_exceeded_1e12 at 0.686
+wave rate=2 policy=static-supported dx=0.05: stop=component_exceeded_1e12 at 0.6835
+correction_retained=initial scalar Id reconstruction check failed; corrected auxiliary equation and regenerated
+retained_failure_events=12
+raw_results_sha256=8da1bd5ae952e8fcb7f97862cfb168e115a281be7d12f8daf70fb76a5f8612d7
+raw_samples_sha256=7a3990ad4aa4a62e34951655ce2e253dd0b1b8dbb11af0357d24ce0abde734a5
+wave_results_sha256=e2360f67b883044a9542bccec5de5b37dcf55f5eb7e281413878eacb3eb5de05
+boundary_certificates_sha256=35c155e6c4a99738bb844f59ce722c52844785fb97c69183df624728d5acc53a
+total_runtime_seconds=2.991275292
+status=completed

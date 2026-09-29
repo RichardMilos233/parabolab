@@ -1,0 +1,3 @@
+# Pre-execution protocol clarification
+
+Before any numerical implementation or execution, add one wave state per rate/horizon: x=1.5*T. The exact solution there is always -1/2. The original fixed points become closer to the stable -1 state as T grows, so tracking the moving front is a stronger nontrivial long-horizon control. Preserve all original rows. The schedule now contains 60 rows, each with N=2048, and simultaneous Hoeffding intervals divide alpha by 60. Seeds remain base+row index in the final explicitly serialized schedule. This change was motivated by the analytic exact wave, not observed numerical results.

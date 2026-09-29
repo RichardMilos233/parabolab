@@ -46,6 +46,12 @@ from .solve import (
     grid_states,
 )
 from .tree import TreeSample, default_rate, jcp_rate, sample_tree
+from .majority import (
+    AllenCahnMajorityMC,
+    MajoritySamples,
+    majority_branch,
+    sample_majority,
+)
 from .blowup import TSweep, integrability_edge, sweep_T
 from .moments import MomentQuadrature, finite_depth_moment_1d
 from .rate_optimization import (
@@ -78,6 +84,7 @@ from . import library
 
 __all__ = [
     "Code",
+    "AllenCahnMajorityMC",
     "CodingTreeMC",
     "Comparison",
     "Curve",
@@ -95,6 +102,7 @@ __all__ = [
     "FullyNonlinearPDEnD",
     "Id",
     "MCResult",
+    "MajoritySamples",
     "MomentQuadrature",
     "ParabolicPDE",
     "SemilinearMechanism",
@@ -116,6 +124,7 @@ __all__ = [
     "integrability_edge",
     "jcp_rate",
     "library",
+    "majority_branch",
     "oracle_ratio_bound",
     "optimize_exponential_rate_1d",
     "RateMomentDerivatives",
@@ -125,6 +134,7 @@ __all__ = [
     "riccati_binary_optimal_rate",
     "riccati_binary_second_moment",
     "sample_tree",
+    "sample_majority",
     "second_moment_objective",
     "short_time_rate_1d",
     "sqrt_optimal_probabilities",

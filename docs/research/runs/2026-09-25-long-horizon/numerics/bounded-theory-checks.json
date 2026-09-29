@@ -1,0 +1,176 @@
+{
+  "scope": "Exact finite-support conditional-law checks; floating flat moment ODE references, not a validated certificate",
+  "discrete_laws": 120,
+  "exact_kernel_evaluations": 9720,
+  "seed": 9262026,
+  "corner_counterexamples_below_rate_two": 3,
+  "all_checks_passed": true,
+  "flat_moment_rows": [
+    {
+      "rate": 2.0,
+      "horizon": 0.05,
+      "mean": 0.5188586989213058,
+      "second_moment": 0.2726680587185653,
+      "variance": 0.003453709272255079,
+      "expected_nodes": 1.332104137240255,
+      "refinement_gap": 4.790062790860361e-11
+    },
+    {
+      "rate": 2.0,
+      "horizon": 0.25,
+      "mean": 0.595534419150097,
+      "second_moment": 0.370269760060594,
+      "variance": 0.01560851566815058,
+      "expected_nodes": 3.577422742688568,
+      "refinement_gap": 8.566586329195047e-11
+    },
+    {
+      "rate": 2.0,
+      "horizon": 0.5,
+      "mean": 0.6894685536111648,
+      "second_moment": 0.5008316075905677,
+      "variance": 0.025464721171896076,
+      "expected_nodes": 10.583584148395975,
+      "refinement_gap": 7.03263003387633e-10
+    },
+    {
+      "rate": 2.0,
+      "horizon": 1.0,
+      "mean": 0.8433472560147415,
+      "second_moment": 0.7370028348354899,
+      "variance": 0.025768240607895954,
+      "expected_nodes": 81.39722504971635,
+      "refinement_gap": 1.400066729217997e-10
+    },
+    {
+      "rate": 2.0,
+      "horizon": 1.5,
+      "mean": 0.9327639071927086,
+      "second_moment": 0.8847360472806559,
+      "variance": 0.014687540719247938,
+      "expected_nodes": 604.6431902391026,
+      "refinement_gap": 1.9793577887838865e-10
+    },
+    {
+      "rate": 2.0,
+      "horizon": 2.0,
+      "mean": 0.9736092613710675,
+      "second_moment": 0.9543660793334836,
+      "variance": 0.006451085505967957,
+      "expected_nodes": 4470.936980562592,
+      "refinement_gap": 2.1987978104931472e-10
+    },
+    {
+      "rate": 2.5,
+      "horizon": 0.05,
+      "mean": 0.5188586989213058,
+      "second_moment": 0.27195460392111664,
+      "variance": 0.002740254474806414,
+      "expected_nodes": 1.426038125031612,
+      "refinement_gap": 3.4593994335807565e-12
+    },
+    {
+      "rate": 2.5,
+      "horizon": 0.25,
+      "mean": 0.595534419150097,
+      "second_moment": 0.3666688840182212,
+      "variance": 0.012007639625777777,
+      "expected_nodes": 4.735514436192762,
+      "refinement_gap": 8.246292537705813e-12
+    },
+    {
+      "rate": 2.5,
+      "horizon": 0.5,
+      "mean": 0.6894685536111648,
+      "second_moment": 0.49425849745170514,
+      "variance": 0.01889161103303355,
+      "expected_nodes": 17.77374094105521,
+      "refinement_gap": 4.363740480073375e-10
+    },
+    {
+      "rate": 2.5,
+      "horizon": 1.0,
+      "mean": 0.8433472560147415,
+      "second_moment": 0.7288442300028498,
+      "variance": 0.017609635775255872,
+      "expected_nodes": 222.11973865386489,
+      "refinement_gap": 1.652011860642233e-12
+    },
+    {
+      "rate": 2.5,
+      "horizon": 1.5,
+      "mean": 0.9327639071927086,
+      "second_moment": 0.8789877386927002,
+      "variance": 0.008939232131292218,
+      "expected_nodes": 2711.563621684095,
+      "refinement_gap": 1.8203960561180565e-10
+    },
+    {
+      "rate": 2.5,
+      "horizon": 2.0,
+      "mean": 0.9736092613710675,
+      "second_moment": 0.9512768404916303,
+      "variance": 0.003361846664114654,
+      "expected_nodes": 33039.19869221008,
+      "refinement_gap": 2.0990487126226753e-10
+    },
+    {
+      "rate": 3.0,
+      "horizon": 0.05,
+      "mean": 0.5188586989213058,
+      "second_moment": 0.27147921231284106,
+      "variance": 0.0022648628665308257,
+      "expected_nodes": 1.5247882113640046,
+      "refinement_gap": 1.8984813721090177e-13
+    },
+    {
+      "rate": 3.0,
+      "horizon": 0.25,
+      "mean": 0.595534419150097,
+      "second_moment": 0.36429034398513566,
+      "variance": 0.009629099592692258,
+      "expected_nodes": 6.222533605507097,
+      "refinement_gap": 6.213535241883505e-11
+    },
+    {
+      "rate": 3.0,
+      "horizon": 0.5,
+      "mean": 0.6894685536111648,
+      "second_moment": 0.49000897466423987,
+      "variance": 0.014642088245568285,
+      "expected_nodes": 29.628305384781502,
+      "refinement_gap": 4.4466375026530613e-11
+    },
+    {
+      "rate": 3.0,
+      "horizon": 1.0,
+      "mean": 0.8433472560147415,
+      "second_moment": 0.7239468290047357,
+      "variance": 0.012712234777141784,
+      "expected_nodes": 604.6431902391026,
+      "refinement_gap": 5.885592013754604e-11
+    },
+    {
+      "rate": 3.0,
+      "horizon": 1.5,
+      "mean": 0.9327639071927086,
+      "second_moment": 0.8759216346678474,
+      "variance": 0.005873128106439474,
+      "expected_nodes": 12154.125891363077,
+      "refinement_gap": 1.5444456824553754e-10
+    },
+    {
+      "rate": 3.0,
+      "horizon": 2.0,
+      "mean": 0.9736092613710675,
+      "second_moment": 0.9498653773883766,
+      "variance": 0.0019503835608609688,
+      "expected_nodes": 244131.68712850587,
+      "refinement_gap": 2.1627455382144944e-10
+    }
+  ],
+  "max_refinement_gap": 7.03263003387633e-10,
+  "seconds": 0.11575299967080355,
+  "python": "3.11.15",
+  "script_sha256": "85ab07ccdef67702afd697dee21c13bca7ad8dbe10abaf70e47bd459814ee717"
+}

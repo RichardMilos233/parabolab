@@ -1,0 +1,8 @@
+{
+  "file": "docs/research/runs/2026-09-16-certified-tuple-policy/numerics/flat-explosion-checks.json",
+  "exact_certificate_recomputed": true,
+  "source_hashes_match": true,
+  "stored_environment_hash_valid": true,
+  "stored_command_hash_valid": true,
+  "valid": true
+}
