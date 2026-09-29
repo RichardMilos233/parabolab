@@ -7,5 +7,9 @@ dist/
 build/
 examples/*.png
 examples/*.csv
+# Raw research-run arrays and activity logs (~1.4 GB) stay on the local
+# machine; each run's manifest files record their SHA-256 hashes and sizes.
+docs/research/runs/**/*.npz
+docs/research/runs/**/*.jsonl
 demo/*.png
 .vscode/

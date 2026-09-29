@@ -1,9 +1,11 @@
 # parabolab — agent notes
 
 ## Worktree responsibility
-- This checkout, on `local/mc-tuple-policy`, owns branching Monte Carlo and
-  its mathematical theory: mechanisms, moments, integrability, variance and
-  rate/tuple-policy optimization, certificates, proofs and Lean coverage.
+- This checkout, on `research/branching-mc-theory` (renamed from
+  `local/mc-tuple-policy` on 2026-09-29), owns branching Monte Carlo and its
+  mathematical theory: mechanisms, integrability horizons, samplers (clock
+  rates, tuple policies, supersolution tilts), moments, variance and work,
+  long-horizon continuation, certificates, proofs and Lean coverage.
 - New NN fitting, backbone, operator-learning and latent/Fourier work belongs
   in the sibling checkout `../parabolab-latent-fourier` on
   `research/nn-latent-fourier`. Keep historical NN reproductions working, but
@@ -14,12 +16,25 @@
 
 ## Current direction
 - The project remains a PDE solver/reproduction framework. Active research
-  improves branching estimation through the exponential clock rate `lambda`
-  and tuple probabilities `q_c(Z)`. Prioritize recursive dependencies,
+  concerns what limits branching estimation and how samplers reach those
+  limits: the exponential clock rate `lambda`, tuple probabilities `q_c(Z)`,
+  supersolution-tilted samplers, and the sampler-independent integrability
+  horizon of a fixed expansion. Prioritize recursive dependencies,
   variance reduction, approximation-error control and mathematical guarantees.
   Runtime is supporting evidence, not the main criterion for choosing a
   research direction. Start at [the documentation map](docs/documentation-map.md)
   and [the current research guide](docs/research/README.md).
+- Since 2026-09-29 the work is being consolidated into ONE paper
+  (plan: `docs/research/paper/00-plan.md`, draft `docs/research/paper/manuscript/`).
+  Close its listed gaps before opening new directions. Key code:
+  `parabolab/tilted.py` (bounded-output tilted sampler, any dimension).
+  The query-complexity results of the 2026-09-28 run are a separate second
+  paper. The principle of tilting by a majorant is Mikhailov's "value
+  modelling" (Medvedev–Mikhailov 2009, checked in full text); attribute it.
+- Research runs under `docs/research/runs/` keep raw `.npz`/`.jsonl` arrays
+  on the local machine only (gitignored, ~1.4 GB); their hashes are in each
+  run's manifest. Do not force-add them. `pytest` collects `tests/` only,
+  because run folders contain source snapshots with their own test files.
 - Multidimensional/multifactor Merton is inactive research. Keep its proofs,
   symbolic checks, existing examples, and general multidimensional support;
   do not resume that roadmap as the default next task.

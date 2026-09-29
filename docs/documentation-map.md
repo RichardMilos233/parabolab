@@ -1,9 +1,28 @@
 # Documentation map and status
 
-Reviewed 17 September 2026. This worktree's active research concerns
+Reviewed 17 September 2026; current-line section added 29 September 2026.
+This worktree (branch `research/branching-mc-theory`) concerns
 **branching Monte Carlo algorithms and mathematical guarantees**: recursive
-moments, scalar rate selection, tuple proposals, integrability and
-approximation error.
+moments, scalar rate selection, tuple proposals, supersolution-tilted
+samplers, sampler-independent integrability horizons, work, long-horizon
+continuation and approximation error.
+
+## Current line: one paper (29 September 2026)
+
+| Document | Role |
+|---|---|
+| [Paper plan and status](research/paper/00-plan.md) | Chosen thesis, theorem list with sources, remaining gaps, venues |
+| [Tilted-sampler theory](research/paper/01-tilted-sampler-theory.md) | Sampler independence, supersolution tilt, work identity, literature checks |
+| [Numerical results](research/paper/03-numerical-results.md) | Flat, periodic, d = 100 and negative (wave) experiments with seeds |
+| [Manuscript](research/paper/manuscript/main.tex) | LaTeX draft (build with `tectonic main.tex`) |
+
+Dated research runs feeding it, each with `07-report.md`, a claim ledger
+and a hash manifest: [tuple policy (16 Sep)](research/runs/2026-09-16-certified-tuple-policy/07-report.md),
+[long horizon (25 Sep)](research/runs/2026-09-25-long-horizon/07-report.md),
+[extend-T survey (27 Sep)](research/runs/2026-09-27-extend-T-survey/07-report.md),
+[slab continuation (27 Sep)](research/runs/2026-09-27-slab-continuation/07-report.md),
+[dynamic continuation (28 Sep)](research/runs/2026-09-28-dynamic-continuation/07-report.md).
+Their raw arrays are kept locally and are not in git.
 Runtime is supporting evidence. Multifactor Merton is an inactive research
 application; its examples and historical mathematical records are retained.
 NN fitting and latent/Fourier research are assigned to the sibling

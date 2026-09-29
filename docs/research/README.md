@@ -35,6 +35,21 @@ separates conventional probability/PDE arguments, eleven deterministic Lean
 declarations, exact scalar checks and floating experiments. This does not
 extend the raw-wave certificate or solve arbitrary fully nonlinear PDEs.
 
+The [slab](runs/2026-09-27-slab-continuation/07-report.md) and
+[dynamic](runs/2026-09-28-dynamic-continuation/07-report.md) continuation
+runs push T further by re-estimating intermediate terminal data, classify
+the original tree's absolute-moment obstructions (compact tori, R^d,
+constant data) and add a separate query-complexity line; their reports
+record the negative efficiency comparisons as well.
+
+**Current line (29 September 2026):** the results are being consolidated
+into one paper, [plan](paper/00-plan.md). Its core is that for a fixed
+expansion the first absolute moment and the node-weighted mass are
+sampler independent, and that a supersolution-tilted sampler
+([theory](paper/01-tilted-sampler-theory.md), `parabolab/tilted.py`)
+attains that horizon with bounded output and work at most ϑ/(ϑ−1), in any
+dimension ([results](paper/03-numerical-results.md)).
+
 ## The central problem
 
 For a fixed PDE, mechanism, tuple law, root code and starting state, choose

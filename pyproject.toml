@@ -14,6 +14,8 @@ include = ["parabolab*"]
 
 [tool.pytest.ini_options]
 addopts = "-m 'not slow'"
+# Research runs keep source snapshots (with their own test files) as evidence.
+testpaths = ["tests"]
 markers = [
     "slow: heavy Monte Carlo validation runs (run with: pytest -m 'slow or not slow')",
 ]
