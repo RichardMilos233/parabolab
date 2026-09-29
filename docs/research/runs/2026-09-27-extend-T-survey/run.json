@@ -1,0 +1,67 @@
+{
+  "run_id": "2026-09-27-extend-T-survey",
+  "status": "completed",
+  "mode": "ideate",
+  "date": "2026-09-27",
+  "objective": "广泛调研在固定PDE、误差与完整预算下延长可用时间T的潜在方向",
+  "skill": "math-auto-research",
+  "skill_version": "0.2.0",
+  "base_revision": "65dca46e42db1c80cdf9ddd8eed6a415148c37f3",
+  "preexisting_work_preserved": true,
+  "implemented_directions": [],
+  "formalized_claims": [],
+  "new_numerical_results": [],
+  "directions": 10,
+  "confirmed_high_value_shortlist": [],
+  "bounded_feasibility_priority": [
+    "D01",
+    "D03",
+    "D04"
+  ],
+  "baseline": "D05",
+  "next_execution_order": [
+    "theory",
+    "Lean",
+    "code"
+  ],
+  "source_notes": [
+    "sources/R00-alternatives.md",
+    "sources/R01-continuation.md",
+    "sources/R02-representation.md",
+    "sources/R03-sampling.md"
+  ],
+  "research_delegations": [
+    {
+      "agent": "survey_continuation",
+      "model_requested": "gpt-6-astra",
+      "reasoning_requested": "max",
+      "role": "research",
+      "status": "completed"
+    },
+    {
+      "agent": "survey_representation",
+      "model_requested": "gpt-6-astra",
+      "reasoning_requested": "max",
+      "role": "research",
+      "status": "completed"
+    },
+    {
+      "agent": "survey_sampling",
+      "model_requested": "gpt-6-astra",
+      "reasoning_requested": "max",
+      "role": "research",
+      "status": "completed"
+    }
+  ],
+  "review": "09-survey-review.md",
+  "report": "07-report.md",
+  "plan": "02-plan.md",
+  "canvas": "/Users/michael/.cursor/projects/Users-michael-Desktop-NTU-fyp-parabolab/canvases/extend-T-survey.canvas.tsx",
+  "validation": "validation.json",
+  "limitations": [
+    "finite literature coverage, not exhaustive novelty proof",
+    "D10 splitting source full theorem access pending",
+    "higher-order coding extensions conditional",
+    "no new theoretical, Lean or numerical claims"
+  ]
+}

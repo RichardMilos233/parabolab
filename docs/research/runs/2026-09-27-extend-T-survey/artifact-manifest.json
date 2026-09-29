@@ -1,0 +1,25 @@
+{
+  "algorithm": "sha256",
+  "files": {
+    "docs/research/runs/2026-09-27-extend-T-survey/00-context.md": "30d166dae1ce7be647ca8001bd8047857bb180e35757a692ce2cc3f16e603274",
+    "docs/research/runs/2026-09-27-extend-T-survey/01-ideas.md": "042fa85ad3fca1f21a4247e21058bd4cd73b83e7d2453be2211715314af5e3f4",
+    "docs/research/runs/2026-09-27-extend-T-survey/02-plan.md": "2a1be91a2eadb7f4bb06bf06b26d0935c1745b364f65f9f8e9813004972d627c",
+    "docs/research/runs/2026-09-27-extend-T-survey/07-report.md": "37464656054523c515eef93292b86f8c44a17fb5f7a44786994c7bebffaa95b9",
+    "docs/research/runs/2026-09-27-extend-T-survey/08-next.md": "c2e4f13295a000f8553f72576377f1aaf21fa56c8c0fc9f3196ac28c35c6a973",
+    "docs/research/runs/2026-09-27-extend-T-survey/09-survey-review.md": "a9c4c888fbabbd796e2a0318ff3d1dfc1c911dca6db21119f7daccc011cfed00",
+    "docs/research/runs/2026-09-27-extend-T-survey/canvas-validation.json": "658994bf43912ed7d6a250c55e3757a73da3cbe5eef45d5ad6a97beb6a6c0205",
+    "docs/research/runs/2026-09-27-extend-T-survey/ideas.json": "23d5d2a42741274ddf894c6e8d06d0423862382c140f06bcd038780ad67e7959",
+    "docs/research/runs/2026-09-27-extend-T-survey/initial-source-hashes.json": "3b49f1ddf35c0e658866bf2838431328ee454fe3f85f0435eb51fcf1b981e4f9",
+    "docs/research/runs/2026-09-27-extend-T-survey/initial-working-tree.patch": "32d0db214d922e84f3be591ddbe3dd8a66cb782b86ed93beea03babd840f2144",
+    "docs/research/runs/2026-09-27-extend-T-survey/run.json": "65b03ed247981aa09e64d4b4f0a304138f10aeb79fcf5458787c2862536bc507",
+    "docs/research/runs/2026-09-27-extend-T-survey/scores.json": "1810233175f97fad31a70dc91f4f3f136b2b9def72ba228d8bc6e2e76e99d095",
+    "docs/research/runs/2026-09-27-extend-T-survey/sources/R00-alternatives.md": "d4c01a658d2dce8f5b8c2ca3fab566b2473193aac6f2cbfa17d48f3aaf9c2f06",
+    "docs/research/runs/2026-09-27-extend-T-survey/sources/R01-continuation.md": "7f94624e5c7b639d46305db5c8d033e5147b0352a0894aa746086cba18e9d8e2",
+    "docs/research/runs/2026-09-27-extend-T-survey/sources/R02-representation.md": "616deb11b10c147dd020833e01c892002cfb304728c60f8b47a7f02fbcac6439",
+    "docs/research/runs/2026-09-27-extend-T-survey/sources/R03-sampling.md": "42691cf142e812c8e014fae6d390a9fa275eea3c7acadb524a4c05233c172000",
+    "docs/research/runs/2026-09-27-extend-T-survey/validation.json": "010c0fbbeecbbe93b9c960e3a4bc03d07135f6211ea55631d69b3a0e1d23b92d"
+  },
+  "external_artifacts": {
+    "/Users/michael/.cursor/projects/Users-michael-Desktop-NTU-fyp-parabolab/canvases/extend-T-survey.canvas.tsx": "401932544a2823dc93aea1e9d4c06edbf96383091005d68942925a26a83e5393"
+  }
+}

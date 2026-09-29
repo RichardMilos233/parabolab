@@ -1,0 +1,25 @@
+{
+  "date": "2026-09-27",
+  "idea_count": 10,
+  "priority_feasibility_studies": [
+    "D01",
+    "D03",
+    "D04"
+  ],
+  "required_comparator": "D05",
+  "score_summary": {
+    "idea_count": 10,
+    "high_value_count": 0,
+    "shortlist_count": 0,
+    "provisional_candidate_count": 0,
+    "conditional_candidate_count": 0,
+    "top_limit": 3
+  },
+  "preexisting_files_verified_unchanged": 67,
+  "changed_preexisting_files": [],
+  "local_document_links_missing": [],
+  "canvas_validation": "canvas-validation.json",
+  "executed_solver_experiments": false,
+  "added_or_checked_lean_proofs": false,
+  "research_claims_status": "literature review and hypotheses only"
+}

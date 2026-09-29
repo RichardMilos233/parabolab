@@ -1,0 +1,369 @@
+{
+  "date": "2026-09-27",
+  "mode": "ideate",
+  "objective": "在固定PDE、精度和总预算下延长可用T",
+  "scores_are": "coarse hypotheses, not measured performance",
+  "practical_priority": [
+    "D01",
+    "D03",
+    "D04"
+  ],
+  "required_baseline": "D05",
+  "ideas": [
+    {
+      "id": "D01",
+      "title": "带 code 误差证书的时间分段",
+      "family": "时间分段",
+      "priority": "优先摸底",
+      "gap": "现成时间 patching 和局部 Picard 已存在，但本项目尚无每个中间 terminal code 的误差、矩与总成本契约。",
+      "hypothesis": "每段在局部安全区内运行，把 continuation 的函数与可达 code 误差显式传播，可以把固定 PDE 的可用 T 推到多个局部步长。",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "可能的新意是现有高阶 coding 的接口与证书，不是分段本身；还需查同类实现。",
+        "impact": "中间终值不再精确已知是多类长时间分支方法的共同瓶颈。",
+        "effect": "待验证目标是同精度预算下 T_use 至少翻倍；当前未取得该结果。"
+      },
+      "evidence": [
+        "https://arxiv.org/pdf/1612.06790",
+        "https://arxiv.org/pdf/1710.10933",
+        "https://arxiv.org/pdf/1804.08432"
+      ],
+      "evidence_status": "searched",
+      "feasibility": {
+        "status": "conditional",
+        "reason": "有限闭合 code 子类可做两段验证；任意高阶编码需 all-code 加权正则性，而非默认有限 C^r。",
+        "first_test": "两段对照：oracle 中间终值、实际 continuation、受控扰动；若含导数成本后不能保持局部矩界或误差增长不可控则收缩范围。"
+      },
+      "scope": "先有限闭合的半线性/多项式子类，再评估解析或 Gevrey all-code 空间。",
+      "mechanism": "重启局部表示，阻止一棵树贯穿整个 T；自适应步长以 code 矩余量决定，属于此方向。",
+      "bias": "拟合 continuation 通常有偏，需总误差界；直接估计各 terminal code 并独立复制是另一个条件无偏版本。",
+      "prerequisites": "局部稳定映射、可达 code 契约、可计算中间终值和导数成本。",
+      "obstacle": "函数值误差小不代表导数或非线性 terminal code 误差小；嵌套工作量可能相乘。",
+      "target": "计划以 ε=0.02、同一总预算测 T_use；至少从两个 slab 得到可复核误差账本，2倍T仅为接受目标。",
+      "cost": "理论接口约1–3研究工作日；后续原型约3–7日，先限2 CPU小时筛选。粗估，非交期。",
+      "fallback": "若通用 all-code 契约失败，限制有限闭合子类；若学习开销超额，仅保留反例和误差诊断。",
+      "plan": "先理论误差递推与独立性条件；Lean 证乘积扰动/有限递推；最后两段数值。"
+    },
+    {
+      "id": "D02",
+      "title": "二叉、阶乘归一化的重新编码",
+      "family": "改写表示",
+      "priority": "低成本核验",
+      "gap": "2026 新表示减轻 Faà di Bruno 分支数量，但对本项目可用 T 的增益未知。",
+      "hypothesis": "归一化和至多二叉机制可能在非恒定高阶 code 上降低成本或矩增长；不预设它扩大常数例的可积区间。",
+      "novelty": 1,
+      "impact": 10,
+      "effect": 1,
+      "rationale": {
+        "novelty": "机制及稳定性分析已由 Huang–Privault 提出；本项目首先是复现适配。",
+        "impact": "可影响半线性热方程中高维、高阶 code 的组织成本。",
+        "effect": "常数 Allen–Cahn 纸面初筛没有扩大临界时间，实际长T增益尚无证据。"
+      },
+      "evidence": [
+        "https://arxiv.org/html/2502.17853v2"
+      ],
+      "evidence_status": "searched",
+      "feasibility": {
+        "status": "feasible",
+        "reason": "半线性热方程的机制和代码明确，足以做有边界的对照筛选；不是一般 jet PDE 的现成迁移。",
+        "first_test": "先独立复核常数 φ=0.5 的非零树与矩方程，再在非恒定解析 terminal 上比较 code 数、权重矩及节点成本。"
+      },
+      "scope": "u_t+Δu/2+f(u)=0；不能直接宣称覆盖任意 f(u,Du,…,D^n u)。",
+      "mechanism": "改变 code 与分支展开，而非只换 q 或 lifetime。",
+      "bias": "在论文可积性及表示条件下为精确表示；数值封顶仍需单独处理。",
+      "prerequisites": "新旧 code 对应、终端高阶复合导数和可积性条件核验。",
+      "obstacle": "少分支不等于小权重；导数增长与终端 code 上界仍存在。",
+      "target": "计划同T下 code/节点成本至少减半且矩不恶化，或证明某非恒定类的可积区间变大；尚未测得。",
+      "cost": "纸面筛选0.5–1日；受限复现2–5日。先以1 CPU小时检查。",
+      "fallback": "若只有代码组织收益，降为实现优化，不算延长T主路线。",
+      "plan": "先矩方程与新旧对应；有正面筛选后再 Lean 和实现。"
+    },
+    {
+      "id": "D03",
+      "title": "围绕参考解求残差，并精确吸收线性项",
+      "family": "改写表示",
+      "priority": "优先摸底",
+      "gap": "原树把有利的线性阻尼和大项抵消分散到随机权重中，可能丢失稳定结构。",
+      "hypothesis": "设 u=v+w，只为小残差构树，把已知线性项保留为 Feynman–Kac 权重，能在明确邻域得到比 raw 表示更长的矩证书。",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "PACV、SCaSML已做残差纠正，HLTT已保留线性killing；仅本项目all-code矩/阻尼/成本证书是待验证的具体差异，非残差机制首创。",
+        "impact": "适合耗散反应和已知稳态/廉价近似解附近，范围有限但常见。",
+        "effect": "已有可检验的稳定 majorant 候选；仍需 L2 与总成本，不能把 L1 观察直接称实用成功。"
+      },
+      "evidence": [
+        "https://arxiv.org/pdf/1302.4624",
+        "https://arxiv.org/pdf/1701.07660",
+        "https://arxiv.org/html/2504.16172v3"
+      ],
+      "evidence_status": "searched",
+      "feasibility": {
+        "status": "feasible",
+        "reason": "Allen–Cahn v=1 的代数改写与候选 majorant 明确，适合先做局部理论筛选。",
+        "first_test": "对 v=1、w=φ−1 独立推导 L1 和 L2 majorant；先测小幅非恒定扰动，再用跨越两相的波检验适用边界。"
+      },
+      "scope": "先已知稳态或可廉价求导的参考解；一般高阶非线性需要参考 jet 的统一控制。",
+      "mechanism": "保留线性耗散、重组抵消，再对剩余非线性展开。",
+      "bias": "已知参考解和精确线性传播不引入偏差；估计参考解须携带 residual forcing 与其误差。",
+      "prerequisites": "参考函数、PDE residual、Jacobian/高阶 code 的界，而不只是训练残差小。",
+      "obstacle": "参考解接近不保证其导数接近；阻尼可能只在一个相邻域成立。",
+      "target": "先争取一个非恒定邻域的全T L1证书，再在T=2,4检查有限L2和相同ε成本；均为目标。",
+      "cost": "代数与L1摸底0.5–1日，L2和code接口2–4日，原型另1–3日。",
+      "fallback": "若L2仍很快爆炸，组合分段；若只能常数例，不能宣称覆盖移动界面。",
+      "plan": "理论先验证 w_t+Lw−2w−3w²−w³=0；Lean 验代数、区间不变性和局部矩比较；之后数值。"
+    },
+    {
+      "id": "D04",
+      "title": "有界投票表示的率与分支成本优化",
+      "family": "改写表示",
+      "priority": "优先摸底",
+      "gap": "majority 已能控制值域/矩，但树的节点数随T增长；一般多项式投票表示也已有先例。",
+      "hypothesis": "把不变区间上的多项式编译为投票/Bernstein 规则，联合选择次数、速率及提前判定，减少达到同一精度的总工作量。",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "一般投票存在性不是新发现；候选贡献在最小成本编译、证书与可验证的提前停止规则。",
+        "impact": "面向具有已知不变区间的多项式反应，不覆盖任意高阶导数非线性。",
+        "effect": "样本有界已经成立；新增目标是降低长T成本至少2倍，而非重复证明有界。"
+      },
+      "evidence": [
+        "https://arxiv.org/abs/1607.07563",
+        "https://arxiv.org/pdf/2209.03435",
+        "https://www.stats.ox.ac.uk/~etheridg/odowd.pdf"
+      ],
+      "evidence_status": "searched",
+      "feasibility": {
+        "status": "feasible",
+        "reason": "本项目已有 majority 比较器，可在有限次数候选中精确检查系数、值域与节点成本。",
+        "first_test": "在Allen–Cahn和另一已知不变区间反应上列出可行投票率/次数，若成本证书不能优于现有majority则停止通用化。"
+      },
+      "scope": "有不变区间的标量多项式反应；导数输出和一般系统需要额外理论。",
+      "mechanism": "由乘法权重改为有界局部聚合；把长T瓶颈转到树工作量。",
+      "bias": "合法投票规则与独立子树下可精确表示；任意提前截枝会改变答案，需证明输出已确定。",
+      "prerequisites": "区间证书、Bernstein 系数、连续时间生成元与投票规则对应。",
+      "obstacle": "最小 arity 未必最小 λ(arity−1)；有界输出不保证廉价。",
+      "target": "固定 ε 和预算，在 T=2/4 的非恒定例上相对现有 majority 降低至少2倍工作量；未测得。",
+      "cost": "有限候选优化/理论1–3日；编译器和审核2–5日，先2 CPU小时。",
+      "fallback": "无法降低工作量时保留为可靠长T对照，不作为主研究创新。",
+      "plan": "先生成元对应和成本界；Lean 验多项式与区间/投票恒等式；再做成本实验。"
+    },
+    {
+      "id": "D05",
+      "title": "截断多层 Picard 长时间基线",
+      "family": "替代随机方法",
+      "priority": "必须比较",
+      "gap": "原单树矩失效不说明PDE难解，需要已有任意固定T方法作实用能力对照。",
+      "hypothesis": "在合适半线性子类用 MLP 的多层差分与样本分配，跨过单树小时间区间并得到可控总误差。",
+      "novelty": 1,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "MLP及Allen–Cahn截断理论已成熟，本项目首先是严谨复现。",
+        "impact": "覆盖高维半线性类，部分结果允许梯度依赖。",
+        "effect": "有任意固定T的理论支持，但T常数可能很大；实际收益需公平对照。"
+      },
+      "evidence": [
+        "https://arxiv.org/pdf/1907.06729",
+        "https://arxiv.org/pdf/1911.03188",
+        "https://arxiv.org/pdf/2310.12545",
+        "https://arxiv.org/html/2410.00203v2"
+      ],
+      "evidence_status": "searched",
+      "feasibility": {
+        "status": "feasible",
+        "reason": "Allen–Cahn已有直接适用的截断定理；先限制该类可以复现。",
+        "first_test": "核对原始参数与截断先验界，在T=1,2,4记录误差和所有层的随机工作量，检验T常数是否吞掉优势。"
+      },
+      "scope": "无梯度半线性为最稳起点；梯度扩展需额外条件，任意高阶jet未覆盖。",
+      "mechanism": "改变为多层随机固定点迭代，重分配各层样本。",
+      "bias": "有限层/截断近似通常有偏，以总RMSE评估；不能冒充单样本无偏树。",
+      "prerequisites": "适用定理、解的先验界、截断规则、独立层样本。",
+      "obstacle": "固定T复杂度良好不等于随T增长仍便宜；梯度权重加重常数。",
+      "target": "构建T=2/4、ε=0.02的对照成本曲线；不预先承诺胜过majority或分段。",
+      "cost": "严格复现3–7日；先2 CPU小时参数筛选，后续预算依据误差收敛再定。",
+      "fallback": "若长T成本过大，仍作为分段/残差路线的同精度基线。",
+      "plan": "适用性核验和有限层误差；Lean只验采用的代数递推模块；最后复现实验。"
+    },
+    {
+      "id": "D06",
+      "title": "递归层内独立平均与条件嵌套",
+      "family": "改写表示",
+      "priority": "条件候选",
+      "gap": "外层增加样本不修复坏矩；在相乘前平均独立子估计则改变二阶矩传播。",
+      "hypothesis": "对每个code递归生成若干独立副本，先平均再相乘，可能在固定有限T稳定L2，同时用分层配置控制工作量。",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "nested branching 已知；潜在差异是code级矩方程、方差与完整成本联合配置。",
+        "impact": "适用于可以独立调用子code的递归乘积结构。",
+        "effect": "有明确的均值平方+方差/m机制，但长T所需m及乘法工作量未明。"
+      },
+      "evidence": [
+        "https://arxiv.org/pdf/1701.07660",
+        "https://arxiv.org/pdf/1804.08432"
+      ],
+      "evidence_status": "searched",
+      "feasibility": {
+        "status": "conditional",
+        "reason": "有限code的L2稳定可纸面筛选；必须同时证明递归终止、有限总成本和独立性。",
+        "first_test": "在flat有限code上推导平均次数m的矩-工作量系统，检验T超过原临界后是否能同时得到有限L2和可接受成本。"
+      },
+      "scope": "先有限闭合多项式类，再考虑连续状态和高阶code。",
+      "mechanism": "sums-before-products 的表示重组；不同于在最外层平均有限个原始全树估计。",
+      "bias": "有限深度nested通常有截断偏差；完整递归版本的无偏性需可积性和独立性证明，不能默认。",
+      "prerequisites": "每个乘法因子的独立随机数、条件矩算子、工作量递推。",
+      "obstacle": "平均次数增加会在树层数间相乘；不能只画方差下降而忽略工作量。",
+      "target": "先找T=2同时有限L2及工作量的证书，再比较ε成本；这是研究假说。",
+      "cost": "理论1–3日，有限code诊断2–4日；可行后再更广实现。",
+      "fallback": "若独立副本成本过大，采用有限深度有偏版本并显式估计偏差，或转MLP。",
+      "plan": "理论矩递推和成本先行；Lean验独立平均与乘积代数模块；最后模拟。"
+    },
+    {
+      "id": "D07",
+      "title": "ghost/对偶耦合消除导数权重奇异性",
+      "family": "局部耦合",
+      "priority": "按瓶颈启用",
+      "gap": "当前NPP使用直接导数code；导数增长可能限制矩。若转为Malliavin/ghost混合表示，又须消除短寿命权重奇异性，不能把已有方法直接套上。",
+      "hypothesis": "通过共享增量的ghost/antithetic差分先消去常数或低阶项，再乘导数权重，改善局部矩并间接扩大可用T。",
+      "novelty": 1,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "局部ghost和antithetic分支方法已有；本项目首先核对适配边界。",
+        "impact": "对导数非线性和非恒定terminal重要，对flat纯反应瓶颈无直接作用。",
+        "effect": "已有长T数值改善先例，但没有覆盖任意高阶完全非线性的总保证。"
+      },
+      "evidence": [
+        "https://arxiv.org/pdf/1701.07660",
+        "https://arxiv.org/pdf/1603.01727"
+      ],
+      "evidence_status": "searched",
+      "feasibility": {
+        "status": "conditional",
+        "reason": "一阶/部分二阶子类有明确构造；本项目通用code需额外正则性与耦合对应。",
+        "first_test": "对一阶code检查Δt趋零时的条件二阶矩和单位成本，再看该奇异性是否真是目标PDE的限制。"
+      },
+      "scope": "优先梯度或有限阶导数类；扩散系数非恒定的离散化偏差另计。",
+      "mechanism": "局部相关差分的解析抵消，不是调整抽样概率。",
+      "bias": "精确diffusion与正确抵消下可保持表示；Euler推进及截断带来额外偏差。",
+      "prerequisites": "原直接导数code到混合表示的恒等式、递归L2增量界、coupling身份、完整随机权重。",
+      "obstacle": "局部权重被控制不自动控制长树乘积；复制成本增加。",
+      "target": "先得到可验证的局部L2阶数改进，再争取同预算T_use翻倍；后者尚无本项目证据。",
+      "cost": "单code理论1–3日，受限原型2–5日；不先做通用任意阶引擎。",
+      "fallback": "若纯反应项仍限制T，将其定位为分段/MLP的辅助模块。",
+      "plan": "先差分与条件矩证明；Lean验Taylor/代数中可复用部分；再代码验证。"
+    },
+    {
+      "id": "D08",
+      "title": "code/时间/状态联合选择时钟与标签",
+      "family": "保留原表示",
+      "priority": "辅助优化",
+      "gap": "全局常数Λ和固定q忽视各code剩余时域及未来工作量。",
+      "hypothesis": "以条件二阶矩和子树成本近似联合优化hazard与q，可在原可积区域内延长有用的L2/预算区间。",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "importance sampling已知；潜在差异是当前code级成本-方差与时钟的一致优化。",
+        "impact": "可复用已有短T的Λ优化并改善多个候选表示。",
+        "effect": "可能显著改善L2与工作量，但同一受支持原树展开不能越过其L1绝对可积边界。"
+      },
+      "evidence": [
+        "https://arxiv.org/pdf/1302.4624",
+        "https://arxiv.org/pdf/1603.01727",
+        "https://arxiv.org/html/2502.17853v2"
+      ],
+      "evidence_status": "searched",
+      "feasibility": {
+        "status": "feasible",
+        "reason": "原有moment/clock设施可提供有限code的基线，支持和似然校正可以逐项核验。",
+        "first_test": "在已知flat矩系统内先算oracle q/hazard上限，若成本与二阶矩不能优于现有全局参数则不做学习策略。"
+      },
+      "scope": "相同、受支持、非爆炸的原始树展开；若时钟导致路径测度变化须包含完整likelihood。",
+      "mechanism": "改变proposal；生存概率、状态hazard积分与所有后代概率均需正确校正。",
+      "bias": "完整支撑和权重下不改变期望；adaptive学习与估计样本依赖需独立或条件论证。",
+      "prerequisites": "条件矩/成本预测器、hazard可模拟性、support及权重证书。",
+      "obstacle": "不能修复proposal不变的L1发散；适应性状态时钟也可能增加单节点成本。",
+      "target": "在L1有效区间内至少降低2倍variance×work，或扩大有限L2时间；不承诺T>1.44551的同一flat raw表示。",
+      "cost": "有限code oracle1–2日，状态近似2–5日；仅在oracle有收益后实现。",
+      "fallback": "把该方向用作D01/D03/D04的新表示局部调优，不再作为唯一长T机制。",
+      "plan": "理论最优条件分配与权重不变性；Lean验选定有限模型；再做数据驱动配置。"
+    },
+    {
+      "id": "D09",
+      "title": "完整树状态上的重采样与分治粒子法",
+      "family": "群体方法",
+      "priority": "高风险候选",
+      "gap": "signed tree权重退化可能被重采样缓和，但保留非线性乘积的无偏性和树成本并不自动成立。",
+      "hypothesis": "在完整树状态的Feynman–Kac模型上保留归一化因子与符号，用独立子群分治控制退化，并量化真正的树内成本。",
+      "novelty": 10,
+      "impact": 10,
+      "effect": 1,
+      "rationale": {
+        "novelty": "2016论文Appendix A已有非线性分支树的signed重采样；潜在差异仅是通用code和可证成本改进。",
+        "impact": "如成立可服务多类非线性树，但适用依赖仍大。",
+        "effect": "只固定树副本数并不限制各树活分支，当前没有实际长T收益证据。"
+      },
+      "evidence": [
+        "https://arxiv.org/pdf/1603.01727",
+        "https://arxiv.org/abs/2110.15782",
+        "https://arxiv.org/abs/2104.08198"
+      ],
+      "evidence_status": "searched",
+      "feasibility": {
+        "status": "conditional",
+        "reason": "已有tree-state construction可作起点；将粒子群相关性与coding乘积正确连接仍待证明。",
+        "first_test": "有限深度可枚举树比较精确和、signed重采样、独立子群与共享子群，检查期望以及总活节点成本。"
+      },
+      "scope": "先有限深度、可验证的树状态模型；不默认跨越原无限展开L1边界。",
+      "mechanism": "完整树/历史状态上selection，保留normalization与genealogical signs；不能随意逐子粒子重采样。",
+      "bias": "非归一化估计在对应条件下可无偏；normalized估计一般有偏，关联子群会改变乘积。",
+      "prerequisites": "完整状态空间、势函数、所有归一化因子、独立子群与成本统计。",
+      "obstacle": "符号抵消、相关性和每棵树的内部爆炸仍在。",
+      "target": "先通过有限树精确期望核验，再测试同ε成本；不设未经支持的加速倍数。",
+      "cost": "文献对应与有限树证明2–4日；若通过才投入3–7日原型。",
+      "fallback": "若只改变树权重退化而不改善总节点成本，保留为辅助方差技术。",
+      "plan": "先有限状态无偏性/偏差界，再Lean有限和证明，最后最小粒子实验。"
+    },
+    {
+      "id": "D10",
+      "title": "精确反应子流与随机扩散的时间分裂",
+      "family": "替代随机方法",
+      "priority": "待补全文",
+      "gap": "如果允许可控偏差，可以绕开整段非线性乘积树，但需完整时间/空间/采样误差分析。",
+      "hypothesis": "对反应流可显式解、具有不变区间的PDE，分裂推进反应和扩散，以稳定子步换取较长可用T。",
+      "novelty": 1,
+      "impact": 10,
+      "effect": 10,
+      "rationale": {
+        "novelty": "reaction–diffusion splitting及概率实现已有，不作原创机制主张。",
+        "impact": "适合耗散标量反应，不覆盖任意高阶非线性。",
+        "effect": "结构保持提供可行性直觉，但未核验主来源全文，也未量化高维总成本。"
+      },
+      "evidence": [
+        "https://doi.org/10.1090/S0025-5718-08-02185-6"
+      ],
+      "evidence_status": "provisional",
+      "feasibility": {
+        "status": "conditional",
+        "reason": "反应子流明确；Faou论文全文获取失败，且高维热半群表示/复用的误差和成本尚未选定。",
+        "first_test": "先拿到并核对全文定理；对1D已知解做步长减半与样本加倍双序列，分离分裂和MC误差。"
+      },
+      "scope": "先Allen–Cahn等反应可精确解的半线性类；高维插值/回归问题不能隐藏。",
+      "mechanism": "确定性时间步与随机热半群交替，放弃原单树组织。",
+      "bias": "存在分裂与非线性plug-in偏差，必须总误差控制；有界反应子流不使MC估计无偏。",
+      "prerequisites": "子流精确性、适用分裂误差定理、空间表示、样本复用契约。",
+      "obstacle": "每一步非线性作用于估计值会传播偏差；高维状态表示可能成为主成本。",
+      "target": "先验证总误差随步长/样本收敛，再与MLP及majority比T=2/4成本；未验证。",
+      "cost": "补全文/适用性0.5–2日，1D基线2–4日；高维成本目前不能可靠估计。",
+      "fallback": "若高维实现成本不清晰，只作为低维独立参考而不作为主路线。",
+      "plan": "全文核验与误差分解先行；有闭合理论后Lean对应子流模块；再数值。"
+    }
+  ]
+}
