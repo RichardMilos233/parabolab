@@ -1,0 +1,83 @@
+{
+  "status": "passed_with_explicit_scope",
+  "root_test_run": {
+    "command": "/opt/miniconda3/envs/parabolab/bin/python -m pytest docs/research/runs/2026-09-27-slab-continuation/numerics/test_slab_sampler.py docs/research/runs/2026-09-27-slab-continuation/numerics/test_experiment.py -q",
+    "exit_code": 0,
+    "passed": 29,
+    "seconds": 18.98,
+    "log": "numerics/tests.log"
+  },
+  "production": {
+    "reference": {
+      "exit_code": 0,
+      "log": "numerics/reference.log"
+    },
+    "slab": {
+      "exit_code": 0,
+      "log": "numerics/slab-production.log"
+    },
+    "majority": {
+      "exit_code": 0,
+      "log": "numerics/majority-production.log"
+    },
+    "sensitivity": {
+      "exit_code": 0,
+      "log": "numerics/sensitivity.log"
+    }
+  },
+  "lean": {
+    "module": "EstimatorIntegrity.SlabContinuation",
+    "build_exit_code": 0,
+    "build_log": "lean/build.log",
+    "axiom_exit_code": 0,
+    "axiom_log": "lean/axioms.log",
+    "checked_theorems": 11,
+    "ordinary_axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "additional_project_axioms": [],
+    "sorry_or_admit": false,
+    "coverage": "deterministic algebra only"
+  },
+  "raw_record_audit": {
+    "all_scheduled_roots_present": true,
+    "audited_archives": 206,
+    "audited_artifact_disk_bytes": 508740898,
+    "audited_root_records": 32548000,
+    "checks": 12406,
+    "expected_archives": 206,
+    "failed_checks": 0,
+    "manifest_disk_bytes": 817410,
+    "max_numeric_absolute_deviation": 5.551115123125783e-16,
+    "max_numeric_deviation_check": "slab:slab-seed-2026092701-stage-015.npz: interface derivative bound",
+    "npz_disk_bytes": 507923488,
+    "passed_checks": 12406,
+    "saved_root_deletion_detected": false
+  },
+  "independent_correspondence": "pass within specified stationary benchmark and partial formalization scope; see10-correspondence-review.md",
+  "canvas": {
+    "file": "/Users/michael/.cursor/projects/Users-michael-Desktop-NTU-fyp-parabolab/canvases/slab-continuation-T4.canvas.tsx",
+    "source_sha256": "9c58d23c1adecbe4e4f2c0b9789af65eea1c6bdc6be658091cc91736846bf499",
+    "typescript_version": "6.0.3",
+    "validation": "TypeScript/TSX transpile syntax check; SDK prop shapes inspected against declarations; host render not observed",
+    "diagnostics": [],
+    "passed": true
+  },
+  "canvas_open_status": "queued; no host render observed",
+  "scientific_figure": "PNG inspected by creator and root; readable labels and correct distinction between measurements and theoretical guarantees",
+  "preservation": {
+    "initial_hash_file": "initial-source-hashes.json",
+    "checked_paths": 85,
+    "changed_paths": []
+  },
+  "limitations": [
+    "stationary one-dimensional small-amplitude periodic datum with preserved odd symmetry",
+    "three-sine interface is a biased controlled MC continuation reference",
+    "integrated ensemble RMS guarantee, not pointwise or high probability",
+    "Lean algebra is partial coverage; probability/PDE/Fourier bridges remain conventional",
+    "floating implementation not interval-certified",
+    "raw L2 obstruction only for specified rate2 uniform law"
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "provenance": {
+    "algorithm_contract": {
+      "adaptive_sample_budget": false,
+      "failed_root_deletion": false,
+      "projection": "coordinatewise clipping of coefficient estimates",
+      "projection_is_biased": true,
+      "raw_local_trees_unbiased_conditional_on_interface": true,
+      "selected_label_probability_renormalized": false,
+      "selected_structural_zero_short_circuit_allowed": true,
+      "tree_cutoff": null,
+      "tree_weight_clipping": false
+    },
+    "command": "/opt/miniconda3/envs/parabolab/bin/python docs/research/runs/2026-09-27-slab-continuation/numerics/run_experiment.py reference",
+    "configuration": {
+      "mode": "reference",
+      "output": "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-27-slab-continuation/numerics/artifacts/reference"
+    },
+    "created_at_utc": "2026-09-27T05:33:19.021988+00:00",
+    "environment": {
+      "mpmath_version": "1.3.0",
+      "numpy_version": "2.4.6",
+      "platform": "macOS-26.3-arm64-arm-64bit",
+      "python_executable": "/opt/miniconda3/envs/parabolab/bin/python",
+      "python_version": "3.11.15",
+      "scipy_version": "1.17.1"
+    },
+    "git_revision": "65dca46e42db1c80cdf9ddd8eed6a415148c37f3",
+    "mode": "reference",
+    "reference_checks": {
+      "amplitude": "0.30860669992418382052218892552799984084310496700278",
+      "analytical_tail_squared_upper_bound": "7.0143407369044248882285460752950540585011196530639e-17",
+      "checks": {
+        "coefficient_box_derivative_bound_lt_1_over_2": true,
+        "coefficient_box_value_bound_lt_2_over_5": true,
+        "coefficient_quadrature_max_difference_lt_1e_40": true,
+        "coefficients_inside_caps": true,
+        "nome_lt_1_over_300": true,
+        "stationarity_max_residual_lt_1e_40": true,
+        "tail_squared_lt_1e_16": true,
+        "tail_within_analytic_bound": true
+      },
+      "coefficient_box_derivative_upper_bound": "0.46103728300056738844917770803469513065155671462923",
+      "coefficient_box_value_upper_bound": "0.32958247071104980112323355717707013721066203055660",
+      "coefficient_quadrature_absolute_differences": [
+        "1.3177747429038154030435717564087523759637451727961e-81",
+        "2.9032224804599683098303690258380325782951260838163e-82",
+        "1.5527527038042973793614303310149639278667042500863e-82"
+      ],
+      "complementary_complete_elliptic_k": "2.9083372484445521000949883117346036232862063194414",
+      "complete_elliptic_k": "1.5910034537907921801093426057172009706957893696552",
+      "decimal_precision": 80,
+      "exact_fourier_tail_squared_after_n5": "5.1686279568620035735026427878995989569306667766666e-17",
+      "fourier_coefficients_n_1_3_5": [
+        "0.21891520052154060572216275067438369823560315975892",
+        "0.00069954571370227609798981835724155477911747767261534",
+        "0.0000022425944605018022146506070761591322292705118457311"
+      ],
+      "kappa": "1.3801311186847084355922537292542639736323936071199",
+      "method": "mpmath Jacobi functions, elliptic integrals, quadrature, and differentiation",
+      "nome": "0.0032057869706856932057926699780927287137662616723720",
+      "omega": "1.3626022536657161589137804127340715071234328342176",
+      "parameter_m": "0.05",
+      "period": "4.6111660906741937545645534882299042320994392268448",
+      "quadrature_coefficients_n_1_3_5": [
+        "0.21891520052154060572216275067438369823560315975892",
+        "0.00069954571370227609798981835724155477911747767261534",
+        "0.0000022425944605018022146506070761591322292705118457311"
+      ],
+      "stationarity_max_absolute_residual": "1.1859972686134338627392145807678771383673706555165e-81"
+    },
+    "seed_schedule": [],
+    "source_sha256": {
+      "docs/research/runs/2026-09-27-slab-continuation/02-plan.md": "ba501df4e76aa1ff89ce93315089f41058db0520f196399e517f3c4685acefa9",
+      "docs/research/runs/2026-09-27-slab-continuation/04-theory.md": "52e75b29bc986486d6d26fdb95a263c02005778dfea509edf04857e616623db3",
+      "docs/research/runs/2026-09-27-slab-continuation/numerics/run_experiment.py": "12621c9269a62b08c7017c5adc55401d4d3818b8e4663b106ca176eb2b4e0d05",
+      "docs/research/runs/2026-09-27-slab-continuation/numerics/slab_sampler.py": "994e892784f36930fa63649aa749985448df75887f9096f6c40c142b46ff108a"
+    }
+  },
+  "schema_version": 1,
+  "status": "complete"
+}

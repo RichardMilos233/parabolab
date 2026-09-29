@@ -1,0 +1,141 @@
+{
+  "run_id": "2026-09-27-slab-continuation",
+  "date": "2026-09-27",
+  "status": "completed",
+  "mode": "execute",
+  "skill": "math-auto-research",
+  "skill_version": "0.2.0",
+  "objective": "Extend usable coding-tree horizon by certified learned slab continuation on a nonconstant periodic Allen–Cahn feasibility benchmark",
+  "selected_direction": "D01",
+  "selection": "bounded feasibility study approved after prior ten-direction survey; not a >1000 novelty score claim",
+  "user_order": [
+    "theory",
+    "Lean",
+    "code"
+  ],
+  "base_revision": "65dca46e42db1c80cdf9ddd8eed6a415148c37f3",
+  "theory_status": "C1–C7 and C9 conventionally proved and independently reviewed; scope explicitly limited",
+  "lean_core_gate": "Postfixed box, scalar projection contraction and finite recurrence compiled successfully before numerical implementation began; later rational checks received final build/axiom audit",
+  "phases": {
+    "theory": "complete",
+    "lean_scoped_targets": "complete",
+    "numerics": "complete",
+    "correspondence": "complete",
+    "presentation": "complete"
+  },
+  "delegations": [
+    {
+      "id": "T01",
+      "agent": "slab_interface_theory",
+      "role": "research",
+      "model_requested": "gpt-6-astra",
+      "reasoning_requested": "max",
+      "status": "completed",
+      "deliverable": "reviews/T01-interface-theory.md"
+    },
+    {
+      "id": "T02",
+      "agent": "slab_constructive_theory",
+      "role": "research",
+      "model_requested": "gpt-6-astra",
+      "reasoning_requested": "max",
+      "status": "completed",
+      "deliverable": "reviews/T02-constructive-theory.md"
+    },
+    {
+      "id": "T03",
+      "agent": "slab_lean",
+      "role": "implementation",
+      "model_requested": "gpt-5.6-sol",
+      "reasoning_requested": "xhigh",
+      "status": "completed",
+      "deliverable": "06-formalization.md"
+    },
+    {
+      "id": "T04",
+      "agent": "slab_sampler",
+      "role": "implementation",
+      "model_requested": "gpt-5.6-sol",
+      "reasoning_requested": "xhigh",
+      "status": "completed",
+      "deliverable": "numerics/slab_sampler.py"
+    },
+    {
+      "id": "T05",
+      "agent": "slab_experiment_driver",
+      "role": "implementation",
+      "model_requested": "gpt-5.6-sol",
+      "reasoning_requested": "xhigh",
+      "status": "completed",
+      "deliverable": "numerics/run_experiment.py"
+    },
+    {
+      "id": "T06",
+      "agent": "slab_interface_theory",
+      "role": "research",
+      "model_requested": "gpt-6-astra",
+      "reasoning_requested": "max",
+      "status": "completed",
+      "deliverable": "10-correspondence-review.md"
+    },
+    {
+      "id": "T07",
+      "agent": "slab_experiment_driver",
+      "role": "implementation",
+      "model_requested": "gpt-5.6-sol",
+      "reasoning_requested": "xhigh",
+      "status": "completed",
+      "deliverable": "numerics/summarize_results.py"
+    },
+    {
+      "id": "T08",
+      "agent": "slab_sampler",
+      "role": "implementation",
+      "model_requested": "gpt-5.6-sol",
+      "reasoning_requested": "xhigh",
+      "status": "completed",
+      "deliverable": "numerics/audit.json"
+    }
+  ],
+  "actual_model_note": "Explicit model/effort dispatch settings accepted by collaboration tools; no independent service-level actual-model telemetry or token cost available",
+  "initial_sources": "initial-source-hashes.json",
+  "preexisting_work_preserved": true,
+  "protocol": "02-plan.md",
+  "claims": "03-claims.md",
+  "theory": "04-theory.md",
+  "limitations": [
+    "stationary one-dimensional small-amplitude periodic datum with preserved odd symmetry",
+    "three-sine interface is a biased controlled MC continuation reference",
+    "integrated ensemble RMS guarantee, not pointwise or high probability",
+    "Lean algebra is partial coverage; probability/PDE/Fourier bridges remain conventional",
+    "floating implementation not interval-certified",
+    "raw L2 obstruction only for specified rate2 uniform law"
+  ],
+  "formalization": "partial deterministic algebra only, eleven checked theorems; no end-to-end stochastic/PDE formalization",
+  "formalized_module": "formal/EstimatorIntegrity/SlabContinuation.lean",
+  "report": "07-report.md",
+  "numerics": "05-numerics.md",
+  "independent_review": "10-correspondence-review.md",
+  "canvas": "/Users/michael/.cursor/projects/Users-michael-Desktop-NTU-fyp-parabolab/canvases/slab-continuation-T4.canvas.tsx",
+  "figure": "slab-results.png",
+  "validation": "validation.json",
+  "artifact_manifest": "artifact-manifest.json",
+  "results": {
+    "primary_T": 4,
+    "primary_runs": 3,
+    "primary_roots_per_run": 10000000,
+    "primary_final_L2_errors": [
+      0.0019504913475596874,
+      0.0016353923712140001,
+      0.0006885325413671547
+    ],
+    "ideal_model_ensemble_L2_RMS_bound": 0.02,
+    "bound_is_strict": true,
+    "raw_rate2_uniform_second_moment_infinite_for_T_at_least": 3.5,
+    "all_archives": 206,
+    "all_roots": 32548000,
+    "failed_or_discarded_roots": 0,
+    "tests_passed": 29,
+    "initial_files_unchanged": 85
+  }
+}

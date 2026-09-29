@@ -1,0 +1,799 @@
+{
+  "benchmark": "stationary periodic Jacobi Allen-Cahn datum; three-sine learned slab continuation",
+  "bounded_majority": {
+    "aggregate": {
+      "coordinate_projection_count": 10,
+      "maximum_absolute_grid_minus_fourier_l2": 3.469446951953614e-18,
+      "node_count": 105927093,
+      "root_count": 48000,
+      "run_end_to_end_seconds": 18.926697458140552,
+      "tree_sampling_seconds": 18.867388873826712
+    },
+    "prescribed_budget": "8000 full-horizon roots independently at T=0.8 and T=2",
+    "runs": [
+      {
+        "grid_agreement": {
+          "maximum_absolute_grid_minus_fourier_l2": 3.469446951953614e-18
+        },
+        "horizons": {
+          "0.8": {
+            "grid_minus_fourier_error": -2.6020852139652106e-18,
+            "node_count": 291710,
+            "normalized_spatial_l2_error": 0.006315318598014814,
+            "periodic_grid_l2_crosscheck": 0.006315318598014812,
+            "projected_coefficients": [
+              0.22403324015960743,
+              -0.003,
+              5e-05
+            ],
+            "projection_mask": [
+              false,
+              true,
+              true
+            ],
+            "root_branch_fraction": 0.802125,
+            "root_count": 8000,
+            "sampling_seconds": 0.15952600026503205,
+            "terminal_calls": 197140
+          },
+          "2.0": {
+            "grid_minus_fourier_error": -3.469446951953614e-18,
+            "node_count": 34825778,
+            "normalized_spatial_l2_error": 0.004604464535941531,
+            "periodic_grid_l2_crosscheck": 0.004604464535941527,
+            "projected_coefficients": [
+              0.2161744477260038,
+              -0.003,
+              -5e-05
+            ],
+            "projection_mask": [
+              false,
+              true,
+              true
+            ],
+            "root_branch_fraction": 0.97975,
+            "root_count": 8000,
+            "sampling_seconds": 6.022680500056595,
+            "terminal_calls": 23219852
+          }
+        },
+        "projection": {
+          "coordinate_clip_count": 4,
+          "coordinate_clip_counts_n_1_3_5": [
+            0,
+            2,
+            2
+          ],
+          "stage_or_horizon_count_with_any_clipping": 2,
+          "total_coordinate_estimates": 6
+        },
+        "seed": 2026092711,
+        "status": "complete",
+        "timing_seconds": {
+          "run_end_to_end_including_archives_and_statistics": 6.200596125330776,
+          "tree_sampling_only": 6.182206500321627
+        },
+        "work": {
+          "aggregate_root_branch_fraction": 0.8909375,
+          "node_count": 35117488,
+          "root_branch_count": 14255,
+          "root_count": 16000,
+          "terminal_calls": 23416992
+        }
+      },
+      {
+        "grid_agreement": {
+          "maximum_absolute_grid_minus_fourier_l2": 2.6020852139652106e-18
+        },
+        "horizons": {
+          "0.8": {
+            "grid_minus_fourier_error": 2.6020852139652106e-18,
+            "node_count": 288353,
+            "normalized_spatial_l2_error": 0.004015992676454743,
+            "periodic_grid_l2_crosscheck": 0.004015992676454746,
+            "projected_coefficients": [
+              0.21523806358799139,
+              0.002313416953743102,
+              5e-05
+            ],
+            "projection_mask": [
+              false,
+              false,
+              true
+            ],
+            "root_branch_fraction": 0.800125,
+            "root_count": 8000,
+            "sampling_seconds": 0.15051508275792003,
+            "terminal_calls": 194902
+          },
+          "2.0": {
+            "grid_minus_fourier_error": -8.673617379884035e-19,
+            "node_count": 35030042,
+            "normalized_spatial_l2_error": 0.006858375916626819,
+            "periodic_grid_l2_crosscheck": 0.006858375916626818,
+            "projected_coefficients": [
+              0.2121266844242384,
+              -0.0002754620409890223,
+              -5e-05
+            ],
+            "projection_mask": [
+              false,
+              false,
+              true
+            ],
+            "root_branch_fraction": 0.983125,
+            "root_count": 8000,
+            "sampling_seconds": 6.230087250005454,
+            "terminal_calls": 23356028
+          }
+        },
+        "projection": {
+          "coordinate_clip_count": 2,
+          "coordinate_clip_counts_n_1_3_5": [
+            0,
+            0,
+            2
+          ],
+          "stage_or_horizon_count_with_any_clipping": 2,
+          "total_coordinate_estimates": 6
+        },
+        "seed": 2026092712,
+        "status": "complete",
+        "timing_seconds": {
+          "run_end_to_end_including_archives_and_statistics": 6.402614374645054,
+          "tree_sampling_only": 6.380602332763374
+        },
+        "work": {
+          "aggregate_root_branch_fraction": 0.891625,
+          "node_count": 35318395,
+          "root_branch_count": 14266,
+          "root_count": 16000,
+          "terminal_calls": 23550930
+        }
+      },
+      {
+        "grid_agreement": {
+          "maximum_absolute_grid_minus_fourier_l2": 3.469446951953614e-18
+        },
+        "horizons": {
+          "0.8": {
+            "grid_minus_fourier_error": 3.469446951953614e-18,
+            "node_count": 288512,
+            "normalized_spatial_l2_error": 0.00307787240927276,
+            "periodic_grid_l2_crosscheck": 0.0030778724092727634,
+            "projected_coefficients": [
+              0.21687106761106503,
+              0.003,
+              -5e-05
+            ],
+            "projection_mask": [
+              false,
+              true,
+              true
+            ],
+            "root_branch_fraction": 0.800625,
+            "root_count": 8000,
+            "sampling_seconds": 0.14893629075959325,
+            "terminal_calls": 195008
+          },
+          "2.0": {
+            "grid_minus_fourier_error": -3.469446951953614e-18,
+            "node_count": 35202698,
+            "normalized_spatial_l2_error": 0.004335640123305964,
+            "periodic_grid_l2_crosscheck": 0.004335640123305961,
+            "projected_coefficients": [
+              0.2211753791654358,
+              -0.003,
+              -5e-05
+            ],
+            "projection_mask": [
+              false,
+              true,
+              true
+            ],
+            "root_branch_fraction": 0.98075,
+            "root_count": 8000,
+            "sampling_seconds": 6.155643749982119,
+            "terminal_calls": 23471132
+          }
+        },
+        "projection": {
+          "coordinate_clip_count": 4,
+          "coordinate_clip_counts_n_1_3_5": [
+            0,
+            2,
+            2
+          ],
+          "stage_or_horizon_count_with_any_clipping": 2,
+          "total_coordinate_estimates": 6
+        },
+        "seed": 2026092713,
+        "status": "complete",
+        "timing_seconds": {
+          "run_end_to_end_including_archives_and_statistics": 6.323486958164722,
+          "tree_sampling_only": 6.304580040741712
+        },
+        "work": {
+          "aggregate_root_branch_fraction": 0.8906875,
+          "node_count": 35491210,
+          "root_branch_count": 14251,
+          "root_count": 16000,
+          "terminal_calls": 23666140
+        }
+      }
+    ],
+    "unrun_T4_theoretical_work": {
+      "expected_nodes": 106633322246.09447,
+      "expected_nodes_billions": 106.63332224609447,
+      "measured": false,
+      "note": "reported separately and omitted from the measured-node plot",
+      "roots": 8000
+    }
+  },
+  "interpretation_limits": [
+    "The benchmark is stationary, periodic, one-dimensional, and small-amplitude.",
+    "Three-run empirical RMS values are descriptive and are not confidence intervals.",
+    "The slab and majority node curves use different prescribed root budgets.",
+    "Measured work does not establish speedup optimality.",
+    "The population RMS theorem is not plotted as a pathwise confidence band."
+  ],
+  "schema_version": 1,
+  "sensitivity_diagnostic": {
+    "classification": "optional empirical budget diagnostic; excluded from the primary three-run RMS",
+    "prescribed_budget": "50000 roots per slab, 50 slabs of length 0.08",
+    "run": {
+      "final": {
+        "grid_minus_fourier_error": 1.734723475976807e-18,
+        "normalized_spatial_l2_error": 0.006847049649181421,
+        "periodic_grid_l2_crosscheck": 0.006847049649181423,
+        "projected_coefficients": [
+          0.22575705820076294,
+          0.000438120567830838,
+          -5e-05
+        ]
+      },
+      "grid_agreement": {
+        "maximum_absolute_grid_minus_fourier_l2": 5.637851296924623e-18
+      },
+      "projection": {
+        "coordinate_clip_count": 50,
+        "coordinate_clip_counts_n_1_3_5": [
+          0,
+          2,
+          48
+        ],
+        "stage_or_horizon_count_with_any_clipping": 48,
+        "total_coordinate_estimates": 150
+      },
+      "seed": 2026092799,
+      "selected_times": {
+        "0.8": {
+          "cumulative_node_count": 589287,
+          "cumulative_root_count": 500000,
+          "cumulative_sampling_seconds": 0.10435799835249782,
+          "grid_minus_fourier_error": -2.6020852139652106e-18,
+          "instantaneous_root_branch_fraction": 0.14798,
+          "normalized_spatial_l2_error": 0.001915744925224496,
+          "periodic_grid_l2_crosscheck": 0.0019157449252244934,
+          "projected_coefficients": [
+            0.21712195503662637,
+            2.7518957813400004e-05,
+            -5e-05
+          ],
+          "projection_mask": [
+            false,
+            false,
+            true
+          ],
+          "stage": 10
+        },
+        "1.6": {
+          "cumulative_node_count": 1179015,
+          "cumulative_root_count": 1000000,
+          "cumulative_sampling_seconds": 0.19633716205134988,
+          "grid_minus_fourier_error": 2.168404344971009e-18,
+          "instantaneous_root_branch_fraction": 0.1473,
+          "normalized_spatial_l2_error": 0.0019980346305247063,
+          "periodic_grid_l2_crosscheck": 0.0019980346305247085,
+          "projected_coefficients": [
+            0.22089889290323783,
+            0.0009336955583248725,
+            5e-05
+          ],
+          "projection_mask": [
+            false,
+            false,
+            true
+          ],
+          "stage": 20
+        },
+        "2.0": {
+          "cumulative_node_count": 1473557,
+          "cumulative_root_count": 1250000,
+          "cumulative_sampling_seconds": 0.2442586631514132,
+          "grid_minus_fourier_error": 1.734723475976807e-18,
+          "instantaneous_root_branch_fraction": 0.1462,
+          "normalized_spatial_l2_error": 0.002911080873122652,
+          "periodic_grid_l2_crosscheck": 0.0029110808731226535,
+          "projected_coefficients": [
+            0.22181663386381617,
+            0.0009314845857279925,
+            5e-05
+          ],
+          "projection_mask": [
+            false,
+            false,
+            true
+          ],
+          "stage": 25
+        },
+        "4.0": {
+          "cumulative_node_count": 2949388,
+          "cumulative_root_count": 2500000,
+          "cumulative_sampling_seconds": 0.494291914626956,
+          "grid_minus_fourier_error": 1.734723475976807e-18,
+          "instantaneous_root_branch_fraction": 0.14714,
+          "normalized_spatial_l2_error": 0.006847049649181421,
+          "periodic_grid_l2_crosscheck": 0.006847049649181423,
+          "projected_coefficients": [
+            0.22575705820076294,
+            0.000438120567830838,
+            -5e-05
+          ],
+          "projection_mask": [
+            false,
+            false,
+            true
+          ],
+          "stage": 50
+        }
+      },
+      "status": "complete",
+      "timing_seconds": {
+        "run_end_to_end_including_archives_and_stage_statistics": 2.306629959028214,
+        "tree_sampling_only": 0.494291914626956
+      },
+      "work": {
+        "aggregate_root_branch_fraction": 0.1477536,
+        "node_count": 2949388,
+        "root_branch_count": 369384,
+        "root_count": 2500000,
+        "terminal_calls": 2547185
+      }
+    }
+  },
+  "slab": {
+    "aggregate": {
+      "coordinate_projection_count": 142,
+      "maximum_absolute_grid_minus_fourier_l2": 5.312590645178972e-18,
+      "node_count": 35392237,
+      "root_count": 30000000,
+      "run_end_to_end_seconds": 26.92269404185936,
+      "tree_sampling_seconds": 6.030549576506019
+    },
+    "final_errors": {
+      "empirical_rms_across_three_runs": 0.0015223886675497455,
+      "interpretation": "descriptive three-run RMS; not a confidence interval",
+      "per_seed_normalized_spatial_l2_errors": [
+        0.0019504913475596874,
+        0.0016353923712140001,
+        0.0006885325413671547
+      ]
+    },
+    "prescribed_budget": "200000 roots per slab, 50 slabs of length 0.08",
+    "runs": [
+      {
+        "final": {
+          "grid_minus_fourier_error": 1.0842021724855044e-18,
+          "normalized_spatial_l2_error": 0.0019504913475596874,
+          "periodic_grid_l2_crosscheck": 0.0019504913475596884,
+          "projected_coefficients": [
+            0.22086186865081295,
+            0.0005892261657843172,
+            -5e-05
+          ]
+        },
+        "grid_agreement": {
+          "maximum_absolute_grid_minus_fourier_l2": 4.445228907190568e-18
+        },
+        "projection": {
+          "coordinate_clip_count": 47,
+          "coordinate_clip_counts_n_1_3_5": [
+            0,
+            0,
+            47
+          ],
+          "stage_or_horizon_count_with_any_clipping": 47,
+          "total_coordinate_estimates": 150
+        },
+        "seed": 2026092701,
+        "selected_times": {
+          "0.8": {
+            "cumulative_node_count": 2360286,
+            "cumulative_root_count": 2000000,
+            "cumulative_sampling_seconds": 0.4133870820514858,
+            "grid_minus_fourier_error": 4.0115480381963664e-18,
+            "instantaneous_root_branch_fraction": 0.14768,
+            "normalized_spatial_l2_error": 0.00048214675920837523,
+            "periodic_grid_l2_crosscheck": 0.00048214675920837924,
+            "projected_coefficients": [
+              0.21931773984538439,
+              0.0009605951732668786,
+              5e-05
+            ],
+            "projection_mask": [
+              false,
+              false,
+              true
+            ],
+            "stage": 10
+          },
+          "1.6": {
+            "cumulative_node_count": 4720103,
+            "cumulative_root_count": 4000000,
+            "cumulative_sampling_seconds": 0.8018890814855695,
+            "grid_minus_fourier_error": 2.6020852139652106e-18,
+            "instantaneous_root_branch_fraction": 0.14744,
+            "normalized_spatial_l2_error": 0.0014679024905152789,
+            "periodic_grid_l2_crosscheck": 0.0014679024905152815,
+            "projected_coefficients": [
+              0.2203285456554378,
+              0.0010931349466780883,
+              5e-05
+            ],
+            "projection_mask": [
+              false,
+              false,
+              true
+            ],
+            "stage": 20
+          },
+          "2.0": {
+            "cumulative_node_count": 5899559,
+            "cumulative_root_count": 5000000,
+            "cumulative_sampling_seconds": 0.997505372390151,
+            "grid_minus_fourier_error": 2.3852447794681098e-18,
+            "instantaneous_root_branch_fraction": 0.14716,
+            "normalized_spatial_l2_error": 0.0014795852037230342,
+            "periodic_grid_l2_crosscheck": 0.0014795852037230365,
+            "projected_coefficients": [
+              0.22031769142274385,
+              0.001168492274925042,
+              5e-05
+            ],
+            "projection_mask": [
+              false,
+              false,
+              true
+            ],
+            "stage": 25
+          },
+          "4.0": {
+            "cumulative_node_count": 11798512,
+            "cumulative_root_count": 10000000,
+            "cumulative_sampling_seconds": 2.0227280822582543,
+            "grid_minus_fourier_error": 1.0842021724855044e-18,
+            "instantaneous_root_branch_fraction": 0.1478,
+            "normalized_spatial_l2_error": 0.0019504913475596874,
+            "periodic_grid_l2_crosscheck": 0.0019504913475596884,
+            "projected_coefficients": [
+              0.22086186865081295,
+              0.0005892261657843172,
+              -5e-05
+            ],
+            "projection_mask": [
+              false,
+              false,
+              true
+            ],
+            "stage": 50
+          }
+        },
+        "status": "complete",
+        "timing_seconds": {
+          "run_end_to_end_including_archives_and_stage_statistics": 9.04646220896393,
+          "tree_sampling_only": 2.0227280822582543
+        },
+        "work": {
+          "aggregate_root_branch_fraction": 0.1478475,
+          "node_count": 11798512,
+          "root_branch_count": 1478475,
+          "root_count": 10000000,
+          "terminal_calls": 10188633
+        }
+      },
+      {
+        "final": {
+          "grid_minus_fourier_error": 2.168404344971009e-18,
+          "normalized_spatial_l2_error": 0.0016353923712140001,
+          "periodic_grid_l2_crosscheck": 0.0016353923712140023,
+          "projected_coefficients": [
+            0.217555524613492,
+            0.001606772446206094,
+            -5e-05
+          ]
+        },
+        "grid_agreement": {
+          "maximum_absolute_grid_minus_fourier_l2": 4.9873299934333204e-18
+        },
+        "projection": {
+          "coordinate_clip_count": 48,
+          "coordinate_clip_counts_n_1_3_5": [
+            0,
+            0,
+            48
+          ],
+          "stage_or_horizon_count_with_any_clipping": 48,
+          "total_coordinate_estimates": 150
+        },
+        "seed": 2026092702,
+        "selected_times": {
+          "0.8": {
+            "cumulative_node_count": 2358666,
+            "cumulative_root_count": 2000000,
+            "cumulative_sampling_seconds": 0.4234369997866452,
+            "grid_minus_fourier_error": -4.9873299934333204e-18,
+            "instantaneous_root_branch_fraction": 0.14822,
+            "normalized_spatial_l2_error": 0.0007362644142761352,
+            "periodic_grid_l2_crosscheck": 0.0007362644142761303,
+            "projected_coefficients": [
+              0.21873416772835447,
+              -1.22008189854212e-05,
+              -5e-05
+            ],
+            "projection_mask": [
+              false,
+              false,
+              true
+            ],
+            "stage": 10
+          },
+          "1.6": {
+            "cumulative_node_count": 4718429,
+            "cumulative_root_count": 4000000,
+            "cumulative_sampling_seconds": 0.8240170395001769,
+            "grid_minus_fourier_error": -2.168404344971009e-18,
+            "instantaneous_root_branch_fraction": 0.147425,
+            "normalized_spatial_l2_error": 0.001924838094623156,
+            "periodic_grid_l2_crosscheck": 0.0019248380946231538,
+            "projected_coefficients": [
+              0.21706642557088512,
+              0.0001663444537509125,
+              -5e-05
+            ],
+            "projection_mask": [
+              false,
+              false,
+              true
+            ],
+            "stage": 20
+          },
+          "2.0": {
+            "cumulative_node_count": 5899098,
+            "cumulative_root_count": 5000000,
+            "cumulative_sampling_seconds": 1.01825191359967,
+            "grid_minus_fourier_error": 8.673617379884035e-19,
+            "instantaneous_root_branch_fraction": 0.14841,
+            "normalized_spatial_l2_error": 0.0029210823632479462,
+            "periodic_grid_l2_crosscheck": 0.002921082363247947,
+            "projected_coefficients": [
+              0.21604645632789943,
+              0.0012475417315716208,
+              -5e-05
+            ],
+            "projection_mask": [
+              false,
+              false,
+              true
+            ],
+            "stage": 25
+          },
+          "4.0": {
+            "cumulative_node_count": 11796012,
+            "cumulative_root_count": 10000000,
+            "cumulative_sampling_seconds": 2.023221995215863,
+            "grid_minus_fourier_error": 2.168404344971009e-18,
+            "instantaneous_root_branch_fraction": 0.147955,
+            "normalized_spatial_l2_error": 0.0016353923712140001,
+            "periodic_grid_l2_crosscheck": 0.0016353923712140023,
+            "projected_coefficients": [
+              0.217555524613492,
+              0.001606772446206094,
+              -5e-05
+            ],
+            "projection_mask": [
+              false,
+              false,
+              true
+            ],
+            "stage": 50
+          }
+        },
+        "status": "complete",
+        "timing_seconds": {
+          "run_end_to_end_including_archives_and_stage_statistics": 9.060230374801904,
+          "tree_sampling_only": 2.023221995215863
+        },
+        "work": {
+          "aggregate_root_branch_fraction": 0.1476076,
+          "node_count": 11796012,
+          "root_branch_count": 1476076,
+          "root_count": 10000000,
+          "terminal_calls": 10188704
+        }
+      },
+      {
+        "final": {
+          "grid_minus_fourier_error": -8.673617379884035e-19,
+          "normalized_spatial_l2_error": 0.0006885325413671547,
+          "periodic_grid_l2_crosscheck": 0.0006885325413671539,
+          "projected_coefficients": [
+            0.2182299184640829,
+            0.0007412143292350909,
+            -5e-05
+          ]
+        },
+        "grid_agreement": {
+          "maximum_absolute_grid_minus_fourier_l2": 5.312590645178972e-18
+        },
+        "projection": {
+          "coordinate_clip_count": 47,
+          "coordinate_clip_counts_n_1_3_5": [
+            0,
+            0,
+            47
+          ],
+          "stage_or_horizon_count_with_any_clipping": 47,
+          "total_coordinate_estimates": 150
+        },
+        "seed": 2026092703,
+        "selected_times": {
+          "0.8": {
+            "cumulative_node_count": 2358366,
+            "cumulative_root_count": 2000000,
+            "cumulative_sampling_seconds": 0.40684845950454473,
+            "grid_minus_fourier_error": -2.3852447794681098e-18,
+            "instantaneous_root_branch_fraction": 0.147685,
+            "normalized_spatial_l2_error": 0.00039517081504106917,
+            "periodic_grid_l2_crosscheck": 0.0003951708150410668,
+            "projected_coefficients": [
+              0.21856618928786437,
+              0.0005204637157447194,
+              5e-05
+            ],
+            "projection_mask": [
+              false,
+              false,
+              true
+            ],
+            "stage": 10
+          },
+          "1.6": {
+            "cumulative_node_count": 4718185,
+            "cumulative_root_count": 4000000,
+            "cumulative_sampling_seconds": 0.8040057918988168,
+            "grid_minus_fourier_error": -1.7889335846010823e-18,
+            "instantaneous_root_branch_fraction": 0.149185,
+            "normalized_spatial_l2_error": 0.0003852045049444405,
+            "periodic_grid_l2_crosscheck": 0.0003852045049444387,
+            "projected_coefficients": [
+              0.2192608070489894,
+              0.0005376526932022587,
+              -5e-05
+            ],
+            "projection_mask": [
+              false,
+              false,
+              true
+            ],
+            "stage": 20
+          },
+          "2.0": {
+            "cumulative_node_count": 5898498,
+            "cumulative_root_count": 5000000,
+            "cumulative_sampling_seconds": 0.9992097499780357,
+            "grid_minus_fourier_error": -3.7947076036992655e-18,
+            "instantaneous_root_branch_fraction": 0.14792,
+            "normalized_spatial_l2_error": 0.0005882850859038428,
+            "periodic_grid_l2_crosscheck": 0.000588285085903839,
+            "projected_coefficients": [
+              0.21857027460495124,
+              0.0002253888994241999,
+              5e-05
+            ],
+            "projection_mask": [
+              false,
+              false,
+              true
+            ],
+            "stage": 25
+          },
+          "4.0": {
+            "cumulative_node_count": 11797713,
+            "cumulative_root_count": 10000000,
+            "cumulative_sampling_seconds": 1.9845994990319014,
+            "grid_minus_fourier_error": -8.673617379884035e-19,
+            "instantaneous_root_branch_fraction": 0.148825,
+            "normalized_spatial_l2_error": 0.0006885325413671547,
+            "periodic_grid_l2_crosscheck": 0.0006885325413671539,
+            "projected_coefficients": [
+              0.2182299184640829,
+              0.0007412143292350909,
+              -5e-05
+            ],
+            "projection_mask": [
+              false,
+              false,
+              true
+            ],
+            "stage": 50
+          }
+        },
+        "status": "complete",
+        "timing_seconds": {
+          "run_end_to_end_including_archives_and_stage_statistics": 8.816001458093524,
+          "tree_sampling_only": 1.9845994990319014
+        },
+        "work": {
+          "aggregate_root_branch_fraction": 0.147859,
+          "node_count": 11797713,
+          "root_branch_count": 1478590,
+          "root_count": 10000000,
+          "terminal_calls": 10188111
+        }
+      }
+    ],
+    "selected_times": {
+      "0.8": {
+        "empirical_rms_across_three_runs": 0.0005569891555511478,
+        "interpretation": "descriptive three-run RMS; not a confidence interval",
+        "per_seed_normalized_spatial_l2_errors": [
+          0.00048214675920837523,
+          0.0007362644142761352,
+          0.00039517081504106917
+        ]
+      },
+      "1.6": {
+        "empirical_rms_across_three_runs": 0.0014151704164520199,
+        "interpretation": "descriptive three-run RMS; not a confidence interval",
+        "per_seed_normalized_spatial_l2_errors": [
+          0.0014679024905152789,
+          0.001924838094623156,
+          0.0003852045049444405
+        ]
+      },
+      "2.0": {
+        "empirical_rms_across_three_runs": 0.001920761471417975,
+        "interpretation": "descriptive three-run RMS; not a confidence interval",
+        "per_seed_normalized_spatial_l2_errors": [
+          0.0014795852037230342,
+          0.0029210823632479462,
+          0.0005882850859038428
+        ]
+      },
+      "4.0": {
+        "empirical_rms_across_three_runs": 0.0015223886675497455,
+        "interpretation": "descriptive three-run RMS; not a confidence interval",
+        "per_seed_normalized_spatial_l2_errors": [
+          0.0019504913475596874,
+          0.0016353923712140001,
+          0.0006885325413671547
+        ]
+      }
+    }
+  },
+  "source_artifacts": {
+    "bounded_majority": {
+      "path": "numerics/artifacts/majority/results.json",
+      "sha256": "a6ba9a1a7a6b7dc7e715cc0b7b21356017c76ab07ddb56dc3c5bc1b73b7759e1"
+    },
+    "optional_sensitivity": {
+      "path": "numerics/artifacts/sensitivity/results.json",
+      "sha256": "8c7e04ee9bbb77283d4c47789319afc63a379bff1ef362b5ca9a41181e9bb7f4"
+    },
+    "slab": {
+      "path": "numerics/artifacts/slab/results.json",
+      "sha256": "be7aef6592244234976ea09d1de0c7031c6b39eb73ca4fcab2a0e8d41765da20"
+    }
+  }
+}

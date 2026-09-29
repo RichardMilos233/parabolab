@@ -1,0 +1,13 @@
+import EstimatorIntegrity.SlabContinuation
+
+#print axioms EstimatorIntegrity.slabMomentSupersolution_postfixed
+#print axioms EstimatorIntegrity.slabMomentSupersolution_postfixed_strict
+#print axioms EstimatorIntegrity.intervalClamp_abs_sub_le
+#print axioms EstimatorIntegrity.finite_error_recurrence
+#print axioms EstimatorIntegrity.projectedCoefficientBounds_sum
+#print axioms EstimatorIntegrity.projectedCoefficientBounds_weightedSum
+#print axioms EstimatorIntegrity.projectedCoefficientBounds_value
+#print axioms EstimatorIntegrity.projectedCoefficientBounds_derivative
+#print axioms EstimatorIntegrity.periodicStabilityExponent_upper
+#print axioms EstimatorIntegrity.fiftySlabAmplification_upper
+#print axioms EstimatorIntegrity.normalizedSpatialMSE_budget

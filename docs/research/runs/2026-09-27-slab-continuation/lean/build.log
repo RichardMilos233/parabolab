@@ -1,0 +1,12 @@
+Command (working directory `formal/`):
+
+    ~/.elan/bin/lake build EstimatorIntegrity.SlabContinuation
+
+Exit code: 0
+
+    ✔ [3007/3007] Built EstimatorIntegrity.SlabContinuation (48s)
+    Build completed successfully (3007 jobs).
+
+Source SHA-256:
+
+    d9f214c6c7b89b5e571f47f8c7f91125d7940dedb0834aed3cb198105acfb229  formal/EstimatorIntegrity/SlabContinuation.lean

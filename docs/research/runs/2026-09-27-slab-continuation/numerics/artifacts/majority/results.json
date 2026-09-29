@@ -1,0 +1,914 @@
+{
+  "provenance": {
+    "algorithm_contract": {
+      "adaptive_sample_budget": false,
+      "failed_root_deletion": false,
+      "projection": "coordinatewise clipping of coefficient estimates",
+      "projection_is_biased": true,
+      "raw_local_trees_unbiased_conditional_on_interface": true,
+      "selected_label_probability_renormalized": false,
+      "selected_structural_zero_short_circuit_allowed": true,
+      "tree_cutoff": null,
+      "tree_weight_clipping": false
+    },
+    "command": "/opt/miniconda3/envs/parabolab/bin/python docs/research/runs/2026-09-27-slab-continuation/numerics/run_experiment.py majority",
+    "configuration": {
+      "batch_size": 32,
+      "horizons": [
+        0.8,
+        2.0
+      ],
+      "max_seconds": 7200.0,
+      "mode": "majority",
+      "n": 8000,
+      "output": "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-27-slab-continuation/numerics/artifacts/majority",
+      "seeds": [
+        2026092711,
+        2026092712,
+        2026092713
+      ]
+    },
+    "created_at_utc": "2026-09-27T05:35:07.579473+00:00",
+    "environment": {
+      "mpmath_version": "1.3.0",
+      "numpy_version": "2.4.6",
+      "platform": "macOS-26.3-arm64-arm-64bit",
+      "python_executable": "/opt/miniconda3/envs/parabolab/bin/python",
+      "python_version": "3.11.15",
+      "scipy_version": "1.17.1"
+    },
+    "git_revision": "65dca46e42db1c80cdf9ddd8eed6a415148c37f3",
+    "mode": "majority",
+    "reference_checks": {
+      "amplitude": "0.30860669992418382052218892552799984084310496700278",
+      "analytical_tail_squared_upper_bound": "7.0143407369044248882285460752950540585011196530639e-17",
+      "checks": {
+        "coefficient_box_derivative_bound_lt_1_over_2": true,
+        "coefficient_box_value_bound_lt_2_over_5": true,
+        "coefficient_quadrature_max_difference_lt_1e_40": true,
+        "coefficients_inside_caps": true,
+        "nome_lt_1_over_300": true,
+        "stationarity_max_residual_lt_1e_40": true,
+        "tail_squared_lt_1e_16": true,
+        "tail_within_analytic_bound": true
+      },
+      "coefficient_box_derivative_upper_bound": "0.46103728300056738844917770803469513065155671462923",
+      "coefficient_box_value_upper_bound": "0.32958247071104980112323355717707013721066203055660",
+      "coefficient_quadrature_absolute_differences": [
+        "1.3177747429038154030435717564087523759637451727961e-81",
+        "2.9032224804599683098303690258380325782951260838163e-82",
+        "1.5527527038042973793614303310149639278667042500863e-82"
+      ],
+      "complementary_complete_elliptic_k": "2.9083372484445521000949883117346036232862063194414",
+      "complete_elliptic_k": "1.5910034537907921801093426057172009706957893696552",
+      "decimal_precision": 80,
+      "exact_fourier_tail_squared_after_n5": "5.1686279568620035735026427878995989569306667766666e-17",
+      "fourier_coefficients_n_1_3_5": [
+        "0.21891520052154060572216275067438369823560315975892",
+        "0.00069954571370227609798981835724155477911747767261534",
+        "0.0000022425944605018022146506070761591322292705118457311"
+      ],
+      "kappa": "1.3801311186847084355922537292542639736323936071199",
+      "method": "mpmath Jacobi functions, elliptic integrals, quadrature, and differentiation",
+      "nome": "0.0032057869706856932057926699780927287137662616723720",
+      "omega": "1.3626022536657161589137804127340715071234328342176",
+      "parameter_m": "0.05",
+      "period": "4.6111660906741937545645534882299042320994392268448",
+      "quadrature_coefficients_n_1_3_5": [
+        "0.21891520052154060572216275067438369823560315975892",
+        "0.00069954571370227609798981835724155477911747767261534",
+        "0.0000022425944605018022146506070761591322292705118457311"
+      ],
+      "stationarity_max_absolute_residual": "1.1859972686134338627392145807678771383673706555165e-81"
+    },
+    "seed_schedule": [
+      2026092711,
+      2026092712,
+      2026092713
+    ],
+    "source_sha256": {
+      "docs/research/runs/2026-09-27-slab-continuation/02-plan.md": "ba501df4e76aa1ff89ce93315089f41058db0520f196399e517f3c4685acefa9",
+      "docs/research/runs/2026-09-27-slab-continuation/04-theory.md": "52e75b29bc986486d6d26fdb95a263c02005778dfea509edf04857e616623db3",
+      "docs/research/runs/2026-09-27-slab-continuation/numerics/run_experiment.py": "12621c9269a62b08c7017c5adc55401d4d3818b8e4663b106ca176eb2b4e0d05",
+      "docs/research/runs/2026-09-27-slab-continuation/numerics/slab_sampler.py": "994e892784f36930fa63649aa749985448df75887f9096f6c40c142b46ff108a"
+    }
+  },
+  "runs": [
+    {
+      "completed_horizons": 2,
+      "horizons": [
+        {
+          "coefficient_estimator_covariance": [
+            [
+              1.070474154984345e-05,
+              -2.295834215279133e-06,
+              2.4892532882956325e-07
+            ],
+            [
+              -2.295834215279133e-06,
+              1.4752704165447472e-05,
+              -2.166659318897875e-06
+            ],
+            [
+              2.4892532882956325e-07,
+              -2.166659318897875e-06,
+              1.4745118679656277e-05
+            ]
+          ],
+          "coefficient_observation_covariance": [
+            [
+              0.0856379323987476,
+              -0.018366673722233065,
+              0.001991402630636506
+            ],
+            [
+              -0.018366673722233065,
+              0.11802163332357977,
+              -0.017333274551182998
+            ],
+            [
+              0.001991402630636506,
+              -0.017333274551182998,
+              0.11796094943725022
+            ]
+          ],
+          "complete": true,
+          "error": {
+            "exact_tail_squared": 5.1686279568620035e-17,
+            "grid_crosscheck_minus_exact_fourier": -2.6020852139652106e-18,
+            "grid_points": 16384,
+            "normalized_l2_exact_fourier_plus_tail": 0.006315318598014814,
+            "normalized_l2_periodic_grid_crosscheck": 0.006315318598014812,
+            "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.00932899270411346
+          },
+          "horizon": 0.8,
+          "interface_bounds": {
+            "analytic_sup_derivative_bound": 0.4495392736165278,
+            "analytic_sup_value_bound": 0.32114419802134353,
+            "derivative_admissible_lt_0p5": true,
+            "value_admissible_lt_0p4": true
+          },
+          "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+          "max_absolute_tree_value": 0.8201026259988959,
+          "max_nodes": 496,
+          "mean_nodes": 36.46375,
+          "moments": {
+            "coefficient_observation_second_moments": [
+              0.13581812035360985,
+              0.11805662903311184,
+              0.11794693800322051
+            ],
+            "tree_value_mean": 0.004284196617992543,
+            "tree_value_sample_variance": 0.11767709540284611,
+            "tree_value_second_moment": 0.11768074010658239
+          },
+          "projected_coefficients": [
+            0.22403324015960743,
+            -0.003,
+            5e-05
+          ],
+          "projection_difference_raw_minus_projected": [
+            0.0,
+            -0.004053255538970985,
+            0.0008065539388045934
+          ],
+          "projection_distortion_l2": 0.004132724249257405,
+          "projection_is_biased_interface_step": true,
+          "projection_mask": [
+            false,
+            true,
+            true
+          ],
+          "raw_archive": {
+            "complete": true,
+            "completed_roots": 8000,
+            "path": "majority-seed-2026092711-T-0p8.npz",
+            "scheduled_roots": 8000,
+            "sha256": "f39c83f7365782422107166f83ddb3295e9fab301de864be530b0bf407b39d04"
+          },
+          "raw_coefficients": [
+            0.22403324015960743,
+            -0.0070532555389709855,
+            0.0008565539388045934
+          ],
+          "root_branch_count": 6417,
+          "root_branch_fraction": 0.802125,
+          "root_count": 8000,
+          "sampling_seconds": 0.15952600026503205,
+          "terminal_code_counts": [
+            197140,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "terminal_code_order": [
+            "Id",
+            "Dx",
+            "F0",
+            "F1",
+            "F2",
+            "F3"
+          ],
+          "terminal_source": "exact_jacobi_full_horizon_comparator",
+          "theoretical_expected_nodes_per_root": 36.29879529566403,
+          "total_nodes": 291710
+        },
+        {
+          "coefficient_estimator_covariance": [
+            [
+              1.8068864867449606e-05,
+              -1.8292157271947907e-06,
+              -1.738216417102703e-07
+            ],
+            [
+              -1.8292157271947907e-06,
+              2.161425095861088e-05,
+              -2.0371191574484822e-06
+            ],
+            [
+              -1.738216417102703e-07,
+              -2.0371191574484822e-06,
+              2.194941710797379e-05
+            ]
+          ],
+          "coefficient_observation_covariance": [
+            [
+              0.14455091893959685,
+              -0.014633725817558325,
+              -0.0013905731336821623
+            ],
+            [
+              -0.014633725817558325,
+              0.17291400766888704,
+              -0.016296953259587858
+            ],
+            [
+              -0.0013905731336821623,
+              -0.016296953259587858,
+              0.17559533686379034
+            ]
+          ],
+          "complete": true,
+          "error": {
+            "exact_tail_squared": 5.1686279568620035e-17,
+            "grid_crosscheck_minus_exact_fourier": -3.469446951953614e-18,
+            "grid_points": 16384,
+            "normalized_l2_exact_fourier_plus_tail": 0.004604464535941531,
+            "normalized_l2_periodic_grid_crosscheck": 0.004604464535941527,
+            "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.010725984162770678
+          },
+          "horizon": 2.0,
+          "interface_bounds": {
+            "analytic_sup_derivative_bound": 0.4343952973939404,
+            "analytic_sup_value_bound": 0.31003018717786623,
+            "derivative_admissible_lt_0p5": true,
+            "value_admissible_lt_0p4": true
+          },
+          "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+          "max_absolute_tree_value": 0.9232852003649358,
+          "max_nodes": 69214,
+          "mean_nodes": 4353.22225,
+          "moments": {
+            "coefficient_observation_second_moments": [
+              0.1912642419243726,
+              0.17298530975802082,
+              0.1755740268820664
+            ],
+            "tree_value_mean": 0.002863611276774889,
+            "tree_value_sample_variance": 0.17504551590554424,
+            "tree_value_second_moment": 0.1750318354856005
+          },
+          "projected_coefficients": [
+            0.2161744477260038,
+            -0.003,
+            -5e-05
+          ],
+          "projection_difference_raw_minus_projected": [
+            0.0,
+            -0.006639312220914064,
+            -0.0007496470373054759
+          ],
+          "projection_distortion_l2": 0.006681499640598637,
+          "projection_is_biased_interface_step": true,
+          "projection_mask": [
+            false,
+            true,
+            true
+          ],
+          "raw_archive": {
+            "complete": true,
+            "completed_roots": 8000,
+            "path": "majority-seed-2026092711-T-2p0.npz",
+            "scheduled_roots": 8000,
+            "sha256": "3bf5d5a661730bc9a867b7de2e1450fa27868a7e8d3c453c010e6645c120a838"
+          },
+          "raw_coefficients": [
+            0.2161744477260038,
+            -0.009639312220914064,
+            -0.0007996470373054759
+          ],
+          "root_branch_count": 7838,
+          "root_branch_fraction": 0.97975,
+          "root_count": 8000,
+          "sampling_seconds": 6.022680500056595,
+          "terminal_code_counts": [
+            23219852,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "terminal_code_order": [
+            "Id",
+            "Dx",
+            "F0",
+            "F1",
+            "F2",
+            "F3"
+          ],
+          "terminal_source": "exact_jacobi_full_horizon_comparator",
+          "theoretical_expected_nodes_per_root": 4470.936980562592,
+          "total_nodes": 34825778
+        }
+      ],
+      "measured_work": {
+        "root_branches": 14255,
+        "roots_completed": 16000,
+        "terminal_calls": 23416992,
+        "terminal_code_counts": [
+          23416992,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "terminal_code_order": [
+          "Id",
+          "Dx",
+          "F0",
+          "F1",
+          "F2",
+          "F3"
+        ],
+        "total_nodes": 35117488
+      },
+      "n_roots_per_horizon": 8000,
+      "scheduled_horizons": [
+        0.8,
+        2.0
+      ],
+      "seed": 2026092711,
+      "status": "complete",
+      "total_seconds": 6.200596125330776
+    },
+    {
+      "completed_horizons": 2,
+      "horizons": [
+        {
+          "coefficient_estimator_covariance": [
+            [
+              1.0552358844641039e-05,
+              -1.8871338030669686e-06,
+              -7.656387134324335e-08
+            ],
+            [
+              -1.8871338030669686e-06,
+              1.4518355312125886e-05,
+              -1.9682354786422405e-06
+            ],
+            [
+              -7.656387134324335e-08,
+              -1.9682354786422405e-06,
+              1.496576347583884e-05
+            ]
+          ],
+          "coefficient_observation_covariance": [
+            [
+              0.08441887075712831,
+              -0.01509707042453575,
+              -0.0006125109707459468
+            ],
+            [
+              -0.01509707042453575,
+              0.11614684249700709,
+              -0.015745883829137924
+            ],
+            [
+              -0.0006125109707459468,
+              -0.015745883829137924,
+              0.11972610780671071
+            ]
+          ],
+          "complete": true,
+          "error": {
+            "exact_tail_squared": 5.1686279568620035e-17,
+            "grid_crosscheck_minus_exact_fourier": 2.6020852139652106e-18,
+            "grid_points": 16384,
+            "normalized_l2_exact_fourier_plus_tail": 0.004015992676454743,
+            "normalized_l2_periodic_grid_crosscheck": 0.004015992676454746,
+            "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.004918104001792999
+          },
+          "horizon": 0.8,
+          "interface_bounds": {
+            "analytic_sup_derivative_bound": 0.4286217168487547,
+            "analytic_sup_value_bound": 0.3077349649745861,
+            "derivative_admissible_lt_0p5": true,
+            "value_admissible_lt_0p4": true
+          },
+          "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+          "max_absolute_tree_value": 0.8271901291196653,
+          "max_nodes": 721,
+          "mean_nodes": 36.044125,
+          "moments": {
+            "coefficient_observation_second_moments": [
+              0.13073574241539124,
+              0.11613767603969667,
+              0.11971921661378924
+            ],
+            "tree_value_mean": -0.002385640297584474,
+            "tree_value_sample_variance": 0.11593450119391202,
+            "tree_value_second_moment": 0.11592570066089226
+          },
+          "projected_coefficients": [
+            0.21523806358799139,
+            0.002313416953743102,
+            5e-05
+          ],
+          "projection_difference_raw_minus_projected": [
+            0.0,
+            0.0,
+            0.002791578883965153
+          ],
+          "projection_distortion_l2": 0.002791578883965153,
+          "projection_is_biased_interface_step": true,
+          "projection_mask": [
+            false,
+            false,
+            true
+          ],
+          "raw_archive": {
+            "complete": true,
+            "completed_roots": 8000,
+            "path": "majority-seed-2026092712-T-0p8.npz",
+            "scheduled_roots": 8000,
+            "sha256": "0cc8d17ea75c42cb557207bfa4546c2e1403cc0a7966eb1c187962f10b6f11db"
+          },
+          "raw_coefficients": [
+            0.21523806358799139,
+            0.002313416953743102,
+            0.0028415788839651532
+          ],
+          "root_branch_count": 6401,
+          "root_branch_fraction": 0.800125,
+          "root_count": 8000,
+          "sampling_seconds": 0.15051508275792003,
+          "terminal_code_counts": [
+            194902,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "terminal_code_order": [
+            "Id",
+            "Dx",
+            "F0",
+            "F1",
+            "F2",
+            "F3"
+          ],
+          "terminal_source": "exact_jacobi_full_horizon_comparator",
+          "theoretical_expected_nodes_per_root": 36.29879529566403,
+          "total_nodes": 288353
+        },
+        {
+          "coefficient_estimator_covariance": [
+            [
+              1.762371779686922e-05,
+              -1.7262250188841612e-06,
+              -1.8423175011844903e-07
+            ],
+            [
+              -1.7262250188841612e-06,
+              2.122833261726343e-05,
+              -1.908716852775352e-06
+            ],
+            [
+              -1.8423175011844903e-07,
+              -1.908716852775352e-06,
+              2.1334960147528686e-05
+            ]
+          ],
+          "coefficient_observation_covariance": [
+            [
+              0.14098974237495374,
+              -0.01380980015107329,
+              -0.0014738540009475922
+            ],
+            [
+              -0.01380980015107329,
+              0.16982666093810744,
+              -0.015269734822202816
+            ],
+            [
+              -0.0014738540009475922,
+              -0.015269734822202816,
+              0.1706796811802295
+            ]
+          ],
+          "complete": true,
+          "error": {
+            "exact_tail_squared": 5.1686279568620035e-17,
+            "grid_crosscheck_minus_exact_fourier": -8.673617379884035e-19,
+            "grid_points": 16384,
+            "normalized_l2_exact_fourier_plus_tail": 0.006858375916626819,
+            "normalized_l2_periodic_grid_crosscheck": 0.006858375916626818,
+            "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.007883345794470692
+          },
+          "horizon": 2.0,
+          "interface_bounds": {
+            "analytic_sup_derivative_bound": 0.4108445741795691,
+            "analytic_sup_value_bound": 0.30045270688639986,
+            "derivative_admissible_lt_0p5": true,
+            "value_admissible_lt_0p4": true
+          },
+          "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+          "max_absolute_tree_value": 0.9406472720348574,
+          "max_nodes": 72130,
+          "mean_nodes": 4378.75525,
+          "moments": {
+            "coefficient_observation_second_moments": [
+              0.1859698489019776,
+              0.1698055084848259,
+              0.17067344133899007
+            ],
+            "tree_value_mean": -0.0018539644682400373,
+            "tree_value_sample_variance": 0.17268555819737952,
+            "tree_value_second_moment": 0.17266740968685435
+          },
+          "projected_coefficients": [
+            0.2121266844242384,
+            -0.0002754620409890223,
+            -5e-05
+          ],
+          "projection_difference_raw_minus_projected": [
+            0.0,
+            0.0,
+            -0.0038352437386483316
+          ],
+          "projection_distortion_l2": 0.0038352437386483316,
+          "projection_is_biased_interface_step": true,
+          "projection_mask": [
+            false,
+            false,
+            true
+          ],
+          "raw_archive": {
+            "complete": true,
+            "completed_roots": 8000,
+            "path": "majority-seed-2026092712-T-2p0.npz",
+            "scheduled_roots": 8000,
+            "sha256": "6865e13aa9d2f822643fb13452995d8bfb5d65ff8ef792a4f8b10cfe5b74f5ea"
+          },
+          "raw_coefficients": [
+            0.2121266844242384,
+            -0.0002754620409890223,
+            -0.0038852437386483318
+          ],
+          "root_branch_count": 7865,
+          "root_branch_fraction": 0.983125,
+          "root_count": 8000,
+          "sampling_seconds": 6.230087250005454,
+          "terminal_code_counts": [
+            23356028,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "terminal_code_order": [
+            "Id",
+            "Dx",
+            "F0",
+            "F1",
+            "F2",
+            "F3"
+          ],
+          "terminal_source": "exact_jacobi_full_horizon_comparator",
+          "theoretical_expected_nodes_per_root": 4470.936980562592,
+          "total_nodes": 35030042
+        }
+      ],
+      "measured_work": {
+        "root_branches": 14266,
+        "roots_completed": 16000,
+        "terminal_calls": 23550930,
+        "terminal_code_counts": [
+          23550930,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "terminal_code_order": [
+          "Id",
+          "Dx",
+          "F0",
+          "F1",
+          "F2",
+          "F3"
+        ],
+        "total_nodes": 35318395
+      },
+      "n_roots_per_horizon": 8000,
+      "scheduled_horizons": [
+        0.8,
+        2.0
+      ],
+      "seed": 2026092712,
+      "status": "complete",
+      "total_seconds": 6.402614374645054
+    },
+    {
+      "completed_horizons": 2,
+      "horizons": [
+        {
+          "coefficient_estimator_covariance": [
+            [
+              1.0700947450633103e-05,
+              -1.8192428212837e-06,
+              -1.5996120288894684e-07
+            ],
+            [
+              -1.8192428212837e-06,
+              1.4718873316115647e-05,
+              -2.016589319639028e-06
+            ],
+            [
+              -1.5996120288894684e-07,
+              -2.016589319639028e-06,
+              1.4530318305103527e-05
+            ]
+          ],
+          "coefficient_observation_covariance": [
+            [
+              0.08560757960506482,
+              -0.014553942570269601,
+              -0.0012796896231115748
+            ],
+            [
+              -0.014553942570269601,
+              0.11775098652892518,
+              -0.016132714557112224
+            ],
+            [
+              -0.0012796896231115748,
+              -0.016132714557112224,
+              0.11624254644082822
+            ]
+          ],
+          "complete": true,
+          "error": {
+            "exact_tail_squared": 5.1686279568620035e-17,
+            "grid_crosscheck_minus_exact_fourier": 3.469446951953614e-18,
+            "grid_points": 16384,
+            "normalized_l2_exact_fourier_plus_tail": 0.00307787240927276,
+            "normalized_l2_periodic_grid_crosscheck": 0.0030778724092727634,
+            "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.005003003002841423
+          },
+          "horizon": 0.8,
+          "interface_bounds": {
+            "analytic_sup_derivative_bound": 0.43573769128774514,
+            "analytic_sup_value_bound": 0.31101535646713857,
+            "derivative_admissible_lt_0p5": true,
+            "value_admissible_lt_0p4": true
+          },
+          "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+          "max_absolute_tree_value": 0.8343869739582028,
+          "max_nodes": 409,
+          "mean_nodes": 36.064,
+          "moments": {
+            "coefficient_observation_second_moments": [
+              0.1326299386243774,
+              0.11776333877240926,
+              0.1162285832786945
+            ],
+            "tree_value_mean": -0.00529408021404849,
+            "tree_value_sample_variance": 0.11763266538713031,
+            "tree_value_second_moment": 0.11764598858926971
+          },
+          "projected_coefficients": [
+            0.21687106761106503,
+            0.003,
+            -5e-05
+          ],
+          "projection_difference_raw_minus_projected": [
+            0.0,
+            0.0022029911397004557,
+            -0.0007030977167604735
+          ],
+          "projection_distortion_l2": 0.002312469753513006,
+          "projection_is_biased_interface_step": true,
+          "projection_mask": [
+            false,
+            true,
+            true
+          ],
+          "raw_archive": {
+            "complete": true,
+            "completed_roots": 8000,
+            "path": "majority-seed-2026092713-T-0p8.npz",
+            "scheduled_roots": 8000,
+            "sha256": "96c97635aa6c6c354bd7e053cd51c3c34e69774e6dda192a6a3b9a76c61498a3"
+          },
+          "raw_coefficients": [
+            0.21687106761106503,
+            0.005202991139700456,
+            -0.0007530977167604736
+          ],
+          "root_branch_count": 6405,
+          "root_branch_fraction": 0.800625,
+          "root_count": 8000,
+          "sampling_seconds": 0.14893629075959325,
+          "terminal_code_counts": [
+            195008,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "terminal_code_order": [
+            "Id",
+            "Dx",
+            "F0",
+            "F1",
+            "F2",
+            "F3"
+          ],
+          "terminal_source": "exact_jacobi_full_horizon_comparator",
+          "theoretical_expected_nodes_per_root": 36.29879529566403,
+          "total_nodes": 288512
+        },
+        {
+          "coefficient_estimator_covariance": [
+            [
+              1.7697916694251977e-05,
+              -1.997957716758614e-06,
+              2.864541020206874e-07
+            ],
+            [
+              -1.997957716758614e-06,
+              2.1791876498275756e-05,
+              -1.6603502492073734e-06
+            ],
+            [
+              2.864541020206874e-07,
+              -1.6603502492073734e-06,
+              2.1593905302007626e-05
+            ]
+          ],
+          "coefficient_observation_covariance": [
+            [
+              0.1415833335540158,
+              -0.01598366173406891,
+              0.002291632816165499
+            ],
+            [
+              -0.01598366173406891,
+              0.17433501198620605,
+              -0.013282801993658987
+            ],
+            [
+              0.002291632816165499,
+              -0.013282801993658987,
+              0.17275124241606102
+            ]
+          ],
+          "complete": true,
+          "error": {
+            "exact_tail_squared": 5.1686279568620035e-17,
+            "grid_crosscheck_minus_exact_fourier": -3.469446951953614e-18,
+            "grid_points": 16384,
+            "normalized_l2_exact_fourier_plus_tail": 0.004335640123305964,
+            "normalized_l2_periodic_grid_crosscheck": 0.004335640123305961,
+            "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.008809549660640546
+          },
+          "horizon": 2.0,
+          "interface_bounds": {
+            "analytic_sup_derivative_bound": 0.44403214522385825,
+            "analytic_sup_value_bound": 0.31710257224400895,
+            "derivative_admissible_lt_0p5": true,
+            "value_admissible_lt_0p4": true
+          },
+          "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+          "max_absolute_tree_value": 0.9344207786881468,
+          "max_nodes": 65080,
+          "mean_nodes": 4400.33725,
+          "moments": {
+            "coefficient_observation_second_moments": [
+              0.19048418398629607,
+              0.17435593137341376,
+              0.1727497839075482
+            ],
+            "tree_value_mean": -0.0011960291028477012,
+            "tree_value_sample_variance": 0.17365204315434898,
+            "tree_value_second_moment": 0.17363176713456954
+          },
+          "projected_coefficients": [
+            0.2211753791654358,
+            -0.003,
+            -5e-05
+          ],
+          "projection_difference_raw_minus_projected": [
+            0.0,
+            -0.003535385505511455,
+            -0.004437248242390239
+          ],
+          "projection_distortion_l2": 0.005673457732033945,
+          "projection_is_biased_interface_step": true,
+          "projection_mask": [
+            false,
+            true,
+            true
+          ],
+          "raw_archive": {
+            "complete": true,
+            "completed_roots": 8000,
+            "path": "majority-seed-2026092713-T-2p0.npz",
+            "scheduled_roots": 8000,
+            "sha256": "045989876c34f802ee520bdf903bc8cbe2466cff14e860a42811397757ef94e8"
+          },
+          "raw_coefficients": [
+            0.2211753791654358,
+            -0.006535385505511455,
+            -0.004487248242390239
+          ],
+          "root_branch_count": 7846,
+          "root_branch_fraction": 0.98075,
+          "root_count": 8000,
+          "sampling_seconds": 6.155643749982119,
+          "terminal_code_counts": [
+            23471132,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "terminal_code_order": [
+            "Id",
+            "Dx",
+            "F0",
+            "F1",
+            "F2",
+            "F3"
+          ],
+          "terminal_source": "exact_jacobi_full_horizon_comparator",
+          "theoretical_expected_nodes_per_root": 4470.936980562592,
+          "total_nodes": 35202698
+        }
+      ],
+      "measured_work": {
+        "root_branches": 14251,
+        "roots_completed": 16000,
+        "terminal_calls": 23666140,
+        "terminal_code_counts": [
+          23666140,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "terminal_code_order": [
+          "Id",
+          "Dx",
+          "F0",
+          "F1",
+          "F2",
+          "F3"
+        ],
+        "total_nodes": 35491210
+      },
+      "n_roots_per_horizon": 8000,
+      "scheduled_horizons": [
+        0.8,
+        2.0
+      ],
+      "seed": 2026092713,
+      "status": "complete",
+      "total_seconds": 6.323486958164722
+    }
+  ],
+  "schema_version": 1,
+  "status": "complete",
+  "total_seconds": 18.990546124987304
+}

@@ -1,0 +1,384 @@
+diff --git a/demo/rate_variance.py b/demo/rate_variance.py
+index 822aa10..b8f8ab0 100644
+--- a/demo/rate_variance.py
++++ b/demo/rate_variance.py
+@@ -1,27 +1,49 @@
+ """Rate sensitivity and variance convexity: generalizability across PDEs."""
++import argparse
+ from pathlib import Path
+ 
+ from parabolab import compare_rate_variance, sweep_rate_variance
+-from parabolab.library import allen_cahn_wave_1d, binary_control_1d, fisher_kpp_1d
++from parabolab.library import (
++    allen_cahn_flat,
++    allen_cahn_wave_1d,
++    binary_control_1d,
++    fisher_kpp_1d,
++)
+ 
+ if __name__ == "__main__":
++    parser = argparse.ArgumentParser(description="Rate sensitivity and variance convexity demo")
++    parser.add_argument("--T", type=float, default=0.05, help="Terminal horizon T (default: 0.05)")
++    args = parser.parse_args()
++    T = args.T
++
+     sweeps = [
+         sweep_rate_variance(
+-            allen_cahn_wave_1d(T=0.05), x=0.0,
++            allen_cahn_wave_1d(T=T), x=0.0,
+             title="(a) Allen–Cahn Wave (x = 0.0)",
+         ),
+         sweep_rate_variance(
+-            allen_cahn_wave_1d(T=0.05), x=-1.0, lambda_bracket=(0.12, 1.8),
++            allen_cahn_wave_1d(T=T), x=-1.0, lambda_bracket=(0.12, 1.8),
+             title="(b) Allen–Cahn Wave (x = -1.0)",
+         ),
+         sweep_rate_variance(
+-            fisher_kpp_1d(T=0.05, phi0=0.5), x=0.0, lambda_bracket=(0.12, 1.6),
+-            title="(c) Fisher–KPP Logistic Equation",
++            fisher_kpp_1d(T=T, phi0=0.5), x=0.0, lambda_bracket=(0.12, 1.6),
++            title="(c) Fisher–KPP Logistic Equation (phi0 = 0.5)",
++        ),
++        sweep_rate_variance(
++            binary_control_1d(T=T), x=0.0, use_riccati=True,
++            title="(d) Binary Riccati Control (phi0 = 1.0)",
++        ),
++        sweep_rate_variance(
++            allen_cahn_flat(phi0=0.3, T=T), x=0.0, lambda_bracket=(0.20, 2.2),
++            title="(e) Allen–Cahn Flat State (phi0 = 0.3)",
+         ),
+         sweep_rate_variance(
+-            binary_control_1d(T=0.05), x=0.0, use_riccati=True, lambda_bracket=(0.25, 2.3),
+-            title="(d) Binary Riccati Control",
++            fisher_kpp_1d(T=T, phi0=0.2), x=0.0, lambda_bracket=(0.20, 2.0),
++            title="(f) Fisher–KPP Logistic State (phi0 = 0.2)",
+         ),
+     ]
+ 
+-    compare_rate_variance(*sweeps).table().plot(Path(__file__).with_suffix(".png"))
++    compare_rate_variance(*sweeps).table().plot(
++        Path(__file__).with_suffix(".png"),
++        save_individual=True,
++    )
+diff --git a/docs/research/README.md b/docs/research/README.md
+index a03e623..7cf22ed 100644
+--- a/docs/research/README.md
++++ b/docs/research/README.md
+@@ -1,6 +1,6 @@
+ # Research: reliable branching-estimator algorithms
+ 
+-**Current scope, 17 September 2026:** this worktree owns branching Monte Carlo
++**Current scope, 26 September 2026:** this worktree owns branching Monte Carlo
+ and its mathematical theory. Improve branching Monte Carlo PDE
+ estimation through exponential-rate selection, tuple proposals, moment
+ control and verifiable approximation error. Algorithmic and mathematical
+@@ -17,7 +17,7 @@ The earlier certificate/profile work is on local `main`. The
+ code/test/witness checks. For every documentation area and its status, use
+ [the repository documentation map](../documentation-map.md).
+ 
+-The latest [tuple-policy research run](runs/2026-09-16-certified-tuple-policy/07-report.md)
++The [tuple-policy research run](runs/2026-09-16-certified-tuple-policy/07-report.md)
+ adds an exact flat-data second-moment explosion threshold, a 37.84% increase
+ in the rate-optimized horizon threshold, certified flat variance reductions,
+ and a strict wave improvement theorem. Its code and evidence are local
+@@ -25,6 +25,16 @@ working-tree additions on the integrated baseline. The
+ [claim ledger](runs/2026-09-16-certified-tuple-policy/03-claims.md) separates
+ the conventional proofs, exact numerical checks and five Lean sublemmas.
+ 
++The [long-horizon investigation](runs/2026-09-25-long-horizon/07-report.md)
++extends this question beyond short times. Its exact raw-flat absolute-moment
++ceiling is `(3*pi-2*log(3))/5`, independent of supported nonexplosive importance
++proposals on the same expansion. A separately attributed bounded ternary
++Allen–Cahn representation is the long-time comparator; its exponential tree
++cost remains material. The [claim ledger](runs/2026-09-25-long-horizon/03-claims.md)
++separates conventional probability/PDE arguments, eleven deterministic Lean
++declarations, exact scalar checks and floating experiments. This does not
++extend the raw-wave certificate or solve arbitrary fully nonlinear PDEs.
++
+ ## The central problem
+ 
+ For a fixed PDE, mechanism, tuple law, root code and starting state, choose
+@@ -65,6 +75,9 @@ nor produces a rate that is individually optimal at every location.
+    ten earlier research options, completed work and deferred alternatives.
+ 8. [Tuple-policy continuation](runs/2026-09-16-certified-tuple-policy/07-report.md):
+    supported whole-tree improvement and the exact flat variance boundary.
++9. [Long-horizon investigation](runs/2026-09-25-long-horizon/07-report.md):
++   longer-time rate selection, the raw absolute-integrability ceiling, and
++   bounded ternary sampling with nonconstant data through T=2.
+ 
+ The [theory index](estimator-integrity/README.md) and
+ [results index](results/README.md) give the complete collections and mark
+diff --git a/docs/research/proof-registry.md b/docs/research/proof-registry.md
+index 68d1da8..1047e2d 100644
+--- a/docs/research/proof-registry.md
++++ b/docs/research/proof-registry.md
+@@ -1,5 +1,22 @@
+ # Formal and Conventional Proof Registry
+ 
++**Long-horizon continuation (26 September 2026):** the
++[new investigation](runs/2026-09-25-long-horizon/03-claims.md) registers
++`PR-HORIZON-1` (L1: the exact raw-flat absolute-integrability ceiling),
++`PR-HORIZON-2` (L2: proposal-independent second-moment lower bound),
++`PR-HORIZON-3` (B1: bounded ternary Allen–Cahn representation),
++`PR-HORIZON-4` (B2: admissible clock and expected node count), and
++`PR-HORIZON-5` (B3: bounded-family variance monotonicity in the rate).
++L3 reuses the prior common-rate flat L2 threshold and studies its longer-time
++feasible region. These probability/analysis arguments are conventional;
++majority voting has explicit prior-art attribution. Eleven deterministic
++declarations in `LongHorizonAlgebra` and `LongHorizon` prove scalar/branch
++identities, cube preservation and all-finite-tree boundedness. The
++[formal inventory](runs/2026-09-25-long-horizon/06-formalization.md) records
++the fresh 3,394-job aggregate build, standard-axiom audit and omitted
++stochastic/analytic/roundoff obligations. A definition of the exact horizon
++constant is not a Lean proof of the improper integral or explosion theorem.
++
+ **Status:** navigation and claim inventory for the `parabolab` research programme; entries must be checked against their underlying proofs.
+ **Historical reviewed commit:** `ce2949330fcff1a3faf56c8a0ff36628586b242d`
+ **Certificate checkpoint review:** 14 September 2026; research commits
+diff --git a/formal/EstimatorIntegrity.lean b/formal/EstimatorIntegrity.lean
+index 9a9f2f8..e76bd14 100644
+--- a/formal/EstimatorIntegrity.lean
++++ b/formal/EstimatorIntegrity.lean
+@@ -8,3 +8,4 @@ import EstimatorIntegrity.AllenCahnBounds
+ import EstimatorIntegrity.ConvexEnclosure
+ import EstimatorIntegrity.ProfileEfficiency
+ import EstimatorIntegrity.TuplePolicy
++import EstimatorIntegrity.LongHorizon
+diff --git a/formal/README.md b/formal/README.md
+index 6e935bb..9a5e81e 100644
+--- a/formal/README.md
++++ b/formal/README.md
+@@ -16,8 +16,8 @@ lake build
+ ```
+ 
+ The aggregate [EstimatorIntegrity.lean](EstimatorIntegrity.lean) imports
+-the proof modules. The latest recorded integrated build completed 3,391
+-jobs; see the [integration record](../docs/research/results/integration-2026-09-16.md).
++the proof modules. The latest recorded integrated build completed 3,394
++jobs; see the [long-horizon record](../docs/research/runs/2026-09-25-long-horizon/06-formalization.md).
+ Build counts are dated environment records, not mathematical claims.
+ 
+ ## Coverage
+@@ -32,13 +32,20 @@ Build counts are dated environment records, not mathematical claims.
+ | `AllenCahnBounds` | Positive polynomial field and enclosure inequalities |
+ | `ConvexEnclosure` | Convex endpoint bounds, cells and exterior rays |
+ | `ProfileEfficiency` | Weighted objectives, interpolation, variance shifts and continuous cost algebra |
++| `TuplePolicy` | Supported binary-policy comparison and abstract monotone iteration |
++| `LongHorizonAlgebra`, `LongHorizon` | Raw scalar algebra, bounded ternary reaction, and induction over every finite ternary tree |
+ 
+-The recent certificate/profile checkpoints added 26 public lemmas and
+-two private helpers across the last four modules. That count is not the
++The earlier certificate/profile checkpoints added 26 public lemmas and
++two private helpers in their scoped modules. That count is not the
+ number of declarations in the entire project. Their recorded axiom
+ audits use standard Lean axioms only; the registry records the details.
+ 
+ Passing the build checks the encoded statements under their assumptions.
++The [26 September long-horizon record](../docs/research/runs/2026-09-25-long-horizon/06-formalization.md)
++adds eleven checked declarations; its aggregate build completed 3,394 jobs
++with standard logical axioms only. Its exact explosion-time expression is
++a definition supported by conventional analysis, not a formally evaluated
++improper integral.
+ It does not formalize the whole continuous-time random tree, its PDE
+ correspondence, analytical residual comparison, the Python verifier,
+ production roundoff, experimental confidence claims or historical novelty.
+diff --git a/parabolab/__init__.py b/parabolab/__init__.py
+index 7aac465..7f5d93d 100644
+--- a/parabolab/__init__.py
++++ b/parabolab/__init__.py
+@@ -46,6 +46,12 @@ from .solve import (
+     grid_states,
+ )
+ from .tree import TreeSample, default_rate, jcp_rate, sample_tree
++from .majority import (
++    AllenCahnMajorityMC,
++    MajoritySamples,
++    majority_branch,
++    sample_majority,
++)
+ from .blowup import TSweep, integrability_edge, sweep_T
+ from .moments import MomentQuadrature, finite_depth_moment_1d
+ from .rate_optimization import (
+@@ -78,6 +84,7 @@ from . import library
+ 
+ __all__ = [
+     "Code",
++    "AllenCahnMajorityMC",
+     "CodingTreeMC",
+     "Comparison",
+     "Curve",
+@@ -95,6 +102,7 @@ __all__ = [
+     "FullyNonlinearPDEnD",
+     "Id",
+     "MCResult",
++    "MajoritySamples",
+     "MomentQuadrature",
+     "ParabolicPDE",
+     "SemilinearMechanism",
+@@ -116,6 +124,7 @@ __all__ = [
+     "integrability_edge",
+     "jcp_rate",
+     "library",
++    "majority_branch",
+     "oracle_ratio_bound",
+     "optimize_exponential_rate_1d",
+     "RateMomentDerivatives",
+@@ -125,6 +134,7 @@ __all__ = [
+     "riccati_binary_optimal_rate",
+     "riccati_binary_second_moment",
+     "sample_tree",
++    "sample_majority",
+     "second_moment_objective",
+     "short_time_rate_1d",
+     "sqrt_optimal_probabilities",
+diff --git a/parabolab/library.py b/parabolab/library.py
+index 116d5d4..1fd2580 100644
+--- a/parabolab/library.py
++++ b/parabolab/library.py
+@@ -59,6 +59,7 @@ def allen_cahn_wave_1d(T: float = 0.5) -> ParabolicPDE:
+         phi_derivatives=(phi_prime,),
+         exact_solution=exact,
+         name=f"allen_cahn_wave_1d(T={T})",
++        reaction_kind="allen_cahn",
+     )
+ 
+ 
+@@ -86,6 +87,7 @@ def allen_cahn_flat(phi0: float = 0.5, T: float = 0.5) -> ParabolicPDE:
+         phi_derivatives=(lambda x: 0.0,),
+         exact_solution=exact,
+         name=f"allen_cahn_flat(phi0={phi0}, T={T})",
++        reaction_kind="allen_cahn",
+     )
+ 
+ 
+@@ -653,4 +655,3 @@ def merton_vasicek_2d(
+         name=f"merton_vasicek_2d(T={T}, consumption={consumption})",
+     )
+ 
+-
+diff --git a/parabolab/pde.py b/parabolab/pde.py
+index 9cdc9a7..cacd81e 100644
+--- a/parabolab/pde.py
++++ b/parabolab/pde.py
+@@ -52,6 +52,9 @@ class ParabolicPDE:
+     d: int = 1
+     exact_solution: Optional[Callable[[float, float], float]] = None
+     name: str = field(default="")
++    # Explicit compatibility marker for representation-specific solvers.
++    # Generic callbacks are deliberately not classified by numerical probes.
++    reaction_kind: Optional[str] = None
+ 
+     def __post_init__(self) -> None:
+         if self.d != 1:
+diff --git a/parabolab/rate_variance.py b/parabolab/rate_variance.py
+index b102e9c..410cb49 100644
+--- a/parabolab/rate_variance.py
++++ b/parabolab/rate_variance.py
+@@ -174,21 +174,30 @@ class RateVarianceComparison:
+     def plot(
+         self,
+         path: Optional[Union[str, Path]] = None,
+-        figsize: tuple[float, float] = (14.0, 10.5),
++        figsize: Optional[tuple[float, float]] = None,
++        save_individual: bool = False,
+     ) -> RateVarianceComparison:
+-        """Render multi-panel grid comparing all sweeps."""
++        """Render multi-panel grid comparing all sweeps, and optionally save individual figures."""
+         n = len(self.sweeps)
+         if n == 1:
+             nrows, ncols = 1, 1
++            default_figsize = (7.5, 5.5)
+         elif n == 2:
+             nrows, ncols = 1, 2
++            default_figsize = (14.0, 5.5)
+         elif n <= 4:
+             nrows, ncols = 2, 2
++            default_figsize = (14.0, 10.5)
++        elif n <= 6:
++            nrows, ncols = 2, 3
++            default_figsize = (16.5, 10.0)
+         else:
+             ncols = 3
+             nrows = (n + ncols - 1) // ncols
++            default_figsize = (16.5, 4.8 * nrows)
+ 
+-        fig, axes = plt.subplots(nrows, ncols, figsize=figsize, sharex=False, sharey=False)
++        fig_size = figsize if figsize is not None else default_figsize
++        fig, axes = plt.subplots(nrows, ncols, figsize=fig_size, sharex=False, sharey=False)
+         ax_flat = np.atleast_1d(axes).flatten()
+ 
+         for i, sweep in enumerate(self.sweeps):
+@@ -212,6 +221,30 @@ class RateVarianceComparison:
+             plt.close(fig)
+             print(f"Comparison figure successfully saved to: {out_p.resolve()}")
+ 
++            if save_individual:
++                for i, sweep in enumerate(self.sweeps):
++                    panel_letter = chr(ord('a') + i)
++                    title_clean = sweep.title
++                    if title_clean.startswith(f"({panel_letter})"):
++                        title_clean = title_clean[3:].strip()
++                    slug = (
++                        title_clean.lower()
++                        .replace(" ", "_")
++                        .replace("(", "")
++                        .replace(")", "")
++                        .replace("=", "")
++                        .replace("$", "")
++                        .replace(".", "p")
++                        .replace("–", "-")
++                        .replace("-", "_")
++                    )
++                    while "__" in slug:
++                        slug = slug.replace("__", "_")
++                    clean_slug = "".join(c if c.isalnum() or c == "_" else "" for c in slug).strip("_")
++                    indiv_path = out_p.parent / f"{out_p.stem}_{panel_letter}_{clean_slug}.png"
++                    sweep.plot(path=indiv_path)
++                    print(f"  Individual plot ({panel_letter}) saved to: {indiv_path.resolve()}")
++
+         return self
+ 
+ 
+@@ -262,12 +295,24 @@ def sweep_rate_variance(
+     if opt_bracket is None:
+         opt_bracket = (max(0.12, 0.35 * lam_theory), min(3.5, 2.2 * lam_theory))
+ 
++    if use_riccati:
++        # riccati_binary_second_moment(pde.T, r) requires r^2 + 1 - exp(r*T) > 0
++        r_lo, r_hi = opt_bracket
++        if not math.isfinite(riccati_binary_second_moment(pde.T, r_lo)):
++            curr = r_lo
++            while curr < 10.0 and not math.isfinite(riccati_binary_second_moment(pde.T, curr)):
++                curr += 0.05
++            r_lo = curr + 0.05
++        opt_bracket = (r_lo, max(r_lo + 0.5, r_hi))
++        if lambda_bracket[0] < r_lo:
++            lambda_bracket = (r_lo + 0.05, max(r_lo + 0.5, lambda_bracket[1]))
++
+     quad_rates = np.linspace(lambda_bracket[0], lambda_bracket[1], n_quad_points)
+     mc_rates = np.linspace(lambda_bracket[0] * 1.15, lambda_bracket[1] * 0.98, n_mc_points)
+ 
+     # 2. Optimal rate and deterministic curve
+     if use_riccati:
+-        lam_opt = riccati_binary_optimal_rate(pde.T)
++        lam_opt = riccati_binary_optimal_rate(pde.T, bracket=opt_bracket)
+         v_opt = riccati_binary_second_moment(pde.T, lam_opt) - exact_u**2
+         curve_var = np.array([
+             riccati_binary_second_moment(pde.T, r) - exact_u**2 for r in quad_rates
+diff --git a/tests/test_rate_variance.py b/tests/test_rate_variance.py
+index f9edbcd..c40a6d0 100644
+--- a/tests/test_rate_variance.py
++++ b/tests/test_rate_variance.py
+@@ -86,8 +86,10 @@ def test_compare_rate_variance_table_and_plot(tmp_path):
+     )
+ 
+     comp = compare_rate_variance(s1, s2)
+-    # Check chaining table and plot
++    # Check chaining table and plot with save_individual
+     out_comp = tmp_path / "comp.png"
+-    comp.table().plot(path=out_comp)
++    comp.table().plot(path=out_comp, save_individual=True)
+ 
+     assert out_comp.exists() and out_comp.stat().st_size > 0
++    indiv_files = list(tmp_path.glob("comp_*.png"))
++    assert len(indiv_files) == 2

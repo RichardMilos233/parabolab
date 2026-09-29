@@ -1,0 +1,20 @@
+Command (working directory `formal/`):
+
+    ~/.elan/bin/lake env lean ../docs/research/runs/2026-09-27-slab-continuation/lean/PrintSlabContinuationAxioms.lean
+
+Exit code: 0
+
+    'EstimatorIntegrity.slabMomentSupersolution_postfixed' depends on axioms: [propext, Classical.choice, Quot.sound]
+    'EstimatorIntegrity.slabMomentSupersolution_postfixed_strict' depends on axioms: [propext, Classical.choice, Quot.sound]
+    'EstimatorIntegrity.intervalClamp_abs_sub_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+    'EstimatorIntegrity.finite_error_recurrence' depends on axioms: [propext, Classical.choice, Quot.sound]
+    'EstimatorIntegrity.projectedCoefficientBounds_sum' depends on axioms: [propext, Classical.choice, Quot.sound]
+    'EstimatorIntegrity.projectedCoefficientBounds_weightedSum' depends on axioms: [propext, Classical.choice, Quot.sound]
+    'EstimatorIntegrity.projectedCoefficientBounds_value' depends on axioms: [propext, Classical.choice, Quot.sound]
+    'EstimatorIntegrity.projectedCoefficientBounds_derivative' depends on axioms: [propext, Classical.choice, Quot.sound]
+    'EstimatorIntegrity.periodicStabilityExponent_upper' depends on axioms: [propext, Classical.choice, Quot.sound]
+    'EstimatorIntegrity.fiftySlabAmplification_upper' depends on axioms: [propext, Classical.choice, Quot.sound]
+    'EstimatorIntegrity.normalizedSpatialMSE_budget' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+These are Lean/mathlib's standard foundational axioms. No project-specific
+axiom is introduced by this module.

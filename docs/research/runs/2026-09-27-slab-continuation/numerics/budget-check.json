@@ -1,0 +1,19 @@
+{
+  "exact_rational_checks": {
+    "amplification_50_rho50_lt_100": true,
+    "rms_squared_lt_1_over_2500": true,
+    "value_envelope_squared_lt_4_over_25": true,
+    "derivative_envelope_squared_lt_1_over_4": true,
+    "gamma_bound_lt_3_over_40": true,
+    "tail_squared_bound_lt_1e_16": true
+  },
+  "floating_display_only": {
+    "amplification_bound": 91.43716976137951,
+    "ensemble_rms_bound": 0.01851727265593713,
+    "local_expected_nodes_upper": 1.5656916465039359,
+    "slab_T4_expected_total_nodes_upper": 15656916.46503936,
+    "majority_T4_expected_nodes_per_root": 13329165.280761808,
+    "majority_T4_8000_expected_total_nodes": 106633322246.09447
+  },
+  "note": "Exact fractions independently check finite arithmetic. Floating displays do not establish transcendental bounds; see conventional theory and Lean. Counts are theoretical, not measured."
+}

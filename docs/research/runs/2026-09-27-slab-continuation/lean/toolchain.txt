@@ -1,0 +1,10 @@
+Lean (version 4.33.0, arm64-apple-darwin24.6.0, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)
+Lake version 5.0.0-src+d8b1897 (Lean version 4.33.0)
+lean-toolchain: leanprover/lean4:v4.33.0
+mathlib revision: v4.33.0 (from formal/lakefile.lean)
+
+SHA-256:
+
+    302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b  formal/lean-toolchain
+    03a3e4e2f39d48331db402c7b7fae222f722ed7a581f8ac322300fc881eda115  formal/lakefile.lean
+    bf1a0d7201280250cb6d2fa67302ae2ddd9efd923f524e36a2dfb51692dcb089  formal/lake-manifest.json

@@ -1,0 +1,95 @@
+{
+  "execution": {
+    "command": "/opt/miniconda3/envs/parabolab/bin/python /Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-27-slab-continuation/numerics/audit_artifacts.py",
+    "duration_seconds": 5.540449457708746,
+    "python_executable": "/opt/miniconda3/envs/parabolab/bin/python"
+  },
+  "failures": [],
+  "modes": {
+    "majority": {
+      "audited_archives": 6,
+      "audited_root_records": 48000,
+      "audited_seeds": [
+        2026092711,
+        2026092712,
+        2026092713
+      ],
+      "expected_archives": 6,
+      "expected_roots_per_archive": 8000,
+      "expected_seeds": [
+        2026092711,
+        2026092712,
+        2026092713
+      ],
+      "npz_disk_bytes": 833693
+    },
+    "sensitivity": {
+      "audited_archives": 50,
+      "audited_root_records": 2500000,
+      "audited_seeds": [
+        2026092799
+      ],
+      "expected_archives": 50,
+      "expected_roots_per_archive": 50000,
+      "expected_seeds": [
+        2026092799
+      ],
+      "npz_disk_bytes": 39070345
+    },
+    "slab": {
+      "audited_archives": 150,
+      "audited_root_records": 30000000,
+      "audited_seeds": [
+        2026092701,
+        2026092702,
+        2026092703
+      ],
+      "expected_archives": 150,
+      "expected_roots_per_archive": 200000,
+      "expected_seeds": [
+        2026092701,
+        2026092702,
+        2026092703
+      ],
+      "npz_disk_bytes": 468019450
+    }
+  },
+  "schema_version": 1,
+  "scope": {
+    "modes": [
+      "slab",
+      "majority",
+      "sensitivity"
+    ],
+    "note": "Saved sample moments and covariances are reproducibility diagnostics; this audit does not prove population moments or confidence guarantees.",
+    "population_moment_claim": false
+  },
+  "source_integrity": {
+    "captured_production_sources": {
+      "docs/research/runs/2026-09-27-slab-continuation/02-plan.md": "ba501df4e76aa1ff89ce93315089f41058db0520f196399e517f3c4685acefa9",
+      "docs/research/runs/2026-09-27-slab-continuation/04-theory.md": "52e75b29bc986486d6d26fdb95a263c02005778dfea509edf04857e616623db3",
+      "docs/research/runs/2026-09-27-slab-continuation/numerics/run_experiment.py": "12621c9269a62b08c7017c5adc55401d4d3818b8e4663b106ca176eb2b4e0d05",
+      "docs/research/runs/2026-09-27-slab-continuation/numerics/slab_sampler.py": "994e892784f36930fa63649aa749985448df75887f9096f6c40c142b46ff108a"
+    },
+    "initial_source_paths_expected": 85,
+    "initial_source_paths_listed": 85,
+    "initial_source_paths_missing": 0,
+    "initial_source_paths_unchanged": 85
+  },
+  "status": "passed",
+  "summary": {
+    "all_scheduled_roots_present": true,
+    "audited_archives": 206,
+    "audited_artifact_disk_bytes": 508740898,
+    "audited_root_records": 32548000,
+    "checks": 12406,
+    "expected_archives": 206,
+    "failed_checks": 0,
+    "manifest_disk_bytes": 817410,
+    "max_numeric_absolute_deviation": 5.551115123125783e-16,
+    "max_numeric_deviation_check": "slab:slab-seed-2026092701-stage-015.npz: interface derivative bound",
+    "npz_disk_bytes": 507923488,
+    "passed_checks": 12406,
+    "saved_root_deletion_detected": false
+  }
+}

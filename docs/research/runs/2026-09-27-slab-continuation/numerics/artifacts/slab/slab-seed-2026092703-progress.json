@@ -1,0 +1,5914 @@
+{
+  "checkpointed_at_utc": "2026-09-27T05:34:10.997926+00:00",
+  "completed_entries": 50,
+  "elapsed_seconds": 8.81269120797515,
+  "entries": [
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5891644208533924e-07,
+          -1.0727711743418814e-07,
+          -5.966881468770344e-10
+        ],
+        [
+          -1.0727711743418814e-07,
+          2.914316023178527e-07,
+          -1.0670460248482883e-07
+        ],
+        [
+          -5.966881468770344e-10,
+          -1.0670460248482883e-07,
+          2.906518536427867e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.031783288417067845,
+          -0.021455423486837627,
+          -0.00011933762937540687
+        ],
+        [
+          -0.021455423486837627,
+          0.058286320463570546,
+          -0.021340920496965766
+        ],
+        [
+          -0.00011933762937540687,
+          -0.021340920496965766,
+          0.05813037072855734
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 0.08,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": 3.713392440762853e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.00020768100587177703,
+        "normalized_l2_periodic_grid_crosscheck": 0.00020768100587178074,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.00042063823004574047
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.4275797738151099,
+        "analytic_sup_value_bound": 0.31104028129615113,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.3621533172202439,
+      "max_nodes": 14,
+      "mean_nodes": 1.18018,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07975036382173112,
+          0.05828679371047504,
+          0.058130214958839535
+        ],
+        "tree_value_mean": -0.0001473212493158846,
+        "tree_value_sample_variance": 0.05832048584703463,
+        "tree_value_second_moment": 0.05832021594815589
+      },
+      "projected_coefficients": [
+        0.2190142331473164,
+        0.0008744589793633143,
+        -5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        -0.00031726303344259887
+      ],
+      "projection_distortion_l2": 0.00031726303344259887,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-001.npz",
+        "scheduled_roots": 200000,
+        "sha256": "61afbf1f03e7186bc27af90f9955102afdc2d4415e16315fb85e0ce79a9482e8"
+      },
+      "raw_coefficients": [
+        0.2190142331473164,
+        0.0008744589793633143,
+        -0.0003672630334425989
+      ],
+      "root_branch_count": 29693,
+      "root_branch_fraction": 0.148465,
+      "root_count": 200000,
+      "sampling_seconds": 0.06012499984353781,
+      "stage": 1,
+      "terminal_code_counts": [
+        170307,
+        2398,
+        28589,
+        1247,
+        1137,
+        61
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "exact_jacobi",
+      "total_nodes": 236036
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5868133898447553e-07,
+          -1.075992603905504e-07,
+          -3.662197814106121e-10
+        ],
+        [
+          -1.075992603905504e-07,
+          2.916631706848729e-07,
+          -1.0721073231051874e-07
+        ],
+        [
+          -3.662197814106121e-10,
+          -1.0721073231051874e-07,
+          2.9136445181113943e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.031736267796895104,
+          -0.02151985207811008,
+          -7.324395628212242e-05
+        ],
+        [
+          -0.02151985207811008,
+          0.05833263413697458,
+          -0.02144214646210375
+        ],
+        [
+          -7.324395628212242e-05,
+          -0.02144214646210375,
+          0.05827289036222789
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 0.16,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": -2.4936649967166602e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0006133654128964828,
+        "normalized_l2_periodic_grid_crosscheck": 0.0006133654128964803,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0006377316503068048
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.4244521076256117,
+        "analytic_sup_value_bound": 0.3105558314596949,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.36194069643566845,
+      "max_nodes": 11,
+      "mean_nodes": 1.17855,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.0798338316305613,
+          0.05833239732562203,
+          0.05827263257997531
+        ],
+        "tree_value_mean": 2.5347714767519846e-06,
+        "tree_value_sample_variance": 0.058315752543620064,
+        "tree_value_second_moment": 0.05831546097128241
+      },
+      "projected_coefficients": [
+        0.21931192971428318,
+        0.00023420464789361575,
+        5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        0.00013325446658283546
+      ],
+      "projection_distortion_l2": 0.00013325446658283546,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-002.npz",
+        "scheduled_roots": 200000,
+        "sha256": "5d3a333bbf125bf87205d9b092aa1d998bbaec02129d4d386cf304bbb06fda13"
+      },
+      "raw_coefficients": [
+        0.21931192971428318,
+        0.00023420464789361575,
+        0.00018325446658283546
+      ],
+      "root_branch_count": 29438,
+      "root_branch_fraction": 0.14719,
+      "root_count": 200000,
+      "sampling_seconds": 0.03867583302780986,
+      "stage": 2,
+      "terminal_code_counts": [
+        170562,
+        2384,
+        28334,
+        1230,
+        1137,
+        56
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 235710
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5948297684205008e-07,
+          -1.0818203813575342e-07,
+          -7.359184145897292e-11
+        ],
+        [
+          -1.0818203813575342e-07,
+          2.9210588088116914e-07,
+          -1.069621437488635e-07
+        ],
+        [
+          -7.359184145897292e-11,
+          -1.069621437488635e-07,
+          2.9119672141494326e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.03189659536841002,
+          -0.021636407627150682,
+          -1.4718368291794585e-05
+        ],
+        [
+          -0.021636407627150682,
+          0.05842117617623383,
+          -0.0213924287497727
+        ],
+        [
+          -1.4718368291794585e-05,
+          -0.0213924287497727,
+          0.05823934428298865
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 0.24,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": 4.662069341687669e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0005075515109789464,
+        "normalized_l2_periodic_grid_crosscheck": 0.0005075515109789511,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0007319421844761367
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.42840679351065786,
+        "analytic_sup_value_bound": 0.31090854765697523,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.3636632745475884,
+      "max_nodes": 14,
+      "mean_nodes": 1.179285,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07970859752286642,
+          0.05842217370322216,
+          0.05823933587797369
+        ],
+        "tree_value_mean": 8.71475126828841e-05,
+        "tree_value_sample_variance": 0.05829796992352765,
+        "tree_value_second_moment": 0.05829768602836699
+      },
+      "projected_coefficients": [
+        0.2186599223393079,
+        0.0011356200378001644,
+        5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        0.0004817816344779036
+      ],
+      "projection_distortion_l2": 0.0004817816344779036,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-003.npz",
+        "scheduled_roots": 200000,
+        "sha256": "11b5fdef33b528c2f8682a18fa060677c311f4eee48cf09972b14a4d68efd03a"
+      },
+      "raw_coefficients": [
+        0.2186599223393079,
+        0.0011356200378001644,
+        0.0005317816344779036
+      ],
+      "root_branch_count": 29628,
+      "root_branch_fraction": 0.14814,
+      "root_count": 200000,
+      "sampling_seconds": 0.038765457924455404,
+      "stage": 3,
+      "terminal_code_counts": [
+        170372,
+        2386,
+        28523,
+        1212,
+        1118,
+        61
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 235857
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5839045994491356e-07,
+          -1.0733112244539247e-07,
+          -7.043158861721954e-10
+        ],
+        [
+          -1.0733112244539247e-07,
+          2.904977803970074e-07,
+          -1.0713409911163034e-07
+        ],
+        [
+          -7.043158861721954e-10,
+          -1.0713409911163034e-07,
+          2.9077516011109126e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.031678091988982714,
+          -0.021466224489078492,
+          -0.0001408631772344391
+        ],
+        [
+          -0.021466224489078492,
+          0.05809955607940148,
+          -0.021426819822326068
+        ],
+        [
+          -0.0001408631772344391,
+          -0.021426819822326068,
+          0.05815503202221826
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 0.32,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": -4.2825985813177425e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0004673110721753529,
+        "normalized_l2_periodic_grid_crosscheck": 0.00046731107217534864,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0004673110721753529
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.4240408798032994,
+        "analytic_sup_value_bound": 0.31021084276722555,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.36108522190986775,
+      "max_nodes": 16,
+      "mean_nodes": 1.180855,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07966084645825605,
+          0.05809933053429807,
+          0.05815474348517446
+        ],
+        "tree_value_mean": -0.00037370061860663144,
+        "tree_value_sample_variance": 0.05816948554406338,
+        "tree_value_second_moment": 0.05816933434878801
+      },
+      "projected_coefficients": [
+        0.2190500236469621,
+        0.00025485814922219586,
+        -4.730872211475382e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "projection_distortion_l2": 0.0,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        false
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-004.npz",
+        "scheduled_roots": 200000,
+        "sha256": "e7fdb1d6c03899d0cd62d4f61bb10226114c77e26dea41976a20f25f184297a2"
+      },
+      "raw_coefficients": [
+        0.2190500236469621,
+        0.00025485814922219586,
+        -4.730872211475382e-05
+      ],
+      "root_branch_count": 29637,
+      "root_branch_fraction": 0.148185,
+      "root_count": 200000,
+      "sampling_seconds": 0.038422209210693836,
+      "stage": 4,
+      "terminal_code_counts": [
+        170363,
+        2452,
+        28524,
+        1275,
+        1156,
+        70
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 236171
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.595497911887616e-07,
+          -1.0786810965109788e-07,
+          -5.389480638975225e-10
+        ],
+        [
+          -1.0786810965109788e-07,
+          2.907976074906205e-07,
+          -1.0746933782383138e-07
+        ],
+        [
+          -5.389480638975225e-10,
+          -1.0746933782383138e-07,
+          2.9224831735182305e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.03190995823775232,
+          -0.021573621930219576,
+          -0.0001077896127795045
+        ],
+        [
+          -0.021573621930219576,
+          0.05815952149812411,
+          -0.021493867564766275
+        ],
+        [
+          -0.0001077896127795045,
+          -0.021493867564766275,
+          0.058449663470364614
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 0.4,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": -5.312590645178972e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.00036329334250608544,
+        "normalized_l2_periodic_grid_crosscheck": 0.00036329334250608013,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0004979763900570276
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.4243342524977532,
+        "analytic_sup_value_bound": 0.3101688994100149,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.3630328470315972,
+      "max_nodes": 13,
+      "mean_nodes": 1.17904,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.0798410657615217,
+          0.05815934659038022,
+          0.058449488409342255
+        ],
+        "tree_value_mean": -0.0009006325769236152,
+        "tree_value_sample_variance": 0.05829114769132079,
+        "tree_value_second_moment": 0.05829166737462096
+      },
+      "projected_coefficients": [
+        0.21893210608213706,
+        0.00034042600385260455,
+        -5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        -0.00029232629708507787
+      ],
+      "projection_distortion_l2": 0.00029232629708507787,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-005.npz",
+        "scheduled_roots": 200000,
+        "sha256": "7e42ea0a584e5c690e001bd9d362eae507dffdaa658dbf4c2fb2e747a958ca0c"
+      },
+      "raw_coefficients": [
+        0.21893210608213706,
+        0.00034042600385260455,
+        -0.0003423262970850779
+      ],
+      "root_branch_count": 29514,
+      "root_branch_fraction": 0.14757,
+      "root_count": 200000,
+      "sampling_seconds": 0.038563833106309175,
+      "stage": 5,
+      "terminal_code_counts": [
+        170486,
+        2456,
+        28376,
+        1186,
+        1155,
+        59
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 235808
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5928908828866268e-07,
+          -1.0844805138294606e-07,
+          -2.2829970475292896e-10
+        ],
+        [
+          -1.0844805138294606e-07,
+          2.9086345787184216e-07,
+          -1.0644203309916607e-07
+        ],
+        [
+          -2.2829970475292896e-10,
+          -1.0644203309916607e-07,
+          2.9000606462957334e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.03185781765773254,
+          -0.02168961027658921,
+          -4.565994095058579e-05
+        ],
+        [
+          -0.02168961027658921,
+          0.05817269157436843,
+          -0.021288406619833215
+        ],
+        [
+          -4.565994095058579e-05,
+          -0.021288406619833215,
+          0.05800121292591467
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 0.48,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": -2.032879073410321e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.00022886775048566098,
+        "normalized_l2_periodic_grid_crosscheck": 0.00022886775048565895,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.00043774138160557793
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.4254655991126355,
+        "analytic_sup_value_bound": 0.31023624948159256,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.36269067720566617,
+      "max_nodes": 13,
+      "mean_nodes": 1.17835,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07969171895098527,
+          0.05817277301079876,
+          0.058001066129995664
+        ],
+        "tree_value_mean": 0.00020817317385484277,
+        "tree_value_sample_variance": 0.05820398594176527,
+        "tree_value_second_moment": 0.05820373825790588
+      },
+      "projected_coefficients": [
+        0.21870999195816818,
+        0.0006101638201474554,
+        5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        0.0003284311638528446
+      ],
+      "projection_distortion_l2": 0.0003284311638528446,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-006.npz",
+        "scheduled_roots": 200000,
+        "sha256": "9ab883690fb8eea6ed84827ab51d85b9025a99f4517a616c772b59bbaf83e73c"
+      },
+      "raw_coefficients": [
+        0.21870999195816818,
+        0.0006101638201474554,
+        0.00037843116385284463
+      ],
+      "root_branch_count": 29300,
+      "root_branch_fraction": 0.1465,
+      "root_count": 200000,
+      "sampling_seconds": 0.03931916691362858,
+      "stage": 6,
+      "terminal_code_counts": [
+        170700,
+        2444,
+        28180,
+        1218,
+        1156,
+        68
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 235670
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.587134530814794e-07,
+          -1.0772378402461245e-07,
+          -2.7986052659763206e-10
+        ],
+        [
+          -1.0772378402461245e-07,
+          2.9138376452267015e-07,
+          -1.0778512721454575e-07
+        ],
+        [
+          -2.7986052659763206e-10,
+          -1.0778512721454575e-07,
+          2.917027571335256e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.03174269061629588,
+          -0.02154475680492249,
+          -5.597210531952641e-05
+        ],
+        [
+          -0.02154475680492249,
+          0.05827675290453403,
+          -0.02155702544290915
+        ],
+        [
+          -5.597210531952641e-05,
+          -0.02155702544290915,
+          0.05834055142670511
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 0.56,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": 2.927345865710862e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.00013780706631731643,
+        "normalized_l2_periodic_grid_crosscheck": 0.00013780706631731936,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.000438593524646926
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.42654837659226436,
+        "analytic_sup_value_bound": 0.3105900740681019,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.36204036170516335,
+      "max_nodes": 12,
+      "mean_nodes": 1.179995,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.0796178676659511,
+          0.05827704830036711,
+          0.05834043726303314
+        ],
+        "tree_value_mean": 0.00040592140532848313,
+        "tree_value_sample_variance": 0.05818227267179859,
+        "tree_value_second_moment": 0.05818214653262254
+      },
+      "projected_coefficients": [
+        0.2188043321397209,
+        0.0007660154030660446,
+        5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        0.000371353870995854
+      ],
+      "projection_distortion_l2": 0.000371353870995854,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-007.npz",
+        "scheduled_roots": 200000,
+        "sha256": "8e4d969d5b5ddc98e51dbab9f768f4b2a8b4dd29bae71bc9a949b31ec000257d"
+      },
+      "raw_coefficients": [
+        0.2188043321397209,
+        0.0007660154030660446,
+        0.000421353870995854
+      ],
+      "root_branch_count": 29631,
+      "root_branch_fraction": 0.148155,
+      "root_count": 200000,
+      "sampling_seconds": 0.03798295883461833,
+      "stage": 7,
+      "terminal_code_counts": [
+        170369,
+        2424,
+        28516,
+        1239,
+        1133,
+        62
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 235999
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5788479811531625e-07,
+          -1.0707153867420617e-07,
+          -1.4136589588381731e-09
+        ],
+        [
+          -1.0707153867420617e-07,
+          2.9040927978190495e-07,
+          -1.0703260588190655e-07
+        ],
+        [
+          -1.4136589588381731e-09,
+          -1.0703260588190655e-07,
+          2.9215946885211516e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.03157695962306325,
+          -0.021414307734841233,
+          -0.0002827317917676346
+        ],
+        [
+          -0.021414307734841233,
+          0.05808185595638099,
+          -0.02140652117638131
+        ],
+        [
+          -0.0002827317917676346,
+          -0.02140652117638131,
+          0.05843189377042303
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 0.64,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": 4.119968255444917e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0014383618135304546,
+        "normalized_l2_periodic_grid_crosscheck": 0.0014383618135304587,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0014708979127676632
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.4340602195383909,
+        "analytic_sup_value_bound": 0.31229051485385484,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.3619382776751327,
+      "max_nodes": 12,
+      "mean_nodes": 1.17865,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07938848553021531,
+          0.058086034167175615,
+          0.05843169760155987
+        ],
+        "tree_value_mean": 0.00025921640626126486,
+        "tree_value_sample_variance": 0.05812604210000288,
+        "tree_value_second_moment": 0.05812581866293765
+      },
+      "projected_coefficients": [
+        0.21865882966839054,
+        0.00211391108500846,
+        -5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        -0.000259823507251323
+      ],
+      "projection_distortion_l2": 0.000259823507251323,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-008.npz",
+        "scheduled_roots": 200000,
+        "sha256": "26927d34d1b1a3473194bf134711726481a6ca3dd504ccd0285ca6ea7ebfda73"
+      },
+      "raw_coefficients": [
+        0.21865882966839054,
+        0.00211391108500846,
+        -0.000309823507251323
+      ],
+      "root_branch_count": 29528,
+      "root_branch_fraction": 0.14764,
+      "root_count": 200000,
+      "sampling_seconds": 0.03746745875105262,
+      "stage": 8,
+      "terminal_code_counts": [
+        170472,
+        2336,
+        28467,
+        1211,
+        1093,
+        71
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 235730
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5692398266125858e-07,
+          -1.0593873596226275e-07,
+          -9.583755004224862e-10
+        ],
+        [
+          -1.0593873596226275e-07,
+          2.901095737912182e-07,
+          -1.0606760407024369e-07
+        ],
+        [
+          -9.583755004224862e-10,
+          -1.0606760407024369e-07,
+          2.90438586185561e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.031384796532251714,
+          -0.02118774719245255,
+          -0.00019167510008449723
+        ],
+        [
+          -0.02118774719245255,
+          0.05802191475824364,
+          -0.021213520814048738
+        ],
+        [
+          -0.00019167510008449723,
+          -0.021213520814048738,
+          0.0580877172371122
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 0.72,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": 3.903127820947816e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0016254782441786507,
+        "normalized_l2_periodic_grid_crosscheck": 0.0016254782441786546,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0016301751884309382
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.43314254509777067,
+        "analytic_sup_value_bound": 0.3115777325626731,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.3592938820964569,
+      "max_nodes": 12,
+      "mean_nodes": 1.178395,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07897009979430934,
+          0.05802615222141929,
+          0.058087444222365545
+        ],
+        "tree_value_mean": 0.00021251526889637102,
+        "tree_value_sample_variance": 0.057972353952658255,
+        "tree_value_second_moment": 0.057972109253628
+      },
+      "projected_coefficients": [
+        0.21814091818373296,
+        0.00212780937806177,
+        -5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        -8.19993935823622e-05
+      ],
+      "projection_distortion_l2": 8.19993935823622e-05,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-009.npz",
+        "scheduled_roots": 200000,
+        "sha256": "adaeb6b1a3fac2645ffe07a1cbcc72c03ae936a9807809081b84c1e1ce2b4436"
+      },
+      "raw_coefficients": [
+        0.21814091818373296,
+        0.00212780937806177,
+        -0.0001319993935823622
+      ],
+      "root_branch_count": 29341,
+      "root_branch_fraction": 0.146705,
+      "root_count": 200000,
+      "sampling_seconds": 0.03897266695275903,
+      "stage": 9,
+      "terminal_code_counts": [
+        170659,
+        2380,
+        28263,
+        1230,
+        1119,
+        68
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 235679
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5651931485003862e-07,
+          -1.0634857052362303e-07,
+          1.5558597285929634e-10
+        ],
+        [
+          -1.0634857052362303e-07,
+          2.9042372858976416e-07,
+          -1.0687830006402057e-07
+        ],
+        [
+          1.5558597285929634e-10,
+          -1.0687830006402057e-07,
+          2.898299943221677e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.03130386297000772,
+          -0.021269714104724606,
+          3.111719457185927e-05
+        ],
+        [
+          -0.021269714104724606,
+          0.058084745717952836,
+          -0.021375660012804113
+        ],
+        [
+          3.111719457185927e-05,
+          -0.021375660012804113,
+          0.057965998864433536
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 0.8,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": -2.3852447794681098e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.00039517081504106917,
+        "normalized_l2_periodic_grid_crosscheck": 0.0003951708150410668,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0007281714912898377
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.42466993069189896,
+        "analytic_sup_value_bound": 0.3099060266907508,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.35841129323330634,
+      "max_nodes": 15,
+      "mean_nodes": 1.17853,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07907488555051159,
+          0.058084726176703926,
+          0.05796608814554769
+        ],
+        "tree_value_mean": 0.00041370257086330753,
+        "tree_value_sample_variance": 0.057905608451799394,
+        "tree_value_second_moment": 0.057905490073574276
+      },
+      "projected_coefficients": [
+        0.21856618928786437,
+        0.0005204637157447194,
+        5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        0.0005657199921296477
+      ],
+      "projection_distortion_l2": 0.0005657199921296477,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-010.npz",
+        "scheduled_roots": 200000,
+        "sha256": "6cecefd8e533d265312861404bf8f96e46c66edcb13b46e5cf12344835a9ae2b"
+      },
+      "raw_coefficients": [
+        0.21856618928786437,
+        0.0005204637157447194,
+        0.0006157199921296477
+      ],
+      "root_branch_count": 29537,
+      "root_branch_fraction": 0.147685,
+      "root_count": 200000,
+      "sampling_seconds": 0.0385538749396801,
+      "stage": 10,
+      "terminal_code_counts": [
+        170463,
+        2322,
+        28490,
+        1190,
+        1091,
+        68
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 235706
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5822329514130626e-07,
+          -1.0741110807197047e-07,
+          -9.745929739516743e-10
+        ],
+        [
+          -1.0741110807197047e-07,
+          2.9058859764700024e-07,
+          -1.0599290692878235e-07
+        ],
+        [
+          -9.745929739516743e-10,
+          -1.0599290692878235e-07,
+          2.9043170689423305e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.03164465902826125,
+          -0.021482221614394094,
+          -0.00019491859479033486
+        ],
+        [
+          -0.021482221614394094,
+          0.05811771952940005,
+          -0.02119858138575647
+        ],
+        [
+          -0.00019491859479033486,
+          -0.02119858138575647,
+          0.05808634137884661
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 0.88,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": 4.9873299934333204e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0007522294012127786,
+        "normalized_l2_periodic_grid_crosscheck": 0.0007522294012127836,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0007799887611747096
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.4304972006998456,
+        "analytic_sup_value_bound": 0.3115707706938988,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.3619505733356709,
+      "max_nodes": 13,
+      "mean_nodes": 1.180145,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07952665799462545,
+          0.05811951374536835,
+          0.05808609526062828
+        ],
+        "tree_value_mean": -0.0003759402827399613,
+        "tree_value_sample_variance": 0.058152634928298474,
+        "tree_value_second_moment": 0.05815248549622003
+      },
+      "projected_coefficients": [
+        0.2188199195449577,
+        0.0014438852322169748,
+        -5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        -0.00016050769152258952
+      ],
+      "projection_distortion_l2": 0.00016050769152258952,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-011.npz",
+        "scheduled_roots": 200000,
+        "sha256": "07357acaf34ef16782044c98699a507a8572d023beca1e6210fdccd2c954d497"
+      },
+      "raw_coefficients": [
+        0.2188199195449577,
+        0.0014438852322169748,
+        -0.0002105076915225895
+      ],
+      "root_branch_count": 29506,
+      "root_branch_fraction": 0.14753,
+      "root_count": 200000,
+      "sampling_seconds": 0.03944974998012185,
+      "stage": 11,
+      "terminal_code_counts": [
+        170494,
+        2494,
+        28351,
+        1266,
+        1192,
+        58
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 236029
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5804009130375575e-07,
+          -1.0690434265627299e-07,
+          -2.3796421521536204e-10
+        ],
+        [
+          -1.0690434265627299e-07,
+          2.909310546574514e-07,
+          -1.0631301955299305e-07
+        ],
+        [
+          -2.3796421521536204e-10,
+          -1.0631301955299305e-07,
+          2.9035150578230783e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.03160801826075115,
+          -0.021380868531254597,
+          -4.759284304307241e-05
+        ],
+        [
+          -0.021380868531254597,
+          0.058186210931490276,
+          -0.021262603910598612
+        ],
+        [
+          -4.759284304307241e-05,
+          -0.021262603910598612,
+          0.05807030115646157
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 0.96,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": 1.3010426069826053e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0005066490085939005,
+        "normalized_l2_periodic_grid_crosscheck": 0.0005066490085939018,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0006550422969276001
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.4266020650035661,
+        "analytic_sup_value_bound": 0.3102687700217616,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.3606731975971878,
+      "max_nodes": 12,
+      "mean_nodes": 1.180535,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07932809112514866,
+          0.05818671842136896,
+          0.058070187352455595
+        ],
+        "tree_value_mean": 0.00017287134542769364,
+        "tree_value_sample_variance": 0.058088739999908726,
+        "tree_value_second_moment": 0.05808847944071079
+      },
+      "projected_coefficients": [
+        0.21844960724269386,
+        0.0008935440301031562,
+        5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        0.0003701755587488767
+      ],
+      "projection_distortion_l2": 0.0003701755587488767,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-012.npz",
+        "scheduled_roots": 200000,
+        "sha256": "7af0e8aee7d30eb7166d97ac5a6ee111fe50875a4b7052f77e345ce3ed7769a8"
+      },
+      "raw_coefficients": [
+        0.21844960724269386,
+        0.0008935440301031562,
+        0.0004201755587488767
+      ],
+      "root_branch_count": 29623,
+      "root_branch_fraction": 0.148115,
+      "root_count": 200000,
+      "sampling_seconds": 0.03882312495261431,
+      "stage": 12,
+      "terminal_code_counts": [
+        170377,
+        2404,
+        28531,
+        1277,
+        1163,
+        56
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 236107
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5774520586981442e-07,
+          -1.071156242764897e-07,
+          -4.985908958829449e-10
+        ],
+        [
+          -1.071156242764897e-07,
+          2.905610509926839e-07,
+          -1.0766638220475645e-07
+        ],
+        [
+          -4.985908958829449e-10,
+          -1.0766638220475645e-07,
+          2.9073744734010477e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.031549041173962886,
+          -0.021423124855297942,
+          -9.971817917658897e-05
+        ],
+        [
+          -0.021423124855297942,
+          0.058112210198536775,
+          -0.02153327644095129
+        ],
+        [
+          -9.971817917658897e-05,
+          -0.02153327644095129,
+          0.05814748946802096
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 1.04,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": 3.0357660829594124e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.00024830695704299005,
+        "normalized_l2_periodic_grid_crosscheck": 0.0002483069570429931,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0005316513877048652
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.4277050992527057,
+        "analytic_sup_value_bound": 0.31113835101544685,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.36113793215209755,
+      "max_nodes": 12,
+      "mean_nodes": 1.182145,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07954744213734458,
+          0.05811268055209422,
+          0.058147420340263614
+        ],
+        "tree_value_mean": 0.0006999277811825783,
+        "tree_value_sample_variance": 0.05811724875943564,
+        "tree_value_second_moment": 0.05811744807209072
+      },
+      "projected_coefficients": [
+        0.2190857336947999,
+        0.000872304195422895,
+        -5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        -0.0004207543841857937
+      ],
+      "projection_distortion_l2": 0.0004207543841857937,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-013.npz",
+        "scheduled_roots": 200000,
+        "sha256": "cab9a0f0332f63d2ae894d1824f99df4923666ab8d1461f9b03e9164b8199967"
+      },
+      "raw_coefficients": [
+        0.2190857336947999,
+        0.000872304195422895,
+        -0.00047075438418579373
+      ],
+      "root_branch_count": 29860,
+      "root_branch_fraction": 0.1493,
+      "root_count": 200000,
+      "sampling_seconds": 0.0393329169601202,
+      "stage": 13,
+      "terminal_code_counts": [
+        170140,
+        2530,
+        28694,
+        1262,
+        1193,
+        71
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 236429
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5928244132944345e-07,
+          -1.0746365277536656e-07,
+          -1.0306395909333647e-10
+        ],
+        [
+          -1.0746365277536656e-07,
+          2.915737883316021e-07,
+          -1.0774605642390691e-07
+        ],
+        [
+          -1.0306395909333647e-10,
+          -1.0774605642390691e-07,
+          2.9137847961366107e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.03185648826588869,
+          -0.021492730555073312,
+          -2.0612791818667293e-05
+        ],
+        [
+          -0.021492730555073312,
+          0.058314757666320424,
+          -0.02154921128478138
+        ],
+        [
+          -2.0612791818667293e-05,
+          -0.02154921128478138,
+          0.05827569592273222
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 1.12,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": 1.3010426069826053e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0004583901506015415,
+        "normalized_l2_periodic_grid_crosscheck": 0.0004583901506015428,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0005295819715716312
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.426263734084119,
+        "analytic_sup_value_bound": 0.3102119691919649,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.3620629344561584,
+      "max_nodes": 11,
+      "mean_nodes": 1.1788,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07958859289159351,
+          0.05831514810371731,
+          0.05827547837422923
+        ],
+        "tree_value_mean": -5.1592459527267424e-05,
+        "tree_value_sample_variance": 0.05821115992888998,
+        "tree_value_second_moment": 0.058210871534872206
+      },
+      "projected_coefficients": [
+        0.21847714733616197,
+        0.0008258396847087948,
+        5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        0.0002217167198029104
+      ],
+      "projection_distortion_l2": 0.0002217167198029104,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-014.npz",
+        "scheduled_roots": 200000,
+        "sha256": "a1dee8ddb8da259f5126b18e5cb4034098b84400c658f87d2d7b1180881a8a5f"
+      },
+      "raw_coefficients": [
+        0.21847714733616197,
+        0.0008258396847087948,
+        0.0002717167198029104
+      ],
+      "root_branch_count": 29404,
+      "root_branch_fraction": 0.14702,
+      "root_count": 200000,
+      "sampling_seconds": 0.03897954197600484,
+      "stage": 14,
+      "terminal_code_counts": [
+        170596,
+        2372,
+        28316,
+        1270,
+        1115,
+        59
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 235760
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5818078222831086e-07,
+          -1.0668623880057059e-07,
+          -9.415354304588205e-10
+        ],
+        [
+          -1.0668623880057059e-07,
+          2.890253862141627e-07,
+          -1.0596533701557872e-07
+        ],
+        [
+          -9.415354304588205e-10,
+          -1.0596533701557872e-07,
+          2.903898774769648e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.03163615644566217,
+          -0.021337247760114118,
+          -0.00018830708609176411
+        ],
+        [
+          -0.021337247760114118,
+          0.057805077242832535,
+          -0.021193067403115745
+        ],
+        [
+          -0.00018830708609176411,
+          -0.021193067403115745,
+          0.05807797549539296
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 1.2,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": 1.1926223897340549e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0007028264878833616,
+        "normalized_l2_periodic_grid_crosscheck": 0.0007028264878833628,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.001058642414979616
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.4269358183741779,
+        "analytic_sup_value_bound": 0.3101951716704897,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.3612959993224576,
+      "max_nodes": 14,
+      "mean_nodes": 1.17996,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07928431576868486,
+          0.05780580058286679,
+          0.05807831103996373
+        ],
+        "tree_value_mean": 0.0004935304840096626,
+        "tree_value_sample_variance": 0.05801209621872293,
+        "tree_value_second_moment": 0.058012049730580495
+      },
+      "projected_coefficients": [
+        0.2182849456646162,
+        0.001006163714912296,
+        -5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        -0.0007411601906363094
+      ],
+      "projection_distortion_l2": 0.0007411601906363094,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-015.npz",
+        "scheduled_roots": 200000,
+        "sha256": "758538ff36e775604171e018716f02281dbab0204f8e8af4308448b1e6322985"
+      },
+      "raw_coefficients": [
+        0.2182849456646162,
+        0.001006163714912296,
+        -0.0007911601906363094
+      ],
+      "root_branch_count": 29577,
+      "root_branch_fraction": 0.147885,
+      "root_count": 200000,
+      "sampling_seconds": 0.03863179171457887,
+      "stage": 15,
+      "terminal_code_counts": [
+        170423,
+        2466,
+        28444,
+        1227,
+        1162,
+        65
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 235992
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.575607311800253e-07,
+          -1.0629360420806853e-07,
+          -9.044872782148375e-10
+        ],
+        [
+          -1.0629360420806853e-07,
+          2.890714475136858e-07,
+          -1.065816474224243e-07
+        ],
+        [
+          -9.044872782148375e-10,
+          -1.065816474224243e-07,
+          2.90071678118277e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.03151214623600506,
+          -0.021258720841613704,
+          -0.0001808974556429675
+        ],
+        [
+          -0.021258720841613704,
+          0.05781428950273716,
+          -0.02131632948448486
+        ],
+        [
+          -0.0001808974556429675,
+          -0.02131632948448486,
+          0.0580143356236554
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 1.28,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": -2.222614453595284e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.00017370278301693772,
+        "normalized_l2_periodic_grid_crosscheck": 0.0001737027830169355,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0011993159250185776
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.4259710091306068,
+        "analytic_sup_value_bound": 0.31039784862550823,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.36051179803276484,
+      "max_nodes": 11,
+      "mean_nodes": 1.17966,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07936366290122708,
+          0.05781446851749206,
+          0.05801545114473116
+        ],
+        "tree_value_mean": -0.0004269616611839749,
+        "tree_value_sample_variance": 0.05800192252840133,
+        "tree_value_second_moment": 0.0580018148150488
+      },
+      "projected_coefficients": [
+        0.21875025537346152,
+        0.0006841682553508401,
+        -5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        -0.0011355769708991962
+      ],
+      "projection_distortion_l2": 0.0011355769708991962,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-016.npz",
+        "scheduled_roots": 200000,
+        "sha256": "79c0f20feb03584791821e76d06b06ebd40c083f9108d1b0f220cad6ff479177"
+      },
+      "raw_coefficients": [
+        0.21875025537346152,
+        0.0006841682553508401,
+        -0.0011855769708991961
+      ],
+      "root_branch_count": 29563,
+      "root_branch_fraction": 0.147815,
+      "root_count": 200000,
+      "sampling_seconds": 0.03945191623643041,
+      "stage": 16,
+      "terminal_code_counts": [
+        170437,
+        2330,
+        28505,
+        1297,
+        1089,
+        70
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 235932
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.585950991006325e-07,
+          -1.0762205062772377e-07,
+          -3.9486060699337807e-10
+        ],
+        [
+          -1.0762205062772377e-07,
+          2.911757139301103e-07,
+          -1.075632603373606e-07
+        ],
+        [
+          -3.9486060699337807e-10,
+          -1.075632603373606e-07,
+          2.9054348032813345e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.0317190198201265,
+          -0.021524410125544756,
+          -7.897212139867562e-05
+        ],
+        [
+          -0.021524410125544756,
+          0.058235142786022064,
+          -0.02151265206747212
+        ],
+        [
+          -7.897212139867562e-05,
+          -0.02151265206747212,
+          0.058108696065626686
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 1.36,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": 4.689174395999807e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0002232918372165352,
+        "normalized_l2_periodic_grid_crosscheck": 0.00022329183721653988,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0002232918372165352
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.4273778066572574,
+        "analytic_sup_value_bound": 0.310922906469051,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.36181840576695296,
+      "max_nodes": 11,
+      "mean_nodes": 1.17804,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.0796418109646725,
+          0.058235700990333636,
+          0.05810840596177961
+        ],
+        "tree_value_mean": -4.0957040245070786e-05,
+        "tree_value_sample_variance": 0.05820370250684017,
+        "tree_value_second_moment": 0.05820341316580678
+      },
+      "projected_coefficients": [
+        0.2189131100223166,
+        0.0009216181567354696,
+        -2.0967411444556256e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "projection_distortion_l2": 0.0,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        false
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-017.npz",
+        "scheduled_roots": 200000,
+        "sha256": "1a303ce9fbd2688d8328353acf2fe9a21b624e169399d2ccb6a770ee1d24af5b"
+      },
+      "raw_coefficients": [
+        0.2189131100223166,
+        0.0009216181567354696,
+        -2.0967411444556256e-05
+      ],
+      "root_branch_count": 29245,
+      "root_branch_fraction": 0.146225,
+      "root_count": 200000,
+      "sampling_seconds": 0.04436845798045397,
+      "stage": 17,
+      "terminal_code_counts": [
+        170755,
+        2370,
+        28161,
+        1265,
+        1128,
+        62
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 235608
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5824101991533372e-07,
+          -1.0701752806225302e-07,
+          -1.0983675758685784e-09
+        ],
+        [
+          -1.0701752806225302e-07,
+          2.909351861037108e-07,
+          -1.0574590990164336e-07
+        ],
+        [
+          -1.0983675758685784e-09,
+          -1.0574590990164336e-07,
+          2.9119439994971973e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.031648203983066746,
+          -0.021403505612450604,
+          -0.00021967351517371568
+        ],
+        [
+          -0.021403505612450604,
+          0.058187037220742165,
+          -0.021149181980328672
+        ],
+        [
+          -0.00021967351517371568,
+          -0.021149181980328672,
+          0.05823887998994395
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 1.44,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": 4.553649124439119e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0009792582013219153,
+        "normalized_l2_periodic_grid_crosscheck": 0.0009792582013219199,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0010132045521545469
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.43167155257214795,
+        "analytic_sup_value_bound": 0.31180535936145964,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.3617427902094096,
+      "max_nodes": 13,
+      "mean_nodes": 1.18021,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07950574665001692,
+          0.058189520688198174,
+          0.05823865797693367
+        ],
+        "tree_value_mean": -5.0007080817385035e-05,
+        "tree_value_sample_variance": 0.058244737745801675,
+        "tree_value_second_moment": 0.05824444902282108
+      },
+      "projected_coefficients": [
+        0.21876403019686108,
+        0.0016656538179353755,
+        -5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        -0.00021302355175199033
+      ],
+      "projection_distortion_l2": 0.00021302355175199033,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-018.npz",
+        "scheduled_roots": 200000,
+        "sha256": "de30ddfd0164862ff0531e4b624ce86b0a9b595e1bde32d6860a0b8c1f40a107"
+      },
+      "raw_coefficients": [
+        0.21876403019686108,
+        0.0016656538179353755,
+        -0.0002630235517519903
+      ],
+      "root_branch_count": 29690,
+      "root_branch_fraction": 0.14845,
+      "root_count": 200000,
+      "sampling_seconds": 0.038208582904189825,
+      "stage": 18,
+      "terminal_code_counts": [
+        170310,
+        2380,
+        28612,
+        1235,
+        1135,
+        68
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 236042
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5747615204273122e-07,
+          -1.066047927702223e-07,
+          -6.263008754038212e-10
+        ],
+        [
+          -1.066047927702223e-07,
+          2.911725345778401e-07,
+          -1.06424314643315e-07
+        ],
+        [
+          -6.263008754038212e-10,
+          -1.06424314643315e-07,
+          2.905327791928757e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.031495230408546245,
+          -0.02132095855404446,
+          -0.00012526017508076423
+        ],
+        [
+          -0.02132095855404446,
+          0.05823450691556802,
+          -0.021284862928663
+        ],
+        [
+          -0.00012526017508076423,
+          -0.021284862928663,
+          0.058106555838575144
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 1.52,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": 4.553649124439119e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0008648684868868864,
+        "normalized_l2_periodic_grid_crosscheck": 0.0008648684868868909,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0008752194815169702
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.4311303892488825,
+        "analytic_sup_value_bound": 0.31171697604850535,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.36021239788333964,
+      "max_nodes": 12,
+      "mean_nodes": 1.1772,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07937319570861265,
+          0.05823663839417348,
+          0.058106285405810906
+        ],
+        "tree_value_mean": 0.00026220617707109733,
+        "tree_value_sample_variance": 0.05812464925876591,
+        "tree_value_second_moment": 0.05812442738759891
+      },
+      "projected_coefficients": [
+        0.21881070078087375,
+        0.0015564867939889691,
+        -5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        -9.177452220549101e-05
+      ],
+      "projection_distortion_l2": 9.177452220549101e-05,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-019.npz",
+        "scheduled_roots": 200000,
+        "sha256": "f99fa78e529f53daec0c34576c191132e47f80e2b55c1e31ee164b9d8a6baeee"
+      },
+      "raw_coefficients": [
+        0.21881070078087375,
+        0.0015564867939889691,
+        -0.000141774522205491
+      ],
+      "root_branch_count": 29384,
+      "root_branch_fraction": 0.14692,
+      "root_count": 200000,
+      "sampling_seconds": 0.040623665787279606,
+      "stage": 19,
+      "terminal_code_counts": [
+        170616,
+        2240,
+        28351,
+        1229,
+        1068,
+        55
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 235440
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5782737213179242e-07,
+          -1.0703285227894002e-07,
+          -8.498763552798952e-10
+        ],
+        [
+          -1.0703285227894002e-07,
+          2.9051996054077373e-07,
+          -1.0619790715153081e-07
+        ],
+        [
+          -8.498763552798952e-10,
+          -1.0619790715153081e-07,
+          2.903780483572941e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.031565474426358486,
+          -0.021406570455788004,
+          -0.00016997527105597904
+        ],
+        [
+          -0.021406570455788004,
+          0.05810399210815475,
+          -0.021239581430306163
+        ],
+        [
+          -0.00016997527105597904,
+          -0.021239581430306163,
+          0.05807560967145882
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 1.6,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": -1.7889335846010823e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0003852045049444405,
+        "normalized_l2_periodic_grid_crosscheck": 0.0003852045049444387,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.000523500536605012
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.42610783649631595,
+        "analytic_sup_value_bound": 0.31091267343424284,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.3604710251560606,
+      "max_nodes": 11,
+      "mean_nodes": 1.1824,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07964061810676125,
+          0.05810399065861127,
+          0.058075446090857505
+        ],
+        "tree_value_mean": -0.00015386058642752548,
+        "tree_value_sample_variance": 0.058235969498507685,
+        "tree_value_second_moment": 0.05823570199174026
+      },
+      "projected_coefficients": [
+        0.2192608070489894,
+        0.0005376526932022587,
+        -5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        -0.0003060862906048925
+      ],
+      "projection_distortion_l2": 0.0003060862906048925,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-020.npz",
+        "scheduled_roots": 200000,
+        "sha256": "e62dd745f8172f21daeaeb4af53a53b59db181127d19549f906c941ae433b0f5"
+      },
+      "raw_coefficients": [
+        0.2192608070489894,
+        0.0005376526932022587,
+        -0.0003560862906048925
+      ],
+      "root_branch_count": 29837,
+      "root_branch_fraction": 0.149185,
+      "root_count": 200000,
+      "sampling_seconds": 0.03928758390247822,
+      "stage": 20,
+      "terminal_code_counts": [
+        170163,
+        2534,
+        28661,
+        1298,
+        1204,
+        57
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 236480
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5970597105652517e-07,
+          -1.0800401566119898e-07,
+          -3.721517284917201e-10
+        ],
+        [
+          -1.0800401566119898e-07,
+          2.920484180403431e-07,
+          -1.0831984792647678e-07
+        ],
+        [
+          -3.721517284917201e-10,
+          -1.0831984792647678e-07,
+          2.925161961671303e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.031941194211305035,
+          -0.021600803132239797,
+          -7.443034569834402e-05
+        ],
+        [
+          -0.021600803132239797,
+          0.05840968360806863,
+          -0.021663969585295356
+        ],
+        [
+          -7.443034569834402e-05,
+          -0.021663969585295356,
+          0.05850323923342606
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 1.68,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": -1.8973538018496328e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.00045605728952291357,
+        "normalized_l2_periodic_grid_crosscheck": 0.00045605728952291167,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0005137945965040881
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.42577812127016074,
+        "analytic_sup_value_bound": 0.3108723877125285,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.36290887123928234,
+      "max_nodes": 12,
+      "mean_nodes": 1.18035,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.0800351160015456,
+          0.05840960903720095,
+          0.05850300436126859
+        ],
+        "tree_value_mean": 0.0005929614041535874,
+        "tree_value_sample_variance": 0.05846446550868742,
+        "tree_value_second_moment": 0.05846452478958669
+      },
+      "projected_coefficients": [
+        0.21930362855231983,
+        0.00046634488286263184,
+        -5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        -0.00019009172986392533
+      ],
+      "projection_distortion_l2": 0.00019009172986392533,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-021.npz",
+        "scheduled_roots": 200000,
+        "sha256": "2721fd7056f6e8b269d3e713e941b60f330313e0c5a796df148d44613eb44939"
+      },
+      "raw_coefficients": [
+        0.21930362855231983,
+        0.00046634488286263184,
+        -0.00024009172986392532
+      ],
+      "root_branch_count": 29633,
+      "root_branch_fraction": 0.148165,
+      "root_count": 200000,
+      "sampling_seconds": 0.03830137476325035,
+      "stage": 21,
+      "terminal_code_counts": [
+        170367,
+        2458,
+        28502,
+        1246,
+        1168,
+        65
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 236070
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.598774109976707e-07,
+          -1.0806532348857906e-07,
+          -4.431726146758037e-10
+        ],
+        [
+          -1.0806532348857906e-07,
+          2.9195271149305524e-07,
+          -1.079396555996647e-07
+        ],
+        [
+          -4.431726146758037e-10,
+          -1.079396555996647e-07,
+          2.923050702156891e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.03197548219953414,
+          -0.021613064697715813,
+          -8.863452293516074e-05
+        ],
+        [
+          -0.021613064697715813,
+          0.05839054229861104,
+          -0.02158793111993294
+        ],
+        [
+          -8.863452293516074e-05,
+          -0.02158793111993294,
+          0.058461014043137825
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 1.76,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": 4.119968255444917e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0005199794889117716,
+        "normalized_l2_periodic_grid_crosscheck": 0.0005199794889117757,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0005199794889117716
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.4286679339364399,
+        "analytic_sup_value_bound": 0.31108101452540593,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.3630982797106928,
+      "max_nodes": 11,
+      "mean_nodes": 1.17976,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07982698507729694,
+          0.05839167151918376,
+          0.05846072236988506
+        ],
+        "tree_value_mean": 0.00035026705927447435,
+        "tree_value_sample_variance": 0.05838300268647735,
+        "tree_value_second_moment": 0.05838283345847674
+      },
+      "projected_coefficients": [
+        0.2187502291545608,
+        0.0011921297262564533,
+        2.51359884881539e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "projection_distortion_l2": 0.0,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        false
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-022.npz",
+        "scheduled_roots": 200000,
+        "sha256": "df52dcde2ec7b40eeab3252407f0e926b22f858bb30e5ea2f07c22c6c42fff0a"
+      },
+      "raw_coefficients": [
+        0.2187502291545608,
+        0.0011921297262564533,
+        2.51359884881539e-05
+      ],
+      "root_branch_count": 29484,
+      "root_branch_fraction": 0.14742,
+      "root_count": 200000,
+      "sampling_seconds": 0.038809833116829395,
+      "stage": 22,
+      "terminal_code_counts": [
+        170516,
+        2500,
+        28335,
+        1217,
+        1205,
+        58
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 235952
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5773925503923092e-07,
+          -1.0774056077924988e-07,
+          -2.4255916734394747e-10
+        ],
+        [
+          -1.0774056077924988e-07,
+          2.9172708479051556e-07,
+          -1.0734110556031677e-07
+        ],
+        [
+          -2.4255916734394747e-10,
+          -1.0734110556031677e-07,
+          2.919815090103857e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.031547851007846184,
+          -0.021548112155849976,
+          -4.851183346878949e-05
+        ],
+        [
+          -0.021548112155849976,
+          0.058345416958103115,
+          -0.021468221112063354
+        ],
+        [
+          -4.851183346878949e-05,
+          -0.021468221112063354,
+          0.058396301802077145
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 1.84,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": 2.3852447794681098e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0005897599352748454,
+        "normalized_l2_periodic_grid_crosscheck": 0.0005897599352748478,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0006081868619833557
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.428362750631578,
+        "analytic_sup_value_bound": 0.31167322500373,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.36110004726346284,
+      "max_nodes": 11,
+      "mean_nodes": 1.18142,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.0797202228490131,
+          0.05834585427034195,
+          0.05839603488080983
+        ],
+        "tree_value_mean": 0.00040558417753113965,
+        "tree_value_sample_variance": 0.058269252848533744,
+        "tree_value_second_moment": 0.05826912600079457
+      },
+      "projected_coefficients": [
+        0.2194824129182627,
+        0.0008538379961554115,
+        5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        0.00010830427334944465
+      ],
+      "projection_distortion_l2": 0.00010830427334944465,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-023.npz",
+        "scheduled_roots": 200000,
+        "sha256": "ab45cda852e2934764e5349be1bcb8efdac272538c70cdd73a4a4fefed95e47c"
+      },
+      "raw_coefficients": [
+        0.2194824129182627,
+        0.0008538379961554115,
+        0.00015830427334944465
+      ],
+      "root_branch_count": 29801,
+      "root_branch_fraction": 0.149005,
+      "root_count": 200000,
+      "sampling_seconds": 0.04076479189097881,
+      "stage": 23,
+      "terminal_code_counts": [
+        170199,
+        2394,
+        28705,
+        1311,
+        1138,
+        65
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 236284
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5976561100060345e-07,
+          -1.0794060932765451e-07,
+          -2.9410459813989364e-10
+        ],
+        [
+          -1.0794060932765451e-07,
+          2.918502038455333e-07,
+          -1.0700469374458448e-07
+        ],
+        [
+          -2.9410459813989364e-10,
+          -1.0700469374458448e-07,
+          2.9190633797173046e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.03195312220012069,
+          -0.021588121865530902,
+          -5.882091962797873e-05
+        ],
+        [
+          -0.021588121865530902,
+          0.05837004076910666,
+          -0.021400938748916895
+        ],
+        [
+          -5.882091962797873e-05,
+          -0.021400938748916895,
+          0.058381267594346094
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 1.92,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": -3.2526065174565133e-19,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.00023736103667720826,
+        "normalized_l2_periodic_grid_crosscheck": 0.00023736103667720794,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.00047997528987407873
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.4258361944826188,
+        "analytic_sup_value_bound": 0.3103017149756575,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.3629178672163563,
+      "max_nodes": 13,
+      "mean_nodes": 1.18034,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07977533522936889,
+          0.058370215648865034,
+          0.05838115389315917
+        ],
+        "tree_value_mean": -0.00028356868931986507,
+        "tree_value_sample_variance": 0.05835866060737842,
+        "tree_value_second_moment": 0.05835844922527694
+      },
+      "projected_coefficients": [
+        0.218683270496072,
+        0.000683176377030698,
+        5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        0.00037214351960962667
+      ],
+      "projection_distortion_l2": 0.00037214351960962667,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-024.npz",
+        "scheduled_roots": 200000,
+        "sha256": "b0590d1f05d7fd0b5d9709937cb67e492eccd99d586b71c4d758790b38942285"
+      },
+      "raw_coefficients": [
+        0.218683270496072,
+        0.000683176377030698,
+        0.0004221435196096267
+      ],
+      "root_branch_count": 29715,
+      "root_branch_fraction": 0.148575,
+      "root_count": 200000,
+      "sampling_seconds": 0.03915137518197298,
+      "stage": 24,
+      "terminal_code_counts": [
+        170285,
+        2434,
+        28593,
+        1222,
+        1174,
+        60
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 236068
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5852496937558496e-07,
+          -1.0754830735569723e-07,
+          4.090275524944593e-10
+        ],
+        [
+          -1.0754830735569723e-07,
+          2.907829633237774e-07,
+          -1.080842897077069e-07
+        ],
+        [
+          4.090275524944593e-10,
+          -1.080842897077069e-07,
+          2.9037735699613714e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.031704993875116994,
+          -0.021509661471139446,
+          8.180551049889186e-05
+        ],
+        [
+          -0.021509661471139446,
+          0.05815659266475548,
+          -0.02161685794154138
+        ],
+        [
+          8.180551049889186e-05,
+          -0.02161685794154138,
+          0.05807547139922743
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 2.0,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": -3.7947076036992655e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0005882850859038428,
+        "normalized_l2_periodic_grid_crosscheck": 0.000588285085903839,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0006408843846125637
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.4229719662559325,
+        "analytic_sup_value_bound": 0.3094945053944264,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.3618748436141512,
+      "max_nodes": 11,
+      "mean_nodes": 1.179695,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07947780029103196,
+          0.05815635268194749,
+          0.05807524912151508
+        ],
+        "tree_value_mean": -0.0002894705134906539,
+        "tree_value_sample_variance": 0.05805162321302233,
+        "tree_value_second_moment": 0.05805141674808445
+      },
+      "projected_coefficients": [
+        0.21857027460495124,
+        0.0002253888994241999,
+        5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        0.00021095908393729728
+      ],
+      "projection_distortion_l2": 0.00021095908393729728,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-025.npz",
+        "scheduled_roots": 200000,
+        "sha256": "4d4a83337d7bae4fd47e2a2272532f3876111328ddad6b56ddbc67d5a9472a5b"
+      },
+      "raw_coefficients": [
+        0.21857027460495124,
+        0.0002253888994241999,
+        0.0002609590839372973
+      ],
+      "root_branch_count": 29584,
+      "root_branch_fraction": 0.14792,
+      "root_count": 200000,
+      "sampling_seconds": 0.038176583126187325,
+      "stage": 25,
+      "terminal_code_counts": [
+        170416,
+        2422,
+        28465,
+        1235,
+        1152,
+        57
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 235939
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5909450138107263e-07,
+          -1.0827757882523728e-07,
+          2.593642788235306e-10
+        ],
+        [
+          -1.0827757882523728e-07,
+          2.915021395860272e-07,
+          -1.081689752869898e-07
+        ],
+        [
+          2.593642788235306e-10,
+          -1.081689752869898e-07,
+          2.9065378216397974e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.03181890027621453,
+          -0.021655515765047456,
+          5.1872855764706115e-05
+        ],
+        [
+          -0.021655515765047456,
+          0.058300427917205445,
+          -0.021633795057397962
+        ],
+        [
+          5.1872855764706115e-05,
+          -0.021633795057397962,
+          0.058130756432795944
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 2.08,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": -4.119968255444917e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0011271146046267508,
+        "normalized_l2_periodic_grid_crosscheck": 0.0011271146046267467,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.001133694448097004
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.42500251080231777,
+        "analytic_sup_value_bound": 0.3108529264696955,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.36244705796230137,
+      "max_nodes": 14,
+      "mean_nodes": 1.17785,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.0799920700934346,
+          0.05830021038731674,
+          0.05813048279398946
+        ],
+        "tree_value_mean": 0.0004201433116293679,
+        "tree_value_sample_variance": 0.058289339742744306,
+        "tree_value_second_moment": 0.0582892248164479
+      },
+      "projected_coefficients": [
+        0.21948423385683047,
+        -0.000271978401574409,
+        -5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        -8.044146019196315e-05
+      ],
+      "projection_distortion_l2": 8.044146019196315e-05,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-026.npz",
+        "scheduled_roots": 200000,
+        "sha256": "15e154bb8d2b00dccbd77481ce3338a7c8260068292615e7a0f08597cea5de09"
+      },
+      "raw_coefficients": [
+        0.21948423385683047,
+        -0.000271978401574409,
+        -0.00013044146019196314
+      ],
+      "root_branch_count": 29323,
+      "root_branch_fraction": 0.146615,
+      "root_count": 200000,
+      "sampling_seconds": 0.03837429080158472,
+      "stage": 26,
+      "terminal_code_counts": [
+        170677,
+        2386,
+        28224,
+        1208,
+        1134,
+        58
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 235570
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.607888033565872e-07,
+          -1.0867286105037649e-07,
+          -5.634529939760699e-10
+        ],
+        [
+          -1.0867286105037649e-07,
+          2.923988414660529e-07,
+          -1.0759520210115826e-07
+        ],
+        [
+          -5.634529939760699e-10,
+          -1.0759520210115826e-07,
+          2.9279814016641477e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.03215776067131744,
+          -0.021734572210075298,
+          -0.00011269059879521398
+        ],
+        [
+          -0.021734572210075298,
+          0.05847976829321058,
+          -0.02151904042023165
+        ],
+        [
+          -0.00011269059879521398,
+          -0.02151904042023165,
+          0.05855962803328295
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 2.16,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": 3.415236843329339e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0003249992472176616,
+        "normalized_l2_periodic_grid_crosscheck": 0.00032499924721766504,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.00041774365142914895
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.42809148256473906,
+        "analytic_sup_value_bound": 0.3112939420766001,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.3646233289843084,
+      "max_nodes": 14,
+      "mean_nodes": 1.179755,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.08018454519109973,
+          0.058480317790605876,
+          0.05855940565442993
+        ],
+        "tree_value_mean": 0.0007615161579216883,
+        "tree_value_sample_variance": 0.058558265018068205,
+        "tree_value_second_moment": 0.0585585521336019
+      },
+      "projected_coefficients": [
+        0.21915050834662353,
+        0.0009175490380327416,
+        -5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        -0.00021536632970548347
+      ],
+      "projection_distortion_l2": 0.00021536632970548347,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-027.npz",
+        "scheduled_roots": 200000,
+        "sha256": "3c0d58125dca395aa76cf6466a7ba875f67568cbef500461b2ceb333894891af"
+      },
+      "raw_coefficients": [
+        0.21915050834662353,
+        0.0009175490380327416,
+        -0.00026536632970548346
+      ],
+      "root_branch_count": 29322,
+      "root_branch_fraction": 0.14661,
+      "root_count": 200000,
+      "sampling_seconds": 0.03808212513104081,
+      "stage": 27,
+      "terminal_code_counts": [
+        170678,
+        2474,
+        28201,
+        1298,
+        1188,
+        70
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 235951
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.590477926862608e-07,
+          -1.0768878168026475e-07,
+          -5.084746380003933e-10
+        ],
+        [
+          -1.0768878168026475e-07,
+          2.917665118922816e-07,
+          -1.0694590755867166e-07
+        ],
+        [
+          -5.084746380003933e-10,
+          -1.0694590755867166e-07,
+          2.9203759316638323e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.03180955853725216,
+          -0.02153775633605295,
+          -0.00010169492760007866
+        ],
+        [
+          -0.02153775633605295,
+          0.05835330237845632,
+          -0.021389181511734332
+        ],
+        [
+          -0.00010169492760007866,
+          -0.021389181511734332,
+          0.058407518633276645
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 2.24,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": 4.662069341687669e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.00010434932984766138,
+        "normalized_l2_periodic_grid_crosscheck": 0.00010434932984766604,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0005490518802031821
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.4266538493192372,
+        "analytic_sup_value_bound": 0.310661494756661,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.36209534602519144,
+      "max_nodes": 13,
+      "mean_nodes": 1.179615,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07970591179225198,
+          0.05835360063764709,
+          0.058407521877854654
+        ],
+        "tree_value_mean": 0.0004686195863868767,
+        "tree_value_sample_variance": 0.058326444106650555,
+        "tree_value_second_moment": 0.05832637207874676
+      },
+      "projected_coefficients": [
+        0.21885271828970562,
+        0.0007681313062784627,
+        5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        0.0004933987219309921
+      ],
+      "projection_distortion_l2": 0.0004933987219309921,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-028.npz",
+        "scheduled_roots": 200000,
+        "sha256": "cbbea7ca7bae190d21c401bfdfe16950521bb5340e32f3a9f33fa9f0c193ef45"
+      },
+      "raw_coefficients": [
+        0.21885271828970562,
+        0.0007681313062784627,
+        0.0005433987219309922
+      ],
+      "root_branch_count": 29461,
+      "root_branch_fraction": 0.147305,
+      "root_count": 200000,
+      "sampling_seconds": 0.04018158279359341,
+      "stage": 28,
+      "terminal_code_counts": [
+        170539,
+        2432,
+        28346,
+        1273,
+        1153,
+        66
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 235923
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5870310502192058e-07,
+          -1.0768783452070487e-07,
+          -1.0087721524408153e-10
+        ],
+        [
+          -1.0768783452070487e-07,
+          2.9087504585039174e-07,
+          -1.0663039849034021e-07
+        ],
+        [
+          -1.0087721524408153e-10,
+          -1.0663039849034021e-07,
+          2.908588513267114e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.031740621004384115,
+          -0.021537566904140975,
+          -2.0175443048816305e-05
+        ],
+        [
+          -0.021537566904140975,
+          0.058175009170078354,
+          -0.021326079698068042
+        ],
+        [
+          -2.0175443048816305e-05,
+          -0.021326079698068042,
+          0.05817177026534228
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 2.32,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": -3.957337929572091e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.000420069348377215,
+        "normalized_l2_periodic_grid_crosscheck": 0.00042006934837721105,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0006367261724286726
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.42405208502614017,
+        "analytic_sup_value_bound": 0.309819095182633,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.3620150675524559,
+      "max_nodes": 10,
+      "mean_nodes": 1.18068,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07954141788706842,
+          0.0581748710874382,
+          0.05817171281107589
+        ],
+        "tree_value_mean": 0.001121630807131126,
+        "tree_value_sample_variance": 0.05817149587094903,
+        "tree_value_second_moment": 0.05817246306913718
+      },
+      "projected_coefficients": [
+        0.2186342964536649,
+        0.0003908866910552946,
+        5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        0.000433119637989795
+      ],
+      "projection_distortion_l2": 0.000433119637989795,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-029.npz",
+        "scheduled_roots": 200000,
+        "sha256": "4462835db8f05c25edf09d3cacd99c88e01647f7f034722975cd716fd6e00d0e"
+      },
+      "raw_coefficients": [
+        0.2186342964536649,
+        0.0003908866910552946,
+        0.000483119637989795
+      ],
+      "root_branch_count": 29612,
+      "root_branch_fraction": 0.14806,
+      "root_count": 200000,
+      "sampling_seconds": 0.03926954232156277,
+      "stage": 29,
+      "terminal_code_counts": [
+        170388,
+        2408,
+        28518,
+        1303,
+        1153,
+        63
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 236136
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.585314783494516e-07,
+          -1.0749750757819643e-07,
+          -3.0646484140577173e-10
+        ],
+        [
+          -1.0749750757819643e-07,
+          2.9002824500517156e-07,
+          -1.0714545379565104e-07
+        ],
+        [
+          -3.0646484140577173e-10,
+          -1.0714545379565104e-07,
+          2.898726657502208e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.03170629566989032,
+          -0.021499501515639285,
+          -6.129296828115435e-05
+        ],
+        [
+          -0.021499501515639285,
+          0.05800564900103431,
+          -0.021429090759130208
+        ],
+        [
+          -6.129296828115435e-05,
+          -0.021429090759130208,
+          0.05797453315004416
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 2.4,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": -2.8189256484623115e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.00025204627599631014,
+        "normalized_l2_periodic_grid_crosscheck": 0.0002520462759963073,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0005150584062418858
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.4255522825964455,
+        "analytic_sup_value_bound": 0.3102262623702643,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.3622786488202319,
+      "max_nodes": 12,
+      "mean_nodes": 1.180355,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.079525726936973,
+          0.05800576370604694,
+          0.05797444574132008
+        ],
+        "tree_value_mean": 0.0008000987652066938,
+        "tree_value_sample_variance": 0.05804227853826843,
+        "tree_value_second_moment": 0.058042628484909826
+      },
+      "projected_coefficients": [
+        0.21867690732805145,
+        0.0006361864961194825,
+        -5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        -0.0003999599323709919
+      ],
+      "projection_distortion_l2": 0.0003999599323709919,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-030.npz",
+        "scheduled_roots": 200000,
+        "sha256": "5d86f56fde15dc92a51f22a230a2cdb9e727cda8e252ffb4941a269d5b14de26"
+      },
+      "raw_coefficients": [
+        0.21867690732805145,
+        0.0006361864961194825,
+        -0.00044995993237099193
+      ],
+      "root_branch_count": 29687,
+      "root_branch_fraction": 0.148435,
+      "root_count": 200000,
+      "sampling_seconds": 0.03866412490606308,
+      "stage": 30,
+      "terminal_code_counts": [
+        170313,
+        2500,
+        28529,
+        1200,
+        1175,
+        66
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 236071
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.586231382692382e-07,
+          -1.0786819854250442e-07,
+          1.4399632206509713e-10
+        ],
+        [
+          -1.0786819854250442e-07,
+          2.910189417723954e-07,
+          -1.0683512144010284e-07
+        ],
+        [
+          1.4399632206509713e-10,
+          -1.0683512144010284e-07,
+          2.89995988708114e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.03172462765384764,
+          -0.021573639708500885,
+          2.8799264413019427e-05
+        ],
+        [
+          -0.021573639708500885,
+          0.058203788354479084,
+          -0.021367024288020568
+        ],
+        [
+          2.8799264413019427e-05,
+          -0.021367024288020568,
+          0.0579991977416228
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 2.48,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": -2.439454888092385e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0004572246181352937,
+        "normalized_l2_periodic_grid_crosscheck": 0.00045722461813529127,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0008974941581491344
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.4243775595164936,
+        "analytic_sup_value_bound": 0.30978422085386365,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.36177630799628674,
+      "max_nodes": 11,
+      "mean_nodes": 1.179725,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07947233727621669,
+          0.058203735154885965,
+          0.05799950994335736
+        ],
+        "tree_value_mean": -0.00038023828745753756,
+        "tree_value_sample_variance": 0.058076266318122426,
+        "tree_value_second_moment": 0.05807612051794609
+      },
+      "projected_coefficients": [
+        0.21851285601883347,
+        0.00048766725152461353,
+        5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        0.0007260139962754838
+      ],
+      "projection_distortion_l2": 0.0007260139962754838,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-031.npz",
+        "scheduled_roots": 200000,
+        "sha256": "4552f69adaf75d45f0f0533d9e845ac703695a8eded668562c14931e34fc92de"
+      },
+      "raw_coefficients": [
+        0.21851285601883347,
+        0.00048766725152461353,
+        0.0007760139962754839
+      ],
+      "root_branch_count": 29557,
+      "root_branch_fraction": 0.147785,
+      "root_count": 200000,
+      "sampling_seconds": 0.03794433316215873,
+      "stage": 31,
+      "terminal_code_counts": [
+        170443,
+        2456,
+        28435,
+        1207,
+        1165,
+        63
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 235945
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5846347256826048e-07,
+          -1.0740468907229703e-07,
+          -2.0886349351707914e-10
+        ],
+        [
+          -1.0740468907229703e-07,
+          2.9043174112074736e-07,
+          -1.0753519338443762e-07
+        ],
+        [
+          -2.0886349351707914e-10,
+          -1.0753519338443762e-07,
+          2.8989910036425285e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.031692694513652094,
+          -0.021480937814459405,
+          -4.177269870341583e-05
+        ],
+        [
+          -0.021480937814459405,
+          0.05808634822414947,
+          -0.021507038676887524
+        ],
+        [
+          -4.177269870341583e-05,
+          -0.021507038676887524,
+          0.057979820072850574
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 2.56,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": 1.8431436932253575e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0005870465369702785,
+        "normalized_l2_periodic_grid_crosscheck": 0.0005870465369702803,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0005975047573563691
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.42664532288898965,
+        "analytic_sup_value_bound": 0.31020955430043246,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.36191649056931596,
+      "max_nodes": 12,
+      "mean_nodes": 1.181145,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07938042797895478,
+          0.0580869147203778,
+          0.05797954539107494
+        ],
+        "tree_value_mean": 0.0001320587687166045,
+        "tree_value_sample_variance": 0.05799682064459396,
+        "tree_value_second_moment": 0.05799654810000913
+      },
+      "projected_coefficients": [
+        0.21837557539426566,
+        0.0009257040404266381,
+        5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        7.335852354731139e-05
+      ],
+      "projection_distortion_l2": 7.335852354731139e-05,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-032.npz",
+        "scheduled_roots": 200000,
+        "sha256": "51222b5fc65226bfb6d0a27e313b5eb0523a264f205ac0174a78db99c5f67290"
+      },
+      "raw_coefficients": [
+        0.21837557539426566,
+        0.0009257040404266381,
+        0.0001233585235473114
+      ],
+      "root_branch_count": 29638,
+      "root_branch_fraction": 0.14819,
+      "root_count": 200000,
+      "sampling_seconds": 0.039960207883268595,
+      "stage": 32,
+      "terminal_code_counts": [
+        170362,
+        2506,
+        28475,
+        1299,
+        1178,
+        60
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 236229
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5779204956690137e-07,
+          -1.0677827165256416e-07,
+          -3.113004947607971e-10
+        ],
+        [
+          -1.0677827165256416e-07,
+          2.8980823260556976e-07,
+          -1.0660801027218699e-07
+        ],
+        [
+          -3.113004947607971e-10,
+          -1.0660801027218699e-07,
+          2.8900954094554525e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.03155840991338028,
+          -0.02135565433051283,
+          -6.226009895215942e-05
+        ],
+        [
+          -0.02135565433051283,
+          0.05796164652111395,
+          -0.021321602054437398
+        ],
+        [
+          -6.226009895215942e-05,
+          -0.021321602054437398,
+          0.05780190818910905
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 2.64,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": -2.5478751053409354e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.00046029386940624027,
+        "normalized_l2_periodic_grid_crosscheck": 0.0004602938694062377,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0004846851443922658
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.42473776770051597,
+        "analytic_sup_value_bound": 0.3098407238723962,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.3609616966402715,
+      "max_nodes": 14,
+      "mean_nodes": 1.18063,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07929146694950026,
+          0.05796167160598135,
+          0.05780164424300053
+        ],
+        "tree_value_mean": -0.0008874661339243377,
+        "tree_value_sample_variance": 0.05796110332631789,
+        "tree_value_second_moment": 0.05796160111694012
+      },
+      "projected_coefficients": [
+        0.21847932357129443,
+        0.0005611533666254825,
+        -5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        -0.0001083143476427502
+      ],
+      "projection_distortion_l2": 0.0001083143476427502,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-033.npz",
+        "scheduled_roots": 200000,
+        "sha256": "05d2dabc8ce4c1f3c27cc1c4ed5362fdcd9364f41ca5eb96374f8d3e09a862b4"
+      },
+      "raw_coefficients": [
+        0.21847932357129443,
+        0.0005611533666254825,
+        -0.0001583143476427502
+      ],
+      "root_branch_count": 29772,
+      "root_branch_fraction": 0.14886,
+      "root_count": 200000,
+      "sampling_seconds": 0.03818870801478624,
+      "stage": 33,
+      "terminal_code_counts": [
+        170228,
+        2412,
+        28682,
+        1221,
+        1122,
+        80
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 236126
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5823128252076176e-07,
+          -1.0725358569003186e-07,
+          -2.772446739626599e-10
+        ],
+        [
+          -1.0725358569003186e-07,
+          2.9071771555659876e-07,
+          -1.0643597075545914e-07
+        ],
+        [
+          -2.772446739626599e-10,
+          -1.0643597075545914e-07,
+          2.8993045386114415e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.03164625650415235,
+          -0.02145071713800637,
+          -5.544893479253198e-05
+        ],
+        [
+          -0.02145071713800637,
+          0.05814354311131975,
+          -0.02128719415109183
+        ],
+        [
+          -5.544893479253198e-05,
+          -0.02128719415109183,
+          0.057986090772228834
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 2.72,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": 2.8189256484623115e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0009222757434409778,
+        "normalized_l2_periodic_grid_crosscheck": 0.0009222757434409806,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0010081818078745179
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.42866046323163504,
+        "analytic_sup_value_bound": 0.31057037599796217,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.3615729236097941,
+      "max_nodes": 12,
+      "mean_nodes": 1.17805,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07927279578364657,
+          0.05814499743795326,
+          0.05798597080461561
+        ],
+        "tree_value_mean": -0.000539975546026779,
+        "tree_value_sample_variance": 0.058001327035885675,
+        "tree_value_second_moment": 0.0580013286028408
+      },
+      "projected_coefficients": [
+        0.21823541763604118,
+        0.0013210012677736425,
+        5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        0.0003622654969591145
+      ],
+      "projection_distortion_l2": 0.0003622654969591145,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-034.npz",
+        "scheduled_roots": 200000,
+        "sha256": "2f500771fe21086d24ee345d3b29477d71c44371e9da20ce49e334983919ef2d"
+      },
+      "raw_coefficients": [
+        0.21823541763604118,
+        0.0013210012677736425,
+        0.0004122654969591145
+      ],
+      "root_branch_count": 29263,
+      "root_branch_fraction": 0.146315,
+      "root_count": 200000,
+      "sampling_seconds": 0.04042558325454593,
+      "stage": 34,
+      "terminal_code_counts": [
+        170737,
+        2394,
+        28175,
+        1234,
+        1136,
+        70
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 235610
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5746045045857114e-07,
+          -1.0683393840519412e-07,
+          2.578498124248996e-10
+        ],
+        [
+          -1.0683393840519412e-07,
+          2.908375884236276e-07,
+          -1.0697544805964762e-07
+        ],
+        [
+          2.578498124248996e-10,
+          -1.0697544805964762e-07,
+          2.8869248230053214e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.03149209009171423,
+          -0.021366787681038824,
+          5.156996248497992e-05
+        ],
+        [
+          -0.021366787681038824,
+          0.05816751768472552,
+          -0.021395089611929523
+        ],
+        [
+          5.156996248497992e-05,
+          -0.021395089611929523,
+          0.057738496460106425
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 2.8000000000000003,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": -1.951563910473908e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0005364573534644163,
+        "normalized_l2_periodic_grid_crosscheck": 0.0005364573534644144,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0009588092407810194
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.4242659841028736,
+        "analytic_sup_value_bound": 0.30966917011606354,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.36007305826994424,
+      "max_nodes": 11,
+      "mean_nodes": 1.180145,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07919913147309471,
+          0.05816747624094438,
+          0.05773884515284653
+        ],
+        "tree_value_mean": 0.0005041437045497426,
+        "tree_value_sample_variance": 0.05792863736558267,
+        "tree_value_second_moment": 0.057928601883270675
+      },
+      "projected_coefficients": [
+        0.21841977667287923,
+        0.000499393440599863,
+        5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        0.0007483640914098639
+      ],
+      "projection_distortion_l2": 0.0007483640914098639,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-035.npz",
+        "scheduled_roots": 200000,
+        "sha256": "49ba81123804c044ce39e063253bc3508fe1799fdcb5ee6dd2ab1fcf7da3cee5"
+      },
+      "raw_coefficients": [
+        0.21841977667287923,
+        0.000499393440599863,
+        0.0007983640914098639
+      ],
+      "root_branch_count": 29580,
+      "root_branch_fraction": 0.1479,
+      "root_count": 200000,
+      "sampling_seconds": 0.03828020906075835,
+      "stage": 35,
+      "terminal_code_counts": [
+        170420,
+        2426,
+        28482,
+        1256,
+        1140,
+        75
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 236029
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5842370060900431e-07,
+          -1.0713554544043813e-07,
+          -7.862234415909774e-10
+        ],
+        [
+          -1.0713554544043813e-07,
+          2.8895248854195114e-07,
+          -1.0701034629455461e-07
+        ],
+        [
+          -7.862234415909774e-10,
+          -1.0701034629455461e-07,
+          2.900323258628653e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.031684740121800864,
+          -0.021427109088087627,
+          -0.00015724468831819548
+        ],
+        [
+          -0.021427109088087627,
+          0.057790497708390225,
+          -0.021402069258910923
+        ],
+        [
+          -0.00015724468831819548,
+          -0.021402069258910923,
+          0.05800646517257306
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 2.88,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": -4.9873299934333204e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0005202919829718964,
+        "normalized_l2_periodic_grid_crosscheck": 0.0005202919829718914,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0009081726123512286
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.4233664898004095,
+        "analytic_sup_value_bound": 0.30963095167497806,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.3617425558370175,
+      "max_nodes": 13,
+      "mean_nodes": 1.178885,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07947606413540935,
+          0.05779028688430502,
+          0.05800672860149868
+        ],
+        "tree_value_mean": -0.00021056519891926324,
+        "tree_value_sample_variance": 0.05800655525948475,
+        "tree_value_second_moment": 0.05800630956441144
+      },
+      "projected_coefficients": [
+        0.21861263101045167,
+        0.0002795145841694913,
+        -5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        -0.0006939497634178078
+      ],
+      "projection_distortion_l2": 0.0006939497634178078,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-036.npz",
+        "scheduled_roots": 200000,
+        "sha256": "27eae5ebc4596bee614f750bc252dad20f5bca9c3c87577ac4411f72e6247b25"
+      },
+      "raw_coefficients": [
+        0.21861263101045167,
+        0.0002795145841694913,
+        -0.0007439497634178079
+      ],
+      "root_branch_count": 29375,
+      "root_branch_fraction": 0.146875,
+      "root_count": 200000,
+      "sampling_seconds": 0.03744841692969203,
+      "stage": 36,
+      "terminal_code_counts": [
+        170625,
+        2424,
+        28279,
+        1226,
+        1152,
+        74
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 235777
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5895979567494572e-07,
+          -1.0738897383048157e-07,
+          -5.341238943286445e-10
+        ],
+        [
+          -1.0738897383048157e-07,
+          2.8912069456333717e-07,
+          -1.057387259855438e-07
+        ],
+        [
+          -5.341238943286445e-10,
+          -1.057387259855438e-07,
+          2.891872378339913e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.031791959134989146,
+          -0.021477794766096313,
+          -0.00010682477886572889
+        ],
+        [
+          -0.021477794766096313,
+          0.05782413891266743,
+          -0.02114774519710876
+        ],
+        [
+          -0.00010682477886572889,
+          -0.02114774519710876,
+          0.057837447566798254
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 2.96,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": -2.168404344971009e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0011979086195207775,
+        "normalized_l2_periodic_grid_crosscheck": 0.0011979086195207753,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0013108137014519931
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.4221294088163315,
+        "analytic_sup_value_bound": 0.3085354873511653,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.3622615662715799,
+      "max_nodes": 12,
+      "mean_nodes": 1.182855,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07921631354528216,
+          0.05782396939398083,
+          0.057837446309511285
+        ],
+        "tree_value_mean": 0.00032708642994490615,
+        "tree_value_sample_variance": 0.057856386444756075,
+        "tree_value_second_moment": 0.05785620414835651
+      },
+      "projected_coefficients": [
+        0.21777170011295904,
+        0.0003458352297461819,
+        5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        0.0004865910472288844
+      ],
+      "projection_distortion_l2": 0.0004865910472288844,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-037.npz",
+        "scheduled_roots": 200000,
+        "sha256": "54c723c6c634143e734157afcc2afdaea1081514fb71d77d5adf07e9a6634f94"
+      },
+      "raw_coefficients": [
+        0.21777170011295904,
+        0.0003458352297461819,
+        0.0005365910472288844
+      ],
+      "root_branch_count": 30001,
+      "root_branch_fraction": 0.150005,
+      "root_count": 200000,
+      "sampling_seconds": 0.04489895794540644,
+      "stage": 37,
+      "terminal_code_counts": [
+        169999,
+        2580,
+        28795,
+        1232,
+        1240,
+        46
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 236571
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5752958716413682e-07,
+          -1.0625472115420653e-07,
+          -7.049362390673219e-10
+        ],
+        [
+          -1.0625472115420653e-07,
+          2.8670397491658077e-07,
+          -1.0653354204708207e-07
+        ],
+        [
+          -7.049362390673219e-10,
+          -1.0653354204708207e-07,
+          2.879285911584187e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.031505917432827366,
+          -0.021250944230841305,
+          -0.00014098724781346438
+        ],
+        [
+          -0.021250944230841305,
+          0.05734079498331615,
+          -0.021306708409416415
+        ],
+        [
+          -0.00014098724781346438,
+          -0.021306708409416415,
+          0.057585718231683736
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 3.04,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": -2.6020852139652106e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0013256110109252644,
+        "normalized_l2_periodic_grid_crosscheck": 0.0013256110109252618,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0016356232756941163
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.42143488154251496,
+        "analytic_sup_value_bound": 0.30826523409466294,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.36092185536516047,
+      "max_nodes": 11,
+      "mean_nodes": 1.18007,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.0788839260634347,
+          0.05734057649209344,
+          0.05758634675256452
+        ],
+        "tree_value_mean": 0.00044365490222453405,
+        "tree_value_sample_variance": 0.05756749231304844,
+        "tree_value_second_moment": 0.05756740130525915
+      },
+      "projected_coefficients": [
+        0.21766526172128425,
+        0.0002611757111104094,
+        -5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        -0.0009073136761052292
+      ],
+      "projection_distortion_l2": 0.0009073136761052292,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-038.npz",
+        "scheduled_roots": 200000,
+        "sha256": "49d6708f730c53d9cbdc6dc0e7dc44a9b01e331f71badceb9cc9a331c7fa5c44"
+      },
+      "raw_coefficients": [
+        0.21766526172128425,
+        0.0002611757111104094,
+        -0.0009573136761052292
+      ],
+      "root_branch_count": 29894,
+      "root_branch_fraction": 0.14947,
+      "root_count": 200000,
+      "sampling_seconds": 0.03711024997755885,
+      "stage": 38,
+      "terminal_code_counts": [
+        170106,
+        2316,
+        28794,
+        1244,
+        1116,
+        36
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 236014
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5769431241758878e-07,
+          -1.0664790597847622e-07,
+          -7.171304352214152e-10
+        ],
+        [
+          -1.0664790597847622e-07,
+          2.8653458820018446e-07,
+          -1.0601187989968422e-07
+        ],
+        [
+          -7.171304352214152e-10,
+          -1.0601187989968422e-07,
+          2.86506922034142e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.031538862483517754,
+          -0.021329581195695245,
+          -0.00014342608704428304
+        ],
+        [
+          -0.021329581195695245,
+          0.0573069176400369,
+          -0.021202375979936842
+        ],
+        [
+          -0.00014342608704428304,
+          -0.021202375979936842,
+          0.057301384406828394
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 3.12,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": -1.5178830414797062e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0015895400451888069,
+        "normalized_l2_periodic_grid_crosscheck": 0.0015895400451888054,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0016280182321658358
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.42108078570422713,
+        "analytic_sup_value_bound": 0.3079085136574504,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.36071975203755213,
+      "max_nodes": 13,
+      "mean_nodes": 1.178435,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07879223858531681,
+          0.057306718377508385,
+          0.05730122284457184
+        ],
+        "tree_value_mean": 0.0005755705367770902,
+        "tree_value_sample_variance": 0.057465070654558255,
+        "tree_value_second_moment": 0.05746511461064778
+      },
+      "projected_coefficients": [
+        0.21737877954416535,
+        0.000295418448088491,
+        -5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        -0.0003034751274504307
+      ],
+      "projection_distortion_l2": 0.0003034751274504307,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-039.npz",
+        "scheduled_roots": 200000,
+        "sha256": "9a9c814551607014572838e7e9ef12d0803f0c23f7e99aab5f0826718d7529d2"
+      },
+      "raw_coefficients": [
+        0.21737877954416535,
+        0.000295418448088491,
+        -0.0003534751274504307
+      ],
+      "root_branch_count": 29494,
+      "root_branch_fraction": 0.14747,
+      "root_count": 200000,
+      "sampling_seconds": 0.0371395000256598,
+      "stage": 39,
+      "terminal_code_counts": [
+        170506,
+        2346,
+        28390,
+        1239,
+        1133,
+        39
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 235687
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.566570762485572e-07,
+          -1.06144383513556e-07,
+          -1.0578284338877175e-10
+        ],
+        [
+          -1.06144383513556e-07,
+          2.8743549855626047e-07,
+          -1.0540587588679332e-07
+        ],
+        [
+          -1.0578284338877175e-10,
+          -1.0540587588679332e-07,
+          2.858974325150409e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.03133141524971144,
+          -0.0212288767027112,
+          -2.115656867775435e-05
+        ],
+        [
+          -0.0212288767027112,
+          0.05748709971125209,
+          -0.021081175177358663
+        ],
+        [
+          -2.115656867775435e-05,
+          -0.021081175177358663,
+          0.057179486503008185
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 3.2,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": -2.168404344971009e-19,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0016224629270396409,
+        "normalized_l2_periodic_grid_crosscheck": 0.0016224629270396407,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0016265734678858734
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.4247821876188117,
+        "analytic_sup_value_bound": 0.3087530838766085,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.36018747857951217,
+      "max_nodes": 14,
+      "mean_nodes": 1.17969,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07855671209253619,
+          0.057487728541628876,
+          0.05717921612635558
+        ],
+        "tree_value_mean": -0.0004108934413538492,
+        "tree_value_sample_variance": 0.057440280086362386,
+        "tree_value_second_moment": 0.057440161718382114
+      },
+      "projected_coefficients": [
+        0.21731418154345378,
+        0.0009572177779549556,
+        -5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        -7.458242471238092e-05
+      ],
+      "projection_distortion_l2": 7.458242471238092e-05,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-040.npz",
+        "scheduled_roots": 200000,
+        "sha256": "74a8474946d612c2cab19c0bb65cf269319dd348f5785305ce72b1a50474b801"
+      },
+      "raw_coefficients": [
+        0.21731418154345378,
+        0.0009572177779549556,
+        -0.0001245824247123809
+      ],
+      "root_branch_count": 29506,
+      "root_branch_fraction": 0.14753,
+      "root_count": 200000,
+      "sampling_seconds": 0.03877474972978234,
+      "stage": 40,
+      "terminal_code_counts": [
+        170494,
+        2476,
+        28368,
+        1226,
+        1176,
+        66
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 235938
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.559102421249731e-07,
+          -1.0580790392307239e-07,
+          -8.419040342595907e-10
+        ],
+        [
+          -1.0580790392307239e-07,
+          2.8657402060546347e-07,
+          -1.0456305974582906e-07
+        ],
+        [
+          -8.419040342595907e-10,
+          -1.0456305974582906e-07,
+          2.858523237763923e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.03118204842499462,
+          -0.021161580784614477,
+          -0.00016838080685191813
+        ],
+        [
+          -0.021161580784614477,
+          0.05731480412109269,
+          -0.020912611949165813
+        ],
+        [
+          -0.00016838080685191813,
+          -0.020912611949165813,
+          0.05717046475527846
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 3.2800000000000002,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": 1.0842021724855044e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0018583795787864364,
+        "normalized_l2_periodic_grid_crosscheck": 0.0018583795787864375,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0018657902647944537
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.4262215016490307,
+        "analytic_sup_value_bound": 0.3089455154058083,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.3589819532254013,
+      "max_nodes": 13,
+      "mean_nodes": 1.181215,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07833376895665457,
+          0.0573161118086009,
+          0.05717020956270107
+        ],
+        "tree_value_mean": -0.0013715894228976708,
+        "tree_value_sample_variance": 0.057315322289266744,
+        "tree_value_second_moment": 0.0573169169702003
+      },
+      "projected_coefficients": [
+        0.21714482826422318,
+        0.0012626406963968137,
+        5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        0.0001250992493372209
+      ],
+      "projection_distortion_l2": 0.0001250992493372209,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-041.npz",
+        "scheduled_roots": 200000,
+        "sha256": "270ba63ed36bc3238c65b82d8ec2072876dc95ccd6ed5fa03d0d517cab0a6d54"
+      },
+      "raw_coefficients": [
+        0.21714482826422318,
+        0.0012626406963968137,
+        0.00017509924933722089
+      ],
+      "root_branch_count": 29811,
+      "root_branch_fraction": 0.149055,
+      "root_count": 200000,
+      "sampling_seconds": 0.04167712479829788,
+      "stage": 41,
+      "terminal_code_counts": [
+        170189,
+        2400,
+        28704,
+        1295,
+        1134,
+        63
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 236243
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5559584516210088e-07,
+          -1.0570215641023877e-07,
+          1.3694924033491383e-10
+        ],
+        [
+          -1.0570215641023877e-07,
+          2.8697573106544634e-07,
+          -1.052933212993901e-07
+        ],
+        [
+          1.3694924033491383e-10,
+          -1.052933212993901e-07,
+          2.858052181649731e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.031119169032420176,
+          -0.021140431282047754,
+          2.7389848066982764e-05
+        ],
+        [
+          -0.021140431282047754,
+          0.05739514621308926,
+          -0.02105866425987802
+        ],
+        [
+          2.7389848066982764e-05,
+          -0.02105866425987802,
+          0.057161043632994624
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 3.36,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": 0.0,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0018653919794226052,
+        "normalized_l2_periodic_grid_crosscheck": 0.0018653919794226052,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0019272866592770378
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.4233098822958243,
+        "analytic_sup_value_bound": 0.3081462944290623,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.3583599765238026,
+      "max_nodes": 14,
+      "mean_nodes": 1.179515,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07823084551841254,
+          0.05739548291443338,
+          0.05716099704383948
+        ],
+        "tree_value_mean": -0.00021038486015844456,
+        "tree_value_sample_variance": 0.05723835453770495,
+        "tree_value_second_moment": 0.05723811260772165
+      },
+      "projected_coefficients": [
+        0.21705260210796398,
+        0.0007897322803323911,
+        5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        0.00043909719279241045
+      ],
+      "projection_distortion_l2": 0.00043909719279241045,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-042.npz",
+        "scheduled_roots": 200000,
+        "sha256": "8be9224fa3db405886f4f463bb3a32a655aeda96a42b6216fbdce1daf709de61"
+      },
+      "raw_coefficients": [
+        0.21705260210796398,
+        0.0007897322803323911,
+        0.0004890971927924105
+      ],
+      "root_branch_count": 29690,
+      "root_branch_fraction": 0.14845,
+      "root_count": 200000,
+      "sampling_seconds": 0.04160016681998968,
+      "stage": 42,
+      "terminal_code_counts": [
+        170310,
+        2358,
+        28601,
+        1223,
+        1098,
+        62
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 235903
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5614181837152723e-07,
+          -1.0552703344974329e-07,
+          -1.1948749498220598e-09
+        ],
+        [
+          -1.0552703344974329e-07,
+          2.856870909251458e-07,
+          -1.0459671679621401e-07
+        ],
+        [
+          -1.1948749498220598e-09,
+          -1.0459671679621401e-07,
+          2.8631214511461565e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.031228363674305447,
+          -0.021105406689948657,
+          -0.00023897498996441194
+        ],
+        [
+          -0.021105406689948657,
+          0.057137418185029154,
+          -0.020919343359242802
+        ],
+        [
+          -0.00023897498996441194,
+          -0.020919343359242802,
+          0.05726242902292313
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 3.44,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": 4.336808689942018e-19,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.001843312969239852,
+        "normalized_l2_periodic_grid_crosscheck": 0.0018433129692398524,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0018896716781857828
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.4245348114652404,
+        "analytic_sup_value_bound": 0.3084861597982111,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.3589917548947617,
+      "max_nodes": 14,
+      "mean_nodes": 1.178065,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07835855610832838,
+          0.057138107462988294,
+          0.05726231662094958
+        ],
+        "tree_value_mean": 6.454757856441383e-05,
+        "tree_value_sample_variance": 0.05730500544512175,
+        "tree_value_second_moment": 0.057304723086484426
+      },
+      "projected_coefficients": [
+        0.21709525231069415,
+        0.000987403184817815,
+        -5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        -0.0003670253836222486
+      ],
+      "projection_distortion_l2": 0.0003670253836222486,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-043.npz",
+        "scheduled_roots": 200000,
+        "sha256": "cb2b58c48509021b578015cdf34d19a33216f7e688f715ae621683fdc8609fb6"
+      },
+      "raw_coefficients": [
+        0.21709525231069415,
+        0.000987403184817815,
+        -0.0004170253836222486
+      ],
+      "root_branch_count": 29389,
+      "root_branch_fraction": 0.146945,
+      "root_count": 200000,
+      "sampling_seconds": 0.03871220862492919,
+      "stage": 43,
+      "terminal_code_counts": [
+        170611,
+        2380,
+        28304,
+        1188,
+        1112,
+        67
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 235613
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.563926444290284e-07,
+          -1.0643096553972151e-07,
+          -3.1011231161283974e-10
+        ],
+        [
+          -1.0643096553972151e-07,
+          2.8728408599270124e-07,
+          -1.0543342150237058e-07
+        ],
+        [
+          -3.1011231161283974e-10,
+          -1.0543342150237058e-07,
+          2.8776874675123875e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.03127852888580568,
+          -0.0212861931079443,
+          -6.202246232256795e-05
+        ],
+        [
+          -0.0212861931079443,
+          0.05745681719854025,
+          -0.021086684300474116
+        ],
+        [
+          -6.202246232256795e-05,
+          -0.021086684300474116,
+          0.057553749350247756
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 3.52,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": -3.0357660829594124e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0013929161717385734,
+        "normalized_l2_periodic_grid_crosscheck": 0.0013929161717385703,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0015064606475340334
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.4203233323406135,
+        "analytic_sup_value_bound": 0.30806245662496246,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.3585685238186833,
+      "max_nodes": 12,
+      "mean_nodes": 1.18029,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.0786884689328822,
+          0.05745653189074934,
+          0.05755379565787356
+        ],
+        "tree_value_mean": 0.00012302239800230717,
+        "tree_value_sample_variance": 0.05749278355250258,
+        "tree_value_second_moment": 0.057492511223095226
+      },
+      "projected_coefficients": [
+        0.21773859657791433,
+        -4.4455530583261064e-05,
+        5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        0.0005279934006793735
+      ],
+      "projection_distortion_l2": 0.0005279934006793735,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-044.npz",
+        "scheduled_roots": 200000,
+        "sha256": "5f19d6d63f5b0b72373dad5a5c17fdcb08e4021105917efe8743fa2d79baa333"
+      },
+      "raw_coefficients": [
+        0.21773859657791433,
+        -4.4455530583261064e-05,
+        0.0005779934006793735
+      ],
+      "root_branch_count": 29633,
+      "root_branch_fraction": 0.148165,
+      "root_count": 200000,
+      "sampling_seconds": 0.03826704202219844,
+      "stage": 44,
+      "terminal_code_counts": [
+        170367,
+        2414,
+        28523,
+        1269,
+        1144,
+        59
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 236058
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.58168257435969e-07,
+          -1.0773160523865111e-07,
+          1.4005450759764285e-10
+        ],
+        [
+          -1.0773160523865111e-07,
+          2.887772125048572e-07,
+          -1.0748500441452312e-07
+        ],
+        [
+          1.4005450759764285e-10,
+          -1.0748500441452312e-07,
+          2.877920579201718e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.0316336514871938,
+          -0.021546321047730223,
+          2.801090151952857e-05
+        ],
+        [
+          -0.021546321047730223,
+          0.057755442500971435,
+          -0.021497000882904623
+        ],
+        [
+          2.801090151952857e-05,
+          -0.021497000882904623,
+          0.05755841158403436
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 3.6,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": -4.9873299934333204e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0011051426399389472,
+        "normalized_l2_periodic_grid_crosscheck": 0.0011051426399389423,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.001110181717251847
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.42332252729963715,
+        "analytic_sup_value_bound": 0.30949659446584177,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.36151464171952813,
+      "max_nodes": 11,
+      "mean_nodes": 1.17903,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.0793676725266698,
+          0.0577552533335024,
+          0.05755813716083244
+        ],
+        "tree_value_mean": 0.000279519563316208,
+        "tree_value_sample_variance": 0.05780956181064919,
+        "tree_value_second_moment": 0.05780935089402641
+      },
+      "projected_coefficients": [
+        0.21848153058721953,
+        -0.0003156101137200659,
+        -5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        -6.56237679377617e-05
+      ],
+      "projection_distortion_l2": 6.56237679377617e-05,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-045.npz",
+        "scheduled_roots": 200000,
+        "sha256": "4505c86038bbb0f603bf63df4f33233dda36e737d8d072bb4c30a576972e56d0"
+      },
+      "raw_coefficients": [
+        0.21848153058721953,
+        -0.0003156101137200659,
+        -0.00011562376793776171
+      ],
+      "root_branch_count": 29458,
+      "root_branch_fraction": 0.14729,
+      "root_count": 200000,
+      "sampling_seconds": 0.0378885418176651,
+      "stage": 45,
+      "terminal_code_counts": [
+        170542,
+        2460,
+        28328,
+        1196,
+        1158,
+        65
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 235806
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5880567813481964e-07,
+          -1.0857923330021474e-07,
+          2.4587572076061707e-10
+        ],
+        [
+          -1.0857923330021474e-07,
+          2.913092469165106e-07,
+          -1.0852539247339338e-07
+        ],
+        [
+          2.4587572076061707e-10,
+          -1.0852539247339338e-07,
+          2.9097367102818914e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.03176113562696393,
+          -0.021715846660042948,
+          4.9175144152123414e-05
+        ],
+        [
+          -0.021715846660042948,
+          0.058261849383302124,
+          -0.021705078494678676
+        ],
+        [
+          4.9175144152123414e-05,
+          -0.021705078494678676,
+          0.05819473420563783
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 3.68,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": -4.662069341687669e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0008024294655916537,
+        "normalized_l2_periodic_grid_crosscheck": 0.000802429465591649,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0011644516676967748
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.42314421111997347,
+        "analytic_sup_value_bound": 0.310024826230537,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.36303165863786524,
+      "max_nodes": 12,
+      "mean_nodes": 1.17847,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07976056035393309,
+          0.05826156489424033,
+          0.05819516136321328
+        ],
+        "tree_value_mean": -0.0011435741902892324,
+        "tree_value_sample_variance": 0.058111479551185535,
+        "tree_value_second_moment": 0.058112496755716475
+      },
+      "projected_coefficients": [
+        0.2190880725476582,
+        -8.258441613556166e-05,
+        5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        0.0007974262484292454
+      ],
+      "projection_distortion_l2": 0.0007974262484292454,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-046.npz",
+        "scheduled_roots": 200000,
+        "sha256": "e56a6d48182c4c201d30f986368db3847b4b042be1153c3cda359e5ea771661b"
+      },
+      "raw_coefficients": [
+        0.2190880725476582,
+        -8.258441613556166e-05,
+        0.0008474262484292455
+      ],
+      "root_branch_count": 29470,
+      "root_branch_fraction": 0.14735,
+      "root_count": 200000,
+      "sampling_seconds": 0.0380558748729527,
+      "stage": 46,
+      "terminal_code_counts": [
+        170530,
+        2404,
+        28344,
+        1209,
+        1141,
+        48
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 235694
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.6032719058414648e-07,
+          -1.0932102667064492e-07,
+          1.2583417765070728e-09
+        ],
+        [
+          -1.0932102667064492e-07,
+          2.9321308397005493e-07,
+          -1.0931015810307443e-07
+        ],
+        [
+          1.2583417765070728e-09,
+          -1.0931015810307443e-07,
+          2.910634015613354e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.0320654381168293,
+          -0.021864205334128983,
+          0.00025166835530141457
+        ],
+        [
+          -0.021864205334128983,
+          0.058642616794010984,
+          -0.021862031620614886
+        ],
+        [
+          0.00025166835530141457,
+          -0.021862031620614886,
+          0.05821268031226708
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 3.7600000000000002,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": -3.903127820947816e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0016084449572730396,
+        "normalized_l2_periodic_grid_crosscheck": 0.0016084449572730357,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0017790411130353479
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.42806091092665044,
+        "analytic_sup_value_bound": 0.31164694272017435,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.36381750382371475,
+      "max_nodes": 12,
+      "mean_nodes": 1.17952,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.08025995198138917,
+          0.05864293951090181,
+          0.05821297284309399
+        ],
+        "tree_value_mean": -7.214471626792917e-05,
+        "tree_value_sample_variance": 0.0584271128679084,
+        "tree_value_second_moment": 0.05842682593720414
+      },
+      "projected_coefficients": [
+        0.2195328544700113,
+        -0.0007848120634795111,
+        5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        0.000713933392013448
+      ],
+      "projection_distortion_l2": 0.000713933392013448,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-047.npz",
+        "scheduled_roots": 200000,
+        "sha256": "495805442fa428eaaece176bd53d79d45e90cb4a9708031f06b3b7903d181160"
+      },
+      "raw_coefficients": [
+        0.2195328544700113,
+        -0.0007848120634795111,
+        0.000763933392013448
+      ],
+      "root_branch_count": 29438,
+      "root_branch_fraction": 0.14719,
+      "root_count": 200000,
+      "sampling_seconds": 0.041904374957084656,
+      "stage": 47,
+      "terminal_code_counts": [
+        170562,
+        2468,
+        28300,
+        1254,
+        1167,
+        61
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 235904
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.607321429878077e-07,
+          -1.0895190991456486e-07,
+          -3.7377341662035677e-10
+        ],
+        [
+          -1.0895190991456486e-07,
+          2.919030435843002e-07,
+          -1.0850233014288851e-07
+        ],
+        [
+          -3.7377341662035677e-10,
+          -1.0850233014288851e-07,
+          2.930005069258392e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.03214642859756154,
+          -0.02179038198291297,
+          -7.475468332407135e-05
+        ],
+        [
+          -0.02179038198291297,
+          0.058380608716860044,
+          -0.0217004660285777
+        ],
+        [
+          -7.475468332407135e-05,
+          -0.0217004660285777,
+          0.058600101385167844
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 3.84,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": -6.505213034913027e-19,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.000410688989012539,
+        "normalized_l2_periodic_grid_crosscheck": 0.00041068898901253835,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.000763471668229071
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.42680546429880767,
+        "analytic_sup_value_bound": 0.31113731722323706,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.36572107512247415,
+      "max_nodes": 12,
+      "mean_nodes": 1.180445,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.08024668141442397,
+          0.058380725444260054,
+          0.058600222446350575
+        ],
+        "tree_value_mean": 0.0001674852171708931,
+        "tree_value_sample_variance": 0.05853310263574682,
+        "tree_value_second_moment": 0.058532838021531614
+      },
+      "projected_coefficients": [
+        0.2193180648031591,
+        0.0006392420855817952,
+        -5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        -0.0005934762539311986
+      ],
+      "projection_distortion_l2": 0.0005934762539311986,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-048.npz",
+        "scheduled_roots": 200000,
+        "sha256": "50eba7c423786780d57e70323328bf79e0d6bbabc11b2544444fdbef06c4849c"
+      },
+      "raw_coefficients": [
+        0.2193180648031591,
+        0.0006392420855817952,
+        -0.0006434762539311986
+      ],
+      "root_branch_count": 29603,
+      "root_branch_fraction": 0.148015,
+      "root_count": 200000,
+      "sampling_seconds": 0.03852066583931446,
+      "stage": 48,
+      "terminal_code_counts": [
+        170397,
+        2472,
+        28473,
+        1241,
+        1184,
+        61
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 236089
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.5984805157028295e-07,
+          -1.0853513418116545e-07,
+          5.040654441915785e-10
+        ],
+        [
+          -1.0853513418116545e-07,
+          2.923248496268754e-07,
+          -1.0758883903330843e-07
+        ],
+        [
+          5.040654441915785e-10,
+          -1.0758883903330843e-07,
+          2.920624191747462e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.03196961031405659,
+          -0.02170702683623309,
+          0.0001008130888383157
+        ],
+        [
+          -0.02170702683623309,
+          0.05846496992537508,
+          -0.021517767806661686
+        ],
+        [
+          0.0001008130888383157,
+          -0.021517767806661686,
+          0.05841248383494924
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 3.92,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": -4.445228907190568e-18,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0006612355305980215,
+        "normalized_l2_periodic_grid_crosscheck": 0.0006612355305980171,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.001484613006778914
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.422429853087536,
+        "analytic_sup_value_bound": 0.3093835643108263,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.3628352987077208,
+      "max_nodes": 13,
+      "mean_nodes": 1.180735,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07975246619481267,
+          0.05846469296432485,
+          0.05841396686736171
+        ],
+        "tree_value_mean": -4.87742769835808e-05,
+        "tree_value_sample_variance": 0.058275800260737955,
+        "tree_value_second_moment": 0.058275511260666754
+      },
+      "projected_coefficients": [
+        0.21859326551568353,
+        0.00012395079616607052,
+        5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        0.0012823268484668956
+      ],
+      "projection_distortion_l2": 0.0012823268484668956,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-049.npz",
+        "scheduled_roots": 200000,
+        "sha256": "717ee12897df341516f357dc956f509502e99b3c7e190de930eca20a77e8101b"
+      },
+      "raw_coefficients": [
+        0.21859326551568353,
+        0.00012395079616607052,
+        0.0013323268484668955
+      ],
+      "root_branch_count": 29695,
+      "root_branch_fraction": 0.148475,
+      "root_count": 200000,
+      "sampling_seconds": 0.03884604200720787,
+      "stage": 49,
+      "terminal_code_counts": [
+        170305,
+        2408,
+        28588,
+        1290,
+        1124,
+        63
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 236147
+    },
+    {
+      "coefficient_estimator_covariance": [
+        [
+          1.588516345937044e-07,
+          -1.0711855922878577e-07,
+          -1.294647026973372e-10
+        ],
+        [
+          -1.0711855922878577e-07,
+          2.901180666782985e-07,
+          -1.083517891264062e-07
+        ],
+        [
+          -1.294647026973372e-10,
+          -1.083517891264062e-07,
+          2.9042765823592553e-07
+        ]
+      ],
+      "coefficient_observation_covariance": [
+        [
+          0.03177032691874088,
+          -0.021423711845757153,
+          -2.5892940539467437e-05
+        ],
+        [
+          -0.021423711845757153,
+          0.0580236133356597,
+          -0.02167035782528124
+        ],
+        [
+          -2.5892940539467437e-05,
+          -0.02167035782528124,
+          0.05808553164718511
+        ]
+      ],
+      "complete": true,
+      "elapsed_time": 4.0,
+      "error": {
+        "exact_tail_squared": 5.1686279568620035e-17,
+        "grid_crosscheck_minus_exact_fourier": -8.673617379884035e-19,
+        "grid_points": 16384,
+        "normalized_l2_exact_fourier_plus_tail": 0.0006885325413671547,
+        "normalized_l2_periodic_grid_crosscheck": 0.0006885325413671539,
+        "normalized_l2_raw_coefficients_exact_fourier_plus_tail": 0.0007856128523768842
+      },
+      "interface_bounds": {
+        "analytic_sup_derivative_bound": 0.4252980995623038,
+        "analytic_sup_value_bound": 0.309742656442629,
+        "derivative_admissible_lt_0p5": true,
+        "value_admissible_lt_0p4": true
+      },
+      "local_tree_estimator_is_unbiased_conditional_on_frozen_interface": true,
+      "max_absolute_tree_value": 0.3626535596543213,
+      "max_nodes": 11,
+      "mean_nodes": 1.180905,
+      "moments": {
+        "coefficient_observation_second_moments": [
+          0.07939446537994724,
+          0.05802387261627482,
+          0.05808538535149032
+        ],
+        "tree_value_mean": -0.00011175671562146942,
+        "tree_value_sample_variance": 0.057965638712595316,
+        "tree_value_second_moment": 0.057965361373965234
+      },
+      "projected_coefficients": [
+        0.2182299184640829,
+        0.0007412143292350909,
+        -5e-05
+      ],
+      "projection_difference_raw_minus_projected": [
+        0.0,
+        0.0,
+        -0.00032964715661197206
+      ],
+      "projection_distortion_l2": 0.00032964715661197206,
+      "projection_is_biased_interface_step": true,
+      "projection_mask": [
+        false,
+        false,
+        true
+      ],
+      "raw_archive": {
+        "complete": true,
+        "completed_roots": 200000,
+        "path": "slab-seed-2026092703-stage-050.npz",
+        "scheduled_roots": 200000,
+        "sha256": "d7c689fcbc9b2bfa390d68f058181a485035bf0f99b7c75c5047457537205b43"
+      },
+      "raw_coefficients": [
+        0.2182299184640829,
+        0.0007412143292350909,
+        -0.0003796471566119721
+      ],
+      "root_branch_count": 29765,
+      "root_branch_fraction": 0.148825,
+      "root_count": 200000,
+      "sampling_seconds": 0.0451751253567636,
+      "stage": 50,
+      "terminal_code_counts": [
+        170235,
+        2496,
+        28607,
+        1221,
+        1176,
+        64
+      ],
+      "terminal_code_order": [
+        "Id",
+        "Dx",
+        "F0",
+        "F1",
+        "F2",
+        "F3"
+      ],
+      "terminal_source": "frozen_previous_projected_coefficients",
+      "total_nodes": 236181
+    }
+  ],
+  "mode": "slab",
+  "n_roots_per_stage": 200000,
+  "scheduled_stages": 50,
+  "schema_version": 1,
+  "seed": 2026092703,
+  "slab_h": 0.08,
+  "status": "complete"
+}
