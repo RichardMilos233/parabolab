@@ -86,8 +86,10 @@ def test_compare_rate_variance_table_and_plot(tmp_path):
     )
 
     comp = compare_rate_variance(s1, s2)
-    # Check chaining table and plot
+    # Check chaining table and plot with save_individual
     out_comp = tmp_path / "comp.png"
-    comp.table().plot(path=out_comp)
+    comp.table().plot(path=out_comp, save_individual=True)
 
     assert out_comp.exists() and out_comp.stat().st_size > 0
+    indiv_files = list(tmp_path.glob("comp_*.png"))
+    assert len(indiv_files) == 2
