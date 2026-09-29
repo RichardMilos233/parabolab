@@ -1,0 +1,37 @@
+{
+  "actual_pde_solution_computed": false,
+  "actual_point_calls": 655633,
+  "artifact_version": "v2",
+  "bump_value_tests_passed": 204,
+  "bump_value_tests_total": 204,
+  "completed_utc": "2026-09-28T16:16:22.834143+00:00",
+  "constant_tests_passed": 9,
+  "cross_version_charged_calls_after_preflight": 1311266,
+  "evidence_sha256": {
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/preflight_activity.jsonl": "b4a6be135dd3bfa73a9e66164b301bc025d0c38c6da44eb11b51d94dc20a38b1",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/preflight_journal.jsonl": "1d8d2df39aabe6a02fbf94732fd25d41be22fcd1b4cca8aaba97a6f3074a1e4d"
+  },
+  "expected_point_calls": 655633,
+  "implementation_source_sha256": "81eb2b122d325eca97d144adc00380114558c5ad35a830d9d4062fa95f63df08",
+  "independent_replay_executed": false,
+  "manifest_sha256": "9417c6dc18b3c761ee7cdf38c4cc8ececbfc048c0869b0fea5b96acaaae47bd5",
+  "official_design_recalculation_passed": true,
+  "official_run_executed": false,
+  "psi_tests_passed": 8,
+  "psi_tests_total": 8,
+  "reference_crosschecks_passed": 12,
+  "reference_crosschecks_total": 12,
+  "schema_version": 1,
+  "status": "PASS",
+  "timing_measurements_seconds": {
+    "diagnostic_journal_jsonl_serialization": 0.01172829233109951,
+    "diagnostics_raw_wall_before_result_write": 0.08046970888972282,
+    "interpretation": "raw wall durations overlap measured serialization counters; estimator records subtract only measured ledger accounting and are not exact pure-compute certificates",
+    "ledger_accounting": 0.008117381948977709,
+    "ledger_jsonl_serialization": 0.0075147864408791065,
+    "run_log_serialization_before_result_write": 0.0009087920188903809,
+    "setup_before_diagnostics": 0.536794625222683
+  },
+  "underflow_to_zero_count": 31,
+  "wrapped_replay_passed": true
+}

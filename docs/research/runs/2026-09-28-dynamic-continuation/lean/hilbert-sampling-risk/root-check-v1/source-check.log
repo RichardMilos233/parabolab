@@ -1,0 +1,84 @@
+command=["/Users/michael/.elan/bin/lake", "env", "lean", "-DautoImplicit=false", "EstimatorIntegrity/HilbertSamplingRisk.lean"]
+cwd=/Users/michael/Desktop/NTU/fyp/parabolab/formal
+started_utc=2026-09-28T20:38:39.705829+00:00
+source_sha256=0cef39d33c11dd113b1ee2d60059485b214fd7ffd9e4fbe68e21709de2b2487c
+stdout_stderr_begin
+EstimatorIntegrity/HilbertSamplingRisk.lean:48:0: warning: automatically included section variable(s) unused in theorem `EstimatorIntegrity.HilbertSamplingRisk.sample_integrable`:
+  [InnerProductSpace ℝ H]
+  [CompleteSpace H]
+  [MeasurableSpace H]
+  [BorelSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [InnerProductSpace ℝ H] [CompleteSpace H] [MeasurableSpace H] [BorelSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:53:0: warning: automatically included section variable(s) unused in theorem `EstimatorIntegrity.HilbertSamplingRisk.centered_memLp`:
+  [CompleteSpace H]
+  [MeasurableSpace H]
+  [BorelSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] [MeasurableSpace H] [BorelSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:66:0: warning: automatically included section variable(s) unused in theorem `EstimatorIntegrity.HilbertSamplingRisk.sample_sqNorm_integrable`:
+  [InnerProductSpace ℝ H]
+  [CompleteSpace H]
+  [MeasurableSpace H]
+  [BorelSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [InnerProductSpace ℝ H] [CompleteSpace H] [MeasurableSpace H] [BorelSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:70:0: warning: automatically included section variable(s) unused in theorem `EstimatorIntegrity.HilbertSamplingRisk.integral_centered`:
+  [MeasurableSpace H]
+  [BorelSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [MeasurableSpace H] [BorelSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:77:0: warning: automatically included section variable(s) unused in theorem `EstimatorIntegrity.HilbertSamplingRisk.sampleMean_memLp`:
+  [CompleteSpace H]
+  [MeasurableSpace H]
+  [BorelSpace H]
+  [IsProbabilityMeasure μ]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] [MeasurableSpace H] [BorelSpace H] [IsProbabilityMeasure μ] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:99:0: warning: automatically included section variable(s) unused in theorem `EstimatorIntegrity.HilbertSamplingRisk.sampleMean_sub_meanAverage`:
+  [CompleteSpace H]
+  [MeasurableSpace H]
+  [BorelSpace H]
+  [IsProbabilityMeasure μ]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] [MeasurableSpace H] [BorelSpace H] [IsProbabilityMeasure μ] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:118:0: warning: automatically included section variable(s) unused in theorem `EstimatorIntegrity.HilbertSamplingRisk.centered_indep`:
+  [CompleteSpace H]
+  [IsProbabilityMeasure μ]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] [IsProbabilityMeasure μ] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:299:0: warning: automatically included section variable(s) unused in theorem `EstimatorIntegrity.HilbertSamplingRisk.norm_sum_sq_le_card_mul_sum_norm_sq`:
+  [InnerProductSpace ℝ H]
+  [CompleteSpace H]
+  [MeasurableSpace H]
+  [BorelSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [InnerProductSpace ℝ H] [CompleteSpace H] [MeasurableSpace H] [BorelSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:321:0: warning: automatically included section variable(s) unused in theorem `EstimatorIntegrity.HilbertSamplingRisk.rawEstimator_sub_eq`:
+  [MeasurableSpace Ω]
+  [CompleteSpace H]
+  [MeasurableSpace H]
+  [BorelSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [MeasurableSpace Ω] [CompleteSpace H] [MeasurableSpace H] [BorelSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+stdout_stderr_end
+exit_code=0
+elapsed_seconds=77.0361312078312

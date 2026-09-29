@@ -1,0 +1,6 @@
+import EstimatorIntegrity.CriticalMomentWork
+
+#print axioms EstimatorIntegrity.criticalMomentWork_integrable_and_sq_le
+#print axioms EstimatorIntegrity.criticalExponent_lt_iff
+#print axioms EstimatorIntegrity.criticalExponent_eq_iff
+#print axioms EstimatorIntegrity.criticalExponent_alpha_one_p_two

@@ -1,0 +1,73 @@
+label: third-direct-check
+started_utc: 2026-09-28T20:09:47Z
+cwd: /Users/michael/Desktop/NTU/fyp/parabolab/formal
+source_sha256: 5c8f9836662033d7401ebcc892396103d3fc768bb48b31cdacbe103552d139dd
+command: /Users/michael/.elan/bin/lake env lean EstimatorIntegrity/HilbertSamplingRisk.lean
+--- stdout+stderr ---
+EstimatorIntegrity/HilbertSamplingRisk.lean:48:0: warning: automatically included section variable(s) unused in theorem `EstimatorIntegrity.HilbertSamplingRisk.sample_integrable`:
+  [InnerProductSpace ℝ H]
+  [CompleteSpace H]
+  [MeasurableSpace H]
+  [BorelSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [InnerProductSpace ℝ H] [CompleteSpace H] [MeasurableSpace H] [BorelSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:53:0: warning: automatically included section variable(s) unused in theorem `EstimatorIntegrity.HilbertSamplingRisk.centered_memLp`:
+  [CompleteSpace H]
+  [MeasurableSpace H]
+  [BorelSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] [MeasurableSpace H] [BorelSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:66:0: warning: automatically included section variable(s) unused in theorem `EstimatorIntegrity.HilbertSamplingRisk.sample_sqNorm_integrable`:
+  [InnerProductSpace ℝ H]
+  [CompleteSpace H]
+  [MeasurableSpace H]
+  [BorelSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [InnerProductSpace ℝ H] [CompleteSpace H] [MeasurableSpace H] [BorelSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:70:0: warning: automatically included section variable(s) unused in theorem `EstimatorIntegrity.HilbertSamplingRisk.integral_centered`:
+  [MeasurableSpace H]
+  [BorelSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [MeasurableSpace H] [BorelSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:83:2: error: Type mismatch: After simplification, term
+  hsum
+ has type
+  MemLp ((1 / ↑n) • ∑ i, Y i) 2 μ
+but is expected to have type
+  MemLp (fun ω => (1 / ↑n) • ∑ i, Y i ω) 2 μ
+EstimatorIntegrity/HilbertSamplingRisk.lean:99:0: warning: automatically included section variable(s) unused in theorem `EstimatorIntegrity.HilbertSamplingRisk.sampleMean_sub_meanAverage`:
+  [CompleteSpace H]
+  [MeasurableSpace H]
+  [BorelSpace H]
+  [IsProbabilityMeasure μ]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] [MeasurableSpace H] [BorelSpace H] [IsProbabilityMeasure μ] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:118:0: warning: automatically included section variable(s) unused in theorem `EstimatorIntegrity.HilbertSamplingRisk.centered_indep`:
+  [CompleteSpace H]
+  [IsProbabilityMeasure μ]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] [IsProbabilityMeasure μ] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:151:10: warning: This simp argument is unused:
+  real_inner_self_eq_norm_sq
+
+Hint: Omit it from the simp argument list.
+  [apply] simp
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:222:8: warning: declaration uses `sorry`
+EstimatorIntegrity/HilbertSamplingRisk.lean:228:8: warning: declaration uses `sorry`
+--- end stdout+stderr ---
+exit_code: 1
+finished_utc: 2026-09-28T20:11:28Z

@@ -1,0 +1,63 @@
+{
+  "boolean_arrays_checked": 648,
+  "clock_archives": 3,
+  "clock_observations": 300000,
+  "coefficient_limit_substitution_true_count": 0,
+  "count_arrays_checked": 4524,
+  "created_utc": "2026-09-28T10:03:11.235754+00:00",
+  "failure_count": 0,
+  "failures": [],
+  "interpretation": {
+    "all_count_fields_require_integer_dtype_and_nonnegative_values": true,
+    "boolean_flags_checked_separately": true,
+    "mutates_raw_evidence": false,
+    "part_of_original_992_checks": false,
+    "zero_redraws_upper_bound_imposed": false
+  },
+  "manifest_sha256": "3e3f80d1fbaffd7fe3ffb62ab45cb15e28022381fc324a085d4d9a00ffd06947",
+  "observed_dtypes": {
+    "binary_internal": [
+      "int64"
+    ],
+    "clock.is_leaf": [
+      "bool"
+    ],
+    "clock.proposals": [
+      "int64"
+    ],
+    "clock.rejections": [
+      "int64"
+    ],
+    "clock.zero_redraws": [
+      "int64"
+    ],
+    "clock_proposals": [
+      "int64"
+    ],
+    "clock_rejections": [
+      "int64"
+    ],
+    "coefficient_limit_substitution": [
+      "bool"
+    ],
+    "leaves": [
+      "int64"
+    ],
+    "nodes": [
+      "int64"
+    ],
+    "ternary_internal": [
+      "int64"
+    ],
+    "zero_redraws": [
+      "int64"
+    ]
+  },
+  "raw_input_count": 648,
+  "root_archives": 645,
+  "root_observations": 731792,
+  "schema_version": 1,
+  "source_sha256": "9a74bb4b94bc101ed1b82f730d0458fd940ed00dd28e901e335a6183f7eaf89a",
+  "status": "PASS",
+  "zero_redraw_maximum": 0
+}

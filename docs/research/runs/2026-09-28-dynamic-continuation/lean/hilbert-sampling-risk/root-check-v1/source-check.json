@@ -1,0 +1,16 @@
+{
+  "command": [
+    "/Users/michael/.elan/bin/lake",
+    "env",
+    "lean",
+    "-DautoImplicit=false",
+    "EstimatorIntegrity/HilbertSamplingRisk.lean"
+  ],
+  "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab/formal",
+  "start_utc": "2026-09-28T20:38:39.705829+00:00",
+  "source_sha256_before": "0cef39d33c11dd113b1ee2d60059485b214fd7ffd9e4fbe68e21709de2b2487c",
+  "source_sha256_after": "0cef39d33c11dd113b1ee2d60059485b214fd7ffd9e4fbe68e21709de2b2487c",
+  "exit_code": 0,
+  "elapsed_seconds": 77.0361312078312,
+  "log_sha256": "d0249545fd299236d95a9788f59eb0a07a547fdf94bb9b0c731e6016b4f08443"
+}

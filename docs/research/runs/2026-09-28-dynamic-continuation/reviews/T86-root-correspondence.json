@@ -1,0 +1,104 @@
+{
+  "date_local": "2026-09-29",
+  "verdict": "PASS fixed05l only",
+  "source": {
+    "path": "formal/EstimatorIntegrity/UniformSliceConditioning.lean",
+    "sha256": "d50bd7145685480ab802270d4a5eae623205b373b70c1158b30cdbef50fd80fe",
+    "lines": 658
+  },
+  "contract": {
+    "path": "05l-uniform-slice-conditioning-lean-contract.md",
+    "sha256": "2a0dbaa3243d25dbd08db19af195996ec7fa31902f855e21586828a71620098a"
+  },
+  "report": {
+    "path": "06n-uniform-slice-conditioning-lean.md",
+    "sha256": "af6c63d6a6ed82180d68155d4b7047277dd440a2d23d651501abde46b98cc377"
+  },
+  "root_review": "Read complete618-line original implementation then all40 added singleton/endpoint lines, full fixed05l, final report, public types and axioms, capture harness, failure summary and environment. Actual uniform PMF, event normalized restriction, compatible counting, actual pushforward, endpoints, feasibility, natural subtraction, strict reference range, actual finite klDiv/toReal match. No material mathematical weakening.",
+  "worker_library_build": "3403 jobs;67 seconds; exit0, style/unused/deprecation warnings only; directly captured by Capture.zsh",
+  "manifest": {
+    "entries_verified": 14,
+    "sha256": "6828948a9ce80d36aee82095a316aa48367514ff882f086b27d88059eea74715",
+    "mismatches": []
+  },
+  "root_fresh_source_check": {
+    "command": [
+      "/Users/michael/.elan/bin/lake",
+      "env",
+      "lean",
+      "-DautoImplicit=false",
+      "EstimatorIntegrity/UniformSliceConditioning.lean"
+    ],
+    "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab/formal",
+    "started_utc": "2026-09-28T20:16:36.287335+00:00",
+    "exit_code": 0,
+    "elapsed_seconds": 62.96576241683215,
+    "capture": "direct stdout+stderr at execution",
+    "source_sha256_before": "d50bd7145685480ab802270d4a5eae623205b373b70c1158b30cdbef50fd80fe",
+    "source_sha256_after": "d50bd7145685480ab802270d4a5eae623205b373b70c1158b30cdbef50fd80fe",
+    "log_sha256": "6a0326ecd5b533714db8aed691692693c4f4559d60cc7fc2adac86f9ac07b821"
+  },
+  "root_public_audits": {
+    "manifest_entries_verified": 14,
+    "public_declarations": 28,
+    "source_and_inventory_equal": true,
+    "forbidden_source_scan": [],
+    "audits": [
+      {
+        "name": "Axioms",
+        "command": [
+          "/Users/michael/.elan/bin/lake",
+          "env",
+          "lean",
+          "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/uniform-slice-conditioning/Axioms.lean"
+        ],
+        "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab/formal",
+        "started_utc": "2026-09-28T20:17:11.419362+00:00",
+        "exit_code": 0,
+        "capture": "direct subprocess stdout and stderr",
+        "log_sha256": "727c9dba44275249545b080a39334fcb0390c629937e23800cf66e91e3dbb656",
+        "matches_worker_body_excluding_command_headers": true
+      },
+      {
+        "name": "Declarations",
+        "command": [
+          "/Users/michael/.elan/bin/lake",
+          "env",
+          "lean",
+          "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/uniform-slice-conditioning/Declarations.lean"
+        ],
+        "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab/formal",
+        "started_utc": "2026-09-28T20:17:11.419856+00:00",
+        "exit_code": 0,
+        "capture": "direct subprocess stdout and stderr",
+        "log_sha256": "4648a432e849e6fcf218db171b3e0548f0e9405712c0e928575a90ebff663d16",
+        "matches_worker_body_excluding_command_headers": true
+      }
+    ]
+  },
+  "axioms": {
+    "public_declarations": 28,
+    "source_inventory_equal": true,
+    "only": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "forbidden_source_scan": []
+  },
+  "provenance": "Worker successful build/audit/environment logs directly captured with command/cwd/exit. Worker failure list is explicitly retrospective and does not retain every failed raw stream. Root new direct process capture adds timestamp/hash/source re-elaboration; public outputs byte-match worker bodies after excluding command headers.",
+  "accepted": [
+    "Actual uniform fixed-cardinality prior with exact singleton masses",
+    "Actual positive event mass and normalized restriction equals uniform compatible law",
+    "Actual unrevealed membership pushforward is Bernoulli r/m including explicit true-mass0/1 endpoints",
+    "Two-slice feasibility/reference bounds and actual finite KL<=64ell²/(3K²)"
+  ],
+  "outside_scope": [
+    "Adaptive histories and seed simulation",
+    "Full n-step chain/padding/random stopping",
+    "Slice martingale concentration and MSE-to-testing composition",
+    "PDE and full minimax theorem",
+    "Code runtime and numerical evidence"
+  ],
+  "oracle_calls_added": 0
+}

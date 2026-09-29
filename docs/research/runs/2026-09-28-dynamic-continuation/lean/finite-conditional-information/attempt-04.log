@@ -1,0 +1,22 @@
+T72 development attempt 04
+
+Command:
+  cd formal
+  ~/.elan/bin/lake env lean /tmp/FiniteScratch.lean
+
+Result: FAIL (exit 1).
+
+The averaging, finiteness, uniform-bound, and chain-rule declarations already
+compiled. The Bool pushforward helper failed first because the singleton-real
+extensionality alias is namespaced as
+`Measure.ext_of_measureReal_singleton`, not
+`MeasureTheory.ext_of_measureReal_singleton`. After correcting that name, the
+`true` branch left the set equality
+
+```text
+D ⁻¹' {true} = {omega | D omega = true}.
+```
+
+Fix: use the correct measure namespace, rewrite through `measureReal_def`, and
+close the definitionally equivalent set expressions by congruence. The false
+branch uses the measurable complement identity and `measureReal_compl`.

@@ -1,0 +1,7 @@
+Command: ~/.elan/bin/lake build EstimatorIntegrity.CriticalMomentWork
+Working directory: formal
+Lean toolchain: leanprover/lean4:v4.33.0
+Exit status: 0
+
+✔ [3396/3396] Built EstimatorIntegrity.CriticalMomentWork (74s)
+Build completed successfully (3396 jobs).

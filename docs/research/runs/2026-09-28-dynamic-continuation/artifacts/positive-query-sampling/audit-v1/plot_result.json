@@ -1,0 +1,30 @@
+{
+  "completed_utc": "2026-09-28T17:13:51.682010+00:00",
+  "layout_qc": "Initial render was visually inspected; title/legend overlap was corrected in this zero-oracle-call rerender.",
+  "oracle_calls": 0,
+  "per_seed_and_pool_distinction": "Open markers are per-seed RMS/query points; solid markers and lines are pooled RMS/query budgets.",
+  "plotting_wall_seconds": 0.9008251670747995,
+  "png_sha256": "3c18c54eb64f89473cafef04760a2fb6ea2edba8371c353cc1f9a481daebef2f",
+  "query_budget_visibility": "Right column shows actual n per output including zero-query baselines; legends show R per seed.",
+  "reference_scope": "Left column uses the binary64 scalar surrogate. Whiskers show only the conventional \u00b11/32 PDE-bias interpretation.",
+  "replay_gate_sha256": "788394e129bebda45608a926b118cc405e515f2986f60a3acc7992713ea3ed2e",
+  "schema_version": 1,
+  "source_statistics_sha256": "f1f48b74996543a9f7de1aca6c0ffedbb54e34d251d046aa820b0cf9cea5f2da",
+  "status": "PASS",
+  "superseded_initial_render_hashes": {
+    "png_sha256": "38b8d0eabd2a03a6466e2e3c7a737b58823b3e5045c22686ab517ba08b5c6f8e",
+    "svg_sha256": "a6e481d6f147fea34f3aab94c6ac3de6241b6126213c4ae33c82a69c0a1040b3"
+  },
+  "svg_sha256": "6832d357371ff8e6f86557746c13ccfc279ba9a386072830aedd1f049f279849",
+  "timing_interpretation": "Wall time includes rendering and file serialization; no pure-compute claim.",
+  "visible_series": [
+    "growing_0p125",
+    "growing_0p5",
+    "growing_2",
+    "theorem_96",
+    "fixed_51",
+    "constant_0",
+    "constant_0.5",
+    "constant_1"
+  ]
+}

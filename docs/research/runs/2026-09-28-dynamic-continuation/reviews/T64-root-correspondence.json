@@ -1,0 +1,25 @@
+{
+  "reviewer": "root",
+  "completed_utc": "2026-09-28T17:04:17.743648+00:00",
+  "status": "PASS; D28 conventional all-dimension signed lower accepted",
+  "read_scope": "Complete T61 author proof previously root-read; full 491-line final T64 independent audit read this turn, frozen hashes rechecked.",
+  "inputs_sha256": {
+    "reviews/T61-all-dimension-lower-proof.md": "404a237be72991ac60efb97c48b5ba2347384b0a30ffe3a98219a74d1604d691",
+    "reviews/T64-all-dimension-lower-independent-audit.md": "07723a9f4fa3a6725b51431e773bc85a4ff8800ea5ac751cb66dd4b7eb24b8dc",
+    "reviews/R04-signed-all-dimension-lower-candidate.md": "2bc5129ec4b9da882d7b16543d03f0bc8f34989cc02f9b9a65c5e805c1f4ae75",
+    "04u-all-dimension-signed-query-lower-bound.md": "6587b4ba1b30a904bb6b336d8ca22917baad12f7db26627ca313aef632d94117"
+  },
+  "accepted_scope": "For every fixed integers d,s>=1 on normalized unit torus, uniform RMS<=1/4 implies finite-prior average and worst-input expected exact initial point queries Omega(exp(2dT/(2s+d))) for every sufficiently large T. Prior independent of algorithm; expensive member may depend on T and algorithm.",
+  "excluded_scope": [
+    "all-dimension matching upper",
+    "common expensive baseline",
+    "single fixed hard input",
+    "common dominating third-derivative measure",
+    "end-to-end Lean",
+    "numerical evidence for signed theorem",
+    "runtime or bit complexity",
+    "novelty or prize conclusion"
+  ],
+  "new_mechanism": "Direct one-marked-L1 phase derivative estimate; single-cell sensitivity and full-layer concentration; PDE-bad probability paid without conditioning; actual adaptive urn KL and expected-cost truncation.",
+  "protected_sources_verified_in_same_turn": 342
+}

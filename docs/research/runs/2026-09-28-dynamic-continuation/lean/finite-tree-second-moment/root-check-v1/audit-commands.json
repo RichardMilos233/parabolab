@@ -1,0 +1,31 @@
+{
+  "capture": "direct process stdout and stderr bytes",
+  "results": [
+    {
+      "name": "Axioms",
+      "command": [
+        "/Users/michael/.elan/bin/lake",
+        "env",
+        "lean",
+        "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-tree-second-moment/Axioms.lean"
+      ],
+      "exit_code": 0,
+      "log_sha256": "761f7dc20e5913eddad36baaab32ea919c960094bda66cd6aa9828fa14c6874f",
+      "matches_prior_log": true
+    },
+    {
+      "name": "Declarations",
+      "command": [
+        "/Users/michael/.elan/bin/lake",
+        "env",
+        "lean",
+        "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-tree-second-moment/Declarations.lean"
+      ],
+      "exit_code": 0,
+      "log_sha256": "1252cca4cfac909f4d185ae35572bcf5dd369d0cfd5f153bda2dee3c46d93fe3",
+      "matches_prior_log": true
+    }
+  ],
+  "public_axioms_count": 27,
+  "all_standard_axioms": true
+}

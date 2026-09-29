@@ -1,0 +1,32 @@
+import EstimatorIntegrity.UniformSliceConditioning
+
+set_option autoImplicit false
+
+#check @EstimatorIntegrity.sliceFamily
+#check @EstimatorIntegrity.uniformSlice
+#check @EstimatorIntegrity.uniformSlice_isProbabilityMeasure
+#check @EstimatorIntegrity.uniformSlice_singleton
+#check @EstimatorIntegrity.compatibleEvent
+#check @EstimatorIntegrity.compatibleFamily
+#check @EstimatorIntegrity.mem_sliceFamily
+#check @EstimatorIntegrity.mem_compatibleFamily
+#check @EstimatorIntegrity.compatibleFamily_eq_filter_sdiff
+#check @EstimatorIntegrity.compatibleFamily_card
+#check @EstimatorIntegrity.conditionedSlice
+#check @EstimatorIntegrity.uniformSlice_compatibleEvent
+#check @EstimatorIntegrity.uniformSlice_compatibleEvent_pos
+#check @EstimatorIntegrity.conditionedSlice_eq_uniformCompatible
+#check @EstimatorIntegrity.conditionedSlice_isProbabilityMeasure
+#check @EstimatorIntegrity.unrevealedSet
+#check @EstimatorIntegrity.nextBit
+#check @EstimatorIntegrity.measurable_nextBit
+#check @EstimatorIntegrity.sliceParameter
+#check @EstimatorIntegrity.sliceRatio_le
+#check @EstimatorIntegrity.conditionedSlice_next_true
+#check @EstimatorIntegrity.conditionedSlice_next_true_zero
+#check @EstimatorIntegrity.conditionedSlice_next_true_one
+#check @EstimatorIntegrity.conditionedSlice_map_nextBit
+#check @EstimatorIntegrity.twoSlice_feasible
+#check @EstimatorIntegrity.twoSlice_ratio_bounds
+#check @EstimatorIntegrity.twoSlice_next_kl_ne_top
+#check @EstimatorIntegrity.twoSlice_next_kl_toReal_le

@@ -1,0 +1,40 @@
+{
+  "T": 16,
+  "arrays_sha256": "eebd64f68e97e3d103d3110841800e86f6f1aa2ea137ae58136c5d4cad655c2a",
+  "cell": "seed-02_T-01_z-02_schedule-04",
+  "journal_sha256": "3ef2b0c4f4bb4d1cba6c16c4c02a1fe8201f1d98064542645fbf8e3bb47bed12",
+  "n": 51,
+  "nominal_z": 1.0,
+  "reference_primary": {
+    "mass_100_digits": "0.0000001125351747192591272332124408077169627477787222283205905652591331488551390044306209016464965132789535",
+    "psi_100_digits": "0.7071067811865475643616848863936099321125777598443816391940918530262568332803962855308390402125188065",
+    "psi_binary64": {
+      "decimal": "0.7071067811865476",
+      "hex": "0x1.6a09e667f3bcdp-1",
+      "integer_ratio": [
+        6369051672525773,
+        9007199254740992
+      ]
+    },
+    "z_h_100_digits": "1.000000000000000113026325266555105189969125814157836249199821470021161250053984147148536301369886813"
+  },
+  "repetitions": 128,
+  "schedule": "fixed_51",
+  "seed_root": 20260930,
+  "status": "PASS",
+  "timing_measurements_seconds": {
+    "interpretation": "measured subtraction of ledger accounting only; not an exact pure-compute certificate",
+    "measured_estimator_calls_excluding_ledger_accounting": 0.0021363352425396442,
+    "measured_ledger_accounting_during_estimator_calls": 0.004789831582456827,
+    "raw_inclusive_estimator_calls": 0.006926166824996471,
+    "replicate_journal_jsonl_serialization": 0.006340960972011089
+  },
+  "width": {
+    "decimal": "0.011316596976814452",
+    "hex": "0x1.72d27ef56e5d3p-7",
+    "integer_ratio": [
+      6523574006769107,
+      576460752303423488
+    ]
+  }
+}

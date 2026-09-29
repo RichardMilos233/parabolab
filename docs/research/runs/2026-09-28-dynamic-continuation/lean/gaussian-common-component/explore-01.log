@@ -1,0 +1,126 @@
+started_utc=2026-09-28T20:32:31Z
+cwd=/Users/michael/Desktop/NTU/fyp/parabolab/formal
+command=/Users/michael/.elan/bin/lake env lean /Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/gaussian-common-component/Explore.lean 
+stdout_stderr_begin
+ProbabilityTheory.HasGaussianLaw.eval.{u_1, u_4, u_5} {Ω : Type u_1} {ι : Type u_4} {mΩ : MeasurableSpace Ω}
+  {P : Measure Ω} {E : ι → Type u_5} [(i : ι) → NormedAddCommGroup (E i)] [(i : ι) → NormedSpace ℝ (E i)]
+  [(i : ι) → MeasurableSpace (E i)] [∀ (i : ι), BorelSpace (E i)] {X : (i : ι) → Ω → E i}
+  (hX : HasGaussianLaw (fun ω x => X x ω) P) (i : ι) : HasGaussianLaw (X i) P
+ProbabilityTheory.HasGaussianLaw.sum.{u_1, u_4, u_6} {Ω : Type u_1} {ι : Type u_4} {mΩ : MeasurableSpace Ω}
+  {P : Measure Ω} [Fintype ι] {E : Type u_6} [NormedAddCommGroup E] [NormedSpace ℝ E] [MeasurableSpace E] [BorelSpace E]
+  [SecondCountableTopology E] {X : ι → Ω → E} (hX : HasGaussianLaw (fun ω x => X x ω) P) : HasGaussianLaw (∑ i, X i) P
+ProbabilityTheory.HasGaussianLaw.fun_sum.{u_1, u_4, u_6} {Ω : Type u_1} {ι : Type u_4} {mΩ : MeasurableSpace Ω}
+  {P : Measure Ω} [Fintype ι] {E : Type u_6} [NormedAddCommGroup E] [NormedSpace ℝ E] [MeasurableSpace E] [BorelSpace E]
+  [SecondCountableTopology E] {X : ι → Ω → E} (hX : HasGaussianLaw (fun ω x => X x ω) P) :
+  HasGaussianLaw (fun ω => ∑ i, X i ω) P
+ProbabilityTheory.HasGaussianLaw.prodMk.{u_1, u_4, u_5} {Ω : Type u_1} {ι : Type u_4} {mΩ : MeasurableSpace Ω}
+  {P : Measure Ω} {E : ι → Type u_5} [(i : ι) → NormedAddCommGroup (E i)] [(i : ι) → NormedSpace ℝ (E i)]
+  [(i : ι) → MeasurableSpace (E i)] [∀ (i : ι), BorelSpace (E i)] {X : (i : ι) → Ω → E i}
+  [∀ (i : ι), SecondCountableTopology (E i)] [Finite ι] (hX : HasGaussianLaw (fun ω x => X x ω) P) (i j : ι) :
+  HasGaussianLaw (fun ω => (X i ω, X j ω)) P
+ProbabilityTheory.HasGaussianLaw.map.{u_1, u_2, u_3} {Ω : Type u_1} {E : Type u_2} {F : Type u_3}
+  {mΩ : MeasurableSpace Ω} {P : Measure Ω} [NormedAddCommGroup E] [MeasurableSpace E] [BorelSpace E] {X : Ω → E}
+  [NormedSpace ℝ E] [NormedAddCommGroup F] [NormedSpace ℝ F] [MeasurableSpace F] [BorelSpace F]
+  (hX : HasGaussianLaw X P) (L : E →L[ℝ] F) : HasGaussianLaw (⇑L ∘ X) P
+ProbabilityTheory.HasGaussianLaw.map_fun.{u_1, u_2, u_3} {Ω : Type u_1} {E : Type u_2} {F : Type u_3}
+  {mΩ : MeasurableSpace Ω} {P : Measure Ω} [NormedAddCommGroup E] [MeasurableSpace E] [BorelSpace E] {X : Ω → E}
+  [NormedSpace ℝ E] [NormedAddCommGroup F] [NormedSpace ℝ F] [MeasurableSpace F] [BorelSpace F]
+  (hX : HasGaussianLaw X P) (L : E →L[ℝ] F) : HasGaussianLaw (fun ω => L (X ω)) P
+ProbabilityTheory.HasGaussianLaw.indepFun_of_covariance_eval.{u_1, u_4, u_5} {Ω : Type u_1} {mΩ : MeasurableSpace Ω}
+  {P : Measure Ω} {ι : Type u_4} {κ : Type u_5} [Finite ι] [Finite κ] {X : ι → Ω → ℝ} {Y : κ → Ω → ℝ}
+  (hXY : HasGaussianLaw (fun ω => (fun i => X i ω, fun j => Y j ω)) P) (h : ∀ (i : ι) (j : κ), cov[X i, Y j; P] = 0) :
+  (fun ω i => X i ω) ⟂ᵢ[P] fun ω j => Y j ω
+ProbabilityTheory.HasGaussianLaw.map_eq_gaussianReal.{u_1} {Ω : Type u_1} {mΩ : MeasurableSpace Ω} {P : Measure Ω}
+  {X : Ω → ℝ} (h : HasGaussianLaw X P) : Measure.map X P = gaussianReal (∫ (x : Ω), X x ∂P) Var[X; P].toNNReal
+ProbabilityTheory.iIndepFun.hasGaussianLaw.{u_1, u_2, u_3} {Ω : Type u_1} {mΩ : MeasurableSpace Ω} {P : Measure Ω}
+  {ι : Type u_2} [Finite ι] {E : ι → Type u_3} [(i : ι) → NormedAddCommGroup (E i)] [(i : ι) → MeasurableSpace (E i)]
+  [∀ (i : ι), CompleteSpace (E i)] [∀ (i : ι), BorelSpace (E i)] [∀ (i : ι), SecondCountableTopology (E i)]
+  [(i : ι) → NormedSpace ℝ (E i)] {X : (i : ι) → Ω → E i} (hX1 : ∀ (i : ι), HasGaussianLaw (X i) P)
+  (hX2 : iIndepFun X P) : HasGaussianLaw (fun ω x => X x ω) P
+ProbabilityTheory.iIndepFun.indepFun.{u_1, u_2, u_6} {Ω : Type u_1} {ι : Type u_2} {_mΩ : MeasurableSpace Ω}
+  {μ : Measure Ω} {β : ι → Type u_6} {m : (x : ι) → MeasurableSpace (β x)} {f : (i : ι) → Ω → β i}
+  (hf_Indep : iIndepFun f μ) {i j : ι} (hij : i ≠ j) : f i ⟂ᵢ[μ] f j
+/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/gaussian-common-component/Explore.lean:19:7: error(lean.unknownIdentifier): Unknown constant `ProbabilityTheory.iIndepFun.indepFun₀`
+/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/gaussian-common-component/Explore.lean:20:7: error(lean.unknownIdentifier): Unknown constant `ProbabilityTheory.iIndepFun.pairwise_indepFun`
+ProbabilityTheory.IndepFun.covariance_eq_zero.{u_1} {Ω : Type u_1} {mΩ : MeasurableSpace Ω} {X Y : Ω → ℝ}
+  {μ : Measure Ω} (h : X ⟂ᵢ[μ] Y) (hX : MemLp X 2 μ) (hY : MemLp Y 2 μ) : cov[X, Y; μ] = 0
+ProbabilityTheory.IndepFun.map_prod_eq_prod_map_map.{u_1, u_6, u_7} {Ω : Type u_1} {β : Type u_6} {β' : Type u_7}
+  {_mΩ : MeasurableSpace Ω} {μ : Measure Ω} {f : Ω → β} {g : Ω → β'} {mβ : MeasurableSpace β} {mβ' : MeasurableSpace β'}
+  [IsFiniteMeasure μ] (hf : AEMeasurable f μ) (hg : AEMeasurable g μ) :
+  f ⟂ᵢ[μ] g → Measure.map (fun ω => (f ω, g ω)) μ = (Measure.map f μ).prod (Measure.map g μ)
+ContinuousLinearMap.proj.{u_1, u_4, u_5} {R : Type u_1} [Semiring R] {ι : Type u_4} {φ : ι → Type u_5}
+  [(i : ι) → TopologicalSpace (φ i)] [(i : ι) → AddCommMonoid (φ i)] [(i : ι) → Module R (φ i)] (i : ι) :
+  ((i : ι) → φ i) →L[R] φ i
+ContinuousLinearMap.pi.{u_1, u_2, u_4, u_5} {R : Type u_1} [Semiring R] {M : Type u_2} [TopologicalSpace M]
+  [AddCommMonoid M] [Module R M] {ι : Type u_4} {φ : ι → Type u_5} [(i : ι) → TopologicalSpace (φ i)]
+  [(i : ι) → AddCommMonoid (φ i)] [(i : ι) → Module R (φ i)] (f : (i : ι) → M →L[R] φ i) : M →L[R] (i : ι) → φ i
+ContinuousLinearMap.prod.{u_1, u_2, u_3, u_4} {R : Type u_1} [Semiring R] {M₁ : Type u_2} [TopologicalSpace M₁]
+  [AddCommMonoid M₁] [Module R M₁] {M₂ : Type u_3} [TopologicalSpace M₂] [AddCommMonoid M₂] [Module R M₂]
+  {M₃ : Type u_4} [TopologicalSpace M₃] [AddCommMonoid M₃] [Module R M₃] (f₁ : M₁ →L[R] M₂) (f₂ : M₁ →L[R] M₃) :
+  M₁ →L[R] M₂ × M₃
+ContinuousLinearMap.fst.{u_1, u_2, u_3} (R : Type u_1) [Semiring R] (M₁ : Type u_2) [TopologicalSpace M₁]
+  [AddCommMonoid M₁] [Module R M₁] (M₂ : Type u_3) [TopologicalSpace M₂] [AddCommMonoid M₂] [Module R M₂] :
+  M₁ × M₂ →L[R] M₁
+ContinuousLinearMap.snd.{u_1, u_2, u_3} (R : Type u_1) [Semiring R] (M₁ : Type u_2) [TopologicalSpace M₁]
+  [AddCommMonoid M₁] [Module R M₁] (M₂ : Type u_3) [TopologicalSpace M₂] [AddCommMonoid M₂] [Module R M₂] :
+  M₁ × M₂ →L[R] M₂
+ProbabilityTheory.covariance_fun_sum_right.{u_1, u_2} {Ω : Type u_1} {mΩ : MeasurableSpace Ω} {Y : Ω → ℝ}
+  {μ : Measure Ω} {ι : Type u_2} {X : ι → Ω → ℝ} [IsFiniteMeasure μ] [Fintype ι] (hX : ∀ (i : ι), MemLp (X i) 2 μ)
+  (hY : MemLp Y 2 μ) : cov[Y, fun ω => ∑ i, X i ω; μ] = ∑ i, cov[Y, X i; μ]
+ProbabilityTheory.covariance_fun_sum_left.{u_1, u_2} {Ω : Type u_1} {mΩ : MeasurableSpace Ω} {Y : Ω → ℝ} {μ : Measure Ω}
+  {ι : Type u_2} {X : ι → Ω → ℝ} [IsFiniteMeasure μ] [Fintype ι] (hX : ∀ (i : ι), MemLp (X i) 2 μ) (hY : MemLp Y 2 μ) :
+  cov[fun ω => ∑ i, X i ω, Y; μ] = ∑ i, cov[X i, Y; μ]
+ProbabilityTheory.covariance_fun_sum_fun_sum.{u_1, u_2, u_3} {Ω : Type u_1} {mΩ : MeasurableSpace Ω} {μ : Measure Ω}
+  {ι : Type u_2} {X : ι → Ω → ℝ} [IsFiniteMeasure μ] [Fintype ι] {ι' : Type u_3} [Fintype ι'] {Y : ι' → Ω → ℝ}
+  (hX : ∀ (i : ι), MemLp (X i) 2 μ) (hY : ∀ (i : ι'), MemLp (Y i) 2 μ) :
+  cov[fun ω => ∑ i, X i ω, fun ω => ∑ j, Y j ω; μ] = ∑ i, ∑ j, cov[X i, Y j; μ]
+ProbabilityTheory.covariance_const_mul_left.{u_1} {Ω : Type u_1} {mΩ : MeasurableSpace Ω} {X Y : Ω → ℝ} {μ : Measure Ω}
+  (c : ℝ) : cov[fun ω => c * X ω, Y; μ] = c * cov[X, Y; μ]
+ProbabilityTheory.covariance_const_mul_right.{u_1} {Ω : Type u_1} {mΩ : MeasurableSpace Ω} {X Y : Ω → ℝ} {μ : Measure Ω}
+  (c : ℝ) : cov[X, fun ω => c * Y ω; μ] = c * cov[X, Y; μ]
+ProbabilityTheory.covariance_sub_left.{u_1} {Ω : Type u_1} {mΩ : MeasurableSpace Ω} {X Y Z : Ω → ℝ} {μ : Measure Ω}
+  [IsFiniteMeasure μ] (hX : MemLp X 2 μ) (hY : MemLp Y 2 μ) (hZ : MemLp Z 2 μ) :
+  cov[X - Y, Z; μ] = cov[X, Z; μ] - cov[Y, Z; μ]
+ProbabilityTheory.covariance_sub_right.{u_1} {Ω : Type u_1} {mΩ : MeasurableSpace Ω} {X Y Z : Ω → ℝ} {μ : Measure Ω}
+  [IsFiniteMeasure μ] (hX : MemLp X 2 μ) (hY : MemLp Y 2 μ) (hZ : MemLp Z 2 μ) :
+  cov[X, Y - Z; μ] = cov[X, Y; μ] - cov[X, Z; μ]
+ProbabilityTheory.covariance_sub_sub.{u_1} {Ω : Type u_1} {mΩ : MeasurableSpace Ω} {X Y Z T : Ω → ℝ} {μ : Measure Ω}
+  [IsFiniteMeasure μ] (hX : MemLp X 2 μ) (hY : MemLp Y 2 μ) (hZ : MemLp Z 2 μ) (hT : MemLp T 2 μ) :
+  cov[X - Y, Z - T; μ] = cov[X, Z; μ] - cov[X, T; μ] - cov[Y, Z; μ] + cov[Y, T; μ]
+ProbabilityTheory.covariance_self.{u_1} {Ω : Type u_1} {mΩ : MeasurableSpace Ω} {μ : Measure Ω} {X : Ω → ℝ}
+  (hX : AEMeasurable X μ) : cov[X, X; μ] = Var[X; μ]
+ProbabilityTheory.variance_nonneg.{u_1} {Ω : Type u_1} {mΩ : MeasurableSpace Ω} (X : Ω → ℝ) (μ : Measure Ω) :
+  0 ≤ Var[X; μ]
+ProbabilityTheory.variance_eq_integral.{u_1} {Ω : Type u_1} {mΩ : MeasurableSpace Ω} {X : Ω → ℝ} {μ : Measure Ω}
+  (hX : AEMeasurable X μ) : Var[X; μ] = ∫ (ω : Ω), (X ω - ∫ (x : Ω), X x ∂μ) ^ 2 ∂μ
+MeasureTheory.integral_finsetSum.{u_1, u_5, u_6} {α : Type u_1} {G : Type u_5} [NormedAddCommGroup G] [NormedSpace ℝ G]
+  {m : MeasurableSpace α} {μ : Measure α} {ι : Type u_6} (s : Finset ι) {f : ι → α → G}
+  (hf : ∀ i ∈ s, Integrable (f i) μ) : ∫ (a : α), ∑ i ∈ s, f i a ∂μ = ∑ i ∈ s, ∫ (a : α), f i a ∂μ
+MeasureTheory.integral_map.{u_1, u_5, u_6} {α : Type u_1} {G : Type u_5} [NormedAddCommGroup G] [NormedSpace ℝ G]
+  {m : MeasurableSpace α} {μ : Measure α} {β : Type u_6} [MeasurableSpace β] {φ : α → β} (hφ : AEMeasurable φ μ)
+  {f : β → G} (hfm : AEStronglyMeasurable f (Measure.map φ μ)) : ∫ (y : β), f y ∂Measure.map φ μ = ∫ (x : α), f (φ x) ∂μ
+MeasureTheory.Measure.map_map.{u_1, u_2, u_3} {α : Type u_1} {β : Type u_2} {γ : Type u_3} {mα : MeasurableSpace α}
+  {mβ : MeasurableSpace β} {mγ : MeasurableSpace γ} {μ : Measure α} {g : β → γ} {f : α → β} (hg : Measurable g)
+  (hf : Measurable f) : Measure.map g (Measure.map f μ) = Measure.map (g ∘ f) μ
+AEMeasurable.map_map_of_aemeasurable.{u_2, u_3, u_4} {α : Type u_2} {β : Type u_3} {γ : Type u_4}
+  {m0 : MeasurableSpace α} [MeasurableSpace β] [MeasurableSpace γ] {μ : Measure α} {g : β → γ} {f : α → β}
+  (hg : AEMeasurable g (Measure.map f μ)) (hf : AEMeasurable f μ) :
+  Measure.map g (Measure.map f μ) = Measure.map (g ∘ f) μ
+BoundedContinuousFunction.integrable.{u_1, u_2} {X : Type u_1} [MeasurableSpace X] [TopologicalSpace X] (μ : Measure X)
+  {E : Type u_2} [NormedAddCommGroup E] [OpensMeasurableSpace X] [SecondCountableTopology E] [MeasurableSpace E]
+  [BorelSpace E] [IsFiniteMeasure μ] (f : X →ᵇ E) : Integrable (⇑f) μ
+MeasureTheory.Integrable.comp_aemeasurable.{u_1, u_5, u_8} {α : Type u_1} {ε : Type u_5} {m : MeasurableSpace α}
+  {μ : Measure α} [TopologicalSpace ε] [ContinuousENorm ε] {α' : Type u_8} [MeasurableSpace α'] {f : α → α'}
+  {g : α' → ε} (hg : Integrable g (Measure.map f μ)) (hf : AEMeasurable f μ) : Integrable (g ∘ f) μ
+MeasureTheory.Integrable.comp_measurable.{u_1, u_5, u_8} {α : Type u_1} {ε : Type u_5} {m : MeasurableSpace α}
+  {μ : Measure α} [TopologicalSpace ε] [ContinuousENorm ε] {α' : Type u_8} [MeasurableSpace α'] {f : α → α'}
+  {g : α' → ε} (hg : Integrable g (Measure.map f μ)) (hf : Measurable f) : Integrable (g ∘ f) μ
+MeasureTheory.Integrable.integral_prod_left.{u_1, u_2, u_3} {α : Type u_1} {β : Type u_2} {E : Type u_3}
+  [MeasurableSpace α] [MeasurableSpace β] {μ : Measure α} {ν : Measure β} [NormedAddCommGroup E] [SFinite ν]
+  [NormedSpace ℝ E] ⦃f : α × β → E⦄ (hf : Integrable f (μ.prod ν)) : Integrable (fun x => ∫ (y : β), f (x, y) ∂ν) μ
+MeasureTheory.integral_prod.{u_1, u_2, u_3} {α : Type u_1} {β : Type u_2} {E : Type u_3} [MeasurableSpace α]
+  [MeasurableSpace β] {μ : Measure α} {ν : Measure β} [NormedAddCommGroup E] [SFinite ν] [NormedSpace ℝ E] [SFinite μ]
+  (f : α × β → E) (hf : Integrable f (μ.prod ν)) : ∫ (z : α × β), f z ∂μ.prod ν = ∫ (x : α), ∫ (y : β), f (x, y) ∂ν ∂μ
+stdout_stderr_end
+exit_code=1
+ended_utc=2026-09-28T20:33:44Z

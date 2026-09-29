@@ -1,0 +1,7 @@
+Command: ~/.elan/bin/lake build EstimatorIntegrity.DynamicContinuation
+Working directory: formal
+Lean toolchain: leanprover/lean4:v4.33.0
+Exit status: 0
+
+✔ [3006/3006] Built EstimatorIntegrity.DynamicContinuation (43s)
+Build completed successfully (3006 jobs).

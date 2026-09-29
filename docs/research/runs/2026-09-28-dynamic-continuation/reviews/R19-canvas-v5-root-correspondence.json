@@ -1,0 +1,108 @@
+{
+  "date_local": "2026-09-29",
+  "verdict": "PASS bounded D37-D39 and T75 evidence canvas; approved for reversible managed local deployment",
+  "root_review": "Full semantic diff read against accepted 04y/T83/T84/root correspondence and T75 source/report. Historical const data and all five plots retained verbatim. R18 prior-art limits visible. Candidate theoretical T87 excluded from accepted headline.",
+  "implementation_provenance": {
+    "role": "root mechanical packaging fallback",
+    "requested_worker": "none successfully dispatched for this version",
+    "actual_root_model": "unexposed"
+  },
+  "original_sha256": "ea576d19a862e376cfdf248be5ac0cacaa3aed6c29dfde55174a084e6bd3f8ad",
+  "candidate_sha256": "e2619ea14528c4e3d20e62ed2a3edb8cb2f3c175b47af4e31c9f1599f9e9fa41",
+  "source_manifest_sha256": "740536a0e96ddbb3a771cc9ff6d4660cd4a5c611f1cbd93e2277200ebf7d7d70",
+  "source_hash_checks": 8,
+  "source_hash_mismatches": [],
+  "parity": {
+    "status": "PASS",
+    "original_top_level_constants": 74,
+    "candidate_top_level_constants": 82,
+    "original_constants_preserved_verbatim": 74,
+    "historical_pre_t71_top_level_data_constants_preserved": 49,
+    "changed_original_constants": [],
+    "original_link_occurrences": 60,
+    "candidate_link_occurrences": 68,
+    "original_unique_link_bindings": 55,
+    "candidate_unique_link_bindings": 63,
+    "missing_original_link_occurrences": [],
+    "historical_pre_t71_link_bindings_preserved": 33,
+    "original_local_path_constants": 55,
+    "candidate_local_path_constants": 63,
+    "missing_or_changed_original_paths": [],
+    "candidate_local_paths_resolved": 63,
+    "unresolved_candidate_paths": [],
+    "line_charts_original": 5,
+    "line_charts_candidate": 5,
+    "line_charts_preserved_verbatim": true,
+    "e4_records": {
+      "pooled": 60,
+      "per_seed": 180,
+      "zero_query_baselines": 36,
+      "total_activity_text_preserved": true,
+      "replay_point_calls_text_preserved": true
+    },
+    "imports": [
+      "cursor/canvas"
+    ],
+    "embedded_data_only": true,
+    "hardcoded_hex_colors": 0,
+    "gradients": 0,
+    "box_shadows": 0,
+    "required_narrative_present": 9,
+    "required_narrative_total": 9
+  },
+  "checks": [
+    {
+      "check": "parity",
+      "command": [
+        "/opt/homebrew/bin/node",
+        "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v5/validate.cjs"
+      ],
+      "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v5",
+      "started_utc": "2026-09-28T19:50:52.740674+00:00",
+      "exit_code": 0
+    },
+    {
+      "check": "typescript",
+      "command": [
+        "/opt/homebrew/bin/node",
+        "/private/tmp/d29-e4-canvas-check/check.cjs"
+      ],
+      "cwd": "/private/tmp/d39-canvas-check",
+      "started_utc": "2026-09-28T19:50:53.581352+00:00",
+      "exit_code": 0
+    },
+    {
+      "check": "bundle",
+      "command": [
+        "/opt/homebrew/bin/node",
+        "/Applications/Cursor.app/Contents/Resources/app/extensions/node_modules/esbuild-wasm/bin/esbuild",
+        "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v5/dynamic-continuation-evidence.candidate.canvas.tsx",
+        "--bundle",
+        "--platform=browser",
+        "--format=esm",
+        "--external:cursor/canvas",
+        "--external:react",
+        "--external:react/jsx-runtime",
+        "--outfile=/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v5/dynamic-continuation-evidence.bundle.js"
+      ],
+      "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v5",
+      "started_utc": "2026-09-28T19:50:54.318833+00:00",
+      "exit_code": 0
+    }
+  ],
+  "new_oracle_calls": 0,
+  "not_claimed": [
+    "GUI rendering",
+    "New numerical performance",
+    "Full signed PDE Lean coverage",
+    "Finite-bit or practical speed guarantee",
+    "Worldwide novelty or award significance"
+  ],
+  "deployment": {
+    "status": "complete",
+    "managed_sha256": "e2619ea14528c4e3d20e62ed2a3edb8cb2f3c175b47af4e31c9f1599f9e9fa41",
+    "method": "sandbox-approved hash-guarded local copy",
+    "open_result": "queued",
+    "gui_render_verified": false
+  }
+}

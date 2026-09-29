@@ -1,0 +1,99 @@
+EstimatorIntegrity/OracleTranscript.lean:78:31: error(lean.unknownIdentifier): Unknown identifier `tailTrace`
+case nil
+X : Type u_1
+policy : OracleHistory X → OracleAction X
+f g : X → ℝ
+fuel : ℕ
+ih :
+  ∀ (history : OracleHistory X) (output : ℝ) (trace : List X),
+    runOracle policy f history fuel = some (output, trace) →
+      (∀ point ∈ trace, g point = f point) → runOracle policy g history fuel = some (output, trace)
+history : OracleHistory X
+output : ℝ
+trace : List X
+hagree : ∀ point ∈ trace, g point = f point
+point : X
+haction : policy history = OracleAction.query point
+x✝ : Option (ℝ × List X)
+output✝ : ℝ
+heval : runOracle policy f ((point, f point) :: history) fuel = some (output✝, [])
+hrun : some (output✝, [point]) = some (output, trace)
+⊢ (match runOracle policy g ((point, g point) :: history) fuel with
+    | none => none
+    | some (output, trace) => some (output, point :: trace)) =
+    some (output, trace)
+
+case cons
+X : Type u_1
+policy : OracleHistory X → OracleAction X
+f g : X → ℝ
+fuel : ℕ
+ih :
+  ∀ (history : OracleHistory X) (output : ℝ) (trace : List X),
+    runOracle policy f history fuel = some (output, trace) →
+      (∀ point ∈ trace, g point = f point) → runOracle policy g history fuel = some (output, trace)
+history : OracleHistory X
+output : ℝ
+trace : List X
+hagree : ∀ point ∈ trace, g point = f point
+point : X
+haction : policy history = OracleAction.query point
+x✝ : Option (ℝ × List X)
+output✝ : ℝ
+head✝ : X
+tail✝ : List X
+heval : runOracle policy f ((point, f point) :: history) fuel = some (output✝, head✝ :: tail✝)
+hrun : some (output✝, point :: head✝ :: tail✝) = some (output, trace)
+⊢ (match runOracle policy g ((point, g point) :: history) fuel with
+    | none => none
+    | some (output, trace) => some (output, point :: trace)) =
+    some (output, trace)
+case nil
+X : Type u_1
+policy : OracleHistory X → OracleAction X
+f g : X → ℝ
+fuel : ℕ
+ih :
+  ∀ (history : OracleHistory X) (output : ℝ) (trace : List X),
+    runOracle policy f history fuel = some (output, trace) →
+      (∀ point ∈ trace, g point = f point) → runOracle policy g history fuel = some (output, trace)
+history : OracleHistory X
+output : ℝ
+trace : List X
+hagree : ∀ point ∈ trace, g point = f point
+point : X
+haction : policy history = OracleAction.query point
+x✝ : Option (ℝ × List X)
+output✝ : ℝ
+heval : runOracle policy f ((point, f point) :: history) fuel = some (output✝, [])
+hrun : output✝ = output ∧ [point] = trace
+⊢ (match runOracle policy g ((point, g point) :: history) fuel with
+    | none => none
+    | some (output, trace) => some (output, point :: trace)) =
+    some (output, trace)
+
+case cons
+X : Type u_1
+policy : OracleHistory X → OracleAction X
+f g : X → ℝ
+fuel : ℕ
+ih :
+  ∀ (history : OracleHistory X) (output : ℝ) (trace : List X),
+    runOracle policy f history fuel = some (output, trace) →
+      (∀ point ∈ trace, g point = f point) → runOracle policy g history fuel = some (output, trace)
+history : OracleHistory X
+output : ℝ
+trace : List X
+hagree : ∀ point ∈ trace, g point = f point
+point : X
+haction : policy history = OracleAction.query point
+x✝ : Option (ℝ × List X)
+output✝ : ℝ
+head✝ : X
+tail✝ : List X
+heval : runOracle policy f ((point, f point) :: history) fuel = some (output✝, head✝ :: tail✝)
+hrun : some (output✝, point :: head✝ :: tail✝) = some (output, trace)
+⊢ (match runOracle policy g ((point, g point) :: history) fuel with
+    | none => none
+    | some (output, trace) => some (output, point :: trace)) =
+    some (output, trace)

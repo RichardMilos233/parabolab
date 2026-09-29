@@ -1,0 +1,20 @@
+{
+  "status": "PASS within finite-model/scalar scope",
+  "utc": "2026-09-28T14:41:03.720448+00:00",
+  "manifest_hashes_checked": 12,
+  "output_hashes_checked": 4,
+  "protected_initial_paths_checked": 342,
+  "protected_mismatches": 0,
+  "main_rows_independently_recomputed": 105,
+  "per_alternative_risk_rows_independently_recomputed": 820,
+  "mixture_rows_independently_recomputed": 5,
+  "scalar_rows_recomputed_from_stored_values": 4,
+  "quadrature_absolute_difference": "4.62850804389770339320032990069e-83",
+  "official_runtime_seconds": 11.331974749919027,
+  "official_source_sha256": "c856a9ba2548a6486d756af0b628396e8ab3d9186413e13e906fc57cd795930d",
+  "official_result_sha256": "75608875daf99067390f5f31179f7898c22582e895f4dbb0512308e342b1f0d5",
+  "full_evaluator_replay": false,
+  "quadrature_independently_reexecuted": false,
+  "pde_experiment": false,
+  "numerical_proof_of_universal_query_bound": false
+}

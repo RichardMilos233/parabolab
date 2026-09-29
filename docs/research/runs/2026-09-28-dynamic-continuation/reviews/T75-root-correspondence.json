@@ -1,0 +1,100 @@
+{
+  "date_local": "2026-09-29",
+  "verdict": "PASS fixed05k only",
+  "source": {
+    "path": "formal/EstimatorIntegrity/FiniteTreeSecondMoment.lean",
+    "sha256": "61d432bfff085728a2d035286251d8be4e4e9e9f08a070d4a7293475cd3934c4",
+    "lines": 645
+  },
+  "root_review": "Full645-line source,144-line fixed contract,162-line report,123-line declaration output, both harnesses, all27axiom records, environment/build/failure summary read. Actual kernels, conditional triple independence at shared state, correlated coefficient/state law, Bernoulli normalization, ENNReal induction and proved Aj series match.",
+  "manifest": {
+    "path": "docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-tree-second-moment/SHA256SUMS",
+    "sha256": "5e46c91bd5469e188c327d605026973a4ccc903d530eee0f4aa5e45b9e920d8a",
+    "entries_verified": 14,
+    "mismatches": []
+  },
+  "build": {
+    "worker_library_command": "~/.elan/bin/lake build EstimatorIntegrity.FiniteTreeSecondMoment",
+    "worker_log_result": "2497/2497 success;37seconds; only letI style suggestions",
+    "root_fresh_source_check": {
+      "command": [
+        "/Users/michael/.elan/bin/lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "EstimatorIntegrity/FiniteTreeSecondMoment.lean"
+      ],
+      "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab/formal",
+      "source_sha256": "61d432bfff085728a2d035286251d8be4e4e9e9f08a070d4a7293475cd3934c4",
+      "exit_code": 0,
+      "elapsed_seconds": 39.60679507255554,
+      "log_capture": "direct process stdout and stderr bytes",
+      "scope": "Fresh actual source elaboration with library autoImplicit=false; prior library module build retained separately"
+    },
+    "root_import_audits": {
+      "capture": "direct process stdout and stderr bytes",
+      "results": [
+        {
+          "name": "Axioms",
+          "command": [
+            "/Users/michael/.elan/bin/lake",
+            "env",
+            "lean",
+            "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-tree-second-moment/Axioms.lean"
+          ],
+          "exit_code": 0,
+          "log_sha256": "761f7dc20e5913eddad36baaab32ea919c960094bda66cd6aa9828fa14c6874f",
+          "matches_prior_log": true
+        },
+        {
+          "name": "Declarations",
+          "command": [
+            "/Users/michael/.elan/bin/lake",
+            "env",
+            "lean",
+            "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-tree-second-moment/Declarations.lean"
+          ],
+          "exit_code": 0,
+          "log_sha256": "1252cca4cfac909f4d185ae35572bcf5dd369d0cfd5f153bda2dee3c46d93fe3",
+          "matches_prior_log": true
+        }
+      ],
+      "public_axioms_count": 27,
+      "all_standard_axioms": true
+    }
+  },
+  "axioms": {
+    "public_theorems_checked": 27,
+    "only": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "root_forbidden_source_scan": [],
+    "public_source_names_equal_axiom_inventory": true
+  },
+  "provenance": {
+    "worker_failed_attempts": "Retrospective diagnostic summary plus stored failed autoImplicit build log; no claim that every scratch source or failed tool output was preserved.",
+    "worker_capture_mechanism": "Worker log capture/transcription mechanism was not clarified before completion; retained without asserting byte-direct provenance.",
+    "root_resolution": "Root freshly elaborated exact source with autoImplicit=false and reran both import audits, recording direct stdout/stderr bytes and exit codes. Axiom and declaration outputs match worker logs byte-for-byte. No existing evidence overwritten."
+  },
+  "protected_initial_files": {
+    "count": 342,
+    "mismatches": []
+  },
+  "accepted": [
+    "Actual measurable finite-depth Markov kernels on arbitrary measurable S",
+    "Derived joint-law ENNReal weighted recurrence with factors6/5 and6",
+    "Uniform radiusR² bound and explicit finiteness at a=3R/(4M),z=5/4",
+    "Squared-majorant slope<=9/32",
+    "Actual polynomial leaf moments bounded using proved summable Aj=sum n^(2j)(4/5)^n"
+  ],
+  "outside_scope": [
+    "Infinite genealogical coupling and a.s.halting",
+    "Expected node count and actual heat/time kernels",
+    "PDE/graph identification and derivative tuple sampling",
+    "Query/runtime caps and full signed risk/work theorem",
+    "Finite-bit and practical/numerical performance"
+  ],
+  "oracle_calls_added": 0
+}

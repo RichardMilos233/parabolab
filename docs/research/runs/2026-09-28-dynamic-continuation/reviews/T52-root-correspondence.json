@@ -1,0 +1,35 @@
+{
+  "status": "PASS scoped T52; both fixed05h gates accepted",
+  "review": "Root read full383-line source and final report against05h, actual Pairwise IndepFun/variance_sum, bounded L2, zero-mean case, Real.rpow scaling and imported actual sigmoid integral risk. Existing fresh build and axioms verified, not reexecuted by root.",
+  "artifacts_sha256": {
+    "formal/EstimatorIntegrity/PositiveSampleMean.lean": "84cb8468f56f55dbfca243209d64a36164acbdc8625076a7d4ae46f302ca6703",
+    "formal/EstimatorIntegrity/PositiveSigmoidRisk.lean": "3ae1d9acff2ff1f8dae63816b53f7c05eb4f5cd3f562b968d1cb7df168bf9a6d",
+    "05h-positive-upper-bound-lean-contract.md": "c0d5f17b0e13dcb131405c8bcfad3ad34b1a9f9b91b79e6902606a6f08a376a9",
+    "06j-positive-sample-mean-lean.md": "83e6df7057b416f382092e22af0f80fc4820b485ed09dcd31276118fd201f346",
+    "lean/positive-sample-mean/build.log": "a1b511610dc81d8bd123173c14b6e00cb633a8d16f6dc8c251ced04faaaea71b",
+    "lean/positive-sample-mean/axioms.log": "3e27ce5c4d97f3fb8941779a0aef09ee736166a90c5f83b6d5a41665cd60bc3a",
+    "lean/positive-sample-mean/source-scan.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "lean/positive-sample-mean/PositiveSampleMeanAxioms.lean": "4cfcbfd2a1c98618ddeaad4e0d88074865f58ef3aa1d163bb87504f6909a3d89"
+  },
+  "exports": [
+    "positiveSampleMean",
+    "positiveSample_integrable",
+    "positiveSample_memLp_two",
+    "positiveSample_product_integral",
+    "positiveSampleMean_measurable",
+    "positiveSampleMean_integrable",
+    "positiveSampleMean_unbiased",
+    "positiveSampleMean_squaredLoss_integrable",
+    "positiveSampleMean_mse_le",
+    "positive_rpow_one_add_le_one_add_sq",
+    "positive_scaled_rpow_identity",
+    "positive_scaled_budget_bound",
+    "positiveSampleMean_scaled_mse_le",
+    "positiveSampleMean_transformed_mse_le",
+    "positiveSampleMean_full_risk_certificate"
+  ],
+  "protected_count": 342,
+  "protected_mismatches": [],
+  "correspondence_gap": "PDE/interpolation/bias and iid uniform oracle realization remain conventional; not an end-to-end PDE or implementation proof. General-C2 D26 not formalized.",
+  "next_authorization": "A bounded D24 numerical protocol may now be designed and independently reviewed; no official numerical execution yet authorized."
+}

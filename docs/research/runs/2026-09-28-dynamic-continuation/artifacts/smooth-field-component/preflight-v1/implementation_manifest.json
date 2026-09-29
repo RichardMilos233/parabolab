@@ -1,0 +1,343 @@
+{
+  "accounting": {
+    "all_versions": "one shared journal for preflight, official, replay, failures, and repeats",
+    "failure_work_reservations": "Gaussian, U, tuple, and known-evaluator scheduled work is precharged; after a failure these counters are conservative reservations and are not asserted to be exact realized-call counts. Exponential attempts are incremented before each draw, while generated segments remain the exact appended-node count.",
+    "hard_crash_segments": "unresolved reserved block remains conservatively charged and blocks continuation",
+    "known_evaluator": "all distinct binary64 positions in the deterministic known pass are persistently reserved before callback entry; a failure conservatively retains unused reservation",
+    "opaque": "persistent atomic capacity-check-and-charge fsynced before callback entry"
+  },
+  "arithmetic_dtype": "numpy.float64 / Python binary64",
+  "cells": [
+    {
+      "base": 0.0,
+      "degree": 3,
+      "derivative_order": 1,
+      "direction": "cosine_mode_1",
+      "index": 0,
+      "kappa": 0.01,
+      "label": "cell=0;D=3;tau=0.5;base=0;j=1;direction=cosine_mode_1;kappa=0.01",
+      "tau": 0.5
+    },
+    {
+      "base": 0.25,
+      "degree": 3,
+      "derivative_order": 1,
+      "direction": "cosine_mode_1",
+      "index": 1,
+      "kappa": 0.01,
+      "label": "cell=1;D=3;tau=0.5;base=0.25;j=1;direction=cosine_mode_1;kappa=0.01",
+      "tau": 0.5
+    },
+    {
+      "base": 0.25,
+      "degree": 3,
+      "derivative_order": 2,
+      "direction": "constant",
+      "index": 2,
+      "kappa": 0.01,
+      "label": "cell=2;D=3;tau=0.5;base=0.25;j=2;direction=constant;kappa=0.01",
+      "tau": 0.5
+    },
+    {
+      "base": 0.0,
+      "degree": 3,
+      "derivative_order": 3,
+      "direction": "constant",
+      "index": 3,
+      "kappa": 0.01,
+      "label": "cell=3;D=3;tau=0.5;base=0;j=3;direction=constant;kappa=0.01",
+      "tau": 0.5
+    },
+    {
+      "base": 0.25,
+      "degree": 5,
+      "derivative_order": 1,
+      "direction": "cosine_mode_1",
+      "index": 4,
+      "kappa": 0.01,
+      "label": "cell=4;D=5;tau=0.1;base=0.25;j=1;direction=cosine_mode_1;kappa=0.01",
+      "tau": 0.1
+    },
+    {
+      "base": 0.25,
+      "degree": 5,
+      "derivative_order": 2,
+      "direction": "constant",
+      "index": 5,
+      "kappa": 0.01,
+      "label": "cell=5;D=5;tau=0.1;base=0.25;j=2;direction=constant;kappa=0.01",
+      "tau": 0.1
+    },
+    {
+      "base": 0.0,
+      "degree": 3,
+      "derivative_order": 1,
+      "direction": "cosine_mode_1",
+      "index": 6,
+      "kappa": 0.1,
+      "label": "cell=6;D=3;tau=0.5;base=0;j=1;direction=cosine_mode_1;kappa=0.1",
+      "tau": 0.5
+    },
+    {
+      "base": 0.25,
+      "degree": 3,
+      "derivative_order": 1,
+      "direction": "cosine_mode_1",
+      "index": 7,
+      "kappa": 0.1,
+      "label": "cell=7;D=3;tau=0.5;base=0.25;j=1;direction=cosine_mode_1;kappa=0.1",
+      "tau": 0.5
+    },
+    {
+      "base": 0.25,
+      "degree": 3,
+      "derivative_order": 2,
+      "direction": "constant",
+      "index": 8,
+      "kappa": 0.1,
+      "label": "cell=8;D=3;tau=0.5;base=0.25;j=2;direction=constant;kappa=0.1",
+      "tau": 0.5
+    },
+    {
+      "base": 0.0,
+      "degree": 3,
+      "derivative_order": 3,
+      "direction": "constant",
+      "index": 9,
+      "kappa": 0.1,
+      "label": "cell=9;D=3;tau=0.5;base=0;j=3;direction=constant;kappa=0.1",
+      "tau": 0.5
+    },
+    {
+      "base": 0.25,
+      "degree": 5,
+      "derivative_order": 1,
+      "direction": "cosine_mode_1",
+      "index": 10,
+      "kappa": 0.1,
+      "label": "cell=10;D=5;tau=0.1;base=0.25;j=1;direction=cosine_mode_1;kappa=0.1",
+      "tau": 0.1
+    },
+    {
+      "base": 0.25,
+      "degree": 5,
+      "derivative_order": 2,
+      "direction": "constant",
+      "index": 11,
+      "kappa": 0.1,
+      "label": "cell=11;D=5;tau=0.1;base=0.25;j=2;direction=constant;kappa=0.1",
+      "tau": 0.1
+    }
+  ],
+  "created_utc": "2026-09-28T21:59:05.046225+00:00",
+  "environment": {
+    "float_info": {
+      "mantissa_bits": 53,
+      "max_exp": 1024,
+      "radix": 2
+    },
+    "mpmath_version": "1.3.0",
+    "numpy_config": [
+      "{",
+      "  \"Compilers\": {",
+      "    \"c\": {",
+      "      \"name\": \"clang\",",
+      "      \"linker\": \"ld64\",",
+      "      \"version\": \"17.0.6\",",
+      "      \"commands\": \"arm64-apple-darwin20.0.0-clang\",",
+      "      \"args\": \"-ftree-vectorize, -fPIC, -fstack-protector-strong, -O2, -pipe, -isystem, /opt/miniconda3/envs/parabolab/include, -fdebug-prefix-map=/Users/ec2-user/croot/numpy_and_numpy_base_1780345816396/work=/usr/local/src/conda/numpy-base-2.4.6, -fdebug-prefix-map=/opt/miniconda3/envs/parabolab=/usr/local/src/conda-prefix, -mmacosx-version-min=12.1\",",
+      "      \"linker args\": \"-Wl,-headerpad_max_install_names, -Wl,-dead_strip_dylibs, -Wl,-rpath,/opt/miniconda3/envs/parabolab/lib, -L/opt/miniconda3/envs/parabolab/lib, -ftree-vectorize, -fPIC, -fstack-protector-strong, -O2, -pipe, -isystem, /opt/miniconda3/envs/parabolab/include, -fdebug-prefix-map=/Users/ec2-user/croot/numpy_and_numpy_base_1780345816396/work=/usr/local/src/conda/numpy-base-2.4.6, -fdebug-prefix-map=/opt/miniconda3/envs/parabolab=/usr/local/src/conda-prefix, -mmacosx-version-min=12.1\"",
+      "    },",
+      "    \"cython\": {",
+      "      \"name\": \"cython\",",
+      "      \"linker\": \"cython\",",
+      "      \"version\": \"3.2.4\",",
+      "      \"commands\": \"cython\"",
+      "    },",
+      "    \"c++\": {",
+      "      \"name\": \"clang\",",
+      "      \"linker\": \"ld64\",",
+      "      \"version\": \"17.0.6\",",
+      "      \"commands\": \"arm64-apple-darwin20.0.0-clang++\",",
+      "      \"args\": \"-ftree-vectorize, -fPIC, -fstack-protector-strong, -O2, -pipe, -stdlib=libc++, -fvisibility-inlines-hidden, -fmessage-length=0, -isystem, /opt/miniconda3/envs/parabolab/include, -fdebug-prefix-map=/Users/ec2-user/croot/numpy_and_numpy_base_1780345816396/work=/usr/local/src/conda/numpy-base-2.4.6, -fdebug-prefix-map=/opt/miniconda3/envs/parabolab=/usr/local/src/conda-prefix, -mmacosx-version-min=12.1\",",
+      "      \"linker args\": \"-Wl,-headerpad_max_install_names, -Wl,-dead_strip_dylibs, -Wl,-rpath,/opt/miniconda3/envs/parabolab/lib, -L/opt/miniconda3/envs/parabolab/lib, -ftree-vectorize, -fPIC, -fstack-protector-strong, -O2, -pipe, -stdlib=libc++, -fvisibility-inlines-hidden, -fmessage-length=0, -isystem, /opt/miniconda3/envs/parabolab/include, -fdebug-prefix-map=/Users/ec2-user/croot/numpy_and_numpy_base_1780345816396/work=/usr/local/src/conda/numpy-base-2.4.6, -fdebug-prefix-map=/opt/miniconda3/envs/parabolab=/usr/local/src/conda-prefix, -mmacosx-version-min=12.1\"",
+      "    }",
+      "  },",
+      "  \"Machine Information\": {",
+      "    \"host\": {",
+      "      \"cpu\": \"aarch64\",",
+      "      \"family\": \"aarch64\",",
+      "      \"endian\": \"little\",",
+      "      \"system\": \"darwin\"",
+      "    },",
+      "    \"build\": {",
+      "      \"cpu\": \"aarch64\",",
+      "      \"family\": \"aarch64\",",
+      "      \"endian\": \"little\",",
+      "      \"system\": \"darwin\"",
+      "    }",
+      "  },",
+      "  \"Build Dependencies\": {",
+      "    \"blas\": {",
+      "      \"name\": \"openblas\",",
+      "      \"found\": true,",
+      "      \"version\": \"0.3.31\",",
+      "      \"detection method\": \"pkgconfig\",",
+      "      \"include directory\": \"/opt/miniconda3/envs/parabolab/include\",",
+      "      \"lib directory\": \"/opt/miniconda3/envs/parabolab/lib\",",
+      "      \"openblas configuration\": \"USE_64BITINT=0 DYNAMIC_ARCH=1 DYNAMIC_OLDER= NO_CBLAS= NO_LAPACK=0 NO_LAPACKE= NO_AFFINITY=1 USE_OPENMP=0 VORTEX MAX_THREADS=128\",",
+      "      \"pc file directory\": \"/opt/miniconda3/envs/parabolab/lib/pkgconfig\"",
+      "    },",
+      "    \"lapack\": {",
+      "      \"name\": \"openblas\",",
+      "      \"found\": true,",
+      "      \"version\": \"0.3.31\",",
+      "      \"detection method\": \"pkgconfig\",",
+      "      \"include directory\": \"/opt/miniconda3/envs/parabolab/include\",",
+      "      \"lib directory\": \"/opt/miniconda3/envs/parabolab/lib\",",
+      "      \"openblas configuration\": \"USE_64BITINT=0 DYNAMIC_ARCH=1 DYNAMIC_OLDER= NO_CBLAS= NO_LAPACK=0 NO_LAPACKE= NO_AFFINITY=1 USE_OPENMP=0 VORTEX MAX_THREADS=128\",",
+      "      \"pc file directory\": \"/opt/miniconda3/envs/parabolab/lib/pkgconfig\"",
+      "    }",
+      "  },",
+      "  \"Python Information\": {",
+      "    \"path\": \"/opt/miniconda3/envs/parabolab/bin/python\",",
+      "    \"version\": \"3.11\"",
+      "  },",
+      "  \"SIMD Extensions\": {",
+      "    \"baseline\": [",
+      "      \"NEON\",",
+      "      \"NEON_FP16\",",
+      "      \"NEON_VFPV4\",",
+      "      \"ASIMD\"",
+      "    ],",
+      "    \"found\": [",
+      "      \"ASIMDHP\",",
+      "      \"ASIMDDP\"",
+      "    ],",
+      "    \"not found\": [",
+      "      \"ASIMDFHM\"",
+      "    ]",
+      "  }",
+      "}"
+    ],
+    "numpy_version": "2.4.6",
+    "platform": "macOS-26.3-arm64-arm-64bit",
+    "python_executable": "/opt/miniconda3/envs/parabolab/bin/python",
+    "python_implementation": "CPython",
+    "python_version": "3.11.15"
+  },
+  "frozen_sources": {
+    "02h-smooth-field-component-experiment-protocol.md": "1866585a86fcfceb0f9b05f632dae093d3c6e03f4ab005b4eae02fbfa5b27612",
+    "04aa-polynomial-fields-and-linear-gaussian-preparation.md": "433c699d951c74fa6ba19166e159069130e1340a7a319aa0334b0ba4f8a1b8a1",
+    "reviews/R21-linear-tree-common-gaussian-candidate.md": "99f8a23c98332b6797ee1ecc9f0929d94950cd047acb17bcbea0df9052ff7461",
+    "reviews/T98-root-correspondence.json": "cf5485f00bbd7ff0ea24465f85e6b5457acd54cdf952b8da7606b2f117586fe4",
+    "reviews/T98-smooth-field-protocol-independent-audit.md": "4684093695d5c116355d95be79d1fc0701d79b3671b1de889f938eccacd3a227"
+  },
+  "hard_limits": {
+    "global_generated_segments": 10000000,
+    "global_oracle_calls": 300000,
+    "oracle_calls": {
+      "official": 245760,
+      "preflight": 8192,
+      "replay": 864
+    },
+    "single_tree_segments": 100000
+  },
+  "official_chunk_size": 64,
+  "official_loop_order": "cell index, then listed seed, then sample index 0..4095",
+  "official_time_limit_seconds": 1800.0,
+  "output": {
+    "layout": "[constant,cos(1),sin(1),...,cos(64),sin(64)]",
+    "max_frequency": 64,
+    "prefix_lengths": {
+      "16": 33,
+      "4": 9,
+      "64": 129
+    },
+    "prefixes": "views/copies of the single N=64 output; no new sampler or query",
+    "shape": [
+      129
+    ]
+  },
+  "preflight_schedule": {
+    "loop_order": "cell index, then listed seed, then primary indices; then repeats in same order",
+    "maximum_opaque_calls": 300,
+    "primary_indices": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "repeat_indices": [
+      0
+    ]
+  },
+  "reference": {
+    "conversion": "Python float conversion of a 100-decimal-digit mpmath mpf",
+    "decimal_precision": 100,
+    "library": "mpmath",
+    "not_interval_certified": true
+  },
+  "rng_calls_in_order": [
+    "one scalar Generator.exponential(scale=1/rate) per DFS-preorder segment",
+    "one Generator.standard_normal(size=(segment_count,),dtype=float64) vector call",
+    "one scalar Generator.random() for U",
+    "if n>=j, one Generator.choice(n,size=(j,),replace=False,shuffle=True) for the ordered distinct tuple"
+  ],
+  "schema": {
+    "failure": "JSON plus raw attempted .npy coefficients when OutputFiniteError supplies them",
+    "metadata": "UTF-8 JSONL, one fsynced record per completed output",
+    "official_arrays": "atomic .npy float64 chunks, shape (completed_in_chunk,129)",
+    "sample_arrays": "NumPy .npy float64, shape (129,) per preflight output"
+  },
+  "schema_version": "smooth-field-implementation-v1",
+  "scope_exclusions": [
+    "no official acquisition before root implementation/preflight acceptance",
+    "no sparse D48 estimator",
+    "no long-time recursion or PDE certificate",
+    "no universal Hilbert moment or minimax theorem",
+    "no finite-bit guarantee"
+  ],
+  "seeds": [
+    2026092901,
+    2026092902,
+    2026092903
+  ],
+  "source_hashes": {
+    "budget.py": "3f1bbb3a523e453f2cc8044b8ce502a2138e34d0b036c33a29d445ad787dfcba",
+    "driver.py": "73d2e78e89325170b9db5b1775ba65edfef40f13f648da8d8cba26916301b827",
+    "experiment.py": "512e28e1b0efd774ec058e1a854fbbf53181b2217bf6dbac0c2ccd379dba9ec9",
+    "fixtures.py": "efc36545f60775bc196813f1a50a622f5d287e0f810cedb66b80ced4c7e73dc2",
+    "smooth_field.py": "c04cc667c0138dd57bd554940bd9a37684347e78549ecc139bfd4061d5452883",
+    "source_checks.py": "d492f0107cb6672374e5383e201e79c41db63972fca83b7cf2cddda4bbfab53f"
+  },
+  "status": "implementation_and_preflight_only; official_not_executed",
+  "stream_mapping": "Generator(PCG64DXSM(SeedSequence([seed,cell_index,sample_index,tag])))",
+  "tags": {
+    "official_and_replay": 0,
+    "preflight": 1
+  },
+  "timer_boundaries": {
+    "acquisition": "opaque callback loop, known cache lookup, and direction product",
+    "array_serialization": "atomic .npy write per preflight output; for official output, measured once per 64-row chunk and stored in chunk_metadata.jsonl",
+    "gaussian_preparation": "work-charge plus edge-normal draw and common-component passes",
+    "known_and_corner": "cached known-leaf evaluation and complete signed corner passes",
+    "official_suite": "wall clock begins after source/preflight acceptance gates and includes sampling, journal fsyncs, serialization, and metadata records",
+    "output": "single full N=64 Fourier array construction",
+    "prefix_extraction": "copy exact N=4,N=16,N=64 prefixes from the full array",
+    "sample_after_tree": "all sample work after tree generation, before artifact serialization",
+    "sample_including_tree": "tree_generation plus sample_after_tree",
+    "tree_generation": "complete clock-tree generation and persistent segment accounting"
+  },
+  "tolerances": {
+    "covariance_atol": 5e-13,
+    "covariance_rtol": 5e-12,
+    "exact_atol": 2e-14,
+    "exact_rtol": 2e-14,
+    "partial_atol": 2e-14,
+    "partial_rtol": 2e-13,
+    "preflight_replay": "bitwise equality of coefficients and deterministic metadata"
+  },
+  "tree_order": "root first DFS preorder; children pushed right-to-left and visited left-to-right",
+  "zero_length_edge_policy": "draw one binary64 standard normal for every segment, including zero-length segments; multiply by sqrt(kappa*length), yielding exact zero on a zero edge"
+}

@@ -1,0 +1,1 @@
+EstimatorIntegrity/PositiveSigmoidRisk.lean:137:56: error: `MemLp (fun x => 1) 2 μ` is not a `fun_prop` goal! Consider marking `MeasureTheory.MemLp` with `@[fun_prop]`.

@@ -1,0 +1,56 @@
+{
+  "date_local": "2026-09-29",
+  "verdict": "PASS D37 all-positive-diffusivity information lower, D38 strong whole-profile upper, D39 matching exponential rates",
+  "root_read": "Complete T81 857 lines, T82 698 lines, T83 591 lines, T84 884 lines, including T84 Section10a whole-profile corollary. Frozen source hashes rechecked at this acceptance.",
+  "sources": [
+    {
+      "path": "reviews/T81-fixed-burnin-all-diffusion-upper-proof.md",
+      "sha256": "d9b249ed669897df319ca712fc4ad26625fc97e1a9b32b79eacaf497b290bae5",
+      "lines": 857
+    },
+    {
+      "path": "reviews/T82-all-diffusion-prior-lower-proof.md",
+      "sha256": "0b331397bbda06ba02381009ce95bfd7656aabb4bd196bac5e67a616b3a2320a",
+      "lines": 698
+    },
+    {
+      "path": "reviews/T83-all-diffusion-lower-independent-audit.md",
+      "sha256": "902ee581593ace7d682fac5351a1288ccef09544d02893fbacc045782e03a56e",
+      "lines": 591
+    },
+    {
+      "path": "reviews/T84-all-diffusion-upper-independent-audit.md",
+      "sha256": "39cd98fcf957badbe382123bd1960eac7fb99441114c9433bd9ee0ff2d256d7d",
+      "lines": 884
+    }
+  ],
+  "synthesis": {
+    "path": "04y-all-positive-diffusivity-profile-complexity.md",
+    "sha256": "2a62aaec24cb762ebe8ef213ce7bbbb2dbd56e3b7ced197a851736db913d9ba8"
+  },
+  "correspondence": [
+    "Same actual AC flow with kappa/2 Laplacian, normalized unit d-torus and full signed smooth class with only C^s bounds",
+    "Every fixed kappa>0 and fixed integers d,s>=1; constants and thresholds may depend on these parameters",
+    "Same exact initial-value oracle with all preprocessing and repeated acquisitions charged; arbitrary measurable adaptive biased randomized stopping algorithms in the lower",
+    "Fixed full unconditioned Hamming priors, concentration exceptions charged in risk, actual PDE separation and capped adaptive transcript then expected-query truncation",
+    "Upper reconstructs S_1 v using paid Gevrey interpolant and actual fixed-time derivative tuples; marginal correlations retained by Minkowski",
+    "Coefficient clipping and explicit smooth saturation give every completed transcript a uniform known-profile solver interface",
+    "T84 Section10a places the spatial supremum inside L2 expectation and returns a polynomial-size indexed real Fourier array",
+    "Output evaluation transfers the point lower to profile query complexity; Work>=Q transfers both lower bounds to the paid ideal model",
+    "Bounded-time deterministic patch has spatial sup error 3/32<1/8",
+    "Logarithms divided by T remove only the upper polynomial factor; no exact Theta work/query conclusion for all diffusivities"
+  ],
+  "not_claimed": [
+    "Uniform constants as kappa tends to zero",
+    "Exact Theta(exp(gamma T)) for all-kappa queries or work",
+    "Finite-bit or stable floating implementation",
+    "Simultaneous infinite-time pathwise profile control",
+    "End-to-end Lean or signed numerical validation",
+    "Worldwide novelty, significance or award standard"
+  ],
+  "formal_status": "T62/T72 actual information ingredients and T75 actual finite-depth tree moments accepted separately; T86 actual uniform-slice gate active. Full theorem remains conventional.",
+  "initial_protected_files_checked": 342,
+  "initial_protected_mismatches": [],
+  "numerical_calls_added": 0,
+  "frozen_sources_edited": false
+}

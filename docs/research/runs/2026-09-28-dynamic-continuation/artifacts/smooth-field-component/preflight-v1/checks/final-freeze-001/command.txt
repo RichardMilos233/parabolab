@@ -1,0 +1,1 @@
+inline read-only SHA/state/final-gate verification; exact shell invocation preserved in task tool transcript

@@ -1,0 +1,10 @@
+label: trust-scan
+started_utc: 2026-09-28T20:33:40Z
+cwd: /Users/michael/Desktop/NTU/fyp/parabolab/formal
+source_sha256: 0cef39d33c11dd113b1ee2d60059485b214fd7ffd9e4fbe68e21709de2b2487c
+command: sh ../docs/research/runs/2026-09-28-dynamic-continuation/lean/hilbert-sampling-risk/trust-scan.sh
+--- stdout+stderr ---
+no forbidden tokens found
+--- end stdout+stderr ---
+exit_code: 0
+finished_utc: 2026-09-28T20:33:40Z

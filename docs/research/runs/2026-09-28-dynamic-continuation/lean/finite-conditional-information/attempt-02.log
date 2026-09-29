@@ -1,0 +1,16 @@
+T72 development attempt 02
+
+Command:
+  cd formal
+  ~/.elan/bin/lake env lean /tmp/FiniteScratch.lean
+
+Result: FAIL (exit 1).
+
+After the joint singleton law compiled, the explicit joint-density proof did
+not simplify the wrapped Bernoulli measures far enough. The remaining goals
+still contained `Ber(true, false, q h) {false}` and indicator/scalar-action
+terms, so `ENNReal.div_mul_cancel` could not match.
+
+Fix: prove a local exact formula for `bernoulliBool p {b}` by cases on `b`,
+rewrite both conditional masses through that lemma, and only then cancel the
+strictly positive reference mass.

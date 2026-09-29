@@ -1,0 +1,6 @@
+Command: ~/.elan/bin/lake env lean ../docs/research/runs/2026-09-28-dynamic-continuation/lean/absolute-obstruction/AbsoluteMomentObstructionAxioms.lean
+Working directory: formal
+Exit status: 0
+
+'EstimatorIntegrity.scaledRiccati_time_lt_pi_div_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.riccati_time_lt_pi_div_two' depends on axioms: [propext, Classical.choice, Quot.sound]

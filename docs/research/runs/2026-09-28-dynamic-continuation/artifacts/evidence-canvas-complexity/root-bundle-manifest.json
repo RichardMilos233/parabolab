@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "version": "esbuild-wasm0.25.9",
+  "exit_code": 0,
+  "bundle_bytes": 64473,
+  "bundle_sha256": "353a83f6113f34952d099633b4a59eb8b8f6104c40d4f4f4ccb068d674d6ecbd",
+  "note": "CLI completed successfully and generated the inspected bundle; its redirected log was empty. No GUI render certificate."
+}

@@ -1,0 +1,9 @@
+import EstimatorIntegrity.HeatTransformWork
+
+#print axioms EstimatorIntegrity.abs_scalar_mul_list_prod_le_one
+#print axioms EstimatorIntegrity.abs_div_le_one_of_abs_le
+#print axioms EstimatorIntegrity.heatTransformWork_fixedPoint
+#print axioms EstimatorIntegrity.finiteHeatTransformWorkInvariant
+#print axioms EstimatorIntegrity.finiteHeatTransformTotalRootWork_le
+#print axioms EstimatorIntegrity.finiteScalarBaselineWorkInvariant
+#print axioms EstimatorIntegrity.finiteMatchedGaussianWorkInvariant

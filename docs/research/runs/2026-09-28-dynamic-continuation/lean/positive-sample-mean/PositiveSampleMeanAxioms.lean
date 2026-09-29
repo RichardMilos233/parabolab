@@ -1,0 +1,17 @@
+import EstimatorIntegrity.PositiveSampleMean
+
+#print axioms EstimatorIntegrity.positiveSampleMean
+#print axioms EstimatorIntegrity.positiveSample_integrable
+#print axioms EstimatorIntegrity.positiveSample_memLp_two
+#print axioms EstimatorIntegrity.positiveSample_product_integral
+#print axioms EstimatorIntegrity.positiveSampleMean_measurable
+#print axioms EstimatorIntegrity.positiveSampleMean_integrable
+#print axioms EstimatorIntegrity.positiveSampleMean_unbiased
+#print axioms EstimatorIntegrity.positiveSampleMean_squaredLoss_integrable
+#print axioms EstimatorIntegrity.positiveSampleMean_mse_le
+#print axioms EstimatorIntegrity.positive_rpow_one_add_le_one_add_sq
+#print axioms EstimatorIntegrity.positive_scaled_rpow_identity
+#print axioms EstimatorIntegrity.positive_scaled_budget_bound
+#print axioms EstimatorIntegrity.positiveSampleMean_scaled_mse_le
+#print axioms EstimatorIntegrity.positiveSampleMean_transformed_mse_le
+#print axioms EstimatorIntegrity.positiveSampleMean_full_risk_certificate

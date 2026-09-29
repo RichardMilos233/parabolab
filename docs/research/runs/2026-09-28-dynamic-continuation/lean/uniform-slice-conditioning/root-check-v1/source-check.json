@@ -1,0 +1,17 @@
+{
+  "command": [
+    "/Users/michael/.elan/bin/lake",
+    "env",
+    "lean",
+    "-DautoImplicit=false",
+    "EstimatorIntegrity/UniformSliceConditioning.lean"
+  ],
+  "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab/formal",
+  "started_utc": "2026-09-28T20:16:36.287335+00:00",
+  "exit_code": 0,
+  "elapsed_seconds": 62.96576241683215,
+  "capture": "direct stdout+stderr at execution",
+  "source_sha256_before": "d50bd7145685480ab802270d4a5eae623205b373b70c1158b30cdbef50fd80fe",
+  "source_sha256_after": "d50bd7145685480ab802270d4a5eae623205b373b70c1158b30cdbef50fd80fe",
+  "log_sha256": "6a0326ecd5b533714db8aed691692693c4f4559d60cc7fc2adac86f9ac07b821"
+}

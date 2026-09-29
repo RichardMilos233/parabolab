@@ -1,0 +1,4 @@
+$ cd /Users/michael/Desktop/NTU/fyp/parabolab/formal
+$ ~/.elan/bin/lake build EstimatorIntegrity.HeatEnvelopeBudget
+✔ [3006/3006] Built EstimatorIntegrity.HeatEnvelopeBudget (50s)
+Build completed successfully (3006 jobs).

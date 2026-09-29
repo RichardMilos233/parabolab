@@ -1,0 +1,40 @@
+[
+  {
+    "check": "parity",
+    "command": [
+      "/opt/homebrew/bin/node",
+      "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v5/validate.cjs"
+    ],
+    "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v5",
+    "started_utc": "2026-09-28T19:50:52.740674+00:00",
+    "exit_code": 0
+  },
+  {
+    "check": "typescript",
+    "command": [
+      "/opt/homebrew/bin/node",
+      "/private/tmp/d29-e4-canvas-check/check.cjs"
+    ],
+    "cwd": "/private/tmp/d39-canvas-check",
+    "started_utc": "2026-09-28T19:50:53.581352+00:00",
+    "exit_code": 0
+  },
+  {
+    "check": "bundle",
+    "command": [
+      "/opt/homebrew/bin/node",
+      "/Applications/Cursor.app/Contents/Resources/app/extensions/node_modules/esbuild-wasm/bin/esbuild",
+      "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v5/dynamic-continuation-evidence.candidate.canvas.tsx",
+      "--bundle",
+      "--platform=browser",
+      "--format=esm",
+      "--external:cursor/canvas",
+      "--external:react",
+      "--external:react/jsx-runtime",
+      "--outfile=/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v5/dynamic-continuation-evidence.bundle.js"
+    ],
+    "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v5",
+    "started_utc": "2026-09-28T19:50:54.318833+00:00",
+    "exit_code": 0
+  }
+]

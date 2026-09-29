@@ -1,0 +1,22 @@
+T72 development attempt 01
+
+Command:
+  cd formal
+  ~/.elan/bin/lake env lean /tmp/FiniteScratch.lean
+
+Result: FAIL (exit 1).
+
+The first kernel/singleton prototype exposed two API details:
+
+```text
+failed to synthesize instance of type class
+  IsProbabilityMeasure ((bernoulliKernel p) x)
+
+unsolved goal
+  sum_x (Kernel.ofFunOfCountable ... x) (Prod.mk x ⁻¹' {(h,b)}) * mu {x}
+    = mu {h} * bernoulliBool (p h) {b}
+```
+
+Fix: unfold the kernel value explicitly when constructing its Markov instance,
+and reduce the finite composition-product integral with
+`Finset.sum_eq_single h`, proving the relevant singleton preimages directly.

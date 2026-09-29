@@ -1,0 +1,51 @@
+{
+  "reviewer": "root",
+  "completed_utc": "2026-09-28T17:34:39.774929+00:00",
+  "status": "PASS; fixed05i actual Bernoulli information gate only",
+  "read_scope": "Full final 318-line source, fixed05i contract, report, final build and all-public axiom evidence; source scan and all manifest hashes independently checked.",
+  "source_sha256": "39c0096ef110e85fa8bf8a512bbc1e7b2a8d94a0a20abf3e47d723e80ec77158",
+  "contract_sha256": "62d770647ffd6a69d370677e7d39e769710ef9de94f97b28caf77a0dcda4114a",
+  "report_sha256": "836e87cf2a209cdc278dfce7a449215e08036f1b7df0f7902b3dde18e0f06829",
+  "manifest_sha256": "5eeeb2c4c044d2f87639df9a8fad5ff16bd189f91546b3c8381f6ccb7f6d0dc6",
+  "manifest_entries_verified": 17,
+  "public_declarations": [
+    "bernoulliBool",
+    "bernoulliBool_isProbabilityMeasure",
+    "bernoulliKLScalar",
+    "bernoulliKLScalar_eq_log_div",
+    "continuous_bernoulliKLScalar",
+    "hasDerivAt_bernoulliKLScalar",
+    "bernoulliKLScalar_pinsker",
+    "bernoulliKLScalar_le_chiSq",
+    "bernoulliBool_true",
+    "bernoulliBool_kl_ne_top",
+    "bernoulliBool_kl_toReal",
+    "bernoulliBool_kl_le_chiSq",
+    "bernoulliBool_pinsker",
+    "bernoulliBool_testing_error"
+  ],
+  "axioms_for_each": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "fresh_build": "worker final clean module build 3390/3390, 66s; root inspected log and source correspondence, did not redundantly rebuild",
+  "root_checks": [
+    "actual Bool law probability of true is p",
+    "interior q actual density/Radon-Nikodym identity and finite KL",
+    "source endpoints included in exact scalar formula and chi-square bound",
+    "closed-interval convexity gives Pinsker, reference endpoints follow from finite-KL absolute continuity",
+    "actual ENNReal KL<=1/12 gives equal-prior test error>=3/8",
+    "no sorry/admit/custom axiom/opaque"
+  ],
+  "excluded_scope": [
+    "uniform Hamming-layer priors",
+    "adaptive fresh-cell exchangeability",
+    "KL chain rule and transcript postprocessing",
+    "random-stop truncation",
+    "MSE-to-label bridge",
+    "PDE/phase theory",
+    "full D25/D28/D29 certificate"
+  ],
+  "protected_sources_verified": 342
+}

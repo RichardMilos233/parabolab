@@ -1,0 +1,10 @@
+EstimatorIntegrity/PositiveSigmoidRisk.lean:139:6: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+EstimatorIntegrity/PositiveSigmoidRisk.lean:149:4: error: Type mismatch: After simplification, term
+  hcs
+ has type
+  ∫ (a : Ω), |F a| ∂μ ≤ (∫ (a : Ω), |F a| ^ (2 : ℝ) ∂μ) ^ (1 / 2)
+but is expected to have type
+  ∫ (ω : Ω), |F ω| ∂μ ≤ (∫ (ω : Ω), |F ω| ^ (2 : ℕ) ∂μ) ^ (1 / 2)
+EstimatorIntegrity/PositiveSigmoidRisk.lean:190:8: warning: declaration uses `sorry`

@@ -1,0 +1,13 @@
+import EstimatorIntegrity.OracleTranscript
+
+#print axioms EstimatorIntegrity.OracleAction
+#print axioms EstimatorIntegrity.OracleAction.stop
+#print axioms EstimatorIntegrity.OracleAction.query
+#print axioms EstimatorIntegrity.OracleHistory
+#print axioms EstimatorIntegrity.runOracle
+#print axioms EstimatorIntegrity.runOracle_congr_of_eq_on_trace
+#print axioms EstimatorIntegrity.runOracle_noHit
+#print axioms EstimatorIntegrity.oracleQueryCount
+#print axioms EstimatorIntegrity.runOracle_noHit_queryCount
+#print axioms EstimatorIntegrity.visitedCellLabels
+#print axioms EstimatorIntegrity.visitedCellLabels_card_le_trace_length

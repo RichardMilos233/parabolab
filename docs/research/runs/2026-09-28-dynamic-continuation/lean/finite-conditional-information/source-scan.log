@@ -1,0 +1,2 @@
+$ rg -n '\b(sorry|admit|axiom|opaque)\b' formal/EstimatorIntegrity/FiniteConditionalInformation.lean
+Result: no matches.

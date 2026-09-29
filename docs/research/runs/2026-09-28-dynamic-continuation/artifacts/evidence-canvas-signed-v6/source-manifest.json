@@ -1,0 +1,33 @@
+{
+  "task": "T92",
+  "date_local": "2026-09-29",
+  "managed_canvas": {
+    "path": "/Users/michael/.cursor/projects/Users-michael-Desktop-NTU-fyp-parabolab/canvases/dynamic-continuation-evidence.canvas.tsx",
+    "sha256": "e2619ea14528c4e3d20e62ed2a3edb8cb2f3c175b47af4e31c9f1599f9e9fa41",
+    "modified_by_T92": false
+  },
+  "archive": {
+    "path": "dynamic-continuation-evidence.original.canvas.tsx",
+    "sha256": "e2619ea14528c4e3d20e62ed2a3edb8cb2f3c175b47af4e31c9f1599f9e9fa41",
+    "byte_identical_to_managed_source": true
+  },
+  "candidate": {
+    "path": "dynamic-continuation-evidence.candidate.canvas.tsx",
+    "sha256": "a35be1ea0d6c6357cae2b1176df538e31fd61b5012c0f9e77ad0a947226f5b73",
+    "deployed": false
+  },
+  "claim_sources": {
+    "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/04z-all-positive-diffusivity-sharp-queries.md": "57ef1d86ddba30ce9d54f316b0eb2dc97f407f7aeb4446a66b3103c28e0aedd4",
+    "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T90-root-correspondence.json": "2cec8c64716616c05383990fa4cbb143f21e42b58dde6b3a8121277ad56f85e7",
+    "/Users/michael/Desktop/NTU/fyp/parabolab/formal/EstimatorIntegrity/UniformSliceConditioning.lean": "d50bd7145685480ab802270d4a5eae623205b373b70c1158b30cdbef50fd80fe",
+    "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/06n-uniform-slice-conditioning-lean.md": "af6c63d6a6ed82180d68155d4b7047277dd440a2d23d651501abde46b98cc377",
+    "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T86-root-correspondence.json": "b39b9cfb5b22e1185c95e191b3f7a85339b2f6314da4b5eb34ef66c332fdce0d"
+  },
+  "status_boundaries": {
+    "D40_D42": "accepted conventional result after frozen T87/T90 and root correspondence",
+    "T86": "accepted fixed05l only after root direct rebuild and public audit",
+    "T89": "pending",
+    "R20_R21": "candidates pending audit and not premises"
+  },
+  "numerical_execution_or_unknown_input_acquisitions_added": 0
+}

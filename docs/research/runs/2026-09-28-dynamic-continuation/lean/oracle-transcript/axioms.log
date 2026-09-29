@@ -1,0 +1,11 @@
+'EstimatorIntegrity.OracleAction' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.OracleAction.stop' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.OracleAction.query' does not depend on any axioms
+'EstimatorIntegrity.OracleHistory' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.runOracle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.runOracle_congr_of_eq_on_trace' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.runOracle_noHit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.oracleQueryCount' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.runOracle_noHit_queryCount' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.visitedCellLabels' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.visitedCellLabels_card_le_trace_length' depends on axioms: [propext, Classical.choice, Quot.sound]

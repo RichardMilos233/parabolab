@@ -1,0 +1,41 @@
+✖ [3177/3177] Building EstimatorIntegrity.QueryInformationLowerBound (59s)
+trace: .> LEAN_PATH=/Users/michael/Desktop/NTU/fyp/parabolab/formal/.lake/packages/Cli/.lake/build/lib/lean:/Users/michael/Desktop/NTU/fyp/parabolab/formal/.lake/packages/batteries/.lake/build/lib/lean:/Users/michael/Desktop/NTU/fyp/parabolab/formal/.lake/packages/Qq/.lake/build/lib/lean:/Users/michael/Desktop/NTU/fyp/parabolab/formal/.lake/packages/aesop/.lake/build/lib/lean:/Users/michael/Desktop/NTU/fyp/parabolab/formal/.lake/packages/proofwidgets/.lake/build/lib/lean:/Users/michael/Desktop/NTU/fyp/parabolab/formal/.lake/packages/importGraph/.lake/build/lib/lean:/Users/michael/Desktop/NTU/fyp/parabolab/formal/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/Users/michael/Desktop/NTU/fyp/parabolab/formal/.lake/packages/plausible/.lake/build/lib/lean:/Users/michael/Desktop/NTU/fyp/parabolab/formal/.lake/packages/mathlib/.lake/build/lib/lean:/Users/michael/Desktop/NTU/fyp/parabolab/formal/.lake/build/lib/lean /Users/michael/.elan/toolchains/leanprover--lean4---v4.33.0/bin/lean /Users/michael/Desktop/NTU/fyp/parabolab/formal/EstimatorIntegrity/QueryInformationLowerBound.lean -o /Users/michael/Desktop/NTU/fyp/parabolab/formal/.lake/build/lib/lean/EstimatorIntegrity/QueryInformationLowerBound.olean -i /Users/michael/Desktop/NTU/fyp/parabolab/formal/.lake/build/lib/lean/EstimatorIntegrity/QueryInformationLowerBound.ilean -c /Users/michael/Desktop/NTU/fyp/parabolab/formal/.lake/build/ir/EstimatorIntegrity/QueryInformationLowerBound.c --setup /Users/michael/Desktop/NTU/fyp/parabolab/formal/.lake/build/ir/EstimatorIntegrity/QueryInformationLowerBound.setup.json --json
+error: EstimatorIntegrity/QueryInformationLowerBound.lean:53:12: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  Hminus i ω
+in the target expression
+  2 * γ ^ 2 ≤ loss i
+
+Ω : Type u_1
+I : Type u_2
+inst✝¹ : Fintype I
+inst✝ : DecidableEq I
+hit : Ω → Finset I
+Q : Ω → ℝ
+Hplus Hminus : I → Ω → ℝ
+a b : I → ℝ
+γ : ℝ
+hγ : 0 ≤ γ
+hcard : ∀ (ω : Ω), ↑(hit ω).card ≤ Q ω
+hsep : ∀ (i : I), 2 * γ ≤ a i - b i
+hcouple : ∀ (ω : Ω), ∀ i ∉ hit ω, Hplus i ω = Hminus i ω
+ω : Ω
+loss : I → ℝ := fun i => (Hplus i ω - a i) ^ 2 + (Hminus i ω - b i) ^ 2
+i : I
+hi : i ∈ (hit ω)ᶜ
+hnotmem : i ∉ hit ω
+⊢ 2 * γ ^ 2 ≤ loss i
+warning: EstimatorIntegrity/QueryInformationLowerBound.lean:99:4: `MeasureTheory.integrable_finset_sum` has been deprecated: Use `MeasureTheory.integrable_finsetSum` instead
+error: EstimatorIntegrity/QueryInformationLowerBound.lean:103:11: Unknown constant `MeasureTheory.integrable_const.sub`
+error: EstimatorIntegrity/QueryInformationLowerBound.lean:109:41: Application type mismatch: The argument
+  integrable_const
+has type
+  ∀ (c : ?m.493), Integrable (fun x => c) ?m.495
+but is expected to have type
+  Integrable ?m.490 ?m.489
+in the application
+  integral_sub integrable_const
+warning: EstimatorIntegrity/QueryInformationLowerBound.lean:113:10: `MeasureTheory.integral_finset_sum` has been deprecated: Use `MeasureTheory.integral_finsetSum` instead
+error: Lean exited with code 1
+Some required targets logged failures:
+- EstimatorIntegrity.QueryInformationLowerBound
+error: build failed

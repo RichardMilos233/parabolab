@@ -1,0 +1,12 @@
+label: owned-scope-status
+started_utc: 2026-09-28T20:34:54Z
+cwd: /Users/michael/Desktop/NTU/fyp/parabolab/formal
+source_sha256: 0cef39d33c11dd113b1ee2d60059485b214fd7ffd9e4fbe68e21709de2b2487c
+command: git -C .. status --short -- formal/EstimatorIntegrity/HilbertSamplingRisk.lean docs/research/runs/2026-09-28-dynamic-continuation/06o-hilbert-sampling-risk-lean.md docs/research/runs/2026-09-28-dynamic-continuation/lean/hilbert-sampling-risk
+--- stdout+stderr ---
+?? docs/research/runs/2026-09-28-dynamic-continuation/06o-hilbert-sampling-risk-lean.md
+?? docs/research/runs/2026-09-28-dynamic-continuation/lean/hilbert-sampling-risk/
+?? formal/EstimatorIntegrity/HilbertSamplingRisk.lean
+--- end stdout+stderr ---
+exit_code: 0
+finished_utc: 2026-09-28T20:34:54Z

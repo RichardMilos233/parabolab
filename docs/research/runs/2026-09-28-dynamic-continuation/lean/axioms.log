@@ -1,0 +1,13 @@
+Command: ~/.elan/bin/lake env lean ../docs/research/runs/2026-09-28-dynamic-continuation/lean/DynamicContinuationAxioms.lean
+Working directory: formal
+Exit status: 0
+
+'EstimatorIntegrity.dynamicRadicand_le_square' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.dynamicRmsStep_invariant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.finiteDynamicRmsRecurrence' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.finiteDynamicRmsRecurrence_of_parameters' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.dynamicMu_mul_step' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.dynamicAffineDerivativeEnvelope' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.dynamicInterpolationDefect_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.dynamicDenominatorRationals' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.dynamicFinalRmsBudget' depends on axioms: [propext, Classical.choice, Quot.sound]

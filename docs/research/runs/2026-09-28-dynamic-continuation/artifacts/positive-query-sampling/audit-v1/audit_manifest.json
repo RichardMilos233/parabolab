@@ -1,0 +1,3481 @@
+{
+  "actual_spent_before_replay": 338194754,
+  "audit_source": "docs/research/runs/2026-09-28-dynamic-continuation/numerics/audit_positive_query_sampling.py",
+  "audit_source_sha256": "2615203c60973fd0908bd185b7cc3d8d4b3eb1b0b1ac6f9bdd4bcc4b6128b009",
+  "automatic_retry_authorized": false,
+  "created_utc": "2026-09-28T17:11:52.917157+00:00",
+  "declared_bindings": {
+    "clearance_sha256": "bec557a2ac4333151c40b04c69a62b3b422ffdb6b94873c57048b6f150e8b9a9",
+    "implementation_report_sha256": "4f7959a3b673bf1af78ade163ae13276afb72d243d2b85b72a232731c9b9839d",
+    "manifest_sha256": "9417c6dc18b3c761ee7cdf38c4cc8ececbfc048c0869b0fea5b96acaaae47bd5",
+    "official_result_sha256": "818f4f54da86417d1d3df139bbe717d58e371fc8c97acbffcdf73e6bbb064ac3",
+    "preflight_sha256": "ae85c9f1712ada9697bedc472ea273bf692b2cc7c4f0813f58a63ce085380c1c",
+    "producer_sha256": "81eb2b122d325eca97d144adc00380114558c5ad35a830d9d4062fa95f63df08",
+    "protocol_sha256": "8713593424011f0cb713e19125bccfff1dacf25e9ce401c68ff6867aa8c9fe9b"
+  },
+  "environment": {
+    "machine": "arm64",
+    "matplotlib_version": "3.11.0",
+    "numpy_version": "2.4.6",
+    "platform": "macOS-26.3-arm64-arm-64bit",
+    "python_executable": "/opt/miniconda3/envs/parabolab/bin/python",
+    "python_version": "3.11.15 (main, Jun 11 2026, 15:14:57) [Clang 20.1.8 ]"
+  },
+  "exact_replay_subset": [
+    {
+      "T": 12,
+      "cell": "seed-00_T-00_z-00_schedule-00",
+      "n": 51,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260928,
+      "spawn_key": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-00_T-00_z-00_schedule-01",
+      "n": 202,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260928,
+      "spawn_key": [
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-00_T-00_z-00_schedule-02",
+      "n": 807,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260928,
+      "spawn_key": [
+        0,
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-00_T-00_z-00_schedule-03",
+      "n": 38730,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260928,
+      "spawn_key": [
+        0,
+        0,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-00_T-00_z-00_schedule-04",
+      "n": 51,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260928,
+      "spawn_key": [
+        0,
+        0,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-00_T-00_z-01_schedule-00",
+      "n": 51,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260928,
+      "spawn_key": [
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-00_T-00_z-01_schedule-01",
+      "n": 202,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260928,
+      "spawn_key": [
+        0,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-00_T-00_z-01_schedule-02",
+      "n": 807,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260928,
+      "spawn_key": [
+        0,
+        1,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-00_T-00_z-01_schedule-03",
+      "n": 38730,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260928,
+      "spawn_key": [
+        0,
+        1,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-00_T-00_z-01_schedule-04",
+      "n": 51,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260928,
+      "spawn_key": [
+        0,
+        1,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-00_T-00_z-02_schedule-00",
+      "n": 51,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260928,
+      "spawn_key": [
+        0,
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-00_T-00_z-02_schedule-01",
+      "n": 202,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260928,
+      "spawn_key": [
+        0,
+        2,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-00_T-00_z-02_schedule-02",
+      "n": 807,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260928,
+      "spawn_key": [
+        0,
+        2,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-00_T-00_z-02_schedule-03",
+      "n": 38730,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260928,
+      "spawn_key": [
+        0,
+        2,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-00_T-00_z-02_schedule-04",
+      "n": 51,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260928,
+      "spawn_key": [
+        0,
+        2,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-00_T-00_z-03_schedule-00",
+      "n": 51,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260928,
+      "spawn_key": [
+        0,
+        3,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-00_T-00_z-03_schedule-01",
+      "n": 202,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260928,
+      "spawn_key": [
+        0,
+        3,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-00_T-00_z-03_schedule-02",
+      "n": 807,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260928,
+      "spawn_key": [
+        0,
+        3,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-00_T-00_z-03_schedule-03",
+      "n": 38730,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260928,
+      "spawn_key": [
+        0,
+        3,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-00_T-00_z-03_schedule-04",
+      "n": 51,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260928,
+      "spawn_key": [
+        0,
+        3,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-00_T-01_z-00_schedule-00",
+      "n": 373,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260928,
+      "spawn_key": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-00_T-01_z-00_schedule-01",
+      "n": 1491,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260928,
+      "spawn_key": [
+        1,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-00_T-01_z-00_schedule-02",
+      "n": 5962,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260928,
+      "spawn_key": [
+        1,
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-00_T-01_z-00_schedule-03",
+      "n": 286172,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260928,
+      "spawn_key": [
+        1,
+        0,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-00_T-01_z-00_schedule-04",
+      "n": 51,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260928,
+      "spawn_key": [
+        1,
+        0,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-00_T-01_z-01_schedule-00",
+      "n": 373,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260928,
+      "spawn_key": [
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-00_T-01_z-01_schedule-01",
+      "n": 1491,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260928,
+      "spawn_key": [
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-00_T-01_z-01_schedule-02",
+      "n": 5962,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260928,
+      "spawn_key": [
+        1,
+        1,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-00_T-01_z-01_schedule-03",
+      "n": 286172,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260928,
+      "spawn_key": [
+        1,
+        1,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-00_T-01_z-01_schedule-04",
+      "n": 51,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260928,
+      "spawn_key": [
+        1,
+        1,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-00_T-01_z-02_schedule-00",
+      "n": 373,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260928,
+      "spawn_key": [
+        1,
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-00_T-01_z-02_schedule-01",
+      "n": 1491,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260928,
+      "spawn_key": [
+        1,
+        2,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-00_T-01_z-02_schedule-02",
+      "n": 5962,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260928,
+      "spawn_key": [
+        1,
+        2,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-00_T-01_z-02_schedule-03",
+      "n": 286172,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260928,
+      "spawn_key": [
+        1,
+        2,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-00_T-01_z-02_schedule-04",
+      "n": 51,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260928,
+      "spawn_key": [
+        1,
+        2,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-00_T-01_z-03_schedule-00",
+      "n": 373,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260928,
+      "spawn_key": [
+        1,
+        3,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-00_T-01_z-03_schedule-01",
+      "n": 1491,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260928,
+      "spawn_key": [
+        1,
+        3,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-00_T-01_z-03_schedule-02",
+      "n": 5962,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260928,
+      "spawn_key": [
+        1,
+        3,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-00_T-01_z-03_schedule-03",
+      "n": 286172,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260928,
+      "spawn_key": [
+        1,
+        3,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-00_T-01_z-03_schedule-04",
+      "n": 51,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260928,
+      "spawn_key": [
+        1,
+        3,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-00_T-02_z-00_schedule-00",
+      "n": 2754,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260928,
+      "spawn_key": [
+        2,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-00_T-02_z-00_schedule-01",
+      "n": 11014,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260928,
+      "spawn_key": [
+        2,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-00_T-02_z-00_schedule-02",
+      "n": 44053,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260928,
+      "spawn_key": [
+        2,
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-00_T-02_z-00_schedule-03",
+      "n": 2114541,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260928,
+      "spawn_key": [
+        2,
+        0,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-00_T-02_z-00_schedule-04",
+      "n": 51,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260928,
+      "spawn_key": [
+        2,
+        0,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-00_T-02_z-01_schedule-00",
+      "n": 2754,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260928,
+      "spawn_key": [
+        2,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-00_T-02_z-01_schedule-01",
+      "n": 11014,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260928,
+      "spawn_key": [
+        2,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-00_T-02_z-01_schedule-02",
+      "n": 44053,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260928,
+      "spawn_key": [
+        2,
+        1,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-00_T-02_z-01_schedule-03",
+      "n": 2114541,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260928,
+      "spawn_key": [
+        2,
+        1,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-00_T-02_z-01_schedule-04",
+      "n": 51,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260928,
+      "spawn_key": [
+        2,
+        1,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-00_T-02_z-02_schedule-00",
+      "n": 2754,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260928,
+      "spawn_key": [
+        2,
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-00_T-02_z-02_schedule-01",
+      "n": 11014,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260928,
+      "spawn_key": [
+        2,
+        2,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-00_T-02_z-02_schedule-02",
+      "n": 44053,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260928,
+      "spawn_key": [
+        2,
+        2,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-00_T-02_z-02_schedule-03",
+      "n": 2114541,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260928,
+      "spawn_key": [
+        2,
+        2,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-00_T-02_z-02_schedule-04",
+      "n": 51,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260928,
+      "spawn_key": [
+        2,
+        2,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-00_T-02_z-03_schedule-00",
+      "n": 2754,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260928,
+      "spawn_key": [
+        2,
+        3,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-00_T-02_z-03_schedule-01",
+      "n": 11014,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260928,
+      "spawn_key": [
+        2,
+        3,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-00_T-02_z-03_schedule-02",
+      "n": 44053,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260928,
+      "spawn_key": [
+        2,
+        3,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-00_T-02_z-03_schedule-03",
+      "n": 2114541,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260928,
+      "spawn_key": [
+        2,
+        3,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-00_T-02_z-03_schedule-04",
+      "n": 51,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260928,
+      "spawn_key": [
+        2,
+        3,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-01_T-00_z-00_schedule-00",
+      "n": 51,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260929,
+      "spawn_key": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-01_T-00_z-00_schedule-01",
+      "n": 202,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260929,
+      "spawn_key": [
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-01_T-00_z-00_schedule-02",
+      "n": 807,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260929,
+      "spawn_key": [
+        0,
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-01_T-00_z-00_schedule-03",
+      "n": 38730,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260929,
+      "spawn_key": [
+        0,
+        0,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-01_T-00_z-00_schedule-04",
+      "n": 51,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260929,
+      "spawn_key": [
+        0,
+        0,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-01_T-00_z-01_schedule-00",
+      "n": 51,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260929,
+      "spawn_key": [
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-01_T-00_z-01_schedule-01",
+      "n": 202,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260929,
+      "spawn_key": [
+        0,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-01_T-00_z-01_schedule-02",
+      "n": 807,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260929,
+      "spawn_key": [
+        0,
+        1,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-01_T-00_z-01_schedule-03",
+      "n": 38730,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260929,
+      "spawn_key": [
+        0,
+        1,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-01_T-00_z-01_schedule-04",
+      "n": 51,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260929,
+      "spawn_key": [
+        0,
+        1,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-01_T-00_z-02_schedule-00",
+      "n": 51,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260929,
+      "spawn_key": [
+        0,
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-01_T-00_z-02_schedule-01",
+      "n": 202,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260929,
+      "spawn_key": [
+        0,
+        2,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-01_T-00_z-02_schedule-02",
+      "n": 807,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260929,
+      "spawn_key": [
+        0,
+        2,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-01_T-00_z-02_schedule-03",
+      "n": 38730,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260929,
+      "spawn_key": [
+        0,
+        2,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-01_T-00_z-02_schedule-04",
+      "n": 51,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260929,
+      "spawn_key": [
+        0,
+        2,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-01_T-00_z-03_schedule-00",
+      "n": 51,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260929,
+      "spawn_key": [
+        0,
+        3,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-01_T-00_z-03_schedule-01",
+      "n": 202,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260929,
+      "spawn_key": [
+        0,
+        3,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-01_T-00_z-03_schedule-02",
+      "n": 807,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260929,
+      "spawn_key": [
+        0,
+        3,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-01_T-00_z-03_schedule-03",
+      "n": 38730,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260929,
+      "spawn_key": [
+        0,
+        3,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-01_T-00_z-03_schedule-04",
+      "n": 51,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260929,
+      "spawn_key": [
+        0,
+        3,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-01_T-01_z-00_schedule-00",
+      "n": 373,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260929,
+      "spawn_key": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-01_T-01_z-00_schedule-01",
+      "n": 1491,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260929,
+      "spawn_key": [
+        1,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-01_T-01_z-00_schedule-02",
+      "n": 5962,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260929,
+      "spawn_key": [
+        1,
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-01_T-01_z-00_schedule-03",
+      "n": 286172,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260929,
+      "spawn_key": [
+        1,
+        0,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-01_T-01_z-00_schedule-04",
+      "n": 51,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260929,
+      "spawn_key": [
+        1,
+        0,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-01_T-01_z-01_schedule-00",
+      "n": 373,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260929,
+      "spawn_key": [
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-01_T-01_z-01_schedule-01",
+      "n": 1491,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260929,
+      "spawn_key": [
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-01_T-01_z-01_schedule-02",
+      "n": 5962,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260929,
+      "spawn_key": [
+        1,
+        1,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-01_T-01_z-01_schedule-03",
+      "n": 286172,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260929,
+      "spawn_key": [
+        1,
+        1,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-01_T-01_z-01_schedule-04",
+      "n": 51,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260929,
+      "spawn_key": [
+        1,
+        1,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-01_T-01_z-02_schedule-00",
+      "n": 373,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260929,
+      "spawn_key": [
+        1,
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-01_T-01_z-02_schedule-01",
+      "n": 1491,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260929,
+      "spawn_key": [
+        1,
+        2,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-01_T-01_z-02_schedule-02",
+      "n": 5962,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260929,
+      "spawn_key": [
+        1,
+        2,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-01_T-01_z-02_schedule-03",
+      "n": 286172,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260929,
+      "spawn_key": [
+        1,
+        2,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-01_T-01_z-02_schedule-04",
+      "n": 51,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260929,
+      "spawn_key": [
+        1,
+        2,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-01_T-01_z-03_schedule-00",
+      "n": 373,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260929,
+      "spawn_key": [
+        1,
+        3,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-01_T-01_z-03_schedule-01",
+      "n": 1491,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260929,
+      "spawn_key": [
+        1,
+        3,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-01_T-01_z-03_schedule-02",
+      "n": 5962,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260929,
+      "spawn_key": [
+        1,
+        3,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-01_T-01_z-03_schedule-03",
+      "n": 286172,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260929,
+      "spawn_key": [
+        1,
+        3,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-01_T-01_z-03_schedule-04",
+      "n": 51,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260929,
+      "spawn_key": [
+        1,
+        3,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-01_T-02_z-00_schedule-00",
+      "n": 2754,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260929,
+      "spawn_key": [
+        2,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-01_T-02_z-00_schedule-01",
+      "n": 11014,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260929,
+      "spawn_key": [
+        2,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-01_T-02_z-00_schedule-02",
+      "n": 44053,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260929,
+      "spawn_key": [
+        2,
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-01_T-02_z-00_schedule-03",
+      "n": 2114541,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260929,
+      "spawn_key": [
+        2,
+        0,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-01_T-02_z-00_schedule-04",
+      "n": 51,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260929,
+      "spawn_key": [
+        2,
+        0,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-01_T-02_z-01_schedule-00",
+      "n": 2754,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260929,
+      "spawn_key": [
+        2,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-01_T-02_z-01_schedule-01",
+      "n": 11014,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260929,
+      "spawn_key": [
+        2,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-01_T-02_z-01_schedule-02",
+      "n": 44053,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260929,
+      "spawn_key": [
+        2,
+        1,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-01_T-02_z-01_schedule-03",
+      "n": 2114541,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260929,
+      "spawn_key": [
+        2,
+        1,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-01_T-02_z-01_schedule-04",
+      "n": 51,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260929,
+      "spawn_key": [
+        2,
+        1,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-01_T-02_z-02_schedule-00",
+      "n": 2754,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260929,
+      "spawn_key": [
+        2,
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-01_T-02_z-02_schedule-01",
+      "n": 11014,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260929,
+      "spawn_key": [
+        2,
+        2,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-01_T-02_z-02_schedule-02",
+      "n": 44053,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260929,
+      "spawn_key": [
+        2,
+        2,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-01_T-02_z-02_schedule-03",
+      "n": 2114541,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260929,
+      "spawn_key": [
+        2,
+        2,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-01_T-02_z-02_schedule-04",
+      "n": 51,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260929,
+      "spawn_key": [
+        2,
+        2,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-01_T-02_z-03_schedule-00",
+      "n": 2754,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260929,
+      "spawn_key": [
+        2,
+        3,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-01_T-02_z-03_schedule-01",
+      "n": 11014,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260929,
+      "spawn_key": [
+        2,
+        3,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-01_T-02_z-03_schedule-02",
+      "n": 44053,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260929,
+      "spawn_key": [
+        2,
+        3,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-01_T-02_z-03_schedule-03",
+      "n": 2114541,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260929,
+      "spawn_key": [
+        2,
+        3,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-01_T-02_z-03_schedule-04",
+      "n": 51,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260929,
+      "spawn_key": [
+        2,
+        3,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-02_T-00_z-00_schedule-00",
+      "n": 51,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260930,
+      "spawn_key": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-02_T-00_z-00_schedule-01",
+      "n": 202,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260930,
+      "spawn_key": [
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-02_T-00_z-00_schedule-02",
+      "n": 807,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260930,
+      "spawn_key": [
+        0,
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-02_T-00_z-00_schedule-03",
+      "n": 38730,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260930,
+      "spawn_key": [
+        0,
+        0,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-02_T-00_z-00_schedule-04",
+      "n": 51,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260930,
+      "spawn_key": [
+        0,
+        0,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-02_T-00_z-01_schedule-00",
+      "n": 51,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260930,
+      "spawn_key": [
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-02_T-00_z-01_schedule-01",
+      "n": 202,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260930,
+      "spawn_key": [
+        0,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-02_T-00_z-01_schedule-02",
+      "n": 807,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260930,
+      "spawn_key": [
+        0,
+        1,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-02_T-00_z-01_schedule-03",
+      "n": 38730,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260930,
+      "spawn_key": [
+        0,
+        1,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-02_T-00_z-01_schedule-04",
+      "n": 51,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260930,
+      "spawn_key": [
+        0,
+        1,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-02_T-00_z-02_schedule-00",
+      "n": 51,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260930,
+      "spawn_key": [
+        0,
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-02_T-00_z-02_schedule-01",
+      "n": 202,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260930,
+      "spawn_key": [
+        0,
+        2,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-02_T-00_z-02_schedule-02",
+      "n": 807,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260930,
+      "spawn_key": [
+        0,
+        2,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-02_T-00_z-02_schedule-03",
+      "n": 38730,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260930,
+      "spawn_key": [
+        0,
+        2,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-02_T-00_z-02_schedule-04",
+      "n": 51,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260930,
+      "spawn_key": [
+        0,
+        2,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-02_T-00_z-03_schedule-00",
+      "n": 51,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260930,
+      "spawn_key": [
+        0,
+        3,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-02_T-00_z-03_schedule-01",
+      "n": 202,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260930,
+      "spawn_key": [
+        0,
+        3,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-02_T-00_z-03_schedule-02",
+      "n": 807,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260930,
+      "spawn_key": [
+        0,
+        3,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-02_T-00_z-03_schedule-03",
+      "n": 38730,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260930,
+      "spawn_key": [
+        0,
+        3,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 12,
+      "cell": "seed-02_T-00_z-03_schedule-04",
+      "n": 51,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260930,
+      "spawn_key": [
+        0,
+        3,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-02_T-01_z-00_schedule-00",
+      "n": 373,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260930,
+      "spawn_key": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-02_T-01_z-00_schedule-01",
+      "n": 1491,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260930,
+      "spawn_key": [
+        1,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-02_T-01_z-00_schedule-02",
+      "n": 5962,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260930,
+      "spawn_key": [
+        1,
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-02_T-01_z-00_schedule-03",
+      "n": 286172,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260930,
+      "spawn_key": [
+        1,
+        0,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-02_T-01_z-00_schedule-04",
+      "n": 51,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260930,
+      "spawn_key": [
+        1,
+        0,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-02_T-01_z-01_schedule-00",
+      "n": 373,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260930,
+      "spawn_key": [
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-02_T-01_z-01_schedule-01",
+      "n": 1491,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260930,
+      "spawn_key": [
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-02_T-01_z-01_schedule-02",
+      "n": 5962,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260930,
+      "spawn_key": [
+        1,
+        1,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-02_T-01_z-01_schedule-03",
+      "n": 286172,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260930,
+      "spawn_key": [
+        1,
+        1,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-02_T-01_z-01_schedule-04",
+      "n": 51,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260930,
+      "spawn_key": [
+        1,
+        1,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-02_T-01_z-02_schedule-00",
+      "n": 373,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260930,
+      "spawn_key": [
+        1,
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-02_T-01_z-02_schedule-01",
+      "n": 1491,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260930,
+      "spawn_key": [
+        1,
+        2,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-02_T-01_z-02_schedule-02",
+      "n": 5962,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260930,
+      "spawn_key": [
+        1,
+        2,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-02_T-01_z-02_schedule-03",
+      "n": 286172,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260930,
+      "spawn_key": [
+        1,
+        2,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-02_T-01_z-02_schedule-04",
+      "n": 51,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260930,
+      "spawn_key": [
+        1,
+        2,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-02_T-01_z-03_schedule-00",
+      "n": 373,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260930,
+      "spawn_key": [
+        1,
+        3,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-02_T-01_z-03_schedule-01",
+      "n": 1491,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260930,
+      "spawn_key": [
+        1,
+        3,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-02_T-01_z-03_schedule-02",
+      "n": 5962,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260930,
+      "spawn_key": [
+        1,
+        3,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-02_T-01_z-03_schedule-03",
+      "n": 286172,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260930,
+      "spawn_key": [
+        1,
+        3,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 16,
+      "cell": "seed-02_T-01_z-03_schedule-04",
+      "n": 51,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260930,
+      "spawn_key": [
+        1,
+        3,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-02_T-02_z-00_schedule-00",
+      "n": 2754,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260930,
+      "spawn_key": [
+        2,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-02_T-02_z-00_schedule-01",
+      "n": 11014,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260930,
+      "spawn_key": [
+        2,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-02_T-02_z-00_schedule-02",
+      "n": 44053,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260930,
+      "spawn_key": [
+        2,
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-02_T-02_z-00_schedule-03",
+      "n": 2114541,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260930,
+      "spawn_key": [
+        2,
+        0,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-02_T-02_z-00_schedule-04",
+      "n": 51,
+      "nominal_z": 0.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260930,
+      "spawn_key": [
+        2,
+        0,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-02_T-02_z-01_schedule-00",
+      "n": 2754,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260930,
+      "spawn_key": [
+        2,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-02_T-02_z-01_schedule-01",
+      "n": 11014,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260930,
+      "spawn_key": [
+        2,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-02_T-02_z-01_schedule-02",
+      "n": 44053,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260930,
+      "spawn_key": [
+        2,
+        1,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-02_T-02_z-01_schedule-03",
+      "n": 2114541,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260930,
+      "spawn_key": [
+        2,
+        1,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-02_T-02_z-01_schedule-04",
+      "n": 51,
+      "nominal_z": 0.25,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260930,
+      "spawn_key": [
+        2,
+        1,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-02_T-02_z-02_schedule-00",
+      "n": 2754,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260930,
+      "spawn_key": [
+        2,
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-02_T-02_z-02_schedule-01",
+      "n": 11014,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260930,
+      "spawn_key": [
+        2,
+        2,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-02_T-02_z-02_schedule-02",
+      "n": 44053,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260930,
+      "spawn_key": [
+        2,
+        2,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-02_T-02_z-02_schedule-03",
+      "n": 2114541,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260930,
+      "spawn_key": [
+        2,
+        2,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-02_T-02_z-02_schedule-04",
+      "n": 51,
+      "nominal_z": 1.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260930,
+      "spawn_key": [
+        2,
+        2,
+        4,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-02_T-02_z-03_schedule-00",
+      "n": 2754,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p125",
+      "seed_root": 20260930,
+      "spawn_key": [
+        2,
+        3,
+        0,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-02_T-02_z-03_schedule-01",
+      "n": 11014,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_0p5",
+      "seed_root": 20260930,
+      "spawn_key": [
+        2,
+        3,
+        1,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-02_T-02_z-03_schedule-02",
+      "n": 44053,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "growing_2",
+      "seed_root": 20260930,
+      "spawn_key": [
+        2,
+        3,
+        2,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-02_T-02_z-03_schedule-03",
+      "n": 2114541,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 8,
+      "replicate_index": 0,
+      "schedule": "theorem_96",
+      "seed_root": 20260930,
+      "spawn_key": [
+        2,
+        3,
+        3,
+        0
+      ]
+    },
+    {
+      "T": 20,
+      "cell": "seed-02_T-02_z-03_schedule-04",
+      "n": 51,
+      "nominal_z": 4.0,
+      "repetitions_in_official_cell": 128,
+      "replicate_index": 0,
+      "schedule": "fixed_51",
+      "seed_root": 20260930,
+      "spawn_key": [
+        2,
+        3,
+        4,
+        0
+      ]
+    }
+  ],
+  "full_replay_authorized": false,
+  "input_hashes_sha256": {
+    "docs/research/runs/2026-09-28-dynamic-continuation/02g-positive-query-sampling-protocol.md": "8713593424011f0cb713e19125bccfff1dacf25e9ce401c68ff6867aa8c9fe9b",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v1/execution_manifest.json": "f89cb731baa193c140cc42b73a0db7449b49f24795d76339e9c1165846a96428",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v1/preflight.log": "fe10f5eda0bcfbac98a27a39585cbd4de8c2127fd30322c3b858dcdd134c45e6",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v1/preflight_activity.jsonl": "876b23f230fff605c91d74b57b6cdcc8eda4521942a23f36e31844e63b0cdba0",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v1/preflight_journal.jsonl": "89c185bf3066283d0b6f53149b7a6db3550245db1597ebdd266d24b594aad2f1",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v1/preflight_result.json": "7e7327de5cd107366035774f7f109e19c6a0c5d9263cbe031aa503a1ab60aae5",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v1/source/positive_query_sampling.py": "cbfda29abd7e4d62e4131502cea5d96fbfaba05c6d0eaf74a9af329f78b458b0",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/execution_manifest.json": "9417c6dc18b3c761ee7cdf38c4cc8ececbfc048c0869b0fea5b96acaaae47bd5",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/activity.jsonl": "3bfbbc1cc14b3e9cff693282c16e30cd8a3328ef5113e67416468209a64f1713",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/official_result.json": "818f4f54da86417d1d3df139bbe717d58e371fc8c97acbffcdf73e6bbb064ac3",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/run.log": "118fce93337d7632eb022d6bf53a068dae0484195a2a1af6be836fc211ecfb9e",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-00_schedule-00/cell_arrays.npz": "9f1c928270790430bba53ba7a7b9cb3d5eda456b78e215cf4f5014c0751d493d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-00_schedule-00/cell_complete.json": "5a7ec0efd5d8f2c70a279b8d058d8a2819dcdf8050ba3850164c74909e376f72",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-00_schedule-00/replicates.jsonl": "45d18b5371cf456555c8abcac0587c873a5fe4cbb7d5e8474875cb10e31c96e1",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-00_schedule-01/cell_arrays.npz": "bb18c959d9b717a0ceecd20e765020e784b055d3d2f2f0754ffd408323fcc117",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-00_schedule-01/cell_complete.json": "59aae891b270bf7c3feef9b22d4ec86f1df7ccd0e8f572a5a35468fe7c4fa84c",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-00_schedule-01/replicates.jsonl": "12b61d60798ab07c4107d812b5396f23138ad791aa527ede80ea734fa83db77d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-00_schedule-02/cell_arrays.npz": "3d4e872d44adfc166ce13670b6216af1ff50cd83c1c30484f3d859a122b7a706",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-00_schedule-02/cell_complete.json": "72500cee0010cecd085692eb2f487e016503a7cd13872a44839609d95fa17014",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-00_schedule-02/replicates.jsonl": "2613e2809baedb94a65dfecb2e0f51c139a967ffc72c3678d3da0391c6378db9",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-00_schedule-03/cell_arrays.npz": "c67830aea8a3ab9a63d82024ee9d4fe684df463b6001917f146c2a00790d566f",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-00_schedule-03/cell_complete.json": "7435b5f6b597bf12054fce901f040c02ab3c6aa3346c0d91d9c5544f471da8a0",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-00_schedule-03/replicates.jsonl": "862ce670cb26301f6b9f86e6c139edcccfb7ec3fcbaa0b01c86dbf94d2a99f2b",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-00_schedule-04/cell_arrays.npz": "9f1c928270790430bba53ba7a7b9cb3d5eda456b78e215cf4f5014c0751d493d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-00_schedule-04/cell_complete.json": "4cab32417eae06927bd6ff9b4fcea0156adf0072931ed2f7f941b6cb13c93264",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-00_schedule-04/replicates.jsonl": "302ece3792088355788581843862f79ce5b9668b3376a7864e42b9044d621517",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-01_schedule-00/cell_arrays.npz": "236faef2b8bd48dbaffba792e07286493f0589a63d5a27036e151e6606f48eec",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-01_schedule-00/cell_complete.json": "a0cb3fafab3a5cde54fb14873725616181cf51c7e0db48982aa1c07f90df37f5",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-01_schedule-00/replicates.jsonl": "d871d207f5c3820d49ee42531bdbef5643871acfe33d698d95a57195225f18b3",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-01_schedule-01/cell_arrays.npz": "1bca2c3c9f6f7195878c67db47a4ac367ce7fd0e2eea9c7ee9b98536f5d6db84",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-01_schedule-01/cell_complete.json": "ec7fc3972e1be73082a12ec12336376902ecaa9e22aa23cd724441f29ff645e8",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-01_schedule-01/replicates.jsonl": "93baba1be8fbb1e38df393758b9620fefb666e141f8804c22cb9928c27277c03",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-01_schedule-02/cell_arrays.npz": "240fa777017fe2e65f9ac9e348e594feee7cce9f6dbeb102129e9916eb64c980",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-01_schedule-02/cell_complete.json": "68ca38afb3c926e56de0f2d2f465aca983157ca5bfb43c5032003010c760eccc",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-01_schedule-02/replicates.jsonl": "588c36d139c6446f03b73cb244f87fc8f83c63021b4806204ba8b739ed03bd32",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-01_schedule-03/cell_arrays.npz": "cd503a757bb1294afc0938a4edab2df56dea9c1ee503cc6f27e8418790cfaa94",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-01_schedule-03/cell_complete.json": "b8f2e2a6d7d175d7f1db14f920a6b286d880e24630bbddaba412a470a0eeb68d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-01_schedule-03/replicates.jsonl": "4c1befc805f0811e921bdced5e6715e49ab4c3c8c3faa69d3a64e511de8028c3",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-01_schedule-04/cell_arrays.npz": "1696bee733f1690d140f1c313c61930e7d092901bf0490a4f1a06759b8832193",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-01_schedule-04/cell_complete.json": "076a1afc96e320b8cb298de78bd0d8fd041d6ee74174e4d66652282bcc4a3b30",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-01_schedule-04/replicates.jsonl": "74744a2f9cbdcebb4a347c68df61c096386d1efb8cd24e91a2dae0b8251ee70a",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-02_schedule-00/cell_arrays.npz": "b4947067a0816003af1ae240c580e6d1320e15c3ff72ad221f904f991347c288",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-02_schedule-00/cell_complete.json": "21f396a2dff36f9d09ba8c5a63656843806301214f029597105ac4ef2a30ce95",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-02_schedule-00/replicates.jsonl": "151f18b07ccef2da28a49411cda4783811ecff774db5973d392ea688526af835",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-02_schedule-01/cell_arrays.npz": "b5ebc4d6d24381c528836b29bbc0dfa62a48b3c77c81fd60d4b744863d40fa07",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-02_schedule-01/cell_complete.json": "dcb9431765903a0279bbb1527ca8f633e7d96d8f045221818928f30c73b9c95b",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-02_schedule-01/replicates.jsonl": "2e96fc9008fec0a72a647e1405db42951e103423c32c132fa838002a9cc39b4b",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-02_schedule-02/cell_arrays.npz": "3d09f5fe094313f3bbf9033f6a51a920bfb64915ba0a091f25d3b98ceccbccf4",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-02_schedule-02/cell_complete.json": "5aaaf9afdfb0ea72b5bf99b6c08e000dfa71e0d54b0e996cb7c962d82621c296",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-02_schedule-02/replicates.jsonl": "d29a43bbbb2de2c49de81b3e50f0828286b28f0ca65f663c73a632ecbfcc40f2",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-02_schedule-03/cell_arrays.npz": "cab63444df3d7e56434c743964bda80499f9fd4ed5e1859d369d32176cf0d6a9",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-02_schedule-03/cell_complete.json": "6dcf6c3df5ee4e82acb727606a5624b2b3bb1cdcc730e2e4797b1e2c1277d970",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-02_schedule-03/replicates.jsonl": "2eb9cc869f11299549e6def1a6efcbce7d06a28dd9078e13f700a14dfc3b97b6",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-02_schedule-04/cell_arrays.npz": "0cf28c80b0422a62f0c7fd883fdd0d9bd94d2ac7b8b50eacabad7eaf71723b40",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-02_schedule-04/cell_complete.json": "96e4930f35fb08af5e69e0ac7a86fc6eceedf04092d9995694b5211b4ded5e89",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-02_schedule-04/replicates.jsonl": "f1eaa78f12f2e8b2cd0d80911c1ed620178f81fe68c71c72905e715ed24b647f",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-03_schedule-00/cell_arrays.npz": "33d2c0d9374603add237032c3fd99c6bf199aa23ddfdbef05acc7729aec574d7",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-03_schedule-00/cell_complete.json": "29f1ad87e71e7915470ca243ddefb4a2e964ec39c8c658a6926ee21bbeba4390",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-03_schedule-00/replicates.jsonl": "912f099baa29f5020133d5519b794af35247bccc5d21b89ae8565f9675c1e2a2",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-03_schedule-01/cell_arrays.npz": "f8fd6a8b6eb8c2bda97d924d65b6af40e7a699f1c18c03b62ba7ec9f67c2caa9",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-03_schedule-01/cell_complete.json": "3a3287fb1402e0e4a21a106ab0b99931d6e9a3e0a587f928eceb1148d7f2dbcc",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-03_schedule-01/replicates.jsonl": "0dc065c4241b9df00483c4da737460d190b435e3baba92a1455007fee10c7fcc",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-03_schedule-02/cell_arrays.npz": "065e6d540ec4a3f9b938f71711bc7d47e9f80b84deb484e2be0da1d254b904ab",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-03_schedule-02/cell_complete.json": "eb37b39f25cea363dc9fd62fa53cea3034a9d837d3acc120abb3e188473d772d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-03_schedule-02/replicates.jsonl": "a6e7741e106ff45e52e47ac84f2fcfe7b08e8a9b8c1398f5ef72b957ce7bae7c",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-03_schedule-03/cell_arrays.npz": "116e70e7adb5af241718bbd19798e84d9acb6aedc6e60fa31750a4e6abcb680a",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-03_schedule-03/cell_complete.json": "1d0b9b857b2b9d3e05192f7b881c0ba83216215ce01a324b44145083c405dcdf",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-03_schedule-03/replicates.jsonl": "266d451a63a3ce66345c4a0584b49acd41a11a3d12b783b12760e33141e65dc2",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-03_schedule-04/cell_arrays.npz": "9f94b0d581f470e8c8c94fa622269eeeca3f81fbfa57ab08d2299b8d7bc279ed",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-03_schedule-04/cell_complete.json": "1b052a850bd00954b47486f324c8aace669d2f8feb3be03c219e117bd71c7fe7",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-00_z-03_schedule-04/replicates.jsonl": "b5f705fe083df5d07fea8743355d377c13e430736d8a4db50a830ce0e9b95418",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-00_schedule-00/cell_arrays.npz": "00b588935a64019becaa049c7134a3c394d195652106e360ad824147efec893a",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-00_schedule-00/cell_complete.json": "3eaaf6202ec3c451b864b754bf025c2d0bd204b224eb09ac77397d6ed40145cc",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-00_schedule-00/replicates.jsonl": "f249e56b46dcd4b6dc426687ae016999f9f8180392e2cbed759b83a1aa6c6c1d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-00_schedule-01/cell_arrays.npz": "f532f46f74beeabf4c23983f9bb164fe5e2fbd3ff83ba3cef686e8dbe3a8f6b9",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-00_schedule-01/cell_complete.json": "e533908dafd059bf2f83c2edba90e1639e6ddac0533c4130b97a6bb0633efabc",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-00_schedule-01/replicates.jsonl": "04e13b13430fdd53148fef990b34bbed50013e0c019a05d608acc54f0b7fe24f",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-00_schedule-02/cell_arrays.npz": "4b337afec8113a3c938a1d9bfb420b47ea38a095f9db1219621ec80c9b7db3e4",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-00_schedule-02/cell_complete.json": "21c08ab89d2318fbe8b78f72896f15c4d1b195776b74f862b9a011dd9b17a3f8",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-00_schedule-02/replicates.jsonl": "12cc0d75b96beb4b5f4877caac11f5c067793873cd9256a71b6e77342155c91e",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-00_schedule-03/cell_arrays.npz": "7e566d4b15330a6450062c99ceafc26feaad36af0924d815687075687fc178f1",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-00_schedule-03/cell_complete.json": "119ca3fc522d30009127414dd886996fa435a4826f0de1c5352389d87ac36603",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-00_schedule-03/replicates.jsonl": "fa38c8b666b12ccd96b0a5146776eae1fd790448b3feae2f8ec0eb89a1b05973",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-00_schedule-04/cell_arrays.npz": "9f1c928270790430bba53ba7a7b9cb3d5eda456b78e215cf4f5014c0751d493d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-00_schedule-04/cell_complete.json": "87a6b5a7082665f4ff687af98b206b3fb883d8f67eef7d208eb86dabd07b85b2",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-00_schedule-04/replicates.jsonl": "3c68009247f3ff4fae7a867b877852f15a553b639acdfd5d358995fc76343d7d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-01_schedule-00/cell_arrays.npz": "d32fa0558827f8a26065a7fbd44fc43d4eed38a893b55132dc9859b1eff4caa1",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-01_schedule-00/cell_complete.json": "211ba3de7025fb6d85417f231151fc33667d3fb45c5c76b059e11c4abdbc82c1",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-01_schedule-00/replicates.jsonl": "125c4d8b22106131fee415ee801fe3cfb5b4863c240c3e0406005d398e77640e",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-01_schedule-01/cell_arrays.npz": "fc0737bbd44d4340fb0b333cea1337659b45609185722e1e9b97e287efebd5bd",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-01_schedule-01/cell_complete.json": "09c066b48578fd241e970934d2d9daa3ee80009f51b8fa669909ab3a998c561a",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-01_schedule-01/replicates.jsonl": "abe392eb47df6fec61657180907e7587577c8f1f4324d8834017da54911899e4",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-01_schedule-02/cell_arrays.npz": "bef0b35fabcbdd2d74aa509c8704b9a66d56a7802f19f2c1e6d593392e671b26",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-01_schedule-02/cell_complete.json": "d3e692d8cf292910f8663d67ce8c31b76d07e38a942ac8845fda3676d44e4b95",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-01_schedule-02/replicates.jsonl": "89166b56dc4633bc41f87aacb2189bf4f9bc4ec2469d2a2e3a92357d1aeafde2",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-01_schedule-03/cell_arrays.npz": "846963f267f674dbb7346e971603d840ce3aae6a42702ae66ef0f50beab9b1d5",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-01_schedule-03/cell_complete.json": "84e5c450912e36e338649a1838dd45560cf4dc70a354e588b6d557a165176499",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-01_schedule-03/replicates.jsonl": "1c62985089e3dd946fde88babce119b45aff031cd770df96e8c5c3b445498f85",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-01_schedule-04/cell_arrays.npz": "4117d1dd3b0b1fe625b5a6489030116f2f88d0442deee8cfc82c98fcb37cb565",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-01_schedule-04/cell_complete.json": "758d466d51b1f1bd325228810050e233cde7cb2169740bd64123ea994c7ba8d2",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-01_schedule-04/replicates.jsonl": "11e91855aa8efbb1484b70b1e494d8c283853da5eba6c2a93766297bdd017c88",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-02_schedule-00/cell_arrays.npz": "65e2745f6a03c913c6149f58000fdfb4130cba165c96b2e1bb44d1ee78b3f2e3",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-02_schedule-00/cell_complete.json": "668fbe56897ee53206f0c65d86f8e82e1250c70dd6dfe42db4d0d30fac9d2c0b",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-02_schedule-00/replicates.jsonl": "5a81a74b30c9443d1a26d9f5a9877ded4c9caeacd9a33d30d826b573134e4857",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-02_schedule-01/cell_arrays.npz": "0dfb514de1b49092be2e450de9a57bfeb213deeee933a2646c6078612769cc36",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-02_schedule-01/cell_complete.json": "a9ffb85c84b5b857d80af0f065dd859529cbce480a721b266ac2fff22fd2fcf3",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-02_schedule-01/replicates.jsonl": "c85734bd47c36d6e2d5610e3608c37b315209e7e3434586126b9994eebe10311",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-02_schedule-02/cell_arrays.npz": "ca2fce905a60e4dcfec3d7a1080608b2ace64136306de3d5513bb01fac85aaf5",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-02_schedule-02/cell_complete.json": "54b6e80cc5927045dfe6f21243839a9dbee323255c30ef4025a5cadf61f1e284",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-02_schedule-02/replicates.jsonl": "1d8f346de69e882e7c925c597a7ac8788bb084871cb96294a02f19a3a09a90f5",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-02_schedule-03/cell_arrays.npz": "e30a6f0bf81dd552d3aa5d9e825f467f1bb8d7e89081d20d6f488a1a81fb5b65",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-02_schedule-03/cell_complete.json": "823e438b9d32bdf810e639138a0bff7694df22767a4249a825fb77c04f74fd58",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-02_schedule-03/replicates.jsonl": "906d3974145a479b4f296cfa492cca20ee45ec29df52920ebf421af5445a95b4",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-02_schedule-04/cell_arrays.npz": "397dcf23569f22a03b6e3e659fdc840decee7170ad27eec7be7540aebb32da5c",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-02_schedule-04/cell_complete.json": "6e7c4a224c4a556cdf79bd3b3c417c17cf9acdc33fbfd5674bf0c58843fdf51b",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-02_schedule-04/replicates.jsonl": "cfc71798af979792ebbfebd581de4821b6aede811864fb60e2b83c3b77c773cd",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-03_schedule-00/cell_arrays.npz": "3e6d4798d920231f9a755bf8ad160453c9b02ed290b7df942df8a30934e3114d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-03_schedule-00/cell_complete.json": "e40545ebcc52cea3814cce33c12e12b3ae405cefbf24cb869a91022d00d168ff",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-03_schedule-00/replicates.jsonl": "666832829aba0879bc4d56b8303790cf4f7e3316b1df4258f8844b44d407dae2",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-03_schedule-01/cell_arrays.npz": "89dc86061f6690c0fae00fb493dc4ab98bdf3fc48a25d661bd0f00d2c5217bcb",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-03_schedule-01/cell_complete.json": "639b58ad815924bb7524003c5d6f65201ac1d555ed067854ce1114d6739cac56",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-03_schedule-01/replicates.jsonl": "69beb1be5793acfe6030c05404f441cfb787c543583c924bc04b1d068fd4f7f6",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-03_schedule-02/cell_arrays.npz": "da953681384de0629145d3c2ffcce37094e062fb0ef9c59f45d200d4ef844881",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-03_schedule-02/cell_complete.json": "aec759fd6b6f52c2b8270bb2bb6d558950622904ec31bab572a989fedc0ffabf",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-03_schedule-02/replicates.jsonl": "f1b335bcaa9cdaa45b6ea8bf0a7a5ff139082bd2d4c81c63989daa86b0d9c7d7",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-03_schedule-03/cell_arrays.npz": "45d30abb15cf9259da89227a50fadb44a577f1cf0dd28f9622b8e36dd07df001",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-03_schedule-03/cell_complete.json": "3abf56797cb64c1618dd29098ae68c6977819b06381dfa621e01505057e6967b",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-03_schedule-03/replicates.jsonl": "3e84861f83c95f226ac2edb93d4d60078f903ace8743d4d86a541f7c0bc90424",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-03_schedule-04/cell_arrays.npz": "0ca2afd008bf6085f870a4b9b18e63096b5f2517716c52c40f0f87d4c555464c",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-03_schedule-04/cell_complete.json": "d2b774fbee17dbab0ce39c910a30fdc3e08422015847cbd3e53768bfa9a88d6f",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-01_z-03_schedule-04/replicates.jsonl": "ed95e658939d1857473df4e809fdd7029f685deec4eee163a99ca241e27b6a5e",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-00_schedule-00/cell_arrays.npz": "b980d8a24cceb287308e9ef9ae48ba1d2b44f9171f79727b8d20ee98233bf88e",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-00_schedule-00/cell_complete.json": "89f4bb36d4bcb0503f53ba6dfb34e14ca7927f7826f683ed92733762ddf7f802",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-00_schedule-00/replicates.jsonl": "639f7623f7b0df4f5abc75dc5552e9fbb336831b7b736ee05f9f54f015e760d0",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-00_schedule-01/cell_arrays.npz": "7d85a7c46183a34a5d7efc9d525f30a422b0b8d73797489e34725118da89daa8",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-00_schedule-01/cell_complete.json": "0811339da84b88db04dfa43cd197f5eabd01aaf72aa4a5485bb19abd62f03fed",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-00_schedule-01/replicates.jsonl": "4dc62c62b57a8dd0e2ce05e1bec0d1e00aa9d2ae92e97cf1ea89a9dbf179f779",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-00_schedule-02/cell_arrays.npz": "dcd3a991958759c394e426d51eaa5d33ae5f514ef3685e1f0af7848947dc2082",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-00_schedule-02/cell_complete.json": "dee690d8b98e02526d5c71620c2c45f92a11b4360dd6824b699149a2c6c7105a",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-00_schedule-02/replicates.jsonl": "46c9fda9209ff472019b1502aed7585f2fb20194d1077ca99839743d7308725e",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-00_schedule-03/cell_arrays.npz": "adb4ef9bb059b1bb5df790c293f65e65cba0ae052e79c16a79352bb84b03c54c",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-00_schedule-03/cell_complete.json": "1ecc80f6d405b03213dad5a926f0aefa9ca3ea96c479d327c1907a6c4aac88ff",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-00_schedule-03/replicates.jsonl": "10ba4af69c583557d0f866c971c38f801b7fc4918a6a78ba9e63d9b18225149b",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-00_schedule-04/cell_arrays.npz": "9f1c928270790430bba53ba7a7b9cb3d5eda456b78e215cf4f5014c0751d493d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-00_schedule-04/cell_complete.json": "ce268eef11761b5dcc5a92b96ff480d7977659c374ef702ffd455c7f7889cc03",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-00_schedule-04/replicates.jsonl": "149450700540643b2e1cd35059e455374873d1aabbeb1f9c740fb87152bbce17",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-01_schedule-00/cell_arrays.npz": "30edbc6f151facdf95073e8cc6a79815c12b48e6f97f2a306ce5f942f51126d0",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-01_schedule-00/cell_complete.json": "ad480aad9f1249a08c2ff9bf39adffaa5349382be818bd3e7ca5e3ee7dffbd0b",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-01_schedule-00/replicates.jsonl": "ccc59b2194b710be61a4ccf2ebe52086c9f49295d1f20f36ef7c96a8e9500ea4",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-01_schedule-01/cell_arrays.npz": "2072f2907fa1c8060337346dad4a9ea63deb1eba0ac27a5e9fd983e0bd7ed0a1",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-01_schedule-01/cell_complete.json": "a4c338b2c30d98aaa7502bd8c0ef39b8226051cb5b717a776ae954e2a763e951",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-01_schedule-01/replicates.jsonl": "2a7c210e0a28eebbf26b845bf58a36f690e5e42880325287b85097933464880c",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-01_schedule-02/cell_arrays.npz": "6b41ee1451bdc8b72ac3b7cbf1f499ca47d20ddc307aa58dfaf58f953f7eaa11",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-01_schedule-02/cell_complete.json": "809d819afeab25e4ab1eaa4718ae7db807bcffae1ce257de21d8c4cb5d8b8177",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-01_schedule-02/replicates.jsonl": "15157ee24f1ec4cde83cbc6a2098392f1616db0b469d5da308b4a6378c6f8621",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-01_schedule-03/cell_arrays.npz": "c23660b6dc4aeeac76309fbae73c3583c540da640ff8fcd857aaa6b0f8c9abdc",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-01_schedule-03/cell_complete.json": "bb8fc2a8b94203266cfbfce1f2253fd42a60bb162d54fa94e5f2999cf277a7f0",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-01_schedule-03/replicates.jsonl": "d29bcaf4071416802dfc0a3b71f49b78a2986c0af7f58fa95d83437d1aa1e134",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-01_schedule-04/cell_arrays.npz": "34b4463a2c81ea53eb4a9abc10c90007b229f1116956f06b6c28ed8430cd1826",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-01_schedule-04/cell_complete.json": "c1a30d30d5346b2f5bc918abaa55a02826008cbaae821fe3fe3a459a5b489547",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-01_schedule-04/replicates.jsonl": "5bccba76e0866a3c19111cbb7ddcf4e88007165e2ca8000f6afbb12c8eae8467",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-02_schedule-00/cell_arrays.npz": "53620a17455244d4fc15ba53f13bc76bda7eb7956f1bd6cb2df3284da06041a9",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-02_schedule-00/cell_complete.json": "ef753a3e674aa2c5a960a8b4070d7b873d0c49f2b23e42bd026c6444eda7e94b",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-02_schedule-00/replicates.jsonl": "9159bab7ff0808b20bb442ab5b9a5a9fc3550febcdf8f530c83a00736a9c7d6a",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-02_schedule-01/cell_arrays.npz": "3022464d421f5b85dcf6da204963b54829f54099d3b80efeb9fa135ca1df1c2c",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-02_schedule-01/cell_complete.json": "8320ca957daed6edd432927b24f4d85387ac3bce4062274aadfb65a84618d6f7",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-02_schedule-01/replicates.jsonl": "ceb2dc90c1c84b55fb1b80b9cc447cd30703b5dc02c0d9ee9ed772b06d22c555",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-02_schedule-02/cell_arrays.npz": "4da13a135cb28b2464d9dda6912302c6e0873949018713a094dc533c9c443e29",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-02_schedule-02/cell_complete.json": "60c283b575273783520ad8a0dc75bd137af0de6d7b834ea54364d5f87f87914b",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-02_schedule-02/replicates.jsonl": "f916da2007645d0711d6905df924be23735d8089efc64696dd0fb318833cfbf7",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-02_schedule-03/cell_arrays.npz": "4748b360d7e07aa39d2029147cbf70bfea9afb2940a9f18c56c7f534cc6cde0d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-02_schedule-03/cell_complete.json": "743ee36444c81ab452e459d2b2296fe78ddcfbb811b099bf81183c738af73517",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-02_schedule-03/replicates.jsonl": "7336f13621ae24d08438da5ee5ae80e53db790388004237ac7519a3eac0a3bfb",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-02_schedule-04/cell_arrays.npz": "2acd0f277287ff31f184847396bfaf08952fa4d9c5b3460e6156b6a0a1a49b93",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-02_schedule-04/cell_complete.json": "b15b83a04e89b7da62aa3f45f3a3d77ea204efd2316c7b33e138149fe5bf2433",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-02_schedule-04/replicates.jsonl": "7a377e636998c33b7d4f96afa5b8c3230180a2da169952f362e4d12999fcdbc3",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-03_schedule-00/cell_arrays.npz": "e225709ce192113b343627ffbb27da8843809cf5dec7bca503cd844483039bd1",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-03_schedule-00/cell_complete.json": "9470032984c1ffa71447aae2bad10f122088559367bd293037a1ec52f8df876c",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-03_schedule-00/replicates.jsonl": "c064e26f906a8b34bd25ef4edceaf73900d659aa61694ef97812d6b91b55d778",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-03_schedule-01/cell_arrays.npz": "b0e79b8f420d8b5c21116ace59278cd1f9334b58f94d005a83bffef30a6cf51b",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-03_schedule-01/cell_complete.json": "495e3cfa7628a220c9224a6d4ab2de1e82ba78959bb4ead30d102c51910c58ec",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-03_schedule-01/replicates.jsonl": "c8bf5148be9627a1d407292974654dc187bd1364ceafa09ddb05307681dc6032",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-03_schedule-02/cell_arrays.npz": "b5fae605a908ad6f675252bf3c74ee9197baf1b0293a97fb58030a9ce49cd5c0",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-03_schedule-02/cell_complete.json": "ce6b62000045412d8e4a2fc05396ff91def7cc7ff1732961708a2af6cb66fb9c",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-03_schedule-02/replicates.jsonl": "64afa90f3e12cd2f958dbf68cf7a6714e21e7bfb1f17e3e7aa2c39cd93b8b2a4",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-03_schedule-03/cell_arrays.npz": "ca396ed83ab63468073e65fa7f74f7ace4cf70dbf0be094ae03137bfc28caf2a",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-03_schedule-03/cell_complete.json": "5b94200eb0ede679ebbb5f5f3dca332bc5f01190da36284f45fa4e32c227709d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-03_schedule-03/replicates.jsonl": "ee4332281a9048ed33124a976f4f7853c01ef249e4b140750631964dad1d3819",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-03_schedule-04/cell_arrays.npz": "d37ccc8c54972bf2a0d369a29cc1943e4932b4af0c0672f0ace16c9565b0209f",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-03_schedule-04/cell_complete.json": "dfa368bf107d05afe21199a983a2264fcf45fe843550b5f3f8909ce324fca7bb",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-00_T-02_z-03_schedule-04/replicates.jsonl": "362eab56eee0ded662a7430db94fc36609dcb3839845c6b17118542bf1bcf752",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-00_schedule-00/cell_arrays.npz": "9f1c928270790430bba53ba7a7b9cb3d5eda456b78e215cf4f5014c0751d493d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-00_schedule-00/cell_complete.json": "daebe3840e8b61ab0ef36f09dcf6a25beb30222a39cb50ac40229a83c88870fc",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-00_schedule-00/replicates.jsonl": "48c8643a271906945d3424b1eb5ac47e7cf4cf6d5dcd2215777ba0e58d050800",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-00_schedule-01/cell_arrays.npz": "bb18c959d9b717a0ceecd20e765020e784b055d3d2f2f0754ffd408323fcc117",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-00_schedule-01/cell_complete.json": "0203f5aba2abcfde208d7c975af3f34453db7f3b8d4854f05f9ed4b29e84c905",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-00_schedule-01/replicates.jsonl": "4ccfe29b7b7f7e1e37ee3ce2d0f85300a7eb752a28327c0f4ab4fb49656d1c61",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-00_schedule-02/cell_arrays.npz": "3d4e872d44adfc166ce13670b6216af1ff50cd83c1c30484f3d859a122b7a706",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-00_schedule-02/cell_complete.json": "5d90824c02d79757aee924ab39d6eec1496d53bda41b23317e95d38f89423df6",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-00_schedule-02/replicates.jsonl": "1d03474e69f60e38ccfda498c0b2fdf351217f9d4947cc6be1446bb7e5fe6bd4",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-00_schedule-03/cell_arrays.npz": "c67830aea8a3ab9a63d82024ee9d4fe684df463b6001917f146c2a00790d566f",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-00_schedule-03/cell_complete.json": "ec49e092f2fda06707e3cc82ed008150006ebd3e243066cf0b28a276ec09e6f7",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-00_schedule-03/replicates.jsonl": "d6307eeaa7b55e9057394a3250f56aff94d04f330913b95967419ec84778a2e6",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-00_schedule-04/cell_arrays.npz": "9f1c928270790430bba53ba7a7b9cb3d5eda456b78e215cf4f5014c0751d493d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-00_schedule-04/cell_complete.json": "07d7b920c2844d4431bea8687ba3189da1f12f1e25819c2e1ff29e1ceff6db23",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-00_schedule-04/replicates.jsonl": "fc944d1035b5118c92e9b45148689ee7f4430914c839464333bcf5e625829877",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-01_schedule-00/cell_arrays.npz": "2b8f4ac02a7163642251e8c55f023c47a001c8715bef44e09c45eb978411d70b",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-01_schedule-00/cell_complete.json": "d5405f265ca25aff8a3286b3718d2a88771783e9087777099100d128c91dc3f0",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-01_schedule-00/replicates.jsonl": "0d4f24dd03cf5a585b77d46dc180bc462a5e6b0d281df81258921c1ba6fe1d35",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-01_schedule-01/cell_arrays.npz": "ef5fea4ee7e1390474de10c02ddd293195c690fecd2eaf4ebe7ab97d33f9f387",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-01_schedule-01/cell_complete.json": "a8bd89b22156b2d505aad534c73084cfcafadc468ac1cf1c38008e0e20fa969b",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-01_schedule-01/replicates.jsonl": "3a695d5564eddd2875c7881d26d599d9480e3ea5e51fdca6dc058d353ae33bd7",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-01_schedule-02/cell_arrays.npz": "e9c5e9e5d750610ff85a72d968dbd947801b7e3771c09587eb23a488f4de7195",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-01_schedule-02/cell_complete.json": "7d626946261b00155a367653b5bf6f440be7085ae188cafbdfe9e92a659e0f31",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-01_schedule-02/replicates.jsonl": "6960a63fbaf1a02891c34a9e687725eebbc8aae9c50c0a6c0a0c56b3600fa305",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-01_schedule-03/cell_arrays.npz": "c5f729e0b74e57182f19fa7cce1cca9634189245b9de70dec758233c38b52e7d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-01_schedule-03/cell_complete.json": "489eacaad4b146172a3a9b9b5a512cc4ffd3fb770e3de0eb6f52c826e2b10fde",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-01_schedule-03/replicates.jsonl": "d03071fb6c9aaeffb11f6283bd6ab6d5414e78b8b4fe8bff2f3ab51c3a31f668",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-01_schedule-04/cell_arrays.npz": "d0cd88cdf638d96d1eaa02de78996f017328294796d43ed7b5e4858d65fa5e8c",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-01_schedule-04/cell_complete.json": "f7e8d8c3d32e35e3485c1761457d38227f5e8a50b53b9788199d2088b70a2904",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-01_schedule-04/replicates.jsonl": "7df2d6da4fcf8a0a4b38bd3c3bfc863fec857a666b96cc2fcfe75e956783688d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-02_schedule-00/cell_arrays.npz": "5e1cedcf68b53513f69bc9c97196eba1cb658553a13ac77b4a6323eca70b36cb",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-02_schedule-00/cell_complete.json": "299bbb7fdb46cfec83fad6b6b362d8582f3ed10fb69a3e53b597ebf765f4378d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-02_schedule-00/replicates.jsonl": "095119126db5bc227ce99f978c44cee79226d05009deeaeafb90b720acf734cc",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-02_schedule-01/cell_arrays.npz": "d0699ebc4e4b0a64aefbf2a6aef736ef4355405f1beb6e43146dbfc47871ecdd",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-02_schedule-01/cell_complete.json": "80693a73d0ef9cf6875643d20d30be7652c76375743def0e6d281b108ceca709",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-02_schedule-01/replicates.jsonl": "68539e5ec0fa5730bb839714e9ac9189e27446579caa76aa3e29e69b93bf4158",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-02_schedule-02/cell_arrays.npz": "dc9790d0294964d15e4a614e91d2747e34aee44272bdb56029c33e7f92fd0b08",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-02_schedule-02/cell_complete.json": "b84c5c46ee36976cf2cde556a0d9b8e5f92b81720cf63a95b345bfc981fcbaf5",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-02_schedule-02/replicates.jsonl": "69081b09311d9f13413d07ed48faef82ebfae84a0795b61ed968e1c54ee0e681",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-02_schedule-03/cell_arrays.npz": "102795975732ca3b9276851a617c1206692a4d54f739ae04ea637f3d7d5f2704",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-02_schedule-03/cell_complete.json": "88fc5df1434411eebb8377898c3b9eb981e85172db0cf878cfd49e85fe9667a4",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-02_schedule-03/replicates.jsonl": "c7f3667b6a780a0506114c5b606d020c538a9ab9e66e1bab83fe5feb411ccbab",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-02_schedule-04/cell_arrays.npz": "3bb7d110a21e3be75c94aefe53b71aa2a6ed950f0474d7e2a05bf438c8cc5f96",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-02_schedule-04/cell_complete.json": "c9edf2a319d323476b3c9ecbeb3dd371960313c38aaf43676a5b7d46e655ae21",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-02_schedule-04/replicates.jsonl": "b14494d110a7bbc8ea3ae182b005c5b430e85796dfda53e021307faf935be16a",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-03_schedule-00/cell_arrays.npz": "0d751199c0de2a6c552d4ee3f651e0a96b10d0f24db1554694ded7fe8a5610c1",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-03_schedule-00/cell_complete.json": "fd1deba19746510c0c32e5d65ef2f4dc0d825dbd4fab1b9e59b05f999b15b697",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-03_schedule-00/replicates.jsonl": "a8eda16f86a7785379ca47159a4783cde33f629524d13fa7396314b4ff1755f2",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-03_schedule-01/cell_arrays.npz": "2479e5def2561af31c0cba979148a125b0eb59220f1f87f41e158170c38c4aad",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-03_schedule-01/cell_complete.json": "ff14a8672fa24e541235f796086b6d05f278d3180e161fa0618623ab130e4aa7",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-03_schedule-01/replicates.jsonl": "94ed80dad9cfe08769a769bb889d86cd4259a52a9b2d3e896339b9460638e431",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-03_schedule-02/cell_arrays.npz": "21c2a03cd2095acd922920d69b954943ebb43325e5592eec0af6942d4ac07260",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-03_schedule-02/cell_complete.json": "fef738e9b61b4ca06b30440d9cacc0b49965c2e18aa56872761acdbe72c029db",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-03_schedule-02/replicates.jsonl": "63425145d47590cf0c3a33669b7532899ac5bc8d256cd3757056a61564efe8d1",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-03_schedule-03/cell_arrays.npz": "99279d383243c2a7c215ad36e5f3e607efd6ee03da776db10b2b659bfe726cc0",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-03_schedule-03/cell_complete.json": "23fed95ca8e3e2aceabaf6e0e55031053b1402c872ff549e81c29dbc992a4556",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-03_schedule-03/replicates.jsonl": "5250d3219598c51c55e06f76a6323644fb2bf8a7608653a4ab583872d17308e1",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-03_schedule-04/cell_arrays.npz": "195eb1af8b7a74ec61889e5a6f171e600f2465097f7ef6ba902aa4a1f5441f68",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-03_schedule-04/cell_complete.json": "fbc1851641c535dae9304202f7d69b60e79bbc9b4b6c45a95a0b1c52f0ea3972",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-00_z-03_schedule-04/replicates.jsonl": "520fed4a9a198b2bb954573a65d2080a9cbe353304dedabc97dd342e9176a6e3",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-00_schedule-00/cell_arrays.npz": "00b588935a64019becaa049c7134a3c394d195652106e360ad824147efec893a",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-00_schedule-00/cell_complete.json": "0c837b109829719e64cc8368e77fbb2b2a8e75ac19edcf1ebdeed90cf9dba3ed",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-00_schedule-00/replicates.jsonl": "1640c8b237711bb418880ede90183d0d4147456c02826a5196679f55ce2f6a7e",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-00_schedule-01/cell_arrays.npz": "f532f46f74beeabf4c23983f9bb164fe5e2fbd3ff83ba3cef686e8dbe3a8f6b9",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-00_schedule-01/cell_complete.json": "75aedb666e3dff853da32def9ea120dee82df0208340074fe001cd2fa3428557",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-00_schedule-01/replicates.jsonl": "d6d82b3d42956dce931f05ea8b5b9a080af2521592fb14d19117561bf329b556",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-00_schedule-02/cell_arrays.npz": "4b337afec8113a3c938a1d9bfb420b47ea38a095f9db1219621ec80c9b7db3e4",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-00_schedule-02/cell_complete.json": "2c6e5f9c0081cb61b5dc4eff5caba553171e4685c47f17a9413e8033f6678e3f",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-00_schedule-02/replicates.jsonl": "34d9ff2a60ddebf4d791eabb353204f6985906ff79ae318580bbacc8927ffdb8",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-00_schedule-03/cell_arrays.npz": "7e566d4b15330a6450062c99ceafc26feaad36af0924d815687075687fc178f1",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-00_schedule-03/cell_complete.json": "ce08215e142640b91dee2c37d27ecfe2d2c9dd2302df1a3ca8da956e9ed2c2fe",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-00_schedule-03/replicates.jsonl": "1273cd000988d5fb6490b6d34c533d552d7d93a48b4934f63e8e0064a49ef7a0",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-00_schedule-04/cell_arrays.npz": "9f1c928270790430bba53ba7a7b9cb3d5eda456b78e215cf4f5014c0751d493d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-00_schedule-04/cell_complete.json": "906a6b686a84005b4a234f77ba0ab406c1832d1da0812c6bb9049f7b8d4d81ce",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-00_schedule-04/replicates.jsonl": "945e8d433faaf3dda613811c4a8cc1e9373f664f8d3d310c13c7321b52933d5c",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-01_schedule-00/cell_arrays.npz": "8122b31fab38d0762def0a4c0f25a343ac475658f4dbe6c63d570c0d5c5a7d38",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-01_schedule-00/cell_complete.json": "ae65ef5478600658a35ccddf388aa6bfefcf794ce40278c3ac0a3ca6da5fab89",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-01_schedule-00/replicates.jsonl": "31d10ba1e1027d1d8baeeeddcc79dab57fb5dbd89358ca08657772a0f51b7921",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-01_schedule-01/cell_arrays.npz": "b4cf74bcda1e6931a3baab3acff2e48576fdfb91cedc3b90409f907bbeaeba62",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-01_schedule-01/cell_complete.json": "c85864ed2d8794b6066e334fef31e1b9eab4509644cfd4675507169bb63a6af6",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-01_schedule-01/replicates.jsonl": "e6aa68a60c465e270fa98c1259411b862b16fd60398704c085394e657658232e",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-01_schedule-02/cell_arrays.npz": "96fb7205e56c15e4859e09326daeeb82e5bd4c276ddff513bc56255a2d0e30be",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-01_schedule-02/cell_complete.json": "4ffc7dfefc25d55126473b7306c65879e8782a9764fcc43a8c3c5d6f4e6023c8",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-01_schedule-02/replicates.jsonl": "ced0c02d8548394c158e1218ec676b56b587de50d11a64e7ca30034d7f17e661",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-01_schedule-03/cell_arrays.npz": "6cc7c0e0cb513c4f6a9201128bcba5cc88087636b6eac417f577877c003a9db1",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-01_schedule-03/cell_complete.json": "5b2421574b360204f42a93b257a102bc565092bc1847606bda4f2af1e731aa10",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-01_schedule-03/replicates.jsonl": "d918bdea6a1f36cd921a658f4ea4b91fabb31ce0df247674a508c606c42e48f6",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-01_schedule-04/cell_arrays.npz": "de2a8f5994814e650804c9c688fc4b03f570f07181767c9598b3cc0a53112a66",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-01_schedule-04/cell_complete.json": "a536bf9318f0a5a04a56ca64776f574eba6351acb8a9a767d030fb3dace0056d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-01_schedule-04/replicates.jsonl": "e8cbe51435ffc24d913ae958abe76ae3a780f8f75db35d10c998d0b568639ce3",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-02_schedule-00/cell_arrays.npz": "39d1941030dff5261cb49388b72c01cc2206815fa47054d5852609029117a791",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-02_schedule-00/cell_complete.json": "9a56f58e285dbc7da947e3b1c3bb7a72dbd7d4d7e5019250192206aa1de7490b",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-02_schedule-00/replicates.jsonl": "d33b1ffd35f896146ea477e4d0c0f57d247b43840632f6fd0ca00a9940feb72c",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-02_schedule-01/cell_arrays.npz": "200a160d0b0d49c901243c8f7e2d88b79723462a600f930d62109c2c52e21d93",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-02_schedule-01/cell_complete.json": "5a416a9067c460ab62c6700bf31465ac5325f87361d6a3e37b94567ef77c7200",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-02_schedule-01/replicates.jsonl": "481fe807b5f39914df07b333535a5eb02d10c2bfe0c03c19f0410679ba4bf267",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-02_schedule-02/cell_arrays.npz": "79f75ca5965ffacafa0103a16b4cddf58e1034e04763d1d88bbb81dd3b7c3725",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-02_schedule-02/cell_complete.json": "6ded26653af3746fcb4965bde85506f4c9cb93959360c2ff0254575cada81788",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-02_schedule-02/replicates.jsonl": "0a80f87bf786a8cfa2c75fe43900779a844a68f0fade215711e86a0ffb6ff84a",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-02_schedule-03/cell_arrays.npz": "4a3d063ec7e821da72d339a964681d4863516242aa25581166b6c38150ca5db2",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-02_schedule-03/cell_complete.json": "346b8ced02ff13adccc32de1e6b4c765d122c02fbf883c9d41d3974933ad88ad",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-02_schedule-03/replicates.jsonl": "93914422675697145de0366b92a843931ad29c007d33663415da4f8e8979a006",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-02_schedule-04/cell_arrays.npz": "41ba453a747a0a17d34a097ecea076314f8707c4ab6d764b7ec04a7e95329e42",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-02_schedule-04/cell_complete.json": "2227cc509357d7893986d1a93db88899b070ee729ae3c4af2efc437822e4dfdb",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-02_schedule-04/replicates.jsonl": "cd1d8f52afc33835a7fd11de7ef028a169b1fba9faf1feb629f336cc595917f3",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-03_schedule-00/cell_arrays.npz": "1ed384947beac38571d23afe9d19d4df5e271ca78088307a0c2c11cffb3fb339",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-03_schedule-00/cell_complete.json": "743c48c2f9e8b3cfe2ca44078913c2c28df647a4824c22889c004f12d25b3b28",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-03_schedule-00/replicates.jsonl": "9ce3a9414bbfd8fade300004c451f040331a5458c46e8c051a4ea7f54c7642cf",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-03_schedule-01/cell_arrays.npz": "fea8faed8e2d7b6a36902f0c86a58549cfafb4eb4f171884f1337b8d4bfd7a70",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-03_schedule-01/cell_complete.json": "fb431ed9d525d5de4e44252d0b1ce6e2037bf355710244cec04c7cc14824332c",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-03_schedule-01/replicates.jsonl": "d149088f5d93e77582a50572575d6dbf3aacd69305e1460ecb9f43b6ff4e9b64",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-03_schedule-02/cell_arrays.npz": "19ae61e60f482a045585749b09bb08a891f93772d997939f898bcf99bea5b464",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-03_schedule-02/cell_complete.json": "a06e8033f819b0e01f72274721e24424fbc92257cfb2fbe93866c14d8793b669",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-03_schedule-02/replicates.jsonl": "8122b67e3c7664142dd34f658e72f0dc9e78c46a6d59aa0d5434b25ec5d3f72c",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-03_schedule-03/cell_arrays.npz": "97809093897b7678b86d4bd5bffdb8afc27e4f8ef7991ee852d45f8794c041c3",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-03_schedule-03/cell_complete.json": "36390c692de19250e7d45c6b92a78d2f4522d6065ff77fc0f21bdfa1bdd21ffb",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-03_schedule-03/replicates.jsonl": "68c6b6bc72d6fcf84ef9422b54ec8c2fa9b09c6b806624d82e085416342849e7",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-03_schedule-04/cell_arrays.npz": "11b4ce3baf73f728d98bf592281c8684c6320b8764365925276426f4e2c1ba91",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-03_schedule-04/cell_complete.json": "7878c621f522254365dcc1e263f60dda559ef0edee243908e3ec3e721e677067",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-01_z-03_schedule-04/replicates.jsonl": "d3276a1a65406534133622d3c88d92b74a307c4c58c5afb92afc655e80f6f1ad",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-00_schedule-00/cell_arrays.npz": "b980d8a24cceb287308e9ef9ae48ba1d2b44f9171f79727b8d20ee98233bf88e",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-00_schedule-00/cell_complete.json": "d9d721f409bb288e6cdbbbe2d773f38191a2a112d07ae8da598cb43f116ba130",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-00_schedule-00/replicates.jsonl": "49295d50a93a305c4265f38bfa270882d2532ff2cc5f03d5485d7aa8a9d198a8",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-00_schedule-01/cell_arrays.npz": "7d85a7c46183a34a5d7efc9d525f30a422b0b8d73797489e34725118da89daa8",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-00_schedule-01/cell_complete.json": "52a4d780b4a43051873dcc388b0ef3d48e65976e072b9ff1f5093d8ec0815d04",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-00_schedule-01/replicates.jsonl": "03e98451a8d9d16c297fd1b8a656309d8e9c5d2173c61d229ad89fda82d24988",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-00_schedule-02/cell_arrays.npz": "dcd3a991958759c394e426d51eaa5d33ae5f514ef3685e1f0af7848947dc2082",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-00_schedule-02/cell_complete.json": "0c56e46df2c059e0d88564dcb13c89b4807368e755fda2673da23f8f7e7444a8",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-00_schedule-02/replicates.jsonl": "97569e208c6c22c21508bc8b1d1a3e4d4c7474feba44eaa35781a8964056e3cf",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-00_schedule-03/cell_arrays.npz": "adb4ef9bb059b1bb5df790c293f65e65cba0ae052e79c16a79352bb84b03c54c",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-00_schedule-03/cell_complete.json": "16a42f69999a8ade28134083b3c368b3d730f38325e0888a47e08d0ef898c84c",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-00_schedule-03/replicates.jsonl": "32ce2e5f6f39b9ec216b5b6789279f7e6496904330986b13062537f1b1f40a26",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-00_schedule-04/cell_arrays.npz": "9f1c928270790430bba53ba7a7b9cb3d5eda456b78e215cf4f5014c0751d493d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-00_schedule-04/cell_complete.json": "55f617d89ff45c09527d3b4e65334a717f51efa5659697c90eae826a491497da",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-00_schedule-04/replicates.jsonl": "61ac0ad6f5bffd1fd030560ea04d1cbacb46a1e6f3feecfe8cf043ee00a65c93",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-01_schedule-00/cell_arrays.npz": "4f58479ae790f44bc15546f9559039430b14d104a4dc15cccd8cda50629279ad",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-01_schedule-00/cell_complete.json": "4dfb24574ca4abe8b0345f2db4a2c11b0b4579cfcd77af59b4d881dedeb7385d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-01_schedule-00/replicates.jsonl": "c3507593acab0d49f6cd40d80d09bed4ebcc417446f93fff43beecf561bb84ea",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-01_schedule-01/cell_arrays.npz": "8081e07d60f9480e526efedad63228c6efb8e835c4b7bac9801414c53b2a9349",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-01_schedule-01/cell_complete.json": "513a814ddda4d4ac23030055eb217179ee7ce9397e0ad338975b620a713fcba3",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-01_schedule-01/replicates.jsonl": "62c9706548cba33c4323f0974387e59ca49b5a4fd5ccb8a2a0e81a9f90332458",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-01_schedule-02/cell_arrays.npz": "2053e9e2cbd17a3f40a653f1f90d4419c0bfa073c003791f5dde2bbbc4a58983",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-01_schedule-02/cell_complete.json": "1b8c328581eb1b21e4b0254774b62a260ca12da7d0e176818e32ad19e6d45780",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-01_schedule-02/replicates.jsonl": "452956e344caa141aef0a60761f9b017cbe16c18fef295cc50206ccc69644562",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-01_schedule-03/cell_arrays.npz": "fc77ebbe04e6afa81cc93b4392d955dcb04d2c9d39fa9f8d8f836919dd0c8ab7",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-01_schedule-03/cell_complete.json": "21ee2e9da184cc88084c0f6f5b18d0c2b872a006696edcedae64108d717158b2",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-01_schedule-03/replicates.jsonl": "0b1a719f977ff67735e57b9cf0802ba052f014517a09a2d328f2b7ff741c563e",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-01_schedule-04/cell_arrays.npz": "aed5bb989f91b894662e4674dd8e96568128ec0b7377dfa8fffe472af1a51e5a",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-01_schedule-04/cell_complete.json": "eb583f30d71ebc23e2577ad18453761fae427351755bcd35c4dd41333fea1b11",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-01_schedule-04/replicates.jsonl": "104ca299e3d9df1e84a7a70cae119d7d91ef572561524cd0cd4dbb7468566727",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-02_schedule-00/cell_arrays.npz": "063cb29c3c247794d5ea339ae489d210f9f2a778d08c574cfb63acf7c350fc40",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-02_schedule-00/cell_complete.json": "6b7764857eb2765a79c6958ccc1dea906c879b7c63a5a5dce916790af1147524",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-02_schedule-00/replicates.jsonl": "87bd1ce6d633de1ca0113f9dffa9f79a70fe23eedead40ac9f2c8982d881a1d4",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-02_schedule-01/cell_arrays.npz": "dcea3f8769bf578e6cdc4d1a418165f75260d1f2c4cf61101ec6dcd16f9bc904",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-02_schedule-01/cell_complete.json": "92d706eaef79b0a93c71a2f977bfaa6d6a37de355ca973fae080a9305ee53557",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-02_schedule-01/replicates.jsonl": "1adb0adbc08f23e043d91679e44f47caeba5159a8d0ddf9060d29806b920e4f5",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-02_schedule-02/cell_arrays.npz": "9897d50390d9b869f242a2920871ea9245df8e050ae290286d91f37b8f7ab9fb",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-02_schedule-02/cell_complete.json": "04875aa68c66bed08cc24458730693868bb10a6db670425df33f554950db0704",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-02_schedule-02/replicates.jsonl": "392c72eb3c1ffaf9fa1224aa0f03337ff1219db392469947ea47fdec087bc762",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-02_schedule-03/cell_arrays.npz": "790548bb71ea05a930ad0dc591071c5b1d141ad1a81a4d1855c440cd587051a2",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-02_schedule-03/cell_complete.json": "7fb64fa53afdfdbed52ff3ef0eb76e1b26f0d706db85cfc8ddebda8b60aff71e",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-02_schedule-03/replicates.jsonl": "348a360c668aa27770fc67be254c9f53709b59e621c1b5e6659e09a45e4f12e9",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-02_schedule-04/cell_arrays.npz": "b50de84727bda6414ba525056317cc41e55b19a073a2760fd7c7c64bacd5f07a",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-02_schedule-04/cell_complete.json": "c5c7a16bffc023c3c622fa14732fc9e3fe717db6991fc794b7622d99acb4e08b",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-02_schedule-04/replicates.jsonl": "0ab68292b5d887402f70e1f120c0c7287f1fb954405f525d60ffa8f86d6169fc",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-03_schedule-00/cell_arrays.npz": "6de2f166efba0759e68a462cf12fd1c0e7e2a4a2e25c804b61a011ae164c2029",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-03_schedule-00/cell_complete.json": "aa0cf5afa4fb62e6460df0102da2f1270d2ead46b88e47a7f75f96ca4efd11b6",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-03_schedule-00/replicates.jsonl": "b8a85e39a125408f690adee1a858ff43733ceb69b24bb6b8bc6bc899f81fc8c9",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-03_schedule-01/cell_arrays.npz": "d71a42ddf57ff46265186d287fd30eab6446a516c89211983c7b6ded75d138c0",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-03_schedule-01/cell_complete.json": "9885ed600c0047585240ba5855f96f6094d4f1d3e0ae57ef15d69b2bb2d8e825",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-03_schedule-01/replicates.jsonl": "f6fe929edd10cd167cd8826db8d638c80816f37e41d9fab19e3fe9b2f1adbcfe",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-03_schedule-02/cell_arrays.npz": "8cbb2e87d0eca41d3f4f7630c7d9c7864b9e84f626527e20a8c81bc5a582f275",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-03_schedule-02/cell_complete.json": "e7103b1ac6d0ba003e5f37c19abba2d0fd5143e818d1eb275c3826b745331f18",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-03_schedule-02/replicates.jsonl": "793e0d19c31d9ee2a6c8c808f9d727b3dd71a742715c02717dfcd6f1c0fa18a8",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-03_schedule-03/cell_arrays.npz": "537507ec50425c940fb0cb150c73bd74a5cdfec5d2fb02d4377dbc46ff784fb9",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-03_schedule-03/cell_complete.json": "964bbdfed530545d3abde697893e99dee8826438ee9fbecc5fe7e4f574af839f",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-03_schedule-03/replicates.jsonl": "d8a26b1aef34727bb470fccdc4b87b079031e24ffaf5e2e56595c839fe61ec9a",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-03_schedule-04/cell_arrays.npz": "632a5b8c22aea561617eb9f8db4cae8e7a8b62cfd9cbf42ac9340147c4570f49",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-03_schedule-04/cell_complete.json": "d66ee9152f25abf964236c218e569d1b055836819ea888037d2ea1e5fa31b869",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-01_T-02_z-03_schedule-04/replicates.jsonl": "a8f2ef22e96597b7821d4016d0a5083cacd3c5c01988024fe713a780673b6da3",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-00_schedule-00/cell_arrays.npz": "9f1c928270790430bba53ba7a7b9cb3d5eda456b78e215cf4f5014c0751d493d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-00_schedule-00/cell_complete.json": "860b09c0f0bede9b201215de9e9c9d67a43ade6f7d11e7056eeceacbd0a863c9",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-00_schedule-00/replicates.jsonl": "0807fb70ec518e7034af9da7ef4e9749a1ab88100eb610b12e17aa1739c500f1",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-00_schedule-01/cell_arrays.npz": "bb18c959d9b717a0ceecd20e765020e784b055d3d2f2f0754ffd408323fcc117",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-00_schedule-01/cell_complete.json": "77b20318b82ad68527309d746df4efa3a7ff1538633d5ce433ffebeee1c0a8a7",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-00_schedule-01/replicates.jsonl": "f2181005246c256883225d4bbdfc6b25233cd4dc74f64de4c47b3c605d0aba85",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-00_schedule-02/cell_arrays.npz": "3d4e872d44adfc166ce13670b6216af1ff50cd83c1c30484f3d859a122b7a706",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-00_schedule-02/cell_complete.json": "4081b22fd49bd493d3b5540433b5b7c795e7c94037a2d06cc70e435c476a54d1",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-00_schedule-02/replicates.jsonl": "cbcf1764ac1c3a1bdd123204a5844e844449fd318b3e08a32414b46ba65d57d9",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-00_schedule-03/cell_arrays.npz": "c67830aea8a3ab9a63d82024ee9d4fe684df463b6001917f146c2a00790d566f",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-00_schedule-03/cell_complete.json": "283f866b2992e46a563a81a2421ad2b19e130c708899a9aef387a93b4bd9ee14",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-00_schedule-03/replicates.jsonl": "9dcbde65c7f98190748b0c3ac0c537b5be078a18f0ccd702e3f1c96cb1947ce0",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-00_schedule-04/cell_arrays.npz": "9f1c928270790430bba53ba7a7b9cb3d5eda456b78e215cf4f5014c0751d493d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-00_schedule-04/cell_complete.json": "725bfadbd8da2f85393c074b22bbb880e343afd41b7fd4cbf231ac35afc4b7b3",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-00_schedule-04/replicates.jsonl": "f3c3b662860e702b009e92d2b8e45137afedb6083064d2b9f81392cd680cba04",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-01_schedule-00/cell_arrays.npz": "b32af293aec5c9d800ae82fad60caad43e6fb1031ccae5cf0b10769a5ff03598",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-01_schedule-00/cell_complete.json": "cb0c74adcbbfb9bfd926c9d7eb8d614547c9a9071c31d02b65fa1b4d1de19ccb",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-01_schedule-00/replicates.jsonl": "7069e2c3bd00f708329636054a680d95dded094e4cccbc7e5400de65eb2a232d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-01_schedule-01/cell_arrays.npz": "ecbc98bb0bd5bd425ebb0dc13f767d192029e5dacf2788bd9a6ec7be0ad2feeb",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-01_schedule-01/cell_complete.json": "d28ea87435e150b771e419ef7bf2d1c4310c4921138622f55437699c3fbaa14c",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-01_schedule-01/replicates.jsonl": "b4ac0f593ffd3d91783a857931d7d5e8301a80dfc5a1137ecc415209c889583d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-01_schedule-02/cell_arrays.npz": "763c302ed9d223ccc56d31fe3052aebb2d7d7617a549f548a9b1ac7884f1f4c8",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-01_schedule-02/cell_complete.json": "4e7b461ac34c9197ef747a4d8b45a674349b4f6468a3cade1a0850ad3cd4fcc6",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-01_schedule-02/replicates.jsonl": "387c93882ea63b4eaedb091d0a7b1d1f258414ebbc549018d9fece4d9064f912",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-01_schedule-03/cell_arrays.npz": "86433773b086797fa3e2c7396f8181c354e5637d0e3b2cfab9f5e6aaa656b22a",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-01_schedule-03/cell_complete.json": "fffd8f359da6a257380f7733ce8d1ab5f7fbea72e3ae739ee4b77eab3fdb9b97",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-01_schedule-03/replicates.jsonl": "5679233dcb149a5a82e0cb4855cf930a52d376b34fe92e36ce51ccbc2cf2c518",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-01_schedule-04/cell_arrays.npz": "b97690f7c24566fd7cd82171dc477d6a56a66e5572ac2f9ade2add46a9d2d8e4",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-01_schedule-04/cell_complete.json": "b7c98f60baf3a876782b559ce07ae24b56058102d333e7abf17f89fdee81daaa",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-01_schedule-04/replicates.jsonl": "a981952b90d5541f8efc1c66261a0e05f48ba63b8512ef48872dbd90dde16eb4",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-02_schedule-00/cell_arrays.npz": "d12b1d194badbb023306508a1a454e49d59ad8749218190cd890be08405b8baf",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-02_schedule-00/cell_complete.json": "115a2c45adfd525531d24f78ad2c1009d9e1b0798fd5b8a266f2a92a5bc4cd85",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-02_schedule-00/replicates.jsonl": "edaa1335c99ecd5967d304384558c17f94be19a855534f906f8249484f00159a",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-02_schedule-01/cell_arrays.npz": "b0567ec0189a6fabcde73dd1c09008e4cd542d18d66f2b5763e41d06aeaf8e2a",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-02_schedule-01/cell_complete.json": "c736603ae8e15e632106cead783e6ad206cdf1cc2c1f28b13fde13213668445b",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-02_schedule-01/replicates.jsonl": "b969d3d1a39b049eb9bbde0bea6733c7f1898ce502011f2d80d1ec874fd9cc38",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-02_schedule-02/cell_arrays.npz": "9f7ef32a110bd2c0b097b9ecc61789c49127a64e05479c9224a771754f37149d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-02_schedule-02/cell_complete.json": "c994caca82908f538994720a7a8b426d2831d0940e73c02205b0ef7cd79e6d08",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-02_schedule-02/replicates.jsonl": "c95bee5e810b612180e6481100bd325237372d9fcb69eb40dc2564a6318bdc2c",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-02_schedule-03/cell_arrays.npz": "6e9a292454234039ec816705bfd82ee612affd6d4e680b7ee211ed30b1b952cf",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-02_schedule-03/cell_complete.json": "b6327c45776b5bc3ed37191188ce30280bd7096a087a9affe413369f5751162c",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-02_schedule-03/replicates.jsonl": "d7a8a32a8eb641c28181538ce786725a2accab652e56ef6b97daf4f5e99fbe48",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-02_schedule-04/cell_arrays.npz": "db0c148f9d5fb8d83a2eb8fcf74e9394d0f06aa93ca68936e073e2ab3db0e13e",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-02_schedule-04/cell_complete.json": "de5d5b5c572b05163a9cae4b32dfdf5ce5dba0e690b4b6f6a8d4ec87e42cf432",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-02_schedule-04/replicates.jsonl": "7f799b7316708678169ce0224079e92207a91623a358742dba392c2c3059fc69",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-03_schedule-00/cell_arrays.npz": "ed55215bad20df8d96d9a9a633905364bc4e5842c6140abae9286477be807e99",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-03_schedule-00/cell_complete.json": "c3f9f9dd8f22d9a9cd928a8194ae3a46f0b16c9a9a1e07c21edffefa7aa860a9",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-03_schedule-00/replicates.jsonl": "2a8cffd9a92bf63d69a1104cb99cc0e366555c837250cb0b3c80cfd3a56617e5",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-03_schedule-01/cell_arrays.npz": "43d7b626265a305c8ec3e3aa5dba7860fbbead9414bade56c7979e6b81367f5d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-03_schedule-01/cell_complete.json": "d3292ffa4cc6711743bf739c080d640e2b5bacb65ad2aaaf0d337ead276ddd6f",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-03_schedule-01/replicates.jsonl": "8597199ceeb109ad034f1e408fc3eb58a2bd9c5fcde04033e705a5d53cb57bb4",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-03_schedule-02/cell_arrays.npz": "92f06864e2785630bdc4e2e843e6ae8aaf0d08c9dc6abb32c7a380c435a2d5c3",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-03_schedule-02/cell_complete.json": "3aed98c148a0d210d27618e3951a9c8c0aafb8070a01a6233f1f1a9e6c78af5b",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-03_schedule-02/replicates.jsonl": "899e70c052bdef13d7b7d4762d1c8da15e905c993b743699c45202e529c5a8fe",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-03_schedule-03/cell_arrays.npz": "69e75b3ada30b4293f1cdd02467fd66601407c25951e6db738af9a5e28d7ed9f",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-03_schedule-03/cell_complete.json": "647314d5714044c2ec092fc943540001a424d40f9c7b40d03ee557c1d6e05c9d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-03_schedule-03/replicates.jsonl": "ac6deea5d9de2b6cfcdd2c1dc57c5e9475b5d45d99975bb1003ed8990070050a",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-03_schedule-04/cell_arrays.npz": "02abf6d084ea8c7ba8f8cc5f7cc2e638a7ff9b674d046685fd9fae1b7ad7569e",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-03_schedule-04/cell_complete.json": "e4594dcbac22726570e724cf5d11b614bc9463ebb738319f5677880da3852c4e",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-00_z-03_schedule-04/replicates.jsonl": "cbe6cb5aa29c9ac6a25dfd902b550cde1d43e1d9fb4d476d27066889727f02c3",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-00_schedule-00/cell_arrays.npz": "00b588935a64019becaa049c7134a3c394d195652106e360ad824147efec893a",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-00_schedule-00/cell_complete.json": "0eccd41fd5de02c53b36241ca1b5042d830acbe288d6578f143d72511819603f",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-00_schedule-00/replicates.jsonl": "6e8330fb12115ef76f122adb8a3a60fa724b90c7a518155e90a8f9d936496e6f",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-00_schedule-01/cell_arrays.npz": "f532f46f74beeabf4c23983f9bb164fe5e2fbd3ff83ba3cef686e8dbe3a8f6b9",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-00_schedule-01/cell_complete.json": "f03b8b0c5ff5f81f16811f49dd8642a8c0e33b5e1fc4818de09d761f172c2ed9",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-00_schedule-01/replicates.jsonl": "b007417c4922590984a9f7928ac49ea92d04bbc09e4a9e0cb2bb6d0942fc2382",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-00_schedule-02/cell_arrays.npz": "4b337afec8113a3c938a1d9bfb420b47ea38a095f9db1219621ec80c9b7db3e4",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-00_schedule-02/cell_complete.json": "56d55b568084547a532b49206d669d7bb9b72277750b44ec17c3ac3615dcb4b2",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-00_schedule-02/replicates.jsonl": "45ecf0186a5a59184f78e5671f9401091282f5e96fe4c3fe13b23aee5578f6e3",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-00_schedule-03/cell_arrays.npz": "7e566d4b15330a6450062c99ceafc26feaad36af0924d815687075687fc178f1",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-00_schedule-03/cell_complete.json": "a96f3948b23156dfcf83dd896a55496433f7c1104c85a4bf4f37be0e9b3b306b",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-00_schedule-03/replicates.jsonl": "413d34e2aef58159891230372a33decc210dda71e115dc5c025a3d7016dba6b7",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-00_schedule-04/cell_arrays.npz": "9f1c928270790430bba53ba7a7b9cb3d5eda456b78e215cf4f5014c0751d493d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-00_schedule-04/cell_complete.json": "71667c4a39622a410500d172c1766533ee1a3ec9c74ffa9ecc09931aeff87502",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-00_schedule-04/replicates.jsonl": "28a82b01c9d6a791abbbbc6baaa3cc4805e17047ba606c88973c3fda2ed3ba01",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-01_schedule-00/cell_arrays.npz": "bdcd8268655aefc3b30564212a517b6c3f7d0b832e79c8b62af8bc6c5e1f902e",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-01_schedule-00/cell_complete.json": "e27c78996a7ec660f6a036c346271ea064216089adefaf7a333b9f95c373ab21",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-01_schedule-00/replicates.jsonl": "d7fdb3cecb242b896a5a909f2663382abad33345c0d6e974ff65f51248c7f4b9",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-01_schedule-01/cell_arrays.npz": "cf5f8276a1ae7bc957c37355e9453b2b7bab923bab2dc45238e34aa693c473e3",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-01_schedule-01/cell_complete.json": "bcf11871c722c5079d087ac0c37634d4b5e3a250710767b1f818a68111d29221",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-01_schedule-01/replicates.jsonl": "2508a2ee103e74cfd27e71692d8ffec318c2a26717b03746d1865fc22785ade0",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-01_schedule-02/cell_arrays.npz": "a728250c685a3b54558817b66c5dcb5d042130176095c4b809e0ac77267f99ad",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-01_schedule-02/cell_complete.json": "9649a3170c9a9cab95fcf2f70bd411432722e9cc67b8bc609454a7f9c52643e4",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-01_schedule-02/replicates.jsonl": "951fec23a9ee2ea441a27506dfac78c41dba26b9e822eea8847d027321a721b3",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-01_schedule-03/cell_arrays.npz": "56163a58607c85b52b87cf3264ac0577d1cf3905fe8bf060c5f03a7dd9fde185",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-01_schedule-03/cell_complete.json": "8af2ef48ecc8e02e78f1cd86fa09b80ce02a8070510ce1c8901d3e111f3b6cc6",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-01_schedule-03/replicates.jsonl": "8a2b10e83cea2a9c5c2c76dc29fad9644b074208b837946e9c66814824a9a2fa",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-01_schedule-04/cell_arrays.npz": "bc0d3781701d92a68203fbf6054d17a9e43c3c62966eaaa7678f176278ca4c5a",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-01_schedule-04/cell_complete.json": "d4161ccc21ba25a22ca96f0065366b5cad68a05181b84cdd8346a06156cf6e39",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-01_schedule-04/replicates.jsonl": "7fb917d3c02ddb04064f2bae0bbbd27762c2f52b9e18cbb1e0084cae8e7ea222",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-02_schedule-00/cell_arrays.npz": "ecf6cfa98fed3e3de9a02268e73240f27f26cb3dcb64db43a67a0cd01422f988",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-02_schedule-00/cell_complete.json": "c6a3d62265b8c66c082151770391d538bce3fd0d2975f26f1e8304dd9e5646c9",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-02_schedule-00/replicates.jsonl": "9d2eebe0430b384c266426e1fc37e93ad04052b0744d836c140e2aae4f67859d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-02_schedule-01/cell_arrays.npz": "6d7dac8c0b209eb8506b78f22630df28d603d0686353808f397186866822861a",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-02_schedule-01/cell_complete.json": "7eddecf79b88b14f6795a614a1f4a11e7657a6838bed202cf16e604f6b03ab43",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-02_schedule-01/replicates.jsonl": "c113352be325ce58c3dbbf1d9b4d4460bb2d5a9f394bcaa5bc75b9b7236fd2d2",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-02_schedule-02/cell_arrays.npz": "cf5d3e91d62140385025e36f8a08ad73e219ab573496936c7ce1a39f1653fcdc",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-02_schedule-02/cell_complete.json": "29330e140f122c278d62068b41b189587ca1ed9b654f5b068b04eb441fb9d262",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-02_schedule-02/replicates.jsonl": "a16d529abd5e84ae0da1468f318db976c3bf13ece692b50cb7dde30279825394",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-02_schedule-03/cell_arrays.npz": "8cb8a685cc24ccb56a1efdf1f89fbe9cf995a4839def6ae63f2563b62c2a7413",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-02_schedule-03/cell_complete.json": "39ba513d1c3d465b6e72bb8cff54559d9120605339695cdb8e1552f1d43d58c5",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-02_schedule-03/replicates.jsonl": "320b8d3b8664ffa4976a34e67486bab4192d4e26d8a053019eb62e356381b68c",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-02_schedule-04/cell_arrays.npz": "eebd64f68e97e3d103d3110841800e86f6f1aa2ea137ae58136c5d4cad655c2a",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-02_schedule-04/cell_complete.json": "ae1c49ecfefac704e35903160184f25019fef71905c076d240614fce73eb7ca9",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-02_schedule-04/replicates.jsonl": "3ef2b0c4f4bb4d1cba6c16c4c02a1fe8201f1d98064542645fbf8e3bb47bed12",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-03_schedule-00/cell_arrays.npz": "99b5ad53bdff820f7b3b6193d79c8c9a2cbffe82e6d2148fbf4370a5f4194711",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-03_schedule-00/cell_complete.json": "4b8ff39b4067fd8a1c8a9da85d2b395f4bb9c5040f6d5601f42700624f2d889c",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-03_schedule-00/replicates.jsonl": "734296774175e70741e524e3978a294e5fec6755792fa174b40e1668df425b3f",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-03_schedule-01/cell_arrays.npz": "83255f604320613f670119ebf20efc899953b53f62d7611faeb648bea9e4f6c9",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-03_schedule-01/cell_complete.json": "ac1ee158406de05781ba7595865fd499f54f6e8cf1d3b3a47fc9f71af034dbc6",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-03_schedule-01/replicates.jsonl": "97356c3426139765f3e556cf74845968eed13dff91409cad3d557ce818629563",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-03_schedule-02/cell_arrays.npz": "dbfce4ac7b28b1f969e91c6989363c99a264add070375b309837abb6d7141dfc",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-03_schedule-02/cell_complete.json": "35a69202a2ec5550a97bf6e27438f43dbe2d81885a219db95e35c179a26ef5d7",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-03_schedule-02/replicates.jsonl": "435bc749ceaa3b33c0aacfb099350fe62fa2dfbcbf12ce9df582eab85b028ae7",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-03_schedule-03/cell_arrays.npz": "c6814efedad12e3eb889b6bffb190e97a85a958b12256ad99a56ba3df0faff76",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-03_schedule-03/cell_complete.json": "6f0600ffe1351e39f8c4393d05acf6a0fe541be387001b55f3bfbdb18dbfeb99",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-03_schedule-03/replicates.jsonl": "e09b4c7413a034bbb8143468d90f122d18c41e555b247d099eac02d9385b65a9",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-03_schedule-04/cell_arrays.npz": "ca6437fdc7994d13bf0dff6c5f5e151919b69e617f9a7dc232c673c788e99ae4",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-03_schedule-04/cell_complete.json": "a19ce03dbcad33e028f5d42f62076ff478ff69ccc140b7defe915d02c214ea6a",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-01_z-03_schedule-04/replicates.jsonl": "3fe1880f68851e001daa3f5e649a975200d5036328afe81146598846969d5916",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-00_schedule-00/cell_arrays.npz": "b980d8a24cceb287308e9ef9ae48ba1d2b44f9171f79727b8d20ee98233bf88e",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-00_schedule-00/cell_complete.json": "78368478fe4176359f4026dbcec22a18d4b39c6c853e0bd49f392cc3d2b3ee44",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-00_schedule-00/replicates.jsonl": "4f73476954b90652cea2e75b114ce262fd79f83cbc97be2baac86b598169f260",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-00_schedule-01/cell_arrays.npz": "7d85a7c46183a34a5d7efc9d525f30a422b0b8d73797489e34725118da89daa8",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-00_schedule-01/cell_complete.json": "dc0ede0a72b0350c369acde0480e5161bca597c774e8a2d198c18a65d02b1302",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-00_schedule-01/replicates.jsonl": "06db292d45ce691bcb8bd138875fb80f4fec589ead6579039956a33c30737507",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-00_schedule-02/cell_arrays.npz": "dcd3a991958759c394e426d51eaa5d33ae5f514ef3685e1f0af7848947dc2082",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-00_schedule-02/cell_complete.json": "12f0625f14ec9043b361434b38d88d9859ed95c3f6c7a21dc2315b8ea7cec79c",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-00_schedule-02/replicates.jsonl": "fe69ed16e46733f3ccf4b8e0649fb35a55c79bf9741158aa1aa8861f9b9217f6",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-00_schedule-03/cell_arrays.npz": "adb4ef9bb059b1bb5df790c293f65e65cba0ae052e79c16a79352bb84b03c54c",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-00_schedule-03/cell_complete.json": "4485ccbe7ad37ce5bd87b97c9c539134dcb8023bdbed0ada6147b746c53d9a9a",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-00_schedule-03/replicates.jsonl": "881a3356040b37a0ea25e58ff059330c1c0402100415ea35f7dc94f15ba65105",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-00_schedule-04/cell_arrays.npz": "9f1c928270790430bba53ba7a7b9cb3d5eda456b78e215cf4f5014c0751d493d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-00_schedule-04/cell_complete.json": "cb24a3707bc0436dbc5dfbc3ec1354d6543aee999aaef160751c525781e72221",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-00_schedule-04/replicates.jsonl": "c401ad9f32e00154c7c8edf201910893fba2ff067c47a2f3cad2f24d2287ec2f",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-01_schedule-00/cell_arrays.npz": "2cf5e3206e7b376e5d1d0b2fa18bb499c069cbc1692b3b55b70f24e6f1c8b98e",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-01_schedule-00/cell_complete.json": "8b7e0e4249a6c8180b123e5bcd89e4d67687ebcb66cb7c88d9dcd83dd0fb4b79",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-01_schedule-00/replicates.jsonl": "cc91d1fe5d48a003dd0a5fa1772fdef3ca6bdcd6cc7118076d4cc1971f866b10",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-01_schedule-01/cell_arrays.npz": "44065dc71a058960d98e1558602e9cca752d5b8a01ba5f98c60c15aa0f7cbf38",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-01_schedule-01/cell_complete.json": "1491e6e2ffb195aaa2166106f2810b7f6c9be94332cb873043f0f5561f09a4f0",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-01_schedule-01/replicates.jsonl": "46044fe37db0fb4a3d3bc1f4d1f4d9a071dcde039074a5eb004fda0accd5d502",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-01_schedule-02/cell_arrays.npz": "99e2bd33a3b74b162e4250490956ef540e73e20c9e606c7ae5008df34a479b4d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-01_schedule-02/cell_complete.json": "9109881f178e770c95116b09140ad14e70bf527500758f17ccc0dd20b605c8b3",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-01_schedule-02/replicates.jsonl": "74525ea5ab5dfd774a35b6fc3e6a38e65a8dffe01f419f6e5292c0e56d23bdb3",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-01_schedule-03/cell_arrays.npz": "325f64fd2ad7d6148fced88ed849b6d35e580e2a301ffdc1c34151601f2a552a",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-01_schedule-03/cell_complete.json": "0233cea9dcb1deaab71b58a304fddfadee63adcb1f031c02f545d0058a331aea",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-01_schedule-03/replicates.jsonl": "efc010eebf3bc5884ca2cd93fd2b1fa4118b116f9a268b761660e3196b8122eb",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-01_schedule-04/cell_arrays.npz": "12259c8d64adaca06607020539956751b639754625921ecb0b254b838a3b1df6",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-01_schedule-04/cell_complete.json": "3996438d7a4b721fbc74c5a2da0811a10c05c05da6b0915974185e4ee4fd3e07",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-01_schedule-04/replicates.jsonl": "ab3f5034429d86a23b14e6a8d75a07512a421e266dc1072885f22a33932c258b",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-02_schedule-00/cell_arrays.npz": "b5d8484db760c64ef54e6f15435bc4a74b7b04f2b2cd5122a00437e5b38718d6",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-02_schedule-00/cell_complete.json": "8517b637b3b8eb65a9bb9ac4e64a580d818af43f1a19e6ae6a56fc7517373104",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-02_schedule-00/replicates.jsonl": "f47b696f29a36c820a3c123f4ce51d4f5238260f2d16e98b830e0ece8b512367",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-02_schedule-01/cell_arrays.npz": "101d3743b50ef04590c811f31c3e3722dc679049b42d6cc18aff407f4e72709e",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-02_schedule-01/cell_complete.json": "d332ac38ab89295c668302d64f2f5896e1d70c5b177a7298bf60dcbaaaadbaff",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-02_schedule-01/replicates.jsonl": "32f31a119b23453c52797374959bafd3ec227329be23645e943ba6d6ce9fcf79",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-02_schedule-02/cell_arrays.npz": "f06a789d7c600a2078cb312d392deeea919d42e37698f92e7be95e6925fb3573",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-02_schedule-02/cell_complete.json": "c18a6f09cfbf4d2d593793b44b69df49431c0d1393111b1a18a4baa04b9ec792",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-02_schedule-02/replicates.jsonl": "7b4c146576c62d600176f0f1d96ab59099dc1c90dc870aff1ec46c6c2fbc835e",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-02_schedule-03/cell_arrays.npz": "c03f2ee30cc7aaade09d2707745b9f2440cf0e1148262b7d2031a8bf00001e91",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-02_schedule-03/cell_complete.json": "6e4af9a3b0c73e3eea2baf426d96eebd8e93a6f3300ce495ac3c04ff792d45b0",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-02_schedule-03/replicates.jsonl": "a0cd211ae41f6dbafbe7ac09ae20755249290cb9251af39cae522c10e31c1d41",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-02_schedule-04/cell_arrays.npz": "6cf5afda0ecd313d56fd7c000d8cc10b2e00a42e0ee2b1ea3eaa20ea4d915446",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-02_schedule-04/cell_complete.json": "8bdae5899b0e9a1bb4e0453d0e113a3761e6d2978800e6f800d91f02f97a1815",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-02_schedule-04/replicates.jsonl": "a5994254960ed72ddcef1d629a0d53bd87a63676271b71b63e95090764a65cbc",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-03_schedule-00/cell_arrays.npz": "be246fedd257a63c16e09c7ab7191b6126c13bab7582f75f65f081a4e7f0836d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-03_schedule-00/cell_complete.json": "630694502fd6d8ffd1439394598b8e5b8dcf10b5309d0edb502289f3ea118fd5",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-03_schedule-00/replicates.jsonl": "a9481aad2e40f393423fcb39d809de977c88de277ce30593e009707c2b34af01",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-03_schedule-01/cell_arrays.npz": "e35abd96244ed3e628174dc9b30e223e532b332af9aa1e67fd7d4039cb429200",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-03_schedule-01/cell_complete.json": "0e911c7c1996f87a296eaac4fda53933ddf8453eb527b4c412fc011d327ae64a",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-03_schedule-01/replicates.jsonl": "6a7b972155aef53313294bc3f31deb3a98e0e64049417fce17c5df687f145301",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-03_schedule-02/cell_arrays.npz": "3b432722a6ef0fc733ec581e156ff9cf865bec741d45eddf0990529e07a474fc",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-03_schedule-02/cell_complete.json": "26e84954f55667424e807c0e175b0aa3f1223a29a0bda9e6908aaf8886d33f9b",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-03_schedule-02/replicates.jsonl": "48a2555672176d9787786469023c26e82e9e11885aa9afd4168cd54646a0995e",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-03_schedule-03/cell_arrays.npz": "53a9f131f2bc9eccc71f95dea92f500423b9aeac3d89cb7343afcea9cfb9de22",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-03_schedule-03/cell_complete.json": "f9432a9d93c35badf55300337782e70acc216a5a7e06973c424f3ce2ca030f7c",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-03_schedule-03/replicates.jsonl": "87059e42d0840e2a1391160b5defdb10c24da1c916835d8690663a8bac9e43cf",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-03_schedule-04/cell_arrays.npz": "b82c3b2ae8ac0d6e415af90abde50e8f5ad6d77026bc41f75b2b928bb318155f",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-03_schedule-04/cell_complete.json": "286b2bddaca01ab2cf30013ecdc72ad9a7330ac9bf2aa07e69e3b4e73d1dd9a7",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/official/seed-02_T-02_z-03_schedule-04/replicates.jsonl": "1ca240e092e28cca820ace56bc26a55a261972d5889897780d87278955432f38",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/preflight.log": "856659e752e3a66f1bfd25cf536dd36f915ad1996967dca315d14bdbc75b9981",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/preflight_activity.jsonl": "b4a6be135dd3bfa73a9e66164b301bc025d0c38c6da44eb11b51d94dc20a38b1",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/preflight_journal.jsonl": "1d8d2df39aabe6a02fbf94732fd25d41be22fcd1b4cca8aaba97a6f3074a1e4d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v2/preflight_result.json": "ae85c9f1712ada9697bedc472ea273bf692b2cc7c4f0813f58a63ce085380c1c",
+    "docs/research/runs/2026-09-28-dynamic-continuation/initial-source-hashes.json": "85ed03a61da6e7cf5a4826ceba58c5f8e245cbae586bea38508330a4d8e23ea7",
+    "docs/research/runs/2026-09-28-dynamic-continuation/numerics/positive_query_sampling.py": "81eb2b122d325eca97d144adc00380114558c5ad35a830d9d4062fa95f63df08",
+    "docs/research/runs/2026-09-28-dynamic-continuation/reviews/T63v2-positive-sampling-implementation.md": "4f7959a3b673bf1af78ade163ae13276afb72d243d2b85b72a232731c9b9839d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/reviews/T63v2-root-official-clearance.json": "bec557a2ac4333151c40b04c69a62b3b422ffdb6b94873c57048b6f150e8b9a9"
+  },
+  "planned_spent_after_replay": 368270390,
+  "protected_initial_sources": {
+    "mismatches": [],
+    "missing": [],
+    "passed": true,
+    "recorded_count": 342
+  },
+  "replay_cells": 180,
+  "replay_point_calls": 30075636,
+  "replay_selection_rule": "replicate_index=0 of every one of the 180 frozen cells; fixed before results",
+  "schema_version": 1,
+  "status": "FROZEN BEFORE ANY AUDIT REPLAY ORACLE CALL",
+  "whole_activity_cap": 500000000
+}

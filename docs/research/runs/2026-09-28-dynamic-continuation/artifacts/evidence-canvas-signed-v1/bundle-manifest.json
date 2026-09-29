@@ -1,0 +1,11 @@
+{
+  "exit_code": 0,
+  "bytes": 66907,
+  "sha256": "cf6424ba8ff401c711535b42725e4f8bcea88b54a92d6178d15ca43b9a645e42",
+  "external_imports": [
+    "cursor/canvas",
+    "react",
+    "react/jsx-runtime"
+  ],
+  "gui_render_verified": false
+}

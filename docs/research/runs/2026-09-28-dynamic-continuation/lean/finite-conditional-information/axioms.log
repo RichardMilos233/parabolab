@@ -1,0 +1,12 @@
+$ cd formal
+$ ~/.elan/bin/lake env lean ../docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-conditional-information/FiniteConditionalInformationAxioms.lean
+'EstimatorIntegrity.bernoulliKernel' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.bernoulliKernel_isMarkovKernel' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.bernoulliKernel_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.finiteJoint_singleton' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.finiteConditionalKL_ne_top' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.finiteConditionalKL_toReal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.finiteConditionalKL_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.finiteConditionalKL_accumulate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.decisionTrueParameter' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.measurableDecision_testing_error' depends on axioms: [propext, Classical.choice, Quot.sound]

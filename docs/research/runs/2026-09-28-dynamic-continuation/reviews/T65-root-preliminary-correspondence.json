@@ -1,0 +1,21 @@
+{
+  "status": "Preliminary root correspondence only; independent T67 pending",
+  "reviewer": "root",
+  "read_scope": "All1002draftlines plus final changed lower-status paragraph; final1003-line source hash checked.",
+  "source_sha256": "58e862c9cfbaf0946605d30d9c8e8a37e2570c0c0719d626683f22db60fc9f81",
+  "candidate_scope": "All fixed integersd,s>=1; same signed unit-torus class; deterministic querycapO(exp(2dT/(2s+d))); nearbranchRMS<=7/64, farbranch<=1/16.",
+  "independence": "Root proposedR07, so this is not the independent audit.",
+  "key_obligations_read": [
+    "Actual setwise signed-kernel TV Banach construction and all-order derivatives",
+    "Finite-time composition via signed root kernels",
+    "Paid branch selection and multiplicative phase comparison",
+    "Finite known-profile graph-root and PDE evaluation with no unknown input access",
+    "Mixed finite differences with repeated labels; coefficient l1 errors; factorials; Taylor remainder",
+    "Rational tuple sampling, deterministic data cap and measurable a.s. halting"
+  ],
+  "exclusions": [
+    "No accepted D29 before finalT67review",
+    "No runtime/bit/large-domain/dimension-uniform claim",
+    "No signed Lean/numerics or originality claim"
+  ]
+}

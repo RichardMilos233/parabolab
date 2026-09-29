@@ -1,0 +1,24 @@
+{
+  "status": "root preliminary correspondence review, NOT independent acceptance",
+  "candidate_sha256": "0f0cd6a6fbe97d5746c42f2da94161284f4b4fb3da70b724b5992450388d5933",
+  "candidate_lines": 717,
+  "read_scope": "Root read full original656 lines and final new mass-counterexample/public-mesh/Borel/halting sections. Root contributed some route suggestions, so this is not an independent audit.",
+  "checked_interfaces": [
+    "signed class matches04r/D25",
+    "nonlinear coordinate uses actual mean forcing and uniform scalar gap",
+    "profile approximation includes separating set",
+    "Gaussian common-shift covariance and mixed kernel norms are explicit",
+    "quadratic correction uses actual product-space signed derivative measures, not generic bilinear operator representation",
+    "finite known-surrogate solves use only charged coarse transcript",
+    "positive partition controls coefficient l1 sums",
+    "public finite loops, Borel rules and a.s. rational sampling termination are explicit",
+    "data-query cap4k^d and d<=4s Taylor exponent are retained",
+    "initial-mass-only counterexample has cubic coefficient -3c/[4(12pi^2-2)]"
+  ],
+  "high_risk_review_remaining": [
+    "independent analytic proof of heat-tree domination and centered derivative-kernel induction",
+    "independent check of finite coefficient/known-data PDE approximation and precise information model"
+  ],
+  "promotion": "none; accepted ledger stops atD26; no new Lean or numerical target",
+  "practical_limit": "Potentially enormous uncharged J^2 surrogate solves and fine arithmetic; query exponent is not runtime complexity."
+}

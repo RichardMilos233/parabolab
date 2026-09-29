@@ -1,0 +1,7 @@
+Command: ~/.elan/bin/lake build EstimatorIntegrity.AbsoluteMomentObstruction
+Working directory: formal
+Lean toolchain: leanprover/lean4:v4.33.0
+Exit status: 0
+
+✔ [2199/2199] Built EstimatorIntegrity.AbsoluteMomentObstruction (30s)
+Build completed successfully (2199 jobs).

@@ -1,0 +1,9 @@
+EstimatorIntegrity/PositiveSampleMean.lean:168:26: error: not a positivity goal
+EstimatorIntegrity/PositiveSampleMean.lean:185:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  Real.exp ?x * Real.exp ?y
+in the target expression
+  Real.exp ((1 - β) * T) * (Real.exp (T * (1 + β)) * (m * m ^ β)) = Real.exp (2 * T) * m ^ β * m
+
+T m β : ℝ
+hm : 0 < m
+⊢ Real.exp ((1 - β) * T) * (Real.exp (T * (1 + β)) * (m * m ^ β)) = Real.exp (2 * T) * m ^ β * m

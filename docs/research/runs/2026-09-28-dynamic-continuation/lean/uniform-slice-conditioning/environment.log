@@ -1,0 +1,13 @@
+cwd=/Users/michael/Desktop/NTU/fyp/parabolab/formal
+command=zsh /Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/uniform-slice-conditioning/Environment.zsh
+formal_cwd=/Users/michael/Desktop/NTU/fyp/parabolab/formal
+lean_toolchain=leanprover/lean4:v4.33.0
+Lean (version 4.33.0, arm64-apple-darwin24.6.0, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)
+lean_exit_code=0
+Lake version 5.0.0-src+d8b1897 (Lean version 4.33.0)
+lake_exit_code=0
+65dca46e42db1c80cdf9ddd8eed6a415148c37f3
+project_git_exit_code=0
+db584cd6d46c92f209a44c0f1c829460d327499d
+mathlib_git_exit_code=0
+exit_code=0

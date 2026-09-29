@@ -1,0 +1,12 @@
+Command:
+  ~/.elan/bin/lake env lean EstimatorIntegrity/BernoulliInformation.lean
+
+Result: FAIL (exit 1; 80.2 seconds)
+
+All scalar declarations and the actual Radon--Nikodym KL formula compiled.
+The only non-placeholder error was in `bernoulliBool_kl_ne_top`: because the
+local `bernoulliBool` definition is opaque, typeclass search could not recover
+`IsFiniteMeasure (bernoulliBool p)` for `Integrable.of_finite`.  The next
+version installs the inherited `IsProbabilityMeasure` instance explicitly.
+The only declarations still intentionally containing placeholders at this
+stage were endpoint-aware measure Pinsker and its testing corollary.

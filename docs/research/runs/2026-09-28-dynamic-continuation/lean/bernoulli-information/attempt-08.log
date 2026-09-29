@@ -1,0 +1,11 @@
+Command:
+  ~/.elan/bin/lake build EstimatorIntegrity.BernoulliInformation
+
+Result: FAIL (exit 1; 59 seconds)
+
+An over-aggressive linter cleanup removed algebra normalization that three
+`convert` branches still required.  The exposed goals were respectively a
+linear derivative coefficient identity, the common-denominator identity for
+the second derivative, and normalization of the derivative of the squared
+anchor term.  The working `ring`/`field_simp` normalizations were restored;
+the anchor branch now uses `norm_num` after `simp only`.

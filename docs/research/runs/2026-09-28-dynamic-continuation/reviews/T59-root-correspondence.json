@@ -1,0 +1,41 @@
+{
+  "status": "PASS for conventional D27 promotion and internal next-stage contracts",
+  "date_utc": "2026-09-28T16:01:38.671878+00:00",
+  "reviewer": "root",
+  "independent_mathematical_review": "T59, source read in full; root synthesis is not a second independent review",
+  "inputs_and_outputs": {
+    "reviews/T56-signed-upper-feasibility.md": "0f0cd6a6fbe97d5746c42f2da94161284f4b4fb3da70b724b5992450388d5933",
+    "reviews/T58-positive-sampling-protocol-audit.md": "284e3604b935fcf0e729bb965d22aa2774d9e5c6e5909383b348bd0249c316a6",
+    "reviews/T59-signed-upper-independent-audit.md": "47d3ce98ac19210e9bbcd318ac1de2fb9dddd5bc372bff201dc97d47572301ab",
+    "reviews/T60-signed-information-lean-feasibility.md": "6977a5f7f04417ca3475437cb25e5c261e422db58006d3a9717652d5e59416cf",
+    "reviews/R03-signed-mass-counterexample-direct.md": "eecc30c81c4adea40dd3ca4e62d29c58c81097257c4832175794627eff840fef",
+    "04r-signed-many-bump-complexity.md": "4bdcb75b7ee62c40879a80cb84b0949f1a9e796d387775e5760cab04a33fa419",
+    "04t-matching-signed-query-complexity.md": "260ae16cb5104bfdc56eadc8a7829410c1a4b73c81703b038665427313d8eca9",
+    "02f-positive-query-sampling-protocol-draft.md": "9f375f3716b11da6fe963a05731d29daccac9c9853cbb473e8c3d3a25ef60691",
+    "02g-positive-query-sampling-protocol.md": "8713593424011f0cb713e19125bccfff1dacf25e9ce401c68ff6867aa8c9fe9b",
+    "05i-signed-information-lean-contract.md": "62d770647ffd6a69d370677e7d39e769710ef9de94f97b28caf77a0dcda4114a",
+    "reviews/R04-signed-all-dimension-lower-candidate.md": "2bc5129ec4b9da882d7b16543d03f0bc8f34989cc02f9b9a65c5e805c1f4ae75"
+  },
+  "protected_initial_file_count": 342,
+  "protected_initial_mismatches": [],
+  "accepted_scope": [
+    "same signed class as D25; fixed1<=d<=4s",
+    "matching minimax expected initial-value query exponent2d/(2s+d)",
+    "deterministic upper query cap; potentially enormous finite auxiliary arithmetic",
+    "separate R03 fixed equal-mass opposite-phase counterexample"
+  ],
+  "not_accepted": [
+    "R04 all-dimension candidate",
+    "signed Lean/implementation/runtime/novelty",
+    "official positive-sampling execution"
+  ],
+  "downstream": {
+    "T61": "R04 proof task active",
+    "T62": "05i actual Bernoulli KL/Pinsker gate active; full urn/adaptive argument pending",
+    "T63": "02g implementation and exact bounded preflight active; official clearance pending"
+  },
+  "preflight_design_calls": 655633,
+  "official_design_calls": 336883488,
+  "later_subset_replay_calls": 30075636,
+  "whole_activity_cap": 500000000
+}

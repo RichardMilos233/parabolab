@@ -1,0 +1,13 @@
+formal/EstimatorIntegrity/FiniteTreeSecondMoment.lean: OK
+docs/research/runs/2026-09-28-dynamic-continuation/06m-finite-tree-second-moment-lean.md: OK
+docs/research/runs/2026-09-28-dynamic-continuation/05k-finite-tree-second-moment-lean-contract.md: OK
+docs/research/runs/2026-09-28-dynamic-continuation/reviews/T73-stable-graph-sampler-independent-audit.md: OK
+docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-tree-second-moment/build.log: OK
+docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-tree-second-moment/Axioms.lean: OK
+docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-tree-second-moment/axioms.log: OK
+docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-tree-second-moment/Declarations.lean: OK
+docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-tree-second-moment/declarations.log: OK
+docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-tree-second-moment/environment.md: OK
+docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-tree-second-moment/failed-attempts.md: OK
+docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-tree-second-moment/failed-build-autoImplicit.log: OK
+docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-tree-second-moment/trust-scan.log: OK

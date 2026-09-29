@@ -1,0 +1,21 @@
+T72 development summary
+
+1. Defined the actual finite-history Markov kernel with value
+   `bernoulliBool (p h)` and proved its atomic joint-law formula.
+2. Defined the pointwise ratio on `H × Bool` and proved the actual source
+   composition-product equals the reference composition-product with that
+   density. Cancellation uses only `0 < q h < 1`; no history weight is
+   cancelled, so zero-mass histories remain covered.
+3. Derived absolute continuity and finite KL, then used the actual
+   Radon--Nikodym integral and the composition-product integral theorem to
+   prove exact finite-history averaging. Source Bernoulli endpoints remain in
+   the closed unit interval.
+4. Converted the average to a uniform ENNReal one-step bound using the
+   probability weights, then applied Mathlib's exact
+   `InformationTheory.klDiv_compProd_eq_add` chain rule.
+5. Packaged the actual true-decision mass as a unit-interval parameter, proved
+   both pushforward laws equal the corresponding Bernoulli laws by singleton
+   extensionality, applied `InformationTheory.klDiv_map_le`, and invoked the
+   accepted T62 Bernoulli testing theorem.
+6. No numerical experiment was run. The remaining urn, adaptive transcript,
+   sequence, stopping, MSE-to-label, and PDE obligations are outside T72.

@@ -1,0 +1,129 @@
+✖ [2497/2497] Building EstimatorIntegrity.FiniteTreeSecondMoment (32s)
+trace: .> LEAN_PATH=/Users/michael/Desktop/NTU/fyp/parabolab/formal/.lake/packages/Cli/.lake/build/lib/lean:/Users/michael/Desktop/NTU/fyp/parabolab/formal/.lake/packages/batteries/.lake/build/lib/lean:/Users/michael/Desktop/NTU/fyp/parabolab/formal/.lake/packages/Qq/.lake/build/lib/lean:/Users/michael/Desktop/NTU/fyp/parabolab/formal/.lake/packages/aesop/.lake/build/lib/lean:/Users/michael/Desktop/NTU/fyp/parabolab/formal/.lake/packages/proofwidgets/.lake/build/lib/lean:/Users/michael/Desktop/NTU/fyp/parabolab/formal/.lake/packages/importGraph/.lake/build/lib/lean:/Users/michael/Desktop/NTU/fyp/parabolab/formal/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/Users/michael/Desktop/NTU/fyp/parabolab/formal/.lake/packages/plausible/.lake/build/lib/lean:/Users/michael/Desktop/NTU/fyp/parabolab/formal/.lake/packages/mathlib/.lake/build/lib/lean:/Users/michael/Desktop/NTU/fyp/parabolab/formal/.lake/build/lib/lean /Users/michael/.elan/toolchains/leanprover--lean4---v4.33.0/bin/lean /Users/michael/Desktop/NTU/fyp/parabolab/formal/EstimatorIntegrity/FiniteTreeSecondMoment.lean -o /Users/michael/Desktop/NTU/fyp/parabolab/formal/.lake/build/lib/lean/EstimatorIntegrity/FiniteTreeSecondMoment.olean -i /Users/michael/Desktop/NTU/fyp/parabolab/formal/.lake/build/lib/lean/EstimatorIntegrity/FiniteTreeSecondMoment.ilean -c /Users/michael/Desktop/NTU/fyp/parabolab/formal/.lake/build/ir/EstimatorIntegrity/FiniteTreeSecondMoment.c --setup /Users/michael/Desktop/NTU/fyp/parabolab/formal/.lake/build/ir/EstimatorIntegrity/FiniteTreeSecondMoment.setup.json --json
+error: EstimatorIntegrity/FiniteTreeSecondMoment.lean:46:14: Unknown identifier `S`
+
+Note: It is not possible to treat `S` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+error: EstimatorIntegrity/FiniteTreeSecondMoment.lean:50:57: Unknown identifier `S`
+
+Note: It is not possible to treat `S` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+error: EstimatorIntegrity/FiniteTreeSecondMoment.lean:51:29: Invalid argument name `S` for function `branchResult`
+
+Hint: Perhaps you meant one of the following parameter names:
+  • `u`: S̵u̲
+error: EstimatorIntegrity/FiniteTreeSecondMoment.lean:73:53: Unknown identifier `S`
+
+Note: It is not possible to treat `S` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+error: EstimatorIntegrity/FiniteTreeSecondMoment.lean:74:24: Unknown identifier `S`
+
+Note: It is not possible to treat `S` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+warning: EstimatorIntegrity/FiniteTreeSecondMoment.lean:120:4: declaration uses `sorry`
+warning: EstimatorIntegrity/FiniteTreeSecondMoment.lean:135:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+error: EstimatorIntegrity/FiniteTreeSecondMoment.lean:139:45: Unknown identifier `measurable_branchResult`
+error: EstimatorIntegrity/FiniteTreeSecondMoment.lean:134:55: unsolved goals
+S : Type u_1
+inst✝² : MeasurableSpace S
+branch : ProbabilityTheory.Kernel S (ℝ × S)
+K : ProbabilityTheory.Kernel S Output
+inst✝¹ : ProbabilityTheory.IsMarkovKernel branch
+inst✝ : ProbabilityTheory.IsMarkovKernel K
+a z : ℝ
+s : S
+this : ProbabilityTheory.IsMarkovKernel (childTriple K) := id inferInstance
+⊢ ∫⁻ (x : Output), weight a z x ∂((branch ⊗ₖ ProbabilityTheory.Kernel.prodMkLeft S (childTriple K)).map sorry) s =
+    36 * ∫⁻ (wr : ℝ × S), coeffSq wr.1 * (∫⁻ (x : Output), weight a z x ∂K wr.2) ^ 3 ∂branch s
+warning: EstimatorIntegrity/FiniteTreeSecondMoment.lean:138:6: declaration uses `sorry`
+error: EstimatorIntegrity/FiniteTreeSecondMoment.lean:189:32: Unknown identifier `S`
+
+Note: It is not possible to treat `S` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+error: EstimatorIntegrity/FiniteTreeSecondMoment.lean:191:60: Unknown identifier `S`
+
+Note: It is not possible to treat `S` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+error: EstimatorIntegrity/FiniteTreeSecondMoment.lean:192:32: Invalid argument name `S` for function `chooseBranch`
+error: EstimatorIntegrity/FiniteTreeSecondMoment.lean:208:39: Unknown identifier `measurableSet_chooseBranch`
+error: EstimatorIntegrity/FiniteTreeSecondMoment.lean:205:41: unsolved goals
+S : Type u_1
+inst✝ : MeasurableSpace S
+leaf : ProbabilityTheory.Kernel S ℝ
+branch : ProbabilityTheory.Kernel S (ℝ × S)
+K : ProbabilityTheory.Kernel S Output
+⊢ ProbabilityTheory.Kernel S Output
+error: EstimatorIntegrity/FiniteTreeSecondMoment.lean:227:39: Unknown identifier `measurableSet_chooseBranch`
+error: EstimatorIntegrity/FiniteTreeSecondMoment.lean:224:74: unsolved goals
+S : Type u_1
+inst✝³ : MeasurableSpace S
+leaf : ProbabilityTheory.Kernel S ℝ
+branch : ProbabilityTheory.Kernel S (ℝ × S)
+K : ProbabilityTheory.Kernel S Output
+inst✝² : ProbabilityTheory.IsMarkovKernel leaf
+inst✝¹ : ProbabilityTheory.IsMarkovKernel branch
+inst✝ : ProbabilityTheory.IsMarkovKernel K
+a z : ℝ
+s : S
+⊢ ∫⁻ (x : Output), weight a z x ∂(stepKernel leaf branch K) s =
+    5 / 6 * ∫⁻ (x : Output), weight a z x ∂(sourceKernel leaf) s +
+      1 / 6 * ∫⁻ (x : Output), weight a z x ∂(branchKernel branch K) s
+warning: EstimatorIntegrity/FiniteTreeSecondMoment.lean:289:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+error: EstimatorIntegrity/FiniteTreeSecondMoment.lean:291:54: Unknown identifier `measurable_branchResult`
+warning: EstimatorIntegrity/FiniteTreeSecondMoment.lean:309:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: EstimatorIntegrity/FiniteTreeSecondMoment.lean:311:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+error: EstimatorIntegrity/FiniteTreeSecondMoment.lean:314:39: Unknown identifier `measurableSet_chooseBranch`
+error: EstimatorIntegrity/FiniteTreeSecondMoment.lean:307:67: unsolved goals
+S : Type u_1
+inst✝³ : MeasurableSpace S
+leaf : ProbabilityTheory.Kernel S ℝ
+branch : ProbabilityTheory.Kernel S (ℝ × S)
+K : ProbabilityTheory.Kernel S Output
+inst✝² : ProbabilityTheory.IsMarkovKernel leaf
+inst✝¹ : ProbabilityTheory.IsMarkovKernel branch
+inst✝ : ProbabilityTheory.IsMarkovKernel K
+this✝ : ProbabilityTheory.IsMarkovKernel (branchKernel branch K) := branchKernel_isMarkov branch K
+this : ProbabilityTheory.IsMarkovKernel (sourceKernel leaf) := sourceKernel_isMarkov leaf
+⊢ ProbabilityTheory.IsMarkovKernel (stepKernel leaf branch K)
+warning: EstimatorIntegrity/FiniteTreeSecondMoment.lean:338:6: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: EstimatorIntegrity/FiniteTreeSecondMoment.lean:365:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+error: Lean exited with code 1
+Some required targets logged failures:
+- EstimatorIntegrity.FiniteTreeSecondMoment
+error: build failed

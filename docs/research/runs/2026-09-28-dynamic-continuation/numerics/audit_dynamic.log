@@ -1,0 +1,35 @@
+{
+  "counts": {
+    "manifest_files": 618,
+    "nodes": 70801171,
+    "projections": 514,
+    "protected_expected": 342,
+    "protected_hash_mismatch": 0,
+    "protected_missing": 0,
+    "roots": 60000000,
+    "seeds": 3,
+    "stages": 600
+  },
+  "duration_seconds": 20.555749708320946,
+  "failures": [],
+  "maximum_absolute_differences": {
+    "bhat": 0.0,
+    "estimator_covariance": 0.0,
+    "gram": 0.0,
+    "max_absolute_tree_value": 0.0,
+    "mean_nodes": 0.0,
+    "normalized_spatial_rms_errors": 3.469446951953614e-18,
+    "observation_covariance": 0.0,
+    "observation_second_moments": 0.0,
+    "projected_c": 0.0,
+    "projection_metric": 0.0,
+    "projection_vi": 0.0,
+    "raw_c": 0.0,
+    "root_branch_fraction": 0.0,
+    "tree_value_mean": 0.0,
+    "tree_value_sample_variance": 0.0,
+    "tree_value_second_moment": 0.0
+  },
+  "output": "docs/research/runs/2026-09-28-dynamic-continuation/numerics/audit_dynamic.json",
+  "passed": true
+}

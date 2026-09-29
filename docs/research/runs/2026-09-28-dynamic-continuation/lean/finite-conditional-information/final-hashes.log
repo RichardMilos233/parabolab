@@ -1,0 +1,16 @@
+79d7eda08b513e3eadffc7296bb5db90c6783a68be7edf232f378a27dbcf91ab  formal/EstimatorIntegrity/FiniteConditionalInformation.lean
+39c0096ef110e85fa8bf8a512bbc1e7b2a8d94a0a20abf3e47d723e80ec77158  formal/EstimatorIntegrity/BernoulliInformation.lean
+79e539057584ae13f1562cf70e266953c123bfaa31708fa92abb72284a0d54fd  docs/research/runs/2026-09-28-dynamic-continuation/05j-finite-conditional-information-lean-contract.md
+ae011c7c3dce73d24c4f96b2375b5832caf4572033001abb2391ff42335b140e  docs/research/runs/2026-09-28-dynamic-continuation/reviews/T62-root-correspondence.json
+3c6b7fa9ea7cbffd364be13367bc58eb6d67a339fdab33ee158990918ddf0530  docs/research/runs/2026-09-28-dynamic-continuation/06l-finite-conditional-information-lean.md
+3bcce0c3a0b5132f3c96da9b295e5358fce9f7bf5c66ed7643bf1a8a782f8e8e  docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-conditional-information/FiniteConditionalInformationAxioms.lean
+319f930241d2260931f16e21055c802a584c1b08f653e6e3b8be13bfa21d6015  docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-conditional-information/build.log
+39513032c02d390c2f144d696ff99df59989c9d2c5973c959d8bef09bbb4ae0b  docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-conditional-information/axioms.log
+82de57b100b3dab8a594edc840194325c87e8fc2f6d60049368af6038a227b75  docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-conditional-information/source-scan.log
+2df4eb17fa064e53fe5a074b8f632f8f29e1809f1dc43add7f8810d97f9af31d  docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-conditional-information/versions.log
+caf422f14db2a5580a71fe6218d431f7b78f6fe9ce7afb153ce9ad7f0d349444  docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-conditional-information/protected-sources.log
+df08d912eb9953fc5870c0d633e020ad27dfe5c2df58909c65875d4c0f03af1c  docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-conditional-information/development.log
+84b49357f6a794a36e7629dd1c77e0b6341539fa71480efc2f522f423860b527  docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-conditional-information/attempt-01.log
+f51365d46bfb8567953d80dc5c1d224154ae88f7221542036f84713d5f359428  docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-conditional-information/attempt-02.log
+458891de758349cecdf03c3ce3a939b18100978522a51080ee310ac5e936d47e  docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-conditional-information/attempt-03.log
+ac4a479e8193e3a346ded50b46f873c46c9e0494a962fa897d5185e8a688c818  docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-conditional-information/attempt-04.log

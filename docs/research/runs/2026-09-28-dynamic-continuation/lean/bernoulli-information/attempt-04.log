@@ -1,0 +1,13 @@
+$ cd formal
+$ ~/.elan/bin/lake env lean EstimatorIntegrity/BernoulliInformation.lean
+
+Fourth scalar-Pinsker prototype reduced the failure to two normalization
+details after 66.8 seconds:
+
+```text
+line 84: x * 4 - q * 4 = -(q * 4) + id x * 4
+line 102: error: No goals to be solved
+```
+
+The first needs `id` simplification before `ring`; the second arose because
+`field_simp` itself closed a conversion goal before the following `ring`.

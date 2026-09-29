@@ -1,0 +1,21 @@
+Development checks (resolved)
+=============================
+
+$ cd /Users/michael/Desktop/NTU/fyp/parabolab/formal
+$ ~/.elan/bin/lake env lean EstimatorIntegrity/HeatTransformWork.lean
+EstimatorIntegrity/HeatTransformWork.lean:28:8: error:
+  linarith failed to prove `|x| * |xs.prod| ≤ 1` from the two factor bounds.
+EstimatorIntegrity/HeatTransformWork.lean:30:2: error:
+  linarith failed to prove `|σ| * |z.prod| ≤ 1` from the two factor bounds.
+
+Resolution: apply `mul_le_mul` explicitly, using nonnegativity of absolute
+values, rather than asking linear arithmetic to derive a multiplicative
+monotonicity fact. The next direct check passed.
+
+Later successful checks emitted unused-hypothesis warnings for the required
+all-entry nonnegativity and `0 ≤ η` assumptions. The proofs were adjusted to
+reference those fixed target hypotheses explicitly. The final direct check
+exited with code 0 and no diagnostics.
+
+$ ~/.elan/bin/lake env lean EstimatorIntegrity/HeatTransformWork.lean
+(exit code 0; no output)

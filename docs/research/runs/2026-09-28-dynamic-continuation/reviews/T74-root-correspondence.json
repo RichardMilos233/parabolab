@@ -1,0 +1,85 @@
+{
+  "date_local": "2026-09-29",
+  "verdict": "PASS D32 Gate A and D33 shared-model composition",
+  "root_review": "Full final T70 (763 lines), T74 (859 lines), T69 (891 lines), T73 (689 lines), R12 and accepted D29 statement read. Exact actual H, paid g, same class, primitive union, near/far buffers, variance/risk and full work accounting checked.",
+  "sources": [
+    {
+      "path": "reviews/T70-known-base-phase-work-feasibility.md",
+      "sha256": "46666ef19d4d66eb6196c486df726b6cc623f401fb717d925c82806bd3a905d6",
+      "lines": 763
+    },
+    {
+      "path": "reviews/T74-known-base-phase-work-independent-audit.md",
+      "sha256": "0cc8fea39eeee5f1f43f21fa3d29a52525f26fed767ff0e7b1677c1fc8d2dd1c",
+      "lines": 859
+    },
+    {
+      "path": "reviews/T69-stable-graph-sampler-feasibility.md",
+      "sha256": "ff537ca6679fdefeefe9c08990194a09f6a2cec23460e1656876e7fdf8a37d9b",
+      "lines": 891
+    },
+    {
+      "path": "reviews/T73-stable-graph-sampler-independent-audit.md",
+      "sha256": "f21e469f8a15fdebf2293b1cf227e5ec8f3798426f875bdbdcf1641312890df5",
+      "lines": 689
+    },
+    {
+      "path": "reviews/T65-local-stable-graph-upper-proof.md",
+      "sha256": "58e862c9cfbaf0946605d30d9c8e8a37e2570c0c0719d626683f22db60fc9f81",
+      "lines": 1003
+    },
+    {
+      "path": "reviews/R12-signed-work-composition-contract.md",
+      "sha256": "390ede56727253adb0c23fb5356671f6b691b5c958ff4258d0e69ceeafd280ee",
+      "lines": 108
+    },
+    {
+      "path": "04u-all-dimension-signed-query-lower-bound.md",
+      "sha256": "6587b4ba1b30a904bb6b336d8ca22917baad12f7db26627ca313aef632d94117",
+      "lines": 171
+    },
+    {
+      "path": "04w-signed-ideal-work-exponential-rate.md",
+      "sha256": "7eb75d72f0185a75f5823e9fb5175b9033e92a408d89ea268653c4d798f96a79",
+      "lines": 205
+    }
+  ],
+  "independent_audits": {
+    "GateA": "T74 with completions C1-C4",
+    "GateB": "T73 no repair"
+  },
+  "local_completions_retained": [
+    "C1 far branch may omit h0 under R12; optional identical graph routine gives unconditional h0",
+    "C2 explicit Bernstein ellipse and balanced panel geometry",
+    "C3 actual accumulated endpoint-error recurrence and public allocations",
+    "C4 indexed Fourier-array coefficient access; arbitrary polynomial decoding is not free"
+  ],
+  "shared_model_checks": [
+    "Same fixed signed Cs class, unit torus and diffusion",
+    "Same actual H(q)=Pi S_Lq-Theta(QS_Lq)",
+    "D32 exact Gevrey2 paid g is admissible for D31; constant lookup operations charged",
+    "Exact elementary evaluations and continuous random draws separately enumerated and charged",
+    "All inner batches, genealogies, coefficient passes, spectral arrays, scalar weights and root iterations counted",
+    "Scalar Psi is a counted elementary evaluation, even on unbounded finite samples",
+    "Every operation-model algorithm is a Borel query algorithm, and Work>=Q for D28 lower bound"
+  ],
+  "conclusion": {
+    "gamma": "2d/(2s+d)",
+    "lower": "c exp(gamma T)",
+    "upper": "C exp(gamma T)(1+T)^a",
+    "rate": "lim log W(T)/T=gamma",
+    "upper_rms": "<=7/64",
+    "query_cap": "[1+J(J-1)/2]k^d"
+  },
+  "not_claimed": [
+    "Exact Theta operation work without polynomial factor",
+    "Finite-bit complexity",
+    "Practical speed or favorable constants",
+    "Signed numerical evidence",
+    "Complete Lean certificate",
+    "Weak-diffusion/larger-domain extension",
+    "Originality or award-level significance"
+  ],
+  "numerical_calls_added": 0,
+  "frozen_sources_edited": false
+}

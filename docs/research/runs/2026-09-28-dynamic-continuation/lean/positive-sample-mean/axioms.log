@@ -1,0 +1,17 @@
+'EstimatorIntegrity.positiveSampleMean' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.positiveSample_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.positiveSample_memLp_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.positiveSample_product_integral' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.positiveSampleMean_measurable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.positiveSampleMean_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.positiveSampleMean_unbiased' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.positiveSampleMean_squaredLoss_integrable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.positiveSampleMean_mse_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.positive_rpow_one_add_le_one_add_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.positive_scaled_rpow_identity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.positive_scaled_budget_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.positiveSampleMean_scaled_mse_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.positiveSampleMean_transformed_mse_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.positiveSampleMean_full_risk_certificate' depends on axioms: [propext, Classical.choice, Quot.sound]

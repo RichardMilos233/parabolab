@@ -1,0 +1,33 @@
+{
+  "status": "PASS; accepted evidence canvas updated",
+  "reviewer": "root",
+  "completed_utc": "2026-09-28T17:52:21.072917+00:00",
+  "managed_path": "/Users/michael/.cursor/projects/Users-michael-Desktop-NTU-fyp-parabolab/canvases/dynamic-continuation-evidence.canvas.tsx",
+  "managed_sha256": "a1ca7b101e0b5aba2c8bf8a8dc17c2c8ac071fe05fe634483a61da3ab192329d",
+  "previous_managed_sha256": "b1280e8dab63ae9cd908b8b6dc20eb07fa706c439b5400ff06fa9dc0abc584ed",
+  "source_manifest_sha256": "fd3e899e0cf324e54d6415058d394927bc99bd9fec46654ff6170d9051978acd",
+  "validation_manifest_sha256": "55912bb85af07bf2aa6f1bb7630569a7b999a6169a3d4ea96953ef9486d4a157",
+  "worker_correspondence_sha256": "fd251f56e1736c0411b97d6f497d9511d5049cbf509e2dd685352716d4298a32",
+  "root_checks": [
+    "Full semantic diff reviewed excluding data lines, which were compared exactly",
+    "49existing constants preserved verbatim",
+    "33existing Link bindings retained;47localpaths resolve",
+    "60pooled/180per-seed/36baseline records exact field projections of frozen stored_audit",
+    "Allsource-manifest hashes verified",
+    "All8source-keyed series retained in chart, allbaselines/seedranges/actualn/countscope retained",
+    "D29query-only and D30fixed-L known-g-cost limitations visible",
+    "TypeScript6.0.3semantic diagnostics0",
+    "Independent root esbuild bundleexit0",
+    "Managedcopyhash matches accepted candidate"
+  ],
+  "failed_root_check_retained": {
+    "command": "/opt/homebrew/bin/node /private/tmp/d29-e4-canvas-check/check.cjs from repository cwd",
+    "result": "TypeScript Debug Failure before candidate check: ts.findConfigFile had no tsconfig in incorrect cwd",
+    "correction": "Ran identical checker with cwd=/private/tmp/d29-e4-canvas-check; diagnostics0",
+    "candidate_change_needed": false
+  },
+  "root_bundle_sha256": "9bba34f93f4fbd4cc9a26df78ab501b735a423a254c6b7257c96aa86d39e85f3",
+  "oracle_calls": 0,
+  "gui_render_verified": false,
+  "permission": "managed existing canvas copy approved by auto-review; archived prior source preserved"
+}

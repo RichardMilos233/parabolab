@@ -1,0 +1,9 @@
+$ cd /Users/michael/Desktop/NTU/fyp/parabolab/formal
+$ ~/.elan/bin/lake env lean ../docs/research/runs/2026-09-28-dynamic-continuation/lean/heat-transform-work/HeatTransformWorkAxioms.lean
+'EstimatorIntegrity.abs_scalar_mul_list_prod_le_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.abs_div_le_one_of_abs_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.heatTransformWork_fixedPoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.finiteHeatTransformWorkInvariant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.finiteHeatTransformTotalRootWork_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.finiteScalarBaselineWorkInvariant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.finiteMatchedGaussianWorkInvariant' depends on axioms: [propext, Classical.choice, Quot.sound]

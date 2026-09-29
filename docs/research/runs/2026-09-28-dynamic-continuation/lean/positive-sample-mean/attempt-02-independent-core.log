@@ -1,0 +1,36 @@
+EstimatorIntegrity/PositiveSampleMean.lean:90:6: warning: `MeasureTheory.integral_finset_sum` has been deprecated: Use `MeasureTheory.integral_finsetSum` instead
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+EstimatorIntegrity/PositiveSampleMean.lean:155:27: error: unsolved goals
+Ω : Type u_1
+inst✝¹ : MeasurableSpace Ω
+μ : Measure Ω
+inst✝ : IsProbabilityMeasure μ
+n : ℕ
+hn : 0 < n
+Y : Fin n → Ω → ℝ
+A m : ℝ
+hA : 0 ≤ A
+hm : 0 ≤ m
+hYmeas : ∀ (i : Fin n), Measurable (Y i)
+hIndep : Pairwise fun i j => Y i ⟂ᵢ[μ] Y j
+hYrange : ∀ (i : Fin n) (ω : Ω), 0 ≤ Y i ω ∧ Y i ω ≤ A
+hMean : ∀ (i : Fin n), ∫ (ω : Ω), Y i ω ∂μ = m
+hYiL2 : ∀ (i : Fin n), MemLp (Y i) 2 μ
+hsum_meas : AEMeasurable (∑ i, Y i) μ
+hmean_meas : AEMeasurable (positiveSampleMean Y) μ
+hmean_value : ∫ (ω : Ω), positiveSampleMean Y ω ∂μ = m
+hvar_each : ∀ (i : Fin n), Var[Y i; μ] ≤ A * m
+hnR : ↑n ≠ 0
+⊢ ↑Finset.univ.card * A * m = A * m * ↑n
+EstimatorIntegrity/PositiveSampleMean.lean:157:49: warning: This simp argument is unused:
+  Fintype.card_fin
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Finset.sum_const, nsmul_eq_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`

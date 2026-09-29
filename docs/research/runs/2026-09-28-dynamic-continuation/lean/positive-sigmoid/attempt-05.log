@@ -1,0 +1,31 @@
+EstimatorIntegrity/PositiveSigmoidRisk.lean:139:6: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+EstimatorIntegrity/PositiveSigmoidRisk.lean:143:55: error: Application type mismatch: The argument
+  habs_L2
+has type
+  MemLp (fun ω => |F ω|) 2 μ
+but is expected to have type
+  MemLp (fun ω => |F ω|) (ENNReal.ofReal 2) μ
+in the application
+  integral_mul_le_Lp_mul_Lq_of_nonneg Real.HolderConjugate.two_two
+    (Filter.Eventually.of_forall fun ω => abs_nonneg (F ω)) (Filter.Eventually.of_forall fun x => zero_le_one) habs_L2
+EstimatorIntegrity/PositiveSigmoidRisk.lean:147:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ∫ (ω : Ω), |F ω| ^ 2 ∂μ
+in the target expression
+  ∫ (a : Ω), |F a| * 1 ∂μ ≤ (∫ (a : Ω), |F a| ^ 2 ∂μ) ^ (1 / 2) * (∫ (a : Ω), 1 ^ 2 ∂μ) ^ (1 / 2)
+
+Ω : Type u_1
+inst✝¹ : MeasurableSpace Ω
+μ : Measure Ω
+inst✝ : IsProbabilityMeasure μ
+F : Ω → ℝ
+hF : AEStronglyMeasurable F μ
+hFsq : Integrable (fun ω => F ω ^ 2) μ
+hF_L2 : MemLp F 2 μ
+habs_L2 : MemLp (fun ω => |F ω|) 2 μ
+hone_L2 : MemLp (fun x => 1) 2 μ
+hcs : ∫ (a : Ω), |F a| * 1 ∂μ ≤ (∫ (a : Ω), |F a| ^ 2 ∂μ) ^ (1 / 2) * (∫ (a : Ω), 1 ^ 2 ∂μ) ^ (1 / 2)
+habs_sq : ∫ (ω : Ω), |F ω| ^ 2 ∂μ = ∫ (ω : Ω), F ω ^ 2 ∂μ
+⊢ ∫ (ω : Ω), |F ω| ∂μ ≤ √(∫ (ω : Ω), F ω ^ 2 ∂μ)
+EstimatorIntegrity/PositiveSigmoidRisk.lean:186:8: warning: declaration uses `sorry`

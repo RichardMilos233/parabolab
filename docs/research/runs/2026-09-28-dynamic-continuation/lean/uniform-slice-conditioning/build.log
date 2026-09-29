@@ -1,0 +1,117 @@
+cwd=/Users/michael/Desktop/NTU/fyp/parabolab/formal
+command=/Users/michael/.elan/bin/lake build EstimatorIntegrity.UniformSliceConditioning
+⚠ [3403/3403] Built EstimatorIntegrity.UniformSliceConditioning (67s)
+warning: EstimatorIntegrity/UniformSliceConditioning.lean:29:8: automatically included section variable(s) unused in theorem `_private.EstimatorIntegrity.UniformSliceConditioning.0.EstimatorIntegrity.measurableSet_all`:
+  [DecidableEq beta]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq beta] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: EstimatorIntegrity/UniformSliceConditioning.lean:53:47: This simp argument is unused:
+  and_self
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [PMF.uniformOfFinset_apply, hpx, ↓reduceIte]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: EstimatorIntegrity/UniformSliceConditioning.lean:53:57: This simp argument is unused:
+  ↓reduceIte
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [PMF.uniformOfFinset_apply, hpx, and_self]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: EstimatorIntegrity/UniformSliceConditioning.lean:103:0: automatically included section variable(s) unused in theorem `EstimatorIntegrity.uniformSlice_singleton`:
+  [MeasurableSpace alpha]
+  [MeasurableSingletonClass alpha]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [MeasurableSpace alpha] [MeasurableSingletonClass alpha] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: EstimatorIntegrity/UniformSliceConditioning.lean:122:8: automatically included section variable(s) unused in theorem `EstimatorIntegrity.mem_sliceFamily`:
+  [Fintype alpha]
+  [DecidableEq alpha]
+  [MeasurableSpace alpha]
+  [MeasurableSingletonClass alpha]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype alpha] [DecidableEq alpha] [MeasurableSpace alpha] [MeasurableSingletonClass alpha] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: EstimatorIntegrity/UniformSliceConditioning.lean:195:30: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
+warning: EstimatorIntegrity/UniformSliceConditioning.lean:199:8: This simp argument is unused:
+  sliceFamily
+
+Hint: Omit it from the simp argument list.
+  [apply] simp
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: EstimatorIntegrity/UniformSliceConditioning.lean:239:0: automatically included section variable(s) unused in theorem `EstimatorIntegrity.measurable_nextBit`:
+  [MeasurableSpace alpha]
+  [MeasurableSingletonClass alpha]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [MeasurableSpace alpha] [MeasurableSingletonClass alpha] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: EstimatorIntegrity/UniformSliceConditioning.lean:252:38: Variable name `hiP` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hiP
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: EstimatorIntegrity/UniformSliceConditioning.lean:280:12: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: EstimatorIntegrity/UniformSliceConditioning.lean:300:24: Variable name `hhN` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hhN
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: EstimatorIntegrity/UniformSliceConditioning.lean:337:0: automatically included section variable(s) unused in theorem `EstimatorIntegrity.sliceRatio_le`:
+  [Fintype alpha]
+  [DecidableEq alpha]
+  [MeasurableSpace alpha]
+  [MeasurableSingletonClass alpha]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype alpha] [DecidableEq alpha] [MeasurableSpace alpha] [MeasurableSingletonClass alpha] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: EstimatorIntegrity/UniformSliceConditioning.lean:338:5: Variable name `hNU` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hNU
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: EstimatorIntegrity/UniformSliceConditioning.lean:338:19: Variable name `hPh` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hPh
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: EstimatorIntegrity/UniformSliceConditioning.lean:420:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: EstimatorIntegrity/UniformSliceConditioning.lean:422:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: EstimatorIntegrity/UniformSliceConditioning.lean:448:0: automatically included section variable(s) unused in theorem `EstimatorIntegrity.twoSlice_feasible`:
+  [Fintype alpha]
+  [DecidableEq alpha]
+  [MeasurableSpace alpha]
+  [MeasurableSingletonClass alpha]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype alpha] [DecidableEq alpha] [MeasurableSpace alpha] [MeasurableSingletonClass alpha] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+Build completed successfully (3403 jobs).
+exit_code=0

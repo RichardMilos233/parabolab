@@ -1,0 +1,11 @@
+EstimatorIntegrity/PositiveSigmoidRisk.lean:112:42: error: numerals are data in Lean, but the expected type is a proposition
+  Measurable ?m.118 : Prop
+EstimatorIntegrity/PositiveSigmoidRisk.lean:122:26: error: Type mismatch
+  add_le_add_right hle ?m.259
+has type
+  ?m.259 + positiveSigmoid (X ω) ≤ ?m.259 + 1
+but is expected to have type
+  positiveSigmoid (X ω) + |target| ≤ 1 + |target|
+EstimatorIntegrity/PositiveSigmoidRisk.lean:128:8: warning: declaration uses `sorry`
+EstimatorIntegrity/PositiveSigmoidRisk.lean:137:8: warning: declaration uses `sorry`
+EstimatorIntegrity/PositiveSigmoidRisk.lean:148:8: warning: declaration uses `sorry`

@@ -1,0 +1,7 @@
+EstimatorIntegrity/OracleTranscript.lean:78:31: error(lean.unknownIdentifier): Unknown identifier `tailTrace`
+EstimatorIntegrity/OracleTranscript.lean:124:2: error: Type mismatch: After simplification, term
+  List.toFinset_card_le (List.map cell trace)
+ has type
+  @LE.le ℕ instLENat (List.map cell trace).toFinset.card trace.length
+but is expected to have type
+  @LE.le ℕ instLENat (visitedCellLabels cell trace).card trace.length

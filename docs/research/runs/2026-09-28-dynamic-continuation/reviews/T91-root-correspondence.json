@@ -1,0 +1,52 @@
+{
+  "date_local": "2026-09-29",
+  "verdict": "PASS D43 from R20 plus mandatory R20b; PASS D44 from R21",
+  "root_review": "Read full736-line final T91 in complete ranges. Independently checked endpoint Bernstein signs, nonexplosion before moment use, continuous Frechet domain, cutoff-independent Hilbert envelope, ordered-tuple factorial and actual query law; then zero-child guarded recursion, singular whole-vector Gaussian independence conditional on genealogy, maximal removable common variance and O(n) passes. Earlier candidate sources were fully root-derived/read; source locks rechecked.",
+  "source_locks": {
+    "reviews/R20-polynomial-reaction-field-sampler-candidate.md": "b1e42a195c67942066894d04a11c28d7ba2951a6d6730977070e424ac84542b9",
+    "reviews/R20b-continuous-domain-addendum.md": "6c5e8b158ca269588c4200ca09c82f4ffa430e8aa0146a52022370ade352e527",
+    "reviews/R21-linear-tree-common-gaussian-candidate.md": "99f8a23c98332b6797ee1ecc9f0929d94950cd047acb17bcbea0df9052ff7461",
+    "reviews/T91-polynomial-field-linear-gaussian-independent-audit.md": "2f06d787fcbb631662b3be4997eb6c610e145120147a0e831d245345abde1af7",
+    "reviews/T87-all-diffusion-sharp-query-feasibility.md": "acd788e6ee5564778cd0663be99aab17fb61f22bdfb4b345ccade008f18feff1",
+    "reviews/T90-sharp-query-independent-audit.md": "f8959804af651f78b1a48ee6f9d96139aa397388fba88167f6e30daa5804a907"
+  },
+  "synthesis": {
+    "path": "04aa-polynomial-fields-and-linear-gaussian-preparation.md",
+    "sha256": "433c699d951c74fa6ba19166e159069130e1340a7a319aa0334b0ba4f8a1b8a1"
+  },
+  "required_repairs": {
+    "R20_original": "REPAIR, preserved",
+    "R20_plus_R20b": "PASS",
+    "details": [
+      "Base and direction explicitly continuous for C(X) Frechet domain; finite known evaluator cost retained",
+      "Averaged risk is at most V_j delta^(2j)/M; exact identity uses centered second moment"
+    ]
+  },
+  "accepted": [
+    "D43 actual fixed-positive-time H^(d+1) derivative field sampler for each fixed inward polynomial, hard j-query cap, finite real Fourier output and paid expected cost",
+    "D44 compatible O_d(n) Gaussian preparation, maximal extractable conditional common variance, unchanged second-moment envelope/query cap"
+  ],
+  "scope": {
+    "PDE": "scalar constant-positive-diffusion semilinear equation on unit torus",
+    "reaction": "fixed known polynomial f(-1)>=0, f(1)<=0",
+    "domain": "known continuous g with sup<1 and paid evaluator, unknown continuous v; derivative direction v-g; Taylor separately requires whole segment in open ball",
+    "cost": "inherited exact-real paid primitive model; arity and derivative order fixed",
+    "independence": "whole Gaussian residual vector and common scalar conditional on fixed genealogy; no unconditional random-tree independence assertion",
+    "optimization": "maximal removable common covariance only; not full estimator variance optimality"
+  },
+  "formal_status": "05n T93 and05m T89 active; no anticipated formal PASS; tree recursion/PDE not in05n",
+  "numerical_status": "zero new code experiments or unknown-input acquisitions; frozen E4 total368270390 unchanged",
+  "protected_initial_files": {
+    "count": 342,
+    "mismatches": []
+  },
+  "not_claimed": [
+    "General polynomial sharp long-time complexity",
+    "Generalized known-profile continuation solver/lower bound",
+    "Finite-bit cost",
+    "Practical speed",
+    "Uniform constants in reaction/dimension/diffusion/burn-in",
+    "New voting or Gaussian-tree recursion",
+    "Global priority, complete Lean proof or award significance"
+  ]
+}

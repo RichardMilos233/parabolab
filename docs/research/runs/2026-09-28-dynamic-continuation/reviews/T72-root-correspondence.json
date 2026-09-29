@@ -1,0 +1,56 @@
+{
+  "date_local": "2026-09-29",
+  "verdict": "PASS fixed05j only",
+  "source": {
+    "path": "formal/EstimatorIntegrity/FiniteConditionalInformation.lean",
+    "sha256": "79d7eda08b513e3eadffc7296bb5db90c6783a68be7edf232f378a27dbcf91ab",
+    "lines": 276
+  },
+  "root_review": "Full source, contract, correspondence report, all verification logs, harness and all four failure summaries read. Actual measure definitions, endpoint/zero-weight cases, KL chain identity and P(false)+Q(true) orientation match.",
+  "manifest": {
+    "path": "docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-conditional-information/final-hashes.log",
+    "sha256": "6ebf9a2c5a155cfc07a1b9e3d6119cc7ba75ae6a04007063d6cd724b72cba0a2",
+    "entries_verified": 16,
+    "mismatches": []
+  },
+  "build": {
+    "command": "~/.elan/bin/lake build EstimatorIntegrity.FiniteConditionalInformation",
+    "cwd": "formal",
+    "result": "3511/3511 success; target built in 57s",
+    "evidence": "worker fresh build transcribed and root inspected; not independently rebuilt by root"
+  },
+  "axioms": {
+    "public_declarations_checked": 10,
+    "only": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "harness_and_output_read": true,
+    "root_forbidden_source_scan": []
+  },
+  "provenance_clarification": {
+    "failed_attempt_files": "four retrospective summaries with observed diagnostic excerpts; not complete raw stdout/stderr or every scratch snapshot",
+    "build_axioms_versions": "exact transcriptions of actual returned tool outputs, confirmed by worker; not byte-direct tee captures",
+    "effect_on_acceptance": "No change to theorem/source/hash; full raw failure replay is not claimed"
+  },
+  "protected_initial_files": {
+    "count": 342,
+    "mismatches": []
+  },
+  "accepted": [
+    "Actual finite shared-history conditional Bernoulli KL finiteness and averaging",
+    "Uniform one-step actual KL bound",
+    "Actual compProd one-step accumulation",
+    "Actual measurable Bool pushforward identification and KL data processing to testing error >=3/8"
+  ],
+  "outside_scope": [
+    "Uniform layer laws",
+    "Adaptive exchangeability and padded transcripts",
+    "n-step urn path law/parameter arithmetic",
+    "Common seed simulation",
+    "Random stopping and MSE-to-label bridge",
+    "PDE/phase and full signed query theorem"
+  ],
+  "oracle_calls_added": 0
+}

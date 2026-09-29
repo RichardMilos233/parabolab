@@ -1,0 +1,7 @@
+started_utc=2026-09-28T20:24:28Z
+cwd=/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6
+command=/opt/homebrew/bin/node /Applications/Cursor.app/Contents/Resources/app/extensions/node_modules/esbuild-wasm/bin/esbuild /Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/dynamic-continuation-evidence.candidate.canvas.tsx --bundle --platform=browser --format=esm --external:cursor/canvas --external:react --external:react/jsx-runtime --outfile=/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/dynamic-continuation-evidence.bundle.js 
+stdout_stderr_begin
+stdout_stderr_end
+exit_code=0
+ended_utc=2026-09-28T20:24:44Z

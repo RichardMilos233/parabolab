@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "task": "T77",
+  "candidate_sha256": "ea576d19a862e376cfdf248be5ac0cacaa3aed6c29dfde55174a084e6bd3f8ad",
+  "typescript": {
+    "version": "6.0.3",
+    "checker": "/private/tmp/d29-e4-canvas-check/check.cjs",
+    "cwd": "/private/tmp/d29-e4-canvas-check",
+    "files": 1,
+    "diagnostics": 0,
+    "status": "PASS"
+  },
+  "esbuild": {
+    "version": "0.25.9",
+    "bundle_status": "PASS",
+    "bundle_sha256": "8bcfde85ce894bcb031ed781b46c59c4e4f79cb51da9b03007d991487bb26b56",
+    "configured_external": ["cursor/canvas", "react/jsx-runtime"],
+    "runtime_imports_retained": ["cursor/canvas"]
+  },
+  "parity": {
+    "manifest": "parity.json",
+    "status": "PASS",
+    "historical_top_level_data_constants_preserved_verbatim": "49/49",
+    "managed_baseline_const_declarations_preserved_verbatim": "66/66",
+    "historical_link_bindings_preserved": "33/33",
+    "managed_baseline_link_occurrences_preserved": "52/52",
+    "managed_baseline_local_paths_preserved": "47/47",
+    "candidate_local_paths_resolved": "55/55",
+    "line_chart_subtrees_preserved_verbatim": "5/5"
+  },
+  "narrative_checks": {
+    "d31_actual_graph_derivative_sampler_accepted": true,
+    "d32_paid_known_base_high_precision_computation_accepted": true,
+    "d33_rate_bound_exactly_stated": "c exp(gamma T) <= W(T) <= C exp(gamma T)(1+T)^a; gamma=2d/(2s+d)",
+    "d33_not_exact_theta_total_work": true,
+    "finite_bit_or_practical_speed_not_claimed": true,
+    "all_ideal_primitives_charged": true,
+    "t72_accepted_finite_shared_history_scope_stated": true,
+    "t72_3511_build_and_10_standard_axiom_exports_stated": true,
+    "t72_log_provenance_qualified": true,
+    "full_urn_adaptive_stopping_pde_bridge_not_claimed": true,
+    "t75_active_without_pass_stated": true,
+    "r14_full_extension_not_claimed": true
+  },
+  "scope": {
+    "new_oracle_calls": 0,
+    "new_numerical_runs": 0,
+    "new_numeric_or_runtime_plots": 0,
+    "gui_render_performed": false,
+    "managed_canvas_modified": false,
+    "accepted_ledgers_modified": false,
+    "frozen_sources_modified": false
+  }
+}

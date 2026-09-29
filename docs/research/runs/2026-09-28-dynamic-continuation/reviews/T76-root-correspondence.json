@@ -1,0 +1,44 @@
+{
+  "date_local": "2026-09-29",
+  "verdict": "PASS D34 supplied-trajectory local output and finite-time mean root only",
+  "root_review": "Read full R14 (145 lines), R14b (205 lines) and frozen T76 (524 lines); independently checked both signed difference equations, scalar ratios, zero shift, strict root signs, two-sided monotonicity, public schedule and bisection.",
+  "sources": [
+    {
+      "path": "reviews/R14b-local-graph-output-and-root-proof.md",
+      "sha256": "dff72bd839794df81eb36ac0744dfd5f711de6c2bcb5f8a128b2dd922ca24cf6",
+      "lines": 205
+    },
+    {
+      "path": "reviews/R14-spectral-gap-extension-candidate.md",
+      "sha256": "5b113f637b266e558b6f530cbc29049d59ae41141b56a3926fd148d097bedff0",
+      "lines": 145
+    },
+    {
+      "path": "reviews/T76-local-graph-output-root-independent-audit.md",
+      "sha256": "3a5a785173801120d8ff1a7aa6d8bc4ff0c54eadef54c274a8bb92febd23a58f",
+      "lines": 524
+    }
+  ],
+  "accepted": [
+    "Actual supplied stable trajectory bound R exp(-sigma t), for fixed kappa>0 and sigma>0",
+    "Uniform output error R+exp(E)-1+(1-hmax^2)^(-1/2)-1, including h=0",
+    "Unique finite-time mean zero c_tau with error D exp(-(1+3sigma)tau) and r/16 bracket buffer",
+    "Explicit public tau=max(1,ceil(log(1/zeta))), N=ceil(log_2(r/zeta)), conditional deterministic mean errors exp(-2tau)zeta/8"
+  ],
+  "dependencies": [
+    "Actual comparison-compatible classical-for-positive-time PDE flow",
+    "Supplied stable trajectory for each w, with uniform constants if a family is claimed",
+    "Explicit D<=min(1,r/16) smallness",
+    "Finite deterministic certified mean evaluator for the conditional algorithm"
+  ],
+  "not_claimed": [
+    "Graph construction or uniform burn-in in a new spectral regime",
+    "Weighted-L1 derivative or complete lower-prior bridge",
+    "New query/work bound, known-profile evaluator cost, bit complexity",
+    "Lean or numerical validation, novelty or award-level significance"
+  ],
+  "initial_protected_files_checked": 342,
+  "initial_protected_mismatches": [],
+  "numerical_calls_added": 0,
+  "frozen_sources_edited": false
+}

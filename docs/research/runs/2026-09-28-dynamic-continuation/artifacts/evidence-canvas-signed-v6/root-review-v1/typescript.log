@@ -1,0 +1,8 @@
+command=["/opt/homebrew/bin/node", "/private/tmp/d29-e4-canvas-check/check.cjs"]
+cwd=/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/root-review-v1
+started_utc=2026-09-28T20:36:21.730357+00:00
+stdout_stderr_begin
+{"typescript":"6.0.3","files":1,"diagnostics":0}
+stdout_stderr_end
+exit_code=0
+elapsed_seconds=0.5583203341811895

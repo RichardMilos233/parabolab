@@ -1,0 +1,44 @@
+T52 PositiveSampleMean development history
+
+attempt-01-independent-core.log
+  Initial elaboration exposed four concrete API issues: the definition had to
+  be unfolded before measurability/rewrite steps; `MemLp` finite sums use
+  `memLp_finsetSum'`; and the final constant sum required the cardinality of
+  `Fin n` to be normalized explicitly.
+
+attempt-02-independent-core.log
+  The remaining normalization goal contained `Finset.univ.card`; added
+  `Finset.card_univ` and replaced the deprecated integral theorem name.
+
+attempt-03-independent-core.log
+  `field_simp` had already closed the normalization goal, leaving an extra
+  `ring`; removed the redundant tactic.
+
+attempt-04-independent-core.log
+  Independent variance core passed.  Renamed the mathematically redundant
+  explicit `A >= 0` binder with an underscore prefix to silence its linter;
+  the contract assumption remains in the theorem type.
+
+attempt-05-rpow-helpers.log
+  Replaced an unsuitable positivity call with `sq_nonneg`; reassociated the
+  exponential product before applying `Real.exp_add`.
+
+attempt-06-rpow-helpers.log
+  Real-rpow ratio and exact horizon-scaling identity passed.
+
+attempt-07-scaled-budget.log
+  Positive-mean budget branch passed.  The zero-mean branch required its
+  integral to be normalized from `(mhat - 0)^2` to `mhat^2`.
+
+attempt-08-scaled-budget.log
+  Normalized the target as well as the stored zero-integral identity.
+
+attempt-09-combined-risk.log
+  Full source, including the frozen T51 import and exact `25/1024` risk
+  composition, passed with no output.
+
+Final verification
+  `build.log`: fresh Lake target build, 3457/3457 jobs.
+  `axioms.log`: every authored export uses only propext, Classical.choice,
+  and Quot.sound.
+  `source-scan.log`: empty sorry/admit/axiom/opaque scan.

@@ -1,0 +1,565 @@
+{
+  "elapsed_seconds": 0.002234041690826416,
+  "finished_utc": "2026-09-28T09:47:29.789115+00:00",
+  "inverse_checks": [
+    {
+      "absolute_errors": {
+        "q_event": 2.220446049250313e-16,
+        "remaining_time": 1.110223024625155e-16,
+        "stable_d": 0.0,
+        "zeta": 0.0
+      },
+      "actual": {
+        "q_event": 0.9999999999999994,
+        "remaining_time": 2.7755575615628923e-16,
+        "stable_d": 0.5555555555555555,
+        "zeta": 0.6666666666666667
+      },
+      "combined_absolute_plus_relative_tolerance_passed": true,
+      "forward_reconstructed_zeta": 0.6666666666666667,
+      "independent_high_precision_rounded": {
+        "q_event": 0.9999999999999992,
+        "remaining_time": 3.8857805861880474e-16,
+        "stable_d": 0.5555555555555555,
+        "zeta": 0.6666666666666667
+      },
+      "passed": true,
+      "relative_errors": {
+        "q_event": 2.220446049250315e-16,
+        "remaining_time": 0.28571428571428537,
+        "stable_d": 0.0,
+        "zeta": 0.0
+      },
+      "strict_direction_above_accepts": true,
+      "strict_direction_below_rejects": true,
+      "u_decimal": "0.5333333333333334",
+      "u_hex": "0x1.1111111111112p-1"
+    },
+    {
+      "absolute_errors": {
+        "q_event": 2.7755575615628914e-17,
+        "remaining_time": 0.0,
+        "stable_d": 0.0,
+        "zeta": 0.0
+      },
+      "actual": {
+        "q_event": 0.245982069525178,
+        "remaining_time": 0.701248316907637,
+        "stable_d": 0.3145245914228219,
+        "zeta": 0.8279344228724749
+      },
+      "combined_absolute_plus_relative_tolerance_passed": true,
+      "forward_reconstructed_zeta": 0.8279344228724749,
+      "independent_high_precision_rounded": {
+        "q_event": 0.24598206952517804,
+        "remaining_time": 0.701248316907637,
+        "stable_d": 0.3145245914228219,
+        "zeta": 0.8279344228724749
+      },
+      "passed": true,
+      "relative_errors": {
+        "q_event": 1.1283576753869017e-16,
+        "remaining_time": 0.0,
+        "stable_d": 0.0,
+        "zeta": 0.0
+      },
+      "strict_direction_above_accepts": true,
+      "strict_direction_below_rejects": true,
+      "u_decimal": "0.75",
+      "u_hex": "0x1.8000000000000p-1"
+    },
+    {
+      "absolute_errors": {
+        "q_event": 8.673617379884035e-19,
+        "remaining_time": 4.440892098500626e-16,
+        "stable_d": 0.0,
+        "zeta": 1.1102230246251565e-16
+      },
+      "actual": {
+        "q_event": 0.006096145869911065,
+        "remaining_time": 2.550049266046448,
+        "stable_d": 0.013303687169250348,
+        "zeta": 0.9933258845065649
+      },
+      "combined_absolute_plus_relative_tolerance_passed": true,
+      "forward_reconstructed_zeta": 0.993325884506565,
+      "independent_high_precision_rounded": {
+        "q_event": 0.006096145869911066,
+        "remaining_time": 2.5500492660464475,
+        "stable_d": 0.013303687169250348,
+        "zeta": 0.993325884506565
+      },
+      "passed": true,
+      "relative_errors": {
+        "q_event": 1.4228034507334666e-16,
+        "remaining_time": 1.7414926674674442e-16,
+        "stable_d": 0.0,
+        "zeta": 1.117682567163404e-16
+      },
+      "strict_direction_above_accepts": true,
+      "strict_direction_below_rejects": true,
+      "u_decimal": "0.99",
+      "u_hex": "0x1.fae147ae147aep-1"
+    },
+    {
+      "absolute_errors": {
+        "q_event": 0.0,
+        "remaining_time": 0.0,
+        "stable_d": 0.0,
+        "zeta": 0.0
+      },
+      "actual": {
+        "q_event": 6.66133814775094e-17,
+        "remaining_time": 18.623813096721545,
+        "stable_d": 1.4802973661668753e-16,
+        "zeta": 0.9999999999999999
+      },
+      "combined_absolute_plus_relative_tolerance_passed": true,
+      "forward_reconstructed_zeta": 0.9999999999999999,
+      "independent_high_precision_rounded": {
+        "q_event": 6.66133814775094e-17,
+        "remaining_time": 18.623813096721545,
+        "stable_d": 1.4802973661668753e-16,
+        "zeta": 0.9999999999999999
+      },
+      "passed": true,
+      "relative_errors": {
+        "q_event": 0.0,
+        "remaining_time": 0.0,
+        "stable_d": 0.0,
+        "zeta": 0.0
+      },
+      "strict_direction_above_accepts": true,
+      "strict_direction_below_rejects": true,
+      "u_decimal": "0.9999999999999999",
+      "u_hex": "0x1.fffffffffffffp-1"
+    }
+  ],
+  "root_cases": 12,
+  "root_invariant_cases": [
+    {
+      "coefficient_limit_substitutions": 0,
+      "entropy": 2026092890,
+      "final_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 33340133490540843536552274030962092451,
+          "state": 61994509394410976873002604394642058459
+        },
+        "uinteger": 0
+      },
+      "horizon": 0.0,
+      "horizon_index": 0,
+      "initial_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 33340133490540843536552274030962092451,
+          "state": 61994509394410976873002604394642058459
+        },
+        "uinteger": 0
+      },
+      "maximum_clock_proposals": 0,
+      "maximum_nodes": 1,
+      "passed": true,
+      "query": 0.0,
+      "query_index": 0,
+      "roots": 16,
+      "spawn_key": [
+        4,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient_limit_substitutions": 0,
+      "entropy": 2026092890,
+      "final_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 96992615940993355853153096264453835353,
+          "state": 64529737932109885593116042729525464184
+        },
+        "uinteger": 0
+      },
+      "horizon": 0.0,
+      "horizon_index": 0,
+      "initial_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 96992615940993355853153096264453835353,
+          "state": 64529737932109885593116042729525464184
+        },
+        "uinteger": 0
+      },
+      "maximum_clock_proposals": 0,
+      "maximum_nodes": 1,
+      "passed": true,
+      "query": 1.5707963267948966,
+      "query_index": 1,
+      "roots": 16,
+      "spawn_key": [
+        4,
+        0,
+        1
+      ]
+    },
+    {
+      "coefficient_limit_substitutions": 0,
+      "entropy": 2026092890,
+      "final_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 99817461800435038043211547272897553289,
+          "state": 84854388396013422942921155567586211364
+        },
+        "uinteger": 0
+      },
+      "horizon": 0.0,
+      "horizon_index": 0,
+      "initial_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 99817461800435038043211547272897553289,
+          "state": 84854388396013422942921155567586211364
+        },
+        "uinteger": 0
+      },
+      "maximum_clock_proposals": 0,
+      "maximum_nodes": 1,
+      "passed": true,
+      "query": 3.141592653589793,
+      "query_index": 2,
+      "roots": 16,
+      "spawn_key": [
+        4,
+        0,
+        2
+      ]
+    },
+    {
+      "coefficient_limit_substitutions": 0,
+      "entropy": 2026092890,
+      "final_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 246408728635607924606424203855200874709,
+          "state": 183999255135154412147164582376041575856
+        },
+        "uinteger": 0
+      },
+      "horizon": 0.25,
+      "horizon_index": 1,
+      "initial_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 246408728635607924606424203855200874709,
+          "state": 304140821190540548884223467165059273605
+        },
+        "uinteger": 0
+      },
+      "maximum_clock_proposals": 6,
+      "maximum_nodes": 3,
+      "passed": true,
+      "query": 0.0,
+      "query_index": 0,
+      "roots": 16,
+      "spawn_key": [
+        4,
+        1,
+        0
+      ]
+    },
+    {
+      "coefficient_limit_substitutions": 0,
+      "entropy": 2026092890,
+      "final_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 10713918639047119467966997719875054249,
+          "state": 171954340544740057016291301255575074820
+        },
+        "uinteger": 0
+      },
+      "horizon": 0.25,
+      "horizon_index": 1,
+      "initial_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 10713918639047119467966997719875054249,
+          "state": 263607595543134259592476770783201699546
+        },
+        "uinteger": 0
+      },
+      "maximum_clock_proposals": 6,
+      "maximum_nodes": 3,
+      "passed": true,
+      "query": 1.5707963267948966,
+      "query_index": 1,
+      "roots": 16,
+      "spawn_key": [
+        4,
+        1,
+        1
+      ]
+    },
+    {
+      "coefficient_limit_substitutions": 0,
+      "entropy": 2026092890,
+      "final_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 269593387376428204387155255446743356761,
+          "state": 281386489656155320288325097523424458762
+        },
+        "uinteger": 0
+      },
+      "horizon": 0.25,
+      "horizon_index": 1,
+      "initial_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 269593387376428204387155255446743356761,
+          "state": 76640901846742403632994499708324583300
+        },
+        "uinteger": 0
+      },
+      "maximum_clock_proposals": 7,
+      "maximum_nodes": 3,
+      "passed": true,
+      "query": 3.141592653589793,
+      "query_index": 2,
+      "roots": 16,
+      "spawn_key": [
+        4,
+        1,
+        2
+      ]
+    },
+    {
+      "coefficient_limit_substitutions": 0,
+      "entropy": 2026092890,
+      "final_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 261494456457476142101073854230741350563,
+          "state": 301445532021019178987640191251034548743
+        },
+        "uinteger": 0
+      },
+      "horizon": 4.0,
+      "horizon_index": 2,
+      "initial_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 261494456457476142101073854230741350563,
+          "state": 260292421040192920389550618677467345795
+        },
+        "uinteger": 0
+      },
+      "maximum_clock_proposals": 12,
+      "maximum_nodes": 7,
+      "passed": true,
+      "query": 0.0,
+      "query_index": 0,
+      "roots": 16,
+      "spawn_key": [
+        4,
+        2,
+        0
+      ]
+    },
+    {
+      "coefficient_limit_substitutions": 0,
+      "entropy": 2026092890,
+      "final_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 146299627974963553383050470506574569897,
+          "state": 25035932660665417168469278905685034312
+        },
+        "uinteger": 0
+      },
+      "horizon": 4.0,
+      "horizon_index": 2,
+      "initial_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 146299627974963553383050470506574569897,
+          "state": 74015866199000715572924760947301013516
+        },
+        "uinteger": 0
+      },
+      "maximum_clock_proposals": 12,
+      "maximum_nodes": 7,
+      "passed": true,
+      "query": 1.5707963267948966,
+      "query_index": 1,
+      "roots": 16,
+      "spawn_key": [
+        4,
+        2,
+        1
+      ]
+    },
+    {
+      "coefficient_limit_substitutions": 0,
+      "entropy": 2026092890,
+      "final_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 42493195099044574401518378411119898953,
+          "state": 240029122703975515472433346122297895219
+        },
+        "uinteger": 0
+      },
+      "horizon": 4.0,
+      "horizon_index": 2,
+      "initial_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 42493195099044574401518378411119898953,
+          "state": 297369669409776297314725559609155827389
+        },
+        "uinteger": 0
+      },
+      "maximum_clock_proposals": 9,
+      "maximum_nodes": 5,
+      "passed": true,
+      "query": 3.141592653589793,
+      "query_index": 2,
+      "roots": 16,
+      "spawn_key": [
+        4,
+        2,
+        2
+      ]
+    },
+    {
+      "coefficient_limit_substitutions": 0,
+      "entropy": 2026092890,
+      "final_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 145925184376006439146902421750660466967,
+          "state": 272885634599633246544214067462138784868
+        },
+        "uinteger": 0
+      },
+      "horizon": 256.0,
+      "horizon_index": 3,
+      "initial_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 145925184376006439146902421750660466967,
+          "state": 178321959846116882161865889369110132906
+        },
+        "uinteger": 0
+      },
+      "maximum_clock_proposals": 13,
+      "maximum_nodes": 7,
+      "passed": true,
+      "query": 0.0,
+      "query_index": 0,
+      "roots": 16,
+      "spawn_key": [
+        4,
+        3,
+        0
+      ]
+    },
+    {
+      "coefficient_limit_substitutions": 0,
+      "entropy": 2026092890,
+      "final_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 94929368847463279174450473933920996961,
+          "state": 66045530662289412807394948163508608069
+        },
+        "uinteger": 0
+      },
+      "horizon": 256.0,
+      "horizon_index": 3,
+      "initial_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 94929368847463279174450473933920996961,
+          "state": 245322157688257900348532157876748353831
+        },
+        "uinteger": 0
+      },
+      "maximum_clock_proposals": 9,
+      "maximum_nodes": 7,
+      "passed": true,
+      "query": 1.5707963267948966,
+      "query_index": 1,
+      "roots": 16,
+      "spawn_key": [
+        4,
+        3,
+        1
+      ]
+    },
+    {
+      "coefficient_limit_substitutions": 0,
+      "entropy": 2026092890,
+      "final_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 45178990603588897413622173485446357203,
+          "state": 109260394424935233664738166227832526834
+        },
+        "uinteger": 0
+      },
+      "horizon": 256.0,
+      "horizon_index": 3,
+      "initial_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 45178990603588897413622173485446357203,
+          "state": 302222112171993946664683776708618034552
+        },
+        "uinteger": 0
+      },
+      "maximum_clock_proposals": 16,
+      "maximum_nodes": 9,
+      "passed": true,
+      "query": 3.141592653589793,
+      "query_index": 2,
+      "roots": 16,
+      "spawn_key": [
+        4,
+        3,
+        2
+      ]
+    }
+  ],
+  "roots_checked": 192,
+  "schema_version": 1,
+  "started_utc": "2026-09-28T09:47:29.786886+00:00",
+  "status": "passed"
+}

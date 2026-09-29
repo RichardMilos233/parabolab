@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "original_top_level_constants": 74,
+  "candidate_top_level_constants": 82,
+  "original_constants_preserved_verbatim": 74,
+  "historical_pre_t71_top_level_data_constants_preserved": 49,
+  "changed_original_constants": [],
+  "original_link_occurrences": 60,
+  "candidate_link_occurrences": 68,
+  "original_unique_link_bindings": 55,
+  "candidate_unique_link_bindings": 63,
+  "missing_original_link_occurrences": [],
+  "historical_pre_t71_link_bindings_preserved": 33,
+  "original_local_path_constants": 55,
+  "candidate_local_path_constants": 63,
+  "missing_or_changed_original_paths": [],
+  "candidate_local_paths_resolved": 63,
+  "unresolved_candidate_paths": [],
+  "line_charts_original": 5,
+  "line_charts_candidate": 5,
+  "line_charts_preserved_verbatim": true,
+  "e4_records": {
+    "pooled": 60,
+    "per_seed": 180,
+    "zero_query_baselines": 36,
+    "total_activity_text_preserved": true,
+    "replay_point_calls_text_preserved": true
+  },
+  "imports": [
+    "cursor/canvas"
+  ],
+  "embedded_data_only": true,
+  "hardcoded_hex_colors": 0,
+  "gradients": 0,
+  "box_shadows": 0,
+  "required_narrative_present": 9,
+  "required_narrative_total": 9
+}

@@ -1,0 +1,64 @@
+{
+  "date_local": "2026-09-29",
+  "verdict": "PASS D47 fixed-time fractional field sampler; no required repair",
+  "root_review": "Read entire773-line T95 and736-line T97 final mathematical text, independently checked the twelve lemmas including additional q<1 counterexample, and verified all source locks and342 protected files. Direct primary Demni pp1-2 inspected for Laplace-normalized Kanter factorization; existing R22 covers separately scoped predecessor reads.",
+  "source_locks": {
+    "reviews/T95-fractional-diffusion-field-feasibility.md": "9bc1d42d582f75b96a4e562dacbc925cbd01151b2a3b4702c5dc2b0a1ab99d74",
+    "reviews/T97-fractional-field-independent-audit.md": "9e38a6d166806997d9c42ab8653615edad0a47b0fc1fa81dc9e31e980f5dec90",
+    "04aa-polynomial-fields-and-linear-gaussian-preparation.md": "433c699d951c74fa6ba19166e159069130e1340a7a319aa0334b0ba4f8a1b8a1",
+    "reviews/R20-polynomial-reaction-field-sampler-candidate.md": "b1e42a195c67942066894d04a11c28d7ba2951a6d6730977070e424ac84542b9",
+    "reviews/R20b-continuous-domain-addendum.md": "6c5e8b158ca269588c4200ca09c82f4ffa430e8aa0146a52022370ade352e527",
+    "reviews/R21-linear-tree-common-gaussian-candidate.md": "99f8a23c98332b6797ee1ecc9f0929d94950cd047acb17bcbea0df9052ff7461",
+    "reviews/T91-polynomial-field-linear-gaussian-independent-audit.md": "2f06d787fcbb631662b3be4997eb6c610e145120147a0e831d245345abde1af7",
+    "04z-all-positive-diffusivity-sharp-queries.md": "57ef1d86ddba30ce9d54f316b0eb2dc97f407f7aeb4446a66b3103c28e0aedd4",
+    "reviews/T87-all-diffusion-sharp-query-feasibility.md": "acd788e6ee5564778cd0663be99aab17fb61f22bdfb4b345ccade008f18feff1"
+  },
+  "synthesis": {
+    "path": "04ac-fractional-fixed-time-fields.md",
+    "sha256": "3330cccbe4fd4f666569b1f94401a7d8308d3a2ec5302f02616fd188c253ae3d"
+  },
+  "exact_scope": {
+    "equation": "u_t=-c(-Delta)^beta u+f(u) on normalized unit d-torus",
+    "fixed_parameters": "d>=1,0<beta<=1,c>0,tau>0, fixed inward polynomial f",
+    "domain": "continuous g,v;supg<1; known evaluator costG; arbitrary continuous e=v-g, Taylor separately whole segment in open unit ball",
+    "law": "one positive stable edge clock shared across physical coordinates; conditional edge Gaussian covariance2L; complete clocked-tree conditional Gaussian decomposition only",
+    "moments": "E[a^-q|chronology]<=n^(q+1)M_q for q>0; sharper n^q M_q only q>=1",
+    "field": "actual C-infinity Frechet C(X)->H^(d+1), strongly measurable Bochner W_j, EW_j=D^jS_tau(g)[e^j], cutoff-independent second moment",
+    "finite_output": "actual projected real Fourier derivative field; projected MSE bound, full target requires omitted-mode bias",
+    "queries": "at most j scalar initial-value acquisitions on every seed, repetitions charged",
+    "work": "conditional C[(1+G)n+K], expected C(1+G+K), actual elementary stable draw and linear tree passes",
+    "model": "same paid exact-real primitives; no stable/heat/PDE/Fourier/Gamma oracle"
+  },
+  "independent_checks": [
+    "Kanter Laplace scaling and endpoint guards, finite3sin/5log/1exp program",
+    "CMS factor-two conversion, isotropic shared coordinate clock",
+    "bounded parent first-split actual fractional semigroup law and nonexplosion",
+    "unequal-height partition PSD inequality with signed tests",
+    "guarded linear extraction, conditional whole-vector independence and reconstruction",
+    "harmonic height bound with nonnegative weights, n^q inverse moment and q<1 boundary",
+    "explicit finite elementary Sobolev envelope",
+    "complete nonlinear common-translation identity and true Frechet operator remainders",
+    "ordered tuple factorial, finite real Fourier normalization and sine sign",
+    "paid linear preparation and hard-query/a.s.halting accounting",
+    "actual independent Hilbert copies, correlation and projection-bias boundaries",
+    "smooth signed nonanalytic beta<1/2 linear counterexample"
+  ],
+  "classical_external_input": {
+    "source": "https://arxiv.org/pdf/1009.4926",
+    "scope": "root directly read pp1-2 Laplace normalization and factorization, not all13pages or original Kanter proof",
+    "result": "Kanter stable-law identity cited rather than reproved; algebraic use verified"
+  },
+  "not_claimed": [
+    "unconditional Gaussian covariance/independence after random-clock mixing",
+    "sharper moment bound for0<q<1",
+    "analytic smoothing for everybeta",
+    "full fractional known-profile paid solver or long-time complexity",
+    "gradient reactions,systems,variable diffusion,beta>1",
+    "complete Lean/numeric/finite-bit/performance/novelty/award result"
+  ],
+  "protected_initial_files": {
+    "count": 342,
+    "mismatches": []
+  },
+  "numerical_status": "zero new acquisitions; E4 total368270390 remains frozen; E5 still unrun"
+}

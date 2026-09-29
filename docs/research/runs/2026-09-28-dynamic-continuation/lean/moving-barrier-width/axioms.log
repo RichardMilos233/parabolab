@@ -1,0 +1,8 @@
+'EstimatorIntegrity.movingBarrier_increment_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.movingBarrier_finite_telescope' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.movingBarrier_finite_identity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.movingBarrier_remainder_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.movingBarrier_integrableOn' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.movingBarrier_integral_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.movingBarrier_width' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.positiveInterval_relativeVariance' depends on axioms: [propext, Classical.choice, Quot.sound]

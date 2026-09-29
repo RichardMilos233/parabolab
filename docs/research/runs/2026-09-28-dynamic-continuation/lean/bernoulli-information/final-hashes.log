@@ -1,0 +1,17 @@
+39c0096ef110e85fa8bf8a512bbc1e7b2a8d94a0a20abf3e47d723e80ec77158  formal/EstimatorIntegrity/BernoulliInformation.lean
+62d770647ffd6a69d370677e7d39e769710ef9de94f97b28caf77a0dcda4114a  docs/research/runs/2026-09-28-dynamic-continuation/05i-signed-information-lean-contract.md
+a22c095421d6ba5370a7b23143437f60c306fe41ca5186eb9d661f93b5018ecf  docs/research/runs/2026-09-28-dynamic-continuation/lean/bernoulli-information/BernoulliInformationAxioms.lean
+eaa1aff147bff7b89ae84d6ed3d992af5465e1a66cc449113419f68c3ef9d6f7  docs/research/runs/2026-09-28-dynamic-continuation/lean/bernoulli-information/build.log
+f7a29faa5425a71640da9109cc1c92a46bf5efe07db3ed8750c0f2e9c346e7e2  docs/research/runs/2026-09-28-dynamic-continuation/lean/bernoulli-information/axioms.log
+aaa6b5bdff6378ed47c398ac94c974e9115d67ab44710110eb957f57660a847d  docs/research/runs/2026-09-28-dynamic-continuation/lean/bernoulli-information/source-scan.log
+2df4eb17fa064e53fe5a074b8f632f8f29e1809f1dc43add7f8810d97f9af31d  docs/research/runs/2026-09-28-dynamic-continuation/lean/bernoulli-information/versions.log
+18da024a72f8795d1b0d97f1e90ec4e05ad27f9dd0ee64f8671d6d30bf55f13d  docs/research/runs/2026-09-28-dynamic-continuation/lean/bernoulli-information/development.log
+fb71b94d32a739e89d3fe811999e515dbf897d21df936d96f81df804e11a7453  docs/research/runs/2026-09-28-dynamic-continuation/lean/bernoulli-information/attempt-01.log
+58610209030989d37834e3e262821df95b23d8da005e7dd0df7f2c47fc3f7b69  docs/research/runs/2026-09-28-dynamic-continuation/lean/bernoulli-information/attempt-02.log
+dc75c823879f753225e6ce4ccf658464ca9268ffdfdd36660a6af1d455043306  docs/research/runs/2026-09-28-dynamic-continuation/lean/bernoulli-information/attempt-03.log
+7c9581baa82ac1eff45a4a79e728bf2530ac68a6fa5e0ba7e7d87508f48f41d9  docs/research/runs/2026-09-28-dynamic-continuation/lean/bernoulli-information/attempt-04.log
+a64e2d5b5b596439b22098e6eee682bb2ffaa9ec5fd362116774b9f05cb44373  docs/research/runs/2026-09-28-dynamic-continuation/lean/bernoulli-information/attempt-05.log
+4f3118507bdf0e19460b31d5daa862343a3a034e842699fa694dc8ec7cc0c936  docs/research/runs/2026-09-28-dynamic-continuation/lean/bernoulli-information/attempt-06.log
+ced813428704e2f1eefe8bf0d01eae921394ae10fc6461972e28f7c41b98d784  docs/research/runs/2026-09-28-dynamic-continuation/lean/bernoulli-information/attempt-07.log
+9fb4dc3529f679b4b0fad185abfebbc102a5ad6597023364d7116aa268682055  docs/research/runs/2026-09-28-dynamic-continuation/lean/bernoulli-information/attempt-08.log
+836e87cf2a209cdc278dfce7a449215e08036f1b7df0f7902b3dde18e0f06829  docs/research/runs/2026-09-28-dynamic-continuation/06k-bernoulli-information-lean.md

@@ -1,0 +1,5 @@
+EstimatorIntegrity/PositiveSigmoidRisk.lean:34:21: error: failed to prove strict positivity, but it would be possible to prove nonnegativity if desired
+EstimatorIntegrity/PositiveSigmoidRisk.lean:103:8: warning: declaration uses `sorry`
+EstimatorIntegrity/PositiveSigmoidRisk.lean:111:8: warning: declaration uses `sorry`
+EstimatorIntegrity/PositiveSigmoidRisk.lean:120:8: warning: declaration uses `sorry`
+EstimatorIntegrity/PositiveSigmoidRisk.lean:131:8: warning: declaration uses `sorry`

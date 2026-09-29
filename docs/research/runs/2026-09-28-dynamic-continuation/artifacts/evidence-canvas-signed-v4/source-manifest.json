@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "task": "T77",
+  "created_utc": "2026-09-28T18:42:35Z",
+  "managed_canvas": {
+    "path": "/Users/michael/.cursor/projects/Users-michael-Desktop-NTU-fyp-parabolab/canvases/dynamic-continuation-evidence.canvas.tsx",
+    "expected_sha256": "a1ca7b101e0b5aba2c8bf8a8dc17c2c8ac071fe05fe634483a61da3ab192329d",
+    "observed_sha256": "a1ca7b101e0b5aba2c8bf8a8dc17c2c8ac071fe05fe634483a61da3ab192329d",
+    "modified_by_t77": false
+  },
+  "archives": {
+    "original": {
+      "path": "dynamic-continuation-evidence.original.canvas.tsx",
+      "sha256": "a1ca7b101e0b5aba2c8bf8a8dc17c2c8ac071fe05fe634483a61da3ab192329d"
+    },
+    "candidate": {
+      "path": "dynamic-continuation-evidence.candidate.canvas.tsx",
+      "sha256": "ea576d19a862e376cfdf248be5ac0cacaa3aed6c29dfde55174a084e6bd3f8ad"
+    },
+    "bundle": {
+      "path": "dynamic-continuation-evidence.bundle.js",
+      "sha256": "8bcfde85ce894bcb031ed781b46c59c4e4f79cb51da9b03007d991487bb26b56"
+    },
+    "validator": {
+      "path": "validate.cjs",
+      "sha256": "3e65f4e3717cb10cbd44b5ee14b2d1520e41958c389ca9dc2cfe8c139009ac73"
+    }
+  },
+  "prior_packaging_sha256": {
+    "signed_v3/source-manifest.json": "fd3e899e0cf324e54d6415058d394927bc99bd9fec46654ff6170d9051978acd",
+    "signed_v3/validation-manifest.json": "55912bb85af07bf2aa6f1bb7630569a7b999a6169a3d4ea96953ef9486d4a157",
+    "reviews/T71-canvas-packaging-correspondence.md": "fd251f56e1736c0411b97d6f497d9511d5049cbf509e2dd685352716d4298a32",
+    "reviews/T71-root-correspondence.json": "2f1df76fb5dfd94631e2ec716e840d3004ca2d4e31f517e5fa825e0a3fa0b3d6"
+  },
+  "inputs_sha256": {
+    "04w-signed-ideal-work-exponential-rate.md": "7eb75d72f0185a75f5823e9fb5175b9033e92a408d89ea268653c4d798f96a79",
+    "03-claims.md": "2d481ec019d4ed48dbf4475b5d6fb8e3b7a7ea9260886dbe707650839fa342a3",
+    "reviews/T69-stable-graph-sampler-feasibility.md": "ff537ca6679fdefeefe9c08990194a09f6a2cec23460e1656876e7fdf8a37d9b",
+    "reviews/T73-stable-graph-sampler-independent-audit.md": "f21e469f8a15fdebf2293b1cf227e5ec8f3798426f875bdbdcf1641312890df5",
+    "reviews/T73-root-correspondence.json": "76239f3a9381eea39dd9d10ebc5468f19f1ad10727ebc7afd86f3b0c428247e7",
+    "reviews/T74-known-base-phase-work-independent-audit.md": "0cc8fea39eeee5f1f43f21fa3d29a52525f26fed767ff0e7b1677c1fc8d2dd1c",
+    "reviews/T74-root-correspondence.json": "ba0a6bc7a6f6f88e4382bcbae42b07400ee755f635a96d99c5ea2b439ad0507c",
+    "06l-finite-conditional-information-lean.md": "3c6b7fa9ea7cbffd364be13367bc58eb6d67a339fdab33ee158990918ddf0530",
+    "reviews/T72-root-correspondence.json": "b08ac7ad03979913def8fc51e13337623eb37207d132e9e40dff8c01ddcc17e8",
+    "reviews/R14-spectral-gap-extension-candidate.md": "5b113f637b266e558b6f530cbc29049d59ae41141b56a3926fd148d097bedff0",
+    "reviews/R14b-local-graph-output-and-root-proof.md": "dff72bd839794df81eb36ac0744dfd5f711de6c2bcb5f8a128b2dd922ca24cf6",
+    "reviews/T76-local-graph-output-root-independent-audit.md": "3a5a785173801120d8ff1a7aa6d8bc4ff0c54eadef54c274a8bb92febd23a58f"
+  },
+  "oracle_calls": 0,
+  "numerical_runs": 0,
+  "accepted_ledgers_or_frozen_sources_modified": false,
+  "implementation_profile": {
+    "requested": "5.6-sol/xhigh",
+    "backend_serving_telemetry_asserted": false
+  }
+}

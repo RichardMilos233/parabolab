@@ -1,0 +1,67 @@
+{
+  "date_local": "2026-09-29",
+  "verdict": "PASS D35 actual natural-gap analytical interfaces and D36 signed expected-query lower",
+  "root_read": "Full R14c255lines, R14d210lines, T78565lines, T79744lines, T80482lines; R14b/T76 local proof/audit already fully root read.",
+  "sources": [
+    {
+      "path": "reviews/R14c-natural-gap-graph-burnin-proof.md",
+      "sha256": "89a144617890314a47cbe1f7279053b9ea82c60dd670609739715a2a1ff2abbd",
+      "lines": 255
+    },
+    {
+      "path": "reviews/R14d-natural-gap-lower-composition.md",
+      "sha256": "33124c39eef1cb1e28c6e776445b0399f07b851c7c706373febb620510ccff6f",
+      "lines": 210
+    },
+    {
+      "path": "reviews/T78-local-graph-weighted-L1-proof.md",
+      "sha256": "e9613938316379c257fcaaf2cdc5bbbdfa19c01945a22d647a4e62d75b771a53",
+      "lines": 565
+    },
+    {
+      "path": "reviews/T79-natural-gap-graph-lower-independent-audit.md",
+      "sha256": "d39f45621ad988e0093f538b6cb05dfcedc6c9ff675c0f56b2512e8d5e01f2b1",
+      "lines": 744
+    },
+    {
+      "path": "reviews/T80-local-graph-weighted-L1-independent-audit.md",
+      "sha256": "497f332f9e0b533c7b252794ee1951ff88fa6ad6ad624e2afd3f49704b664bde",
+      "lines": 482
+    },
+    {
+      "path": "reviews/R14b-local-graph-output-and-root-proof.md",
+      "sha256": "dff72bd839794df81eb36ac0744dfd5f711de6c2bcb5f8a128b2dd922ca24cf6",
+      "lines": 205
+    },
+    {
+      "path": "reviews/T76-local-graph-output-root-independent-audit.md",
+      "sha256": "3a5a785173801120d8ff1a7aa6d8bc4ff0c54eadef54c274a8bb92febd23a58f",
+      "lines": 524
+    }
+  ],
+  "synthesis": {
+    "path": "04x-natural-gap-graph-and-signed-lower.md",
+    "sha256": "b0d9539204746d1abae8dcc655775ef653cce771e742be6106684baa33a56045"
+  },
+  "correspondence": [
+    "Same actual kappa heat semigroup and normalized Haar measure",
+    "Same nu,sigma,M,C,R,r and radius-R LP contraction; uniqueness identifies Theta",
+    "R14c radius constraints imply all T78 constraints; same fixed L",
+    "R14d a_star instantiated by rho0=min(1/4,r exp(-L)/4), B by max(1,B3)",
+    "Exact exp(T-L)H=exp(T)Atilde and DAtilde(0)=Pi",
+    "Full signed class and unconditioned priors; all-large-T amplitude threshold",
+    "Same exact-value transcript, finite-prior risk, adaptive padding and random-stopping argument"
+  ],
+  "scope": "Every fixed 2pi^2 kappa>1 and d,s>=1; lower only, constants not uniform at critical gap",
+  "not_claimed": [
+    "Matching changed-diffusivity query/work upper",
+    "Free paid approximation or mean/root/PDE evaluator",
+    "Critical/multiple-unstable-mode extension",
+    "Full signed Lean or numerical validation",
+    "Novelty/significance/award standard"
+  ],
+  "initial_protected_files_checked": 342,
+  "initial_protected_mismatches": [],
+  "numerical_calls_added": 0,
+  "frozen_sources_edited": false
+}

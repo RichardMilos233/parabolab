@@ -1,0 +1,2 @@
+Command: rg -n '\b(sorry|admit|axiom|opaque)\b' formal/EstimatorIntegrity/OracleTranscript.lean
+Result: no matches (rg exit status 1 is expected)

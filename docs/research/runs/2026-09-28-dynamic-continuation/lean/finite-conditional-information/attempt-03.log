@@ -1,0 +1,21 @@
+T72 development attempt 03
+
+Command:
+  cd formal
+  ~/.elan/bin/lake env lean /tmp/FiniteScratch.lean
+
+Result: FAIL (exit 1).
+
+The Bernoulli singleton formulas reduced the density identity to the correct
+ENNReal equalities, but cancellation still failed because the target was
+associated as
+
+```text
+(p / q) * (mu {h} * q)
+```
+
+instead of exposing `(p / q) * q`.
+
+Fix: reassociate and commute the history mass before applying
+`ENNReal.div_mul_cancel`. This retains the zero-history-mass case and does not
+divide by `mu {h}`.

@@ -1,0 +1,8 @@
+Command: ~/.elan/bin/lake env lean ../docs/research/runs/2026-09-28-dynamic-continuation/lean/critical-moment-work/CriticalMomentWorkAxioms.lean
+Working directory: formal
+Exit status: 0
+
+'EstimatorIntegrity.criticalMomentWork_integrable_and_sq_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.criticalExponent_lt_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.criticalExponent_eq_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.criticalExponent_alpha_one_p_two' depends on axioms: [propext, Classical.choice, Quot.sound]

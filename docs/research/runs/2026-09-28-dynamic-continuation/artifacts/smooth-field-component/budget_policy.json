@@ -1,0 +1,14 @@
+{
+  "global_generated_segment_cap": 10000000,
+  "global_oracle_cap": 300000,
+  "oracle_caps": {
+    "official": 245760,
+    "preflight": 8192,
+    "replay": 864
+  },
+  "prior_e5_oracle_calls": 0,
+  "reservation_semantics": "capacity is reserved and fsynced before segment generation; normal completion commits the exact generated count and releases unused capacity; an unresolved crash reservation remains charged until independent audit",
+  "segment_reservation_block": 1024,
+  "single_tree_segment_cap": 100000,
+  "version": "e5-budget-v1"
+}

@@ -1,0 +1,22 @@
+$ cd formal
+$ ~/.elan/bin/lake env lean EstimatorIntegrity/BernoulliInformation.lean
+
+First scalar-Pinsker prototype failed after 80.8 seconds.
+
+Key diagnostics:
+
+```text
+BernoulliInformation.lean:57:9: error: Application type mismatch
+  hasDerivAt_mul_log (sub_ne_zero.mpr (LT.lt.ne hp1))
+was inferred at p - 1 rather than 1 - p.
+
+BernoulliInformation.lean:78:15: error: don't know how to synthesize implicit argument q
+in hasDerivAt_bernoulliKLScalar.
+
+BernoulliInformation.lean:95:44: error: `simp` made no progress
+while converting the second derivative.
+```
+
+The remaining warnings were the intentional temporary `sorry` placeholders
+for later gates.  Fix: name the positivity proof for `1-p`, pass `q`
+explicitly, and replace the broad conversion chain by typed derivative facts.

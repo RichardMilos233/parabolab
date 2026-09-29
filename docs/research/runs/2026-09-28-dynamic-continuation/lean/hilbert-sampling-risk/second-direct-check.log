@@ -1,0 +1,87 @@
+label: second-direct-check
+started_utc: 2026-09-28T20:08:02Z
+cwd: /Users/michael/Desktop/NTU/fyp/parabolab/formal
+source_sha256: 45f25d987d772c57a3cba931b4fbedfcb9ccb20dc9f2f097f9792818bcd43ecf
+command: /Users/michael/.elan/bin/lake env lean EstimatorIntegrity/HilbertSamplingRisk.lean
+--- stdout+stderr ---
+EstimatorIntegrity/HilbertSamplingRisk.lean:48:0: warning: automatically included section variable(s) unused in theorem `EstimatorIntegrity.HilbertSamplingRisk.sample_integrable`:
+  [InnerProductSpace ℝ H]
+  [CompleteSpace H]
+  [MeasurableSpace H]
+  [BorelSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [InnerProductSpace ℝ H] [CompleteSpace H] [MeasurableSpace H] [BorelSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:53:0: warning: automatically included section variable(s) unused in theorem `EstimatorIntegrity.HilbertSamplingRisk.centered_memLp`:
+  [CompleteSpace H]
+  [MeasurableSpace H]
+  [BorelSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] [MeasurableSpace H] [BorelSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:66:0: warning: automatically included section variable(s) unused in theorem `EstimatorIntegrity.HilbertSamplingRisk.sample_sqNorm_integrable`:
+  [InnerProductSpace ℝ H]
+  [CompleteSpace H]
+  [MeasurableSpace H]
+  [BorelSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [InnerProductSpace ℝ H] [CompleteSpace H] [MeasurableSpace H] [BorelSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:70:0: warning: automatically included section variable(s) unused in theorem `EstimatorIntegrity.HilbertSamplingRisk.integral_centered`:
+  [MeasurableSpace H]
+  [BorelSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [MeasurableSpace H] [BorelSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:81:2: error: Type mismatch
+  MemLp.const_smul (memLp_finsetSum' Finset.univ fun i x => hY i) (1 / ↑n)
+has type
+  MemLp ((1 / ↑n) • ∑ i, Y i) 2 μ
+but is expected to have type
+  MemLp (fun ω => (1 / ↑n) • ∑ i, Y i ω) 2 μ
+EstimatorIntegrity/HilbertSamplingRisk.lean:97:0: warning: automatically included section variable(s) unused in theorem `EstimatorIntegrity.HilbertSamplingRisk.sampleMean_sub_meanAverage`:
+  [CompleteSpace H]
+  [MeasurableSpace H]
+  [BorelSpace H]
+  [IsProbabilityMeasure μ]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] [MeasurableSpace H] [BorelSpace H] [IsProbabilityMeasure μ] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:122:2: error: Type mismatch: After simplification, term
+  IndepFun.comp (hIndep hij)
+    (have this := Measurable.sub_const measurable_id' (∫ (ω : Ω), Y i ω ∂μ);
+    this)
+    (have this := Measurable.sub_const measurable_id' (∫ (ω : Ω), Y j ω ∂μ);
+    this)
+ has type
+  @IndepFun Ω H H inst✝⁶ inst✝² inst✝² ((fun x => x - ∫ (ω : Ω), Y i ω ∂μ) ∘ Y i)
+    ((fun x => x - ∫ (ω : Ω), Y j ω ∂μ) ∘ Y j) μ
+but is expected to have type
+  @IndepFun Ω H H inst✝⁶ inst✝² inst✝² (fun ω => Y i ω - ∫ (x : Ω), Y i x ∂μ) (fun ω => Y j ω - ∫ (x : Ω), Y j x ∂μ) μ
+EstimatorIntegrity/HilbertSamplingRisk.lean:136:2: error: Type mismatch: After simplification, term
+  h
+ has type
+  @Eq ℝ (∫ (ω : Ω), ((innerSL ℝ) (centered μ (Y i) ω)) (centered μ (Y j) ω) ∂μ) 0
+but is expected to have type
+  @Eq ℝ (∫ (ω : Ω), ⟪centered μ (Y i) ω, centered μ (Y j) ω⟫_ℝ ∂μ) 0
+EstimatorIntegrity/HilbertSamplingRisk.lean:147:10: warning: This simp argument is unused:
+  real_inner_self_eq_norm_sq
+
+Hint: Omit it from the simp argument list.
+  [apply] simp
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:187:2: error: 'change' tactic failed, pattern
+  MemLp ((1 / ↑n) • ∑ i, centered μ (Y i)) 2 μ
+is not definitionally equal to target
+  MemLp (fun ω => sampleMean Y ω - meanAverage μ Y) 2 μ
+EstimatorIntegrity/HilbertSamplingRisk.lean:213:8: warning: declaration uses `sorry`
+EstimatorIntegrity/HilbertSamplingRisk.lean:219:8: warning: declaration uses `sorry`
+--- end stdout+stderr ---
+exit_code: 1
+finished_utc: 2026-09-28T20:09:10Z

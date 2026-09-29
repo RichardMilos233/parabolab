@@ -1,0 +1,8 @@
+{
+  "maximum_empirical_rms": 0.004680482579961569,
+  "maximum_individual_mc_error": 0.006551731098166013,
+  "midpoint_0.95g_maximum_error": 0.010945815911642037,
+  "output": "docs/research/runs/2026-09-28-dynamic-continuation/numerics/summary_dynamic.json",
+  "passed": true,
+  "total_whole_run_elapsed_seconds": 124.80553604196757
+}

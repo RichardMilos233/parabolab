@@ -1,0 +1,38 @@
+T43 OracleTranscript development record
+
+attempt-01.log
+- Failure: importing only Mathlib.Data.Finset.Card did not provide the Real notation.
+- Failure: the initial explicit List.length_map invocation had the wrong argument form.
+- Fix: add Mathlib.Data.Real.Basic; use List.toFinset_card_le with simplification.
+
+attempt-02.log
+- A broad `import Mathlib` trial gave no early feedback, then exposed the remaining
+  unavailable `tailTrace` name and the visitedCellLabels target mismatch.
+- Fix: replace the broad import with the two focused imports for later builds.
+
+attempt-03.log
+- The focused-import build reproduced the two attempt-02 proof errors.
+- Fix for the second error: explicitly change the cell-cardinality target to the
+  mapped-list form.  The first error required inspecting the split state.
+
+attempt-04.log and attempt-05.log
+- Failure: the tail name remained unavailable because `split` had already refined the
+  recursive result's list into nil/cons cases.
+- Fix under investigation: remove rewriting that might obscure the local context.
+
+attempt-06.log
+- Diagnostic trace_state output confirmed that `split at hrun` generated separate
+  nil/cons trace cases and automatically named the recursive output components.
+- Exact fix: replace `split` with an explicit equation case split
+  `cases heval : runOracle ...` and destruct only the `some (output, trace)` payload.
+
+attempt-07.log
+- Success: the evaluator and transcript induction compiled with the explicit recursive
+  result equation.
+
+attempt-08.log
+- Success after tightening runOracle_noHit_queryCount to state equality between the
+  baseline and alternative run counts directly.
+
+Final verification is separately preserved in build.log, axioms.log, and
+source-scan.log.

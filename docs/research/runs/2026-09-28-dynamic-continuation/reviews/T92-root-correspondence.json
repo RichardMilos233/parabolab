@@ -1,0 +1,113 @@
+{
+  "date_local": "2026-09-29",
+  "verdict": "PASS after two versioned root wording repairs and direct root checks; deployed",
+  "review": "Full worker semantic diff, validator source, frozen manifests, reports and logs inspected. Root candidate changes only D40 continuity wording and replaces stale R20/R21 pending status with precise frozen dependency statement. All original v5 lines remain in order, charts/data/constants retained. No theory, numerical data or worker evidence overwritten.",
+  "worker_manifest_entries_verified": 22,
+  "worker_candidate_sha256": "a35be1ea0d6c6357cae2b1176df538e31fd61b5012c0f9e77ad0a947226f5b73",
+  "worker_review_sha256": "af3fa5eeb5b1bad10ad0e93eaea3dc3cefe82421d0b5a089f98caa0777106365",
+  "root_candidate_sha256": "ecb20ba4106227f902ce40c1eb098fd72a6c29fb9740e3be5a473ddd8644675a",
+  "managed_path": "/Users/michael/.cursor/projects/Users-michael-Desktop-NTU-fyp-parabolab/canvases/dynamic-continuation-evidence.canvas.tsx",
+  "managed_sha256": "ecb20ba4106227f902ce40c1eb098fd72a6c29fb9740e3be5a473ddd8644675a",
+  "parity": {
+    "status": "PASS",
+    "source_hashes": {
+      "original": "e2619ea14528c4e3d20e62ed2a3edb8cb2f3c175b47af4e31c9f1599f9e9fa41",
+      "candidate": "ecb20ba4106227f902ce40c1eb098fd72a6c29fb9740e3be5a473ddd8644675a",
+      "managed": "e2619ea14528c4e3d20e62ed2a3edb8cb2f3c175b47af4e31c9f1599f9e9fa41"
+    },
+    "managed_canvas_unchanged_from_archived_original": true,
+    "original_lines_preserved_verbatim_in_order": true,
+    "original_top_level_constants": 82,
+    "candidate_top_level_constants": 87,
+    "original_constants_preserved_verbatim": 82,
+    "changed_original_constants": [],
+    "original_link_occurrences": 68,
+    "candidate_link_occurrences": 73,
+    "missing_original_link_occurrences": [],
+    "original_local_path_constants": 63,
+    "candidate_local_path_constants": 68,
+    "missing_or_changed_original_paths": [],
+    "unresolved_candidate_paths": [],
+    "line_charts_original": 5,
+    "line_charts_candidate": 5,
+    "line_charts_preserved_verbatim": true,
+    "missing_original_numeric_literals": [],
+    "e4_records": {
+      "pooled": 60,
+      "per_seed": 180,
+      "zero_query_baselines": 36,
+      "total_activity_text_preserved": true
+    },
+    "imports": [
+      "cursor/canvas"
+    ],
+    "embedded_data_only": true,
+    "hardcoded_hex_colors": 0,
+    "gradients": 0,
+    "box_shadows": 0,
+    "required_narrative_present": 15,
+    "required_narrative_total": 15,
+    "t86_public_declarations_present": 28,
+    "t86_public_declarations_expected": 28
+  },
+  "root_checks": [
+    {
+      "check": "parity",
+      "command": [
+        "/opt/homebrew/bin/node",
+        "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/root-review-v1/validate.cjs"
+      ],
+      "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/root-review-v1",
+      "exit_code": 0,
+      "elapsed_seconds": 0.3640195829793811,
+      "log": "parity.log"
+    },
+    {
+      "check": "typescript",
+      "command": [
+        "/opt/homebrew/bin/node",
+        "/private/tmp/d29-e4-canvas-check/check.cjs"
+      ],
+      "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/root-review-v1",
+      "exit_code": 0,
+      "elapsed_seconds": 0.5583203341811895,
+      "log": "typescript.log"
+    },
+    {
+      "check": "bundle",
+      "command": [
+        "/opt/homebrew/bin/node",
+        "/Applications/Cursor.app/Contents/Resources/app/extensions/node_modules/esbuild-wasm/bin/esbuild",
+        "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/root-review-v1/dynamic-continuation-evidence.candidate.canvas.tsx",
+        "--bundle",
+        "--platform=browser",
+        "--format=esm",
+        "--external:cursor/canvas",
+        "--external:react",
+        "--external:react/jsx-runtime",
+        "--outfile=/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/root-review-v1/dynamic-continuation-evidence.bundle.js"
+      ],
+      "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/root-review-v1",
+      "exit_code": 0,
+      "elapsed_seconds": 0.6037689168006182,
+      "log": "bundle.log"
+    }
+  ],
+  "root_artifacts": {
+    "artifacts/evidence-canvas-signed-v6/root-review-v1/dynamic-continuation-evidence.bundle.js": "cfec935ef2392205fba7f71bcd475cee55fb8456ce8960da3158d6140b649a86",
+    "artifacts/evidence-canvas-signed-v6/root-review-v1/root-repairs.json": "8e4793902eb511cdf3db6c3cbaa622764bdbea1166c3ced5c267c206b7f3203d",
+    "artifacts/evidence-canvas-signed-v6/root-review-v1/typescript.log": "dc8c763f3b444e900fd543c5efda059ee3776231a085e345cb0f06b40d22920c",
+    "artifacts/evidence-canvas-signed-v6/root-review-v1/validate.cjs": "8f448a2ac2fa25b55f41e73edab2a76177390821db3e94669efc992763ca6135",
+    "artifacts/evidence-canvas-signed-v6/root-review-v1/dynamic-continuation-evidence.candidate.canvas.tsx": "ecb20ba4106227f902ce40c1eb098fd72a6c29fb9740e3be5a473ddd8644675a",
+    "artifacts/evidence-canvas-signed-v6/root-review-v1/commands.json": "cbbbb2c9343aaa2003926a1e75bb6a05231bde5eeccf7fd5de9566ed2f72dd02",
+    "artifacts/evidence-canvas-signed-v6/root-review-v1/dynamic-continuation-evidence.original.canvas.tsx": "e2619ea14528c4e3d20e62ed2a3edb8cb2f3c175b47af4e31c9f1599f9e9fa41",
+    "artifacts/evidence-canvas-signed-v6/root-review-v1/bundle.log": "eb2254764cb95f065c803b8fb2686ec8adf871508e1d38db8803ab7deab7ca58",
+    "artifacts/evidence-canvas-signed-v6/root-review-v1/tsconfig.json": "8119e921d6b36184d52157d1a2717ba1a5ebd8edd497b77b145b3f26c1168e40",
+    "artifacts/evidence-canvas-signed-v6/root-review-v1/worker-to-root.diff": "0d1c8afcd20dde18b8d19d5549de73945cc1a0e4aff780cda59055b8f5b176b7",
+    "artifacts/evidence-canvas-signed-v6/root-review-v1/parity.log": "1e1634128b0f7522f815f19113a0184b8f2454d43c3431a8496cd27c64537bd4"
+  },
+  "deployment": "Approved tool hash-guarded copy from frozen old managed v5 to checked root candidate; output hash matches",
+  "open_in_codex": "queued; no actual GUI render claim",
+  "provenance": "T92 implementation worker performed packaging; root made bounded wording repairs and reran exact candidate checks. Actual executing backend telemetry unexposed. First root manifest check used incorrect relative base and failed before edits; corrected root-based resolution passed.",
+  "numerical_execution_or_acquisitions_added": 0
+}

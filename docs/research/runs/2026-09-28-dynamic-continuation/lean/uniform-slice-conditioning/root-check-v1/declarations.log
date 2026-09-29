@@ -1,0 +1,190 @@
+@EstimatorIntegrity.sliceFamily : {alpha : Type u_1} → Finset alpha → ℕ → Finset (Finset alpha)
+@EstimatorIntegrity.uniformSlice : {alpha : Type u_1} →
+  (U : Finset alpha) → (h : ℕ) → h ≤ U.card → MeasureTheory.Measure (Finset alpha)
+@EstimatorIntegrity.uniformSlice_isProbabilityMeasure : ∀ {alpha : Type u_1} (U : Finset alpha) (h : ℕ)
+  (hh : h ≤ U.card), MeasureTheory.IsProbabilityMeasure (EstimatorIntegrity.uniformSlice U h hh)
+@EstimatorIntegrity.uniformSlice_singleton : ∀ {alpha : Type u_1} [Fintype alpha] [inst : DecidableEq alpha]
+  [inst_1 : MeasurableSpace alpha] [MeasurableSingletonClass alpha] (U A : Finset alpha) (h : ℕ) (hh : h ≤ U.card),
+  (EstimatorIntegrity.uniformSlice U h hh) {A} =
+    if A ∈ EstimatorIntegrity.sliceFamily U h then (↑(U.card.choose h))⁻¹ else 0
+@EstimatorIntegrity.compatibleEvent : {alpha : Type u_1} → Finset alpha → Finset alpha → Set (Finset alpha)
+@EstimatorIntegrity.compatibleFamily : {alpha : Type u_1} →
+  [DecidableEq alpha] → Finset alpha → ℕ → Finset alpha → Finset alpha → Finset (Finset alpha)
+@EstimatorIntegrity.mem_sliceFamily : ∀ {alpha : Type u_1} [Fintype alpha] [DecidableEq alpha]
+  [inst : MeasurableSpace alpha] [MeasurableSingletonClass alpha] {U A : Finset alpha} {h : ℕ},
+  A ∈ EstimatorIntegrity.sliceFamily U h ↔ A ⊆ U ∧ A.card = h
+@EstimatorIntegrity.mem_compatibleFamily : ∀ {alpha : Type u_1} [Fintype alpha] [inst : DecidableEq alpha]
+  [inst_1 : MeasurableSpace alpha] [MeasurableSingletonClass alpha] {U A P N : Finset alpha} {h : ℕ},
+  A ∈ EstimatorIntegrity.compatibleFamily U h P N ↔ A ⊆ U ∧ A.card = h ∧ P ⊆ A ∧ Disjoint A N
+@EstimatorIntegrity.compatibleFamily_eq_filter_sdiff : ∀ {alpha : Type u_1} [Fintype alpha] [inst : DecidableEq alpha]
+  [inst_1 : MeasurableSpace alpha] [MeasurableSingletonClass alpha] (U : Finset alpha) (h : ℕ) (P N : Finset alpha),
+  EstimatorIntegrity.compatibleFamily U h P N = {x ∈ Finset.powersetCard h (U \ N) | P ⊆ x}
+@EstimatorIntegrity.compatibleFamily_card : ∀ {alpha : Type u_1} [Fintype alpha] [inst : DecidableEq alpha]
+  [inst_1 : MeasurableSpace alpha] [MeasurableSingletonClass alpha] (U : Finset alpha) (h : ℕ) (P N : Finset alpha),
+  P ⊆ U →
+    N ⊆ U →
+      Disjoint P N →
+        P.card ≤ h →
+          (EstimatorIntegrity.compatibleFamily U h P N).card = (U.card - (P.card + N.card)).choose (h - P.card)
+@EstimatorIntegrity.conditionedSlice : {alpha : Type u_1} →
+  (U : Finset alpha) → (h : ℕ) → Finset alpha → Finset alpha → h ≤ U.card → MeasureTheory.Measure (Finset alpha)
+@EstimatorIntegrity.uniformSlice_compatibleEvent : ∀ {alpha : Type u_1} [Fintype alpha] [DecidableEq alpha]
+  [inst : MeasurableSpace alpha] [MeasurableSingletonClass alpha] (U : Finset alpha) (h : ℕ) (P N : Finset alpha)
+  (hh : h ≤ U.card),
+  P ⊆ U →
+    N ⊆ U →
+      Disjoint P N →
+        P.card ≤ h →
+          (EstimatorIntegrity.uniformSlice U h hh) (EstimatorIntegrity.compatibleEvent P N) =
+            ↑((U.card - (P.card + N.card)).choose (h - P.card)) / ↑(U.card.choose h)
+@EstimatorIntegrity.uniformSlice_compatibleEvent_pos : ∀ {alpha : Type u_1} [Fintype alpha] [DecidableEq alpha]
+  [inst : MeasurableSpace alpha] [MeasurableSingletonClass alpha] (U : Finset alpha) (h : ℕ) (P N : Finset alpha)
+  (hh : h ≤ U.card),
+  P ⊆ U →
+    N ⊆ U →
+      Disjoint P N →
+        P.card ≤ h →
+          h ≤ U.card - N.card → 0 < (EstimatorIntegrity.uniformSlice U h hh) (EstimatorIntegrity.compatibleEvent P N)
+@EstimatorIntegrity.conditionedSlice_eq_uniformCompatible : ∀ {alpha : Type u_1} [inst : Fintype alpha]
+  [inst_1 : DecidableEq alpha] [inst_2 : MeasurableSpace alpha] [inst_3 : MeasurableSingletonClass alpha]
+  (U : Finset alpha) (h : ℕ) (P N : Finset alpha) (hh : h ≤ U.card) (hPU : P ⊆ U) (hNU : N ⊆ U) (hPN : Disjoint P N)
+  (hPh : P.card ≤ h) (hhN : h ≤ U.card - N.card),
+  EstimatorIntegrity.conditionedSlice U h P N hh =
+    (PMF.uniformOfFinset (EstimatorIntegrity.compatibleFamily U h P N) ⋯).toMeasure
+@EstimatorIntegrity.conditionedSlice_isProbabilityMeasure : ∀ {alpha : Type u_1} [Fintype alpha] [DecidableEq alpha]
+  [inst : MeasurableSpace alpha] [MeasurableSingletonClass alpha] (U : Finset alpha) (h : ℕ) (P N : Finset alpha)
+  (hh : h ≤ U.card),
+  P ⊆ U →
+    N ⊆ U →
+      Disjoint P N →
+        P.card ≤ h →
+          h ≤ U.card - N.card → MeasureTheory.IsProbabilityMeasure (EstimatorIntegrity.conditionedSlice U h P N hh)
+@EstimatorIntegrity.unrevealedSet : {alpha : Type u_1} →
+  [DecidableEq alpha] → Finset alpha → Finset alpha → Finset alpha → Finset alpha
+@EstimatorIntegrity.nextBit : {alpha : Type u_1} → [DecidableEq alpha] → alpha → Finset alpha → Bool
+@EstimatorIntegrity.measurable_nextBit : ∀ {alpha : Type u_1} [Fintype alpha] [inst : DecidableEq alpha]
+  [inst_1 : MeasurableSpace alpha] [MeasurableSingletonClass alpha] (i : alpha),
+  Measurable (EstimatorIntegrity.nextBit i)
+EstimatorIntegrity.sliceParameter : (r m : ℕ) → r ≤ m → ↑(Set.Icc 0 1)
+@EstimatorIntegrity.sliceRatio_le : ∀ {alpha : Type u_1} [Fintype alpha] [DecidableEq alpha]
+  [inst : MeasurableSpace alpha] [MeasurableSingletonClass alpha] (U : Finset alpha) (h : ℕ) (P N : Finset alpha),
+  N ⊆ U → P.card ≤ h → h ≤ U.card - N.card → h - P.card ≤ U.card - (P.card + N.card)
+@EstimatorIntegrity.conditionedSlice_next_true : ∀ {alpha : Type u_1} [Fintype alpha] [inst : DecidableEq alpha]
+  [inst_1 : MeasurableSpace alpha] [MeasurableSingletonClass alpha] (U : Finset alpha) (h : ℕ) (P N : Finset alpha)
+  (i : alpha) (hh : h ≤ U.card),
+  P ⊆ U →
+    N ⊆ U →
+      Disjoint P N →
+        P.card ≤ h →
+          h ≤ U.card - N.card →
+            i ∈ EstimatorIntegrity.unrevealedSet U P N →
+              (MeasureTheory.Measure.map (EstimatorIntegrity.nextBit i)
+                      (EstimatorIntegrity.conditionedSlice U h P N hh)).real
+                  {true} =
+                ↑(h - P.card) / ↑(U.card - (P.card + N.card))
+@EstimatorIntegrity.conditionedSlice_next_true_zero : ∀ {alpha : Type u_1} [Fintype alpha] [inst : DecidableEq alpha]
+  [inst_1 : MeasurableSpace alpha] [MeasurableSingletonClass alpha] (U : Finset alpha) (h : ℕ) (P N : Finset alpha)
+  (i : alpha) (hh : h ≤ U.card),
+  P ⊆ U →
+    N ⊆ U →
+      Disjoint P N →
+        h ≤ U.card - N.card →
+          i ∈ EstimatorIntegrity.unrevealedSet U P N →
+            h = P.card →
+              (MeasureTheory.Measure.map (EstimatorIntegrity.nextBit i)
+                      (EstimatorIntegrity.conditionedSlice U h P N hh)).real
+                  {true} =
+                0
+@EstimatorIntegrity.conditionedSlice_next_true_one : ∀ {alpha : Type u_1} [Fintype alpha] [inst : DecidableEq alpha]
+  [inst_1 : MeasurableSpace alpha] [MeasurableSingletonClass alpha] (U : Finset alpha) (h : ℕ) (P N : Finset alpha)
+  (i : alpha) (hh : h ≤ U.card),
+  P ⊆ U →
+    N ⊆ U →
+      Disjoint P N →
+        P.card ≤ h →
+          h ≤ U.card - N.card →
+            i ∈ EstimatorIntegrity.unrevealedSet U P N →
+              h - P.card = U.card - (P.card + N.card) →
+                (MeasureTheory.Measure.map (EstimatorIntegrity.nextBit i)
+                        (EstimatorIntegrity.conditionedSlice U h P N hh)).real
+                    {true} =
+                  1
+@EstimatorIntegrity.conditionedSlice_map_nextBit : ∀ {alpha : Type u_1} [inst : Fintype alpha]
+  [inst_1 : DecidableEq alpha] [inst_2 : MeasurableSpace alpha] [inst_3 : MeasurableSingletonClass alpha]
+  (U : Finset alpha) (h : ℕ) (P N : Finset alpha) (i : alpha) (hh : h ≤ U.card),
+  P ⊆ U →
+    ∀ (hNU : N ⊆ U),
+      Disjoint P N →
+        ∀ (hPh : P.card ≤ h) (hhN : h ≤ U.card - N.card),
+          i ∈ EstimatorIntegrity.unrevealedSet U P N →
+            MeasureTheory.Measure.map (EstimatorIntegrity.nextBit i) (EstimatorIntegrity.conditionedSlice U h P N hh) =
+              EstimatorIntegrity.bernoulliBool
+                (EstimatorIntegrity.sliceParameter (h - P.card) (U.card - (P.card + N.card)) ⋯)
+@EstimatorIntegrity.twoSlice_feasible : ∀ {alpha : Type u_1} [Fintype alpha] [DecidableEq alpha]
+  [inst : MeasurableSpace alpha] [MeasurableSingletonClass alpha] (U : Finset alpha) (hMinus hPlus ell : ℕ)
+  (P N : Finset alpha),
+  hMinus ≤ hPlus →
+    hPlus + hMinus = U.card →
+      ell = hPlus - hMinus →
+        4 * ell ≤ U.card →
+          8 * (P.card + N.card) ≤ U.card →
+            P.card ≤ hMinus ∧ hMinus ≤ U.card - N.card ∧ P.card ≤ hPlus ∧ hPlus ≤ U.card - N.card
+@EstimatorIntegrity.twoSlice_ratio_bounds : ∀ {alpha : Type u_1} [Fintype alpha] [DecidableEq alpha]
+  [inst : MeasurableSpace alpha] [MeasurableSingletonClass alpha] (U : Finset alpha) (hMinus hPlus ell : ℕ)
+  (P N : Finset alpha),
+  0 < U.card →
+    hMinus ≤ hPlus →
+      hPlus + hMinus = U.card →
+        ell = hPlus - hMinus →
+          4 * ell ≤ U.card →
+            8 * (P.card + N.card) ≤ U.card →
+              1 / 4 ≤ ↑(hMinus - P.card) / ↑(U.card - (P.card + N.card)) ∧
+                ↑(hMinus - P.card) / ↑(U.card - (P.card + N.card)) ≤ 4 / 7 ∧
+                  ↑(hMinus - P.card) / ↑(U.card - (P.card + N.card)) < 3 / 4 ∧
+                    ↑(hPlus - P.card) / ↑(U.card - (P.card + N.card)) -
+                          ↑(hMinus - P.card) / ↑(U.card - (P.card + N.card)) =
+                        ↑ell / ↑(U.card - (P.card + N.card)) ∧
+                      0 ≤
+                          ↑(hPlus - P.card) / ↑(U.card - (P.card + N.card)) -
+                            ↑(hMinus - P.card) / ↑(U.card - (P.card + N.card)) ∧
+                        ↑(hPlus - P.card) / ↑(U.card - (P.card + N.card)) -
+                            ↑(hMinus - P.card) / ↑(U.card - (P.card + N.card)) ≤
+                          2 * ↑ell / ↑U.card
+@EstimatorIntegrity.twoSlice_next_kl_ne_top : ∀ {alpha : Type u_1} [Fintype alpha] [inst : DecidableEq alpha]
+  [inst_1 : MeasurableSpace alpha] [MeasurableSingletonClass alpha] (U : Finset alpha) (hMinus hPlus ell : ℕ)
+  (P N : Finset alpha) (i : alpha),
+  P ⊆ U →
+    N ⊆ U →
+      Disjoint P N →
+        0 < U.card →
+          ∀ (hord : hMinus ≤ hPlus) (hPlusK : hPlus ≤ U.card),
+            hPlus + hMinus = U.card →
+              ell = hPlus - hMinus →
+                4 * ell ≤ U.card →
+                  8 * (P.card + N.card) ≤ U.card →
+                    i ∈ EstimatorIntegrity.unrevealedSet U P N →
+                      InformationTheory.klDiv
+                          (MeasureTheory.Measure.map (EstimatorIntegrity.nextBit i)
+                            (EstimatorIntegrity.conditionedSlice U hPlus P N hPlusK))
+                          (MeasureTheory.Measure.map (EstimatorIntegrity.nextBit i)
+                            (EstimatorIntegrity.conditionedSlice U hMinus P N ⋯)) ≠
+                        ⊤
+@EstimatorIntegrity.twoSlice_next_kl_toReal_le : ∀ {alpha : Type u_1} [Fintype alpha] [inst : DecidableEq alpha]
+  [inst_1 : MeasurableSpace alpha] [MeasurableSingletonClass alpha] (U : Finset alpha) (hMinus hPlus ell : ℕ)
+  (P N : Finset alpha) (i : alpha),
+  P ⊆ U →
+    N ⊆ U →
+      Disjoint P N →
+        0 < U.card →
+          ∀ (hord : hMinus ≤ hPlus) (hPlusK : hPlus ≤ U.card),
+            hPlus + hMinus = U.card →
+              ell = hPlus - hMinus →
+                4 * ell ≤ U.card →
+                  8 * (P.card + N.card) ≤ U.card →
+                    i ∈ EstimatorIntegrity.unrevealedSet U P N →
+                      (InformationTheory.klDiv
+                            (MeasureTheory.Measure.map (EstimatorIntegrity.nextBit i)
+                              (EstimatorIntegrity.conditionedSlice U hPlus P N hPlusK))
+                            (MeasureTheory.Measure.map (EstimatorIntegrity.nextBit i)
+                              (EstimatorIntegrity.conditionedSlice U hMinus P N ⋯))).toReal ≤
+                        64 * ↑ell ^ 2 / (3 * ↑U.card ^ 2)

@@ -1,0 +1,15 @@
+{
+  "command": [
+    "/Users/michael/.elan/bin/lake",
+    "env",
+    "lean",
+    "-DautoImplicit=false",
+    "EstimatorIntegrity/FiniteTreeSecondMoment.lean"
+  ],
+  "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab/formal",
+  "source_sha256": "61d432bfff085728a2d035286251d8be4e4e9e9f08a070d4a7293475cd3934c4",
+  "exit_code": 0,
+  "elapsed_seconds": 39.60679507255554,
+  "log_capture": "direct process stdout and stderr bytes",
+  "scope": "Fresh actual source elaboration with library autoImplicit=false; prior library module build retained separately"
+}

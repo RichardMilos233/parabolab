@@ -1,0 +1,31 @@
+{
+  "created_utc": "2026-09-28T10:03:37.512864+00:00",
+  "error_axis": {
+    "exact_zeros_visible": true,
+    "linthresh": 0.0001,
+    "scale": "symlog"
+  },
+  "exact_zero_counts": {
+    "empirical_three_seed_rms": 3,
+    "harmonic_center_absolute_relative_errors": 0,
+    "mean_ode_absolute_relative_errors": 1
+  },
+  "input_derived_tables_sha256": "d24a0934ab95f303069e9970fc8efa0dcce81e054e1a5e3a305ffbf8106b5636",
+  "manifest_sha256": "d327f7c4f8faac551df219ec43afc998f04d377d550ecad6b8a663e3d6cec2f7",
+  "no_values_changed": true,
+  "outputs": {
+    "docs/research/runs/2026-09-28-dynamic-continuation/two-barrier-results-v2.png": {
+      "bytes": 344510,
+      "sha256": "812bbba5bf93d6c5528d66e04acef455d2d63eb5b2e01a236e8ade471d6ca0ad"
+    },
+    "docs/research/runs/2026-09-28-dynamic-continuation/two-barrier-results-v2.svg": {
+      "bytes": 154258,
+      "sha256": "a32d270d30461757310f452ea6ca1b611f3ffd9e3ff6286711cf5a7287075406"
+    }
+  },
+  "reference_solver_rerun": false,
+  "resampled": false,
+  "schema_version": 1,
+  "source_sha256": "fd88c24111eb1487d0eeace4d7a1b3745dce93128dab57f7ccfa770b9c05eafa",
+  "status": "PASS"
+}

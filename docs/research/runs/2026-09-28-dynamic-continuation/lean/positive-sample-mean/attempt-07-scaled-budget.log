@@ -1,0 +1,42 @@
+EstimatorIntegrity/PositiveSampleMean.lean:199:33: warning: Variable name `hC` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hC
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EstimatorIntegrity/PositiveSampleMean.lean:270:2: error: unsolved goals
+case pos
+Ω : Type u_1
+inst✝¹ : MeasurableSpace Ω
+μ : Measure Ω
+inst✝ : IsProbabilityMeasure μ
+n : ℕ
+hn : 0 < n
+Y : Fin n → Ω → ℝ
+A C β T : ℝ
+hA : 0 ≤ A
+hYmeas : ∀ (i : Fin n), Measurable (Y i)
+hIndep : Pairwise fun i j => Y i ⟂ᵢ[μ] Y j
+hYrange : ∀ (i : Fin n) (ω : Ω), 0 ≤ Y i ω ∧ Y i ω ≤ A
+hβ0 : 0 < β
+hβ1 : β < 1
+hC : 1 ≤ C
+hbudget : 64 * C * Real.exp ((1 - β) * T) ≤ ↑n
+hexp_sq : Real.exp T ^ 2 = Real.exp (2 * T)
+hm : 0 ≤ 0
+hMean : ∀ (i : Fin n), ∫ (ω : Ω), Y i ω ∂μ = 0
+hAupper : A ≤ C * 0 ^ β
+hbase_int : Integrable (fun ω => (positiveSampleMean Y ω - 0) ^ 2) μ
+hbase_mse : ∫ (ω : Ω), (positiveSampleMean Y ω - 0) ^ 2 ∂μ ≤ A * 0 / ↑n
+hscaled_eq :
+  (fun ω => (Real.exp T * positiveSampleMean Y ω - Real.exp T * 0) ^ 2) = fun ω =>
+    Real.exp (2 * T) * (positiveSampleMean Y ω - 0) ^ 2
+hbase_zero : ∫ (ω : Ω), (positiveSampleMean Y ω - 0) ^ 2 ∂μ = 0
+⊢ Real.exp (2 * T) * ∫ (a : Ω), positiveSampleMean Y a ^ 2 ∂μ ≤ 64⁻¹
+EstimatorIntegrity/PositiveSampleMean.lean:275:10: warning: This simp argument is unused:
+  hbase_zero
+
+Hint: Omit it from the simp argument list.
+  [apply] simp
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`

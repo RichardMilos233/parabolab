@@ -1,0 +1,547 @@
+{
+  "additional_oracle_runs": 0,
+  "elapsed_seconds": 0.0003442917950451374,
+  "interpretation": {
+    "finite_abstract_information_lemma_sharpness": true,
+    "matching_pde_upper_bound": false
+  },
+  "reused_main_sweep_records": 19262,
+  "row_count": 5,
+  "schema_version": 1,
+  "status": "PASS",
+  "summary_rows": [
+    {
+      "K": 1,
+      "additional_oracle_runs": 0,
+      "alternative_family_mean_risk": {
+        "denominator": 16,
+        "exact": "1/16",
+        "numerator": 1
+      },
+      "baseline_expected_cost": {
+        "denominator": 4,
+        "exact": "3/4",
+        "numerator": 3
+      },
+      "baseline_risk": {
+        "denominator": 1,
+        "exact": "0",
+        "numerator": 0
+      },
+      "miss_output": {
+        "denominator": 1,
+        "exact": "0",
+        "numerator": 0
+      },
+      "negative_input_mean_risk": {
+        "denominator": 16,
+        "exact": "1/16",
+        "numerator": 1
+      },
+      "per_alternative_risks": [
+        {
+          "hidden_cell": 0,
+          "risk": {
+            "denominator": 16,
+            "exact": "1/16",
+            "numerator": 1
+          },
+          "sign": -1
+        },
+        {
+          "hidden_cell": 0,
+          "risk": {
+            "denominator": 16,
+            "exact": "1/16",
+            "numerator": 1
+          },
+          "sign": 1
+        }
+      ],
+      "positive_input_mean_risk": {
+        "denominator": 16,
+        "exact": "1/16",
+        "numerator": 1
+      },
+      "reused_main_sweep_records": 6,
+      "weights": {
+        "cap_0": {
+          "denominator": 4,
+          "exact": "1/4",
+          "numerator": 1
+        },
+        "cap_K": {
+          "denominator": 4,
+          "exact": "3/4",
+          "numerator": 3
+        }
+      }
+    },
+    {
+      "K": 2,
+      "additional_oracle_runs": 0,
+      "alternative_family_mean_risk": {
+        "denominator": 16,
+        "exact": "1/16",
+        "numerator": 1
+      },
+      "baseline_expected_cost": {
+        "denominator": 2,
+        "exact": "3/2",
+        "numerator": 3
+      },
+      "baseline_risk": {
+        "denominator": 1,
+        "exact": "0",
+        "numerator": 0
+      },
+      "miss_output": {
+        "denominator": 1,
+        "exact": "0",
+        "numerator": 0
+      },
+      "negative_input_mean_risk": {
+        "denominator": 16,
+        "exact": "1/16",
+        "numerator": 1
+      },
+      "per_alternative_risks": [
+        {
+          "hidden_cell": 0,
+          "risk": {
+            "denominator": 16,
+            "exact": "1/16",
+            "numerator": 1
+          },
+          "sign": -1
+        },
+        {
+          "hidden_cell": 0,
+          "risk": {
+            "denominator": 16,
+            "exact": "1/16",
+            "numerator": 1
+          },
+          "sign": 1
+        },
+        {
+          "hidden_cell": 1,
+          "risk": {
+            "denominator": 16,
+            "exact": "1/16",
+            "numerator": 1
+          },
+          "sign": -1
+        },
+        {
+          "hidden_cell": 1,
+          "risk": {
+            "denominator": 16,
+            "exact": "1/16",
+            "numerator": 1
+          },
+          "sign": 1
+        }
+      ],
+      "positive_input_mean_risk": {
+        "denominator": 16,
+        "exact": "1/16",
+        "numerator": 1
+      },
+      "reused_main_sweep_records": 20,
+      "weights": {
+        "cap_0": {
+          "denominator": 4,
+          "exact": "1/4",
+          "numerator": 1
+        },
+        "cap_K": {
+          "denominator": 4,
+          "exact": "3/4",
+          "numerator": 3
+        }
+      }
+    },
+    {
+      "K": 3,
+      "additional_oracle_runs": 0,
+      "alternative_family_mean_risk": {
+        "denominator": 16,
+        "exact": "1/16",
+        "numerator": 1
+      },
+      "baseline_expected_cost": {
+        "denominator": 4,
+        "exact": "9/4",
+        "numerator": 9
+      },
+      "baseline_risk": {
+        "denominator": 1,
+        "exact": "0",
+        "numerator": 0
+      },
+      "miss_output": {
+        "denominator": 1,
+        "exact": "0",
+        "numerator": 0
+      },
+      "negative_input_mean_risk": {
+        "denominator": 16,
+        "exact": "1/16",
+        "numerator": 1
+      },
+      "per_alternative_risks": [
+        {
+          "hidden_cell": 0,
+          "risk": {
+            "denominator": 16,
+            "exact": "1/16",
+            "numerator": 1
+          },
+          "sign": -1
+        },
+        {
+          "hidden_cell": 0,
+          "risk": {
+            "denominator": 16,
+            "exact": "1/16",
+            "numerator": 1
+          },
+          "sign": 1
+        },
+        {
+          "hidden_cell": 1,
+          "risk": {
+            "denominator": 16,
+            "exact": "1/16",
+            "numerator": 1
+          },
+          "sign": -1
+        },
+        {
+          "hidden_cell": 1,
+          "risk": {
+            "denominator": 16,
+            "exact": "1/16",
+            "numerator": 1
+          },
+          "sign": 1
+        },
+        {
+          "hidden_cell": 2,
+          "risk": {
+            "denominator": 16,
+            "exact": "1/16",
+            "numerator": 1
+          },
+          "sign": -1
+        },
+        {
+          "hidden_cell": 2,
+          "risk": {
+            "denominator": 16,
+            "exact": "1/16",
+            "numerator": 1
+          },
+          "sign": 1
+        }
+      ],
+      "positive_input_mean_risk": {
+        "denominator": 16,
+        "exact": "1/16",
+        "numerator": 1
+      },
+      "reused_main_sweep_records": 84,
+      "weights": {
+        "cap_0": {
+          "denominator": 4,
+          "exact": "1/4",
+          "numerator": 1
+        },
+        "cap_K": {
+          "denominator": 4,
+          "exact": "3/4",
+          "numerator": 3
+        }
+      }
+    },
+    {
+      "K": 4,
+      "additional_oracle_runs": 0,
+      "alternative_family_mean_risk": {
+        "denominator": 16,
+        "exact": "1/16",
+        "numerator": 1
+      },
+      "baseline_expected_cost": {
+        "denominator": 1,
+        "exact": "3",
+        "numerator": 3
+      },
+      "baseline_risk": {
+        "denominator": 1,
+        "exact": "0",
+        "numerator": 0
+      },
+      "miss_output": {
+        "denominator": 1,
+        "exact": "0",
+        "numerator": 0
+      },
+      "negative_input_mean_risk": {
+        "denominator": 16,
+        "exact": "1/16",
+        "numerator": 1
+      },
+      "per_alternative_risks": [
+        {
+          "hidden_cell": 0,
+          "risk": {
+            "denominator": 16,
+            "exact": "1/16",
+            "numerator": 1
+          },
+          "sign": -1
+        },
+        {
+          "hidden_cell": 0,
+          "risk": {
+            "denominator": 16,
+            "exact": "1/16",
+            "numerator": 1
+          },
+          "sign": 1
+        },
+        {
+          "hidden_cell": 1,
+          "risk": {
+            "denominator": 16,
+            "exact": "1/16",
+            "numerator": 1
+          },
+          "sign": -1
+        },
+        {
+          "hidden_cell": 1,
+          "risk": {
+            "denominator": 16,
+            "exact": "1/16",
+            "numerator": 1
+          },
+          "sign": 1
+        },
+        {
+          "hidden_cell": 2,
+          "risk": {
+            "denominator": 16,
+            "exact": "1/16",
+            "numerator": 1
+          },
+          "sign": -1
+        },
+        {
+          "hidden_cell": 2,
+          "risk": {
+            "denominator": 16,
+            "exact": "1/16",
+            "numerator": 1
+          },
+          "sign": 1
+        },
+        {
+          "hidden_cell": 3,
+          "risk": {
+            "denominator": 16,
+            "exact": "1/16",
+            "numerator": 1
+          },
+          "sign": -1
+        },
+        {
+          "hidden_cell": 3,
+          "risk": {
+            "denominator": 16,
+            "exact": "1/16",
+            "numerator": 1
+          },
+          "sign": 1
+        }
+      ],
+      "positive_input_mean_risk": {
+        "denominator": 16,
+        "exact": "1/16",
+        "numerator": 1
+      },
+      "reused_main_sweep_records": 432,
+      "weights": {
+        "cap_0": {
+          "denominator": 4,
+          "exact": "1/4",
+          "numerator": 1
+        },
+        "cap_K": {
+          "denominator": 4,
+          "exact": "3/4",
+          "numerator": 3
+        }
+      }
+    },
+    {
+      "K": 6,
+      "additional_oracle_runs": 0,
+      "alternative_family_mean_risk": {
+        "denominator": 16,
+        "exact": "1/16",
+        "numerator": 1
+      },
+      "baseline_expected_cost": {
+        "denominator": 2,
+        "exact": "9/2",
+        "numerator": 9
+      },
+      "baseline_risk": {
+        "denominator": 1,
+        "exact": "0",
+        "numerator": 0
+      },
+      "miss_output": {
+        "denominator": 1,
+        "exact": "0",
+        "numerator": 0
+      },
+      "negative_input_mean_risk": {
+        "denominator": 16,
+        "exact": "1/16",
+        "numerator": 1
+      },
+      "per_alternative_risks": [
+        {
+          "hidden_cell": 0,
+          "risk": {
+            "denominator": 16,
+            "exact": "1/16",
+            "numerator": 1
+          },
+          "sign": -1
+        },
+        {
+          "hidden_cell": 0,
+          "risk": {
+            "denominator": 16,
+            "exact": "1/16",
+            "numerator": 1
+          },
+          "sign": 1
+        },
+        {
+          "hidden_cell": 1,
+          "risk": {
+            "denominator": 16,
+            "exact": "1/16",
+            "numerator": 1
+          },
+          "sign": -1
+        },
+        {
+          "hidden_cell": 1,
+          "risk": {
+            "denominator": 16,
+            "exact": "1/16",
+            "numerator": 1
+          },
+          "sign": 1
+        },
+        {
+          "hidden_cell": 2,
+          "risk": {
+            "denominator": 16,
+            "exact": "1/16",
+            "numerator": 1
+          },
+          "sign": -1
+        },
+        {
+          "hidden_cell": 2,
+          "risk": {
+            "denominator": 16,
+            "exact": "1/16",
+            "numerator": 1
+          },
+          "sign": 1
+        },
+        {
+          "hidden_cell": 3,
+          "risk": {
+            "denominator": 16,
+            "exact": "1/16",
+            "numerator": 1
+          },
+          "sign": -1
+        },
+        {
+          "hidden_cell": 3,
+          "risk": {
+            "denominator": 16,
+            "exact": "1/16",
+            "numerator": 1
+          },
+          "sign": 1
+        },
+        {
+          "hidden_cell": 4,
+          "risk": {
+            "denominator": 16,
+            "exact": "1/16",
+            "numerator": 1
+          },
+          "sign": -1
+        },
+        {
+          "hidden_cell": 4,
+          "risk": {
+            "denominator": 16,
+            "exact": "1/16",
+            "numerator": 1
+          },
+          "sign": 1
+        },
+        {
+          "hidden_cell": 5,
+          "risk": {
+            "denominator": 16,
+            "exact": "1/16",
+            "numerator": 1
+          },
+          "sign": -1
+        },
+        {
+          "hidden_cell": 5,
+          "risk": {
+            "denominator": 16,
+            "exact": "1/16",
+            "numerator": 1
+          },
+          "sign": 1
+        }
+      ],
+      "positive_input_mean_risk": {
+        "denominator": 16,
+        "exact": "1/16",
+        "numerator": 1
+      },
+      "reused_main_sweep_records": 18720,
+      "weights": {
+        "cap_0": {
+          "denominator": 4,
+          "exact": "1/4",
+          "numerator": 1
+        },
+        "cap_K": {
+          "denominator": 4,
+          "exact": "3/4",
+          "numerator": 3
+        }
+      }
+    }
+  ]
+}

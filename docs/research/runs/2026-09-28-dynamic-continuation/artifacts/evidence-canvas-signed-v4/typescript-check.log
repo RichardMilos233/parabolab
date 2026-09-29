@@ -1,0 +1,4 @@
+command: /opt/homebrew/bin/node /private/tmp/d29-e4-canvas-check/check.cjs
+cwd: /private/tmp/d29-e4-canvas-check
+candidate_sha256: ea576d19a862e376cfdf248be5ac0cacaa3aed6c29dfde55174a084e6bd3f8ad
+{"typescript":"6.0.3","files":1,"diagnostics":0}

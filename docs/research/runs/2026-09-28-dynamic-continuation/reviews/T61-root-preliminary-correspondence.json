@@ -1,0 +1,20 @@
+{
+  "status": "root preliminary read complete; independent T64 pending",
+  "source": "docs/research/runs/2026-09-28-dynamic-continuation/reviews/T61-all-dimension-lower-proof.md",
+  "source_sha256": "404a237be72991ac60efb97c48b5ba2347384b0a30ffe3a98219a74d1604d691",
+  "full_lines_read": 614,
+  "root_checks": [
+    "marked single L1 heat path with c1=1,c2=6,c3=57",
+    "short-time integration avoids a t^(-d/2) bound",
+    "centered L2 recurrences with exactly one marked factor",
+    "D3 phase-integrand bound and finite explicit B",
+    "full unconditioned Hamming layers and bad-event accounting",
+    "large-T floor thresholds for every horizon and qbar>=3K/65536"
+  ],
+  "not_promoted": "No D28/all-dimension accepted claim until actual independent audit is read",
+  "not_claimed": [
+    "common invariant triple measure",
+    "all-dimension matching upper",
+    "Lean/numerical/runtime/novelty"
+  ]
+}

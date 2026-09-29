@@ -1,0 +1,66 @@
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+EstimatorIntegrity/MovingBarrierWidth.lean:85:2: error: unsolved goals
+l : ℝ → ℝ
+hl_cont : Continuous l
+hl_mono : Monotone l
+b Δ T : ℝ
+hbound : ∀ (t : ℝ), 0 ≤ t → l t ≤ b
+hΔ : 0 ≤ Δ
+hT : 0 ≤ T
+hTTΔ : T ≤ T + Δ
+hdef_cont : Continuous fun t => b - l t
+hdef_int : IntervalIntegrable (fun t => b - l t) volume T (T + Δ)
+hconst_int : IntervalIntegrable (fun x => b - l T) volume T (T + Δ)
+hmono_int : ∫ (u : ℝ) in T..T + Δ, b - l u ≤ ∫ (u : ℝ) in T..T + Δ, b - l T
+⊢ Δ * b - Δ * l T = ∫ (u : ℝ) in T..Δ + T, b - l T
+EstimatorIntegrity/MovingBarrierWidth.lean:111:31: error: Application type mismatch: The argument
+  not_le.mp hT
+has type
+  T < 0
+but is expected to have type
+  ¬?m.181 < ?m.180
+in the application
+  Ioc_eq_empty (not_le.mp hT)
+EstimatorIntegrity/MovingBarrierWidth.lean:111:8: error: `simp` made no progress
+EstimatorIntegrity/MovingBarrierWidth.lean:112:6: error: Type mismatch
+  tendsto_id
+has type
+  Tendsto id ?m.179 ?m.179
+but is expected to have type
+  ∀ᶠ (i : ℝ) in atTop, ∫ (x : ℝ) in 0..i, ‖h x‖ ≤ J
+EstimatorIntegrity/MovingBarrierWidth.lean:113:4: error: No goals to be solved
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+EstimatorIntegrity/MovingBarrierWidth.lean:157:4: error: Tactic `apply` failed: could not unify the conclusion of `fun hl => Tendsto.congr' hl (Tendsto.sub hconst hR_zero)`
+  Tendsto ?m.383 atTop (𝓝 (J - 0))
+with the goal
+  Tendsto (fun T => ∫ (t : ℝ) in 0..T, h t) atTop (𝓝 J)
+
+Note: The full type of `fun hl => Tendsto.congr' hl (Tendsto.sub hconst hR_zero)` is
+  (fun x => J - R x) =ᶠ[atTop] ?m.383 → Tendsto ?m.383 atTop (𝓝 (J - 0))
+
+l : ℝ → ℝ
+hl_cont : Continuous l
+hl_mono : Monotone l
+b Δ : ℝ
+hbound : ∀ (t : ℝ), 0 ≤ t → l t ≤ b
+hl_lim : Tendsto l atTop (𝓝 b)
+hΔ : 0 ≤ Δ
+h : ℝ → ℝ := fun t => l (t + Δ) - l t
+J : ℝ := ∫ (t : ℝ) in 0..Δ, b - l t
+R : ℝ → ℝ := fun T => ∫ (t : ℝ) in T..T + Δ, b - l t
+hh_Ici : IntegrableOn h (Ici 0) volume
+hh_Ioi : IntegrableOn h (Ioi 0) volume
+hupper : Tendsto (fun T => Δ * (b - l T)) atTop (𝓝 0)
+hR_zero : Tendsto R atTop (𝓝 0)
+hconst : Tendsto (fun x => J) atTop (𝓝 J)
+⊢ Tendsto (fun T => ∫ (t : ℝ) in 0..T, h t) atTop (𝓝 J)

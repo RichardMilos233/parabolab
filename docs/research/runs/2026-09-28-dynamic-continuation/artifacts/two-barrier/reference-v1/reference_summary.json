@@ -1,0 +1,442 @@
+{
+  "artifact_schema": {
+    "preflight_arrays.npz": "all projection/Jacobian pairs and constant-profile coefficient traces",
+    "reference.npz": {
+      "queries": [
+        3
+      ],
+      "scaled_values": [
+        7,
+        3
+      ],
+      "times": [
+        7
+      ]
+    },
+    "refinement_k{K}_{tolerance}.npz": {
+      "coefficients": "[7,K+1]",
+      "queries": [
+        3
+      ],
+      "scaled_values": [
+        7,
+        3
+      ],
+      "times": [
+        7
+      ]
+    }
+  },
+  "classification": "empirical convergence of six Galerkin/Radau refinements of one method",
+  "gates": {
+    "all_output_shapes_match": true,
+    "all_six_solver_runs_succeeded": true,
+    "maximum_21_query_difference_from_strict": 2.282851685464493e-11,
+    "passed": true,
+    "per_run_21_query_difference": {
+      "k16_loose": 6.95177249099288e-12,
+      "k16_strict": 9.625633623500107e-14,
+      "k32_loose": 2.036104618241552e-11,
+      "k32_strict": 1.3666845433135677e-13,
+      "k64_loose": 2.282851685464493e-11,
+      "k64_strict": 0.0
+    },
+    "preflight_passed": true,
+    "refinement_passed": true,
+    "refinement_threshold": 1e-08
+  },
+  "independent_numerical_certificates": false,
+  "limitations": [
+    "The six runs are refinements of one Galerkin/Radau method.",
+    "The discrepancy gate is not a rigorous error enclosure.",
+    "No sampler helper or stochastic implementation is imported.",
+    "The fixed deterministic comparator is not an equal-accuracy optimization."
+  ],
+  "manifest_file": "execution_manifest.json",
+  "manifest_sha256": "3ef7ed5110497633b64a248e050404ae557de8f6bd181010c736b777140eaa7c",
+  "predesignated_comparator": {
+    "all_21_query_evaluations_seconds": 9.207986295223236e-06,
+    "eligible": true,
+    "key": "k16_loose",
+    "max_21_query_difference_from_strict": 6.95177249099288e-12,
+    "one_solve_seconds": 0.0969756250269711,
+    "solve_plus_all_queries_seconds": 0.09698483301326632
+  },
+  "preflight": {
+    "constant_profiles": {
+      "cases": [
+        {
+          "max_scaled_coefficient_difference": 9.672262990534364e-13,
+          "nfev": 5914,
+          "njev": 2,
+          "nlu": 102,
+          "profile": 0.5,
+          "solve_seconds": 0.2671074587851763,
+          "solver_message": "The solver successfully reached the end of the integration interval.",
+          "solver_status": 0,
+          "solver_success": true
+        },
+        {
+          "max_scaled_coefficient_difference": 4.120037644383956e-13,
+          "nfev": 5215,
+          "njev": 2,
+          "nlu": 96,
+          "profile": 0.625,
+          "solve_seconds": 0.09170991694554687,
+          "solver_message": "The solver successfully reached the end of the integration interval.",
+          "solver_status": 0,
+          "solver_success": true
+        },
+        {
+          "max_scaled_coefficient_difference": 1.439959262938828e-13,
+          "nfev": 4825,
+          "njev": 2,
+          "nlu": 86,
+          "profile": 0.75,
+          "solve_seconds": 0.08535116678103805,
+          "solver_message": "The solver successfully reached the end of the integration interval.",
+          "solver_status": 0,
+          "solver_success": true
+        }
+      ],
+      "maximum_scaled_difference": 9.672262990534364e-13,
+      "passed": true,
+      "system": {
+        "max_mode": 16,
+        "n_grid": 128,
+        "tolerance": "strict"
+      },
+      "threshold": 1e-08
+    },
+    "elapsed_seconds": 0.4952787081710994,
+    "passed": true,
+    "projection_and_jacobian": {
+      "cases": [
+        {
+          "jacobian_max_abs_difference": 2.957703526540456e-15,
+          "max_mode": 16,
+          "nonlinear_max_abs_difference": 1.981921571303502e-16,
+          "time": 0.0
+        },
+        {
+          "jacobian_max_abs_difference": 7.105427357601002e-15,
+          "max_mode": 16,
+          "nonlinear_max_abs_difference": 1.3769367590565906e-16,
+          "time": 0.25
+        },
+        {
+          "jacobian_max_abs_difference": 1.2281977735187355e-18,
+          "max_mode": 16,
+          "nonlinear_max_abs_difference": 8.142104205481962e-20,
+          "time": 4.0
+        },
+        {
+          "jacobian_max_abs_difference": 4.340278136893971e-15,
+          "max_mode": 32,
+          "nonlinear_max_abs_difference": 5.984795992119984e-16,
+          "time": 0.0
+        },
+        {
+          "jacobian_max_abs_difference": 2.8796409701214998e-15,
+          "max_mode": 32,
+          "nonlinear_max_abs_difference": 3.804465423251635e-16,
+          "time": 0.25
+        },
+        {
+          "jacobian_max_abs_difference": 1.8041801776516597e-18,
+          "max_mode": 32,
+          "nonlinear_max_abs_difference": 2.24516670581593e-19,
+          "time": 4.0
+        },
+        {
+          "jacobian_max_abs_difference": 6.013798400233972e-15,
+          "max_mode": 64,
+          "nonlinear_max_abs_difference": 1.2695058762904332e-15,
+          "time": 0.0
+        },
+        {
+          "jacobian_max_abs_difference": 3.978208821392437e-15,
+          "max_mode": 64,
+          "nonlinear_max_abs_difference": 8.152793761276311e-16,
+          "time": 0.25
+        },
+        {
+          "jacobian_max_abs_difference": 2.502161795968805e-18,
+          "max_mode": 64,
+          "nonlinear_max_abs_difference": 4.916430688770175e-19,
+          "time": 4.0
+        }
+      ],
+      "maximum_jacobian_entry_difference": 7.105427357601002e-15,
+      "maximum_nonlinear_projection_difference": 1.2695058762904332e-15,
+      "passed": true,
+      "threshold": 1e-10
+    }
+  },
+  "reference": {
+    "dtype": "float64",
+    "file": "reference.npz",
+    "producer_key": "k64_strict",
+    "queries": [
+      0.0,
+      1.5707963267948966,
+      3.141592653589793
+    ],
+    "queries_shape": [
+      3
+    ],
+    "scaled_values": [
+      [
+        0.25,
+        0.375,
+        0.5
+      ],
+      [
+        0.30943141259447354,
+        0.4680004423046071,
+        0.6422735533911363
+      ],
+      [
+        0.47411013939082064,
+        0.6927585043583621,
+        0.9486894989396278
+      ],
+      [
+        0.750239407458248,
+        0.8215511170309717,
+        0.8931583157631559
+      ],
+      [
+        0.821788384704521,
+        0.8219656614988032,
+        0.8221429382930953
+      ],
+      [
+        0.8219656614988099,
+        0.821965661498816,
+        0.8219656614988221
+      ],
+      [
+        0.821965661498816,
+        0.821965661498816,
+        0.821965661498816
+      ]
+    ],
+    "scaled_values_shape": [
+      7,
+      3
+    ],
+    "times": [
+      0.0,
+      0.25,
+      1.0,
+      4.0,
+      16.0,
+      64.0,
+      256.0
+    ],
+    "times_shape": [
+      7
+    ]
+  },
+  "refinements": [
+    {
+      "atol": 1e-12,
+      "coefficient_shape": [
+        7,
+        17
+      ],
+      "key": "k16_loose",
+      "max_21_query_difference_from_strict": 6.95177249099288e-12,
+      "max_mode": 16,
+      "message": "The solver successfully reached the end of the integration interval.",
+      "n_grid": 128,
+      "nfev": 5549,
+      "njev": 5,
+      "nlu": 96,
+      "output_file": "refinement_k16_loose.npz",
+      "passes_refinement_threshold": true,
+      "query_seconds": 9.207986295223236e-06,
+      "retained_mode_count": 17,
+      "returned_time_count": 7,
+      "rtol": 1e-10,
+      "scaled_values_shape": [
+        7,
+        3
+      ],
+      "solve_seconds": 0.0969756250269711,
+      "status": 0,
+      "success": true,
+      "tolerance_name": "loose"
+    },
+    {
+      "atol": 1e-14,
+      "coefficient_shape": [
+        7,
+        17
+      ],
+      "key": "k16_strict",
+      "max_21_query_difference_from_strict": 9.625633623500107e-14,
+      "max_mode": 16,
+      "message": "The solver successfully reached the end of the integration interval.",
+      "n_grid": 128,
+      "nfev": 17285,
+      "njev": 2,
+      "nlu": 102,
+      "output_file": "refinement_k16_strict.npz",
+      "passes_refinement_threshold": true,
+      "query_seconds": 1.0083895176649094e-05,
+      "retained_mode_count": 17,
+      "returned_time_count": 7,
+      "rtol": 1e-12,
+      "scaled_values_shape": [
+        7,
+        3
+      ],
+      "solve_seconds": 0.3034875416196883,
+      "status": 0,
+      "success": true,
+      "tolerance_name": "strict"
+    },
+    {
+      "atol": 1e-12,
+      "coefficient_shape": [
+        7,
+        33
+      ],
+      "key": "k32_loose",
+      "max_21_query_difference_from_strict": 2.036104618241552e-11,
+      "max_mode": 32,
+      "message": "The solver successfully reached the end of the integration interval.",
+      "n_grid": 256,
+      "nfev": 5135,
+      "njev": 6,
+      "nlu": 98,
+      "output_file": "refinement_k32_loose.npz",
+      "passes_refinement_threshold": true,
+      "query_seconds": 1.0417308658361435e-05,
+      "retained_mode_count": 33,
+      "returned_time_count": 7,
+      "rtol": 1e-10,
+      "scaled_values_shape": [
+        7,
+        3
+      ],
+      "solve_seconds": 0.131675458047539,
+      "status": 0,
+      "success": true,
+      "tolerance_name": "loose"
+    },
+    {
+      "atol": 1e-14,
+      "coefficient_shape": [
+        7,
+        33
+      ],
+      "key": "k32_strict",
+      "max_21_query_difference_from_strict": 1.3666845433135677e-13,
+      "max_mode": 32,
+      "message": "The solver successfully reached the end of the integration interval.",
+      "n_grid": 256,
+      "nfev": 15920,
+      "njev": 2,
+      "nlu": 102,
+      "output_file": "refinement_k32_strict.npz",
+      "passes_refinement_threshold": true,
+      "query_seconds": 1.0333023965358734e-05,
+      "retained_mode_count": 33,
+      "returned_time_count": 7,
+      "rtol": 1e-12,
+      "scaled_values_shape": [
+        7,
+        3
+      ],
+      "solve_seconds": 0.4082174161449075,
+      "status": 0,
+      "success": true,
+      "tolerance_name": "strict"
+    },
+    {
+      "atol": 1e-12,
+      "coefficient_shape": [
+        7,
+        65
+      ],
+      "key": "k64_loose",
+      "max_21_query_difference_from_strict": 2.282851685464493e-11,
+      "max_mode": 64,
+      "message": "The solver successfully reached the end of the integration interval.",
+      "n_grid": 512,
+      "nfev": 4722,
+      "njev": 6,
+      "nlu": 96,
+      "output_file": "refinement_k64_loose.npz",
+      "passes_refinement_threshold": true,
+      "query_seconds": 1.2499745935201645e-05,
+      "retained_mode_count": 65,
+      "returned_time_count": 7,
+      "rtol": 1e-10,
+      "scaled_values_shape": [
+        7,
+        3
+      ],
+      "solve_seconds": 0.44244037522003055,
+      "status": 0,
+      "success": true,
+      "tolerance_name": "loose"
+    },
+    {
+      "atol": 1e-14,
+      "coefficient_shape": [
+        7,
+        65
+      ],
+      "key": "k64_strict",
+      "max_21_query_difference_from_strict": 0.0,
+      "max_mode": 64,
+      "message": "The solver successfully reached the end of the integration interval.",
+      "n_grid": 512,
+      "nfev": 14604,
+      "njev": 2,
+      "nlu": 98,
+      "output_file": "refinement_k64_strict.npz",
+      "passes_refinement_threshold": true,
+      "query_seconds": 1.1041760444641113e-05,
+      "retained_mode_count": 65,
+      "returned_time_count": 7,
+      "rtol": 1e-12,
+      "scaled_values_shape": [
+        7,
+        3
+      ],
+      "solve_seconds": 0.7382458751089871,
+      "status": 0,
+      "success": true,
+      "tolerance_name": "strict"
+    }
+  ],
+  "rigorous_enclosure": false,
+  "schema_version": 1,
+  "source_hashes_sha256": {
+    "02d-two-barrier-experiment-protocol.md": "605eda24574bfb7e44dc997c185836d2a54311c18344e0be4c005674e00beda9",
+    "04l-two-barrier-voting.md": "87bc9b8424fc1ea04397adeeb38aa99843d9ade97b81e13c8857b31919706d42",
+    "06f-moving-barrier-lean.md": "7af4309629053943aeb0a3965e5e293d95b8a9ab55df2541f7a876e6d0aef5cb",
+    "formal/EstimatorIntegrity/MovingBarrierWidth.lean": "250cca5be42ddbe45ba157fb0cb572ec9460dcaaafefa420e125c2f1da77d11b",
+    "numerics/test_two_barrier_reference.py": "835249633d23a08207243c96f3b19991db14f899f1b2da92232fdcb613a113ef",
+    "numerics/two_barrier_reference.py": "d2561072434d4eaa3966c3353b299e3fa5813455d7ccf8454ee8889be64856ce",
+    "reviews/T30-two-barrier-voting-audit.md": "a82b3c07afbaaaaa0fe5f94b6296fd2bda187ae0d7cf9e8c6812afa8a5111ce4",
+    "reviews/T31-horizon-free-clock-audit.md": "ba85315b128510f03f86f9f01fc8885406450935a091872dbf013dff3e051d2c",
+    "reviews/T34-two-barrier-protocol-review.md": "a887f7e0bd7f38e2170c02bfbf0a3cc8f9ea545fe6ada2f6cb54daa1c2958765",
+    "reviews/T34b-protocol-freeze-check.md": "7232c7e2dbe6f9efaa5933fcc749e7d548c90f2d341f4e29810a3e7cb7205216"
+  },
+  "status": "PASS",
+  "timings_seconds": {
+    "artifact_io_before_summary": 0.014336624182760715,
+    "comparator_solve_plus_all_queries": 0.09698483301326632,
+    "preflight": 0.4952787081710994,
+    "six_run_query_evaluation_sum": 6.358372047543526e-05,
+    "six_run_solve_plus_query_sum": 2.121105874888599,
+    "six_run_solve_sum": 2.1210422911681235,
+    "validation_wall_before_summary": 2.632992916274816
+  }
+}

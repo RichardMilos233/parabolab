@@ -1,0 +1,4 @@
+$ cd formal
+$ ~/.elan/bin/lake build EstimatorIntegrity.BernoulliInformation
+✔ [3390/3390] Built EstimatorIntegrity.BernoulliInformation (66s)
+Build completed successfully (3390 jobs).

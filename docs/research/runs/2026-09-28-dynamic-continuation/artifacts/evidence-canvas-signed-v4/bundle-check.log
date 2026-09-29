@@ -1,0 +1,6 @@
+command: /Applications/Cursor.app/Contents/Resources/app/extensions/node_modules/esbuild-wasm/bin/esbuild dynamic-continuation-evidence.candidate.canvas.tsx --bundle --platform=browser --format=esm --external:cursor/canvas --external:react/jsx-runtime --outfile=dynamic-continuation-evidence.bundle.js
+esbuild_version: 0.25.9
+status: PASS
+output_size: 133058 bytes
+bundle_sha256: 8bcfde85ce894bcb031ed781b46c59c4e4f79cb51da9b03007d991487bb26b56
+external_runtime_imports_retained: cursor/canvas

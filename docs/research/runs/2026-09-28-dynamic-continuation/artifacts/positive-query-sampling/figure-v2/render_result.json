@@ -1,0 +1,42 @@
+{
+  "accepted_png_reproduced_byte_for_byte": true,
+  "completed_utc": "2026-09-28T17:33:15.694126+00:00",
+  "environment": {
+    "machine": "arm64",
+    "matplotlib_version": "3.11.0",
+    "platform": "macOS-26.3-arm64-arm-64bit",
+    "python_executable": "/opt/miniconda3/envs/parabolab/bin/python",
+    "python_version": "3.11.15 (main, Jun 11 2026, 15:14:57) [Clang 20.1.8 ]"
+  },
+  "frozen_input_hashes_sha256": {
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/audit-v1/positive_query_audit.png": "3c18c54eb64f89473cafef04760a2fb6ea2edba8371c353cc1f9a481daebef2f",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/audit-v1/positive_query_audit.svg": "6832d357371ff8e6f86557746c13ccfc279ba9a386072830aedd1f049f279849",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/audit-v1/replay_result.json": "788394e129bebda45608a926b118cc405e515f2986f60a3acc7992713ea3ed2e",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/audit-v1/stored_audit.json": "f1f48b74996543a9f7de1aca6c0ffedbb54e34d251d046aa820b0cf9cea5f2da"
+  },
+  "outputs_sha256": {
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/figure-v2/positive_query_evidence_v2.png": "3c18c54eb64f89473cafef04760a2fb6ea2edba8371c353cc1f9a481daebef2f",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/figure-v2/positive_query_evidence_v2.svg": "b07b65f2d67cb4733fee71290f1971e77cfe55d350fee8ef5c78fa3215c35704"
+  },
+  "render_wall_seconds": 0.830866334028542,
+  "renderer_source": "docs/research/runs/2026-09-28-dynamic-continuation/numerics/render_positive_query_evidence_v2.py",
+  "renderer_source_sha256": "cb8e8d04591cf4976c984b157aa48e01e4ff47c34291224bab899962dd9c79f0",
+  "schema_version": 1,
+  "scope": {
+    "ledger_changes": 0,
+    "official_or_audit_evidence_modified": false,
+    "oracle_calls": 0,
+    "statistics_recomputed": false
+  },
+  "status": "PASS",
+  "svg_serialization": {
+    "accepted_svg_byte_identity_expected": false,
+    "deterministic_packaging_changes": [
+      "fixed matplotlib.rcParams['svg.hashsalt']",
+      "fixed SVG metadata Date"
+    ],
+    "reason": "the accepted SVG used Matplotlib's process-random IDs and a live timestamp",
+    "visual_recipe": "exact accepted layout recipe"
+  },
+  "timing_interpretation": "Wall time includes frozen-statistics parsing, rendering and serialization; no pure-compute claim."
+}

@@ -1,0 +1,14 @@
+61d432bfff085728a2d035286251d8be4e4e9e9f08a070d4a7293475cd3934c4  formal/EstimatorIntegrity/FiniteTreeSecondMoment.lean
+624906d3ad14cbbc9ffa5be984bb413659d05f295408bd11d9d2a89786950429  docs/research/runs/2026-09-28-dynamic-continuation/06m-finite-tree-second-moment-lean.md
+76533ebab76fe17f149489798bcff75e26c6aa44544ee80717f044772cdb4313  docs/research/runs/2026-09-28-dynamic-continuation/05k-finite-tree-second-moment-lean-contract.md
+f21e469f8a15fdebf2293b1cf227e5ec8f3798426f875bdbdcf1641312890df5  docs/research/runs/2026-09-28-dynamic-continuation/reviews/T73-stable-graph-sampler-independent-audit.md
+6665bf41944742d5f14646762d966992036f299f03ec42a6a6adb25ceb4dd72c  docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-tree-second-moment/build.log
+06447aa7a21863f6204fcfcefba41ae16f2f8a118d627cf089f47d8585fddcb5  docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-tree-second-moment/Axioms.lean
+761f7dc20e5913eddad36baaab32ea919c960094bda66cd6aa9828fa14c6874f  docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-tree-second-moment/axioms.log
+4b561d36622beb6471afb027453e6e1051f5499a8101e141fb442753ab9a0c6f  docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-tree-second-moment/Declarations.lean
+1252cca4cfac909f4d185ae35572bcf5dd369d0cfd5f153bda2dee3c46d93fe3  docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-tree-second-moment/declarations.log
+6902f5de97b1972c8aa74a1798b5f21cda3a55ed3e06f378eafb7005fb326610  docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-tree-second-moment/environment.md
+676a1e47d6c39d4fc0418c20ba8e6e6a7ad3c0630ae410ff5886c5be4ec31241  docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-tree-second-moment/failed-attempts.md
+f8e9fa35049074f51b1730ffd7c1f83becb87e1553e63fc61995ddf19fdaacea  docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-tree-second-moment/failed-build-autoImplicit.log
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-tree-second-moment/trust-scan.log
+605e2546f436a094afcc75a18e32575612ef9244005e95f9a2d02dac7c588707  docs/research/runs/2026-09-28-dynamic-continuation/lean/finite-tree-second-moment/hash-verify.log

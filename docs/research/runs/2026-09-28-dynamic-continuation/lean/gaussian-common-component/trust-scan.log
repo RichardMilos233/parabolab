@@ -1,0 +1,14 @@
+started_utc=2026-09-28T21:02:14Z
+cwd=/Users/michael/Desktop/NTU/fyp/parabolab/formal
+command=zsh /Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/gaussian-common-component/TrustScan.zsh 
+stdout_stderr_begin
+started_utc=2026-09-28T21:02:14Z
+cwd=/Users/michael/Desktop/NTU/fyp/parabolab/formal
+source=/Users/michael/Desktop/NTU/fyp/parabolab/formal/EstimatorIntegrity/GaussianCommonComponent.lean
+pattern=sorry|admit|axiom|native_decide|unsafe|implemented_by|ofReduceBool
+result=no matches
+exit_code=0
+ended_utc=2026-09-28T21:02:14Z
+stdout_stderr_end
+exit_code=0
+ended_utc=2026-09-28T21:02:14Z

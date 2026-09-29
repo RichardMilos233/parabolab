@@ -1,0 +1,77 @@
+'EstimatorIntegrity.FiniteTreeSecondMoment.coeffSq_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.FiniteTreeSecondMoment.measurable_coeffSq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.FiniteTreeSecondMoment.measurable_weight' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.FiniteTreeSecondMoment.lintegral_childTriple' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.FiniteTreeSecondMoment.lintegral_branchKernel' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.FiniteTreeSecondMoment.lintegral_sourceKernel' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.FiniteTreeSecondMoment.lintegral_stepKernel' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.FiniteTreeSecondMoment.childTriple_isMarkov' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.FiniteTreeSecondMoment.branchKernel_isMarkov' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.FiniteTreeSecondMoment.sourceKernel_isMarkov' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.FiniteTreeSecondMoment.stepKernel_isMarkov' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.FiniteTreeSecondMoment.treeKernel_isMarkov' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.FiniteTreeSecondMoment.weightedMoment_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.FiniteTreeSecondMoment.weightedMoment_succ' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.FiniteTreeSecondMoment.weightedMoment_uniform_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.FiniteTreeSecondMoment.weightedMoment_ne_top' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.FiniteTreeSecondMoment.squaredMajorant_slope_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.FiniteTreeSecondMoment.summable_leafPolynomialSeries' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.FiniteTreeSecondMoment.leafPolynomialConstant_nonneg' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.FiniteTreeSecondMoment.leafPolynomialConstant_ennreal_ne_top' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.FiniteTreeSecondMoment.leafPolynomial_term_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.FiniteTreeSecondMoment.leafPolynomial_le_geometric' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.FiniteTreeSecondMoment.measurable_polynomialWeight' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.FiniteTreeSecondMoment.polynomialMoment_le_weightedMoment' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.FiniteTreeSecondMoment.leafPolynomial_domination_ennreal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.FiniteTreeSecondMoment.polynomialMoment_uniform_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.FiniteTreeSecondMoment.polynomialMoment_ne_top' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

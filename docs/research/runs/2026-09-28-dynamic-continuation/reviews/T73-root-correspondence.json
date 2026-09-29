@@ -1,0 +1,64 @@
+{
+  "date_local": "2026-09-29",
+  "verdict": "PASS; D31 actual derivative sampler only",
+  "root_review": "Full frozen T69 (891 lines) and T73 (689 lines) read; source law, weighted recurrence, graph correspondence, all-map composition, cap and expected work rechecked. Root is integrating an independent audit, not claiming its own preliminary read was independent.",
+  "sources": [
+    {
+      "path": "reviews/T69-stable-graph-sampler-feasibility.md",
+      "sha256": "ff537ca6679fdefeefe9c08990194a09f6a2cec23460e1656876e7fdf8a37d9b",
+      "lines": 891
+    },
+    {
+      "path": "reviews/T73-stable-graph-sampler-independent-audit.md",
+      "sha256": "f21e469f8a15fdebf2293b1cf227e5ec8f3798426f875bdbdcf1641312890df5",
+      "lines": 689
+    },
+    {
+      "path": "reviews/T65-local-stable-graph-upper-proof.md",
+      "sha256": "58e862c9cfbaf0946605d30d9c8e8a37e2570c0c0719d626683f22db60fc9f81",
+      "lines": 1003
+    },
+    {
+      "path": "reviews/R10b-finite-burnin-derivative-sampling.md",
+      "sha256": "23683587539ef2905e0679100325808ae3f6353a3782a4bb362b2d24252034f0",
+      "lines": 191
+    },
+    {
+      "path": "reviews/T68-finite-burnin-sampler-independent-audit.md",
+      "sha256": "442b446ae523b220e34ddadcf8c23b181ce60104100fd27c7e8027524840ed9f",
+      "lines": 519
+    },
+    {
+      "path": "reviews/R12-signed-work-composition-contract.md",
+      "sha256": "390ede56727253adb0c23fb5356671f6b691b5c958ff4258d0e69ceeafd280ee",
+      "lines": 108
+    }
+  ],
+  "protected_initial_files": {
+    "count": 342,
+    "mismatches": [],
+    "verification": "recomputed in this goal turn"
+  },
+  "accepted": [
+    "Actual unbiased DjH_L(g) original-time tuple sampler and mixed directions",
+    "Uniform finite coefficient second moment with delta^(2j) residual bound",
+    "At most j new initial values on every seed path; Borel and almost-sure halting",
+    "Full expected ideal work O(Cj(1+Gg(T))) including all burn-in batches, trees, g evaluations and coefficient passes"
+  ],
+  "retained_conditions": [
+    "Exact continuous exponential/Gaussian/uniform random primitives and ideal arithmetic/indexing",
+    "Known g supplied by an already paid exact evaluation representation; actual uniform lookup cost retained",
+    "Fixed d,j,L and graph constants, g norm <= 3/4, continuous residual",
+    "Gate A and shared model composition still require independent T74 and root correspondence"
+  ],
+  "not_claimed": [
+    "Combined work theorem",
+    "Finite-bit algorithm",
+    "Practical speed",
+    "Full signed Lean or numerical validation",
+    "Larger-domain extension",
+    "Originality or award-level significance"
+  ],
+  "oracle_calls_added": 0,
+  "proof_repairs": []
+}

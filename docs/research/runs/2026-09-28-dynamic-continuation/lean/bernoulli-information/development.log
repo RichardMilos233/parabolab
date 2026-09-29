@@ -1,0 +1,19 @@
+T62 development summary
+
+1. Established the scalar KL expression and derivative formula.
+2. Proved scalar Pinsker on the closed source interval by convexity of
+   D_q(p)-2(p-q)^2; failed elaboration attempts 01--06 record derivative
+   normalization fixes.
+3. Proved the scalar chi-square upper bound from log(t) <= t-1, including
+   p=0 and p=1.
+4. Defined the actual Bernoulli law through Mathlib's bernoulliMeasure and
+   proved its explicit withDensity representation for an interior reference.
+5. Derived the actual KL formula from rnDeriv_withDensity,
+   integral_rnDeriv_mul_log, and integral_bernoulliMeasure.
+6. Added the finite-KL endpoint proof: absolute continuity forces p=q at
+   q=0 and q=1.
+7. Derived the equal-prior testing error bound from actual binary Pinsker.
+8. Attempt 07 records the finite-measure instance issue caused by wrapper
+   opacity. Attempt 08 records and fixes an over-aggressive linter cleanup.
+9. The final fresh build and every exported axiom check passed. No numerical
+   computation was run.

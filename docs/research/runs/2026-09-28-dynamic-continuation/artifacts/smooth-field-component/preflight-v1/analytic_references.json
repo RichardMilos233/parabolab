@@ -1,0 +1,249 @@
+{
+  "binary64_conversion": "Python float conversion of a 100-decimal-digit mpmath mpf",
+  "certified_intervals": false,
+  "coefficient_layout": "[constant,cos(1),sin(1),...,cos(64),sin(64)]",
+  "library": "mpmath",
+  "precision_decimal_digits": 100,
+  "records": [
+    {
+      "binary64": 0.14937712402175726,
+      "binary64_hex": "0x1.31eca2338d473p-3",
+      "cell": {
+        "base": 0.0,
+        "degree": 3,
+        "derivative_order": 1,
+        "direction": "cosine_mode_1",
+        "index": 0,
+        "kappa": 0.01,
+        "tau": 0.5
+      },
+      "expression": "delta*exp(tau)*(1+(exp((D-1)tau)-1)*base^(D-1))^(-1-1/(D-1))*exp(-2*pi^2*kappa*tau)",
+      "full_target_array_sha256": "99a50981640861bf756e7d68d486e494a3f0a9d98bb35b0298ed8b65ce28b232",
+      "high_precision_decimal": "0.1493771240217572675021280706136293371283466434464369824617109161435245322449251065998212574837210654",
+      "label": "cell=0;D=3;tau=0.5;base=0;j=1;direction=cosine_mode_1;kappa=0.01",
+      "mpmath_decimal_dps": 100,
+      "nonzero_coefficient_index": 1,
+      "nonzero_coefficient_name": "cosine_mode_1"
+    },
+    {
+      "binary64": 0.12818336245698717,
+      "binary64_hex": "0x1.0684ffad27105p-3",
+      "cell": {
+        "base": 0.25,
+        "degree": 3,
+        "derivative_order": 1,
+        "direction": "cosine_mode_1",
+        "index": 1,
+        "kappa": 0.01,
+        "tau": 0.5
+      },
+      "expression": "delta*exp(tau)*(1+(exp((D-1)tau)-1)*base^(D-1))^(-1-1/(D-1))*exp(-2*pi^2*kappa*tau)",
+      "full_target_array_sha256": "16d68cc1ce512cb8e3c08803a3d6779bf1831b1b6261b003712154da57154d7d",
+      "high_precision_decimal": "0.1281833624569871771197790041085072211223827060468838852707462413086246376537717667742947346108476562",
+      "label": "cell=1;D=3;tau=0.5;base=0.25;j=1;direction=cosine_mode_1;kappa=0.01",
+      "mpmath_decimal_dps": 100,
+      "nonzero_coefficient_index": 1,
+      "nonzero_coefficient_name": "cosine_mode_1"
+    },
+    {
+      "binary64": -0.016464511316638845,
+      "binary64_hex": "-0x1.0dc12a6992d01p-6",
+      "cell": {
+        "base": 0.25,
+        "degree": 3,
+        "derivative_order": 2,
+        "direction": "constant",
+        "index": 2,
+        "kappa": 0.01,
+        "tau": 0.5
+      },
+      "expression": "delta^2*phi_tau''(base)",
+      "full_target_array_sha256": "05b171a76cc865facd9fab0a5dcefc0ffd814974a0a1997d70e79470c6933ff3",
+      "high_precision_decimal": "-0.01646451131663884490006284454513097531901987395415680366680203221122359895771889678194123025438085665",
+      "label": "cell=2;D=3;tau=0.5;base=0.25;j=2;direction=constant;kappa=0.01",
+      "mpmath_decimal_dps": 100,
+      "nonzero_coefficient_index": 0,
+      "nonzero_coefficient_name": "constant"
+    },
+    {
+      "binary64": -0.00849890339891381,
+      "binary64_hex": "-0x1.167df81339b0ap-7",
+      "cell": {
+        "base": 0.0,
+        "degree": 3,
+        "derivative_order": 3,
+        "direction": "constant",
+        "index": 3,
+        "kappa": 0.01,
+        "tau": 0.5
+      },
+      "expression": "-3*delta^3*exp(tau)*(exp(2*tau)-1)",
+      "full_target_array_sha256": "b41c33b6473a8645be0c1411f8ff3e3fadde4760366a64c094d0d942eb5f2c33",
+      "high_precision_decimal": "-0.008498903398913810027260214016915336742055921302978557135592712313435826959817494493044831933978260245",
+      "label": "cell=3;D=3;tau=0.5;base=0;j=3;direction=constant;kappa=0.01",
+      "mpmath_decimal_dps": 100,
+      "nonzero_coefficient_index": 0,
+      "nonzero_coefficient_name": "constant"
+    },
+    {
+      "binary64": 0.10809730495642994,
+      "binary64_hex": "0x1.bac43d592d7ccp-4",
+      "cell": {
+        "base": 0.25,
+        "degree": 5,
+        "derivative_order": 1,
+        "direction": "cosine_mode_1",
+        "index": 4,
+        "kappa": 0.01,
+        "tau": 0.1
+      },
+      "expression": "delta*exp(tau)*(1+(exp((D-1)tau)-1)*base^(D-1))^(-1-1/(D-1))*exp(-2*pi^2*kappa*tau)",
+      "full_target_array_sha256": "ac7ebd183cca351ae1c0ff8f3e02722f5575349ef04fda7fe8a7b2f04e4fd0b3",
+      "high_precision_decimal": "0.1080973049564299392087012898427189947070846675564117501507436696423666254663416105423643360277794884",
+      "label": "cell=4;D=5;tau=0.1;base=0.25;j=1;direction=cosine_mode_1;kappa=0.01",
+      "mpmath_decimal_dps": 100,
+      "nonzero_coefficient_index": 1,
+      "nonzero_coefficient_name": "cosine_mode_1"
+    },
+    {
+      "binary64": -0.0004228188084614349,
+      "binary64_hex": "-0x1.bb5b8f458827cp-12",
+      "cell": {
+        "base": 0.25,
+        "degree": 5,
+        "derivative_order": 2,
+        "direction": "constant",
+        "index": 5,
+        "kappa": 0.01,
+        "tau": 0.1
+      },
+      "expression": "delta^2*phi_tau''(base)",
+      "full_target_array_sha256": "607e01510e5e84c484551cc28a41272cd44e49959beac7c87150c3b92b5f0450",
+      "high_precision_decimal": "-0.0004228188084614348607354841399190203618498237450272425580228299071776471810483119398807706591470323855",
+      "label": "cell=5;D=5;tau=0.1;base=0.25;j=2;direction=constant;kappa=0.01",
+      "mpmath_decimal_dps": 100,
+      "nonzero_coefficient_index": 0,
+      "nonzero_coefficient_name": "constant"
+    },
+    {
+      "binary64": 0.061449134167433875,
+      "binary64_hex": "0x1.f7642cb3bb8dap-5",
+      "cell": {
+        "base": 0.0,
+        "degree": 3,
+        "derivative_order": 1,
+        "direction": "cosine_mode_1",
+        "index": 6,
+        "kappa": 0.1,
+        "tau": 0.5
+      },
+      "expression": "delta*exp(tau)*(1+(exp((D-1)tau)-1)*base^(D-1))^(-1-1/(D-1))*exp(-2*pi^2*kappa*tau)",
+      "full_target_array_sha256": "05ab4edd00858729fbba123dc44143750e98bed44379fbcd6f911e4342281c60",
+      "high_precision_decimal": "0.06144913416743387492722374192874408001033915229094065992684022769171934349613658153978584524335577552",
+      "label": "cell=6;D=3;tau=0.5;base=0;j=1;direction=cosine_mode_1;kappa=0.1",
+      "mpmath_decimal_dps": 100,
+      "nonzero_coefficient_index": 1,
+      "nonzero_coefficient_name": "cosine_mode_1"
+    },
+    {
+      "binary64": 0.05273067539113242,
+      "binary64_hex": "0x1.aff83dc9a1052p-5",
+      "cell": {
+        "base": 0.25,
+        "degree": 3,
+        "derivative_order": 1,
+        "direction": "cosine_mode_1",
+        "index": 7,
+        "kappa": 0.1,
+        "tau": 0.5
+      },
+      "expression": "delta*exp(tau)*(1+(exp((D-1)tau)-1)*base^(D-1))^(-1-1/(D-1))*exp(-2*pi^2*kappa*tau)",
+      "full_target_array_sha256": "3633125456ea3c74bded307e042abc72df9602583536d7afce112e8bfda2043c",
+      "high_precision_decimal": "0.0527306753911324196497213503369978670470709683140440960355917948320767994591038634733528289075695243",
+      "label": "cell=7;D=3;tau=0.5;base=0.25;j=1;direction=cosine_mode_1;kappa=0.1",
+      "mpmath_decimal_dps": 100,
+      "nonzero_coefficient_index": 1,
+      "nonzero_coefficient_name": "cosine_mode_1"
+    },
+    {
+      "binary64": -0.016464511316638845,
+      "binary64_hex": "-0x1.0dc12a6992d01p-6",
+      "cell": {
+        "base": 0.25,
+        "degree": 3,
+        "derivative_order": 2,
+        "direction": "constant",
+        "index": 8,
+        "kappa": 0.1,
+        "tau": 0.5
+      },
+      "expression": "delta^2*phi_tau''(base)",
+      "full_target_array_sha256": "05b171a76cc865facd9fab0a5dcefc0ffd814974a0a1997d70e79470c6933ff3",
+      "high_precision_decimal": "-0.01646451131663884490006284454513097531901987395415680366680203221122359895771889678194123025438085665",
+      "label": "cell=8;D=3;tau=0.5;base=0.25;j=2;direction=constant;kappa=0.1",
+      "mpmath_decimal_dps": 100,
+      "nonzero_coefficient_index": 0,
+      "nonzero_coefficient_name": "constant"
+    },
+    {
+      "binary64": -0.00849890339891381,
+      "binary64_hex": "-0x1.167df81339b0ap-7",
+      "cell": {
+        "base": 0.0,
+        "degree": 3,
+        "derivative_order": 3,
+        "direction": "constant",
+        "index": 9,
+        "kappa": 0.1,
+        "tau": 0.5
+      },
+      "expression": "-3*delta^3*exp(tau)*(exp(2*tau)-1)",
+      "full_target_array_sha256": "b41c33b6473a8645be0c1411f8ff3e3fadde4760366a64c094d0d942eb5f2c33",
+      "high_precision_decimal": "-0.008498903398913810027260214016915336742055921302978557135592712313435826959817494493044831933978260245",
+      "label": "cell=9;D=3;tau=0.5;base=0;j=3;direction=constant;kappa=0.1",
+      "mpmath_decimal_dps": 100,
+      "nonzero_coefficient_index": 0,
+      "nonzero_coefficient_name": "constant"
+    },
+    {
+      "binary64": 0.09050263027465885,
+      "binary64_hex": "0x1.72b2e2d3b4cb6p-4",
+      "cell": {
+        "base": 0.25,
+        "degree": 5,
+        "derivative_order": 1,
+        "direction": "cosine_mode_1",
+        "index": 10,
+        "kappa": 0.1,
+        "tau": 0.1
+      },
+      "expression": "delta*exp(tau)*(1+(exp((D-1)tau)-1)*base^(D-1))^(-1-1/(D-1))*exp(-2*pi^2*kappa*tau)",
+      "full_target_array_sha256": "2f98859d972529fd959e69321200c55e60019d786861a2952ada05ed045d6b35",
+      "high_precision_decimal": "0.09050263027465885200646435417067472706975208112183499332841442742296171056509794339122351843240788916",
+      "label": "cell=10;D=5;tau=0.1;base=0.25;j=1;direction=cosine_mode_1;kappa=0.1",
+      "mpmath_decimal_dps": 100,
+      "nonzero_coefficient_index": 1,
+      "nonzero_coefficient_name": "cosine_mode_1"
+    },
+    {
+      "binary64": -0.0004228188084614349,
+      "binary64_hex": "-0x1.bb5b8f458827cp-12",
+      "cell": {
+        "base": 0.25,
+        "degree": 5,
+        "derivative_order": 2,
+        "direction": "constant",
+        "index": 11,
+        "kappa": 0.1,
+        "tau": 0.1
+      },
+      "expression": "delta^2*phi_tau''(base)",
+      "full_target_array_sha256": "607e01510e5e84c484551cc28a41272cd44e49959beac7c87150c3b92b5f0450",
+      "high_precision_decimal": "-0.0004228188084614348607354841399190203618498237450272425580228299071776471810483119398807706591470323855",
+      "label": "cell=11;D=5;tau=0.1;base=0.25;j=2;direction=constant;kappa=0.1",
+      "mpmath_decimal_dps": 100,
+      "nonzero_coefficient_index": 0,
+      "nonzero_coefficient_name": "constant"
+    }
+  ]
+}

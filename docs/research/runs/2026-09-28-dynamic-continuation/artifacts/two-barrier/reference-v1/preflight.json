@@ -1,0 +1,111 @@
+{
+  "constant_profiles": {
+    "cases": [
+      {
+        "max_scaled_coefficient_difference": 9.672262990534364e-13,
+        "nfev": 5914,
+        "njev": 2,
+        "nlu": 102,
+        "profile": 0.5,
+        "solve_seconds": 0.2671074587851763,
+        "solver_message": "The solver successfully reached the end of the integration interval.",
+        "solver_status": 0,
+        "solver_success": true
+      },
+      {
+        "max_scaled_coefficient_difference": 4.120037644383956e-13,
+        "nfev": 5215,
+        "njev": 2,
+        "nlu": 96,
+        "profile": 0.625,
+        "solve_seconds": 0.09170991694554687,
+        "solver_message": "The solver successfully reached the end of the integration interval.",
+        "solver_status": 0,
+        "solver_success": true
+      },
+      {
+        "max_scaled_coefficient_difference": 1.439959262938828e-13,
+        "nfev": 4825,
+        "njev": 2,
+        "nlu": 86,
+        "profile": 0.75,
+        "solve_seconds": 0.08535116678103805,
+        "solver_message": "The solver successfully reached the end of the integration interval.",
+        "solver_status": 0,
+        "solver_success": true
+      }
+    ],
+    "maximum_scaled_difference": 9.672262990534364e-13,
+    "passed": true,
+    "system": {
+      "max_mode": 16,
+      "n_grid": 128,
+      "tolerance": "strict"
+    },
+    "threshold": 1e-08
+  },
+  "elapsed_seconds": 0.4952787081710994,
+  "passed": true,
+  "projection_and_jacobian": {
+    "cases": [
+      {
+        "jacobian_max_abs_difference": 2.957703526540456e-15,
+        "max_mode": 16,
+        "nonlinear_max_abs_difference": 1.981921571303502e-16,
+        "time": 0.0
+      },
+      {
+        "jacobian_max_abs_difference": 7.105427357601002e-15,
+        "max_mode": 16,
+        "nonlinear_max_abs_difference": 1.3769367590565906e-16,
+        "time": 0.25
+      },
+      {
+        "jacobian_max_abs_difference": 1.2281977735187355e-18,
+        "max_mode": 16,
+        "nonlinear_max_abs_difference": 8.142104205481962e-20,
+        "time": 4.0
+      },
+      {
+        "jacobian_max_abs_difference": 4.340278136893971e-15,
+        "max_mode": 32,
+        "nonlinear_max_abs_difference": 5.984795992119984e-16,
+        "time": 0.0
+      },
+      {
+        "jacobian_max_abs_difference": 2.8796409701214998e-15,
+        "max_mode": 32,
+        "nonlinear_max_abs_difference": 3.804465423251635e-16,
+        "time": 0.25
+      },
+      {
+        "jacobian_max_abs_difference": 1.8041801776516597e-18,
+        "max_mode": 32,
+        "nonlinear_max_abs_difference": 2.24516670581593e-19,
+        "time": 4.0
+      },
+      {
+        "jacobian_max_abs_difference": 6.013798400233972e-15,
+        "max_mode": 64,
+        "nonlinear_max_abs_difference": 1.2695058762904332e-15,
+        "time": 0.0
+      },
+      {
+        "jacobian_max_abs_difference": 3.978208821392437e-15,
+        "max_mode": 64,
+        "nonlinear_max_abs_difference": 8.152793761276311e-16,
+        "time": 0.25
+      },
+      {
+        "jacobian_max_abs_difference": 2.502161795968805e-18,
+        "max_mode": 64,
+        "nonlinear_max_abs_difference": 4.916430688770175e-19,
+        "time": 4.0
+      }
+    ],
+    "maximum_jacobian_entry_difference": 7.105427357601002e-15,
+    "maximum_nonlinear_projection_difference": 1.2695058762904332e-15,
+    "passed": true,
+    "threshold": 1e-10
+  }
+}

@@ -1,0 +1,851 @@
+{
+  "clock_diagnostics": [
+    {
+      "absolute_discrepancies": [
+        0.00011495101688774323,
+        7.859303085611113e-05,
+        0.0006498652707990216,
+        0.00033479395752256114,
+        0.0
+      ],
+      "cdf_fractions_of_horizon": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "cdf_points": [
+        0.0,
+        0.0625,
+        0.125,
+        0.1875,
+        0.25
+      ],
+      "elapsed_seconds": 0.3667216249741614,
+      "empirical_cdf": [
+        0.87987,
+        0.9081,
+        0.93703,
+        0.96801,
+        1.0
+      ],
+      "entropy": 2026092891,
+      "final_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 340192583831014116928161220579727092673,
+          "state": 25340442688600886791658810679275829761
+        },
+        "uinteger": 0
+      },
+      "horizon": 0.25,
+      "horizon_index": 0,
+      "independent_theory_cdf": [
+        0.8799849510168878,
+        0.9081785930308561,
+        0.937679865270799,
+        0.9683447939575226,
+        1.0
+      ],
+      "initial_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 340192583831014116928161220579727092673,
+          "state": 25721849364058749142475404466997408959
+        },
+        "uinteger": 0
+      },
+      "leaf_count": 87987,
+      "maximum_discrepancy": 0.0006498652707990216,
+      "passed": true,
+      "raw_npz": "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/sampler-v1/diagnostics/clock_t0.npz",
+      "raw_npz_sha256": "2f7d9b792e2f9169566c5424e834d0226c094ef191a84ce5f4f3ddd84e295406",
+      "roots": 100000,
+      "spawn_key": [
+        1,
+        0
+      ],
+      "threshold": 0.008517234803187071,
+      "total_proposals": 164574,
+      "total_rejections": 64574,
+      "zero_redraws": 0
+    },
+    {
+      "absolute_discrepancies": [
+        0.002104354508092099,
+        0.001538749220121538,
+        0.0008857185230188858,
+        0.0010094102368636282,
+        0.0
+      ],
+      "cdf_fractions_of_horizon": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "cdf_points": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "elapsed_seconds": 0.2599094579927623,
+      "empirical_cdf": [
+        0.63789,
+        0.72574,
+        0.82256,
+        0.91669,
+        1.0
+      ],
+      "entropy": 2026092891,
+      "final_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 57222230915328518289203414130592914425,
+          "state": 221831374231885888368534930109433972840
+        },
+        "uinteger": 0
+      },
+      "horizon": 1.0,
+      "horizon_index": 1,
+      "independent_theory_cdf": [
+        0.6399943545080921,
+        0.7272787492201216,
+        0.8234457185230188,
+        0.9176994102368636,
+        1.0
+      ],
+      "initial_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 57222230915328518289203414130592914425,
+          "state": 21360823053411492342968302849519016401
+        },
+        "uinteger": 0
+      },
+      "leaf_count": 63789,
+      "maximum_discrepancy": 0.002104354508092099,
+      "passed": true,
+      "raw_npz": "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/sampler-v1/diagnostics/clock_t1.npz",
+      "raw_npz_sha256": "a9e0a9556a6aaffda27beeb348a04a57373cc24c33eb4b4af73fe5263e02ffc3",
+      "roots": 100000,
+      "spawn_key": [
+        1,
+        1
+      ],
+      "threshold": 0.008517234803187071,
+      "total_proposals": 119823,
+      "total_rejections": 19823,
+      "zero_redraws": 0
+    },
+    {
+      "absolute_discrepancies": [
+        0.002181426046361956,
+        0.0028964582718358223,
+        0.00045771914929537694,
+        0.0002721257798862231,
+        0.0
+      ],
+      "cdf_fractions_of_horizon": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        1.0
+      ],
+      "cdf_points": [
+        0.0,
+        1.0,
+        2.0,
+        3.0,
+        4.0
+      ],
+      "elapsed_seconds": 0.23030337505042553,
+      "empirical_cdf": [
+        0.53145,
+        0.83091,
+        0.97096,
+        0.99618,
+        1.0
+      ],
+      "entropy": 2026092891,
+      "final_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 242024260443473036114979244027918112093,
+          "state": 30193610760663364441356343765310208689
+        },
+        "uinteger": 0
+      },
+      "horizon": 4.0,
+      "horizon_index": 2,
+      "independent_theory_cdf": [
+        0.5336314260463619,
+        0.8338064582718359,
+        0.9714177191492954,
+        0.9964521257798862,
+        1.0
+      ],
+      "initial_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 242024260443473036114979244027918112093,
+          "state": 88684273378262177567288387377170309974
+        },
+        "uinteger": 0
+      },
+      "leaf_count": 53145,
+      "maximum_discrepancy": 0.0028964582718358223,
+      "passed": true,
+      "raw_npz": "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/sampler-v1/diagnostics/clock_t2.npz",
+      "raw_npz_sha256": "93119a98d50ed4b4d1c51aab85901aae582e489fd99314305bbe077dd7a7b1bd",
+      "roots": 100000,
+      "spawn_key": [
+        1,
+        2
+      ],
+      "threshold": 0.008517234803187071,
+      "total_proposals": 100051,
+      "total_rejections": 51,
+      "zero_redraws": 0
+    }
+  ],
+  "constant_nonendpoint_diagnostic": {
+    "absolute_discrepancy": 0.0013946296931109936,
+    "coefficient_limit_substitutions": 0,
+    "constant_initial_value": 0.625,
+    "elapsed_seconds": 1.160625624936074,
+    "entropy": 2026092892,
+    "final_rng_state": {
+      "bit_generator": "PCG64",
+      "has_uint32": 0,
+      "state": {
+        "inc": 327738209099932408144761415050513823123,
+        "state": 181648296486978951550493551313393013291
+      },
+      "uinteger": 0
+    },
+    "horizon": 4.0,
+    "independent_scalar_target": 0.7796939902541506,
+    "initial_rng_state": {
+      "bit_generator": "PCG64",
+      "has_uint32": 0,
+      "state": {
+        "inc": 327738209099932408144761415050513823123,
+        "state": 70188708058358295385829471415378137047
+      },
+      "uinteger": 0
+    },
+    "passed": true,
+    "query": 0.0,
+    "raw_npz": "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/sampler-v1/diagnostics/constant_nonendpoint.npz",
+    "raw_npz_sha256": "35ffafd8acfb95ed75466db7bb62d9b7a110b86e4fe09d3e9f73810f500238ac",
+    "roots": 100000,
+    "sample_mean_scaled_output": 0.7782993605610397,
+    "sample_standard_deviation": 0.19038482807570278,
+    "spawn_key": [
+      2,
+      0
+    ],
+    "threshold": 0.010646543503983839,
+    "zero_redraws": 0
+  },
+  "elapsed_seconds": 2.066328375134617,
+  "endpoint_diagnostics": [
+    {
+      "coefficient_limit_substitutions": 0,
+      "constant_initial_value": 0.5,
+      "elapsed_seconds": 0.0010564173571765423,
+      "endpoint_index": 0,
+      "entropy": 2026092893,
+      "final_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 76236510291261105182196859314125453527,
+          "state": 4231493795290421611795579198126143280
+        },
+        "uinteger": 0
+      },
+      "horizon": 0.0,
+      "horizon_index": 0,
+      "independent_scalar_target": 0.5,
+      "initial_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 76236510291261105182196859314125453527,
+          "state": 4231493795290421611795579198126143280
+        },
+        "uinteger": 0
+      },
+      "maximum_absolute_discrepancy": 0.0,
+      "passed": true,
+      "query": 0.0,
+      "raw_npz": "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/sampler-v1/diagnostics/endpoint_e0_t0.npz",
+      "raw_npz_sha256": "d22c1d0913cc6877aa400b67bb96bd959469971f3e74bb0e25b14d55e1ab5c2f",
+      "roots": 128,
+      "spawn_key": [
+        3,
+        0,
+        0
+      ],
+      "threshold": 1e-12,
+      "zero_redraws": 0
+    },
+    {
+      "coefficient_limit_substitutions": 0,
+      "constant_initial_value": 0.5,
+      "elapsed_seconds": 0.0018492923118174076,
+      "endpoint_index": 0,
+      "entropy": 2026092893,
+      "final_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 21405717049099851424382573553764305411,
+          "state": 211338661636718657847845466381005683509
+        },
+        "uinteger": 0
+      },
+      "horizon": 0.25,
+      "horizon_index": 1,
+      "independent_scalar_target": 0.6668510064133175,
+      "initial_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 21405717049099851424382573553764305411,
+          "state": 153715976735733754554179024851898433522
+        },
+        "uinteger": 0
+      },
+      "maximum_absolute_discrepancy": 0.0,
+      "passed": true,
+      "query": 0.0,
+      "raw_npz": "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/sampler-v1/diagnostics/endpoint_e0_t1.npz",
+      "raw_npz_sha256": "8c8336adf22f6a24e41baf457ec0ea3bf886bedf53331e7b85455c2f0fc22df5",
+      "roots": 128,
+      "spawn_key": [
+        3,
+        0,
+        1
+      ],
+      "threshold": 1e-12,
+      "zero_redraws": 0
+    },
+    {
+      "coefficient_limit_substitutions": 0,
+      "constant_initial_value": 0.5,
+      "elapsed_seconds": 0.0021331249736249447,
+      "endpoint_index": 0,
+      "entropy": 2026092893,
+      "final_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 123379064865886177509158040225570445613,
+          "state": 231059094109927163072966994837934908581
+        },
+        "uinteger": 0
+      },
+      "horizon": 1.0,
+      "horizon_index": 2,
+      "independent_scalar_target": 1.1575159133584965,
+      "initial_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 123379064865886177509158040225570445613,
+          "state": 238726574738051944004486206267133713952
+        },
+        "uinteger": 0
+      },
+      "maximum_absolute_discrepancy": 2.220446049250313e-16,
+      "passed": true,
+      "query": 0.0,
+      "raw_npz": "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/sampler-v1/diagnostics/endpoint_e0_t2.npz",
+      "raw_npz_sha256": "63bd3752ff4759819929483b9901ea1047dee7dc64c4ec47fa3518394a850df6",
+      "roots": 128,
+      "spawn_key": [
+        3,
+        0,
+        2
+      ],
+      "threshold": 1e-12,
+      "zero_redraws": 0
+    },
+    {
+      "coefficient_limit_substitutions": 0,
+      "constant_initial_value": 0.5,
+      "elapsed_seconds": 0.002182499971240759,
+      "endpoint_index": 0,
+      "entropy": 2026092893,
+      "final_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 122395812680736105620470116333202390389,
+          "state": 253568133787665938486737394708736149974
+        },
+        "uinteger": 0
+      },
+      "horizon": 4.0,
+      "horizon_index": 3,
+      "independent_scalar_target": 1.498868762310989,
+      "initial_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 122395812680736105620470116333202390389,
+          "state": 324093724493169318152412749698900543993
+        },
+        "uinteger": 0
+      },
+      "maximum_absolute_discrepancy": 2.220446049250313e-16,
+      "passed": true,
+      "query": 0.0,
+      "raw_npz": "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/sampler-v1/diagnostics/endpoint_e0_t3.npz",
+      "raw_npz_sha256": "c4dfb04fa4c35929a798fb9246e49fb6cdaaf7128c722f0be153501a1c499dbf",
+      "roots": 128,
+      "spawn_key": [
+        3,
+        0,
+        3
+      ],
+      "threshold": 1e-12,
+      "zero_redraws": 0
+    },
+    {
+      "coefficient_limit_substitutions": 0,
+      "constant_initial_value": 0.5,
+      "elapsed_seconds": 0.0019008750095963478,
+      "endpoint_index": 0,
+      "entropy": 2026092893,
+      "final_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 29059566958156952885272795093551018815,
+          "state": 126412767560966317816402439491307734851
+        },
+        "uinteger": 0
+      },
+      "horizon": 16.0,
+      "horizon_index": 4,
+      "independent_scalar_target": 1.4999999999999574,
+      "initial_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 29059566958156952885272795093551018815,
+          "state": 312464241890937420139191387744511317385
+        },
+        "uinteger": 0
+      },
+      "maximum_absolute_discrepancy": 4.440892098500626e-16,
+      "passed": true,
+      "query": 0.0,
+      "raw_npz": "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/sampler-v1/diagnostics/endpoint_e0_t4.npz",
+      "raw_npz_sha256": "cb866c68d002730e510d9e4d31242b829b6294cd50e5196d2a06d1cec54882cf",
+      "roots": 128,
+      "spawn_key": [
+        3,
+        0,
+        4
+      ],
+      "threshold": 1e-12,
+      "zero_redraws": 0
+    },
+    {
+      "coefficient_limit_substitutions": 0,
+      "constant_initial_value": 0.5,
+      "elapsed_seconds": 0.0018443330191075802,
+      "endpoint_index": 0,
+      "entropy": 2026092893,
+      "final_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 105539243275774619179092047689797442605,
+          "state": 256079366719654500997368902260875293343
+        },
+        "uinteger": 0
+      },
+      "horizon": 64.0,
+      "horizon_index": 5,
+      "independent_scalar_target": 1.5,
+      "initial_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 105539243275774619179092047689797442605,
+          "state": 93888172675009332290037976047194881030
+        },
+        "uinteger": 0
+      },
+      "maximum_absolute_discrepancy": 0.0,
+      "passed": true,
+      "query": 0.0,
+      "raw_npz": "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/sampler-v1/diagnostics/endpoint_e0_t5.npz",
+      "raw_npz_sha256": "a550e4ebf6307291f2fa278103398fa76b91e0d2013f09a67fa19b93e55223eb",
+      "roots": 128,
+      "spawn_key": [
+        3,
+        0,
+        5
+      ],
+      "threshold": 1e-12,
+      "zero_redraws": 0
+    },
+    {
+      "coefficient_limit_substitutions": 0,
+      "constant_initial_value": 0.5,
+      "elapsed_seconds": 0.00249504204839468,
+      "endpoint_index": 0,
+      "entropy": 2026092893,
+      "final_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 126906649138075140698577388865110608497,
+          "state": 36578946306601546238906533166919280975
+        },
+        "uinteger": 0
+      },
+      "horizon": 256.0,
+      "horizon_index": 6,
+      "independent_scalar_target": 1.5,
+      "initial_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 126906649138075140698577388865110608497,
+          "state": 527302038351261508467559723485333342
+        },
+        "uinteger": 0
+      },
+      "maximum_absolute_discrepancy": 0.0,
+      "passed": true,
+      "query": 0.0,
+      "raw_npz": "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/sampler-v1/diagnostics/endpoint_e0_t6.npz",
+      "raw_npz_sha256": "421c129936e878464d31caee576da76a5fa0f5f1e66bf356ce537950ed4780b1",
+      "roots": 128,
+      "spawn_key": [
+        3,
+        0,
+        6
+      ],
+      "threshold": 1e-12,
+      "zero_redraws": 0
+    },
+    {
+      "coefficient_limit_substitutions": 0,
+      "constant_initial_value": 0.75,
+      "elapsed_seconds": 0.0008523748256266117,
+      "endpoint_index": 1,
+      "entropy": 2026092893,
+      "final_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 338112389175833005348731245826759878289,
+          "state": 224813760906597119799841512078755056883
+        },
+        "uinteger": 0
+      },
+      "horizon": 0.0,
+      "horizon_index": 0,
+      "independent_scalar_target": 0.25,
+      "initial_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 338112389175833005348731245826759878289,
+          "state": 224813760906597119799841512078755056883
+        },
+        "uinteger": 0
+      },
+      "maximum_absolute_discrepancy": 0.0,
+      "passed": true,
+      "query": 0.0,
+      "raw_npz": "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/sampler-v1/diagnostics/endpoint_e1_t0.npz",
+      "raw_npz_sha256": "4afdaa6c05d68ad84a3e5eb3ce8b2ec6da1d377a35f6e09f863151cc44a40edd",
+      "roots": 128,
+      "spawn_key": [
+        3,
+        1,
+        0
+      ],
+      "threshold": 1e-12,
+      "zero_redraws": 0
+    },
+    {
+      "coefficient_limit_substitutions": 0,
+      "constant_initial_value": 0.75,
+      "elapsed_seconds": 0.0015487498603761196,
+      "endpoint_index": 1,
+      "entropy": 2026092893,
+      "final_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 44236669504826578497347633910132586993,
+          "state": 135992200773800283480843415822481694594
+        },
+        "uinteger": 0
+      },
+      "horizon": 0.25,
+      "horizon_index": 1,
+      "independent_scalar_target": 0.28968577863574524,
+      "initial_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 44236669504826578497347633910132586993,
+          "state": 175731431216078530338966646713988307134
+        },
+        "uinteger": 0
+      },
+      "maximum_absolute_discrepancy": 0.0,
+      "passed": true,
+      "query": 0.0,
+      "raw_npz": "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/sampler-v1/diagnostics/endpoint_e1_t1.npz",
+      "raw_npz_sha256": "011179d298dd0b5536a66248622d857aede6e4771985a360a0919f9ae179fbfa",
+      "roots": 128,
+      "spawn_key": [
+        3,
+        1,
+        1
+      ],
+      "threshold": 1e-12,
+      "zero_redraws": 0
+    },
+    {
+      "coefficient_limit_substitutions": 0,
+      "constant_initial_value": 0.75,
+      "elapsed_seconds": 0.001814334187656641,
+      "endpoint_index": 1,
+      "entropy": 2026092893,
+      "final_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 269317978652637617474760544420844654455,
+          "state": 256757082515610763229889307549378478684
+        },
+        "uinteger": 0
+      },
+      "horizon": 1.0,
+      "horizon_index": 2,
+      "independent_scalar_target": 0.36065424053414724,
+      "initial_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 269317978652637617474760544420844654455,
+          "state": 125800963842843230945889779511217819266
+        },
+        "uinteger": 0
+      },
+      "maximum_absolute_discrepancy": 0.0,
+      "passed": true,
+      "query": 0.0,
+      "raw_npz": "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/sampler-v1/diagnostics/endpoint_e1_t2.npz",
+      "raw_npz_sha256": "54c4cf8f3a0a60074590fe630f1c364ae58d676e22090d52be908d77bd0d32c9",
+      "roots": 128,
+      "spawn_key": [
+        3,
+        1,
+        2
+      ],
+      "threshold": 1e-12,
+      "zero_redraws": 0
+    },
+    {
+      "coefficient_limit_substitutions": 0,
+      "constant_initial_value": 0.75,
+      "elapsed_seconds": 0.0021227910183370113,
+      "endpoint_index": 1,
+      "entropy": 2026092893,
+      "final_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 43209584204556167680716719571541663043,
+          "state": 227983240422703407779745751101452983514
+        },
+        "uinteger": 0
+      },
+      "horizon": 4.0,
+      "horizon_index": 3,
+      "independent_scalar_target": 0.38881280511319816,
+      "initial_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 43209584204556167680716719571541663043,
+          "state": 228824120880189584966250582223310526021
+        },
+        "uinteger": 0
+      },
+      "maximum_absolute_discrepancy": 0.0,
+      "passed": true,
+      "query": 0.0,
+      "raw_npz": "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/sampler-v1/diagnostics/endpoint_e1_t3.npz",
+      "raw_npz_sha256": "e2c864cf795838a0e7c1b4162c3b91c984b64ca2338db54f1de4b4c5cab71bba",
+      "roots": 128,
+      "spawn_key": [
+        3,
+        1,
+        3
+      ],
+      "threshold": 1e-12,
+      "zero_redraws": 0
+    },
+    {
+      "coefficient_limit_substitutions": 0,
+      "constant_initial_value": 0.75,
+      "elapsed_seconds": 0.0021629156544804573,
+      "endpoint_index": 1,
+      "entropy": 2026092893,
+      "final_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 283877661833636719255076115156512335125,
+          "state": 255448471690917626543656646840159276884
+        },
+        "uinteger": 0
+      },
+      "horizon": 16.0,
+      "horizon_index": 4,
+      "independent_scalar_target": 0.388888888888886,
+      "initial_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 283877661833636719255076115156512335125,
+          "state": 77220641832894637597669332220514631766
+        },
+        "uinteger": 0
+      },
+      "maximum_absolute_discrepancy": 0.0,
+      "passed": true,
+      "query": 0.0,
+      "raw_npz": "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/sampler-v1/diagnostics/endpoint_e1_t4.npz",
+      "raw_npz_sha256": "8c49d52d4712d9f03dc09bdbcb4bae0410b9092d519aa03874f133298886271d",
+      "roots": 128,
+      "spawn_key": [
+        3,
+        1,
+        4
+      ],
+      "threshold": 1e-12,
+      "zero_redraws": 0
+    },
+    {
+      "coefficient_limit_substitutions": 0,
+      "constant_initial_value": 0.75,
+      "elapsed_seconds": 0.0020475839264690876,
+      "endpoint_index": 1,
+      "entropy": 2026092893,
+      "final_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 171978257469371200115499065006155384883,
+          "state": 56361036612183896208701218722120018991
+        },
+        "uinteger": 0
+      },
+      "horizon": 64.0,
+      "horizon_index": 5,
+      "independent_scalar_target": 0.3888888888888889,
+      "initial_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 171978257469371200115499065006155384883,
+          "state": 246791692428909984594122461108004789035
+        },
+        "uinteger": 0
+      },
+      "maximum_absolute_discrepancy": 5.551115123125783e-17,
+      "passed": true,
+      "query": 0.0,
+      "raw_npz": "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/sampler-v1/diagnostics/endpoint_e1_t5.npz",
+      "raw_npz_sha256": "09dbe481b3c8f4aaeb9535e3cc62ef51b4c6169309d41daf293d92df8a59624a",
+      "roots": 128,
+      "spawn_key": [
+        3,
+        1,
+        5
+      ],
+      "threshold": 1e-12,
+      "zero_redraws": 0
+    },
+    {
+      "coefficient_limit_substitutions": 0,
+      "constant_initial_value": 0.75,
+      "elapsed_seconds": 0.0019362079910933971,
+      "endpoint_index": 1,
+      "entropy": 2026092893,
+      "final_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 86346955552398771269295477718540129605,
+          "state": 330794670950593020169474224482289904691
+        },
+        "uinteger": 0
+      },
+      "horizon": 256.0,
+      "horizon_index": 6,
+      "independent_scalar_target": 0.3888888888888889,
+      "initial_rng_state": {
+        "bit_generator": "PCG64",
+        "has_uint32": 0,
+        "state": {
+          "inc": 86346955552398771269295477718540129605,
+          "state": 306767936649387819112520802889179365844
+        },
+        "uinteger": 0
+      },
+      "maximum_absolute_discrepancy": 5.551115123125783e-17,
+      "passed": true,
+      "query": 0.0,
+      "raw_npz": "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/sampler-v1/diagnostics/endpoint_e1_t6.npz",
+      "raw_npz_sha256": "a9b8658b7c61a53b6fea8a405fdea7f9403145dc9317898e2f8c7422dac38729",
+      "roots": 128,
+      "spawn_key": [
+        3,
+        1,
+        6
+      ],
+      "threshold": 1e-12,
+      "zero_redraws": 0
+    }
+  ],
+  "finished_utc": "2026-09-28T09:47:50.772612+00:00",
+  "ideal_union_false_alarm_bound": 4e-06,
+  "official_pde_roots": 101792,
+  "official_standalone_accepted_clocks": 300000,
+  "schema_version": 1,
+  "scope": {
+    "finite_grid_diagnostic_not_distributional_proof": true,
+    "not_floating_bias_certificate": true
+  },
+  "started_utc": "2026-09-28T09:47:48.706328+00:00",
+  "status": "passed"
+}

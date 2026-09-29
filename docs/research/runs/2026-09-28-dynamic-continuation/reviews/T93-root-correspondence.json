@@ -1,0 +1,119 @@
+{
+  "date_local": "2026-09-29",
+  "verdict": "PASS fixed05n actual Gaussian common-component and independent finite-edge construction",
+  "root_review": "Read entire447-line source, fixed contract and report, all47 elaborated public types (including re-read of initially truncated edge-product passage), all47 axiom records, both harnesses, environment/capture scripts, fresh build and source logs, trust scan and failure provenance. Independently reran exact source with explicit autoImplicit=false and both import harnesses; public outputs agree byte-for-byte with worker raw bodies.",
+  "source": {
+    "path": "formal/EstimatorIntegrity/GaussianCommonComponent.lean",
+    "sha256": "68d4cb7a1c04720703f819d52ae2ea0667c3e7f0afd4e918506d1b3497defc19",
+    "lines": 447,
+    "public_declarations": 47,
+    "definitions": 11,
+    "theorems": 36
+  },
+  "contract": {
+    "path": "05n-gaussian-common-component-lean-contract.md",
+    "sha256": "76af8515034e72c12dcf138dd356e6e98396c4a468af079f521260b5507529ea"
+  },
+  "report": {
+    "path": "06p-gaussian-common-component-lean.md",
+    "sha256": "b51d583958871608b889d77552548c2bf9b1b6886b7b1c4fe9fb78dc5680207d"
+  },
+  "worker_manifest_entries_verified": 22,
+  "worker_verification": {
+    "fresh_build_jobs": 3648,
+    "build_exit": 0,
+    "direct_source_exit": 0,
+    "source_sets_autoImplicit_false": true,
+    "types_exit": 0,
+    "axioms_exit": 0,
+    "warnings": "unused section variables/arguments and simp hints only"
+  },
+  "root_commands": {
+    "source-check": {
+      "command": [
+        "/Users/michael/.elan/bin/lake",
+        "env",
+        "lean",
+        "-DautoImplicit=false",
+        "EstimatorIntegrity/GaussianCommonComponent.lean"
+      ],
+      "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab/formal",
+      "started_utc": "2026-09-28T21:05:48.486019+00:00",
+      "ended_utc": "2026-09-28T21:07:14.006846+00:00",
+      "exit_code": 0,
+      "seconds": 85.52241187496111,
+      "source_sha256_before": "68d4cb7a1c04720703f819d52ae2ea0667c3e7f0afd4e918506d1b3497defc19",
+      "source_sha256_after": "68d4cb7a1c04720703f819d52ae2ea0667c3e7f0afd4e918506d1b3497defc19"
+    },
+    "axioms": {
+      "command": [
+        "/Users/michael/.elan/bin/lake",
+        "env",
+        "lean",
+        "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/gaussian-common-component/Axioms.lean"
+      ],
+      "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab/formal",
+      "started_utc": "2026-09-28T21:05:48.486361+00:00",
+      "ended_utc": "2026-09-28T21:07:13.193578+00:00",
+      "exit_code": 0,
+      "seconds": 84.70939820772037,
+      "source_sha256_before": "68d4cb7a1c04720703f819d52ae2ea0667c3e7f0afd4e918506d1b3497defc19",
+      "source_sha256_after": "68d4cb7a1c04720703f819d52ae2ea0667c3e7f0afd4e918506d1b3497defc19"
+    },
+    "declarations": {
+      "command": [
+        "/Users/michael/.elan/bin/lake",
+        "env",
+        "lean",
+        "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/gaussian-common-component/Declarations.lean"
+      ],
+      "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab/formal",
+      "started_utc": "2026-09-28T21:05:48.486459+00:00",
+      "ended_utc": "2026-09-28T21:07:13.343933+00:00",
+      "exit_code": 0,
+      "seconds": 84.85902166599408,
+      "source_sha256_before": "68d4cb7a1c04720703f819d52ae2ea0667c3e7f0afd4e918506d1b3497defc19",
+      "source_sha256_after": "68d4cb7a1c04720703f819d52ae2ea0667c3e7f0afd4e918506d1b3497defc19"
+    }
+  },
+  "root_evidence_hashes": {
+    "lean/gaussian-common-component/root-check-v1/axioms.json": "724b3f4718d7b077481f8060bde92114adb6f62f7d9b4d240bcb9385b10a3edd",
+    "lean/gaussian-common-component/root-check-v1/axioms.log": "c7a356a171a542f87f3dcc939b75ef02b932d142c9e680736ecfad5b10051909",
+    "lean/gaussian-common-component/root-check-v1/declarations.json": "0620abd90b1a058f74f55956ee8ca4857e695498021d3e9f51b29eafc3288c8f",
+    "lean/gaussian-common-component/root-check-v1/declarations.log": "ca0a71622b0095199d5ad186391075ba4d9e9b9f919cbd8cd7d70f65f0eb6daa",
+    "lean/gaussian-common-component/root-check-v1/inventory.json": "0f07c41bddd6269fc2cc725c9d79284e43ab4e2f0a315e63c78f7e292f2016d8",
+    "lean/gaussian-common-component/root-check-v1/source-check.json": "c411c9b93eb7d660694c2a0004f036a8feb7066d583418127411f4d82ad7ef11",
+    "lean/gaussian-common-component/root-check-v1/source-check.log": "cf2a96dbad78241e596d2b09bee9180d3cf766e7a429d45f7853f4c07875f8f1"
+  },
+  "axioms": {
+    "declarations_checked": 47,
+    "allowed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "additional": []
+  },
+  "accepted_bridge": [
+    "Actual continuous linear common/residual/pair transformations of joint HasGaussianLaw; L2 and integrability obtained from the laws rather than assumed covariance conclusions",
+    "Actual coordinate/common zero means, row covariance, common variance and nonnegativity, residual cross and full residual covariances",
+    "Whole-vector IndepFun through joint Gaussian Unit-coordinate pair, including singular and a=0 cases",
+    "Actual scalar Gaussian law, joint product pushforward, reconstruction law, and explicitly integrable bounded-continuous expectation",
+    "Finite independent centered Gaussian edge family gives derived joint Gaussian leaf law and actual covariance by diagonal/offdiagonal expansion",
+    "Finite coefficient interchange derives row premise and instantiates independence/product/reconstruction/expectation"
+  ],
+  "failure_provenance": "Three raw failure logs retained: nonexistent speculative API names; capture invocation with wrong cwd (exit125); first prototype elaboration. Later local elaboration iterations are honestly retrospective summaries. No historical source snapshots are inferred. Final and root verification streams captured directly.",
+  "not_formalized": [
+    "tree recursion constructing coefficients or variance lower bound",
+    "chronological/random clocks and nonexplosion",
+    "generation work",
+    "torus/heat/Fourier/Sobolev/derivative/PDE bridges",
+    "whole algorithm risk/query/work complexity",
+    "finite-bit and numeric implementation"
+  ],
+  "protected_initial_files": {
+    "count": 342,
+    "mismatches": []
+  },
+  "numerical_status": "zero new experiments or unknown-input acquisitions; E4 remains368270390; E5 unrun"
+}

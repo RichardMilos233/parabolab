@@ -1,0 +1,65 @@
+EstimatorIntegrity/MovingBarrierWidth.lean:80:19: error: typeclass instance problem is stuck
+  IsLocallyFiniteMeasure ?m.112
+
+Note: Lean will not try to resolve this typeclass instance problem because the fourth type argument to `IsLocallyFiniteMeasure` is a metavariable. This argument must be fully determined before Lean will try to resolve the typeclass.
+
+Hint: Adding type annotations and supplying implicit arguments to functions can give Lean more information for typeclass resolution. For example, if you have a variable `x` that you intend to be a `Nat`, but Lean reports it as having an unresolved type like `?m`, replacing `x` with `(x : Nat)` can get typeclass resolution un-stuck.
+EstimatorIntegrity/MovingBarrierWidth.lean:104:10: error: typeclass instance problem is stuck
+  IsCountablyGenerated ?m.134
+
+Note: Lean will not try to resolve this typeclass instance problem because the first and second type arguments to `IsCountablyGenerated` are metavariables. These arguments must be fully determined before Lean will try to resolve the typeclass.
+
+Hint: Adding type annotations and supplying implicit arguments to functions can give Lean more information for typeclass resolution. For example, if you have a variable `x` that you intend to be a `Nat`, but Lean reports it as having an unresolved type like `?m`, replacing `x` with `(x : Nat)` can get typeclass resolution un-stuck.
+EstimatorIntegrity/MovingBarrierWidth.lean:122:8: error(lean.unknownIdentifier): Unknown constant `integrableOn_Ici_iff_integrableOn_Ioi.mpr`
+EstimatorIntegrity/MovingBarrierWidth.lean:129:31: error: Function expected at
+  𝓝
+but this term has type
+  ?m.1
+
+Note: Expected a function because this term is being applied to the argument
+  b
+
+Hint: The identifier `𝓝` is unknown, and Lean's `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement.
+EstimatorIntegrity/MovingBarrierWidth.lean:138:4: error(lean.unknownIdentifier): Unknown constant `integrableOn_Ici_iff_integrableOn_Ioi.mp`
+EstimatorIntegrity/MovingBarrierWidth.lean:139:56: error: Function expected at
+  𝓝
+but this term has type
+  x✝
+
+Note: Expected a function because this term is being applied to the argument
+  0
+EstimatorIntegrity/MovingBarrierWidth.lean:141:34: error: Function expected at
+  𝓝
+but this term has type
+  x✝
+
+Note: Expected a function because this term is being applied to the argument
+  0
+EstimatorIntegrity/MovingBarrierWidth.lean:150:67: error: Function expected at
+  𝓝
+but this term has type
+  x✝
+
+Note: Expected a function because this term is being applied to the argument
+  J
+EstimatorIntegrity/MovingBarrierWidth.lean:164:31: error: Function expected at
+  𝓝
+but this term has type
+  ?m.1
+
+Note: Expected a function because this term is being applied to the argument
+  b
+
+Hint: The identifier `𝓝` is unknown, and Lean's `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement.
+EstimatorIntegrity/MovingBarrierWidth.lean:167:40: error: unsolved goals
+x✝ : Sort u_1
+𝓝 : x✝
+l : ℝ → ℝ
+hl_cont : Continuous l
+hl_mono : Monotone l
+b Δ : ℝ
+hbound : ∀ (t : ℝ), 0 ≤ t → l t ≤ b
+hl_lim : Tendsto l atTop sorry
+hΔ : 0 ≤ Δ
+⊢ IntegrableOn (fun t => l (t + Δ) - l t) (Ici 0) volume ∧
+    ∫ (t : ℝ) in Ici 0, l (t + Δ) - l t = ∫ (t : ℝ) in 0..Δ, b - l t

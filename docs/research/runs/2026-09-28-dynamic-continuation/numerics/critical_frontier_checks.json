@@ -1,0 +1,1023 @@
+{
+  "asymptotic_diagnostics_without_acceptance_threshold": {
+    "cusp_ratios": [
+      {
+        "B_over_delta_to_alpha_plus_one": "0.94139356286748146799546821767074143119486003031757939169840135480770401954489948",
+        "alpha": "0.5",
+        "delta": "1e-2",
+        "interpretation": "finite-cutoff diagnostic; not a proof of the limit",
+        "proved_limit_2_to_alpha_over_alpha_plus_one": "0.94280904158206336586779248280646538571311458358463204878445315866048831897473803"
+      },
+      {
+        "B_over_delta_to_alpha_plus_one": "0.94279489932016811155362132803806587869088684185897244034526393062638628287146978",
+        "alpha": "0.5",
+        "delta": "1e-4",
+        "interpretation": "finite-cutoff diagnostic; not a proof of the limit",
+        "proved_limit_2_to_alpha_over_alpha_plus_one": "0.94280904158206336586779248280646538571311458358463204878445315866048831897473803"
+      },
+      {
+        "B_over_delta_to_alpha_plus_one": "0.94280890016069450164902546749635037044477507733549749220863788277347772514839488",
+        "alpha": "0.5",
+        "delta": "1e-6",
+        "interpretation": "finite-cutoff diagnostic; not a proof of the limit",
+        "proved_limit_2_to_alpha_over_alpha_plus_one": "0.94280904158206336586779248280646538571311458358463204878445315866048831897473803"
+      },
+      {
+        "B_over_delta_to_alpha_plus_one": "0.94280904016784980223200675085928133967579907731838587930589361795231507547994254",
+        "alpha": "0.5",
+        "delta": "1e-8",
+        "interpretation": "finite-cutoff diagnostic; not a proof of the limit",
+        "proved_limit_2_to_alpha_over_alpha_plus_one": "0.94280904158206336586779248280646538571311458358463204878445315866048831897473803"
+      },
+      {
+        "B_over_delta_to_alpha_plus_one": "0.99666666666666666666666666666666666666666666666666666666666666666666666666666659",
+        "alpha": "1",
+        "delta": "1e-2",
+        "interpretation": "finite-cutoff diagnostic; not a proof of the limit",
+        "proved_limit_2_to_alpha_over_alpha_plus_one": "1.0000000000000000000000000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "B_over_delta_to_alpha_plus_one": "0.99996666666666666666666666666666666666666666666666666666666666666666666666667680",
+        "alpha": "1",
+        "delta": "1e-4",
+        "interpretation": "finite-cutoff diagnostic; not a proof of the limit",
+        "proved_limit_2_to_alpha_over_alpha_plus_one": "1.0000000000000000000000000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "B_over_delta_to_alpha_plus_one": "0.99999966666666666666666666666666666666666666666666666666666666666666666666629409",
+        "alpha": "1",
+        "delta": "1e-6",
+        "interpretation": "finite-cutoff diagnostic; not a proof of the limit",
+        "proved_limit_2_to_alpha_over_alpha_plus_one": "1.0000000000000000000000000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "B_over_delta_to_alpha_plus_one": "0.99999999666666666666666666666666666666666666666666666666666666666666666667460721",
+        "alpha": "1",
+        "delta": "1e-8",
+        "interpretation": "finite-cutoff diagnostic; not a proof of the limit",
+        "proved_limit_2_to_alpha_over_alpha_plus_one": "1.0000000000000000000000000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "B_over_delta_to_alpha_plus_one": "1.3233533333333333333333333333333333333333333333333333333333333333333333333333332",
+        "alpha": "2",
+        "delta": "1e-2",
+        "interpretation": "finite-cutoff diagnostic; not a proof of the limit",
+        "proved_limit_2_to_alpha_over_alpha_plus_one": "1.3333333333333333333333333333333333333333333333333333333333333333333333333333333"
+      },
+      {
+        "B_over_delta_to_alpha_plus_one": "1.3332333353333333333333333333333333333333333333333333333333333333333333333333536",
+        "alpha": "2",
+        "delta": "1e-4",
+        "interpretation": "finite-cutoff diagnostic; not a proof of the limit",
+        "proved_limit_2_to_alpha_over_alpha_plus_one": "1.3333333333333333333333333333333333333333333333333333333333333333333333333333333"
+      },
+      {
+        "B_over_delta_to_alpha_plus_one": "1.3333323333335333333333333333333333333333333333333333333333333333333333333325882",
+        "alpha": "2",
+        "delta": "1e-6",
+        "interpretation": "finite-cutoff diagnostic; not a proof of the limit",
+        "proved_limit_2_to_alpha_over_alpha_plus_one": "1.3333333333333333333333333333333333333333333333333333333333333333333333333333333"
+      },
+      {
+        "B_over_delta_to_alpha_plus_one": "1.3333333233333333533333333333333333333333333333333333333333333333333333333492144",
+        "alpha": "2",
+        "delta": "1e-8",
+        "interpretation": "finite-cutoff diagnostic; not a proof of the limit",
+        "proved_limit_2_to_alpha_over_alpha_plus_one": "1.3333333333333333333333333333333333333333333333333333333333333333333333333333333"
+      }
+    ],
+    "scaled_endpoint_integrands": [
+      {
+        "J_times_delta_to_alpha_plus_one_over_two": "1.3691306659729281301634533738948116215577683983723280220021289877050028537648030",
+        "acceptance_threshold": null,
+        "alpha": "0.5",
+        "analytic_limiting_value": "1.3690658273200601512630503676487312075218904645150782305082741785345760899387993",
+        "delta": "1e-2",
+        "interpretation": "finite-cutoff asymptotic diagnostic; no residual theorem test"
+      },
+      {
+        "J_times_delta_to_alpha_plus_one_over_two": "1.3690628151674955985636947238691200932096246339514011737216858571504221331432563",
+        "acceptance_threshold": null,
+        "alpha": "0.5",
+        "analytic_limiting_value": "1.3690658273200601512630503676487312075218904645150782305082741785345760899387993",
+        "delta": "1e-4",
+        "interpretation": "finite-cutoff asymptotic diagnostic; no residual theorem test"
+      },
+      {
+        "J_times_delta_to_alpha_plus_one_over_two": "1.3690657935042439652783974011536621928447882792595008444933574557093880585534631",
+        "acceptance_threshold": null,
+        "alpha": "0.5",
+        "analytic_limiting_value": "1.3690658273200601512630503676487312075218904645150782305082741785345760899387993",
+        "delta": "1e-6",
+        "interpretation": "finite-cutoff asymptotic diagnostic; no residual theorem test"
+      },
+      {
+        "J_times_delta_to_alpha_plus_one_over_two": "1.3690658269782045550798357857250068895013641566784094561442392075295781761238229",
+        "acceptance_threshold": null,
+        "alpha": "0.5",
+        "analytic_limiting_value": "1.3690658273200601512630503676487312075218904645150782305082741785345760899387993",
+        "delta": "1e-8",
+        "interpretation": "finite-cutoff asymptotic diagnostic; no residual theorem test"
+      },
+      {
+        "J_times_delta_to_alpha_plus_one_over_two": "1.6330473605990956301491952219606659878130559242008460483966451506862513828005316",
+        "acceptance_threshold": null,
+        "alpha": "1",
+        "analytic_limiting_value": "1.6329931618554520654648560498039275946439649871044467522884617115006402516382100",
+        "delta": "1e-2",
+        "interpretation": "finite-cutoff asymptotic diagnostic; no residual theorem test"
+      },
+      {
+        "J_times_delta_to_alpha_plus_one_over_two": "1.6329931672985207562332289294256350975821436963770739943597794795121161530895033",
+        "acceptance_threshold": null,
+        "alpha": "1",
+        "analytic_limiting_value": "1.6329931618554520654648560498039275946439649871044467522884617115006402516382100",
+        "delta": "1e-4",
+        "interpretation": "finite-cutoff asymptotic diagnostic; no residual theorem test"
+      },
+      {
+        "J_times_delta_to_alpha_plus_one_over_two": "1.6329931618559963962768837159765279127780986975252391768678142947029677756537881",
+        "acceptance_threshold": null,
+        "alpha": "1",
+        "analytic_limiting_value": "1.6329931618554520654648560498039275946439649871044467522884617115006402516382100",
+        "delta": "1e-6",
+        "interpretation": "finite-cutoff asymptotic diagnostic; no residual theorem test"
+      },
+      {
+        "J_times_delta_to_alpha_plus_one_over_two": "1.6329931618554521198979612030607578595194103291445453313277524356525707064020748",
+        "acceptance_threshold": null,
+        "alpha": "1",
+        "analytic_limiting_value": "1.6329931618554520654648560498039275946439649871044467522884617115006402516382100",
+        "delta": "1e-8",
+        "interpretation": "finite-cutoff asymptotic diagnostic; no residual theorem test"
+      },
+      {
+        "J_times_delta_to_alpha_plus_one_over_two": "1.8997307947958151407732490297506383684222626313311306691425958816052416732479949",
+        "acceptance_threshold": null,
+        "alpha": "2",
+        "analytic_limiting_value": "1.8973665961010275991993361266596311202317330835951300961145029116755566631835429",
+        "delta": "1e-2",
+        "interpretation": "finite-cutoff asymptotic diagnostic; no residual theorem test"
+      },
+      {
+        "J_times_delta_to_alpha_plus_one_over_two": "1.8973903123248303473819623904044464736745198334873644301343713674450539179334181",
+        "acceptance_threshold": null,
+        "alpha": "2",
+        "analytic_limiting_value": "1.8973665961010275991993361266596311202317330835951300961145029116755566631835429",
+        "delta": "1e-4",
+        "interpretation": "finite-cutoff asymptotic diagnostic; no residual theorem test"
+      },
+      {
+        "J_times_delta_to_alpha_plus_one_over_two": "1.8973668332717661384997027326032798220412553598329217214114134061679097349031481",
+        "acceptance_threshold": null,
+        "alpha": "2",
+        "analytic_limiting_value": "1.8973665961010275991993361266596311202317330835951300961145029116755566631835429",
+        "delta": "1e-6",
+        "interpretation": "finite-cutoff asymptotic diagnostic; no residual theorem test"
+      },
+      {
+        "J_times_delta_to_alpha_plus_one_over_two": "1.8973665984727358357281793328793371877751855932316680250739608222147765707041569",
+        "acceptance_threshold": null,
+        "alpha": "2",
+        "analytic_limiting_value": "1.8973665961010275991993361266596311202317330835951300961145029116755566631835429",
+        "delta": "1e-8",
+        "interpretation": "finite-cutoff asymptotic diagnostic; no residual theorem test"
+      }
+    ],
+    "theory_predictions_from_T22": {
+      "alpha_0.5": "finite limit",
+      "alpha_1": "logarithmic divergence",
+      "alpha_2": "power divergence"
+    },
+    "truncated_endpoint_contributions": [
+      {
+        "K_alpha_delta": "1.1727735728230322953862031630926325308116898948777618303203257447370894109237332",
+        "alpha": "0.5",
+        "delta": "1e-2",
+        "interpretation": "truncated endpoint contribution; not the full S_2 mass",
+        "positive": true,
+        "quadrature_breaks": [
+          "0.010000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.10000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.50000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        ],
+        "quadrature_variable": "r=1-z"
+      },
+      {
+        "K_alpha_delta": "1.6451641432631637742304729615290002087598622902424219383049543663334485402344508",
+        "alpha": "0.5",
+        "delta": "1e-4",
+        "interpretation": "truncated endpoint contribution; not the full S_2 mass",
+        "positive": true,
+        "quadrature_breaks": [
+          "0.00010000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.010000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.10000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.50000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        ],
+        "quadrature_variable": "r=1-z"
+      },
+      {
+        "K_alpha_delta": "1.7945486507244531413170533929104088186951817815482752356383474317669143809138207",
+        "alpha": "0.5",
+        "delta": "1e-6",
+        "interpretation": "truncated endpoint contribution; not the full S_2 mass",
+        "positive": true,
+        "quadrature_breaks": [
+          "0.0000010000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.00010000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.010000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.10000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.50000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        ],
+        "quadrature_variable": "r=1-z"
+      },
+      {
+        "K_alpha_delta": "1.8417882109301968668036888650423631477799016071426494427425159331674819627430336",
+        "alpha": "0.5",
+        "delta": "1e-8",
+        "interpretation": "truncated endpoint contribution; not the full S_2 mass",
+        "positive": true,
+        "quadrature_breaks": [
+          "0.000000010000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.0000010000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.00010000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.010000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.10000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.50000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        ],
+        "quadrature_variable": "r=1-z"
+      },
+      {
+        "K_alpha_delta": "2.5760104874930457619208763545377766561192461714479831585799124905743272322770029",
+        "alpha": "1",
+        "delta": "1e-2",
+        "interpretation": "truncated endpoint contribution; not the full S_2 mass",
+        "positive": true,
+        "quadrature_breaks": [
+          "0.010000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.10000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.50000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        ],
+        "quadrature_variable": "r=1-z"
+      },
+      {
+        "K_alpha_delta": "5.5761516069771972131581394011769287522737722407492318359040089098928467884087249",
+        "alpha": "1",
+        "delta": "1e-4",
+        "interpretation": "truncated endpoint contribution; not the full S_2 mass",
+        "positive": true,
+        "quadrature_breaks": [
+          "0.00010000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.010000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.10000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.50000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        ],
+        "quadrature_variable": "r=1-z"
+      },
+      {
+        "K_alpha_delta": "8.5762819022151309798682400239952079560043737148608079766422073106574132004683599",
+        "alpha": "1",
+        "delta": "1e-6",
+        "interpretation": "truncated endpoint contribution; not the full S_2 mass",
+        "positive": true,
+        "quadrature_breaks": [
+          "0.0000010000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.00010000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.010000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.10000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.50000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        ],
+        "quadrature_variable": "r=1-z"
+      },
+      {
+        "K_alpha_delta": "11.576412196367530696306387116072483798211021747769393875160937736116764726864561",
+        "alpha": "1",
+        "delta": "1e-8",
+        "interpretation": "truncated endpoint contribution; not the full S_2 mass",
+        "positive": true,
+        "quadrature_breaks": [
+          "0.000000010000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.0000010000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.00010000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.010000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.10000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.50000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        ],
+        "quadrature_variable": "r=1-z"
+      },
+      {
+        "K_alpha_delta": "13.130063940849072972903457782817619042917334017658159741149067320717024086422803",
+        "alpha": "2",
+        "delta": "1e-2",
+        "interpretation": "truncated endpoint contribution; not the full S_2 mass",
+        "positive": true,
+        "quadrature_breaks": [
+          "0.010000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.10000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.50000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        ],
+        "quadrature_variable": "r=1-z"
+      },
+      {
+        "K_alpha_delta": "149.39623017105201129068821188142723230005461464742055668292208538668012687829365",
+        "alpha": "2",
+        "delta": "1e-4",
+        "interpretation": "truncated endpoint contribution; not the full S_2 mass",
+        "positive": true,
+        "quadrature_breaks": [
+          "0.00010000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.010000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.10000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.50000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        ],
+        "quadrature_variable": "r=1-z"
+      },
+      {
+        "K_alpha_delta": "1511.8894951535652637741434239700685215024844114635947623796017701550554202858514",
+        "alpha": "2",
+        "delta": "1e-6",
+        "interpretation": "truncated endpoint contribution; not the full S_2 mass",
+        "positive": true,
+        "quadrature_breaks": [
+          "0.0000010000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.00010000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.010000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.10000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.50000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        ],
+        "quadrature_variable": "r=1-z"
+      },
+      {
+        "K_alpha_delta": "15136.805284373851917821824846651054785943775415353888938832689480570910810107950",
+        "alpha": "2",
+        "delta": "1e-8",
+        "interpretation": "truncated endpoint contribution; not the full S_2 mass",
+        "positive": true,
+        "quadrature_breaks": [
+          "0.000000010000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.0000010000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.00010000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.010000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.10000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "0.50000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        ],
+        "quadrature_variable": "r=1-z"
+      }
+    ]
+  },
+  "created_utc": "2026-09-28T08:59:17.620753+00:00",
+  "exact_identity_acceptance_checks": {
+    "all_passed": true,
+    "derivatives_orders_0_through_12": [
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "0.5",
+        "closed_formula": "1.0000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "direct_high_precision_differentiation": "1.0000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "order": 0,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "0.5",
+        "closed_formula": "0.0",
+        "direct_high_precision_differentiation": "0.0",
+        "order": 1,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "0.5",
+        "closed_formula": "-1.0000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "direct_high_precision_differentiation": "-1.0000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "order": 2,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "0.5",
+        "closed_formula": "0.0",
+        "direct_high_precision_differentiation": "0.0",
+        "order": 3,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "0.5",
+        "closed_formula": "9.0000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "direct_high_precision_differentiation": "9.0000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "order": 4,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "0.5",
+        "closed_formula": "0.0",
+        "direct_high_precision_differentiation": "0.0",
+        "order": 5,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "0.5",
+        "closed_formula": "-225.00000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "direct_high_precision_differentiation": "-225.00000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "order": 6,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "0.5",
+        "closed_formula": "0.0",
+        "direct_high_precision_differentiation": "0.0",
+        "order": 7,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "0.5",
+        "closed_formula": "11025.000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "direct_high_precision_differentiation": "11025.000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "order": 8,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "0.5",
+        "closed_formula": "0.0",
+        "direct_high_precision_differentiation": "0.0",
+        "order": 9,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "0.5",
+        "closed_formula": "-893025.00000000000000000000000000000000000000000000000000000000000000000000000000",
+        "direct_high_precision_differentiation": "-893025.00000000000000000000000000000000000000000000000000000000000000000000000000",
+        "order": 10,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "0.5",
+        "closed_formula": "0.0",
+        "direct_high_precision_differentiation": "0.0",
+        "order": 11,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "0.5",
+        "closed_formula": "108056025.00000000000000000000000000000000000000000000000000000000000000000000000",
+        "direct_high_precision_differentiation": "108056025.00000000000000000000000000000000000000000000000000000000000000000000000",
+        "order": 12,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "1",
+        "closed_formula": "1.0000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "direct_high_precision_differentiation": "1.0000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "order": 0,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "1",
+        "closed_formula": "0.0",
+        "direct_high_precision_differentiation": "0.0",
+        "order": 1,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "1",
+        "closed_formula": "-2.0000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "direct_high_precision_differentiation": "-2.0000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "order": 2,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "1",
+        "closed_formula": "0.0",
+        "direct_high_precision_differentiation": "0.0",
+        "order": 3,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "1",
+        "closed_formula": "24.000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "direct_high_precision_differentiation": "24.000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "order": 4,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "1",
+        "closed_formula": "0.0",
+        "direct_high_precision_differentiation": "0.0",
+        "order": 5,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "1",
+        "closed_formula": "-720.00000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "direct_high_precision_differentiation": "-720.00000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "order": 6,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "1",
+        "closed_formula": "0.0",
+        "direct_high_precision_differentiation": "0.0",
+        "order": 7,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "1",
+        "closed_formula": "40320.000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "direct_high_precision_differentiation": "40320.000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "order": 8,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "1",
+        "closed_formula": "0.0",
+        "direct_high_precision_differentiation": "0.0",
+        "order": 9,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "1",
+        "closed_formula": "-3628800.0000000000000000000000000000000000000000000000000000000000000000000000000",
+        "direct_high_precision_differentiation": "-3628800.0000000000000000000000000000000000000000000000000000000000000000000000000",
+        "order": 10,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "1",
+        "closed_formula": "0.0",
+        "direct_high_precision_differentiation": "0.0",
+        "order": 11,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "1",
+        "closed_formula": "479001600.00000000000000000000000000000000000000000000000000000000000000000000000",
+        "direct_high_precision_differentiation": "479001600.00000000000000000000000000000000000000000000000000000000000000000000000",
+        "order": 12,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "2",
+        "closed_formula": "1.0000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "direct_high_precision_differentiation": "1.0000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "order": 0,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "2",
+        "closed_formula": "0.0",
+        "direct_high_precision_differentiation": "0.0",
+        "order": 1,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "2",
+        "closed_formula": "-4.0000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "direct_high_precision_differentiation": "-4.0000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "order": 2,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "2",
+        "closed_formula": "0.0",
+        "direct_high_precision_differentiation": "0.0",
+        "order": 3,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "2",
+        "closed_formula": "72.000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "direct_high_precision_differentiation": "72.000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "order": 4,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "2",
+        "closed_formula": "0.0",
+        "direct_high_precision_differentiation": "0.0",
+        "order": 5,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "2",
+        "closed_formula": "-2880.0000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "direct_high_precision_differentiation": "-2880.0000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "order": 6,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "2",
+        "closed_formula": "0.0",
+        "direct_high_precision_differentiation": "0.0",
+        "order": 7,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "2",
+        "closed_formula": "201600.00000000000000000000000000000000000000000000000000000000000000000000000000",
+        "direct_high_precision_differentiation": "201600.00000000000000000000000000000000000000000000000000000000000000000000000000",
+        "order": 8,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "2",
+        "closed_formula": "0.0",
+        "direct_high_precision_differentiation": "0.0",
+        "order": 9,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "2",
+        "closed_formula": "-21772800.000000000000000000000000000000000000000000000000000000000000000000000000",
+        "direct_high_precision_differentiation": "-21772800.000000000000000000000000000000000000000000000000000000000000000000000000",
+        "order": 10,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "2",
+        "closed_formula": "0.0",
+        "direct_high_precision_differentiation": "0.0",
+        "order": 11,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "2",
+        "closed_formula": "3353011200.0000000000000000000000000000000000000000000000000000000000000000000000",
+        "direct_high_precision_differentiation": "3353011200.0000000000000000000000000000000000000000000000000000000000000000000000",
+        "order": 12,
+        "passed": true,
+        "scaled_discrepancy": "0.0"
+      }
+    ],
+    "tail_quadrature_vs_incomplete_beta": [
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "0.5",
+        "delta": "1e-2",
+        "direct_quadrature": "0.00094139356286748146799546821767074143119486003031757939169840135480770401954489951",
+        "incomplete_beta": "0.00094139356286748146799546821767074143119486003031757939169840135480770401954489948",
+        "passed": true,
+        "scaled_discrepancy": "0.000000000000000000000000000000000000000000000000000000000000000000000000000000000031914857054701779292461503475524471605371953403654661528555727908042233693365483"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "0.5",
+        "delta": "1e-4",
+        "direct_quadrature": "0.00000094279489932016811155362132803806587869088684185897244034526393062638628287146901",
+        "incomplete_beta": "0.00000094279489932016811155362132803806587869088684185897244034526393062638628287146978",
+        "passed": true,
+        "scaled_discrepancy": "0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000077313902076189731211891684011713453454293826132215331134889600432473783109242870"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "0.5",
+        "delta": "1e-6",
+        "direct_quadrature": "0.00000000094280890016069450164902546749635037044477507733549749220863788277347772514812801",
+        "incomplete_beta": "0.00000000094280890016069450164902546749635037044477507733549749220863788277347772514839488",
+        "passed": true,
+        "scaled_discrepancy": "0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000026687599351005948724187730825209189454444742603531507637789821158711291522558947"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "0.5",
+        "delta": "1e-8",
+        "direct_quadrature": "0.00000000000094280904016784980223200675085928133967579907731838587930589361795231507545888848",
+        "incomplete_beta": "0.00000000000094280904016784980223200675085928133967579907731838587930589361795231507547994254",
+        "passed": true,
+        "scaled_discrepancy": "0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000021054060607915208301259667866431621565660490137007292621828334331126966078847801"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "1",
+        "delta": "1e-2",
+        "direct_quadrature": "0.000099666666666666666666666666666666666666666666666666666666666666666666666666666664",
+        "incomplete_beta": "0.000099666666666666666666666666666666666666666666666666666666666666666666666666666660",
+        "passed": true,
+        "scaled_discrepancy": "0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000045041128907845253033715831517877278475323321335802949737881067612156378196281932"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "1",
+        "delta": "1e-4",
+        "direct_quadrature": "0.0000000099996666666666666666666666666666666666666666666666666666666666666666666666667571",
+        "incomplete_beta": "0.0000000099996666666666666666666666666666666666666666666666666666666666666666666666667680",
+        "passed": true,
+        "scaled_discrepancy": "0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000010933532965911096579054903298145433112034399989438774071416442193799120823316206"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "1",
+        "delta": "1e-6",
+        "direct_quadrature": "0.00000000000099999966666666666666666666666666666666666666666666666666666666666666666666591667",
+        "incomplete_beta": "0.00000000000099999966666666666666666666666666666666666666666666666666666666666666666666629409",
+        "passed": true,
+        "scaled_discrepancy": "0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000037742107720819060340906392368612843730433436200746744707270502896348893829055417"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "1",
+        "delta": "1e-8",
+        "direct_quadrature": "0.000000000000000099999999666666666666666666666666666666666666666666666666666666666666666664483228",
+        "incomplete_beta": "0.000000000000000099999999666666666666666666666666666666666666666666666666666666666666666667460721",
+        "passed": true,
+        "scaled_discrepancy": "0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000029774939608928833180597724394931537742222002909628730340464537093718932206911289"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "2",
+        "delta": "1e-2",
+        "direct_quadrature": "0.0000013233533333333333333333333333333333333333333333333333333333333333333333333333333",
+        "incomplete_beta": "0.0000013233533333333333333333333333333333333333333333333333333333333333333333333333332",
+        "passed": true,
+        "scaled_discrepancy": "0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000092495175435753644622809296867069411154681820600309628926005763846392562367364681"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "2",
+        "delta": "1e-4",
+        "direct_quadrature": "0.0000000000013332333353333333333333333333333333333333333333333333333333333333333333333333514",
+        "incomplete_beta": "0.0000000000013332333353333333333333333333333333333333333333333333333333333333333333333333536",
+        "passed": true,
+        "scaled_discrepancy": "0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000021841630691305119312406579127849093583393634643503410369773650173734815957531384"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "2",
+        "delta": "1e-6",
+        "direct_quadrature": "0.0000000000000000013333323333335333333333333333333333333333333333333333333333333333333333333318333",
+        "incomplete_beta": "0.0000000000000000013333323333335333333333333333333333333333333333333333333333333333333333333325882",
+        "passed": true,
+        "scaled_discrepancy": "0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000075484167466159675973510427207658818944078722197291825121147471627697274223833206"
+      },
+      {
+        "acceptance": "scaled_discrepancy < 1e-60",
+        "alpha": "2",
+        "delta": "1e-8",
+        "direct_quadrature": "0.0000000000000000000000013333333233333333533333333333333333333333333333333333333333333333333333332896645",
+        "incomplete_beta": "0.0000000000000000000000013333333233333333533333333333333333333333333333333333333333333333333333333492144",
+        "passed": true,
+        "scaled_discrepancy": "0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000059549890742376292935514275139144572822918513066722987308344147356033162411787048"
+      }
+    ],
+    "tau_quadrature_vs_gamma": [
+      {
+        "absolute_discrepancy": "0.0",
+        "acceptance": "absolute_discrepancy < 1e-60",
+        "alpha": "0.5",
+        "gamma_formula": "0.78539816339744830961566084581987572104929234984377645524373614807695410157155225",
+        "passed": true,
+        "quadrature": "0.78539816339744830961566084581987572104929234984377645524373614807695410157155225"
+      },
+      {
+        "absolute_discrepancy": "0.0000000000000000000000000000000000000000000000000000000000000000000000000000000010542197943230523224348574051270019007709961382368507550077763025108144290969760",
+        "acceptance": "absolute_discrepancy < 1e-60",
+        "alpha": "1",
+        "gamma_formula": "0.66666666666666666666666666666666666666666666666666666666666666666666666666666667",
+        "passed": true,
+        "quadrature": "0.66666666666666666666666666666666666666666666666666666666666666666666666666666667"
+      },
+      {
+        "absolute_discrepancy": "0.0",
+        "acceptance": "absolute_discrepancy < 1e-60",
+        "alpha": "2",
+        "gamma_formula": "0.53333333333333333333333333333333333333333333333333333333333333333333333333333333",
+        "passed": true,
+        "quadrature": "0.53333333333333333333333333333333333333333333333333333333333333333333333333333333"
+      }
+    ]
+  },
+  "failures": [],
+  "protocol": {
+    "alphas": [
+      "0.5",
+      "1",
+      "2"
+    ],
+    "beta": "0.5",
+    "decimal_precision": 80,
+    "deltas": [
+      "1e-2",
+      "1e-4",
+      "1e-6",
+      "1e-8"
+    ],
+    "exact_identity_acceptance": "strictly below 1e-60",
+    "outcome_dependent_tuning": false,
+    "p": "2"
+  },
+  "provenance": {
+    "command": [
+      "/opt/miniconda3/envs/parabolab/bin/python",
+      "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/numerics/check_critical_frontier.py"
+    ],
+    "environment": {
+      "matplotlib": "3.11.0",
+      "mpmath": "1.3.0",
+      "numpy": "2.4.6",
+      "platform": "macOS-26.3-arm64-arm-64bit",
+      "python": "3.11.15 (main, Jun 11 2026, 15:14:57) [Clang 20.1.8 ]",
+      "python_executable": "/opt/miniconda3/envs/parabolab/bin/python"
+    },
+    "figure_hashes_sha256": {
+      "critical-frontier.png": "b966e1b10ff97d1f3157448d48ec6a5b9554b2c6a5a8ef6d74b077f3acd8eba3",
+      "critical-frontier.svg": "b756d2d892f7d1d81f56c0588f989e6dea293ab885b1d4a0c87d68886a115774"
+    },
+    "git_revision": "65dca46e42db1c80cdf9ddd8eed6a415148c37f3",
+    "lean_gate_logs_read_before_numerics": {
+      "axiom_log": "lean/critical-moment-work/axioms.log",
+      "build_log": "lean/critical-moment-work/build.log"
+    },
+    "runtime_seconds": "2.875464459",
+    "source_and_gate_hashes_sha256_verified_before_numerics": {
+      "../../../../formal/EstimatorIntegrity/CriticalMomentWork.lean": "2aa8eac99d548e1a4ba5e21f7c9d5aef0a6595a527a4ee9d59c49c0dba23893e",
+      "02c-critical-frontier-protocol.md": "3e6929d0c49d17f69819c3dd7854cbfab8804745103e7d4ef9831126957220cc",
+      "04h-critical-moment-work.md": "9750b19bab65bd1cc78bf0db6b5385a896e3a8146a8219777f808ea1279e7dd4",
+      "06e-critical-work-lean.md": "9195a1827c05a78a86ab08b6c6c5b7a3a88feeff01b75806a8d325ae228da068",
+      "lean/critical-moment-work/axioms.log": "60d379bd383500c73b4c8aeb738732d748fd32ade4fd708f889244ef04c585e5",
+      "lean/critical-moment-work/build.log": "cb5476d3a90ba929e47e7cb54ca6dea6315c9a5ad3f7b858a57e32d4e42190e1",
+      "numerics/check_critical_frontier.py": "5e4b61edb9f5d7c5aa1f45d9ccdc26e45bed92b0236e78a407d4fb6f605336fe",
+      "reviews/T22-critical-moment-work-audit.md": "cab149f5b1a7bea91cc9ea3e52d09ce68b1edf9cbf9b2ce3c8329ef2bedbdf4d"
+    }
+  },
+  "purpose": "fixed deterministic illustrations of the reviewed critical moment/work frontier",
+  "schema_version": 1,
+  "scope": {
+    "K_alpha_delta_is_not_full_S2": true,
+    "deterministic_not_stochastic": true,
+    "diagnostic_concerns_original_tree_representation": true,
+    "finite_asymptotic_ratios_are_not_convergence_proofs": true,
+    "four_cutoffs_do_not_prove_integrability_or_divergence": true,
+    "signed_scalar_ode_remains_globally_solvable": true
+  },
+  "status": "passed",
+  "structural_checks": {
+    "all_passed": true,
+    "endpoint_contribution_monotonicity": [
+      {
+        "alpha": "0.5",
+        "delta_order": [
+          "1e-2",
+          "1e-4",
+          "1e-6",
+          "1e-8"
+        ],
+        "strictly_increases_as_delta_decreases": true
+      },
+      {
+        "alpha": "1",
+        "delta_order": [
+          "1e-2",
+          "1e-4",
+          "1e-6",
+          "1e-8"
+        ],
+        "strictly_increases_as_delta_decreases": true
+      },
+      {
+        "alpha": "2",
+        "delta_order": [
+          "1e-2",
+          "1e-4",
+          "1e-6",
+          "1e-8"
+        ],
+        "strictly_increases_as_delta_decreases": true
+      }
+    ],
+    "endpoint_contribution_positivity": [
+      {
+        "alpha": "0.5",
+        "delta": "1e-2",
+        "positive": true
+      },
+      {
+        "alpha": "0.5",
+        "delta": "1e-4",
+        "positive": true
+      },
+      {
+        "alpha": "0.5",
+        "delta": "1e-6",
+        "positive": true
+      },
+      {
+        "alpha": "0.5",
+        "delta": "1e-8",
+        "positive": true
+      },
+      {
+        "alpha": "1",
+        "delta": "1e-2",
+        "positive": true
+      },
+      {
+        "alpha": "1",
+        "delta": "1e-4",
+        "positive": true
+      },
+      {
+        "alpha": "1",
+        "delta": "1e-6",
+        "positive": true
+      },
+      {
+        "alpha": "1",
+        "delta": "1e-8",
+        "positive": true
+      },
+      {
+        "alpha": "2",
+        "delta": "1e-2",
+        "positive": true
+      },
+      {
+        "alpha": "2",
+        "delta": "1e-4",
+        "positive": true
+      },
+      {
+        "alpha": "2",
+        "delta": "1e-6",
+        "positive": true
+      },
+      {
+        "alpha": "2",
+        "delta": "1e-8",
+        "positive": true
+      }
+    ]
+  }
+}

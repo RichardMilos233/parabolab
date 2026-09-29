@@ -1,0 +1,67 @@
+T51 PositiveSigmoidRisk development record
+
+attempt-01.log
+- The first pointwise draft left later theorems as temporary sorries.
+- Failures: continuity did not normalize the denominator before proving it
+  nonzero, and the x<=z absolute-value branch retained `-(x-z)` syntax.
+- Fix: explicitly normalize the square-root denominator and simplify `neg_sub`.
+
+attempt-02.log
+- Failure: generic positivity did not prove strict positivity of the normalized
+  square-root denominator.
+- Fix: use `Real.sqrt_pos.2` with `1 + z^2 > 0` proved by nonlinear arithmetic.
+
+attempt-03.log
+- Success for definition, continuity, range, monotonicity, and the full anchored
+  pointwise theorem; only the planned later placeholders remained.
+
+attempt-04.log
+- Failures in transformed-loss integrability: measurable real powers require
+  `Measurable.pow_const`, and an addition lemma normalized operands in the
+  opposite order.
+- Fix: use `pow_const 2` and close the ordered addition by commutativity.
+
+attempt-05.log
+- Failures in the probability Cauchy theorem: Holder expects exponent
+  `ENNReal.ofReal 2`, and direct rewriting of the squared absolute integral did
+  not match the real-rpow expression.
+- Fix: bridge the MemLp exponents with `simpa`, first simplify Holder to a
+  separate intermediate inequality, and only then rewrite its squared integral.
+
+attempt-06.log
+- Failure: the probability normalization remained as `mu.real univ`.
+- Fix: include `measureReal_def`, `measure_univ`, and `ENNReal.toReal_one` in
+  the explicit simplification.
+
+attempt-07.log
+- Failure: Holder uses real exponentiation while the target squared loss uses
+  natural exponentiation.
+- Fix: normalize the Holder square with `Real.rpow_two`.
+
+attempt-08.log
+- Success for the bounded-loss integrability theorem, probability Cauchy theorem,
+  and actual transformed integral loss theorem.  Only bias composition remained.
+
+attempt-09.log
+- Failure in bias composition: a direct `rw [integral_add ...]` did not match
+  the elaborated pointwise sum of three functions.
+- Fix: split the outer and inner integral additions in explicit calc steps,
+  using `Pi.add_apply` for the function-level equality.
+
+attempt-10.log
+- All mathematical targets compiled.  Remaining linter warnings identified an
+  unnecessary simplification and the logically unused nonnegative-z hypothesis
+  in the general bias-composition result.
+- Fix: retain the contract's z>=0 hypothesis as `_hz` and tighten simplification.
+
+attempt-11.log
+- Failed cleanup trial: `fun_prop` does not synthesize MemLp for the constant-one
+  function.
+- Fix: restore the direct `memLp_two_iff_integrable_sq` proof with an explicit
+  `one_pow` simplification.
+
+attempt-12.log
+- Clean success: no errors, warnings, or placeholders.
+
+Final verification is separately preserved in build.log, axioms.log, and
+source-scan.log.

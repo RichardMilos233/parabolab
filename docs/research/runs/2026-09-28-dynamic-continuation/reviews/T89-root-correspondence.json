@@ -1,0 +1,144 @@
+{
+  "date_local": "2026-09-29",
+  "verdict": "PASS fixed05m actual finite Hilbert statistical gate",
+  "root_read": "Complete662-line source, fixed05m, full report, all elaborated public types, all-public axiom output, worker fresh build/source/env/capture/failed-attempt evidence. No covariance cancellation or final risk bound assumed as premise.",
+  "contract_sha256": "af935dacaabb0c09e0b643da3c8265d542e00c86d8efafea78465545822cf383",
+  "source": {
+    "path": "formal/EstimatorIntegrity/HilbertSamplingRisk.lean",
+    "sha256": "0cef39d33c11dd113b1ee2d60059485b214fd7ffd9e4fbe68e21709de2b2487c",
+    "lines": 662
+  },
+  "report_sha256": "40647b00611fcba4f63f29e10ba72bb9d91c7360c70a8805bdeb0f2fd6f6a8ce",
+  "manifest_entries_verified": 21,
+  "public_declarations": {
+    "count": 46,
+    "definitions": 5,
+    "theorems": 41,
+    "names": [
+      "sampleMean",
+      "meanAverage",
+      "centered",
+      "sample_integrable",
+      "centered_memLp",
+      "centered_integrable",
+      "centered_sqNorm_integrable",
+      "sample_sqNorm_integrable",
+      "integral_centered",
+      "sampleMean_memLp",
+      "sampleMean_integrable",
+      "integral_sampleMean",
+      "sampleMean_sub_meanAverage",
+      "centered_inner_integrable",
+      "centered_indep",
+      "integral_inner_centered_eq_zero",
+      "integral_inner_centered",
+      "integral_norm_sum_centered_sq",
+      "sampleMean_error_memLp",
+      "sampleMean_error_sqNorm_integrable",
+      "integral_sampleMean_error_sq",
+      "integral_centered_sq_eq",
+      "integral_sampleMean_sub_commonMean_sq_le",
+      "rawEstimator",
+      "norm_sum_sq_le_card_mul_sum_norm_sq",
+      "norm_bias_add_sum_sq_le",
+      "rawEstimator_sub_eq",
+      "rawEstimator_memLp",
+      "rawEstimator_aestronglyMeasurable",
+      "rawEstimator_sub_memLp",
+      "rawEstimator_sub_sqNorm_integrable",
+      "rawEstimator_pointwise_sq_le",
+      "rawEstimator_risk_le",
+      "anchored_rawEstimator_sub_memLp",
+      "anchored_rawEstimator_sqNorm_integrable",
+      "anchored_rawEstimator_risk_le",
+      "boxClip",
+      "boxClip_apply",
+      "boxClip_fixed",
+      "boxClip_continuous",
+      "boxClip_sub_sqNorm_le",
+      "boxClip_sub_norm_le",
+      "boxClip_rawEstimator_risk_le",
+      "boundedLinear_anchored_sub_memLp",
+      "boundedLinear_anchored_sqNorm_integrable",
+      "boundedLinear_anchored_risk_le"
+    ],
+    "all_public_axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "extra_axioms": []
+  },
+  "worker_build": "Fresh library build exit0,3454jobs; source autoImplicit=false; unused-section-variable linter warnings only",
+  "root_source_check": {
+    "command": [
+      "/Users/michael/.elan/bin/lake",
+      "env",
+      "lean",
+      "-DautoImplicit=false",
+      "EstimatorIntegrity/HilbertSamplingRisk.lean"
+    ],
+    "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab/formal",
+    "start_utc": "2026-09-28T20:38:39.705829+00:00",
+    "source_sha256_before": "0cef39d33c11dd113b1ee2d60059485b214fd7ffd9e4fbe68e21709de2b2487c",
+    "source_sha256_after": "0cef39d33c11dd113b1ee2d60059485b214fd7ffd9e4fbe68e21709de2b2487c",
+    "exit_code": 0,
+    "elapsed_seconds": 77.0361312078312,
+    "log_sha256": "d0249545fd299236d95a9788f59eb0a07a547fdf94bb9b0c731e6016b4f08443"
+  },
+  "root_audits": {
+    "all-public-axioms": {
+      "command": [
+        "/Users/michael/.elan/bin/lake",
+        "env",
+        "lean",
+        "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/hilbert-sampling-risk/root-check-v1/AllPublicAxioms.lean"
+      ],
+      "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab/formal",
+      "start_utc": "2026-09-28T20:41:10.084669+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 86.09948133397847,
+      "source_sha256": "0cef39d33c11dd113b1ee2d60059485b214fd7ffd9e4fbe68e21709de2b2487c",
+      "log_sha256": "ca9a50a6a2defa8d002831271292f780e91157c340f4abf97da4431898eeca7e"
+    },
+    "public-types": {
+      "command": [
+        "/Users/michael/.elan/bin/lake",
+        "env",
+        "lean",
+        "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/hilbert-sampling-risk/PublicTypes.lean"
+      ],
+      "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab/formal",
+      "start_utc": "2026-09-28T20:41:10.084997+00:00",
+      "exit_code": 0,
+      "elapsed_seconds": 86.95835058344528,
+      "source_sha256": "0cef39d33c11dd113b1ee2d60059485b214fd7ffd9e4fbe68e21709de2b2487c",
+      "log_sha256": "efc97b1ea5bb214fca6c20f1de6172f2dc41c0450ed9f374c7c1a4ece224f479"
+    }
+  },
+  "root_type_body_matches_worker": true,
+  "accepted": [
+    "Actual Bochner finite mean and centering integrability from MemLp2",
+    "Pairwise within-batch independence implies exact mean-square identity; common-mean V/n",
+    "Dependent-across-batch raw bound with m+1, including m=0",
+    "Continuous anchored contraction, actual finite Euclidean box clipping, loss integrability",
+    "Bounded-linear transfer to arbitrary real normed target with norm inside expectation"
+  ],
+  "same_assumptions": [
+    "Unbounded L2 samples permitted",
+    "No coordinate independence",
+    "No cross-batch independence",
+    "No identical distributions required",
+    "No ambient-dimension factor in risk",
+    "Positive sample count explicit; bias and moment bounds nonnegative"
+  ],
+  "provenance": "Accepted logs directly captured, not reconstructed. Development logs cover some early failures only; later adaptive checks remain in tool history and scratch source snapshots were not retained, as worker explicitly records. Root generated an additional complete46-declaration axiom harness, including definitions, and directly checked frozen source.",
+  "exclusions": [
+    "Actual tree and Gaussian sampler law",
+    "Heat/Sobolev/Fourier identification",
+    "Taylor and PDE bounds",
+    "PDE clipping intervals/saturation/continuation solver",
+    "Oracle/work/minimax/finite-bit theorem",
+    "Numerical evidence or originality"
+  ]
+}

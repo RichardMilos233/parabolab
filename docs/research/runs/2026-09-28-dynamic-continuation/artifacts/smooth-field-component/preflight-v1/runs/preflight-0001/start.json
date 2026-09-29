@@ -1,0 +1,45 @@
+{
+  "analytic_references_sha256": "fa389cc6f62b0229b7635f415341d2486ee6c8d00579013ae249805d1c35ec60",
+  "budget_before": {
+    "active_segment_reservations": {},
+    "completed_samples": {
+      "official": 0,
+      "preflight": 0,
+      "replay": 0
+    },
+    "exponential_draws": 0,
+    "failed_samples": {
+      "official": 0,
+      "preflight": 0,
+      "replay": 0
+    },
+    "gaussian_draws": 0,
+    "known_evaluator_calls": 0,
+    "oracle_calls": {
+      "official": 0,
+      "preflight": 0,
+      "replay": 0,
+      "total": 0
+    },
+    "segments_generated": 0,
+    "segments_reserved": 0,
+    "sequence": 0,
+    "tuple_draw_calls": 0,
+    "tuple_indices_drawn": 0,
+    "uniform_draws": 0,
+    "updated_utc": null,
+    "version": "e5-budget-v1"
+  },
+  "implementation_manifest_sha256": "196a967e9acf153ab2de91451cf40cee2c969edb6f37e80456579424bbf6d125",
+  "phase": "preflight",
+  "source_snapshot_hashes": {
+    "budget.py": "3f1bbb3a523e453f2cc8044b8ce502a2138e34d0b036c33a29d445ad787dfcba",
+    "driver.py": "73d2e78e89325170b9db5b1775ba65edfef40f13f648da8d8cba26916301b827",
+    "experiment.py": "021698adfb8994d3f7188875ff4eb19ddd0f0cbf9e9de66eea4e8af68b4f7576",
+    "fixtures.py": "efc36545f60775bc196813f1a50a622f5d287e0f810cedb66b80ced4c7e73dc2",
+    "smooth_field.py": "c04cc667c0138dd57bd554940bd9a37684347e78549ecc139bfd4061d5452883",
+    "source_checks.py": "d492f0107cb6672374e5383e201e79c41db63972fca83b7cf2cddda4bbfab53f"
+  },
+  "status": "started",
+  "utc": "2026-09-28T21:54:59.364543+00:00"
+}

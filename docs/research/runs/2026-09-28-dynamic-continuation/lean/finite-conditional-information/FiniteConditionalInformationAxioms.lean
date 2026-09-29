@@ -1,0 +1,12 @@
+import EstimatorIntegrity.FiniteConditionalInformation
+
+#print axioms EstimatorIntegrity.bernoulliKernel
+#print axioms EstimatorIntegrity.bernoulliKernel_isMarkovKernel
+#print axioms EstimatorIntegrity.bernoulliKernel_apply
+#print axioms EstimatorIntegrity.finiteJoint_singleton
+#print axioms EstimatorIntegrity.finiteConditionalKL_ne_top
+#print axioms EstimatorIntegrity.finiteConditionalKL_toReal
+#print axioms EstimatorIntegrity.finiteConditionalKL_le
+#print axioms EstimatorIntegrity.finiteConditionalKL_accumulate
+#print axioms EstimatorIntegrity.decisionTrueParameter
+#print axioms EstimatorIntegrity.measurableDecision_testing_error

@@ -1,0 +1,78 @@
+started_utc=2026-09-28T20:37:02Z
+cwd=/Users/michael/Desktop/NTU/fyp/parabolab/formal
+command=/Users/michael/.elan/bin/lake env lean /Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/gaussian-common-component/Prototype.lean 
+stdout_stderr_begin
+/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/gaussian-common-component/Prototype.lean:35:68: error: unsolved goals
+I : Type u_1
+inst✝ : Fintype I
+w x : I → ℝ
+⊢ (residualMap w) x = fun i => x i - ∑ i, w i * x i
+/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/gaussian-common-component/Prototype.lean:65:62: error: Function expected at
+  commonPart ?m.8 ?m.10 w
+but this term has type
+  ℝ
+
+Note: Expected a function because this term is being applied to the argument
+  omega
+/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/gaussian-common-component/Prototype.lean:65:76: error: Application type mismatch: The argument
+  X
+has type
+  Omega → I → ℝ
+but is expected to have type
+  ?m.5 → ℝ
+in the application
+  commonPart ?m.8 X
+/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/gaussian-common-component/Prototype.lean:70:19: error: Application type mismatch: The argument
+  commonPart ?m.20 ?m.22 w
+has type
+  ℝ
+of sort `Type` but is expected to have type
+  Omega → ?m.10
+of sort `Type (max ?u.26 u_1)` in the application
+  HasGaussianLaw (commonPart ?m.20 ?m.22 w)
+/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/gaussian-common-component/Prototype.lean:74:20: error: Function expected at
+  residualPart mu X
+but this term has type
+  ℝ
+
+Note: Expected a function because this term is being applied to the argument
+  w
+/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/gaussian-common-component/Prototype.lean:75:84: error(lean.unknownIdentifier): Unknown identifier `w`
+/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/gaussian-common-component/Prototype.lean:75:9: warning: declaration uses `sorry`
+/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/gaussian-common-component/Prototype.lean:78:33: error: Function expected at
+  residualPart mu X
+but this term has type
+  ℝ
+
+Note: Expected a function because this term is being applied to the argument
+  w
+/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/gaussian-common-component/Prototype.lean:78:60: error: Function expected at
+  commonPart ?m.28 ?m.30 w
+but this term has type
+  ℝ
+
+Note: Expected a function because this term is being applied to the argument
+  omega
+/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/gaussian-common-component/Prototype.lean:78:74: error: Application type mismatch: The argument
+  X
+has type
+  Omega → I → ℝ
+but is expected to have type
+  ?m.25 → ℝ
+in the application
+  commonPart ?m.28 X
+/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/gaussian-common-component/Prototype.lean:86:49: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  Fintype Omega
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/gaussian-common-component/Prototype.lean:86:64: error: Application type mismatch: The argument
+  mu
+has type
+  Measure Omega
+of sort `Type u_1` but is expected to have type
+  Omega → (I → E → ℝ) → ℝ
+of sort `Type (max u_1 u_2 u_3)` in the application
+  edgeLeafVector mu
+stdout_stderr_end
+exit_code=1
+ended_utc=2026-09-28T20:37:51Z

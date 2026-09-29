@@ -1,0 +1,32 @@
+import EstimatorIntegrity.UniformSliceConditioning
+
+set_option autoImplicit false
+
+#print axioms EstimatorIntegrity.sliceFamily
+#print axioms EstimatorIntegrity.uniformSlice
+#print axioms EstimatorIntegrity.uniformSlice_isProbabilityMeasure
+#print axioms EstimatorIntegrity.uniformSlice_singleton
+#print axioms EstimatorIntegrity.compatibleEvent
+#print axioms EstimatorIntegrity.compatibleFamily
+#print axioms EstimatorIntegrity.mem_sliceFamily
+#print axioms EstimatorIntegrity.mem_compatibleFamily
+#print axioms EstimatorIntegrity.compatibleFamily_eq_filter_sdiff
+#print axioms EstimatorIntegrity.compatibleFamily_card
+#print axioms EstimatorIntegrity.conditionedSlice
+#print axioms EstimatorIntegrity.uniformSlice_compatibleEvent
+#print axioms EstimatorIntegrity.uniformSlice_compatibleEvent_pos
+#print axioms EstimatorIntegrity.conditionedSlice_eq_uniformCompatible
+#print axioms EstimatorIntegrity.conditionedSlice_isProbabilityMeasure
+#print axioms EstimatorIntegrity.unrevealedSet
+#print axioms EstimatorIntegrity.nextBit
+#print axioms EstimatorIntegrity.measurable_nextBit
+#print axioms EstimatorIntegrity.sliceParameter
+#print axioms EstimatorIntegrity.sliceRatio_le
+#print axioms EstimatorIntegrity.conditionedSlice_next_true
+#print axioms EstimatorIntegrity.conditionedSlice_next_true_zero
+#print axioms EstimatorIntegrity.conditionedSlice_next_true_one
+#print axioms EstimatorIntegrity.conditionedSlice_map_nextBit
+#print axioms EstimatorIntegrity.twoSlice_feasible
+#print axioms EstimatorIntegrity.twoSlice_ratio_bounds
+#print axioms EstimatorIntegrity.twoSlice_next_kl_ne_top
+#print axioms EstimatorIntegrity.twoSlice_next_kl_toReal_le

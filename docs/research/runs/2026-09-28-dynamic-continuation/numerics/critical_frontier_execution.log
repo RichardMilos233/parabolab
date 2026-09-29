@@ -1,0 +1,34 @@
+{
+  "command": [
+    "/opt/miniconda3/envs/parabolab/bin/python",
+    "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/numerics/check_critical_frontier.py"
+  ],
+  "decimal_precision": 80,
+  "environment": {
+    "matplotlib": "3.11.0",
+    "mpmath": "1.3.0",
+    "numpy": "2.4.6",
+    "platform": "macOS-26.3-arm64-arm-64bit",
+    "python": "3.11.15 (main, Jun 11 2026, 15:14:57) [Clang 20.1.8 ]",
+    "python_executable": "/opt/miniconda3/envs/parabolab/bin/python"
+  },
+  "exact_identity_checks_passed": true,
+  "failure_count": 0,
+  "failures": [],
+  "json": "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/numerics/critical_frontier_checks.json",
+  "png": "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/critical-frontier.png",
+  "runtime_seconds": "2.875464459",
+  "source_and_gate_hashes_sha256": {
+    "../../../../formal/EstimatorIntegrity/CriticalMomentWork.lean": "2aa8eac99d548e1a4ba5e21f7c9d5aef0a6595a527a4ee9d59c49c0dba23893e",
+    "02c-critical-frontier-protocol.md": "3e6929d0c49d17f69819c3dd7854cbfab8804745103e7d4ef9831126957220cc",
+    "04h-critical-moment-work.md": "9750b19bab65bd1cc78bf0db6b5385a896e3a8146a8219777f808ea1279e7dd4",
+    "06e-critical-work-lean.md": "9195a1827c05a78a86ab08b6c6c5b7a3a88feeff01b75806a8d325ae228da068",
+    "lean/critical-moment-work/axioms.log": "60d379bd383500c73b4c8aeb738732d748fd32ade4fd708f889244ef04c585e5",
+    "lean/critical-moment-work/build.log": "cb5476d3a90ba929e47e7cb54ca6dea6315c9a5ad3f7b858a57e32d4e42190e1",
+    "numerics/check_critical_frontier.py": "5e4b61edb9f5d7c5aa1f45d9ccdc26e45bed92b0236e78a407d4fb6f605336fe",
+    "reviews/T22-critical-moment-work-audit.md": "cab149f5b1a7bea91cc9ea3e52d09ce68b1edf9cbf9b2ce3c8329ef2bedbdf4d"
+  },
+  "status": "passed",
+  "structural_checks_passed": true,
+  "svg": "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/critical-frontier.svg"
+}

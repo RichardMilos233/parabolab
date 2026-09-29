@@ -1,0 +1,22 @@
+{
+  "reviewer": "root",
+  "completed_utc": "2026-09-28T17:34:39.774929+00:00",
+  "status": "PASS; D30 fixed-burn-in derivative sampler subroutine only",
+  "inputs_sha256": {
+    "reviews/R10-finite-burnin-derivative-sampling.md": "c8c0b8445e570a278d4ccdf8773edf44fb54b3128a57c95f568ff75b8f18032d",
+    "reviews/R10b-finite-burnin-derivative-sampling.md": "23683587539ef2905e0679100325808ae3f6353a3782a4bb362b2d24252034f0",
+    "reviews/T68-finite-burnin-sampler-independent-audit.md": "442b446ae523b220e34ddadcf8c23b181ce60104100fd27c7e8027524840ed9f"
+  },
+  "read_scope": "Root authored R10/R10b; full independent T68 audit read and frozen hashes checked.",
+  "accepted_scope": "Continuous known g in open unit sup ball and continuous residual e; fixed L>=0 and integer j>=1. Actual DjS_L(g)[e^j] unbiased estimate, at most j charged unknown values, second moment<=delta^(2j) exp(2(3^(2j)-1)L), almost-sure finite tree; expected ideal primitive work C_j(d+1)exp(4L) counting known g evaluation as primitive. Explicit non-unit g costs remain additive. Mean and one-tree centered coin variants included.",
+  "root_role": "Author and correspondence; T68 supplies independent audit.",
+  "excluded_scope": [
+    "stable-graph derivative sampler",
+    "base phase at exp(-T) accuracy efficiently",
+    "full long-horizon arithmetic-work theorem",
+    "finite-bit continuous randomness",
+    "Lean or numerical verification",
+    "novelty"
+  ],
+  "protected_sources_verified": 342
+}

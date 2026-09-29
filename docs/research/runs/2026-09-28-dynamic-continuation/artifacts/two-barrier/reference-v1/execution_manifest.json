@@ -1,0 +1,154 @@
+{
+  "artifact_directory": "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/reference-v1",
+  "cases": {
+    "all_mode_vector": "c_0=3/8; c_k=(-1)^k/(8*(k+1)^2), k=1,...,K",
+    "constant_profiles": [
+      0.5,
+      0.625,
+      0.75
+    ],
+    "maximum_modes": [
+      16,
+      32,
+      64
+    ],
+    "projection_normalization": "a_0=mean; a_k=2*mean(f*cos(k*x)) for k>0",
+    "projection_times": [
+      0.0,
+      0.25,
+      4.0
+    ],
+    "quadrature_grid_sizes": {
+      "16": 128,
+      "32": 256,
+      "64": 512
+    },
+    "quadrature_nodes": "2*pi*j/J for j=0,...,J-1",
+    "queries": [
+      0.0,
+      1.5707963267948966,
+      3.141592653589793
+    ],
+    "times": [
+      0.0,
+      0.25,
+      1.0,
+      4.0,
+      16.0,
+      64.0,
+      256.0
+    ]
+  },
+  "created_at_utc": "2026-09-28T09:43:17.839661+00:00",
+  "environment": {
+    "byteorder": "little",
+    "float64_eps": 2.220446049250313e-16,
+    "machine": "arm64",
+    "numpy_version": "2.4.6",
+    "platform": "macOS-26.3-arm64-arm-64bit",
+    "processor": "arm",
+    "python_executable": "/opt/miniconda3/envs/parabolab/bin/python",
+    "python_version": "3.11.15 (main, Jun 11 2026, 15:14:57) [Clang 20.1.8 ]",
+    "scipy_version": "1.17.1"
+  },
+  "gates": {
+    "all_six_solver_runs_must_succeed": true,
+    "constant_profile_max_scaled_difference": 1e-08,
+    "projection_and_jacobian_max_abs_difference": 1e-10,
+    "refinement_max_21_query_difference": 1e-08
+  },
+  "git_revision": "65dca46e42db1c80cdf9ddd8eed6a415148c37f3",
+  "interpretation": {
+    "classification": "empirical convergence of six refinements of one method",
+    "independent_certificate_count": 0,
+    "rigorous_enclosure": false,
+    "sampler_imports": false
+  },
+  "manifest_preparation_seconds": 0.00018420768901705742,
+  "output_contract": {
+    "reference.npz": {
+      "producer": "k64_strict",
+      "queries": [
+        3
+      ],
+      "scaled_values": [
+        7,
+        3
+      ],
+      "times": [
+        7
+      ]
+    },
+    "reference_summary.json": "self-contained gates, solver diagnostics, timings, and schema",
+    "refinement_k{K}_{tolerance}.npz": {
+      "coefficients": "[7,K+1]",
+      "queries": [
+        3
+      ],
+      "scaled_values": [
+        7,
+        3
+      ],
+      "times": [
+        7
+      ]
+    }
+  },
+  "pde": {
+    "coefficient_representation": "w = a_0 + sum_{k=1}^K a_k cos(k*x)",
+    "domain": "2*pi periodic torus",
+    "equation": "w_t = 0.5*w_xx + 3*exp(-2*t)*w^2 - exp(-4*t)*w^3",
+    "initial_condition": "w(0,x) = 3/8 - (1/8)*cos(x)"
+  },
+  "schema_version": 1,
+  "solver": {
+    "analytic_projected_jacobian": true,
+    "method": "scipy.integrate.solve_ivp Radau",
+    "predesignated_comparator_key": "k16_loose",
+    "run_order": [
+      "k16_loose",
+      "k16_strict",
+      "k32_loose",
+      "k32_strict",
+      "k64_loose",
+      "k64_strict"
+    ],
+    "single_solve_evaluation_times": [
+      0.0,
+      0.25,
+      1.0,
+      4.0,
+      16.0,
+      64.0,
+      256.0
+    ],
+    "single_solve_interval": [
+      0.0,
+      256.0
+    ],
+    "strict_reference_key": "k64_strict",
+    "tolerances": {
+      "loose": {
+        "atol": 1e-12,
+        "rtol": 1e-10
+      },
+      "strict": {
+        "atol": 1e-14,
+        "rtol": 1e-12
+      }
+    }
+  },
+  "source_hashes_sha256": {
+    "02d-two-barrier-experiment-protocol.md": "605eda24574bfb7e44dc997c185836d2a54311c18344e0be4c005674e00beda9",
+    "04l-two-barrier-voting.md": "87bc9b8424fc1ea04397adeeb38aa99843d9ade97b81e13c8857b31919706d42",
+    "06f-moving-barrier-lean.md": "7af4309629053943aeb0a3965e5e293d95b8a9ab55df2541f7a876e6d0aef5cb",
+    "formal/EstimatorIntegrity/MovingBarrierWidth.lean": "250cca5be42ddbe45ba157fb0cb572ec9460dcaaafefa420e125c2f1da77d11b",
+    "numerics/test_two_barrier_reference.py": "835249633d23a08207243c96f3b19991db14f899f1b2da92232fdcb613a113ef",
+    "numerics/two_barrier_reference.py": "d2561072434d4eaa3966c3353b299e3fa5813455d7ccf8454ee8889be64856ce",
+    "reviews/T30-two-barrier-voting-audit.md": "a82b3c07afbaaaaa0fe5f94b6296fd2bda187ae0d7cf9e8c6812afa8a5111ce4",
+    "reviews/T31-horizon-free-clock-audit.md": "ba85315b128510f03f86f9f01fc8885406450935a091872dbf013dff3e051d2c",
+    "reviews/T34-two-barrier-protocol-review.md": "a887f7e0bd7f38e2170c02bfbf0a3cc8f9ea545fe6ada2f6cb54daa1c2958765",
+    "reviews/T34b-protocol-freeze-check.md": "7232c7e2dbe6f9efaa5933fcc749e7d548c90f2d341f4e29810a3e7cb7205216"
+  },
+  "status": "prepared-before-deterministic-checks"
+}

@@ -1,0 +1,16 @@
+import EstimatorIntegrity.BernoulliInformation
+
+#print axioms EstimatorIntegrity.bernoulliBool
+#print axioms EstimatorIntegrity.bernoulliBool_isProbabilityMeasure
+#print axioms EstimatorIntegrity.bernoulliKLScalar
+#print axioms EstimatorIntegrity.bernoulliKLScalar_eq_log_div
+#print axioms EstimatorIntegrity.continuous_bernoulliKLScalar
+#print axioms EstimatorIntegrity.hasDerivAt_bernoulliKLScalar
+#print axioms EstimatorIntegrity.bernoulliKLScalar_pinsker
+#print axioms EstimatorIntegrity.bernoulliKLScalar_le_chiSq
+#print axioms EstimatorIntegrity.bernoulliBool_true
+#print axioms EstimatorIntegrity.bernoulliBool_kl_ne_top
+#print axioms EstimatorIntegrity.bernoulliBool_kl_toReal
+#print axioms EstimatorIntegrity.bernoulliBool_kl_le_chiSq
+#print axioms EstimatorIntegrity.bernoulliBool_pinsker
+#print axioms EstimatorIntegrity.bernoulliBool_testing_error

@@ -1,0 +1,4 @@
+import EstimatorIntegrity.AbsoluteMomentObstruction
+
+#print axioms EstimatorIntegrity.scaledRiccati_time_lt_pi_div_two
+#print axioms EstimatorIntegrity.riccati_time_lt_pi_div_two

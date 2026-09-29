@@ -1,0 +1,15 @@
+{
+  "command": [
+    "/Users/michael/.elan/bin/lake",
+    "env",
+    "lean",
+    "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/gaussian-common-component/Axioms.lean"
+  ],
+  "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab/formal",
+  "started_utc": "2026-09-28T21:05:48.486361+00:00",
+  "ended_utc": "2026-09-28T21:07:13.193578+00:00",
+  "exit_code": 0,
+  "seconds": 84.70939820772037,
+  "source_sha256_before": "68d4cb7a1c04720703f819d52ae2ea0667c3e7f0afd4e918506d1b3497defc19",
+  "source_sha256_after": "68d4cb7a1c04720703f819d52ae2ea0667c3e7f0afd4e918506d1b3497defc19"
+}

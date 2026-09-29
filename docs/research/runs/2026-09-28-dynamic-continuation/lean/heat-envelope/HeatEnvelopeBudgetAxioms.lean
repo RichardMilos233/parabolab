@@ -1,0 +1,13 @@
+import EstimatorIntegrity.HeatEnvelopeBudget
+
+#print axioms EstimatorIntegrity.heatI0
+#print axioms EstimatorIntegrity.heatI1
+#print axioms EstimatorIntegrity.heatEnvelopeC
+#print axioms EstimatorIntegrity.heatEnvelopeJstar
+#print axioms EstimatorIntegrity.heatI0_pos_le
+#print axioms EstimatorIntegrity.heatI1_pos_le
+#print axioms EstimatorIntegrity.heatDimensionRatio_le
+#print axioms EstimatorIntegrity.heatEnvelopeC_pos_le
+#print axioms EstimatorIntegrity.heatEnvelopeJstar_nonneg_le
+#print axioms EstimatorIntegrity.heatEnvelopeA_bounds
+#print axioms EstimatorIntegrity.heatEnvelopeCoefficientBudget

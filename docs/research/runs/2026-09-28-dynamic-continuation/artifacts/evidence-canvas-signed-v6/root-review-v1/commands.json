@@ -1,0 +1,43 @@
+[
+  {
+    "check": "parity",
+    "command": [
+      "/opt/homebrew/bin/node",
+      "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/root-review-v1/validate.cjs"
+    ],
+    "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/root-review-v1",
+    "exit_code": 0,
+    "elapsed_seconds": 0.3640195829793811,
+    "log": "parity.log"
+  },
+  {
+    "check": "typescript",
+    "command": [
+      "/opt/homebrew/bin/node",
+      "/private/tmp/d29-e4-canvas-check/check.cjs"
+    ],
+    "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/root-review-v1",
+    "exit_code": 0,
+    "elapsed_seconds": 0.5583203341811895,
+    "log": "typescript.log"
+  },
+  {
+    "check": "bundle",
+    "command": [
+      "/opt/homebrew/bin/node",
+      "/Applications/Cursor.app/Contents/Resources/app/extensions/node_modules/esbuild-wasm/bin/esbuild",
+      "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/root-review-v1/dynamic-continuation-evidence.candidate.canvas.tsx",
+      "--bundle",
+      "--platform=browser",
+      "--format=esm",
+      "--external:cursor/canvas",
+      "--external:react",
+      "--external:react/jsx-runtime",
+      "--outfile=/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/root-review-v1/dynamic-continuation-evidence.bundle.js"
+    ],
+    "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/root-review-v1",
+    "exit_code": 0,
+    "elapsed_seconds": 0.6037689168006182,
+    "log": "bundle.log"
+  }
+]

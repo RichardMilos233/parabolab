@@ -1,0 +1,45 @@
+{
+  "status": "PASS for E4 numerical data, independent subset replay and statistics; final figure visually inspected",
+  "reviewer": "root",
+  "reviewed_utc": "2026-09-28T17:23:42.670964+00:00",
+  "complete_source_lines_read": 928,
+  "source_sha256": "2615203c60973fd0908bd185b7cc3d8d4b3eb1b0b1ac6f9bdd4bcc4b6128b009",
+  "audit_report_sha256": "e9281b60ea1c407b5778ff85a4a4e90a6767bfb1fe6dbf45bde878f11420ebe1",
+  "audit_result_sha256": "72d77d88ada5bc900d0694d045b6d3bd687f3e93a9ff2290123b302509aede84",
+  "frozen_input_hashes_rechecked": 559,
+  "audit_output_hashes_rechecked": 11,
+  "protected_original_hashes_rechecked": 342,
+  "root_independent_recomputation": {
+    "per_seed_statistics": 180,
+    "pooled_statistics": 60,
+    "zero_query_baselines": 36,
+    "outputs": 18720,
+    "official_calls": 336883488,
+    "replay_ledger_rows": 396,
+    "replay_records_compared_to_archives": 180,
+    "replay_calls": 30075636,
+    "root_added_oracle_calls": 0
+  },
+  "total_charged_activity": 368270390,
+  "cap": 500000000,
+  "maximum_theorem_schedule_pooled_scalar_RMS": 0.011810832050378835,
+  "maximum_case": {
+    "T": 20,
+    "nominal_z": 1,
+    "n_per_output": 2114541,
+    "pooled_outputs": 24
+  },
+  "figure": {
+    "path": "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/audit-v1/positive_query_audit.png",
+    "sha256": "3c18c54eb64f89473cafef04760a2fb6ea2edba8371c353cc1f9a481daebef2f",
+    "visually_inspected": true,
+    "scope": "All schedules and zero-query baselines visible; pooled/per-seed and scalar/PDE-bias distinctions labeled. Original frozen plot function generated first layout; corrected final layout was a separate zero-call rerender. Its reproducible standalone recipe remains to be archived."
+  },
+  "limits": [
+    "Only the prescribed 180 of18720 outputs were oracle-replayed; all stored data were audited.",
+    "No actual PDE numerical solve. Scalar reference/statistics are uncertified binary64.",
+    "PDE comparison adds conventional1/32bias, not a rigorous floating enclosure or confidence interval.",
+    "PCG64 distinct streams do not prove an iid-real bridge.",
+    "Finite family does not prove asymptotic/minimax/novelty or practical signed-work claims."
+  ]
+}

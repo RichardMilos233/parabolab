@@ -1,0 +1,20 @@
+EstimatorIntegrity/MovingBarrierWidth.lean:123:12: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ‖?r‖
+in the target expression
+  (fun x => ‖h x‖) t = h t
+
+l : ℝ → ℝ
+hl_cont : Continuous l
+hl_mono : Monotone l
+b Δ : ℝ
+hbound : ∀ (t : ℝ), 0 ≤ t → l t ≤ b
+hΔ : 0 ≤ Δ
+h : ℝ → ℝ := fun t => l (t + Δ) - l t
+J : ℝ := ∫ (t : ℝ) in 0..Δ, b - l t
+hh_cont : Continuous h
+hh_nonneg : ∀ (t : ℝ), 0 ≤ h t
+T : ℝ
+hT : 0 ≤ T
+t : ℝ
+ht : t ∈ [[0, T]]
+⊢ (fun x => ‖h x‖) t = h t

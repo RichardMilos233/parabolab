@@ -1,0 +1,24 @@
+{
+  "activity_ledger_sha256": "7b03c4ad3907b385f44c81034307c0a25ee7de162f3d0f8f6174dcd00fad9b45",
+  "actual_point_calls": 30075636,
+  "actual_spent_after_replay": 368270390,
+  "actual_spent_before_replay": 338194754,
+  "all_mean_output_positive_count_query_count_batch_and_rng_matches": true,
+  "audit_manifest_sha256": "7f25110439ad49b341bffedc54539279108a355f5223d814824787fa6bf9259f",
+  "audit_source_sha256": "2615203c60973fd0908bd185b7cc3d8d4b3eb1b0b1ac6f9bdd4bcc4b6128b009",
+  "automatic_retry_executed": false,
+  "completed_cells": 180,
+  "completed_utc": "2026-09-28T17:12:28.441659+00:00",
+  "full_replay_executed": false,
+  "ledger_rows": 396,
+  "replay_journal_sha256": "febc877cc33fe2e4f45e3ca0dfe5377e39ffcdd671d1baa76d17cbf557290deb",
+  "schema_version": 1,
+  "selection_rule": "replicate_index=0 of all 180 cells, frozen before replay",
+  "status": "PASS",
+  "stored_audit_sha256": "f1f48b74996543a9f7de1aca6c0ffedbb54e34d251d046aa820b0cf9cea5f2da",
+  "timing": {
+    "interpretation": "Wall time includes RNG, oracle evaluation, arithmetic, durable JSONL writes, and fsync; no pure-compute claim.",
+    "replay_wall_seconds": 0.6423926251009107
+  },
+  "whole_activity_cap": 500000000
+}

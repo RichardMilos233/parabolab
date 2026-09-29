@@ -1,0 +1,12 @@
+EstimatorIntegrity/MovingBarrierWidth.lean:190:22: warning: Variable name `hμ_lower` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hμ_lower
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+EstimatorIntegrity/MovingBarrierWidth.lean:190:41: warning: Variable name `hμ_upper` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hμ_upper
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`

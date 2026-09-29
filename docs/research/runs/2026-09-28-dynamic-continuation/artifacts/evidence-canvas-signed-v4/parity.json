@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "task": "T77",
+  "status": "PASS",
+  "baseline_sha256": "a1ca7b101e0b5aba2c8bf8a8dc17c2c8ac071fe05fe634483a61da3ab192329d",
+  "candidate_sha256": "ea576d19a862e376cfdf248be5ac0cacaa3aed6c29dfde55174a084e6bd3f8ad",
+  "top_level_constants": {
+    "historical_pre_t71_data_constants": 49,
+    "historical_pre_t71_data_constants_preserved_verbatim": 49,
+    "managed_baseline_const_declarations": 66,
+    "managed_baseline_const_declarations_preserved_verbatim": 66,
+    "candidate_const_declarations": 74,
+    "changed_or_missing_managed_baseline_constants": []
+  },
+  "links": {
+    "historical_pre_t71_link_bindings": 33,
+    "historical_pre_t71_link_bindings_preserved": 33,
+    "managed_baseline_link_occurrences": 52,
+    "candidate_link_occurrences": 60,
+    "managed_baseline_unique_path_bindings": 47,
+    "candidate_unique_path_bindings": 55,
+    "missing_managed_baseline_link_occurrences": []
+  },
+  "paths": {
+    "managed_baseline_local_path_constants": 47,
+    "candidate_local_path_constants": 55,
+    "candidate_local_paths_resolved": 55,
+    "unresolved_candidate_paths": []
+  },
+  "charts_and_data": {
+    "line_charts_original": 5,
+    "line_charts_candidate": 5,
+    "line_chart_subtrees_preserved_verbatim": true,
+    "e4_pooled_records_exact": 60,
+    "e4_per_seed_records_exact": 180,
+    "e4_zero_query_baseline_records_exact": 36,
+    "e4_total_activity_including_preflights_and_replay": 368270390,
+    "e4_replay_point_calls": 30075636,
+    "new_numeric_or_runtime_plots": 0
+  },
+  "candidate_policy": {
+    "imports": ["cursor/canvas"],
+    "embedded_data_only": true,
+    "network_calls": 0,
+    "hardcoded_hex_colors": 0,
+    "gradients": 0,
+    "box_shadows": 0
+  }
+}

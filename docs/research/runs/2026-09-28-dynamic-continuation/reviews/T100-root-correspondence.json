@@ -1,0 +1,37 @@
+{
+  "date_local": "2026-09-29",
+  "verdict": "PASS D48 actual sparse-frequency derivative averaging; no required repair",
+  "root_review": "Read entire208-line R23 and408-line final T100 mathematical text; independently checked the stated law, stronger Sobolev moment, endpoint and conjugate modes, Bochner mean/risk, charged finite accumulation and strict variance counterexample. No code execution.",
+  "source_locks": {
+    "04aa-polynomial-fields-and-linear-gaussian-preparation.md": "433c699d951c74fa6ba19166e159069130e1340a7a319aa0334b0ba4f8a1b8a1",
+    "reviews/R20b-continuous-domain-addendum.md": "6c5e8b158ca269588c4200ca09c82f4ffa430e8aa0146a52022370ade352e527",
+    "reviews/R21-linear-tree-common-gaussian-candidate.md": "99f8a23c98332b6797ee1ecc9f0929d94950cd047acb17bcbea0df9052ff7461",
+    "reviews/R23-sparse-frequency-field-candidate.md": "352f4e8d4ac334f0a570300313773b19b5263500b29ee0e601ce4a7737ee45e0",
+    "reviews/T100-sparse-frequency-field-independent-audit.md": "139f5e2b7bda99198d9056b1615de022842d35e1f4d769d754f486d9f2af4bdc"
+  },
+  "synthesis": {
+    "path": "04ad-sparse-fourier-derivative-averaging.md",
+    "sha256": "e8b2fd80bad4731f7686cd088ce8d5f3f36a0695c79caba2c0d1b2d135e9ce08"
+  },
+  "exact_scope": {
+    "parameters": "fixed d>=1,kappa,tau>0,inward polynomial,j>=1; continuous g with sup<1 and evaluator G; continuous v, arbitrary e=v-g",
+    "output": "K=(2N+1)^d real Fourier array, integerN>=0,integerM>=1",
+    "mean": "P_N actual D^j S_tau(g)[e^j]",
+    "risk": "H^(d+1) MSE <=6^d V_(j,2d+1)||e||^(2j)/M",
+    "cost": "expected C[M(1+G)+K],hardjM scalar acquisitions,a.s.halting",
+    "law_change": "independent polynomial-tail lattice draw; out-of-box zero counts as a trial; no rejection conditioning",
+    "model": "ideal real arithmetic and finite index words; coordinate magnitude has infinite mean, no fixed-word/bit claim"
+  },
+  "not_claimed": [
+    "same sample law or variance dominance",
+    "omitted-mode bias control",
+    "exact total-work Theta or practical speedup",
+    "full Fourier/PDE Lean correspondence",
+    "new numerical result or originality"
+  ],
+  "protected_initial_files": {
+    "count": 342,
+    "mismatches": []
+  },
+  "numerical_status": "zero new acquisitions; E4 unchanged; E5 unimplemented/unrun"
+}

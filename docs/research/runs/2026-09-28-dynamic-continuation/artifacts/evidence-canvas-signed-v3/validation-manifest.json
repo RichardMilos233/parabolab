@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "task": "T71",
+  "candidate_sha256": "a1ca7b101e0b5aba2c8bf8a8dc17c2c8ac071fe05fe634483a61da3ab192329d",
+  "typescript": {
+    "version": "6.0.3",
+    "files": 1,
+    "diagnostics": 0,
+    "status": "PASS"
+  },
+  "esbuild": {
+    "version": "0.25.9",
+    "bundle_status": "PASS",
+    "runtime_imports_externalized": [
+      "cursor/canvas",
+      "react/jsx-runtime"
+    ]
+  },
+  "parity": {
+    "existing_top_level_constants": 49,
+    "existing_top_level_constants_preserved_verbatim": 49,
+    "existing_link_bindings": 33,
+    "existing_link_bindings_preserved": 33,
+    "candidate_local_path_constants": 47,
+    "candidate_local_paths_resolved": 47,
+    "e4_pooled_records_exact": 60,
+    "e4_per_seed_records_exact": 180,
+    "e4_zero_query_baseline_records_exact": 36,
+    "e4_nominal_z_values": [0, 0.25, 1, 4],
+    "e4_zero_query_baselines_at_each_z": [0, 0.5, 1],
+    "e4_chart_series_exact_source_keys": [
+      "growing_0p125",
+      "growing_0p5",
+      "growing_2",
+      "theorem_96",
+      "fixed_51",
+      "constant_0",
+      "constant_0.5",
+      "constant_1"
+    ],
+    "e4_total_activity_including_preflights_and_replay": 368270390,
+    "e4_replay_point_calls": 30075636
+  },
+  "policy": {
+    "imports_only_cursor_canvas": true,
+    "embedded_data_only": true,
+    "network_calls": 0,
+    "hardcoded_colors": 0,
+    "gradients": 0,
+    "box_shadows": 0,
+    "unaccepted_T69_or_T70_presented_as_evidence": false,
+    "gui_render_performed": false
+  },
+  "implementation_model_request": {
+    "mode": "inherited from parent agent; no explicit model override",
+    "backend_serving_telemetry_asserted": false
+  }
+}

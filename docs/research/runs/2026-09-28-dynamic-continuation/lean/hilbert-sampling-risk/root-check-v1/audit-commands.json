@@ -1,0 +1,30 @@
+{
+  "all-public-axioms": {
+    "command": [
+      "/Users/michael/.elan/bin/lake",
+      "env",
+      "lean",
+      "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/hilbert-sampling-risk/root-check-v1/AllPublicAxioms.lean"
+    ],
+    "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab/formal",
+    "start_utc": "2026-09-28T20:41:10.084669+00:00",
+    "exit_code": 0,
+    "elapsed_seconds": 86.09948133397847,
+    "source_sha256": "0cef39d33c11dd113b1ee2d60059485b214fd7ffd9e4fbe68e21709de2b2487c",
+    "log_sha256": "ca9a50a6a2defa8d002831271292f780e91157c340f4abf97da4431898eeca7e"
+  },
+  "public-types": {
+    "command": [
+      "/Users/michael/.elan/bin/lake",
+      "env",
+      "lean",
+      "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/hilbert-sampling-risk/PublicTypes.lean"
+    ],
+    "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab/formal",
+    "start_utc": "2026-09-28T20:41:10.084997+00:00",
+    "exit_code": 0,
+    "elapsed_seconds": 86.95835058344528,
+    "source_sha256": "0cef39d33c11dd113b1ee2d60059485b214fd7ffd9e4fbe68e21709de2b2487c",
+    "log_sha256": "efc97b1ea5bb214fca6c20f1de6172f2dc41c0450ed9f374c7c1a4ece224f479"
+  }
+}

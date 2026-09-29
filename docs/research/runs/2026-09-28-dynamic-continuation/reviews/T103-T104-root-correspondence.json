@@ -1,0 +1,50 @@
+{
+  "date_local": "2026-09-29",
+  "verdict": "PASS D49 same-class fractional odd-power matching query complexity",
+  "root_review": "Complete final T1011163lines,T102962lines,T1031037lines,T104964lines read. Checked actual law, full paid solver, exact class/risk, strong-profile upper, original-slice lower, arbitrary seeds and expected stopping, constants and scope. No frozen source edits.",
+  "source_locks": {
+    "04ab-odd-power-long-horizon-complexity.md": "a8bd72ec33c69aae4d50126c72f6fd75ac4e1625cb08cfcef6a1b310918d18c0",
+    "04ac-fractional-fixed-time-fields.md": "3330cccbe4fd4f666569b1f94401a7d8308d3a2ec5302f02616fd188c253ae3d",
+    "reviews/T94-odd-power-long-horizon-feasibility.md": "2600c29a2823aefd9a69578de113bc511179d97bdfbea7eb3a6861ac28b7e1d9",
+    "reviews/T95-fractional-diffusion-field-feasibility.md": "9bc1d42d582f75b96a4e562dacbc925cbd01151b2a3b4702c5dc2b0a1ab99d74",
+    "reviews/T96-odd-power-long-horizon-independent-audit.md": "b8f5f32be92c820bd8b955c5969406a49fa21e12a1b38c86d17bb7467ba1eda4",
+    "reviews/T97-fractional-field-independent-audit.md": "9e38a6d166806997d9c42ab8653615edad0a47b0fc1fa81dc9e31e980f5dec90",
+    "reviews/T81-fixed-burnin-all-diffusion-upper-proof.md": "d9b249ed669897df319ca712fc4ad26625fc97e1a9b32b79eacaf497b290bae5",
+    "reviews/T84-all-diffusion-upper-independent-audit.md": "39cd98fcf957badbe382123bd1960eac7fb99441114c9433bd9ee0ff2d256d7d",
+    "reviews/T101-fractional-known-profile-upper-feasibility.md": "e16885dc66d636cc628c46f26718a80a618ed3658d399e007bdeef8cba8e6fd2",
+    "reviews/T102-fractional-long-horizon-lower-feasibility.md": "04d04c669deb6e1e162b4d737766607b0dd35f39c786448a0556a93025541a7d",
+    "reviews/T103-fractional-long-horizon-lower-independent-audit.md": "2e1d4b9ddf3a215ea1fa6a98ef9c23bc248a459a82e2cdc570ee70434f2c6a5d",
+    "reviews/T104-fractional-known-profile-upper-independent-audit.md": "432baed89167702b31b3e35b9fbc0620bf1723372d50697537baeee6cfcf0c11"
+  },
+  "synthesis": {
+    "path": "04ae-fractional-long-horizon-query-complexity.md",
+    "sha256": "953188cbde6cc190c6d1b449dacac5f80c6d5886a7cdea7acb242e4a278ceef2"
+  },
+  "exact_scope": {
+    "parameters": "fixed integers d,s,p>=1, c>0, 0<beta<=1",
+    "equation": "u_t=-c(-Delta)^beta u+u-u^(2p+1), unit torus",
+    "class": "full signed smooth periodic, sup<=1/2, total-order derivatives through s<=1, min<0<max",
+    "risk": "point or E spatial-supremum-squared, RMS tolerance1/4; constructed upper RMS1/8",
+    "queries": "Theta(exp(2dT/(2s+d))); upper all-seed deterministic cap, lower arbitrary measurable private seeds/inputwise a.s. stopping/worst-input expected acquisitions",
+    "work": "lower c0 exp(gammaT), upper C exp(gammaT)(1+T)^A_work, exact-real charged operations",
+    "output": "finite explicitly indexed real Fourier array, polynomial length"
+  },
+  "construction_clarifications": [
+    "inclusive initial alias tail |k|inf>=Q0-H>H",
+    "concrete free-heat initial nodal Picard iterate inherited from locked solver construction"
+  ],
+  "required_mathematical_repairs": [],
+  "not_claimed": [
+    "exact paid-work Theta",
+    "uniform c or beta down to zero",
+    "arbitrary inward reaction long-time theorem",
+    "full Lean correspondence",
+    "finite precision stability or implementation",
+    "empirical performance or global originality"
+  ],
+  "protected_initial_files": {
+    "count": 342,
+    "mismatches": []
+  },
+  "numerical_status": "No fractional theorem execution. Separate E5 producer reports two retained preflights, cumulative430unknowncalls, official0/replay0; root source/output acceptance pending. E4 unchanged."
+}

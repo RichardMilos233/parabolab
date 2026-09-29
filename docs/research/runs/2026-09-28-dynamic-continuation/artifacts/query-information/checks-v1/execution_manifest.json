@@ -1,0 +1,103 @@
+{
+  "commands": {
+    "prepare": "/opt/miniconda3/envs/parabolab/bin/python docs/research/runs/2026-09-28-dynamic-continuation/numerics/query_information_checks.py prepare",
+    "run": "/opt/miniconda3/envs/parabolab/bin/python docs/research/runs/2026-09-28-dynamic-continuation/numerics/query_information_checks.py run"
+  },
+  "created_utc": "2026-09-28T14:39:39.670235+00:00",
+  "environment": {
+    "lake_version": "Lake version 5.0.0-src+d8b1897 (Lean version 4.33.0)",
+    "lean_version": "Lean (version 4.33.0, arm64-apple-darwin24.6.0, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)",
+    "machine": "arm64",
+    "mathlib_revision": "db584cd6d46c92f209a44c0f1c829460d327499d",
+    "mpmath_version": "1.3.0",
+    "platform": "macOS-26.3-arm64-arm-64bit",
+    "python_executable": "/opt/miniconda3/envs/parabolab/bin/python",
+    "python_version": "3.11.15 (main, Jun 11 2026, 15:14:57) [Clang 20.1.8 ]"
+  },
+  "finite_contract": {
+    "K_values": [
+      1,
+      2,
+      3,
+      4,
+      6
+    ],
+    "expected_configurations": 25960,
+    "expected_main_summary_rows": 105,
+    "expected_mixture_rows": 5,
+    "expected_no_hit_alternative_runs": 154030,
+    "expected_oracle_runs": 334020,
+    "expected_reused_mixture_records": 19262,
+    "miss_outputs": [
+      {
+        "denominator": 1,
+        "exact": "-1",
+        "numerator": -1
+      },
+      {
+        "denominator": 2,
+        "exact": "-1/2",
+        "numerator": -1
+      },
+      {
+        "denominator": 1,
+        "exact": "0",
+        "numerator": 0
+      },
+      {
+        "denominator": 2,
+        "exact": "1/2",
+        "numerator": 1
+      },
+      {
+        "denominator": 1,
+        "exact": "1",
+        "numerator": 1
+      }
+    ]
+  },
+  "immutable_after_creation": true,
+  "implementation_source": "docs/research/runs/2026-09-28-dynamic-continuation/numerics/query_information_checks.py",
+  "implementation_source_sha256": "c856a9ba2548a6486d756af0b628396e8ab3d9186413e13e906fc57cd795930d",
+  "input_hashes_sha256": {
+    "docs/research/runs/2026-09-28-dynamic-continuation/02e-query-information-check-protocol.md": "5e4fe3e20cad7e435142dcf37e343798e730286aa0547cdf7812a8b7a42e33c2",
+    "docs/research/runs/2026-09-28-dynamic-continuation/04o-unstable-phase-query-lower-bound.md": "67d6463087775a857a2ffc035fa6ef7fa31db47b4c99b496ecdcc9e8f87fd765",
+    "docs/research/runs/2026-09-28-dynamic-continuation/05g-query-lower-bound-lean-contract.md": "7f457eca55cb6f73c84783ba6c10fe6ec448f5b34de0744fd874bac6060acadb",
+    "docs/research/runs/2026-09-28-dynamic-continuation/06g-query-information-lean.md": "936bd350561c5dae30d29303908049fcb9e000b3c9ecb4402b44345b69a4442e",
+    "docs/research/runs/2026-09-28-dynamic-continuation/06h-oracle-transcript-lean.md": "50dc5f546febc399407bc8882f37127772436668315a9a1e42b5870cdee78870",
+    "docs/research/runs/2026-09-28-dynamic-continuation/numerics/query_information_checks.py": "c856a9ba2548a6486d756af0b628396e8ab3d9186413e13e906fc57cd795930d",
+    "docs/research/runs/2026-09-28-dynamic-continuation/reviews/T42-T43-root-correspondence.json": "607d603e6ede9cf77f137b228f53d9d7a1d0836c74afdc8b81f4a07a7fb1f95c",
+    "docs/research/runs/2026-09-28-dynamic-continuation/reviews/T47-query-check-protocol-audit.md": "c2bd4343117f20a0b6b2e93e03d9773643a281a89fa4635cd433513f41ac1ffc",
+    "formal/EstimatorIntegrity/OracleTranscript.lean": "997b4af24aeee366a170b6632969431d2bf5fc1e47dc440ecb00ead19d81c53c",
+    "formal/EstimatorIntegrity/QueryInformationLowerBound.lean": "82422e2894fa5febb586cc6fbb23e73ae3a843d5cd84310c7be3fff38d967483",
+    "formal/lakefile.lean": "03a3e4e2f39d48331db402c7b7fae222f722ed7a581f8ac322300fc881eda115",
+    "formal/lean-toolchain": "302cd63c54178885b89e669f33b38f12f4dd7ae7e5cac537b3203e3768d8fb2b"
+  },
+  "protocol_sha256": "5e4fe3e20cad7e435142dcf37e343798e730286aa0547cdf7812a8b7a42e33c2",
+  "review_sha256": "c2bd4343117f20a0b6b2e93e03d9773643a281a89fa4635cd433513f41ac1ffc",
+  "scalar_contract": {
+    "comparison_absolute_tolerance": "1e-70",
+    "gauss_legendre_decimal_digits": 100,
+    "k_values": [
+      4,
+      8,
+      16,
+      32
+    ],
+    "primary_integral_input_decimal_digits": 80,
+    "primary_row_arithmetic_decimal_digits": 100,
+    "quadrature_maxdegree": 12,
+    "split_point": "1/2",
+    "stored_significant_digits": 80,
+    "tanh_sinh_decimal_digits": 80
+  },
+  "schema_version": 1,
+  "scope": {
+    "finite_abstract_assigned_targets": true,
+    "pde_solver": false,
+    "policy_receives_hidden_label": false,
+    "random_sampling": false,
+    "validates_universal_quantifiers": false
+  },
+  "status": "prepared-before-official-run"
+}

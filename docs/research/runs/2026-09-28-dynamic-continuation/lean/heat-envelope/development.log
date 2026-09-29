@@ -1,0 +1,21 @@
+Development check (resolved)
+============================
+
+$ cd /Users/michael/Desktop/NTU/fyp/parabolab/formal
+$ ~/.elan/bin/lake env lean EstimatorIntegrity/HeatEnvelopeBudget.lean
+EstimatorIntegrity/HeatEnvelopeBudget.lean:91:51: error: unsolved goals
+  `gcongr` required the separately projected facts
+  `0 ≤ heatI0 d` and `heatI0 d ≤ 2 / 3`.
+EstimatorIntegrity/HeatEnvelopeBudget.lean:98:52: error: unsolved goals
+  `gcongr` required the separately projected facts
+  `0 ≤ heatI1 d`, `heatEnvelopeC d ≤ 166 / 3`, and
+  `heatI1 d ≤ 4 / 3`.
+EstimatorIntegrity/HeatEnvelopeBudget.lean:103:4: error:
+  failed to prove positivity/nonnegativity/nonzeroness.
+
+Resolution: destruct the three paired bound theorems into named positivity
+and upper-bound facts, and supply the two nonnegative summands explicitly.
+The next direct Lean check exited successfully with no diagnostics.
+
+$ ~/.elan/bin/lake env lean EstimatorIntegrity/HeatEnvelopeBudget.lean
+(exit code 0; no output)

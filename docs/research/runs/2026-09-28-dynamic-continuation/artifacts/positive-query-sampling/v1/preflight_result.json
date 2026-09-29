@@ -1,0 +1,28 @@
+{
+  "actual_pde_solution_computed": false,
+  "actual_point_calls": 655633,
+  "artifact_version": "v1",
+  "bump_value_tests_passed": 204,
+  "bump_value_tests_total": 204,
+  "completed_utc": "2026-09-28T16:05:46.178623+00:00",
+  "constant_tests_passed": 9,
+  "elapsed_seconds_before_result_write": 0.19972945796325803,
+  "evidence_sha256": {
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v1/preflight_activity.jsonl": "876b23f230fff605c91d74b57b6cdcc8eda4521942a23f36e31844e63b0cdba0",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/v1/preflight_journal.jsonl": "89c185bf3066283d0b6f53149b7a6db3550245db1597ebdd266d24b594aad2f1"
+  },
+  "expected_point_calls": 655633,
+  "implementation_source_sha256": "cbfda29abd7e4d62e4131502cea5d96fbfaba05c6d0eaf74a9af329f78b458b0",
+  "independent_replay_executed": false,
+  "manifest_sha256": "f89cb731baa193c140cc42b73a0db7449b49f24795d76339e9c1165846a96428",
+  "official_design_recalculation_passed": true,
+  "official_run_executed": false,
+  "psi_tests_passed": 8,
+  "psi_tests_total": 8,
+  "reference_crosschecks_passed": 12,
+  "reference_crosschecks_total": 12,
+  "schema_version": 1,
+  "status": "PASS",
+  "underflow_to_zero_count": 31,
+  "wrapped_replay_passed": true
+}

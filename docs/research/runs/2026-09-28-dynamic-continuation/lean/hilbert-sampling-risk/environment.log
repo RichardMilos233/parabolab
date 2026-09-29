@@ -1,0 +1,12 @@
+label: environment
+started_utc: 2026-09-28T20:33:40Z
+cwd: /Users/michael/Desktop/NTU/fyp/parabolab/formal
+source_sha256: 0cef39d33c11dd113b1ee2d60059485b214fd7ffd9e4fbe68e21709de2b2487c
+command: sh ../docs/research/runs/2026-09-28-dynamic-continuation/lean/hilbert-sampling-risk/environment.sh
+--- stdout+stderr ---
+lean: Lean (version 4.33.0, arm64-apple-darwin24.6.0, commit d8b18978322de05a8f3dba51ef03cf5461676c17, Release)
+toolchain: leanprover/lean4:v4.33.0
+mathlib: db584cd6d46c92f209a44c0f1c829460d327499d
+--- end stdout+stderr ---
+exit_code: 0
+finished_utc: 2026-09-28T20:33:46Z

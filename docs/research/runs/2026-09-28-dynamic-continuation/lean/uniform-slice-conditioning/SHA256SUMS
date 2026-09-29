@@ -1,0 +1,14 @@
+d50bd7145685480ab802270d4a5eae623205b373b70c1158b30cdbef50fd80fe  formal/EstimatorIntegrity/UniformSliceConditioning.lean
+af6c63d6a6ed82180d68155d4b7047277dd440a2d23d651501abde46b98cc377  docs/research/runs/2026-09-28-dynamic-continuation/06n-uniform-slice-conditioning-lean.md
+f86ab36d6b9578187c9485e021396d9cccc0d4517c005afa7da924361b8f3584  docs/research/runs/2026-09-28-dynamic-continuation/lean/uniform-slice-conditioning/Axioms.lean
+f861851469c28c875b8f8718a639f1072c3e5cc41ab9b3ab4ccc772983f2be94  docs/research/runs/2026-09-28-dynamic-continuation/lean/uniform-slice-conditioning/Declarations.lean
+29a38c86dccecb16fa651a24a2bb386334f5c24ad3ca0245ee2def2f93d33a98  docs/research/runs/2026-09-28-dynamic-continuation/lean/uniform-slice-conditioning/build.log
+77fbf51dc4401ef7570cbc43dbbd717589a70df1aa4ab3c4dc457583e032d739  docs/research/runs/2026-09-28-dynamic-continuation/lean/uniform-slice-conditioning/axioms.log
+1b262f7912d7e7f5e37c7c224045f45fbb11496f06c03921e1a673e0ac86830b  docs/research/runs/2026-09-28-dynamic-continuation/lean/uniform-slice-conditioning/declarations.log
+ee90e74fdda1694239b04e80249a6629c0724ac7950b51df723e38b263fa1114  docs/research/runs/2026-09-28-dynamic-continuation/lean/uniform-slice-conditioning/trust-scan.log
+dfbdeb9830035f0d4dd6620333a40225605479f1a996c1f80aa3244453699116  docs/research/runs/2026-09-28-dynamic-continuation/lean/uniform-slice-conditioning/environment.log
+5cb4773eaf97c02c4e049fbdc44843ec8650e2bc05f33b1c86aa28f3a8ad7f27  docs/research/runs/2026-09-28-dynamic-continuation/lean/uniform-slice-conditioning/environment.md
+5b3e8058ae6a47dbc4d36349360f616fe9b3ba4c4dd98085e166941042e5f941  docs/research/runs/2026-09-28-dynamic-continuation/lean/uniform-slice-conditioning/failed-attempts.md
+53ca41ffd9c8b7b6d45fa1da48d30d46decf6d85a0d55cfef68160208f533d72  docs/research/runs/2026-09-28-dynamic-continuation/lean/uniform-slice-conditioning/Capture.zsh
+0824e7dc54413dec847702f0ee60bbbbd3b276c722f3beb152697bb10727027a  docs/research/runs/2026-09-28-dynamic-continuation/lean/uniform-slice-conditioning/TrustScan.zsh
+c24ad7afdac63d731f2a457101137b8c7b289b00cf92d4bfc9eb42737661b16c  docs/research/runs/2026-09-28-dynamic-continuation/lean/uniform-slice-conditioning/Environment.zsh

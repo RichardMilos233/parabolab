@@ -1,0 +1,38 @@
+{
+  "manifest_entries_verified": 14,
+  "public_declarations": 28,
+  "source_and_inventory_equal": true,
+  "forbidden_source_scan": [],
+  "audits": [
+    {
+      "name": "Axioms",
+      "command": [
+        "/Users/michael/.elan/bin/lake",
+        "env",
+        "lean",
+        "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/uniform-slice-conditioning/Axioms.lean"
+      ],
+      "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab/formal",
+      "started_utc": "2026-09-28T20:17:11.419362+00:00",
+      "exit_code": 0,
+      "capture": "direct subprocess stdout and stderr",
+      "log_sha256": "727c9dba44275249545b080a39334fcb0390c629937e23800cf66e91e3dbb656",
+      "matches_worker_body_excluding_command_headers": true
+    },
+    {
+      "name": "Declarations",
+      "command": [
+        "/Users/michael/.elan/bin/lake",
+        "env",
+        "lean",
+        "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/uniform-slice-conditioning/Declarations.lean"
+      ],
+      "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab/formal",
+      "started_utc": "2026-09-28T20:17:11.419856+00:00",
+      "exit_code": 0,
+      "capture": "direct subprocess stdout and stderr",
+      "log_sha256": "4648a432e849e6fcf218db171b3e0548f0e9405712c0e928575a90ebff663d16",
+      "matches_worker_body_excluding_command_headers": true
+    }
+  ]
+}

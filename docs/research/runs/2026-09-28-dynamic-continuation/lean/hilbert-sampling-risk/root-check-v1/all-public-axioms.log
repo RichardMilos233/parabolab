@@ -1,0 +1,103 @@
+metadata={"command": ["/Users/michael/.elan/bin/lake", "env", "lean", "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/hilbert-sampling-risk/root-check-v1/AllPublicAxioms.lean"], "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab/formal", "start_utc": "2026-09-28T20:41:10.084669+00:00", "exit_code": 0, "elapsed_seconds": 86.09948133397847, "source_sha256": "0cef39d33c11dd113b1ee2d60059485b214fd7ffd9e4fbe68e21709de2b2487c"}
+stdout_stderr_begin
+'EstimatorIntegrity.HilbertSamplingRisk.sampleMean' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.meanAverage' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.centered' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.sample_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.centered_memLp' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.centered_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.centered_sqNorm_integrable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.sample_sqNorm_integrable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.integral_centered' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.sampleMean_memLp' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.sampleMean_integrable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.integral_sampleMean' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.sampleMean_sub_meanAverage' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.centered_inner_integrable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.centered_indep' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.integral_inner_centered_eq_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.integral_inner_centered' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.integral_norm_sum_centered_sq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.sampleMean_error_memLp' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.sampleMean_error_sqNorm_integrable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.integral_sampleMean_error_sq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.integral_centered_sq_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.integral_sampleMean_sub_commonMean_sq_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.rawEstimator' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.norm_sum_sq_le_card_mul_sum_norm_sq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.norm_bias_add_sum_sq_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.rawEstimator_sub_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.rawEstimator_memLp' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.rawEstimator_aestronglyMeasurable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.rawEstimator_sub_memLp' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.rawEstimator_sub_sqNorm_integrable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.rawEstimator_pointwise_sq_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.rawEstimator_risk_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.anchored_rawEstimator_sub_memLp' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.anchored_rawEstimator_sqNorm_integrable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.anchored_rawEstimator_risk_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.boxClip' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.boxClip_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.boxClip_fixed' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.boxClip_continuous' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.boxClip_sub_sqNorm_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.boxClip_sub_norm_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.boxClip_rawEstimator_risk_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.boundedLinear_anchored_sub_memLp' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.boundedLinear_anchored_sqNorm_integrable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.HilbertSamplingRisk.boundedLinear_anchored_risk_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+stdout_stderr_end

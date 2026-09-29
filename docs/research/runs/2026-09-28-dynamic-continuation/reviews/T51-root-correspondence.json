@@ -1,0 +1,27 @@
+{
+  "status": "PASS scoped T51 root correspondence",
+  "review": "Root read complete source and fixed05h; reviewed actual arbitrary probability-space hypotheses, range-derived integrability, anchored estimate and actual Cauchy bias expansion. Existing worker build and axiom logs verified; root did not rerun build.",
+  "artifacts_sha256": {
+    "formal/EstimatorIntegrity/PositiveSigmoidRisk.lean": "3ae1d9acff2ff1f8dae63816b53f7c05eb4f5cd3f562b968d1cb7df168bf9a6d",
+    "lean/positive-sigmoid/build.log": "da1b7b7fbb5a33eb6e8e435bd5982ddceeb2cb94af4afbf4beb95760f5781ceb",
+    "lean/positive-sigmoid/axioms.log": "9960085251f4f4fefad98fd49ea3d89281df845ced356473c75f78f0a77ac644",
+    "lean/positive-sigmoid/source-scan.log": "5666dfc2e43b617f75eb6c8038ece5cb88159816fe3f040eccfb66d9ef3b597d",
+    "lean/positive-sigmoid/PositiveSigmoidRiskAxioms.lean": "1e0cd567a415824583e0684eb8c00d9623dc8f76871c6320affa4763c979f462"
+  },
+  "report_sha256": "0dee9ba99d5ad0c02204eca7e80641f1a2052ef005280a2474019068e3ce18c8",
+  "exports": [
+    "positiveSigmoid",
+    "continuous_positiveSigmoid",
+    "positiveSigmoid_nonneg",
+    "positiveSigmoid_le_one",
+    "positiveSigmoid_mono_nonneg",
+    "positiveSigmoid_anchored",
+    "positiveSigmoid_squaredLoss_integrable",
+    "integral_abs_le_sqrt_integral_sq",
+    "positiveSigmoid_integral_loss_le",
+    "positiveSigmoid_bias_composition"
+  ],
+  "protected_count": 342,
+  "protected_mismatches": [],
+  "remaining": "T52 combined independent-sample certificate; PDE/interpolation/iid oracle implementation remain conventional; no D24 numerical authorization."
+}

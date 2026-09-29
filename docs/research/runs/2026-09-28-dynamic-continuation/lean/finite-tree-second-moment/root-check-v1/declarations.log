@@ -1,0 +1,123 @@
+EstimatorIntegrity.FiniteTreeSecondMoment.Output : Type
+EstimatorIntegrity.FiniteTreeSecondMoment.coeffSq (c : ℝ) : ENNReal
+EstimatorIntegrity.FiniteTreeSecondMoment.coeffSq_mul (x y : ℝ) : coeffSq (x * y) = coeffSq x * coeffSq y
+EstimatorIntegrity.FiniteTreeSecondMoment.measurable_coeffSq : Measurable coeffSq
+EstimatorIntegrity.FiniteTreeSecondMoment.weight (a z : ℝ) (x : Output) : ENNReal
+EstimatorIntegrity.FiniteTreeSecondMoment.measurable_weight (a z : ℝ) : Measurable (weight a z)
+EstimatorIntegrity.FiniteTreeSecondMoment.childTriple.{u_1} {S : Type u_1} [MeasurableSpace S]
+  (K : ProbabilityTheory.Kernel S Output) : ProbabilityTheory.Kernel (ℝ × S) ((Output × Output) × Output)
+EstimatorIntegrity.FiniteTreeSecondMoment.lintegral_childTriple.{u_1} {S : Type u_1} [MeasurableSpace S]
+  (K : ProbabilityTheory.Kernel S Output) [ProbabilityTheory.IsMarkovKernel K] (a z : ℝ) (wr : ℝ × S) :
+  ∫⁻ (t : (Output × Output) × Output), weight a z t.1.1 * weight a z t.1.2 * weight a z t.2 ∂(childTriple K) wr =
+    (∫⁻ (x : Output), weight a z x ∂K wr.2) ^ 3
+EstimatorIntegrity.FiniteTreeSecondMoment.branchKernel.{u_1} {S : Type u_1} [MeasurableSpace S]
+  (branch : ProbabilityTheory.Kernel S (ℝ × S)) (K : ProbabilityTheory.Kernel S Output) :
+  ProbabilityTheory.Kernel S Output
+EstimatorIntegrity.FiniteTreeSecondMoment.lintegral_branchKernel.{u_1} {S : Type u_1} [MeasurableSpace S]
+  (branch : ProbabilityTheory.Kernel S (ℝ × S)) (K : ProbabilityTheory.Kernel S Output)
+  [ProbabilityTheory.IsMarkovKernel branch] [ProbabilityTheory.IsMarkovKernel K] (a z : ℝ) (s : S) :
+  ∫⁻ (x : Output), weight a z x ∂(branchKernel branch K) s =
+    36 * ∫⁻ (wr : ℝ × S), coeffSq wr.1 * (∫⁻ (x : Output), weight a z x ∂K wr.2) ^ 3 ∂branch s
+EstimatorIntegrity.FiniteTreeSecondMoment.sourceKernel.{u_1} {S : Type u_1} [MeasurableSpace S]
+  (leaf : ProbabilityTheory.Kernel S ℝ) : ProbabilityTheory.Kernel S Output
+EstimatorIntegrity.FiniteTreeSecondMoment.lintegral_sourceKernel.{u_1} {S : Type u_1} [MeasurableSpace S]
+  (leaf : ProbabilityTheory.Kernel S ℝ) (a z : ℝ) (s : S) :
+  ∫⁻ (x : Output), weight a z x ∂(sourceKernel leaf) s =
+    36 / 25 * ENNReal.ofReal (a ^ 2 * z) * ∫⁻ (l : ℝ), coeffSq l ∂leaf s
+EstimatorIntegrity.FiniteTreeSecondMoment.stepKernel.{u_1} {S : Type u_1} [MeasurableSpace S]
+  (leaf : ProbabilityTheory.Kernel S ℝ) (branch : ProbabilityTheory.Kernel S (ℝ × S))
+  (K : ProbabilityTheory.Kernel S Output) : ProbabilityTheory.Kernel S Output
+EstimatorIntegrity.FiniteTreeSecondMoment.lintegral_stepKernel.{u_1} {S : Type u_1} [MeasurableSpace S]
+  (leaf : ProbabilityTheory.Kernel S ℝ) (branch : ProbabilityTheory.Kernel S (ℝ × S))
+  (K : ProbabilityTheory.Kernel S Output) [ProbabilityTheory.IsMarkovKernel leaf]
+  [ProbabilityTheory.IsMarkovKernel branch] [ProbabilityTheory.IsMarkovKernel K] (a z : ℝ) (s : S) :
+  ∫⁻ (x : Output), weight a z x ∂(stepKernel leaf branch K) s =
+    5 / 6 * ∫⁻ (x : Output), weight a z x ∂(sourceKernel leaf) s +
+      1 / 6 * ∫⁻ (x : Output), weight a z x ∂(branchKernel branch K) s
+EstimatorIntegrity.FiniteTreeSecondMoment.treeKernel.{u_1} {S : Type u_1} [MeasurableSpace S]
+  (leaf : ProbabilityTheory.Kernel S ℝ) (branch : ProbabilityTheory.Kernel S (ℝ × S)) :
+  ℕ → ProbabilityTheory.Kernel S Output
+EstimatorIntegrity.FiniteTreeSecondMoment.childTriple_isMarkov.{u_1} {S : Type u_1} [MeasurableSpace S]
+  (K : ProbabilityTheory.Kernel S Output) [ProbabilityTheory.IsMarkovKernel K] :
+  ProbabilityTheory.IsMarkovKernel (childTriple K)
+EstimatorIntegrity.FiniteTreeSecondMoment.branchKernel_isMarkov.{u_1} {S : Type u_1} [MeasurableSpace S]
+  (branch : ProbabilityTheory.Kernel S (ℝ × S)) (K : ProbabilityTheory.Kernel S Output)
+  [ProbabilityTheory.IsMarkovKernel branch] [ProbabilityTheory.IsMarkovKernel K] :
+  ProbabilityTheory.IsMarkovKernel (branchKernel branch K)
+EstimatorIntegrity.FiniteTreeSecondMoment.sourceKernel_isMarkov.{u_1} {S : Type u_1} [MeasurableSpace S]
+  (leaf : ProbabilityTheory.Kernel S ℝ) [ProbabilityTheory.IsMarkovKernel leaf] :
+  ProbabilityTheory.IsMarkovKernel (sourceKernel leaf)
+EstimatorIntegrity.FiniteTreeSecondMoment.stepKernel_isMarkov.{u_1} {S : Type u_1} [MeasurableSpace S]
+  (leaf : ProbabilityTheory.Kernel S ℝ) (branch : ProbabilityTheory.Kernel S (ℝ × S))
+  (K : ProbabilityTheory.Kernel S Output) [ProbabilityTheory.IsMarkovKernel leaf]
+  [ProbabilityTheory.IsMarkovKernel branch] [ProbabilityTheory.IsMarkovKernel K] :
+  ProbabilityTheory.IsMarkovKernel (stepKernel leaf branch K)
+EstimatorIntegrity.FiniteTreeSecondMoment.treeKernel_isMarkov.{u_1} {S : Type u_1} [MeasurableSpace S]
+  (leaf : ProbabilityTheory.Kernel S ℝ) (branch : ProbabilityTheory.Kernel S (ℝ × S))
+  [ProbabilityTheory.IsMarkovKernel leaf] [ProbabilityTheory.IsMarkovKernel branch] (D : ℕ) :
+  ProbabilityTheory.IsMarkovKernel (treeKernel leaf branch D)
+EstimatorIntegrity.FiniteTreeSecondMoment.weightedMoment.{u_1} {S : Type u_1} [MeasurableSpace S]
+  (leaf : ProbabilityTheory.Kernel S ℝ) (branch : ProbabilityTheory.Kernel S (ℝ × S)) (D : ℕ) (a z : ℝ) (s : S) :
+  ENNReal
+EstimatorIntegrity.FiniteTreeSecondMoment.weightedMoment_zero.{u_1} {S : Type u_1} [MeasurableSpace S]
+  (leaf : ProbabilityTheory.Kernel S ℝ) (branch : ProbabilityTheory.Kernel S (ℝ × S)) (a z : ℝ) (s : S) :
+  weightedMoment leaf branch 0 a z s = 0
+EstimatorIntegrity.FiniteTreeSecondMoment.weightedMoment_succ.{u_1} {S : Type u_1} [MeasurableSpace S]
+  (leaf : ProbabilityTheory.Kernel S ℝ) (branch : ProbabilityTheory.Kernel S (ℝ × S))
+  [ProbabilityTheory.IsMarkovKernel leaf] [ProbabilityTheory.IsMarkovKernel branch] (D : ℕ) (a z : ℝ) (s : S) :
+  weightedMoment leaf branch (D + 1) a z s =
+    6 / 5 * ENNReal.ofReal (a ^ 2 * z) * ∫⁻ (l : ℝ), coeffSq l ∂leaf s +
+      6 * ∫⁻ (wr : ℝ × S), coeffSq wr.1 * weightedMoment leaf branch D a z wr.2 ^ 3 ∂branch s
+EstimatorIntegrity.FiniteTreeSecondMoment.weightedMoment_uniform_bound.{u_1} {S : Type u_1} [MeasurableSpace S]
+  (leaf : ProbabilityTheory.Kernel S ℝ) (branch : ProbabilityTheory.Kernel S (ℝ × S))
+  [ProbabilityTheory.IsMarkovKernel leaf] [ProbabilityTheory.IsMarkovKernel branch] (M C R : ℝ) (hM : 0 < M)
+  (hR : 0 < R) (hC : 0 ≤ C) (hsmall : C * R ^ 2 ≤ 1 / 8)
+  (hleaf : ∀ (s : S), ∫⁻ (l : ℝ), coeffSq l ∂leaf s ≤ ENNReal.ofReal (M ^ 2))
+  (hbranch : ∀ (s : S), ∫⁻ (wr : ℝ × S), coeffSq wr.1 ∂branch s ≤ ENNReal.ofReal (C ^ 2)) (D : ℕ) (s : S) :
+  weightedMoment leaf branch D (3 * R / (4 * M)) (5 / 4) s ≤ ENNReal.ofReal (R ^ 2)
+EstimatorIntegrity.FiniteTreeSecondMoment.weightedMoment_ne_top.{u_1} {S : Type u_1} [MeasurableSpace S]
+  (leaf : ProbabilityTheory.Kernel S ℝ) (branch : ProbabilityTheory.Kernel S (ℝ × S))
+  [ProbabilityTheory.IsMarkovKernel leaf] [ProbabilityTheory.IsMarkovKernel branch] (D : ℕ) (M C R : ℝ) (hM : 0 < M)
+  (hR : 0 < R) (hC : 0 ≤ C) (hsmall : C * R ^ 2 ≤ 1 / 8)
+  (hleaf : ∀ (s : S), ∫⁻ (l : ℝ), coeffSq l ∂leaf s ≤ ENNReal.ofReal (M ^ 2))
+  (hbranch : ∀ (s : S), ∫⁻ (wr : ℝ × S), coeffSq wr.1 ∂branch s ≤ ENNReal.ofReal (C ^ 2)) (s : S) :
+  weightedMoment leaf branch D (3 * R / (4 * M)) (5 / 4) s ≠ ⊤
+EstimatorIntegrity.FiniteTreeSecondMoment.squaredMajorant_slope_bound (C R : ℝ) (hC : 0 ≤ C)
+  (hsmall : C * R ^ 2 ≤ 1 / 8) : 3 * (C ^ 2 / (1 / 6)) * (R ^ 2) ^ 2 ≤ 9 / 32
+EstimatorIntegrity.FiniteTreeSecondMoment.leafPolynomialConstant (j : ℕ) : ℝ
+EstimatorIntegrity.FiniteTreeSecondMoment.summable_leafPolynomialSeries (j : ℕ) :
+  Summable fun n => ↑n ^ (2 * j) * (4 / 5) ^ n
+EstimatorIntegrity.FiniteTreeSecondMoment.leafPolynomialConstant_nonneg (j : ℕ) : 0 ≤ leafPolynomialConstant j
+EstimatorIntegrity.FiniteTreeSecondMoment.leafPolynomialConstant_ennreal_ne_top (j : ℕ) :
+  ENNReal.ofReal (leafPolynomialConstant j) ≠ ⊤
+EstimatorIntegrity.FiniteTreeSecondMoment.leafPolynomial_term_le (j n : ℕ) :
+  ↑n ^ (2 * j) * (4 / 5) ^ n ≤ leafPolynomialConstant j
+EstimatorIntegrity.FiniteTreeSecondMoment.leafPolynomial_le_geometric (j n : ℕ) :
+  ↑n ^ (2 * j) ≤ leafPolynomialConstant j * (5 / 4) ^ n
+EstimatorIntegrity.FiniteTreeSecondMoment.polynomialWeight (j : ℕ) (a : ℝ) (x : Output) : ENNReal
+EstimatorIntegrity.FiniteTreeSecondMoment.measurable_polynomialWeight (j : ℕ) (a : ℝ) :
+  Measurable (polynomialWeight j a)
+EstimatorIntegrity.FiniteTreeSecondMoment.polynomialMoment.{u_1} {S : Type u_1} [MeasurableSpace S]
+  (leaf : ProbabilityTheory.Kernel S ℝ) (branch : ProbabilityTheory.Kernel S (ℝ × S)) (j D : ℕ) (a : ℝ) (s : S) :
+  ENNReal
+EstimatorIntegrity.FiniteTreeSecondMoment.polynomialMoment_le_weightedMoment.{u_1} {S : Type u_1} [MeasurableSpace S]
+  (leaf : ProbabilityTheory.Kernel S ℝ) (branch : ProbabilityTheory.Kernel S (ℝ × S)) (j D : ℕ) (a : ℝ) (s : S)
+  (A : ENNReal) (hA : ∀ (n : ℕ), ENNReal.ofReal (↑n ^ (2 * j)) ≤ A * (5 / 4) ^ n) :
+  polynomialMoment leaf branch j D a s ≤ A * weightedMoment leaf branch D a (5 / 4) s
+EstimatorIntegrity.FiniteTreeSecondMoment.leafPolynomial_domination_ennreal (j n : ℕ) :
+  ENNReal.ofReal (↑n ^ (2 * j)) ≤ ENNReal.ofReal (leafPolynomialConstant j) * (5 / 4) ^ n
+EstimatorIntegrity.FiniteTreeSecondMoment.polynomialMoment_uniform_bound.{u_1} {S : Type u_1} [MeasurableSpace S]
+  (leaf : ProbabilityTheory.Kernel S ℝ) (branch : ProbabilityTheory.Kernel S (ℝ × S))
+  [ProbabilityTheory.IsMarkovKernel leaf] [ProbabilityTheory.IsMarkovKernel branch] (j D : ℕ) (M C R : ℝ) (hM : 0 < M)
+  (hR : 0 < R) (hC : 0 ≤ C) (hsmall : C * R ^ 2 ≤ 1 / 8)
+  (hleaf : ∀ (s : S), ∫⁻ (l : ℝ), coeffSq l ∂leaf s ≤ ENNReal.ofReal (M ^ 2))
+  (hbranch : ∀ (s : S), ∫⁻ (wr : ℝ × S), coeffSq wr.1 ∂branch s ≤ ENNReal.ofReal (C ^ 2)) (s : S) :
+  polynomialMoment leaf branch j D (3 * R / (4 * M)) s ≤
+    ENNReal.ofReal (leafPolynomialConstant j) * ENNReal.ofReal (R ^ 2)
+EstimatorIntegrity.FiniteTreeSecondMoment.polynomialMoment_ne_top.{u_1} {S : Type u_1} [MeasurableSpace S]
+  (leaf : ProbabilityTheory.Kernel S ℝ) (branch : ProbabilityTheory.Kernel S (ℝ × S))
+  [ProbabilityTheory.IsMarkovKernel leaf] [ProbabilityTheory.IsMarkovKernel branch] (j D : ℕ) (M C R : ℝ) (hM : 0 < M)
+  (hR : 0 < R) (hC : 0 ≤ C) (hsmall : C * R ^ 2 ≤ 1 / 8)
+  (hleaf : ∀ (s : S), ∫⁻ (l : ℝ), coeffSq l ∂leaf s ≤ ENNReal.ofReal (M ^ 2))
+  (hbranch : ∀ (s : S), ∫⁻ (wr : ℝ × S), coeffSq wr.1 ∂branch s ≤ ENNReal.ofReal (C ^ 2)) (s : S) :
+  polynomialMoment leaf branch j D (3 * R / (4 * M)) s ≠ ⊤

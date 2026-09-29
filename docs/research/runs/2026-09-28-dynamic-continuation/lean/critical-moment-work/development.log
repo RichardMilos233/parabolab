@@ -1,0 +1,29 @@
+Development command used after each proof increment:
+
+  ~/.elan/bin/lake env lean EstimatorIntegrity/CriticalMomentWork.lean
+
+Working directory: formal
+
+Resolved diagnostics:
+
+1. `Eventually.of_forall` was not in the open namespace. The proof now uses
+   the fully qualified `Filter.Eventually.of_forall`.
+
+2. The Bochner product lemma returns integrability for pointwise function
+   multiplication. An explicit `change` matches this with the lambda in the
+   public theorem statement.
+
+3. The real Holder theorem expects exponents of the form
+   `ENNReal.ofReal 2`. Local `simpa` conversions supply the already proved
+   `MemLp ... 2` hypotheses without changing them.
+
+4. Holder's integral powers are real powers, even when the displayed
+   exponent is `2`. Applying `Real.rpow_two` before the integral congruences
+   permits the exact rewrites `|H|^2 = H^2` and `(sqrt N)^2 = N`.
+
+5. The unavailable name `lt_add_iff_sub_left` in an initial exponent proof
+   was replaced by explicit positive-denominator cross multiplication and
+   `nlinarith`.
+
+Final direct-check status: 0. No `sorry`, `admit`, or custom axiom
+declaration remains in the module or the axiom-audit source.

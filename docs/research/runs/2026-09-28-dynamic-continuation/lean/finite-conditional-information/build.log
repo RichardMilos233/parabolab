@@ -1,0 +1,4 @@
+$ cd formal
+$ ~/.elan/bin/lake build EstimatorIntegrity.FiniteConditionalInformation
+✔ [3511/3511] Built EstimatorIntegrity.FiniteConditionalInformation (57s)
+Build completed successfully (3511 jobs).

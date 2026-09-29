@@ -1,0 +1,11 @@
+import EstimatorIntegrity.DynamicContinuation
+
+#print axioms EstimatorIntegrity.dynamicRadicand_le_square
+#print axioms EstimatorIntegrity.dynamicRmsStep_invariant
+#print axioms EstimatorIntegrity.finiteDynamicRmsRecurrence
+#print axioms EstimatorIntegrity.finiteDynamicRmsRecurrence_of_parameters
+#print axioms EstimatorIntegrity.dynamicMu_mul_step
+#print axioms EstimatorIntegrity.dynamicAffineDerivativeEnvelope
+#print axioms EstimatorIntegrity.dynamicInterpolationDefect_sq
+#print axioms EstimatorIntegrity.dynamicDenominatorRationals
+#print axioms EstimatorIntegrity.dynamicFinalRmsBudget

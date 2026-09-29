@@ -1,0 +1,51 @@
+{
+  "activity": {
+    "cap": 500000000,
+    "spent_after_replay": 368270390,
+    "spent_before_replay": 338194754
+  },
+  "claims": {
+    "actual_pde_numerical_solve": false,
+    "full_replay": false,
+    "iid_machine_to_real_bridge": false,
+    "minimax_empirical_proof": false,
+    "novelty_claim": false,
+    "rigorous_float_enclosure": false
+  },
+  "completed_utc": "2026-09-28T17:16:05.461161+00:00",
+  "official_verified": {
+    "cells": 180,
+    "outputs": 18720,
+    "point_calls": 336883488
+  },
+  "output_hashes_sha256": {
+    "docs/research/runs/2026-09-28-dynamic-continuation/numerics/audit_positive_query_sampling.py": "2615203c60973fd0908bd185b7cc3d8d4b3eb1b0b1ac6f9bdd4bcc4b6128b009",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/audit-v1/audit_manifest.json": "7f25110439ad49b341bffedc54539279108a355f5223d814824787fa6bf9259f",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/audit-v1/plot_result.json": "87678c8986c82ace7e002d0ca53b527f4898b73e552099866d42a4778f40e64e",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/audit-v1/positive_query_audit.png": "3c18c54eb64f89473cafef04760a2fb6ea2edba8371c353cc1f9a481daebef2f",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/audit-v1/positive_query_audit.svg": "6832d357371ff8e6f86557746c13ccfc279ba9a386072830aedd1f049f279849",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/audit-v1/replay_activity.jsonl": "7b03c4ad3907b385f44c81034307c0a25ee7de162f3d0f8f6174dcd00fad9b45",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/audit-v1/replay_journal.jsonl": "febc877cc33fe2e4f45e3ca0dfe5377e39ffcdd671d1baa76d17cbf557290deb",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/audit-v1/replay_result.json": "788394e129bebda45608a926b118cc405e515f2986f60a3acc7992713ea3ed2e",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/audit-v1/statistics_raw.npz": "bd78b8fae2868fc53d6bc014076dce6d769132d4acf7129049bc0cad59a9bb8f",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/audit-v1/stored_audit.json": "f1f48b74996543a9f7de1aca6c0ffedbb54e34d251d046aa820b0cf9cea5f2da",
+    "docs/research/runs/2026-09-28-dynamic-continuation/reviews/T66-positive-query-independent-audit.md": "e9281b60ea1c407b5778ff85a4a4e90a6767bfb1fe6dbf45bde878f11420ebe1"
+  },
+  "residual_limitations": [
+    "The replay covers only the prespecified replicate-0 subset, 180 of 18720 outputs.",
+    "The scalar reference and reported statistics use ordinary binary64 and are not rigorous enclosures.",
+    "The \u00b11/32 PDE comparison comes from the conventional theorem; no PDE was numerically solved here.",
+    "PCG64/binary64 sampling is reproducible numerical evidence, not a certified iid-real-law bridge.",
+    "The finite experiment does not establish a minimax theorem, asymptotic optimality, or novelty."
+  ],
+  "schema_version": 1,
+  "self_hash_note": "This file hashes every other audit output; as usual, it cannot contain its own SHA256 without changing it.",
+  "status": "PASS",
+  "subset_replay_verified": {
+    "bitwise_agreement": true,
+    "cells": 180,
+    "point_calls": 30075636,
+    "selection": "replicate 0 of every cell"
+  },
+  "task": "T66 independent frozen positive-query audit and prespecified subset replay"
+}

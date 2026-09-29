@@ -1,0 +1,51 @@
+{
+  "date_local": "2026-09-29",
+  "verdict": "PASS conventional D40-D42 after frozen T87/T90 and root correspondence",
+  "root_review": "Read full788-line T87 and814-line T90 in complete ranges. Independently checked partition covariance, singular Gaussian factorization, complete nonlinear translation, Sobolev heat-shell constants, actual directional Bochner/Frechet identification, weighted real-coefficient norm/signs, Js>=q, base accuracy, query/work separation and profile risk. No material repair required.",
+  "source_locks": {
+    "reviews/T87-all-diffusion-sharp-query-feasibility.md": "acd788e6ee5564778cd0663be99aab17fb61f22bdfb4b345ccade008f18feff1",
+    "reviews/T90-sharp-query-independent-audit.md": "f8959804af651f78b1a48ee6f9d96139aa397388fba88167f6e30daa5804a907",
+    "reviews/T81-fixed-burnin-all-diffusion-upper-proof.md": "d9b249ed669897df319ca712fc4ad26625fc97e1a9b32b79eacaf497b290bae5",
+    "reviews/T84-all-diffusion-upper-independent-audit.md": "39cd98fcf957badbe382123bd1960eac7fb99441114c9433bd9ee0ff2d256d7d",
+    "reviews/R10b-finite-burnin-derivative-sampling.md": "23683587539ef2905e0679100325808ae3f6353a3782a4bb362b2d24252034f0",
+    "reviews/T68-finite-burnin-sampler-independent-audit.md": "442b446ae523b220e34ddadcf8c23b181ce60104100fd27c7e8027524840ed9f",
+    "04y-all-positive-diffusivity-profile-complexity.md": "2a62aaec24cb762ebe8ef213ce7bbbb2dbd56e3b7ced197a851736db913d9ba8"
+  },
+  "synthesis": {
+    "path": "04z-all-positive-diffusivity-sharp-queries.md",
+    "sha256": "57ef1d86ddba30ce9d54f316b0eb2dc97f407f7aeb4446a66b3103c28e0aedd4"
+  },
+  "same_contract": {
+    "PDE": "u_t=(kappa/2)Delta u+u-u^3 on unit torus",
+    "fixed_parameters": "every fixed kappa>0 and integers d,s>=1",
+    "input": "same full signed smooth class; sup<=1/2; total derivatives throughs<=1",
+    "oracle": "only charged exact scalar initial values; repetitions/preprocessing charged",
+    "upper_risk": "sup_v (E||U_T-S_Tv||inf²)^(1/2)<=1/8; finite indexed real Fourier output",
+    "minimax_risk": "point or strong profile MSE<=1/16, RMS<=1/4",
+    "upper_queries": "all-seed hardcap [1+J(J-1)/2]k^d; k^d<=C exp(gamma T)",
+    "lower": "separately accepted D37; arbitrary biased adaptive a.s.randomly stopped rules",
+    "paid_work": "same listed ideal primitives; exp(gamma T)polyT upper only; no exactTheta work",
+    "gamma": "2d/(2s+d)"
+  },
+  "accepted": [
+    "D40 actual fixed-time H^(d+1) field derivative sampler with cutoff-independent second moments",
+    "D41 explicit strong profile upper with sharp hard query cap and paid expected work",
+    "D42 exact point/profile minimax expected query order Theta(exp(gamma T)) using accepted D37"
+  ],
+  "formal_status": "T86 and T89 in progress, partial gates; full theorem remains conventional",
+  "numerical_status": "no new code/experiment/input acquisitions; E4 remains368270390 calls",
+  "protected_initial_files": {
+    "count": 342,
+    "mismatches": []
+  },
+  "not_claimed": [
+    "Exact paid-work Theta",
+    "Uniform kappa tending to zero",
+    "Finite-bit/random-bit complexity",
+    "Practical speed",
+    "Simultaneous pathwise infinite-time risk",
+    "Full Lean coverage",
+    "Originality or award significance"
+  ],
+  "other_candidates": "R20/R21 remain unaudited and are not premises; T91 fresh and reuse dispatch attempts failed at agent thread limit"
+}

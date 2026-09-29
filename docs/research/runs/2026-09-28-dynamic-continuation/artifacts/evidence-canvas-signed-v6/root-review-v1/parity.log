@@ -1,0 +1,76 @@
+command=["/opt/homebrew/bin/node", "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/root-review-v1/validate.cjs"]
+cwd=/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/root-review-v1
+started_utc=2026-09-28T20:36:21.365699+00:00
+stdout_stderr_begin
+{
+  "status": "PASS",
+  "source_hashes": {
+    "original": "e2619ea14528c4e3d20e62ed2a3edb8cb2f3c175b47af4e31c9f1599f9e9fa41",
+    "candidate": "ecb20ba4106227f902ce40c1eb098fd72a6c29fb9740e3be5a473ddd8644675a",
+    "managed": "e2619ea14528c4e3d20e62ed2a3edb8cb2f3c175b47af4e31c9f1599f9e9fa41"
+  },
+  "managed_canvas_unchanged_from_archived_original": true,
+  "checked_source_locks": {
+    "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/04z-all-positive-diffusivity-sharp-queries.md": {
+      "expected": "57ef1d86ddba30ce9d54f316b0eb2dc97f407f7aeb4446a66b3103c28e0aedd4",
+      "actual": "57ef1d86ddba30ce9d54f316b0eb2dc97f407f7aeb4446a66b3103c28e0aedd4",
+      "matches": true
+    },
+    "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T90-root-correspondence.json": {
+      "expected": "2cec8c64716616c05383990fa4cbb143f21e42b58dde6b3a8121277ad56f85e7",
+      "actual": "2cec8c64716616c05383990fa4cbb143f21e42b58dde6b3a8121277ad56f85e7",
+      "matches": true
+    },
+    "/Users/michael/Desktop/NTU/fyp/parabolab/formal/EstimatorIntegrity/UniformSliceConditioning.lean": {
+      "expected": "d50bd7145685480ab802270d4a5eae623205b373b70c1158b30cdbef50fd80fe",
+      "actual": "d50bd7145685480ab802270d4a5eae623205b373b70c1158b30cdbef50fd80fe",
+      "matches": true
+    },
+    "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/06n-uniform-slice-conditioning-lean.md": {
+      "expected": "af6c63d6a6ed82180d68155d4b7047277dd440a2d23d651501abde46b98cc377",
+      "actual": "af6c63d6a6ed82180d68155d4b7047277dd440a2d23d651501abde46b98cc377",
+      "matches": true
+    },
+    "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T86-root-correspondence.json": {
+      "expected": "b39b9cfb5b22e1185c95e191b3f7a85339b2f6314da4b5eb34ef66c332fdce0d",
+      "actual": "b39b9cfb5b22e1185c95e191b3f7a85339b2f6314da4b5eb34ef66c332fdce0d",
+      "matches": true
+    }
+  },
+  "original_lines_preserved_verbatim_in_order": true,
+  "original_top_level_constants": 82,
+  "candidate_top_level_constants": 87,
+  "original_constants_preserved_verbatim": 82,
+  "changed_original_constants": [],
+  "original_link_occurrences": 68,
+  "candidate_link_occurrences": 73,
+  "missing_original_link_occurrences": [],
+  "original_local_path_constants": 63,
+  "candidate_local_path_constants": 68,
+  "missing_or_changed_original_paths": [],
+  "unresolved_candidate_paths": [],
+  "line_charts_original": 5,
+  "line_charts_candidate": 5,
+  "line_charts_preserved_verbatim": true,
+  "missing_original_numeric_literals": [],
+  "e4_records": {
+    "pooled": 60,
+    "per_seed": 180,
+    "zero_query_baselines": 36,
+    "total_activity_text_preserved": true
+  },
+  "imports": [
+    "cursor/canvas"
+  ],
+  "embedded_data_only": true,
+  "hardcoded_hex_colors": 0,
+  "gradients": 0,
+  "box_shadows": 0,
+  "required_narrative_present": 15,
+  "required_narrative_total": 15,
+  "t86_public_declarations_present": 28,
+  "t86_public_declarations_expected": 28
+}
+stdout_stderr_end
+exit_code=0
+elapsed_seconds=0.3640195829793811

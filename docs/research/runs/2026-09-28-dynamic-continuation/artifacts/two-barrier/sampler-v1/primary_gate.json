@@ -1,0 +1,54 @@
+{
+  "created_utc": "2026-09-28T09:48:18.230186+00:00",
+  "diagnostics_summary_sha256": "75ed4c01ad9fa02d54762b168dd79ee490375de7b06f6b751de0ca3f5e6da2a0",
+  "frozen_source_hashes_verified": true,
+  "preflight_results_sha256": "f944959771b8cf59b6d22113145ace8784b7523d6bf2d1c4be51ed2b9d039c6b",
+  "protocol_sha256": "605eda24574bfb7e44dc997c185836d2a54311c18344e0be4c005674e00beda9",
+  "reference": {
+    "array_path": "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/reference-v1/reference.npz",
+    "array_sha256": "dd49e4f5c630466942b9c276be7b807763c46171a79311ac71c7840d71603072",
+    "gates": {
+      "all_output_shapes_match": true,
+      "all_six_solver_runs_succeeded": true,
+      "maximum_21_query_difference_from_strict": 2.282851685464493e-11,
+      "passed": true,
+      "per_run_21_query_difference": {
+        "k16_loose": 6.95177249099288e-12,
+        "k16_strict": 9.625633623500107e-14,
+        "k32_loose": 2.036104618241552e-11,
+        "k32_strict": 1.3666845433135677e-13,
+        "k64_loose": 2.282851685464493e-11,
+        "k64_strict": 0.0
+      },
+      "preflight_passed": true,
+      "refinement_passed": true,
+      "refinement_threshold": 1e-08
+    },
+    "interface_shapes": {
+      "queries": [
+        3
+      ],
+      "scaled_values": [
+        7,
+        3
+      ],
+      "times": [
+        7
+      ]
+    },
+    "predesignated_comparator": {
+      "all_21_query_evaluations_seconds": 9.207986295223236e-06,
+      "eligible": true,
+      "key": "k16_loose",
+      "max_21_query_difference_from_strict": 6.95177249099288e-12,
+      "one_solve_seconds": 0.0969756250269711,
+      "solve_plus_all_queries_seconds": 0.09698483301326632
+    },
+    "summary_path": "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/reference-v1/reference_summary.json",
+    "summary_sha256": "cb384301956b0a650dea10f458522f55981d6e10ab738aacb105624d75dbfc81",
+    "summary_status": "PASS"
+  },
+  "sampler_manifest_sha256": "8d08a3d9043c40e61868a3c8def8e75bf94d9d87b5f31b1de61986c13b7132b6",
+  "schema_version": 1,
+  "status": "passed"
+}

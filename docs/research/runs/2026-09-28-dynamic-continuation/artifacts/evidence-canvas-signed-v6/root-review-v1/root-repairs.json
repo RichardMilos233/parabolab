@@ -1,0 +1,10 @@
+{
+  "worker_sha256": "a35be1ea0d6c6357cae2b1176df538e31fd61b5012c0f9e77ad0a947226f5b73",
+  "candidate_sha256": "ecb20ba4106227f902ce40c1eb098fd72a6c29fb9740e3be5a473ddd8644675a",
+  "repairs": [
+    "Make C(X) continuity of g and e explicit in the D40 summary",
+    "Replace now-stale R20/R21 pending status with frozen dependency statement; no new accepted generalization added to this Canvas"
+  ],
+  "frozen_worker_manifest_entries_verified": 22,
+  "prior_root_attempt": "First manifest check incorrectly resolved repository-relative paths against package directory; failed before any writes. Corrected to repository root; no source change."
+}

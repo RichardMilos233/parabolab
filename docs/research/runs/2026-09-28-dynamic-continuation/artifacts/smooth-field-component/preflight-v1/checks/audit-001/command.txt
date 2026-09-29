@@ -1,0 +1,1 @@
+/opt/miniconda3/envs/parabolab/bin/python docs/research/runs/2026-09-28-dynamic-continuation/artifacts/smooth-field-component/preflight-v1/audit_preflight.py

@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "ES2021",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "baseUrl": "/",
+    "ignoreDeprecations": "6.0",
+    "paths": {
+      "cursor/canvas": [
+        "Users/michael/.cursor/skills-cursor/canvas/sdk/index.d.ts"
+      ],
+      "react": [
+        "Applications/Cursor.app/Contents/Resources/app/extensions/cursor-local-agent-runtime/dist/agent-sdk/@types/react/index.d.ts"
+      ],
+      "react/jsx-runtime": [
+        "Applications/Cursor.app/Contents/Resources/app/extensions/cursor-local-agent-runtime/dist/agent-sdk/@types/react/jsx-runtime.d.ts"
+      ]
+    },
+    "lib": ["ESNext", "DOM"]
+  },
+  "files": ["dynamic-continuation-evidence.candidate.canvas.tsx"]
+}

@@ -1,0 +1,8 @@
+started_utc=2026-09-28T20:36:52Z
+cwd=/Users/michael/.elan/bin/lake
+command=env lean Prototype.lean 
+stdout_stderr_begin
+Capture.zsh:cd:22: not a directory: /Users/michael/.elan/bin/lake
+stdout_stderr_end
+exit_code=125
+ended_utc=2026-09-28T20:36:52Z

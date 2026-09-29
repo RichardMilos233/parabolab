@@ -1,0 +1,8 @@
+started_utc=2026-09-28T20:25:18Z
+cwd=/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6
+command=/opt/homebrew/bin/node -e const\ ts=require\(\"/Applications/Cursor.app/Contents/Resources/app/extensions/node_modules/typescript/lib/typescript.js\"\)\;\ const\ esbuild=require\(\"/Applications/Cursor.app/Contents/Resources/app/extensions/node_modules/esbuild-wasm/package.json\"\)\;\ console.log\(JSON.stringify\(\{node:process.version,typescript:ts.version,esbuild_wasm:esbuild.version\}\)\)\; 
+stdout_stderr_begin
+{"node":"v26.0.0","typescript":"6.0.3","esbuild_wasm":"0.25.9"}
+stdout_stderr_end
+exit_code=0
+ended_utc=2026-09-28T20:25:18Z

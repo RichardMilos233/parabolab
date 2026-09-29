@@ -1,0 +1,4 @@
+EstimatorIntegrity/PositiveSigmoidRisk.lean:139:6: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+EstimatorIntegrity/PositiveSigmoidRisk.lean:190:8: warning: declaration uses `sorry`

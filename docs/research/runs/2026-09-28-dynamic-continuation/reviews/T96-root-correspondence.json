@@ -1,0 +1,66 @@
+{
+  "date_local": "2026-09-29",
+  "verdict": "PASS D45 normalized fixed odd powers; PASS D46 explicitly scaled physical theorem and unscaled counterexample",
+  "root_review": "Read all1257 draft proof lines, final1266-line proof changes and lock table; read full930-line audit text before final typographical line splitting and rechecked all11 corrected passages in frozen944-line audit. Independently checked degree-dependent flow/saturation, actual parent and Gaussian law, solver algebra and FFT padding, both bootstraps/time-panel geometry/weights, strong risk/query/work/output accounting, full signed prior, mixed-L1 coefficient, every-positive-gap separation, adaptive seed/stopping reduction, and exact physical scaling counterexample. No mathematical repair required.",
+  "source_locks": {
+    "reviews/T94-odd-power-long-horizon-feasibility.md": "2600c29a2823aefd9a69578de113bc511179d97bdfbea7eb3a6861ac28b7e1d9",
+    "reviews/T96-odd-power-long-horizon-independent-audit.md": "b8f5f32be92c820bd8b955c5969406a49fa21e12a1b38c86d17bb7467ba1eda4",
+    "reviews/R20-polynomial-reaction-field-sampler-candidate.md": "b1e42a195c67942066894d04a11c28d7ba2951a6d6730977070e424ac84542b9",
+    "reviews/R20b-continuous-domain-addendum.md": "6c5e8b158ca269588c4200ca09c82f4ffa430e8aa0146a52022370ade352e527",
+    "reviews/R21-linear-tree-common-gaussian-candidate.md": "99f8a23c98332b6797ee1ecc9f0929d94950cd047acb17bcbea0df9052ff7461",
+    "04z-all-positive-diffusivity-sharp-queries.md": "57ef1d86ddba30ce9d54f316b0eb2dc97f407f7aeb4446a66b3103c28e0aedd4",
+    "reviews/T81-fixed-burnin-all-diffusion-upper-proof.md": "d9b249ed669897df319ca712fc4ad26625fc97e1a9b32b79eacaf497b290bae5",
+    "reviews/T84-all-diffusion-upper-independent-audit.md": "39cd98fcf957badbe382123bd1960eac7fb99441114c9433bd9ee0ff2d256d7d",
+    "reviews/T82-all-diffusion-prior-lower-proof.md": "0b331397bbda06ba02381009ce95bfd7656aabb4bd196bac5e67a616b3a2320a",
+    "reviews/T83-all-diffusion-lower-independent-audit.md": "902ee581593ace7d682fac5351a1288ccef09544d02893fbacc045782e03a56e",
+    "reviews/T87-all-diffusion-sharp-query-feasibility.md": "acd788e6ee5564778cd0663be99aab17fb61f22bdfb4b345ccade008f18feff1",
+    "04aa-polynomial-fields-and-linear-gaussian-preparation.md": "433c699d951c74fa6ba19166e159069130e1340a7a319aa0334b0ba4f8a1b8a1",
+    "reviews/T70-known-base-phase-work-feasibility.md": "46666ef19d4d66eb6196c486df726b6cc623f401fb717d925c82806bd3a905d6"
+  },
+  "synthesis": {
+    "path": "04ab-odd-power-long-horizon-complexity.md",
+    "sha256": "a8bd72ec33c69aae4d50126c72f6fd75ac4e1625cb08cfcef6a1b310918d18c0"
+  },
+  "same_problem": {
+    "domain": "normalized unit d-torus, fixed integers p,d,s>=1, fixed kappa>0",
+    "equation": "u_t=(kappa/2)Delta u+u-u^(2p+1)",
+    "input_class": "full signed smooth v, sup<=1/2,total-order derivatives through s<=1; no bound above s",
+    "oracle": "only exact scalar initial values, preprocessing/repeats charged",
+    "algorithm": "measurable arbitrary biased/adaptive/private input-independent seed/a.s. random stopping",
+    "query_risk": "common RMS1/4 point and strong profile supremum inside expectation",
+    "constructed_upper": "RMS<=1/8, all-seed [1+J(J-1)/2]k^d cap, k^d<=Cexp(gamma T)",
+    "gamma": "2d/(2s+d)",
+    "paid_model": "existing exact-real scalar primitive model; finite ideal index/address words",
+    "paid_result": "matching exponential rate, upper polynomial factor A=3d^2+22d+52",
+    "output": "<=C(1+T)^(3d^2+9d) real Fourier entries"
+  },
+  "checked_specifics": [
+    "rate D-1 parent (sum-product)/(D-1), cube bound and true PDE first-split law",
+    "degree-dependent sigma_p and saturation thresholds; fixed25 Lipschitz and p-dependent Gevrey constants",
+    "degree D projected forcing with FFT padding >2DH; no Galerkin maximum principle",
+    "early Gevrey/late analytic tails; complex startup disk, sector panels, fixed Picard counts and exact mode convolutions",
+    "Minkowski/Hilbert risk and coordinate clipping keep all Fourier correlations; no cutoff factor in sample count",
+    "mixed-L1 B_D=e^2[D(D-1)(D-2)+(3/2)D^2(D-1)^2]",
+    "original complete Hamming slices, no conditioning on PDE-good event; target separation91/160",
+    "centered nonlinear energy monotonicity and mean remainder bound valid for every positive spectral gap",
+    "full seed/word law plus Bernoulli KL/Pinsker and random stopping, expected query lower",
+    "physical R=(a/b)^(1/(2p)), scaled class R V/toleranceR/4,time aT,diffusionkappa/a",
+    "unscaled b=a8^(2p), aT>=log(1+2^(-2p))/(2p) permits zero queries at tolerance1/4"
+  ],
+  "not_claimed": [
+    "arbitrary inward polynomial long-time theorem",
+    "fractional/variable diffusion or systems",
+    "degree/diffusion uniform constants",
+    "exact Theta paid work or finite-bit cost",
+    "simultaneous all-time accuracy",
+    "full Lean PDE/solver composition",
+    "measured performance, worldwide priority or award significance"
+  ],
+  "formal_status": "T89/T93 and other finite probability gates accepted separately; no full odd-power theorem formalization",
+  "numerical_status": "zero new unknown-input acquisitions; frozen E4 total368270390; E5 still unrun",
+  "protected_initial_files": {
+    "count": 342,
+    "mismatches": []
+  },
+  "audit_final_repairs": "11 stray prose line-join plus signs removed before freeze; formatting only"
+}

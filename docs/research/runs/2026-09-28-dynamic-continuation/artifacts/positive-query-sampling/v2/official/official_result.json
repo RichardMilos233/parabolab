@@ -1,0 +1,32 @@
+{
+  "actual_pde_solution_computed": false,
+  "actual_point_calls": 336883488,
+  "artifact_version": "v2",
+  "clearance_sha256": "bec557a2ac4333151c40b04c69a62b3b422ffdb6b94873c57048b6f150e8b9a9",
+  "completed_cells": 180,
+  "completed_outputs": 18720,
+  "completed_utc": "2026-09-28T17:00:20.922783+00:00",
+  "implementation_source_sha256": "81eb2b122d325eca97d144adc00380114558c5ad35a830d9d4062fa95f63df08",
+  "independent_replay_executed": false,
+  "manifest_sha256": "9417c6dc18b3c761ee7cdf38c4cc8ececbfc048c0869b0fea5b96acaaae47bd5",
+  "plots_created": false,
+  "preflight_result_sha256": "ae85c9f1712ada9697bedc472ea273bf692b2cc7c4f0813f58a63ce085380c1c",
+  "schema_version": 1,
+  "status": "PASS",
+  "timing_seconds": {
+    "cell_array_and_metadata_serialization": 0.3291721697896719,
+    "diagnostics": 0.0,
+    "interpretation": "raw wall durations overlap measured serialization counters; accounting-excluded estimator time subtracts only measured ledger accounting",
+    "ledger_accounting_all_official_calls": 1.0319401659071445,
+    "ledger_jsonl_serialization": 0.9590939111076295,
+    "measured_estimator_calls_excluding_ledger_accounting": 4.864989265799522,
+    "measured_ledger_accounting_during_estimator_calls": 1.0319401659071445,
+    "plotting": 0.0,
+    "raw_inclusive_estimator_calls": 5.896929431706667,
+    "reference": 0.0,
+    "replicate_journal_jsonl_serialization": 1.3389846216887236,
+    "run_log_serialization_before_result_write": 0.012463914696127176,
+    "setup_before_first_cell": 0.6660144161432981,
+    "total_wall_before_result_write": 9.493612125050277
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "journal_path": "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/smooth-field-component/budget_journal.jsonl",
+  "journal_sha256": "c181089862c166756a5c0397fd503457563ce75cc7e32f084bb7435032607330",
+  "policy_path": "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/smooth-field-component/budget_policy.json",
+  "policy_sha256": "d64663e9675fc9c20fcdf5de28459b83b23c81cf6a71f7461e437565c6d3f559",
+  "state_path": "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/smooth-field-component/budget_state.json",
+  "state_sha256": "4c4b52c9349c754b8c75c2a2dbcad68760215aed09ec8780f9aab587912d2423",
+  "state_snapshot": {
+    "active_segment_reservations": {},
+    "completed_samples": {
+      "official": 0,
+      "preflight": 360,
+      "replay": 0
+    },
+    "exponential_draws": 3402,
+    "failed_samples": {
+      "official": 0,
+      "preflight": 0,
+      "replay": 0
+    },
+    "gaussian_draws": 3436,
+    "known_evaluator_calls": 2442,
+    "oracle_calls": {
+      "official": 0,
+      "preflight": 430,
+      "replay": 0,
+      "total": 430
+    },
+    "segments_generated": 3456,
+    "segments_reserved": 0,
+    "sequence": 2194,
+    "tuple_draw_calls": 286,
+    "tuple_indices_drawn": 430,
+    "uniform_draws": 362,
+    "updated_utc": "2026-09-28T21:59:05.693437+00:00",
+    "version": "e5-budget-v1"
+  },
+  "updated_utc": "2026-09-28T21:59:05.695037+00:00",
+  "version": "e5-budget-v1"
+}

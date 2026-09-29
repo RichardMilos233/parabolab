@@ -1,0 +1,11 @@
+{
+  "status": "PASS static parity",
+  "old_canvas_sha256": "b50570e376c8fd12ed10dc6c23e46bd7c3435a801a266d3d4b24766946ecffd6",
+  "candidate_sha256": "0c6f4a59cacbea9bc8f846fa7e20eb64817e7777ce72d8da9d79a083c065ed4f",
+  "old_top_level_constants_retained_verbatim": 28,
+  "local_links_checked": 29,
+  "missing_links": [],
+  "old_negative_baselines_retained": true,
+  "E3_counts_match_check_result": true,
+  "gui_render_verified": false
+}

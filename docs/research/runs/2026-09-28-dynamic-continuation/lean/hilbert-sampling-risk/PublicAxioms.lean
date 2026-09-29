@@ -1,0 +1,45 @@
+import EstimatorIntegrity.HilbertSamplingRisk
+
+open EstimatorIntegrity.HilbertSamplingRisk
+
+#print axioms sample_integrable
+#print axioms centered_memLp
+#print axioms centered_integrable
+#print axioms centered_sqNorm_integrable
+#print axioms sample_sqNorm_integrable
+#print axioms integral_centered
+#print axioms sampleMean_memLp
+#print axioms sampleMean_integrable
+#print axioms integral_sampleMean
+#print axioms sampleMean_sub_meanAverage
+#print axioms centered_inner_integrable
+#print axioms centered_indep
+#print axioms integral_inner_centered_eq_zero
+#print axioms integral_inner_centered
+#print axioms integral_norm_sum_centered_sq
+#print axioms sampleMean_error_memLp
+#print axioms sampleMean_error_sqNorm_integrable
+#print axioms integral_sampleMean_error_sq
+#print axioms integral_centered_sq_eq
+#print axioms integral_sampleMean_sub_commonMean_sq_le
+#print axioms norm_sum_sq_le_card_mul_sum_norm_sq
+#print axioms norm_bias_add_sum_sq_le
+#print axioms rawEstimator_sub_eq
+#print axioms rawEstimator_memLp
+#print axioms rawEstimator_aestronglyMeasurable
+#print axioms rawEstimator_sub_memLp
+#print axioms rawEstimator_sub_sqNorm_integrable
+#print axioms rawEstimator_pointwise_sq_le
+#print axioms rawEstimator_risk_le
+#print axioms anchored_rawEstimator_sub_memLp
+#print axioms anchored_rawEstimator_sqNorm_integrable
+#print axioms anchored_rawEstimator_risk_le
+#print axioms boxClip_apply
+#print axioms boxClip_fixed
+#print axioms boxClip_continuous
+#print axioms boxClip_sub_sqNorm_le
+#print axioms boxClip_sub_norm_le
+#print axioms boxClip_rawEstimator_risk_le
+#print axioms boundedLinear_anchored_sub_memLp
+#print axioms boundedLinear_anchored_sqNorm_integrable
+#print axioms boundedLinear_anchored_risk_le

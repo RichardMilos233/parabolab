@@ -1,0 +1,29 @@
+started_utc=2026-09-28T20:29:52Z
+cwd=/Users/michael/Desktop/NTU/fyp/parabolab
+command=/usr/bin/shasum -a 256 -c /Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/SHA256SUMS 
+stdout_stderr_begin
+/Users/michael/.cursor/projects/Users-michael-Desktop-NTU-fyp-parabolab/canvases/dynamic-continuation-evidence.canvas.tsx: OK
+docs/research/runs/2026-09-28-dynamic-continuation/04z-all-positive-diffusivity-sharp-queries.md: OK
+docs/research/runs/2026-09-28-dynamic-continuation/reviews/T90-root-correspondence.json: OK
+formal/EstimatorIntegrity/UniformSliceConditioning.lean: OK
+docs/research/runs/2026-09-28-dynamic-continuation/06n-uniform-slice-conditioning-lean.md: OK
+docs/research/runs/2026-09-28-dynamic-continuation/reviews/T86-root-correspondence.json: OK
+docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/dynamic-continuation-evidence.original.canvas.tsx: OK
+docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/dynamic-continuation-evidence.candidate.canvas.tsx: OK
+docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/dynamic-continuation-evidence.bundle.js: OK
+docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/Capture.zsh: OK
+docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/validate.cjs: OK
+docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/tsconfig.json: OK
+docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/parity.log: OK
+docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/typescript.log: OK
+docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/bundle.log: OK
+docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/environment.log: OK
+docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/esbuild-version.log: OK
+docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/semantic-diff.log: OK
+docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/source-manifest.json: OK
+docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/check-commands.json: OK
+docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/validation-manifest.json: OK
+docs/research/runs/2026-09-28-dynamic-continuation/reviews/T92-canvas-packaging-correspondence.md: OK
+stdout_stderr_end
+exit_code=0
+ended_utc=2026-09-28T20:29:52Z

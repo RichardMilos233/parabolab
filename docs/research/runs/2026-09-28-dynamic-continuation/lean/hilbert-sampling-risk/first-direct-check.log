@@ -1,0 +1,146 @@
+label: first-direct-check
+started_utc: 2026-09-28T20:06:40Z
+cwd: /Users/michael/Desktop/NTU/fyp/parabolab/formal
+source_sha256: b396bac2067f0d19874bd20cbbd91ababda6ddb71eecb117054b7520ab644be8
+command: /Users/michael/.elan/bin/lake env lean EstimatorIntegrity/HilbertSamplingRisk.lean
+--- stdout+stderr ---
+EstimatorIntegrity/HilbertSamplingRisk.lean:48:0: warning: automatically included section variable(s) unused in theorem `EstimatorIntegrity.HilbertSamplingRisk.sample_integrable`:
+  [InnerProductSpace ℝ H]
+  [CompleteSpace H]
+  [MeasurableSpace H]
+  [BorelSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [InnerProductSpace ℝ H] [CompleteSpace H] [MeasurableSpace H] [BorelSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:53:0: warning: automatically included section variable(s) unused in theorem `EstimatorIntegrity.HilbertSamplingRisk.centered_memLp`:
+  [CompleteSpace H]
+  [MeasurableSpace H]
+  [BorelSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] [MeasurableSpace H] [BorelSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:66:0: warning: automatically included section variable(s) unused in theorem `EstimatorIntegrity.HilbertSamplingRisk.sample_sqNorm_integrable`:
+  [InnerProductSpace ℝ H]
+  [CompleteSpace H]
+  [MeasurableSpace H]
+  [BorelSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [InnerProductSpace ℝ H] [CompleteSpace H] [MeasurableSpace H] [BorelSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:73:49: error: Application type mismatch: The argument
+  integrable_const
+has type
+  ∀ (c : ?m.52), Integrable (fun x => c) ?m.54
+but is expected to have type
+  Integrable ?m.40 μ
+in the application
+  integral_sub (MemLp.integrable ?m.48 hY) integrable_const
+EstimatorIntegrity/HilbertSamplingRisk.lean:71:34: error: unsolved goals
+Ω : Type u_1
+H : Type u_2
+inst✝⁶ : MeasurableSpace Ω
+inst✝⁵ : NormedAddCommGroup H
+inst✝⁴ : InnerProductSpace ℝ H
+inst✝³ : CompleteSpace H
+inst✝² : MeasurableSpace H
+inst✝¹ : BorelSpace H
+μ : Measure Ω
+inst✝ : IsProbabilityMeasure μ
+Y : Ω → H
+hY : MemLp Y 2 μ
+⊢ ∫ (ω : Ω), Y ω - ∫ (x : Ω), Y x ∂μ ∂μ = 0
+EstimatorIntegrity/HilbertSamplingRisk.lean:80:8: error: typeclass instance problem is stuck
+  IsBoundedSMul ?m.52 H
+
+Note: Lean will not try to resolve this typeclass instance problem because the first, third, fifth, and seventh type arguments to `IsBoundedSMul` contain metavariables. These arguments must be fully determined before Lean will try to resolve the typeclass.
+
+Hint: Adding type annotations and supplying implicit arguments to functions can give Lean more information for typeclass resolution. For example, if you have a variable `x` that you intend to be a `Nat`, but Lean reports it as having an unresolved type like `?m`, replacing `x` with `(x : Nat)` can get typeclass resolution un-stuck.
+EstimatorIntegrity/HilbertSamplingRisk.lean:96:0: warning: automatically included section variable(s) unused in theorem `EstimatorIntegrity.HilbertSamplingRisk.sampleMean_sub_meanAverage`:
+  [CompleteSpace H]
+  [MeasurableSpace H]
+  [BorelSpace H]
+  [IsProbabilityMeasure μ]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] [MeasurableSpace H] [BorelSpace H] [IsProbabilityMeasure μ] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:119:2: error: Type mismatch: After simplification, term
+  IndepFun.comp (hIndep hij)
+    (have this := Measurable.sub_const measurable_id' (∫ (ω : Ω), Y i ω ∂μ);
+    this)
+    (have this := Measurable.sub_const measurable_id' (∫ (ω : Ω), Y j ω ∂μ);
+    this)
+ has type
+  @IndepFun Ω H H inst✝⁶ inst✝² inst✝² ((fun x => x - ∫ (ω : Ω), Y i ω ∂μ) ∘ Y i)
+    ((fun x => x - ∫ (ω : Ω), Y j ω ∂μ) ∘ Y j) μ
+but is expected to have type
+  @IndepFun Ω H H inst✝⁶ inst✝² inst✝² (centered μ (Y i)) (centered μ (Y j)) μ
+EstimatorIntegrity/HilbertSamplingRisk.lean:133:2: error: Type mismatch: After simplification, term
+  h
+ has type
+  @Eq ℝ (∫ (ω : Ω), ((innerSL ℝ) (centered μ (Y i) ω)) (centered μ (Y j) ω) ∂μ) 0
+but is expected to have type
+  @Eq ℝ (∫ (ω : Ω), ⟪centered μ (Y i) ω, centered μ (Y j) ω⟫_ℝ ∂μ) 0
+EstimatorIntegrity/HilbertSamplingRisk.lean:143:2: error: unsolved goals
+case pos
+Ω : Type u_1
+H : Type u_2
+inst✝⁶ : MeasurableSpace Ω
+inst✝⁵ : NormedAddCommGroup H
+inst✝⁴ : InnerProductSpace ℝ H
+inst✝³ : CompleteSpace H
+inst✝² : MeasurableSpace H
+inst✝¹ : BorelSpace H
+μ : Measure Ω
+inst✝ : IsProbabilityMeasure μ
+n : ℕ
+Y : Fin n → Ω → H
+hY : ∀ (i : Fin n), MemLp (Y i) 2 μ
+hIndep : Pairwise fun i j => Y i ⟂ᵢ[μ] Y j
+i : Fin n
+⊢ ∫ (ω : Ω), ‖centered μ (Y i) ω‖ ^ 2 ∂μ = if True then ∫ (ω : Ω), ‖centered μ (Y i) ω‖ ^ 2 ∂μ else 0
+EstimatorIntegrity/HilbertSamplingRisk.lean:144:15: warning: This simp argument is unused:
+  if_pos rfl
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [real_inner_self_eq_norm_sq]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:184:14: error(lean.unknownIdentifier): Unknown identifier `Function.const_smul_apply`
+EstimatorIntegrity/HilbertSamplingRisk.lean:184:2: error: Type mismatch: After simplification, term
+  hscaled
+ has type
+  MemLp ((1 / ↑n) • ∑ i, centered μ (Y i)) 2 μ
+but is expected to have type
+  MemLp (fun ω => (1 / ↑n) • ∑ i, centered μ (Y i) ω) 2 μ
+EstimatorIntegrity/HilbertSamplingRisk.lean:203:2: error: Tactic `rfl` failed: The left-hand side
+  (1 / ↑n) ^ 2 * ∑ i, ∫ (ω : Ω), ‖centered μ (Y i) ω‖ ^ 2 ∂μ
+is not definitionally equal to the right-hand side
+  1 / ↑n ^ 2 * ∑ i, ∫ (ω : Ω), ‖Y i ω - ∫ (x : Ω), Y i x ∂μ‖ ^ 2 ∂μ
+
+Ω : Type u_1
+H : Type u_2
+inst✝⁶ : MeasurableSpace Ω
+inst✝⁵ : NormedAddCommGroup H
+inst✝⁴ : InnerProductSpace ℝ H
+inst✝³ : CompleteSpace H
+inst✝² : MeasurableSpace H
+inst✝¹ : BorelSpace H
+μ : Measure Ω
+inst✝ : IsProbabilityMeasure μ
+n : ℕ
+hn : 0 < n
+Y : Fin n → Ω → H
+hY : ∀ (i : Fin n), MemLp (Y i) 2 μ
+hIndep : Pairwise fun i j => Y i ⟂ᵢ[μ] Y j
+hnR : 0 < ↑n
+⊢ (1 / ↑n) ^ 2 * ∑ i, ∫ (ω : Ω), ‖centered μ (Y i) ω‖ ^ 2 ∂μ =
+    1 / ↑n ^ 2 * ∑ i, ∫ (ω : Ω), ‖Y i ω - ∫ (x : Ω), Y i x ∂μ‖ ^ 2 ∂μ
+EstimatorIntegrity/HilbertSamplingRisk.lean:207:8: warning: declaration uses `sorry`
+EstimatorIntegrity/HilbertSamplingRisk.lean:213:8: warning: declaration uses `sorry`
+--- end stdout+stderr ---
+exit_code: 1
+finished_utc: 2026-09-28T20:07:30Z

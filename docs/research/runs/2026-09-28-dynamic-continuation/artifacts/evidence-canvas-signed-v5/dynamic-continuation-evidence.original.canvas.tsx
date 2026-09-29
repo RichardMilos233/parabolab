@@ -1,0 +1,1037 @@
+import {
+  Callout,
+  Card,
+  CardBody,
+  CardHeader,
+  Grid,
+  H1,
+  H2,
+  LineChart,
+  Link,
+  Pill,
+  Row,
+  Select,
+  Stack,
+  Stat,
+  Table,
+  Text,
+  useHostTheme,
+  useState,
+} from "cursor/canvas";
+
+const times = [0,0.08,0.16,0.24,0.32,0.4,0.48,0.56,0.64,0.72,0.8,0.88,0.96,1.04,1.12,1.2,1.28,1.36,1.44,1.52,1.6,1.68,1.76,1.84,1.92,2,2.08,2.16,2.24,2.32,2.4,2.48,2.56,2.64,2.72,2.8000000000000003,2.88,2.96,3.04,3.12,3.2,3.2800000000000002,3.36,3.44,3.52,3.6,3.68,3.7600000000000002,3.84,3.92,4,4.08,4.16,4.24,4.32,4.4,4.48,4.5600000000000005,4.64,4.72,4.8,4.88,4.96,5.04,5.12,5.2,5.28,5.36,5.44,5.5200000000000005,5.6000000000000005,5.68,5.76,5.84,5.92,6,6.08,6.16,6.24,6.32,6.4,6.48,6.5600000000000005,6.640000000000001,6.72,6.8,6.88,6.96,7.04,7.12,7.2,7.28,7.36,7.44,7.5200000000000005,7.6000000000000005,7.68,7.76,7.84,7.92,8,8.08,8.16,8.24,8.32,8.4,8.48,8.56,8.64,8.72,8.8,8.88,8.96,9.040000000000001,9.120000000000001,9.200000000000001,9.28,9.36,9.44,9.52,9.6,9.68,9.76,9.84,9.92,10,10.08,10.16,10.24,10.32,10.4,10.48,10.56,10.64,10.72,10.8,10.88,10.96,11.040000000000001,11.120000000000001,11.200000000000001,11.28,11.36,11.44,11.52,11.6,11.68,11.76,11.84,11.92,12,12.08,12.16,12.24,12.32,12.4,12.48,12.56,12.64,12.72,12.8,12.88,12.96,13.040000000000001,13.120000000000001,13.200000000000001,13.280000000000001,13.36,13.44,13.52,13.6,13.68,13.76,13.84,13.92,14,14.08,14.16,14.24,14.32,14.4,14.48,14.56,14.64,14.72,14.8,14.88,14.96,15.040000000000001,15.120000000000001,15.200000000000001,15.280000000000001,15.36,15.44,15.52,15.6,15.68,15.76,15.84,15.92,16];
+const empiricalRms = [0,0.00023339408029152998,0.0003784332342046206,0.0005036523404201009,0.0004746775942779389,0.0004347182650571657,0.0007309578549881803,0.0004422355218909285,0.0004403457402084484,0.000719247790463001,0.0009590485308689482,0.0007629249782335103,0.0008768325309002412,0.0011734078562671958,0.0011404709982474402,0.001510570355727619,0.0018869374148109761,0.0019515791924395582,0.0021196228421959842,0.0017777722818622514,0.0018172240224462012,0.00234227611374183,0.002023578017299989,0.0018131219329032815,0.001510844855246385,0.0013394761624785573,0.0013376087576212762,0.0010862705014295124,0.00116603733190151,0.0013002054346777326,0.0018111534262245158,0.0017851973748871277,0.0018244300991134934,0.0017425649863312617,0.0021450485932708314,0.0024284830593536573,0.0022493217544041896,0.0023672898338336556,0.0019579752466244954,0.0020137280456022405,0.0021471798777769635,0.001929073729303542,0.0013482495605855792,0.0010876461424942398,0.0009783630576227767,0.0007913275901407557,0.0005297245406827146,0.000878304816894741,0.001049830028880273,0.0012788684902770937,0.0013793555306341552,0.0009357566694678011,0.0008744327035888887,0.0006301270473862713,0.0005949872376023156,0.0009727125097205828,0.0010856056798561622,0.0014022874939508482,0.0016797052792468631,0.0018625051213208054,0.002258402256167908,0.0016585673788167892,0.001310090041033374,0.0016077250025341048,0.0017091843294505206,0.0015577549838365521,0.0016083215661434052,0.0013273433777414925,0.0017351434597462885,0.0023128646101954475,0.002521097904127024,0.002910895428399663,0.003078270203235183,0.00304945167803442,0.00287631718725785,0.002840002970833056,0.002291375258155617,0.002378727519012544,0.0022255084232937926,0.0025786990270745833,0.002632222081746047,0.0021516529870555267,0.002252456734535609,0.0016604606419398614,0.0015216060308207199,0.0023268349656839237,0.0028335981917425005,0.0035760788292035234,0.0029168168073772896,0.0033464490498027683,0.0031675047522717833,0.002862805382243056,0.0028301770701410715,0.002646391432044081,0.0025977584750024674,0.0027514189735796044,0.0022714270193954,0.0021168193370974045,0.002463752141741039,0.002249310813553365,0.001976846176790009,0.001426403287671042,0.001512332921263693,0.0012619721044253246,0.0014161740700962405,0.0016149649668466919,0.002033436807288492,0.0022290867137502984,0.0025371769585057764,0.002280862768547315,0.002964034451337882,0.003019046545815959,0.0033667368438044685,0.0037569478057603075,0.003903670035959042,0.003940481788456896,0.004117203676336045,0.004283056977782264,0.004301094890799265,0.004092416804684282,0.004143172046840106,0.0037297024676069017,0.004176019521789957,0.003698910024128224,0.0037384541098862733,0.004013755469617206,0.004127987452345937,0.004396649341446307,0.003975946057421026,0.003979674026873933,0.0038929292223919168,0.0034749071920048853,0.0034572901129390006,0.0034570560415171903,0.0034431838416114973,0.0034781239633636407,0.003315751947728187,0.0033940239165114613,0.0030599101457576498,0.0029714233751703388,0.0027185266753584035,0.0031981758195395037,0.0033672880419520256,0.003718105306127145,0.004199882854325327,0.003915029303037212,0.003838780332482151,0.004069711977800643,0.003749209709393859,0.0037371347318547656,0.0034920186833606536,0.003550256343512401,0.0033856436360883203,0.0034030267257128674,0.003570014960387322,0.004003611528317124,0.003874106919670075,0.004032167251146706,0.0040962178615878775,0.004680482579961569,0.00429694869103198,0.003950525169198855,0.004117564033008005,0.0039922960937781365,0.004449619450760829,0.004234289536001394,0.004222522311746394,0.004311257821127961,0.0041777305039068045,0.004140012328955068,0.0038698022284405103,0.003490612885542874,0.003415561660999734,0.003179932371091468,0.003345930477726196,0.003806357376898831,0.00333805474835873,0.0032165284883107345,0.003275082008959066,0.003415525459464136,0.0038206320605214516,0.003746640793326679,0.003633832678634308,0.0031187236958893708,0.002996910412783156,0.003128687379793468,0.003262294699917086,0.0035080597378183346,0.004003934481368954,0.004381898477312108,0.0038599348497812425,0.003807865429213176,0.0036084291828965185,0.0033073178550298973,0.0032015904454595363,0.002778125301223682,0.002936893975379868,0.0027093297332696094,0.002746160442497317,0.0036177458506608563,0.003539624140161601];
+const midpoint095g = [0.010945815911642037,0.010732532959291363,0.01052116182016813,0.010311540784997708,0.010103630781016674,0.009897423269925473,0.009692915034015577,0.009490102183768034,0.00928897930797963,0.009089539770864935,0.008891776117364508,0.008695680374460588,0.008501244243551375,0.008308459216200848,0.00811731664216826,0.007927807769226839,0.007739923766722856,0.007553655739879444,0.007368994738867987,0.007185931764928976,0.007004457774830104,0.0068245636843895134,0.006646240371471221,0.006469478678684566,0.006294269415920024,0.006120603362795524,0.005948471271060789,0.0057778638669867865,0.00560877185376129,0.005441185913906358,0.005275096711733376,0.005110494895849807,0.0049473711017367986,0.004785715954417974,0.004625520071244621,0.004466774064828745,0.0043094685461636814,0.004153594127980335,0.003999141428402752,0.003846101074981465,0.003694463709207597,0.0035442199916415227,0.0033953606078289656,0.003247876275236401,0.0031017577515119604,0.002956995844490449,0.0028135814245058652,0.0026715054398016146,0.00253075893613805,0.0023913330821704842,0.0022532192028709946,0.002116408824351125,0.001980893735135433,0.001846666071656606,0.0017137184402323028,0.001582044095415927,0.00145163720803555,0.0013224932807810515,0.0011946098161341157,0.0010679874359871692,0.0009426318548738123,0.0008185575761542394,0.0006957953617580644,0.0005744088749810594,0.0004545369329049672,0.0003365225887790585,0.0002214382932255319,0.00011463618972301581,0.00006898423582806336,0.0001519705814638516,0.00025956545004248306,0.00036991375165393216,0.0004803502469379035,0.000590208006172467,0.0006992491690587449,0.0008073715162943428,0.0009145265886977706,0.0010206906660152556,0.0011258526893456904,0.0012300086162693245,0.0013331585392375998,0.0014353051087041201,0.0015364526202841506,0.0016366064611235353,0.0017357727606901606,0.0018339581629921665,0.0019311696736208366,0.0020274145543909923,0.0021227002491173304,0.0022170343302647844,0.002310424459903831,0.002402878360666113,0.002494403793812703,0.0025850085424476677,0.0026747003985063272,0.002763487152551636,0.0028513765856866273,0.00293837646307828,0.0030244945287240415,0.003109738501184898,0.0031941160700781407,0.0032776348931725955,0.0033603025939664536,0.0034421267596525624,0.0035231149394009597,0.003603274642899924,0.0036826133391108617,0.003761138455200419,0.0038388573756226183,0.003915777441324607,0.003991905949060716,0.004067250150796066,0.004141817253188944,0.00421561441714085,0.0042886487574053025,0.004360927342248507,0.004432457193154836,0.004503245284573602,0.004573298543700614,0.004642623850292537,0.004711228036510339,0.00477911788678824,0.004846300137727389,0.004912781478010782,0.004978568548338061,0.005043667941378881,0.005108086201743636,0.005171829825969476,0.0052349052625208356,0.00529731891180442,0.005359077126196917,0.005420186210084063,0.005480652419911904,0.005540481964248311,0.005599681003854927,0.005658255651768247,0.005716211973390621,0.005773555986589047,0.005830293661803094,0.005886430922159433,0.005941973643595348,0.0059969276549880855,0.006051298738292106,0.00610509262868163,0.006158315014701,0.006210971538419238,0.006263067795591532,0.006314609335826379,0.006365601662756518,0.006416050234216516,0.006465960462423934,0.006515337714166034,0.006564187310989888,0.00661251452939793,0.006660324601046089,0.006707622712947208,0.006754414007677248,0.006800703583585044,0.006846496495005942,0.006891797752478615,0.006936612322964037,0.006980945130068581,0.007024801054269486,0.00706818493314234,0.007111101561592243,0.007153555692086534,0.007195552034890064,0.007237095258302572,0.007278189988898449,0.007318840811767641,0.00735905227075953,0.007398828868727273,0.007438175067774957,0.007477095289505338,0.00751559391526947,0.007553675286417457,0.007591343704550595,0.007628603431774877,0.007665458690954818,0.00770191366596905,0.0077379725019661085,0.007773639305621888,0.007808918145396664,0.007843813051793982,0.007878328017619035,0.007912466998238676,0.007946233911840718,0.007979632639694378,0.008012667026410536,0.008045340880202976,0.008077657973148479,0.008109622041448614,0.008141236785690516,0.008172505871107625,0.008203432927841038,0.008234021551200222,0.008264275301923777,0.008294197706439969,0.008323792257126723,0.008353062412571405,0.008382011597830955];
+const equilibriumG = [0.021891631823283946,0.02167828214308843,0.021466814317783738,0.02125711905052249,0.02104915962219142,0.020842920379029815,0.02063839147544801,0.02043556447602111,0.020234431156270053,0.020034983215817082,0.01983721223487202,0.019641109685744704,0.019446666950631887,0.01925387533557026,0.01906272608007695,0.018873210363750892,0.01868531931100132,0.018499043994679026,0.018314375439079718,0.01813130462258678,0.017949822480102615,0.017769919905353326,0.017591587753110323,0.017414816841354333,0.01723959795339607,0.017065921839958857,0.016893779221229293,0.01672316078887624,0.016554057208040065,0.016386459119292388,0.01622035714056719,0.01605574186906195,0.015892603883110226,0.015730933744025205,0.015570721997913855,0.0154119591774619,0.015254635803690061,0.015098742387680499,0.014944269432274797,0.01479120743374228,0.014639546883419157,0.014489278269319237,0.014340392077714845,0.014192878794689388,0.014046728907660084,0.0139019329068739,0.01375848128687237,0.013616364547929725,0.013475573197461356,0.013336097751405058,0.0131979287355732,0.013061056686977263,0.01292547215512474,0.012791165703288086,0.01265812790974602,0.01252634936899796,0.012395820692951233,0.012266532512081305,0.012138475476565078,0.012011640257388316,0.011886017547425916,0.011761598062497183,0.011638372542394661,0.011516331751887666,0.011395466481700532,0.01127576754946531,0.011157225800650395,0.011039832109464236,0.010923577379735093,0.010808452545765977,0.010694448573166858,0.010581556459662841,0.010469767235879179,0.01035907196610382,0.010249461749026714,0.010140927718456835,0.010033461044018008,0.009927052931821771,0.009821694625119845,0.00971737740493434,0.009614092590668123,0.00951183154069414,0.009410585652924098,0.009310346365357608,0.009211105156611582,0.009112853546430176,0.009015583096175124,0.008919285409298174,0.008823952131794226,0.008729574952636487,0.00863614560419428,0.0085436558626318,0.008452097548291097,0.00836146252605691,0.008271742705705203,0.008182930042235406,0.008095016536185815,0.008007994233933894,0.0079218552279804,0.007836591657218386,0.007752195707187239,0.007668659610311975,0.007585975646127443,0.007504136141489621,0.007423133470771817,0.007342960056047668,0.007263608367260678,0.007185070922381123,0.007107340287548876,0.0070304090772054855,0.006954269954212058,0.006878915629956498,0.006804338864448361,0.006730532466402153,0.006657489293309486,0.006585202251499917,0.00651366429619165,0.006442868431530661,0.0063728077106206486,0.0063034752355422465,0.006234864157362298,0.006166967676134226,0.006099779040888137,0.006033291549612335,0.005967498549225989,0.005902393435542954,0.005837969653226762,0.005774220695737856,0.005711140105272964,0.0056487214726958996,0.005586958437460878,0.005525844687529122,0.005465373959277411,0.005405540037400084,0.005346336754803914,0.005287757992496801,0.005229797679469218,0.005172449792570248,0.005115708356376642,0.005059567443057208,0.005004021172229973,0.004949063710815097,0.004894689272881304,0.004840892119488342,0.004787666558522781,0.004735006944530723,0.004682907678544524,0.00463136320790479,0.004580368026079365,0.004529916672476423,0.004480003732254671,0.004430623836128611,0.004381771660170991,0.004333441925610331,0.004285629398626343,0.004238328890140519,0.004191535255604339,0.004145243394784298,0.004099448251543401,0.004054144813619808,0.0040093281124036,0.003964993222709708,0.003921135262548724,0.003877749392895931,0.0038348308174568596,0.0037923747824314983,0.0037503765762761376,0.003708831529463288,0.003667735014239367,0.003627082444381404,0.0035868692749509035,0.0035470910020473836,0.0035077431625592246,0.0034688213339140357,0.003430321133827251,0.0033922382200496978,0.0033545682901138622,0.003317307081078892,0.0032804503692753467,0.0032439939700482593,0.0032079337375000893,0.0031722655642320544,0.003136985381085973,0.003102089156884297,0.003067572898170701,0.0030334326489491166,0.002999664490423481,0.0029662645407364445,0.002933228954708266,0.0029005539235747776,0.002868235674726545,0.002836270471446358,0.002804654612647777,0.0027733844326137307,0.002742456300734566,0.002711866621246729,0.00268161183297145,0.002651688409053677,0.0026220928567015586,0.0025928217169261898,0.0025638715642810144];
+const theoremEnvelope = times.map(() => 0.02);
+
+const criticalCutoffDepths = ["2", "4", "6", "8"];
+const criticalKAlpha05 = [
+  1.1727735728230323, 1.6451641432631638, 1.7945486507244532,
+  1.8417882109301969,
+];
+const criticalKAlpha1 = [
+  2.5760104874930458, 5.5761516069771972, 8.576281902215131,
+  11.576412196367531,
+];
+const criticalKAlpha2 = [
+  13.130063940849073, 149.39623017105203, 1511.8894951535653,
+  15136.805284373852,
+];
+const cuspRatioAlpha05 = [
+  0.9413935628674814, 0.9427948993201681, 0.9428089001606945,
+  0.9428090401678498,
+];
+const cuspRatioAlpha1 = [
+  0.9966666666666667, 0.9999666666666667, 0.9999996666666666,
+  0.9999999966666666,
+];
+const cuspRatioAlpha2 = [
+  1.3233533333333333, 1.3332333353333334, 1.3333323333335333,
+  1.3333333233333334,
+];
+
+const twoBarrierHorizons = ["0", "0.25", "1", "4", "16", "64", "256"];
+const twoBarrierRmsX0 = [
+  0, 0.00039716783415984393, 0.002203031202009768,
+  0.004179564524291642, 0.010253539797496892,
+  0.005207344790732692, 0.00388407979942406,
+];
+const twoBarrierRmsXPi2 = [
+  0, 0.00216515922418698, 0.004378670881220735,
+  0.003369637444526398, 0.005127392329648042,
+  0.001906952340139489, 0.0015227722738745517,
+];
+const twoBarrierRmsXPi = [
+  0, 0.000588789955955046, 0.0017596396175536943,
+  0.0023989368070094492, 0.007902366711021114,
+  0.0023401071601213273, 0.004990921616023957,
+];
+
+const reportPath =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/07-report.md";
+const artifactAuditPath =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T14-artifact-summary.md";
+const noncompactAuditPath =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T15-noncompact-quadratic-audit.md";
+const relativeCostAuditPath =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T20-relative-cost-audit.md";
+const summaryPath =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/numerics/summary_dynamic.json";
+const criticalChecksPath =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/numerics/critical_frontier_checks.json";
+const criticalAuditPath =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T25-critical-frontier-checks.md";
+const twoBarrierFigurePath =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/two-barrier-results-v2.png";
+const twoBarrierDerivedPath =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/audit-v1/derived_tables.json";
+const twoBarrierAuditSummaryPath =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/audit-v1/audit_summary.json";
+const twoBarrierAuditPath =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T38-two-barrier-audit.md";
+const twoBarrierImplementationPath =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T35-two-barrier-implementation.md";
+const claimsPath =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/03-claims.md";
+const d22Path =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/04o-unstable-phase-query-lower-bound.md";
+const d23Path =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/04p-fixed-zero-query-lower-bound.md";
+const d24Path =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/04q-matching-positive-query-complexity.md";
+const d25Path =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/04r-signed-many-bump-complexity.md";
+const d26Path =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/04s-general-reaction-query-complexity.md";
+const t42Path =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/06g-query-information-lean.md";
+const t43Path =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/06h-oracle-transcript-lean.md";
+const t51Path =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/06i-positive-sigmoid-lean.md";
+const t52Path =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/06j-positive-sample-mean-lean.md";
+const t42t43RootPath =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T42-T43-root-correspondence.json";
+const t51RootPath =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T51-root-correspondence.json";
+const t52RootPath =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T52-root-correspondence.json";
+const e3ResultPath =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/query-information/checks-v1/check_result.json";
+const e3ManifestPath =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/query-information/checks-v1/execution_manifest.json";
+const e3ReportPath =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T49-query-information-implementation.md";
+const e3RootAuditPath =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T49-root-output-audit.json";
+
+const d27Path =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/04t-matching-signed-query-complexity.md";
+const t59Path =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T59-signed-upper-independent-audit.md";
+
+const d28Path =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/04u-all-dimension-signed-query-lower-bound.md";
+const t64Path =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T64-all-dimension-lower-independent-audit.md";
+
+const d29Path =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/04v-all-dimension-matching-signed-query-complexity.md";
+const t67Path =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T67-all-dimension-upper-independent-audit.md";
+const t67RootPath =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T67-root-correspondence.json";
+const d30Path =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/R10b-finite-burnin-derivative-sampling.md";
+const t68Path =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T68-finite-burnin-sampler-independent-audit.md";
+const t68RootPath =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T68-root-correspondence.json";
+const t62Path =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/06k-bernoulli-information-lean.md";
+const t62RootPath =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T62-root-correspondence.json";
+const e4StatisticsRawPath =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/audit-v1/statistics_raw.npz";
+const e4StoredAuditPath =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/audit-v1/stored_audit.json";
+const e4FigurePath =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/positive-query-sampling/figure-v2/positive_query_evidence_v2.png";
+const e4AuditPath =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T66-positive-query-independent-audit.md";
+const e4FigureRecipePath =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T66-figure-recipe-correspondence.md";
+const e4FigureRootPath =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T66-figure-root-correspondence.json";
+const d33Path =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/04w-signed-ideal-work-exponential-rate.md";
+const t69Path =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T69-stable-graph-sampler-feasibility.md";
+const t73Path =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T73-stable-graph-sampler-independent-audit.md";
+const t73RootPath =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T73-root-correspondence.json";
+const t74Path =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T74-known-base-phase-work-independent-audit.md";
+const t74RootPath =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T74-root-correspondence.json";
+const t72Path =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/06l-finite-conditional-information-lean.md";
+const t72RootPath =
+  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T72-root-correspondence.json";
+
+const e4PooledCells = [{"T":12,"nominal_z":0,"schedule":"growing_0p125","rms":0,"n_per_output":51,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":19584,"zero_frequency":1},{"T":12,"nominal_z":0,"schedule":"growing_0p5","rms":0,"n_per_output":202,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":77568,"zero_frequency":1},{"T":12,"nominal_z":0,"schedule":"growing_2","rms":0,"n_per_output":807,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":309888,"zero_frequency":1},{"T":12,"nominal_z":0,"schedule":"theorem_96","rms":0,"n_per_output":38730,"pooled_replications":24,"replications_per_seed":8,"actual_total_queries":929520,"zero_frequency":1},{"T":12,"nominal_z":0,"schedule":"fixed_51","rms":0,"n_per_output":51,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":19584,"zero_frequency":1},{"T":12,"nominal_z":0.25,"schedule":"growing_0p125","rms":0.18764893755824996,"n_per_output":51,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":19584,"zero_frequency":0.1171875},{"T":12,"nominal_z":0.25,"schedule":"growing_0p5","rms":0.0961102780374986,"n_per_output":202,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":77568,"zero_frequency":0},{"T":12,"nominal_z":0.25,"schedule":"growing_2","rms":0.05492524928752456,"n_per_output":807,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":309888,"zero_frequency":0},{"T":12,"nominal_z":0.25,"schedule":"theorem_96","rms":0.008933111852226727,"n_per_output":38730,"pooled_replications":24,"replications_per_seed":8,"actual_total_queries":929520,"zero_frequency":0},{"T":12,"nominal_z":0.25,"schedule":"fixed_51","rms":0.19258363572193474,"n_per_output":51,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":19584,"zero_frequency":0.09635416666666667},{"T":12,"nominal_z":1,"schedule":"growing_0p125","rms":0.27007676365834027,"n_per_output":51,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":19584,"zero_frequency":0.010416666666666666},{"T":12,"nominal_z":1,"schedule":"growing_0p5","rms":0.13518885099978706,"n_per_output":202,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":77568,"zero_frequency":0},{"T":12,"nominal_z":1,"schedule":"growing_2","rms":0.0620218603126186,"n_per_output":807,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":309888,"zero_frequency":0},{"T":12,"nominal_z":1,"schedule":"theorem_96","rms":0.008970038185663564,"n_per_output":38730,"pooled_replications":24,"replications_per_seed":8,"actual_total_queries":929520,"zero_frequency":0},{"T":12,"nominal_z":1,"schedule":"fixed_51","rms":0.2615770485059291,"n_per_output":51,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":19584,"zero_frequency":0.013020833333333334},{"T":12,"nominal_z":4,"schedule":"growing_0p125","rms":0.1177766511641214,"n_per_output":51,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":19584,"zero_frequency":0},{"T":12,"nominal_z":4,"schedule":"growing_0p5","rms":0.017657402709533816,"n_per_output":202,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":77568,"zero_frequency":0},{"T":12,"nominal_z":4,"schedule":"growing_2","rms":0.006973048525159127,"n_per_output":807,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":309888,"zero_frequency":0},{"T":12,"nominal_z":4,"schedule":"theorem_96","rms":0.0009912525155368554,"n_per_output":38730,"pooled_replications":24,"replications_per_seed":8,"actual_total_queries":929520,"zero_frequency":0},{"T":12,"nominal_z":4,"schedule":"fixed_51","rms":0.12788690131511593,"n_per_output":51,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":19584,"zero_frequency":0},{"T":16,"nominal_z":0,"schedule":"growing_0p125","rms":0,"n_per_output":373,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":143232,"zero_frequency":1},{"T":16,"nominal_z":0,"schedule":"growing_0p5","rms":0,"n_per_output":1491,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":572544,"zero_frequency":1},{"T":16,"nominal_z":0,"schedule":"growing_2","rms":0,"n_per_output":5962,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":2289408,"zero_frequency":1},{"T":16,"nominal_z":0,"schedule":"theorem_96","rms":0,"n_per_output":286172,"pooled_replications":24,"replications_per_seed":8,"actual_total_queries":6868128,"zero_frequency":1},{"T":16,"nominal_z":0,"schedule":"fixed_51","rms":0,"n_per_output":51,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":19584,"zero_frequency":1},{"T":16,"nominal_z":0.25,"schedule":"growing_0p125","rms":0.1941398726473336,"n_per_output":373,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":143232,"zero_frequency":0.1328125},{"T":16,"nominal_z":0.25,"schedule":"growing_0p5","rms":0.10355798116340222,"n_per_output":1491,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":572544,"zero_frequency":0},{"T":16,"nominal_z":0.25,"schedule":"growing_2","rms":0.05368395341561621,"n_per_output":5962,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":2289408,"zero_frequency":0},{"T":16,"nominal_z":0.25,"schedule":"theorem_96","rms":0.007786425660684033,"n_per_output":286172,"pooled_replications":24,"replications_per_seed":8,"actual_total_queries":6868128,"zero_frequency":0},{"T":16,"nominal_z":0.25,"schedule":"fixed_51","rms":0.31999773821534006,"n_per_output":51,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":19584,"zero_frequency":0.7578125},{"T":16,"nominal_z":1,"schedule":"growing_0p125","rms":0.27857845239777485,"n_per_output":373,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":143232,"zero_frequency":0.015625},{"T":16,"nominal_z":1,"schedule":"growing_0p5","rms":0.12734443475566484,"n_per_output":1491,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":572544,"zero_frequency":0},{"T":16,"nominal_z":1,"schedule":"growing_2","rms":0.06866008768658449,"n_per_output":5962,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":2289408,"zero_frequency":0},{"T":16,"nominal_z":1,"schedule":"theorem_96","rms":0.009073527757898598,"n_per_output":286172,"pooled_replications":24,"replications_per_seed":8,"actual_total_queries":6868128,"zero_frequency":0},{"T":16,"nominal_z":1,"schedule":"fixed_51","rms":0.5966770330016217,"n_per_output":51,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":19584,"zero_frequency":0.53125},{"T":16,"nominal_z":4,"schedule":"growing_0p125","rms":0.1031313586367488,"n_per_output":373,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":143232,"zero_frequency":0},{"T":16,"nominal_z":4,"schedule":"growing_0p5","rms":0.02085106701773888,"n_per_output":1491,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":572544,"zero_frequency":0},{"T":16,"nominal_z":4,"schedule":"growing_2","rms":0.007387555165166592,"n_per_output":5962,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":2289408,"zero_frequency":0},{"T":16,"nominal_z":4,"schedule":"theorem_96","rms":0.0010752844381368074,"n_per_output":286172,"pooled_replications":24,"replications_per_seed":8,"actual_total_queries":6868128,"zero_frequency":0},{"T":16,"nominal_z":4,"schedule":"fixed_51","rms":0.6813936688100214,"n_per_output":51,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":19584,"zero_frequency":0.3307291666666667},{"T":20,"nominal_z":0,"schedule":"growing_0p125","rms":0,"n_per_output":2754,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":1057536,"zero_frequency":1},{"T":20,"nominal_z":0,"schedule":"growing_0p5","rms":0,"n_per_output":11014,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":4229376,"zero_frequency":1},{"T":20,"nominal_z":0,"schedule":"growing_2","rms":0,"n_per_output":44053,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":16916352,"zero_frequency":1},{"T":20,"nominal_z":0,"schedule":"theorem_96","rms":0,"n_per_output":2114541,"pooled_replications":24,"replications_per_seed":8,"actual_total_queries":50748984,"zero_frequency":1},{"T":20,"nominal_z":0,"schedule":"fixed_51","rms":0,"n_per_output":51,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":19584,"zero_frequency":1},{"T":20,"nominal_z":0.25,"schedule":"growing_0p125","rms":0.1985758289572693,"n_per_output":2754,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":1057536,"zero_frequency":0.109375},{"T":20,"nominal_z":0.25,"schedule":"growing_0p5","rms":0.10847208222482534,"n_per_output":11014,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":4229376,"zero_frequency":0},{"T":20,"nominal_z":0.25,"schedule":"growing_2","rms":0.05444390427490037,"n_per_output":44053,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":16916352,"zero_frequency":0},{"T":20,"nominal_z":0.25,"schedule":"theorem_96","rms":0.00782647778837002,"n_per_output":2114541,"pooled_replications":24,"replications_per_seed":8,"actual_total_queries":50748984,"zero_frequency":0},{"T":20,"nominal_z":0.25,"schedule":"fixed_51","rms":0.24949544311721578,"n_per_output":51,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":19584,"zero_frequency":0.9765625},{"T":20,"nominal_z":1,"schedule":"growing_0p125","rms":0.2848857014716553,"n_per_output":2754,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":1057536,"zero_frequency":0.013020833333333334},{"T":20,"nominal_z":1,"schedule":"growing_0p5","rms":0.1331747102334986,"n_per_output":11014,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":4229376,"zero_frequency":0},{"T":20,"nominal_z":1,"schedule":"growing_2","rms":0.06245332347137801,"n_per_output":44053,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":16916352,"zero_frequency":0},{"T":20,"nominal_z":1,"schedule":"theorem_96","rms":0.011810832050378835,"n_per_output":2114541,"pooled_replications":24,"replications_per_seed":8,"actual_total_queries":50748984,"zero_frequency":0},{"T":20,"nominal_z":1,"schedule":"fixed_51","rms":0.6879386397004744,"n_per_output":51,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":19584,"zero_frequency":0.921875},{"T":20,"nominal_z":4,"schedule":"growing_0p125","rms":0.12574845207277183,"n_per_output":2754,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":1057536,"zero_frequency":0},{"T":20,"nominal_z":4,"schedule":"growing_0p5","rms":0.01720396788718917,"n_per_output":11014,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":4229376,"zero_frequency":0},{"T":20,"nominal_z":4,"schedule":"growing_2","rms":0.007472648761251048,"n_per_output":44053,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":16916352,"zero_frequency":0},{"T":20,"nominal_z":4,"schedule":"theorem_96","rms":0.0009532883478174225,"n_per_output":2114541,"pooled_replications":24,"replications_per_seed":8,"actual_total_queries":50748984,"zero_frequency":0},{"T":20,"nominal_z":4,"schedule":"fixed_51","rms":0.9203943069498294,"n_per_output":51,"pooled_replications":384,"replications_per_seed":128,"actual_total_queries":19584,"zero_frequency":0.8802083333333334}];
+const e4PerSeedCells = [{"T":12,"nominal_z":0,"schedule":"growing_0p125","seed_root":20260928,"rms":0,"replications":128,"n_per_output":51},{"T":12,"nominal_z":0,"schedule":"growing_0p5","seed_root":20260928,"rms":0,"replications":128,"n_per_output":202},{"T":12,"nominal_z":0,"schedule":"growing_2","seed_root":20260928,"rms":0,"replications":128,"n_per_output":807},{"T":12,"nominal_z":0,"schedule":"theorem_96","seed_root":20260928,"rms":0,"replications":8,"n_per_output":38730},{"T":12,"nominal_z":0,"schedule":"fixed_51","seed_root":20260928,"rms":0,"replications":128,"n_per_output":51},{"T":12,"nominal_z":0.25,"schedule":"growing_0p125","seed_root":20260928,"rms":0.19139124096180288,"replications":128,"n_per_output":51},{"T":12,"nominal_z":0.25,"schedule":"growing_0p5","seed_root":20260928,"rms":0.0908357119202411,"replications":128,"n_per_output":202},{"T":12,"nominal_z":0.25,"schedule":"growing_2","seed_root":20260928,"rms":0.05469308164351335,"replications":128,"n_per_output":807},{"T":12,"nominal_z":0.25,"schedule":"theorem_96","seed_root":20260928,"rms":0.010142637121902288,"replications":8,"n_per_output":38730},{"T":12,"nominal_z":0.25,"schedule":"fixed_51","seed_root":20260928,"rms":0.20092183782845674,"replications":128,"n_per_output":51},{"T":12,"nominal_z":1,"schedule":"growing_0p125","seed_root":20260928,"rms":0.25563735531885295,"replications":128,"n_per_output":51},{"T":12,"nominal_z":1,"schedule":"growing_0p5","seed_root":20260928,"rms":0.14189170696038667,"replications":128,"n_per_output":202},{"T":12,"nominal_z":1,"schedule":"growing_2","seed_root":20260928,"rms":0.05611194695725976,"replications":128,"n_per_output":807},{"T":12,"nominal_z":1,"schedule":"theorem_96","seed_root":20260928,"rms":0.0092430721454868,"replications":8,"n_per_output":38730},{"T":12,"nominal_z":1,"schedule":"fixed_51","seed_root":20260928,"rms":0.25675875378489976,"replications":128,"n_per_output":51},{"T":12,"nominal_z":4,"schedule":"growing_0p125","seed_root":20260928,"rms":0.12138864509439465,"replications":128,"n_per_output":51},{"T":12,"nominal_z":4,"schedule":"growing_0p5","seed_root":20260928,"rms":0.017351258723938404,"replications":128,"n_per_output":202},{"T":12,"nominal_z":4,"schedule":"growing_2","seed_root":20260928,"rms":0.007723691513127802,"replications":128,"n_per_output":807},{"T":12,"nominal_z":4,"schedule":"theorem_96","seed_root":20260928,"rms":0.0011022256809357339,"replications":8,"n_per_output":38730},{"T":12,"nominal_z":4,"schedule":"fixed_51","seed_root":20260928,"rms":0.1586566207962193,"replications":128,"n_per_output":51},{"T":16,"nominal_z":0,"schedule":"growing_0p125","seed_root":20260928,"rms":0,"replications":128,"n_per_output":373},{"T":16,"nominal_z":0,"schedule":"growing_0p5","seed_root":20260928,"rms":0,"replications":128,"n_per_output":1491},{"T":16,"nominal_z":0,"schedule":"growing_2","seed_root":20260928,"rms":0,"replications":128,"n_per_output":5962},{"T":16,"nominal_z":0,"schedule":"theorem_96","seed_root":20260928,"rms":0,"replications":8,"n_per_output":286172},{"T":16,"nominal_z":0,"schedule":"fixed_51","seed_root":20260928,"rms":0,"replications":128,"n_per_output":51},{"T":16,"nominal_z":0.25,"schedule":"growing_0p125","seed_root":20260928,"rms":0.19803703317305987,"replications":128,"n_per_output":373},{"T":16,"nominal_z":0.25,"schedule":"growing_0p5","seed_root":20260928,"rms":0.10778461963935469,"replications":128,"n_per_output":1491},{"T":16,"nominal_z":0.25,"schedule":"growing_2","seed_root":20260928,"rms":0.056165726319255274,"replications":128,"n_per_output":5962},{"T":16,"nominal_z":0.25,"schedule":"theorem_96","seed_root":20260928,"rms":0.010329951249619116,"replications":8,"n_per_output":286172},{"T":16,"nominal_z":0.25,"schedule":"fixed_51","seed_root":20260928,"rms":0.32390875269032393,"replications":128,"n_per_output":51},{"T":16,"nominal_z":1,"schedule":"growing_0p125","seed_root":20260928,"rms":0.2642883260351149,"replications":128,"n_per_output":373},{"T":16,"nominal_z":1,"schedule":"growing_0p5","seed_root":20260928,"rms":0.13823880970058205,"replications":128,"n_per_output":1491},{"T":16,"nominal_z":1,"schedule":"growing_2","seed_root":20260928,"rms":0.07245870786508285,"replications":128,"n_per_output":5962},{"T":16,"nominal_z":1,"schedule":"theorem_96","seed_root":20260928,"rms":0.009945505646561712,"replications":8,"n_per_output":286172},{"T":16,"nominal_z":1,"schedule":"fixed_51","seed_root":20260928,"rms":0.6019688259235387,"replications":128,"n_per_output":51},{"T":16,"nominal_z":4,"schedule":"growing_0p125","seed_root":20260928,"rms":0.11999807615513987,"replications":128,"n_per_output":373},{"T":16,"nominal_z":4,"schedule":"growing_0p5","seed_root":20260928,"rms":0.022482762850652968,"replications":128,"n_per_output":1491},{"T":16,"nominal_z":4,"schedule":"growing_2","seed_root":20260928,"rms":0.007992125824396451,"replications":128,"n_per_output":5962},{"T":16,"nominal_z":4,"schedule":"theorem_96","seed_root":20260928,"rms":0.0009573967851318052,"replications":8,"n_per_output":286172},{"T":16,"nominal_z":4,"schedule":"fixed_51","seed_root":20260928,"rms":0.7025138653548817,"replications":128,"n_per_output":51},{"T":20,"nominal_z":0,"schedule":"growing_0p125","seed_root":20260928,"rms":0,"replications":128,"n_per_output":2754},{"T":20,"nominal_z":0,"schedule":"growing_0p5","seed_root":20260928,"rms":0,"replications":128,"n_per_output":11014},{"T":20,"nominal_z":0,"schedule":"growing_2","seed_root":20260928,"rms":0,"replications":128,"n_per_output":44053},{"T":20,"nominal_z":0,"schedule":"theorem_96","seed_root":20260928,"rms":0,"replications":8,"n_per_output":2114541},{"T":20,"nominal_z":0,"schedule":"fixed_51","seed_root":20260928,"rms":0,"replications":128,"n_per_output":51},{"T":20,"nominal_z":0.25,"schedule":"growing_0p125","seed_root":20260928,"rms":0.20605861739601627,"replications":128,"n_per_output":2754},{"T":20,"nominal_z":0.25,"schedule":"growing_0p5","seed_root":20260928,"rms":0.11381411533263575,"replications":128,"n_per_output":11014},{"T":20,"nominal_z":0.25,"schedule":"growing_2","seed_root":20260928,"rms":0.05338646435812772,"replications":128,"n_per_output":44053},{"T":20,"nominal_z":0.25,"schedule":"theorem_96","seed_root":20260928,"rms":0.006784258183676542,"replications":8,"n_per_output":2114541},{"T":20,"nominal_z":0.25,"schedule":"fixed_51","seed_root":20260928,"rms":0.2504196795152653,"replications":128,"n_per_output":51},{"T":20,"nominal_z":1,"schedule":"growing_0p125","seed_root":20260928,"rms":0.2889545077137043,"replications":128,"n_per_output":2754},{"T":20,"nominal_z":1,"schedule":"growing_0p5","seed_root":20260928,"rms":0.14386952131512504,"replications":128,"n_per_output":11014},{"T":20,"nominal_z":1,"schedule":"growing_2","seed_root":20260928,"rms":0.06062987851896123,"replications":128,"n_per_output":44053},{"T":20,"nominal_z":1,"schedule":"theorem_96","seed_root":20260928,"rms":0.011357527192437393,"replications":8,"n_per_output":2114541},{"T":20,"nominal_z":1,"schedule":"fixed_51","seed_root":20260928,"rms":0.6844326410205299,"replications":128,"n_per_output":51},{"T":20,"nominal_z":4,"schedule":"growing_0p125","seed_root":20260928,"rms":0.09924023262710722,"replications":128,"n_per_output":2754},{"T":20,"nominal_z":4,"schedule":"growing_0p5","seed_root":20260928,"rms":0.015212551604580822,"replications":128,"n_per_output":11014},{"T":20,"nominal_z":4,"schedule":"growing_2","seed_root":20260928,"rms":0.007647853659038798,"replications":128,"n_per_output":44053},{"T":20,"nominal_z":4,"schedule":"theorem_96","seed_root":20260928,"rms":0.0009888054178077367,"replications":8,"n_per_output":2114541},{"T":20,"nominal_z":4,"schedule":"fixed_51","seed_root":20260928,"rms":0.9317535462635395,"replications":128,"n_per_output":51},{"T":12,"nominal_z":0,"schedule":"growing_0p125","seed_root":20260929,"rms":0,"replications":128,"n_per_output":51},{"T":12,"nominal_z":0,"schedule":"growing_0p5","seed_root":20260929,"rms":0,"replications":128,"n_per_output":202},{"T":12,"nominal_z":0,"schedule":"growing_2","seed_root":20260929,"rms":0,"replications":128,"n_per_output":807},{"T":12,"nominal_z":0,"schedule":"theorem_96","seed_root":20260929,"rms":0,"replications":8,"n_per_output":38730},{"T":12,"nominal_z":0,"schedule":"fixed_51","seed_root":20260929,"rms":0,"replications":128,"n_per_output":51},{"T":12,"nominal_z":0.25,"schedule":"growing_0p125","seed_root":20260929,"rms":0.19373540990433377,"replications":128,"n_per_output":51},{"T":12,"nominal_z":0.25,"schedule":"growing_0p5","seed_root":20260929,"rms":0.1014604928891396,"replications":128,"n_per_output":202},{"T":12,"nominal_z":0.25,"schedule":"growing_2","seed_root":20260929,"rms":0.058964063370340346,"replications":128,"n_per_output":807},{"T":12,"nominal_z":0.25,"schedule":"theorem_96","seed_root":20260929,"rms":0.006615224205326098,"replications":8,"n_per_output":38730},{"T":12,"nominal_z":0.25,"schedule":"fixed_51","seed_root":20260929,"rms":0.18595678568852356,"replications":128,"n_per_output":51},{"T":12,"nominal_z":1,"schedule":"growing_0p125","seed_root":20260929,"rms":0.29153784011967443,"replications":128,"n_per_output":51},{"T":12,"nominal_z":1,"schedule":"growing_0p5","seed_root":20260929,"rms":0.1360223264530752,"replications":128,"n_per_output":202},{"T":12,"nominal_z":1,"schedule":"growing_2","seed_root":20260929,"rms":0.06190066046887074,"replications":128,"n_per_output":807},{"T":12,"nominal_z":1,"schedule":"theorem_96","seed_root":20260929,"rms":0.00831988714337168,"replications":8,"n_per_output":38730},{"T":12,"nominal_z":1,"schedule":"fixed_51","seed_root":20260929,"rms":0.25316967586178657,"replications":128,"n_per_output":51},{"T":12,"nominal_z":4,"schedule":"growing_0p125","seed_root":20260929,"rms":0.1202402569451681,"replications":128,"n_per_output":51},{"T":12,"nominal_z":4,"schedule":"growing_0p5","seed_root":20260929,"rms":0.018031951900313013,"replications":128,"n_per_output":202},{"T":12,"nominal_z":4,"schedule":"growing_2","seed_root":20260929,"rms":0.007170575430310853,"replications":128,"n_per_output":807},{"T":12,"nominal_z":4,"schedule":"theorem_96","seed_root":20260929,"rms":0.00046793631513157656,"replications":8,"n_per_output":38730},{"T":12,"nominal_z":4,"schedule":"fixed_51","seed_root":20260929,"rms":0.13300248299072656,"replications":128,"n_per_output":51},{"T":16,"nominal_z":0,"schedule":"growing_0p125","seed_root":20260929,"rms":0,"replications":128,"n_per_output":373},{"T":16,"nominal_z":0,"schedule":"growing_0p5","seed_root":20260929,"rms":0,"replications":128,"n_per_output":1491},{"T":16,"nominal_z":0,"schedule":"growing_2","seed_root":20260929,"rms":0,"replications":128,"n_per_output":5962},{"T":16,"nominal_z":0,"schedule":"theorem_96","seed_root":20260929,"rms":0,"replications":8,"n_per_output":286172},{"T":16,"nominal_z":0,"schedule":"fixed_51","seed_root":20260929,"rms":0,"replications":128,"n_per_output":51},{"T":16,"nominal_z":0.25,"schedule":"growing_0p125","seed_root":20260929,"rms":0.18415451216718912,"replications":128,"n_per_output":373},{"T":16,"nominal_z":0.25,"schedule":"growing_0p5","seed_root":20260929,"rms":0.0983586166752925,"replications":128,"n_per_output":1491},{"T":16,"nominal_z":0.25,"schedule":"growing_2","seed_root":20260929,"rms":0.050446481355896584,"replications":128,"n_per_output":5962},{"T":16,"nominal_z":0.25,"schedule":"theorem_96","seed_root":20260929,"rms":0.0061608661430516435,"replications":8,"n_per_output":286172},{"T":16,"nominal_z":0.25,"schedule":"fixed_51","seed_root":20260929,"rms":0.2982072174363154,"replications":128,"n_per_output":51},{"T":16,"nominal_z":1,"schedule":"growing_0p125","seed_root":20260929,"rms":0.28947215385525044,"replications":128,"n_per_output":373},{"T":16,"nominal_z":1,"schedule":"growing_0p5","seed_root":20260929,"rms":0.11857716521950466,"replications":128,"n_per_output":1491},{"T":16,"nominal_z":1,"schedule":"growing_2","seed_root":20260929,"rms":0.06573759493709312,"replications":128,"n_per_output":5962},{"T":16,"nominal_z":1,"schedule":"theorem_96","seed_root":20260929,"rms":0.007706925313603106,"replications":8,"n_per_output":286172},{"T":16,"nominal_z":1,"schedule":"fixed_51","seed_root":20260929,"rms":0.6052929005240119,"replications":128,"n_per_output":51},{"T":16,"nominal_z":4,"schedule":"growing_0p125","seed_root":20260929,"rms":0.0969296979433189,"replications":128,"n_per_output":373},{"T":16,"nominal_z":4,"schedule":"growing_0p5","seed_root":20260929,"rms":0.02320590306493507,"replications":128,"n_per_output":1491},{"T":16,"nominal_z":4,"schedule":"growing_2","seed_root":20260929,"rms":0.007311280127715822,"replications":128,"n_per_output":5962},{"T":16,"nominal_z":4,"schedule":"theorem_96","seed_root":20260929,"rms":0.0010847172601466724,"replications":8,"n_per_output":286172},{"T":16,"nominal_z":4,"schedule":"fixed_51","seed_root":20260929,"rms":0.6853521623607176,"replications":128,"n_per_output":51},{"T":20,"nominal_z":0,"schedule":"growing_0p125","seed_root":20260929,"rms":0,"replications":128,"n_per_output":2754},{"T":20,"nominal_z":0,"schedule":"growing_0p5","seed_root":20260929,"rms":0,"replications":128,"n_per_output":11014},{"T":20,"nominal_z":0,"schedule":"growing_2","seed_root":20260929,"rms":0,"replications":128,"n_per_output":44053},{"T":20,"nominal_z":0,"schedule":"theorem_96","seed_root":20260929,"rms":0,"replications":8,"n_per_output":2114541},{"T":20,"nominal_z":0,"schedule":"fixed_51","seed_root":20260929,"rms":0,"replications":128,"n_per_output":51},{"T":20,"nominal_z":0.25,"schedule":"growing_0p125","seed_root":20260929,"rms":0.20419991088269887,"replications":128,"n_per_output":2754},{"T":20,"nominal_z":0.25,"schedule":"growing_0p5","seed_root":20260929,"rms":0.10455761093409918,"replications":128,"n_per_output":11014},{"T":20,"nominal_z":0.25,"schedule":"growing_2","seed_root":20260929,"rms":0.055317515557611496,"replications":128,"n_per_output":44053},{"T":20,"nominal_z":0.25,"schedule":"theorem_96","seed_root":20260929,"rms":0.0054201592837998455,"replications":8,"n_per_output":2114541},{"T":20,"nominal_z":0.25,"schedule":"fixed_51","seed_root":20260929,"rms":0.2422527486507424,"replications":128,"n_per_output":51},{"T":20,"nominal_z":1,"schedule":"growing_0p125","seed_root":20260929,"rms":0.27205965823634365,"replications":128,"n_per_output":2754},{"T":20,"nominal_z":1,"schedule":"growing_0p5","seed_root":20260929,"rms":0.13084035556809412,"replications":128,"n_per_output":11014},{"T":20,"nominal_z":1,"schedule":"growing_2","seed_root":20260929,"rms":0.06373890101056394,"replications":128,"n_per_output":44053},{"T":20,"nominal_z":1,"schedule":"theorem_96","seed_root":20260929,"rms":0.01565179737196325,"replications":8,"n_per_output":2114541},{"T":20,"nominal_z":1,"schedule":"fixed_51","seed_root":20260929,"rms":0.6932092048103663,"replications":128,"n_per_output":51},{"T":20,"nominal_z":4,"schedule":"growing_0p125","seed_root":20260929,"rms":0.08112732786270027,"replications":128,"n_per_output":2754},{"T":20,"nominal_z":4,"schedule":"growing_0p5","seed_root":20260929,"rms":0.017469609642278606,"replications":128,"n_per_output":11014},{"T":20,"nominal_z":4,"schedule":"growing_2","seed_root":20260929,"rms":0.007754362581349687,"replications":128,"n_per_output":44053},{"T":20,"nominal_z":4,"schedule":"theorem_96","seed_root":20260929,"rms":0.0008777862343066465,"replications":8,"n_per_output":2114541},{"T":20,"nominal_z":4,"schedule":"fixed_51","seed_root":20260929,"rms":0.9029972479907391,"replications":128,"n_per_output":51},{"T":12,"nominal_z":0,"schedule":"growing_0p125","seed_root":20260930,"rms":0,"replications":128,"n_per_output":51},{"T":12,"nominal_z":0,"schedule":"growing_0p5","seed_root":20260930,"rms":0,"replications":128,"n_per_output":202},{"T":12,"nominal_z":0,"schedule":"growing_2","seed_root":20260930,"rms":0,"replications":128,"n_per_output":807},{"T":12,"nominal_z":0,"schedule":"theorem_96","seed_root":20260930,"rms":0,"replications":8,"n_per_output":38730},{"T":12,"nominal_z":0,"schedule":"fixed_51","seed_root":20260930,"rms":0,"replications":128,"n_per_output":51},{"T":12,"nominal_z":0.25,"schedule":"growing_0p125","seed_root":20260930,"rms":0.17740449580695772,"replications":128,"n_per_output":51},{"T":12,"nominal_z":0.25,"schedule":"growing_0p5","seed_root":20260930,"rms":0.09574026559380165,"replications":128,"n_per_output":202},{"T":12,"nominal_z":0.25,"schedule":"growing_2","seed_root":20260930,"rms":0.05081589396128561,"replications":128,"n_per_output":807},{"T":12,"nominal_z":0.25,"schedule":"theorem_96","seed_root":20260930,"rms":0.009631572198756454,"replications":8,"n_per_output":38730},{"T":12,"nominal_z":0.25,"schedule":"fixed_51","seed_root":20260930,"rms":0.19056720385119902,"replications":128,"n_per_output":51},{"T":12,"nominal_z":1,"schedule":"growing_0p125","seed_root":20260930,"rms":0.26168608130434956,"replications":128,"n_per_output":51},{"T":12,"nominal_z":1,"schedule":"growing_0p5","seed_root":20260930,"rms":0.12725072300811766,"replications":128,"n_per_output":202},{"T":12,"nominal_z":1,"schedule":"growing_2","seed_root":20260930,"rms":0.06752696581438541,"replications":128,"n_per_output":807},{"T":12,"nominal_z":1,"schedule":"theorem_96","seed_root":20260930,"rms":0.009312886254629766,"replications":8,"n_per_output":38730},{"T":12,"nominal_z":1,"schedule":"fixed_51","seed_root":20260930,"rms":0.27431316864868643,"replications":128,"n_per_output":51},{"T":12,"nominal_z":4,"schedule":"growing_0p125","seed_root":20260930,"rms":0.11144997142311192,"replications":128,"n_per_output":51},{"T":12,"nominal_z":4,"schedule":"growing_0p5","seed_root":20260930,"rms":0.017582210973017754,"replications":128,"n_per_output":202},{"T":12,"nominal_z":4,"schedule":"growing_2","seed_root":20260930,"rms":0.005898953687810367,"replications":128,"n_per_output":807},{"T":12,"nominal_z":4,"schedule":"theorem_96","seed_root":20260930,"rms":0.0012303978226335056,"replications":8,"n_per_output":38730},{"T":12,"nominal_z":4,"schedule":"fixed_51","seed_root":20260930,"rms":0.0787629023066872,"replications":128,"n_per_output":51},{"T":16,"nominal_z":0,"schedule":"growing_0p125","seed_root":20260930,"rms":0,"replications":128,"n_per_output":373},{"T":16,"nominal_z":0,"schedule":"growing_0p5","seed_root":20260930,"rms":0,"replications":128,"n_per_output":1491},{"T":16,"nominal_z":0,"schedule":"growing_2","seed_root":20260930,"rms":0,"replications":128,"n_per_output":5962},{"T":16,"nominal_z":0,"schedule":"theorem_96","seed_root":20260930,"rms":0,"replications":8,"n_per_output":286172},{"T":16,"nominal_z":0,"schedule":"fixed_51","seed_root":20260930,"rms":0,"replications":128,"n_per_output":51},{"T":16,"nominal_z":0.25,"schedule":"growing_0p125","seed_root":20260930,"rms":0.19984824141094087,"replications":128,"n_per_output":373},{"T":16,"nominal_z":0.25,"schedule":"growing_0p5","seed_root":20260930,"rms":0.10431119155124828,"replications":128,"n_per_output":1491},{"T":16,"nominal_z":0.25,"schedule":"growing_2","seed_root":20260930,"rms":0.054281343653504455,"replications":128,"n_per_output":5962},{"T":16,"nominal_z":0.25,"schedule":"theorem_96","seed_root":20260930,"rms":0.00610091052679588,"replications":8,"n_per_output":286172},{"T":16,"nominal_z":0.25,"schedule":"fixed_51","seed_root":20260930,"rms":0.3366767482144982,"replications":128,"n_per_output":51},{"T":16,"nominal_z":1,"schedule":"growing_0p125","seed_root":20260930,"rms":0.28138126320879453,"replications":128,"n_per_output":373},{"T":16,"nominal_z":1,"schedule":"growing_0p5","seed_root":20260930,"rms":0.12441584533648391,"replications":128,"n_per_output":1491},{"T":16,"nominal_z":1,"schedule":"growing_2","seed_root":20260930,"rms":0.06760863250944854,"replications":128,"n_per_output":5962},{"T":16,"nominal_z":1,"schedule":"theorem_96","seed_root":20260930,"rms":0.009416843290870981,"replications":8,"n_per_output":286172},{"T":16,"nominal_z":1,"schedule":"fixed_51","seed_root":20260930,"rms":0.5825156498552805,"replications":128,"n_per_output":51},{"T":16,"nominal_z":4,"schedule":"growing_0p125","seed_root":20260930,"rms":0.09007400722998457,"replications":128,"n_per_output":373},{"T":16,"nominal_z":4,"schedule":"growing_0p5","seed_root":20260930,"rms":0.016134200472191062,"replications":128,"n_per_output":1491},{"T":16,"nominal_z":4,"schedule":"growing_2","seed_root":20260930,"rms":0.006811682733085988,"replications":128,"n_per_output":5962},{"T":16,"nominal_z":4,"schedule":"theorem_96","seed_root":20260930,"rms":0.0011728127429631503,"replications":8,"n_per_output":286172},{"T":16,"nominal_z":4,"schedule":"fixed_51","seed_root":20260930,"rms":0.6554835453425014,"replications":128,"n_per_output":51},{"T":20,"nominal_z":0,"schedule":"growing_0p125","seed_root":20260930,"rms":0,"replications":128,"n_per_output":2754},{"T":20,"nominal_z":0,"schedule":"growing_0p5","seed_root":20260930,"rms":0,"replications":128,"n_per_output":11014},{"T":20,"nominal_z":0,"schedule":"growing_2","seed_root":20260930,"rms":0,"replications":128,"n_per_output":44053},{"T":20,"nominal_z":0,"schedule":"theorem_96","seed_root":20260930,"rms":0,"replications":8,"n_per_output":2114541},{"T":20,"nominal_z":0,"schedule":"fixed_51","seed_root":20260930,"rms":0,"replications":128,"n_per_output":51},{"T":20,"nominal_z":0.25,"schedule":"growing_0p125","seed_root":20260930,"rms":0.18476829308769405,"replications":128,"n_per_output":2754},{"T":20,"nominal_z":0.25,"schedule":"growing_0p5","seed_root":20260930,"rms":0.1068299162845822,"replications":128,"n_per_output":11014},{"T":20,"nominal_z":0.25,"schedule":"growing_2","seed_root":20260930,"rms":0.054610200823246496,"replications":128,"n_per_output":44053},{"T":20,"nominal_z":0.25,"schedule":"theorem_96","seed_root":20260930,"rms":0.010409465786052811,"replications":8,"n_per_output":2114541},{"T":20,"nominal_z":0.25,"schedule":"fixed_51","seed_root":20260930,"rms":0.2556316065970709,"replications":128,"n_per_output":51},{"T":20,"nominal_z":1,"schedule":"growing_0p125","seed_root":20260930,"rms":0.2932037236142237,"replications":128,"n_per_output":2754},{"T":20,"nominal_z":1,"schedule":"growing_0p5","seed_root":20260930,"rms":0.12405189449863487,"replications":128,"n_per_output":11014},{"T":20,"nominal_z":1,"schedule":"growing_2","seed_root":20260930,"rms":0.06294936986660997,"replications":128,"n_per_output":44053},{"T":20,"nominal_z":1,"schedule":"theorem_96","seed_root":20260930,"rms":0.0066719619503424355,"replications":8,"n_per_output":2114541},{"T":20,"nominal_z":1,"schedule":"fixed_51","seed_root":20260930,"rms":0.686142604893953,"replications":128,"n_per_output":51},{"T":20,"nominal_z":4,"schedule":"growing_0p125","seed_root":20260930,"rms":0.17609018285546232,"replications":128,"n_per_output":2754},{"T":20,"nominal_z":4,"schedule":"growing_0p5","seed_root":20260930,"rms":0.018743546777882793,"replications":128,"n_per_output":11014},{"T":20,"nominal_z":4,"schedule":"growing_2","seed_root":20260930,"rms":0.00699297031982627,"replications":128,"n_per_output":44053},{"T":20,"nominal_z":4,"schedule":"theorem_96","seed_root":20260930,"rms":0.000988954596950354,"replications":8,"n_per_output":2114541},{"T":20,"nominal_z":4,"schedule":"fixed_51","seed_root":20260930,"rms":0.9261794318291896,"replications":128,"n_per_output":51}];
+const e4ZeroQueryBaselines = [{"T":12,"nominal_z":0.0,"name":"constant_0","output":0.0,"rms":0.0,"actual_queries":0,"zero_frequency":1.0,"per_seed_and_pooled_identical":true},{"T":12,"nominal_z":0.0,"name":"constant_0.5","output":0.5,"rms":0.5,"actual_queries":0,"zero_frequency":0.0,"per_seed_and_pooled_identical":true},{"T":12,"nominal_z":0.0,"name":"constant_1","output":1.0,"rms":1.0,"actual_queries":0,"zero_frequency":0.0,"per_seed_and_pooled_identical":true},{"T":12,"nominal_z":0.25,"name":"constant_0","output":0.0,"rms":0.242535625036333,"actual_queries":0,"zero_frequency":1.0,"per_seed_and_pooled_identical":true},{"T":12,"nominal_z":0.25,"name":"constant_0.5","output":0.5,"rms":0.25746437496366703,"actual_queries":0,"zero_frequency":0.0,"per_seed_and_pooled_identical":true},{"T":12,"nominal_z":0.25,"name":"constant_1","output":1.0,"rms":0.757464374963667,"actual_queries":0,"zero_frequency":0.0,"per_seed_and_pooled_identical":true},{"T":12,"nominal_z":1.0,"name":"constant_0","output":0.0,"rms":0.7071067811865476,"actual_queries":0,"zero_frequency":1.0,"per_seed_and_pooled_identical":true},{"T":12,"nominal_z":1.0,"name":"constant_0.5","output":0.5,"rms":0.20710678118654757,"actual_queries":0,"zero_frequency":0.0,"per_seed_and_pooled_identical":true},{"T":12,"nominal_z":1.0,"name":"constant_1","output":1.0,"rms":0.2928932188134524,"actual_queries":0,"zero_frequency":0.0,"per_seed_and_pooled_identical":true},{"T":12,"nominal_z":4.0,"name":"constant_0","output":0.0,"rms":0.9701425001453319,"actual_queries":0,"zero_frequency":1.0,"per_seed_and_pooled_identical":true},{"T":12,"nominal_z":4.0,"name":"constant_0.5","output":0.5,"rms":0.4701425001453319,"actual_queries":0,"zero_frequency":0.0,"per_seed_and_pooled_identical":true},{"T":12,"nominal_z":4.0,"name":"constant_1","output":1.0,"rms":0.029857499854668124,"actual_queries":0,"zero_frequency":0.0,"per_seed_and_pooled_identical":true},{"T":16,"nominal_z":0.0,"name":"constant_0","output":0.0,"rms":0.0,"actual_queries":0,"zero_frequency":1.0,"per_seed_and_pooled_identical":true},{"T":16,"nominal_z":0.0,"name":"constant_0.5","output":0.5,"rms":0.5,"actual_queries":0,"zero_frequency":0.0,"per_seed_and_pooled_identical":true},{"T":16,"nominal_z":0.0,"name":"constant_1","output":1.0,"rms":1.0,"actual_queries":0,"zero_frequency":0.0,"per_seed_and_pooled_identical":true},{"T":16,"nominal_z":0.25,"name":"constant_0","output":0.0,"rms":0.242535625036333,"actual_queries":0,"zero_frequency":1.0,"per_seed_and_pooled_identical":true},{"T":16,"nominal_z":0.25,"name":"constant_0.5","output":0.5,"rms":0.25746437496366703,"actual_queries":0,"zero_frequency":0.0,"per_seed_and_pooled_identical":true},{"T":16,"nominal_z":0.25,"name":"constant_1","output":1.0,"rms":0.757464374963667,"actual_queries":0,"zero_frequency":0.0,"per_seed_and_pooled_identical":true},{"T":16,"nominal_z":1.0,"name":"constant_0","output":0.0,"rms":0.7071067811865476,"actual_queries":0,"zero_frequency":1.0,"per_seed_and_pooled_identical":true},{"T":16,"nominal_z":1.0,"name":"constant_0.5","output":0.5,"rms":0.20710678118654757,"actual_queries":0,"zero_frequency":0.0,"per_seed_and_pooled_identical":true},{"T":16,"nominal_z":1.0,"name":"constant_1","output":1.0,"rms":0.2928932188134524,"actual_queries":0,"zero_frequency":0.0,"per_seed_and_pooled_identical":true},{"T":16,"nominal_z":4.0,"name":"constant_0","output":0.0,"rms":0.9701425001453319,"actual_queries":0,"zero_frequency":1.0,"per_seed_and_pooled_identical":true},{"T":16,"nominal_z":4.0,"name":"constant_0.5","output":0.5,"rms":0.4701425001453319,"actual_queries":0,"zero_frequency":0.0,"per_seed_and_pooled_identical":true},{"T":16,"nominal_z":4.0,"name":"constant_1","output":1.0,"rms":0.029857499854668124,"actual_queries":0,"zero_frequency":0.0,"per_seed_and_pooled_identical":true},{"T":20,"nominal_z":0.0,"name":"constant_0","output":0.0,"rms":0.0,"actual_queries":0,"zero_frequency":1.0,"per_seed_and_pooled_identical":true},{"T":20,"nominal_z":0.0,"name":"constant_0.5","output":0.5,"rms":0.5,"actual_queries":0,"zero_frequency":0.0,"per_seed_and_pooled_identical":true},{"T":20,"nominal_z":0.0,"name":"constant_1","output":1.0,"rms":1.0,"actual_queries":0,"zero_frequency":0.0,"per_seed_and_pooled_identical":true},{"T":20,"nominal_z":0.25,"name":"constant_0","output":0.0,"rms":0.24253562503633297,"actual_queries":0,"zero_frequency":1.0,"per_seed_and_pooled_identical":true},{"T":20,"nominal_z":0.25,"name":"constant_0.5","output":0.5,"rms":0.25746437496366703,"actual_queries":0,"zero_frequency":0.0,"per_seed_and_pooled_identical":true},{"T":20,"nominal_z":0.25,"name":"constant_1","output":1.0,"rms":0.757464374963667,"actual_queries":0,"zero_frequency":0.0,"per_seed_and_pooled_identical":true},{"T":20,"nominal_z":1.0,"name":"constant_0","output":0.0,"rms":0.7071067811865476,"actual_queries":0,"zero_frequency":1.0,"per_seed_and_pooled_identical":true},{"T":20,"nominal_z":1.0,"name":"constant_0.5","output":0.5,"rms":0.20710678118654757,"actual_queries":0,"zero_frequency":0.0,"per_seed_and_pooled_identical":true},{"T":20,"nominal_z":1.0,"name":"constant_1","output":1.0,"rms":0.2928932188134524,"actual_queries":0,"zero_frequency":0.0,"per_seed_and_pooled_identical":true},{"T":20,"nominal_z":4.0,"name":"constant_0","output":0.0,"rms":0.9701425001453319,"actual_queries":0,"zero_frequency":1.0,"per_seed_and_pooled_identical":true},{"T":20,"nominal_z":4.0,"name":"constant_0.5","output":0.5,"rms":0.4701425001453319,"actual_queries":0,"zero_frequency":0.0,"per_seed_and_pooled_identical":true},{"T":20,"nominal_z":4.0,"name":"constant_1","output":1.0,"rms":0.029857499854668124,"actual_queries":0,"zero_frequency":0.0,"per_seed_and_pooled_identical":true}];
+
+export default function DynamicContinuationEvidence() {
+  const theme = useHostTheme();
+  const [selectedE4Z, setSelectedE4Z] = useState("1");
+  const selectedE4ZValue = Number(selectedE4Z);
+  const e4Horizons = [12, 16, 20];
+  const e4Schedules = [
+    { key: "growing_0p125", label: "增长 0.125" },
+    { key: "growing_0p5", label: "增长 0.5" },
+    { key: "growing_2", label: "增长 2" },
+    { key: "theorem_96", label: "定理 96" },
+    { key: "fixed_51", label: "固定 51" },
+  ] as const;
+  const e4Baselines = [
+    { key: "constant_0", label: "零查询 · 常数 0" },
+    { key: "constant_0.5", label: "零查询 · 常数 0.5" },
+    { key: "constant_1", label: "零查询 · 常数 1" },
+  ] as const;
+  const e4SelectedPooled = e4PooledCells.filter(
+    (cell) => cell.nominal_z === selectedE4ZValue,
+  );
+  const e4SelectedSeeds = e4PerSeedCells.filter(
+    (cell) => cell.nominal_z === selectedE4ZValue,
+  );
+  const e4SelectedBaselines = e4ZeroQueryBaselines.filter(
+    (cell) => cell.nominal_z === selectedE4ZValue,
+  );
+  const getE4Pooled = (schedule: string, T: number) => {
+    const cell = e4SelectedPooled.find(
+      (candidate) => candidate.schedule === schedule && candidate.T === T,
+    );
+    if (!cell) throw new Error("E4 pooled cell missing");
+    return cell;
+  };
+  const getE4Baseline = (name: string, T: number) => {
+    const cell = e4SelectedBaselines.find(
+      (candidate) => candidate.name === name && candidate.T === T,
+    );
+    if (!cell) throw new Error("E4 baseline cell missing");
+    return cell;
+  };
+  const formatE4 = (value: number) =>
+    value === 0 ? "0" : value.toPrecision(7);
+  const e4SeedRange = (schedule: string, T: number) => {
+    const values = e4SelectedSeeds
+      .filter((cell) => cell.schedule === schedule && cell.T === T)
+      .map((cell) => cell.rms);
+    if (values.length !== 3) throw new Error("E4 seed cells missing");
+    return `${formatE4(Math.min(...values))}–${formatE4(Math.max(...values))}`;
+  };
+  const e4ScheduleRows = e4Schedules.map((schedule) => {
+    const cells = e4Horizons.map((T) => getE4Pooled(schedule.key, T));
+    return [
+      schedule.label,
+      ...cells.map(
+        (cell) =>
+          `${formatE4(cell.rms)} / ${e4SeedRange(schedule.key, cell.T)}`,
+      ),
+      cells.map((cell) => cell.n_per_output.toLocaleString()).join(" / "),
+      cells.map((cell) => formatE4(cell.zero_frequency)).join(" / "),
+      `${cells[0].replications_per_seed}/种子 → ${cells[0].pooled_replications} pooled`,
+    ];
+  });
+  const e4BaselineRows = e4Baselines.map((baseline) => [
+    baseline.label,
+    ...e4Horizons.map((T) => formatE4(getE4Baseline(baseline.key, T).rms)),
+    "0 / 0 / 0",
+    e4Horizons
+      .map((T) => formatE4(getE4Baseline(baseline.key, T).zero_frequency))
+      .join(" / "),
+    "确定性；种子与 pooled 相同",
+  ]);
+
+  return (
+    <Stack
+      gap={20}
+      style={{
+        minHeight: "100vh",
+        maxWidth: 1180,
+        margin: "0 auto",
+        padding: 24,
+        background: theme.bg.editor,
+        color: theme.text.primary,
+      }}
+    >
+      <Stack gap={8}>
+        <Row gap={10} align="center" wrap>
+          <Pill active>独立审计通过</Pill>
+          <Pill size="sm">T ∈ [0, 16] · 201 个时点</Pill>
+          <Pill size="sm">D22–D28 · 精确点查询复杂度</Pill>
+          <Pill size="sm">D29–D33 · 查询与理想工作率</Pill>
+          <Pill size="sm">Lean · T42 / T43 / T51 / T52 / T62 / T72</Pill>
+          <Pill size="sm">E4 · 正类采样审计</Pill>
+        </Row>
+        <H1>动态延拓：证据、基线与适用范围</H1>
+        <Text tone="secondary">
+          已审计数值证据、查询复杂度、理想期望工作率与实际形式化覆盖；每一层的量词和未覆盖桥接均单独标明。
+        </Text>
+      </Stack>
+
+      <Callout tone="warning" title="先读负面结果">
+        固定中点 0.95g 的全区间最大误差已是 0.0109458，低于 0.02
+        目标。延拓路径虽然更精确，但该目标本身不能证明相对简单基线的竞争优势；在这个光滑一维算例上，
+        每条 Monte Carlo 路径耗时是一次严格确定性求解的 26.6–27.7 倍。
+      </Callout>
+
+      <Grid columns="minmax(0, 1.55fr) minmax(250px, 0.45fr)" gap={18} align="start">
+        <Card size="lg">
+          <CardHeader trailing="201 / 201">
+            归一化空间 L² 误差随终点 T 变化
+          </CardHeader>
+          <CardBody>
+            <Stack gap={8}>
+              <Text size="small" tone="tertiary">
+                纵轴：归一化空间 L² 误差
+              </Text>
+              <LineChart
+                categories={times.map((value) => value.toFixed(2))}
+                series={[
+                  {
+                    name: "3 种子经验 RMS",
+                    data: empiricalRms,
+                    tone: "info",
+                  },
+                  {
+                    name: "固定 0.95g",
+                    data: midpoint095g,
+                    tone: "success",
+                  },
+                  {
+                    name: "固定 g",
+                    data: equilibriumG,
+                    tone: "warning",
+                  },
+                  {
+                    name: "理论包络 0.02（逐终点总体）",
+                    data: theoremEnvelope,
+                    tone: "danger",
+                  },
+                ]}
+                height={360}
+                yMin={0}
+                yMax={0.023}
+                showHoverGuide
+              />
+              <Text
+                size="small"
+                tone="tertiary"
+                style={{ textAlign: "center" }}
+              >
+                横轴：终点 T
+              </Text>
+              <Text size="small" tone="tertiary">
+                来源：<Link href={summaryPath}>summary_dynamic.json</Link>，完整
+                201 时点（2026-09-28）。三种子 RMS 仅作描述，无置信区间；
+                0.02 是逐终点的总体归一化空间 RMS 定理包络，不是整条路径的同时概率保证。
+              </Text>
+            </Stack>
+          </CardBody>
+        </Card>
+
+        <Stack gap={12}>
+          <H2>规模与终点</H2>
+          <Grid columns={2} gap={12}>
+            <Stat value="60M" label="总根数" />
+            <Stat value="70,801,171" label="访问节点" />
+            <Stat value="201" label="终点数（含 T=0）" />
+            <Stat value="0.00353962" label="T=16 经验 RMS" tone="success" />
+          </Grid>
+          <Callout tone="neutral" title="比较锚点">
+            <Text size="small">
+              0.95g 全区间最大值：0.0109458
+            </Text>
+            <Text size="small">
+              最大三种子经验 RMS：0.00468048（T=12.72）
+            </Text>
+            <Text size="small">
+              结论：误差目标已被简单固定中点满足，确定性谱法也更快。
+            </Text>
+          </Callout>
+        </Stack>
+      </Grid>
+
+      <Stack gap={12}>
+        <Row justify="space-between" align="end" gap={16} wrap>
+          <Stack gap={4}>
+            <H2>临界端点前沿 · p = 2</H2>
+            <Text tone="secondary">
+              固定 α ∈ {"{0.5, 1, 2}"}，比较 δ = 10⁻²、10⁻⁴、10⁻⁶、10⁻⁸ 下的截断端点贡献与尖点比值。
+            </Text>
+          </Stack>
+          <Row gap={8} wrap>
+            <Pill active>54 / 54 精确检查通过</Pill>
+            <Pill size="sm">80 位十进制精度</Pill>
+          </Row>
+        </Row>
+
+        <Grid columns={4} gap={12}>
+          <Stat value="54 / 54" label="精确恒等式检查" tone="success" />
+          <Stat value="1.0542×10⁻⁸¹" label="最大恒等式残差" tone="success" />
+          <Stat value="2.87546 s" label="固定协议运行时间" />
+          <Stat value="12 / 12" label="K 正值且随截断深度单调" tone="success" />
+        </Grid>
+
+        <Grid columns="1fr 1fr" gap={14}>
+          <Card>
+            <CardHeader trailing="δ = 10⁻²…10⁻⁸">
+              截断端点贡献 K(δ)
+            </CardHeader>
+            <CardBody>
+              <Stack gap={8}>
+                <Text size="small" tone="secondary">
+                  纵轴：log₁₀ K(δ)；数值变换仅用于同时显示有限、对数与幂律增长。
+                </Text>
+                <LineChart
+                  categories={criticalCutoffDepths}
+                  series={[
+                    {
+                      name: "α=0.5 · 理论：有限极限",
+                      data: criticalKAlpha05.map(Math.log10),
+                      tone: "info",
+                    },
+                    {
+                      name: "α=1 · 理论：对数发散",
+                      data: criticalKAlpha1.map(Math.log10),
+                      tone: "warning",
+                    },
+                    {
+                      name: "α=2 · 理论：幂律发散",
+                      data: criticalKAlpha2.map(Math.log10),
+                      tone: "danger",
+                    },
+                  ]}
+                  height={250}
+                  beginAtZero={false}
+                  showHoverGuide
+                />
+                <Text size="small" tone="secondary" style={{ textAlign: "center" }}>
+                  横轴：log₁₀(1/δ) [无量纲]
+                </Text>
+              </Stack>
+            </CardBody>
+          </Card>
+
+          <Card>
+            <CardHeader trailing="理论极限作参考线">
+              尖点比值
+            </CardHeader>
+            <CardBody>
+              <Stack gap={8}>
+                <Text size="small" tone="secondary">
+                  纵轴：无量纲比值；每条曲线对应同一组四个截断深度。
+                </Text>
+                <LineChart
+                  categories={criticalCutoffDepths}
+                  series={[
+                    { name: "α=0.5", data: cuspRatioAlpha05, tone: "info" },
+                    { name: "α=1", data: cuspRatioAlpha1, tone: "warning" },
+                    { name: "α=2", data: cuspRatioAlpha2, tone: "danger" },
+                  ]}
+                  referenceLines={[
+                    { value: 0.9428090415820634, label: "α=0.5 极限", tone: "info" },
+                    { value: 1, label: "α=1 极限", tone: "warning" },
+                    { value: 1.3333333333333333, label: "α=2 极限", tone: "danger" },
+                  ]}
+                  height={250}
+                  yMin={0.92}
+                  yMax={1.35}
+                  beginAtZero={false}
+                  showHoverGuide
+                />
+                <Text size="small" tone="secondary" style={{ textAlign: "center" }}>
+                  横轴：log₁₀(1/δ) [无量纲]
+                </Text>
+              </Stack>
+            </CardBody>
+          </Card>
+        </Grid>
+
+        <Grid columns="1fr 1fr" gap={14}>
+          <Stack gap={6}>
+            <Text weight="semibold">K(δ) 原始高精度值</Text>
+            <Table
+              headers={["α", "δ=10⁻²", "δ=10⁻⁴", "δ=10⁻⁶", "δ=10⁻⁸"]}
+              rows={[
+                ["0.5", "1.1727735728230323", "1.6451641432631638", "1.7945486507244532", "1.8417882109301969"],
+                ["1", "2.5760104874930458", "5.5761516069771972", "8.5762819022151310", "11.576412196367531"],
+                ["2", "13.130063940849073", "149.39623017105203", "1511.8894951535653", "15136.805284373852"],
+              ]}
+              columnAlign={["left", "right", "right", "right", "right"]}
+              striped
+              framed
+            />
+          </Stack>
+
+          <Stack gap={6}>
+            <Text weight="semibold">尖点比值与理论极限</Text>
+            <Table
+              headers={["α", "δ=10⁻²", "δ=10⁻⁴", "δ=10⁻⁶", "δ=10⁻⁸", "理论极限"]}
+              rows={[
+                ["0.5", "0.9413935628674814", "0.9427948993201681", "0.9428089001606945", "0.9428090401678498", "0.9428090415820634"],
+                ["1", "0.9966666666666667", "0.9999666666666667", "0.9999996666666666", "0.9999999966666666", "1"],
+                ["2", "1.3233533333333333", "1.3332333353333334", "1.3333323333335333", "1.3333333233333334", "1.3333333333333333"],
+              ]}
+              columnAlign={["left", "right", "right", "right", "right", "right"]}
+              striped
+              framed
+            />
+          </Stack>
+        </Grid>
+
+        <Callout tone="warning" title="解释边界">
+          <Text size="small">
+            K(δ) 是截断端点贡献，不是完整 S₂。四个截断点只用于核对理论预言的数值形态；收敛或发散来自已审查的理论论证，不能由这四个点证明。
+          </Text>
+        </Callout>
+
+        <Text size="small" tone="secondary">
+          来源：固定 T25 协议输出 <Link href={criticalChecksPath}>critical_frontier_checks.json</Link>；解释与复核见 <Link href={criticalAuditPath}>T25 审计</Link>。
+        </Text>
+      </Stack>
+
+      <Stack gap={12}>
+        <Row justify="space-between" align="end" gap={16} wrap>
+          <Stack gap={4}>
+            <H2>E2 · 双移动屏障的有限证据</H2>
+            <Text tone="secondary">
+              固定一维 2π 周期数据 v(x)=5/8+(1/8)cos(x)；63 个单元、630,000 个主实验根，每单元 N=10,000，固定终点 T≤256。
+            </Text>
+          </Stack>
+          <Row gap={8} wrap>
+            <Pill active>T38 独立审计 992 / 992</Pill>
+            <Pill size="sm">dtype 补充检查通过</Pill>
+          </Row>
+        </Row>
+
+        <Grid columns={4} gap={12}>
+          <Stat value="630,000" label="主实验根" />
+          <Stat value="63" label="固定单元" />
+          <Stat value="10,000" label="每单元根数" />
+          <Stat value="256" label="最大有限终点 T" />
+        </Grid>
+
+        <Card size="lg">
+          <CardHeader trailing="3 个查询点 × 7 个终点">
+            三种子相对误差 RMS
+          </CardHeader>
+          <CardBody>
+            <Stack gap={8}>
+              <Text size="small" tone="secondary">
+                纵轴：相对 RMS [%]；1% 线是理想重复集合的参考目标，不是每个有限实现的验收上界。
+              </Text>
+              <LineChart
+                categories={twoBarrierHorizons}
+                series={[
+                  { name: "x=0", data: twoBarrierRmsX0.map((value) => 100 * value), tone: "info" },
+                  { name: "x=π/2", data: twoBarrierRmsXPi2.map((value) => 100 * value), tone: "success" },
+                  { name: "x=π", data: twoBarrierRmsXPi.map((value) => 100 * value), tone: "warning" },
+                ]}
+                referenceLines={[{ value: 1, label: "1% 理想集合 RMS 参照", tone: "danger" }]}
+                height={270}
+                beginAtZero
+                yMax={1.1}
+                valueSuffix="%"
+                showHoverGuide
+              />
+              <Text size="small" tone="secondary" style={{ textAlign: "center" }}>
+                横轴：七个固定终点 T（分类轴，不表示等比例时间间隔）
+              </Text>
+            </Stack>
+          </CardBody>
+        </Card>
+
+        <Stack gap={6}>
+          <Text weight="semibold">全部 21 个查询 RMS</Text>
+          <Table
+            headers={["查询点", "T=0", "T=0.25", "T=1", "T=4", "T=16", "T=64", "T=256"]}
+            rows={[
+              ["x=0", ...twoBarrierRmsX0.map((value) => `${(100 * value).toFixed(6)}%`)],
+              ["x=π/2", ...twoBarrierRmsXPi2.map((value) => `${(100 * value).toFixed(6)}%`)],
+              ["x=π", ...twoBarrierRmsXPi.map((value) => `${(100 * value).toFixed(6)}%`)],
+            ]}
+            columnAlign={["left", "right", "right", "right", "right", "right", "right", "right"]}
+            striped
+            framed
+          />
+        </Stack>
+
+        <Callout tone="warning" title="有限样本结论">
+          <Text size="small">
+            最大 RMS 为 1.02535%，出现在 T=16、x=0；因此不能写成“所有点都低于 1%”。这是三种子有限实现的诊断值，不违反理想重复集合的 RMS 界。
+          </Text>
+        </Callout>
+
+        <Grid columns="1fr 1fr" gap={14}>
+          <Stack gap={6}>
+            <Text weight="semibold">固定计时范围</Text>
+            <Table
+              headers={["任务", "耗时"]}
+              rows={[
+                ["种子 2026092831 · 21 查询采样", "2.12709 s"],
+                ["种子 2026092832 · 21 查询采样", "1.89072 s"],
+                ["种子 2026092833 · 21 查询采样", "1.76424 s"],
+                ["固定 16 模式 · 一次求解 + 21 查询", "0.0969848 s"],
+                ["六次参考细化 · 求解 + 查询合计", "2.12111 s"],
+              ]}
+              columnAlign={["left", "right"]}
+              striped
+              framed
+            />
+            <Text size="small" tone="tertiary">
+              16 模式比较时间不含基函数与系统构造；六次细化验证成本单列。这里只报告固定实现的测量，不作等精度优化或加速结论。
+            </Text>
+          </Stack>
+
+          <Stack gap={6}>
+            <Text weight="semibold">T=256 的误差对照</Text>
+            <Table
+              headers={["量", "x=0", "x=π/2", "x=π"]}
+              rows={[
+                ["三种子 RMS", "0.3884%", "0.1523%", "0.4991%"],
+                ["调和中心 · 绝对相对误差", "24.8573%", "24.8573%", "24.8573%"],
+                ["空间均值 ODE · 绝对相对误差", "5.1055%", "5.1055%", "5.1055%"],
+              ]}
+              columnAlign={["left", "right", "right", "right"]}
+              striped
+              framed
+            />
+          </Stack>
+        </Grid>
+
+        <Callout tone="neutral" title="工作量证据的边界">
+          <Text size="small">
+            理论量 E[N]≤2.82733 与 E[提案数]≤5.30124 是期望上界，不是单根或有限样本上界。最大单元经验平均节点数为 2.8354；这种有限波动不是理论违例，经验曲线也不能证明期望界。
+          </Text>
+        </Callout>
+
+        <Text size="small" tone="secondary">
+          来源：<Link href={twoBarrierDerivedPath}>审计派生表</Link> · <Link href={twoBarrierAuditSummaryPath}>992 / 992 原始证据审计</Link> · <Link href={twoBarrierAuditPath}>T38 审计报告</Link> · <Link href={twoBarrierImplementationPath}>T35 实现报告</Link> · <Link href={twoBarrierFigurePath}>v2 科学图</Link>。
+        </Text>
+      </Stack>
+
+      <Stack gap={12}>
+        <Row justify="space-between" align="end" gap={16} wrap>
+          <Stack gap={4}>
+            <H2>D22–D33 · 精确点查询与理想工作率地图</H2>
+            <Text tone="secondary">
+              固定维数 d、光滑阶数 s 与固定绝对精度；下表是查询阶，D31–D33 另行给出实际子程序与显式理想原语工作率。
+            </Text>
+          </Stack>
+          <Pill active>常规证明 + 独立审查</Pill>
+        </Row>
+
+        <Card size="lg">
+          <CardHeader trailing="不同输入类与不同量词不可混用">
+            正类、变号类与一般反应
+          </CardHeader>
+          <CardBody>
+            <Table
+              headers={["结论", "输入类 / 精度", "已建立的查询阶", "量词与保留边界"]}
+              rows={[
+                [
+                  "D22 · 变号下界",
+                  "Allen–Cahn；固定变号 Cˢ 类；MSE≤1/16",
+                  "Ω(exp(dT/(s+d)))",
+                  "每个 T 有显式基线 g_T；基线随 T 变。算法可依赖 T、可自适应、可有偏；未声称最优指数。",
+                ],
+                [
+                  "D23 · 非负类零基线下界",
+                  "Allen–Cahn；固定非负 Cˢ 类；RMS≤1/4",
+                  "Ω(exp(dT/(s+d)))",
+                  "昂贵输入是同一个零函数；隐藏替代随 T 变。若输入以已知零公式给出，则不适用。",
+                ],
+                [
+                  "D24 · 非负类匹配阶",
+                  "与 D23 完全相同的类；固定 d,s 与固定 RMS≤1/4",
+                  "Θ(exp(dT/(s+d)))",
+                  "每个充分大 T；上界用独立均匀点样本与有偏 Ψ(exp(T)m̂)，统一 RMS≤5/32。",
+                ],
+                [
+                  "D25 · 变号强化下界",
+                  "与 D22 相同的类；1≤d≤4s；RMS≤1/4",
+                  "Ω(exp(2dT/(2s+d)))",
+                  "有限先验给最坏输入；昂贵成员可依赖 T 和算法。D27在此范围匹配上界；D28已把下界推广到任意固定d,s≥1。",
+                ],
+                [
+                  "D26 · 一般 C² 正类",
+                  "0≤v≤b/2、Cˢ 范数≤R，R>0；固定 ε∈(0,b/2)",
+                  "Θ(exp(λdT/(s+d)))",
+                  "每个终点可用依赖公开 f、参数与 T 的有限参数；不依赖未知 v。只证明非统一的逐终点查询复杂度。一般 C² 层尚未 Lean 形式化。",
+                ],
+                [
+                  "D27 · 变号类匹配阶",
+                  "与 D25 完全相同的类；1≤d≤4s；RMS≤1/4",
+                  "Θ(exp(2dT/(2s+d)))",
+                  "粗网格插值与线性/二次随机修正估计非线性相位。查询数有确定上限；已付费样本后的有限辅助计算可能极大，没有运行时间上界。",
+                ],
+                [
+                  "D28 · 任意固定维数变号下界",
+                  "与 D22 相同的固定类；所有整数d,s≥1；RMS≤1/4",
+                  "Ω(exp(2dT/(2s+d)))",
+                  "带L¹方向权重的相位导数与完整先验上的集中估计消除下界的维数限制。昂贵成员仍可依赖T与算法；D29现已给出匹配上界。",
+                ],
+                [
+                  "D29 · 任意固定维数变号匹配阶",
+                  "与 D28 相同的类和精确初值点查询模型；固定整数d,s≥1；RMS≤1/4",
+                  "Θ(exp(2dT/(2s+d)))",
+                  "最坏输入期望查询数；构造上界有确定查询上限且RMS≤7/64。只计查询，不是算术、位复杂度或实际运行时间定理；常数不随维数统一。",
+                ],
+              ]}
+              columnAlign={["left", "left", "left", "left"]}
+              striped
+              framed
+            />
+          </CardBody>
+        </Card>
+
+
+        <Grid columns="1fr 1fr" gap={14}>
+          <Callout tone="info" title="D29 · 所有固定 d,s 的查询阶已匹配">
+            在原有变号类、单位环面和精确初值点查询模型中，固定整数 d,s≥1 时，
+            最坏输入期望查询数为 Θ(exp(2dT/(2s+d)))。算法可有偏、自适应、随机停机；
+            结论不覆盖更大区域、弱扩散、维数统一常数或高效算术实现。
+          </Callout>
+          <Callout tone="neutral" title="D30 · 固定烧入导数采样只解决一个子程序">
+            固定 L 与 j、已知连续 g 严格位于单位 sup 球且连续残差 e 满足 ||e||∞≤δ 时，
+            可无偏估计 DʲS_L(g)[eʲ]；每条路径最多 j 个新初值查询，
+            二阶矩≤δ²ʲ exp(2(3²ʲ−1)L)，理想原语期望工作≤Cⱼ(d+1)exp(4L)。
+            该工作界把一次已知 g 求值计作一个原语；实际 g 的求值与预处理成本必须另计。
+            这不是稳定图导数、基础相位或完整长时算术工作定理，也不含有限位连续随机数实现。
+          </Callout>
+        </Grid>
+
+        <Grid columns="1fr 1fr" gap={14}>
+          <Callout tone="info" title="D31 · 实际稳定图导数采样器已接受">
+            固定 d、j、烧入 L 与图常数，给定已付费且可精确求值的 g，fresh-seed 样本无偏估计
+            DʲH_L(g)[eʲ]，具有统一有限二阶矩并在每条路径至多取得 j 个新初值。
+            期望理想工作把所有烧入批次、树、g 求值和系数遍历计入；它依赖实际 g 求值成本，且不提供有限位或实际速度保证。
+          </Callout>
+          <Callout tone="info" title="D32 · 已知基底高精度计算已接受">
+            从恰好 kᵈ 个付费网格值构造 Gevrey-2 插值 g，预处理与存储为 O(kᵈ)，以后每次 g 求值使用
+            O₍d,s₎(1) 个列明的理想操作。近分支基础相位值达到 exp(−(T−L))/192 精度，
+            总工作至多 Ckᵈ(1+T)ᵃ；谱数组、配点迭代、标量权重、读写和有缓冲的根搜索均实际计费。
+          </Callout>
+        </Grid>
+
+        <Callout tone="success" title="D33 · 匹配的是理想期望工作的指数率">
+          对固定整数 d,s≥1、归一化单位环面、方程 ∂ₜu=½Δu+u−u³，以及原固定变号 Cˢ 初值类，
+          在显式列明且每个操作均计费的理想原语模型中，存在 c,C,a,T₀&gt;0，使所有 T≥T₀ 满足
+          c exp(γT) ≤ W(T) ≤ C exp(γT)(1+T)ᵃ，γ=2d/(2s+d)，因而 lim log W(T)/T=γ。
+          这是与查询下界匹配的指数工作率，不是去掉多项式因子的精确 Θ(exp(γT)) 总工作定理；也不是有限位复杂度、实际运行时间或工程速度结论。
+        </Callout>
+
+        <Callout tone="warning" title="形式化与范围扩展仍有边界">
+          T75 的有限树矩 Lean 工作仍在进行，没有 PASS。R14 是弱扩散/更一般谱隙范围的扩展候选；
+          R14b/T76 接受的局部图输出引理没有完成或提升整条 R14 扩展，D33 仍只覆盖上述单位环面、½Δ 与固定变号类。
+        </Callout>
+
+        <Grid columns="1fr 1fr" gap={14}>
+          <Callout tone="neutral" title="远离不稳定零相时可有统一工作量">
+            <Text size="small">
+              D17–D19 在{'0 < m ≤ v ≤ M < 1'}、m与M固定等相应条件下，给出理想树表示对终点T一致的期望节点界。
+              D22–D28 允许数据逼近不稳定零相或考察完整固定非负类，量词和信息模型不同，因此并不矛盾。
+            </Text>
+          </Callout>
+          <Callout tone="warning" title="基线量词必须区分">
+            <Text size="small">
+              D22 的公开基线 g_T 随 T 变化；D23 在所有终点使用同一个零输入；D25/D28 只保证有限先验平均昂贵，
+              具体昂贵成员可随 T 和算法变化。D23 的固定零输入结论依赖整个非负类的统一精度要求，不能据此断言每个固定剖面都同样困难。
+            </Text>
+          </Callout>
+        </Grid>
+
+        <Callout tone="warning" title="查询模型与理想工作模型必须区分">
+          D22–D29 计数未知初值的<strong>精确实数点查询</strong>；未知初值的公式、积分、导数或演化值都不免费，已有样本后的算术不进入查询数。
+          D31–D33 的共同理想工作模型还逐项计数实数算术、比较、索引、存储读写、列明的初等函数与连续随机原语，且任意已知函数或 PDE 求解也不免费。
+          两种模型都没有随机比特、有限精度、机器内存/位长或实际运行时间保证。
+        </Callout>
+
+        <Callout tone="neutral" title="变号时，总质量不足以决定长期结果">
+          固定的两个光滑初值可以具有相同的零总质量，却分别趋向正、负平衡态。
+          D27因此估计实际PDE定义的非线性相位A(v)，并用有限计算构造修正系数；它没有调用免费的相位或PDE解预言机。
+          单位环面的强扩散混合是证明条件，不能直接推广到大区域或弱扩散。
+          <Text size="small">常规证明与独立审查已通过；D31–D33 尚无完整 Lean 或变号数值证据。D29 的查询阶与 D33 的理想期望工作指数率均已覆盖任意固定 d,s，但常数不随维数统一。</Text>
+        </Callout>
+
+        <Text size="small" tone="secondary">
+          D22–D29 均在单位环面上。D26 还要求 f(0)=f(b)=0、f 在(0,b)内为正、f'(0)=λ 为正；b处可退化。
+          理论来源：<Link href={d22Path}>D22</Link> · <Link href={d23Path}>D23</Link> · <Link href={d24Path}>D24</Link> · <Link href={d25Path}>D25</Link> · <Link href={d26Path}>D26</Link> · <Link href={d27Path}>D27</Link> · <Link href={t59Path}>T59独立审查</Link> · <Link href={d28Path}>D28</Link> · <Link href={t64Path}>T64独立审查</Link> · <Link href={d29Path}>D29</Link> · <Link href={t67Path}>T67独立审查</Link> · <Link href={t67RootPath}>T67主任务对应</Link> · <Link href={d30Path}>D30/R10b</Link> · <Link href={t68Path}>T68独立审查</Link> · <Link href={t68RootPath}>T68主任务对应</Link> · <Link href={t69Path}>D31/T69</Link> · <Link href={t73Path}>T73独立审查</Link> · <Link href={t73RootPath}>T73主任务对应</Link> · <Link href={d33Path}>D32–D33</Link> · <Link href={t74Path}>T74独立审查</Link> · <Link href={t74RootPath}>T74主任务对应</Link>。
+        </Text>
+      </Stack>
+
+      <Stack gap={12}>
+        <Row justify="space-between" align="end" gap={16} wrap>
+          <Stack gap={4}>
+            <H2>Lean 实际覆盖 · 信息核、条件 KL 与正类风险</H2>
+            <Text tone="secondary">
+              以下六个模块覆盖概率积分、有限自适应求值器、统计误差、实际 Bernoulli 信息不等式与有限共享历史的一步条件累积；PDE 偏差仍是显式的外部数学输入。
+            </Text>
+          </Stack>
+          <Pill active>主任务对应审查通过</Pill>
+        </Row>
+
+        <Table
+          headers={["模块", "Lean 中实际证明", "仍属常规论证 / 未覆盖"]}
+          rows={[
+            [
+              "T42 · 查询信息积分",
+              "任意概率空间上的配对平方损失与期望查询下界；不要求输出有界或无偏，访问集合先作逐点估计，再对损失积分。",
+              "PDE、热核、平滑 bump、一般随机算法嵌入。",
+            ],
+            [
+              "T43 · 自适应求值器",
+              "真实 fuel 有限求值器的轨迹归纳、no-hit 同轨迹同输出、访问单元数≤查询数。",
+              "无限种子空间的可测编码与逐种子非统一停机桥接。",
+            ],
+            [
+              "T51 · Ψ 变换",
+              "从 Ψ(z)=z/√(1+z²) 推导锚定不等式、实际积分损失界与精确 25/1024 偏差合成。",
+              "PDE 近似、质量插值、均匀偏差≤1/32。",
+            ],
+            [
+              "T52 · 独立样本均值",
+              "从可测 Pairwise IndepFun 与 0≤Yᵢ≤A 推导 L²、无偏、MSE≤Am/n、rpow 缩放与总 MSE<1/16。",
+              "iid 均匀点样本的实现桥；一般 C² 的 Φ 坐标与有限表。",
+            ],
+            [
+              "T62 · 实际 Bernoulli 信息",
+              "实际 Bool Bernoulli 测度的 KL 公式、χ² 上界、端点完整 Pinsker，以及 KL≤1/12 时等先验二元检验误差≥3/8；14个公开声明仅含标准公理。",
+              "共享历史的条件平均与一步累积见 T72；均匀 Hamming 层先验、自适应 fresh-cell 交换性、随机停止截断、MSE→标签及 PDE/相位桥仍未覆盖。",
+            ],
+            [
+              "T72 · 有限条件信息",
+              "实际有限共享历史条件 Bernoulli 联合律的 KL 有限性与精确平均、统一一步界、actual compProd 一步累积，以及任意可测 Bool 判决的数据处理与二元检验结论；10个公开声明仅含标准公理。",
+              "完整 urn 层律、adaptive/padded transcript、共同私有种子、n步 urn 参数算术、随机停止、MSE→标签和 PDE/相位桥。",
+            ],
+          ]}
+          columnAlign={["left", "left", "left"]}
+          striped
+          framed
+        />
+
+        <Callout tone="warning" title="T62 / T72 仍不是完整变号定理证书">
+          T72 已把有限共享历史的条件 KL、一步 compProd 累积与任意可测二元后处理落到实际测度；完整 urn 层律、自适应 fresh-cell 交换性与转录 padding、共同种子模拟、n步路径、随机停止截断、有限先验平均、MSE→标签及 PDE/相位桥仍未形式化。
+          T51/T52 也未覆盖 D24 的高度—质量插值、热混合、非线性 PDE 比较、统一偏差与 iid 初值查询实现。
+        </Callout>
+
+        <Callout tone="neutral" title="T72 构建与日志来源">
+          fresh build 为 3511/3511；10 个公开导出只依赖 Mathlib 标准公理 propext、Classical.choice 与 Quot.sound。
+          四个失败尝试文件是事后整理的诊断摘要，不是逐字节原始 stdout/stderr 或全部草稿快照；成功的构建与公理日志是实际工具输出的精确转录，也不是直接 tee 得到的字节归档。
+        </Callout>
+
+        <Text size="small" tone="secondary">
+          形式化报告：<Link href={t42Path}>T42</Link> · <Link href={t43Path}>T43</Link> · <Link href={t51Path}>T51</Link> · <Link href={t52Path}>T52</Link> · <Link href={t62Path}>T62实际Bernoulli</Link> · <Link href={t72Path}>T72有限条件信息</Link>；主任务对应审查：<Link href={t42t43RootPath}>T42/T43</Link> · <Link href={t51RootPath}>T51</Link> · <Link href={t52RootPath}>T52</Link> · <Link href={t62RootPath}>T62</Link> · <Link href={t72RootPath}>T72</Link>。
+        </Text>
+      </Stack>
+
+      <Stack gap={12}>
+        <Row justify="space-between" align="end" gap={16} wrap>
+          <Stack gap={4}>
+            <H2>E3 · 查询信息核的有限精确检查</H2>
+            <Text tone="secondary">
+              一次冻结运行；Fraction 穷举加两种高精度积分公式，只检查 D22 信息核与标量公式的有限实例。
+            </Text>
+          </Stack>
+          <Pill active>固定范围 PASS</Pill>
+        </Row>
+
+        <Grid columns={4} gap={12}>
+          <Stat value="25,960" label="精确配置" />
+          <Stat value="334,020" label="求值器运行" />
+          <Stat value="154,030" label="no-hit 替代运行" />
+          <Stat value="105 + 5" label="主表 + 混合表行" />
+        </Grid>
+
+        <Grid columns="1fr 1fr" gap={14}>
+          <Card>
+            <CardHeader trailing="一次官方运行 · 11.332 s">检查了什么</CardHeader>
+            <CardBody>
+              <Stack gap={6}>
+                <Text size="small">全部 no-hit 运行保持输出与完整有序轨迹一致。</Text>
+                <Text size="small">访问单元数不超过查询数；25,960 个配对损失检查全部精确通过。</Text>
+                <Text size="small">105 个主汇总行、820 个固定替代风险和 5 个预算混合行由主任务审查重新计算。</Text>
+                <Text size="small">两种积分结果相差约 4.63×10⁻⁸³，低于固定 10⁻⁷⁰ 比较阈值；这不是严格积分包络。</Text>
+              </Stack>
+            </CardBody>
+          </Card>
+          <Callout tone="warning" title="E3 的有限角色">
+            E3 使用抽象分配目标，既不是 PDE 求解，也不是 D24 上界算法的数值验证；它不能经验性证明对所有可测随机算法的普遍量词。
+            主任务审查重新计算了存储汇总，但没有重放完整求值器，也没有重新执行高精度积分。
+          </Callout>
+        </Grid>
+
+        <Text size="small" tone="secondary">
+          冻结证据：<Link href={e3ResultPath}>check_result.json</Link> · <Link href={e3ManifestPath}>execution_manifest.json</Link> · <Link href={e3ReportPath}>T49 报告</Link> · <Link href={e3RootAuditPath}>主任务输出审查</Link>。
+        </Text>
+      </Stack>
+
+
+      <Stack gap={12}>
+        <Row justify="space-between" align="end" gap={16} wrap>
+          <Stack gap={4}>
+            <H2>E4 · 正类点查询采样的描述性证据</H2>
+            <Text tone="secondary">
+              选择 nominal z 后比较 T=12、16、20 的 pooled 标量替代 RMS；曲线只画 pooled 值，表格同时列出三种子范围与全部零查询基线。
+            </Text>
+          </Stack>
+          <Select
+            value={selectedE4Z}
+            onChange={setSelectedE4Z}
+            options={[
+              { value: "0", label: "nominal z = 0" },
+              { value: "0.25", label: "nominal z = 0.25" },
+              { value: "1", label: "nominal z = 1" },
+              { value: "4", label: "nominal z = 4" },
+            ]}
+            style={{ minWidth: 180 }}
+          />
+        </Row>
+
+        <Grid columns={3} gap={12}>
+          <Stat value="18,720" label="冻结输出" />
+          <Stat value="336,883,488" label="官方点查询" />
+          <Stat value="368,270,390" label="总活动量（含预检与重放）" />
+          <Stat value="30,075,636" label="独立重放点查询" />
+          <Stat value="180 / 18,720" label="预定独立重放" />
+          <Stat value="0.0118108321" label="定理日程最大非零 pooled RMS" />
+        </Grid>
+
+        <Grid columns="minmax(0, 1.15fr) minmax(280px, 0.85fr)" gap={16} align="start">
+          <Card size="lg">
+            <CardHeader trailing={`z = ${selectedE4Z}`}>
+              pooled 标量替代 RMS 随终点 T 变化
+            </CardHeader>
+            <CardBody>
+              <Stack gap={8}>
+                <Text size="small" tone="tertiary">
+                  纵轴：对 binary64 标量替代值计算的绝对 RMS
+                </Text>
+                <LineChart
+                  categories={e4Horizons.map(String)}
+                  series={[
+                    ...e4Schedules.map((schedule) => ({
+                      name: schedule.key,
+                      data: e4Horizons.map(
+                        (T) => getE4Pooled(schedule.key, T).rms,
+                      ),
+                    })),
+                    ...e4Baselines.map((baseline) => ({
+                      name: baseline.key,
+                      data: e4Horizons.map(
+                        (T) => getE4Baseline(baseline.key, T).rms,
+                      ),
+                    })),
+                  ]}
+                  height={300}
+                  beginAtZero
+                  showHoverGuide
+                />
+                <Text size="small" tone="tertiary" style={{ textAlign: "center" }}>
+                  横轴：终点 T
+                </Text>
+                <Text size="small" tone="tertiary">
+                  来源：<Link href={e4StoredAuditPath}>stored_audit.json</Link>，
+                  T=12、16、20；五个日程曲线为三种子 pooled RMS，另含全部三个零查询基线。
+                  图例使用冻结源键；图中没有误差条或置信区间。
+                </Text>
+              </Stack>
+            </CardBody>
+          </Card>
+
+          <Callout tone="warning" title="E4 只能作标量替代值的描述性检查">
+            RMS 针对计算得到的 binary64 标量替代值；没有数值求解 PDE。
+            常规 PDE 偏差只给每个 RMS 的 ±1/32 解释区间，不是严格浮点包络。
+            PCG64/binary64 也不是经认证的 iid 实数桥。三种子最小—最大值只是描述性范围，
+            不是置信区间；有限样本不能证明渐近、minimax、新颖性或实际变号工作量。
+          </Callout>
+        </Grid>
+
+        <Table
+          headers={[
+            "方法",
+            "T=12 pooled / 种子min–max",
+            "T=16 pooled / 种子min–max",
+            "T=20 pooled / 种子min–max",
+            "实际 n/输出（12/16/20）",
+            "pooled 零输出频率（12/16/20）",
+            "重复数",
+          ]}
+          rows={[...e4ScheduleRows, ...e4BaselineRows]}
+          columnAlign={["left", "right", "right", "right", "right", "right", "left"]}
+          rowTone={["info", "info", "info", "success", "warning", "neutral", "neutral", "neutral"]}
+          striped
+          framed
+        />
+
+        <Text size="small" tone="secondary">
+          定理日程每个 (T,z) 为 8 次/种子、24 次 pooled；其余日程为 128 次/种子、384 次 pooled。
+          三个零查询常数 0、0.5、1 均保留，查询数恒为 0，种子与 pooled 数值相同。
+          冻结证据：<Link href={e4StatisticsRawPath}>statistics_raw.npz</Link> · <Link href={e4StoredAuditPath}>stored_audit.json</Link> · <Link href={e4FigurePath}>figure-v2</Link> · <Link href={e4AuditPath}>T66独立审计</Link> · <Link href={e4FigureRecipePath}>最终图配方对应</Link> · <Link href={e4FigureRootPath}>主任务图配方审查</Link>。
+        </Text>
+      </Stack>
+
+      <Stack gap={10}>
+        <H2>早期理论适用范围</H2>
+        <Table
+          headers={["场景", "已建立的结论", "必须保留的边界"]}
+          rows={[
+            [
+              "紧致情形 · 原始编码",
+              "若 f(v) 不恒为零，且某个高阶导数 f^(p)(v)（p≥2）不恒为零，则在某个有限 T 后不再绝对可积。",
+              "连通平坦环面上的原始单树表示；要求支持所有非零项、精确似然权重且几乎必然完成。反应零点及仿射终端导数族是例外。",
+            ],
+            [
+              "非紧致高斯 · f = −u²",
+              "若 0 < ε ≤ 1/32，则原始表示一阶绝对矩在所有有限时域可积，当且仅当 d ≥ 5。",
+              "仅针对指定高斯数据族与原始表示；见 T15。",
+            ],
+            [
+              "同一规范绝对质量 · i.i.d. 根",
+              "同一小高斯数据族中，固定 d≥5、x=0，以预定数量的独立同分布无偏根取平均，固定相对精度需要 Ω(T²) 个根。",
+              "匹配高斯的标准二叉表示在 T 上有一致的相对方差界；仅为理想实数、节点计数层面的比较，见 T20。",
+            ],
+          ]}
+          columnAlign={["left", "left", "left"]}
+          rowTone={["neutral", "info", "warning"]}
+          striped
+        />
+      </Stack>
+
+      <Stack gap={8}>
+        <H2>本地证据链</H2>
+        <Row gap={14} wrap>
+          <Link href={reportPath}>综合报告</Link>
+          <Link href={claimsPath}>D1–D33 声明账本</Link>
+          <Link href={d29Path}>D29 全维匹配</Link>
+          <Link href={d30Path}>D30 固定烧入采样</Link>
+          <Link href={t62Path}>T62 实际 Bernoulli</Link>
+          <Link href={e4AuditPath}>E4 / T66 数值审计</Link>
+          <Link href={artifactAuditPath}>T14 数值与制品审计</Link>
+          <Link href={noncompactAuditPath}>T15 非紧致二次型审计</Link>
+          <Link href={relativeCostAuditPath}>T20 相对代价审计</Link>
+        </Row>
+        <Text size="small" tone="tertiary">
+          展示值直接来自已审计摘要；本页不增加新数值，也不作新颖性主张。
+        </Text>
+      </Stack>
+    </Stack>
+  );
+}

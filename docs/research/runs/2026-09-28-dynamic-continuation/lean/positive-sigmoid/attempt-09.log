@@ -1,0 +1,41 @@
+EstimatorIntegrity/PositiveSigmoidRisk.lean:139:6: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+EstimatorIntegrity/PositiveSigmoidRisk.lean:255:10: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ∫ (a : Ω), ((fun ω => F ω ^ 2) + fun ω => 2 * |b| * |F ω|) a + b ^ 2 ∂μ
+in the target expression
+  ∫ (ω : Ω), F ω ^ 2 + 2 * |b| * |F ω| + b ^ 2 ∂μ = ∫ (ω : Ω), F ω ^ 2 ∂μ + 2 * |b| * ∫ (ω : Ω), |F ω| ∂μ + b ^ 2
+
+Ω : Type u_1
+inst✝¹ : MeasurableSpace Ω
+μ : Measure Ω
+inst✝ : IsProbabilityMeasure μ
+X : Ω → ℝ
+z y : ℝ
+hX : Measurable X
+hX_nonneg : ∀ (ω : Ω), 0 ≤ X ω
+hz : 0 ≤ z
+htransformed : ∫ (ω : Ω), (positiveSigmoid (X ω) - positiveSigmoid z) ^ 2 ∂μ ≤ 1 / 64
+hbias : |y - positiveSigmoid z| ≤ 1 / 32
+F : Ω → ℝ := fun ω => positiveSigmoid (X ω) - positiveSigmoid z
+b : ℝ := positiveSigmoid z - y
+hpsi_meas : Measurable fun ω => positiveSigmoid (X ω)
+hF_meas : Measurable F
+hFsq : Integrable (fun ω => F ω ^ 2) μ
+hF_L2 : MemLp F 2 μ
+hF_int : Integrable F μ
+hFabs_int : Integrable (fun ω => |F ω|) μ
+hCauchy : ∫ (ω : Ω), |F ω| ∂μ ≤ √(∫ (ω : Ω), F ω ^ 2 ∂μ)
+hF_mse : ∫ (ω : Ω), F ω ^ 2 ∂μ ≤ 1 / 64
+hF_mse_nonneg : 0 ≤ ∫ (ω : Ω), F ω ^ 2 ∂μ
+hsqrt_le : √(∫ (ω : Ω), F ω ^ 2 ∂μ) ≤ 1 / 8
+hFabs_mean : ∫ (ω : Ω), |F ω| ∂μ ≤ 1 / 8
+hFabs_mean_nonneg : 0 ≤ ∫ (ω : Ω), |F ω| ∂μ
+hb_abs : |b| ≤ 1 / 32
+hb_sq : b ^ 2 ≤ 1 / 1024
+hcross : 2 * |b| * ∫ (ω : Ω), |F ω| ∂μ ≤ 1 / 128
+hcross_int : Integrable (fun ω => 2 * |b| * |F ω|) μ
+hconst_int : Integrable (fun x => b ^ 2) μ
+hrhs_int : Integrable (fun ω => F ω ^ 2 + 2 * |b| * |F ω| + b ^ 2) μ
+htotal_int : Integrable (fun ω => (positiveSigmoid (X ω) - y) ^ 2) μ
+⊢ ∫ (ω : Ω), F ω ^ 2 + 2 * |b| * |F ω| + b ^ 2 ∂μ = ∫ (ω : Ω), F ω ^ 2 ∂μ + 2 * |b| * ∫ (ω : Ω), |F ω| ∂μ + b ^ 2

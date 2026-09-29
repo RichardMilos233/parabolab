@@ -1,0 +1,12 @@
+import EstimatorIntegrity.PositiveSigmoidRisk
+
+#print axioms EstimatorIntegrity.positiveSigmoid
+#print axioms EstimatorIntegrity.continuous_positiveSigmoid
+#print axioms EstimatorIntegrity.positiveSigmoid_nonneg
+#print axioms EstimatorIntegrity.positiveSigmoid_le_one
+#print axioms EstimatorIntegrity.positiveSigmoid_mono_nonneg
+#print axioms EstimatorIntegrity.positiveSigmoid_anchored
+#print axioms EstimatorIntegrity.positiveSigmoid_squaredLoss_integrable
+#print axioms EstimatorIntegrity.integral_abs_le_sqrt_integral_sq
+#print axioms EstimatorIntegrity.positiveSigmoid_integral_loss_le
+#print axioms EstimatorIntegrity.positiveSigmoid_bias_composition

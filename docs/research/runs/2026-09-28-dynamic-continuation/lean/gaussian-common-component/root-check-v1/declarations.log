@@ -1,0 +1,257 @@
+EstimatorIntegrity.GaussianCommonComponent.commonMap.{u_1} {I : Type u_1} [Fintype I] (w : I → ℝ) : (I → ℝ) →L[ℝ] ℝ
+EstimatorIntegrity.GaussianCommonComponent.commonMap_apply.{u_1} {I : Type u_1} [Fintype I] (w x : I → ℝ) :
+  (EstimatorIntegrity.GaussianCommonComponent.commonMap w) x = ∑ i, w i * x i
+EstimatorIntegrity.GaussianCommonComponent.residualMap.{u_1} {I : Type u_1} [Fintype I] (w : I → ℝ) :
+  (I → ℝ) →L[ℝ] I → ℝ
+EstimatorIntegrity.GaussianCommonComponent.residualMap_apply.{u_1} {I : Type u_1} [Fintype I] (w x : I → ℝ) (i : I) :
+  (EstimatorIntegrity.GaussianCommonComponent.residualMap w) x i = x i - ∑ j, w j * x j
+EstimatorIntegrity.GaussianCommonComponent.pairMap.{u_1} {I : Type u_1} [Fintype I] (w : I → ℝ) :
+  (I → ℝ) →L[ℝ] (I → ℝ) × ℝ
+EstimatorIntegrity.GaussianCommonComponent.pairMap_apply.{u_1} {I : Type u_1} [Fintype I] (w x : I → ℝ) :
+  (EstimatorIntegrity.GaussianCommonComponent.pairMap w) x = (fun i => x i - ∑ j, w j * x j, ∑ j, w j * x j)
+EstimatorIntegrity.GaussianCommonComponent.pairUnitMap.{u_1} {I : Type u_1} [Fintype I] (w : I → ℝ) :
+  (I → ℝ) →L[ℝ] (I → ℝ) × (Unit → ℝ)
+EstimatorIntegrity.GaussianCommonComponent.pairUnitMap_apply.{u_1} {I : Type u_1} [Fintype I] (w x : I → ℝ) :
+  (EstimatorIntegrity.GaussianCommonComponent.pairUnitMap w) x =
+    (fun i => x i - ∑ j, w j * x j, fun x_1 => ∑ j, w j * x j)
+EstimatorIntegrity.GaussianCommonComponent.addCommonMap.{u_1} {I : Type u_1} [Fintype I] : (I → ℝ) × ℝ →L[ℝ] I → ℝ
+EstimatorIntegrity.GaussianCommonComponent.addCommonMap_apply.{u_1} {I : Type u_1} [Fintype I] (p : (I → ℝ) × ℝ)
+  (i : I) : EstimatorIntegrity.GaussianCommonComponent.addCommonMap p i = p.1 i + p.2
+EstimatorIntegrity.GaussianCommonComponent.addCommon.{u_1} {I : Type u_1} [Fintype I] : (I → ℝ) × ℝ → I → ℝ
+EstimatorIntegrity.GaussianCommonComponent.addCommon_apply.{u_1} {I : Type u_1} [Fintype I] (p : (I → ℝ) × ℝ) (i : I) :
+  EstimatorIntegrity.GaussianCommonComponent.addCommon p i = p.1 i + p.2
+EstimatorIntegrity.GaussianCommonComponent.addCommon_measurable.{u_1} {I : Type u_1} [Fintype I] :
+  Measurable EstimatorIntegrity.GaussianCommonComponent.addCommon
+EstimatorIntegrity.GaussianCommonComponent.edgeMap.{u_1, u_2} {I : Type u_1} {E : Type u_2} [Fintype I] [Fintype E]
+  (L : I → E → ℝ) : (E → ℝ) →L[ℝ] I → ℝ
+EstimatorIntegrity.GaussianCommonComponent.edgeMap_apply.{u_1, u_2} {I : Type u_1} {E : Type u_2} [Fintype I]
+  [Fintype E] (L : I → E → ℝ) (y : E → ℝ) (i : I) :
+  (EstimatorIntegrity.GaussianCommonComponent.edgeMap L) y i = ∑ e, L i e * y e
+EstimatorIntegrity.GaussianCommonComponent.commonPart.{u_1, u_2} {Omega : Type u_1} {I : Type u_2} [Fintype I]
+  (X : Omega → I → ℝ) (w : I → ℝ) : Omega → ℝ
+EstimatorIntegrity.GaussianCommonComponent.residualPart.{u_1, u_2} {Omega : Type u_1} {I : Type u_2} [Fintype I]
+  (X : Omega → I → ℝ) (w : I → ℝ) : Omega → I → ℝ
+EstimatorIntegrity.GaussianCommonComponent.actualCovariance.{u_1, u_2} {Omega : Type u_1} {I : Type u_2}
+  [MeasurableSpace Omega] (mu : MeasureTheory.Measure Omega) (X : Omega → I → ℝ) (i j : I) : ℝ
+EstimatorIntegrity.GaussianCommonComponent.commonPart_hasGaussianLaw.{u_1, u_2} {Omega : Type u_1} {I : Type u_2}
+  [MeasurableSpace Omega] [Fintype I] [Nonempty I] (mu : MeasureTheory.Measure Omega) (X : Omega → I → ℝ) (w : I → ℝ)
+  (hX : ProbabilityTheory.HasGaussianLaw X mu) :
+  ProbabilityTheory.HasGaussianLaw (EstimatorIntegrity.GaussianCommonComponent.commonPart X w) mu
+EstimatorIntegrity.GaussianCommonComponent.residualPart_hasGaussianLaw.{u_1, u_2} {Omega : Type u_1} {I : Type u_2}
+  [MeasurableSpace Omega] [Fintype I] [Nonempty I] (mu : MeasureTheory.Measure Omega) (X : Omega → I → ℝ) (w : I → ℝ)
+  (hX : ProbabilityTheory.HasGaussianLaw X mu) :
+  ProbabilityTheory.HasGaussianLaw (EstimatorIntegrity.GaussianCommonComponent.residualPart X w) mu
+EstimatorIntegrity.GaussianCommonComponent.pair_hasGaussianLaw.{u_1, u_2} {Omega : Type u_1} {I : Type u_2}
+  [MeasurableSpace Omega] [Fintype I] [Nonempty I] (mu : MeasureTheory.Measure Omega) (X : Omega → I → ℝ) (w : I → ℝ)
+  (hX : ProbabilityTheory.HasGaussianLaw X mu) :
+  ProbabilityTheory.HasGaussianLaw
+    (fun omega =>
+      (EstimatorIntegrity.GaussianCommonComponent.residualPart X w omega,
+        EstimatorIntegrity.GaussianCommonComponent.commonPart X w omega))
+    mu
+EstimatorIntegrity.GaussianCommonComponent.commonPart_mean_zero.{u_1, u_2} {Omega : Type u_1} {I : Type u_2}
+  [MeasurableSpace Omega] [Fintype I] [Nonempty I] (mu : MeasureTheory.Measure Omega) (X : Omega → I → ℝ) (w : I → ℝ)
+  [MeasureTheory.IsProbabilityMeasure mu] (hX : ProbabilityTheory.HasGaussianLaw X mu)
+  (hMeanX : ∀ (i : I), ∫ (omega : Omega), X omega i ∂mu = 0) :
+  ∫ (omega : Omega), EstimatorIntegrity.GaussianCommonComponent.commonPart X w omega ∂mu = 0
+EstimatorIntegrity.GaussianCommonComponent.residualPart_mean_zero.{u_1, u_2} {Omega : Type u_1} {I : Type u_2}
+  [MeasurableSpace Omega] [Fintype I] [Nonempty I] (mu : MeasureTheory.Measure Omega) (X : Omega → I → ℝ) (w : I → ℝ)
+  [MeasureTheory.IsProbabilityMeasure mu] (hX : ProbabilityTheory.HasGaussianLaw X mu)
+  (hMeanX : ∀ (i : I), ∫ (omega : Omega), X omega i ∂mu = 0) (i : I) :
+  ∫ (omega : Omega), EstimatorIntegrity.GaussianCommonComponent.residualPart X w omega i ∂mu = 0
+EstimatorIntegrity.GaussianCommonComponent.covariance_coord_commonPart.{u_1, u_2} {Omega : Type u_1} {I : Type u_2}
+  [MeasurableSpace Omega] [Fintype I] [Nonempty I] (mu : MeasureTheory.Measure Omega) (X : Omega → I → ℝ) (w : I → ℝ)
+  [MeasureTheory.IsProbabilityMeasure mu] (hX : ProbabilityTheory.HasGaussianLaw X mu) (a : ℝ)
+  (hrow : ∀ (i : I), ∑ j, w j * EstimatorIntegrity.GaussianCommonComponent.actualCovariance mu X i j = a) (i : I) :
+  ProbabilityTheory.covariance (fun omega => X omega i) (EstimatorIntegrity.GaussianCommonComponent.commonPart X w) mu =
+    a
+EstimatorIntegrity.GaussianCommonComponent.commonPart_variance.{u_1, u_2} {Omega : Type u_1} {I : Type u_2}
+  [MeasurableSpace Omega] [Fintype I] [Nonempty I] (mu : MeasureTheory.Measure Omega) (X : Omega → I → ℝ) (w : I → ℝ)
+  [MeasureTheory.IsProbabilityMeasure mu] (hX : ProbabilityTheory.HasGaussianLaw X mu) (a : ℝ) (hw : ∑ i, w i = 1)
+  (hrow : ∀ (i : I), ∑ j, w j * EstimatorIntegrity.GaussianCommonComponent.actualCovariance mu X i j = a) :
+  ProbabilityTheory.variance (EstimatorIntegrity.GaussianCommonComponent.commonPart X w) mu = a
+EstimatorIntegrity.GaussianCommonComponent.commonPart_parameter_nonneg.{u_1, u_2} {Omega : Type u_1} {I : Type u_2}
+  [MeasurableSpace Omega] [Fintype I] [Nonempty I] (mu : MeasureTheory.Measure Omega) (X : Omega → I → ℝ) (w : I → ℝ)
+  [MeasureTheory.IsProbabilityMeasure mu] (hX : ProbabilityTheory.HasGaussianLaw X mu) (a : ℝ) (hw : ∑ i, w i = 1)
+  (hrow : ∀ (i : I), ∑ j, w j * EstimatorIntegrity.GaussianCommonComponent.actualCovariance mu X i j = a) : 0 ≤ a
+EstimatorIntegrity.GaussianCommonComponent.covariance_residual_commonPart.{u_1, u_2} {Omega : Type u_1} {I : Type u_2}
+  [MeasurableSpace Omega] [Fintype I] [Nonempty I] (mu : MeasureTheory.Measure Omega) (X : Omega → I → ℝ) (w : I → ℝ)
+  [MeasureTheory.IsProbabilityMeasure mu] (hX : ProbabilityTheory.HasGaussianLaw X mu) (a : ℝ) (hw : ∑ i, w i = 1)
+  (hrow : ∀ (i : I), ∑ j, w j * EstimatorIntegrity.GaussianCommonComponent.actualCovariance mu X i j = a) (i : I) :
+  ProbabilityTheory.covariance (fun omega => EstimatorIntegrity.GaussianCommonComponent.residualPart X w omega i)
+      (EstimatorIntegrity.GaussianCommonComponent.commonPart X w) mu =
+    0
+EstimatorIntegrity.GaussianCommonComponent.covariance_residual_residual.{u_1, u_2} {Omega : Type u_1} {I : Type u_2}
+  [MeasurableSpace Omega] [Fintype I] [Nonempty I] (mu : MeasureTheory.Measure Omega) (X : Omega → I → ℝ) (w : I → ℝ)
+  [MeasureTheory.IsProbabilityMeasure mu] (hX : ProbabilityTheory.HasGaussianLaw X mu) (a : ℝ) (hw : ∑ i, w i = 1)
+  (hrow : ∀ (i : I), ∑ j, w j * EstimatorIntegrity.GaussianCommonComponent.actualCovariance mu X i j = a) (i j : I) :
+  ProbabilityTheory.covariance (fun omega => EstimatorIntegrity.GaussianCommonComponent.residualPart X w omega i)
+      (fun omega => EstimatorIntegrity.GaussianCommonComponent.residualPart X w omega j) mu =
+    EstimatorIntegrity.GaussianCommonComponent.actualCovariance mu X i j - a
+EstimatorIntegrity.GaussianCommonComponent.residualPart_indep_commonPart.{u_1, u_2} {Omega : Type u_1} {I : Type u_2}
+  [MeasurableSpace Omega] [Fintype I] [Nonempty I] (mu : MeasureTheory.Measure Omega) (X : Omega → I → ℝ) (w : I → ℝ)
+  [MeasureTheory.IsProbabilityMeasure mu] (hX : ProbabilityTheory.HasGaussianLaw X mu) (a : ℝ) (hw : ∑ i, w i = 1)
+  (hrow : ∀ (i : I), ∑ j, w j * EstimatorIntegrity.GaussianCommonComponent.actualCovariance mu X i j = a) :
+  ProbabilityTheory.IndepFun (EstimatorIntegrity.GaussianCommonComponent.residualPart X w)
+    (EstimatorIntegrity.GaussianCommonComponent.commonPart X w) mu
+EstimatorIntegrity.GaussianCommonComponent.commonPart_map_eq_gaussianReal.{u_1, u_2} {Omega : Type u_1} {I : Type u_2}
+  [MeasurableSpace Omega] [Fintype I] [Nonempty I] (mu : MeasureTheory.Measure Omega) (X : Omega → I → ℝ) (w : I → ℝ)
+  [MeasureTheory.IsProbabilityMeasure mu] (hX : ProbabilityTheory.HasGaussianLaw X mu)
+  (hMeanX : ∀ (i : I), ∫ (omega : Omega), X omega i ∂mu = 0) (a : ℝ) (hw : ∑ i, w i = 1)
+  (hrow : ∀ (i : I), ∑ j, w j * EstimatorIntegrity.GaussianCommonComponent.actualCovariance mu X i j = a) :
+  MeasureTheory.Measure.map (EstimatorIntegrity.GaussianCommonComponent.commonPart X w) mu =
+    ProbabilityTheory.gaussianReal 0 a.toNNReal
+EstimatorIntegrity.GaussianCommonComponent.residualCommon_map_eq_product.{u_1, u_2} {Omega : Type u_1} {I : Type u_2}
+  [MeasurableSpace Omega] [Fintype I] [Nonempty I] (mu : MeasureTheory.Measure Omega) (X : Omega → I → ℝ) (w : I → ℝ)
+  [MeasureTheory.IsProbabilityMeasure mu] (hX : ProbabilityTheory.HasGaussianLaw X mu)
+  (hMeanX : ∀ (i : I), ∫ (omega : Omega), X omega i ∂mu = 0) (a : ℝ) (hw : ∑ i, w i = 1)
+  (hrow : ∀ (i : I), ∑ j, w j * EstimatorIntegrity.GaussianCommonComponent.actualCovariance mu X i j = a) :
+  MeasureTheory.Measure.map
+      (fun omega =>
+        (EstimatorIntegrity.GaussianCommonComponent.residualPart X w omega,
+          EstimatorIntegrity.GaussianCommonComponent.commonPart X w omega))
+      mu =
+    (MeasureTheory.Measure.map (EstimatorIntegrity.GaussianCommonComponent.residualPart X w) mu).prod
+      (ProbabilityTheory.gaussianReal 0 a.toNNReal)
+EstimatorIntegrity.GaussianCommonComponent.reconstruction_law.{u_1, u_2} {Omega : Type u_1} {I : Type u_2}
+  [MeasurableSpace Omega] [Fintype I] [Nonempty I] (mu : MeasureTheory.Measure Omega) (X : Omega → I → ℝ) (w : I → ℝ)
+  [MeasureTheory.IsProbabilityMeasure mu] (hX : ProbabilityTheory.HasGaussianLaw X mu)
+  (hMeanX : ∀ (i : I), ∫ (omega : Omega), X omega i ∂mu = 0) (a : ℝ) (hw : ∑ i, w i = 1)
+  (hrow : ∀ (i : I), ∑ j, w j * EstimatorIntegrity.GaussianCommonComponent.actualCovariance mu X i j = a) :
+  MeasureTheory.Measure.map X mu =
+    MeasureTheory.Measure.map EstimatorIntegrity.GaussianCommonComponent.addCommon
+      ((MeasureTheory.Measure.map (EstimatorIntegrity.GaussianCommonComponent.residualPart X w) mu).prod
+        (ProbabilityTheory.gaussianReal 0 a.toNNReal))
+EstimatorIntegrity.GaussianCommonComponent.boundedContinuous_integrable_original.{u_1, u_2} {Omega : Type u_1}
+  {I : Type u_2} [MeasurableSpace Omega] [Fintype I] [Nonempty I] (mu : MeasureTheory.Measure Omega) (X : Omega → I → ℝ)
+  [MeasureTheory.IsProbabilityMeasure mu] (hX : ProbabilityTheory.HasGaussianLaw X mu)
+  (F : BoundedContinuousFunction (I → ℝ) ℝ) : MeasureTheory.Integrable (fun omega => F (X omega)) mu
+EstimatorIntegrity.GaussianCommonComponent.boundedContinuous_integrable_product.{u_1, u_2} {Omega : Type u_1}
+  {I : Type u_2} [MeasurableSpace Omega] [Fintype I] [Nonempty I] (mu : MeasureTheory.Measure Omega) (X : Omega → I → ℝ)
+  (w : I → ℝ) [MeasureTheory.IsProbabilityMeasure mu] (hX : ProbabilityTheory.HasGaussianLaw X mu)
+  (hMeanX : ∀ (i : I), ∫ (omega : Omega), X omega i ∂mu = 0) (a : ℝ) (hw : ∑ i, w i = 1)
+  (hrow : ∀ (i : I), ∑ j, w j * EstimatorIntegrity.GaussianCommonComponent.actualCovariance mu X i j = a)
+  (F : BoundedContinuousFunction (I → ℝ) ℝ) :
+  MeasureTheory.Integrable (fun p => F (EstimatorIntegrity.GaussianCommonComponent.addCommon p))
+    ((MeasureTheory.Measure.map (EstimatorIntegrity.GaussianCommonComponent.residualPart X w) mu).prod
+      (ProbabilityTheory.gaussianReal 0 a.toNNReal))
+EstimatorIntegrity.GaussianCommonComponent.boundedContinuous_expectation.{u_1, u_2} {Omega : Type u_1} {I : Type u_2}
+  [MeasurableSpace Omega] [Fintype I] [Nonempty I] (mu : MeasureTheory.Measure Omega) (X : Omega → I → ℝ) (w : I → ℝ)
+  [MeasureTheory.IsProbabilityMeasure mu] (hX : ProbabilityTheory.HasGaussianLaw X mu)
+  (hMeanX : ∀ (i : I), ∫ (omega : Omega), X omega i ∂mu = 0) (a : ℝ) (hw : ∑ i, w i = 1)
+  (hrow : ∀ (i : I), ∑ j, w j * EstimatorIntegrity.GaussianCommonComponent.actualCovariance mu X i j = a)
+  (F : BoundedContinuousFunction (I → ℝ) ℝ) :
+  ∫ (omega : Omega), F (X omega) ∂mu =
+    ∫ (p : (I → ℝ) × ℝ),
+      F
+        (EstimatorIntegrity.GaussianCommonComponent.addCommon
+          p) ∂(MeasureTheory.Measure.map (EstimatorIntegrity.GaussianCommonComponent.residualPart X w) mu).prod
+        (ProbabilityTheory.gaussianReal 0 a.toNNReal)
+EstimatorIntegrity.GaussianCommonComponent.edgeLeafVector.{u_1, u_2, u_3} {Omega : Type u_1} {I : Type u_2}
+  {E : Type u_3} [Fintype E] (Y : E → Omega → ℝ) (L : I → E → ℝ) : Omega → I → ℝ
+EstimatorIntegrity.GaussianCommonComponent.edgeLeafVector_hasGaussianLaw.{u_1, u_2, u_3} {Omega : Type u_1}
+  {I : Type u_2} {E : Type u_3} [MeasurableSpace Omega] [Fintype I] [Nonempty I] [Fintype E]
+  (mu : MeasureTheory.Measure Omega) (Y : E → Omega → ℝ) (L : I → E → ℝ)
+  (hYGauss : ∀ (e : E), ProbabilityTheory.HasGaussianLaw (Y e) mu) (hYIndep : ProbabilityTheory.iIndepFun Y mu) :
+  ProbabilityTheory.HasGaussianLaw (EstimatorIntegrity.GaussianCommonComponent.edgeLeafVector Y L) mu
+EstimatorIntegrity.GaussianCommonComponent.edgeLeafVector_mean_zero.{u_1, u_2, u_3} {Omega : Type u_1} {I : Type u_2}
+  {E : Type u_3} [MeasurableSpace Omega] [Fintype I] [Nonempty I] [Fintype E] (mu : MeasureTheory.Measure Omega)
+  (Y : E → Omega → ℝ) (L : I → E → ℝ) [MeasureTheory.IsProbabilityMeasure mu]
+  (hYGauss : ∀ (e : E), ProbabilityTheory.HasGaussianLaw (Y e) mu)
+  (hYMean : ∀ (e : E), ∫ (omega : Omega), Y e omega ∂mu = 0) (i : I) :
+  ∫ (omega : Omega), EstimatorIntegrity.GaussianCommonComponent.edgeLeafVector Y L omega i ∂mu = 0
+EstimatorIntegrity.GaussianCommonComponent.edgeVariance_nonneg.{u_1, u_3} {Omega : Type u_1} {E : Type u_3}
+  [MeasurableSpace Omega] [Fintype E] (mu : MeasureTheory.Measure Omega) (Y : E → Omega → ℝ)
+  [MeasureTheory.IsProbabilityMeasure mu] (hYGauss : ∀ (e : E), ProbabilityTheory.HasGaussianLaw (Y e) mu) (ell : E → ℝ)
+  (hYVar : ∀ (e : E), ProbabilityTheory.variance (Y e) mu = ell e) (e : E) : 0 ≤ ell e
+EstimatorIntegrity.GaussianCommonComponent.edgeVariables_covariance.{u_1, u_3} {Omega : Type u_1} {E : Type u_3}
+  [MeasurableSpace Omega] [Fintype E] (mu : MeasureTheory.Measure Omega) (Y : E → Omega → ℝ)
+  [MeasureTheory.IsProbabilityMeasure mu] (hYGauss : ∀ (e : E), ProbabilityTheory.HasGaussianLaw (Y e) mu)
+  (hYIndep : ProbabilityTheory.iIndepFun Y mu) (ell : E → ℝ)
+  (hYVar : ∀ (e : E), ProbabilityTheory.variance (Y e) mu = ell e) (e f : E) :
+  ProbabilityTheory.covariance (Y e) (Y f) mu = if e = f then ell e else 0
+EstimatorIntegrity.GaussianCommonComponent.edgeLeafVector_covariance.{u_1, u_2, u_3} {Omega : Type u_1} {I : Type u_2}
+  {E : Type u_3} [MeasurableSpace Omega] [Fintype I] [Nonempty I] [Fintype E] (mu : MeasureTheory.Measure Omega)
+  (Y : E → Omega → ℝ) (L : I → E → ℝ) [MeasureTheory.IsProbabilityMeasure mu]
+  (hYGauss : ∀ (e : E), ProbabilityTheory.HasGaussianLaw (Y e) mu) (hYIndep : ProbabilityTheory.iIndepFun Y mu)
+  (ell : E → ℝ) (hYVar : ∀ (e : E), ProbabilityTheory.variance (Y e) mu = ell e) (i j : I) :
+  ProbabilityTheory.covariance (fun omega => EstimatorIntegrity.GaussianCommonComponent.edgeLeafVector Y L omega i)
+      (fun omega => EstimatorIntegrity.GaussianCommonComponent.edgeLeafVector Y L omega j) mu =
+    ∑ e, ell e * L i e * L j e
+EstimatorIntegrity.GaussianCommonComponent.weighted_edgeCovariance.{u_2, u_3} {I : Type u_2} {E : Type u_3} [Fintype I]
+  [Nonempty I] [Fintype E] (w : I → ℝ) (L : I → E → ℝ) (ell : E → ℝ) (i : I) :
+  ∑ j, w j * ∑ e, ell e * L i e * L j e = ∑ e, ell e * L i e * ∑ j, w j * L j e
+EstimatorIntegrity.GaussianCommonComponent.edgeLeafVector_row_covariance.{u_1, u_2, u_3} {Omega : Type u_1}
+  {I : Type u_2} {E : Type u_3} [MeasurableSpace Omega] [Fintype I] [Nonempty I] [Fintype E]
+  (mu : MeasureTheory.Measure Omega) (w : I → ℝ) (Y : E → Omega → ℝ) (L : I → E → ℝ)
+  [MeasureTheory.IsProbabilityMeasure mu] (hYGauss : ∀ (e : E), ProbabilityTheory.HasGaussianLaw (Y e) mu)
+  (hYIndep : ProbabilityTheory.iIndepFun Y mu) (ell : E → ℝ)
+  (hYVar : ∀ (e : E), ProbabilityTheory.variance (Y e) mu = ell e) (a : ℝ)
+  (hcoeff : ∀ (i : I), ∑ e, ell e * L i e * ∑ j, w j * L j e = a) (i : I) :
+  ∑ j,
+      w j *
+        EstimatorIntegrity.GaussianCommonComponent.actualCovariance mu
+          (EstimatorIntegrity.GaussianCommonComponent.edgeLeafVector Y L) i j =
+    a
+EstimatorIntegrity.GaussianCommonComponent.edgeLeafVector_residual_indep_common.{u_1, u_2, u_3} {Omega : Type u_1}
+  {I : Type u_2} {E : Type u_3} [MeasurableSpace Omega] [Fintype I] [Nonempty I] [Fintype E]
+  (mu : MeasureTheory.Measure Omega) (w : I → ℝ) (Y : E → Omega → ℝ) (L : I → E → ℝ)
+  [MeasureTheory.IsProbabilityMeasure mu] (hYGauss : ∀ (e : E), ProbabilityTheory.HasGaussianLaw (Y e) mu)
+  (hYMean : ∀ (e : E), ∫ (omega : Omega), Y e omega ∂mu = 0) (hYIndep : ProbabilityTheory.iIndepFun Y mu) (ell : E → ℝ)
+  (hYVar : ∀ (e : E), ProbabilityTheory.variance (Y e) mu = ell e) (a : ℝ) (hw : ∑ i, w i = 1)
+  (hcoeff : ∀ (i : I), ∑ e, ell e * L i e * ∑ j, w j * L j e = a) :
+  ProbabilityTheory.IndepFun
+    (EstimatorIntegrity.GaussianCommonComponent.residualPart
+      (EstimatorIntegrity.GaussianCommonComponent.edgeLeafVector Y L) w)
+    (EstimatorIntegrity.GaussianCommonComponent.commonPart
+      (EstimatorIntegrity.GaussianCommonComponent.edgeLeafVector Y L) w)
+    mu
+EstimatorIntegrity.GaussianCommonComponent.edgeLeafVector_product_law.{u_1, u_2, u_3} {Omega : Type u_1} {I : Type u_2}
+  {E : Type u_3} [MeasurableSpace Omega] [Fintype I] [Nonempty I] [Fintype E] (mu : MeasureTheory.Measure Omega)
+  (w : I → ℝ) (Y : E → Omega → ℝ) (L : I → E → ℝ) [MeasureTheory.IsProbabilityMeasure mu]
+  (hYGauss : ∀ (e : E), ProbabilityTheory.HasGaussianLaw (Y e) mu)
+  (hYMean : ∀ (e : E), ∫ (omega : Omega), Y e omega ∂mu = 0) (hYIndep : ProbabilityTheory.iIndepFun Y mu) (ell : E → ℝ)
+  (hYVar : ∀ (e : E), ProbabilityTheory.variance (Y e) mu = ell e) (a : ℝ) (hw : ∑ i, w i = 1)
+  (hcoeff : ∀ (i : I), ∑ e, ell e * L i e * ∑ j, w j * L j e = a) :
+  MeasureTheory.Measure.map
+      (fun omega =>
+        (EstimatorIntegrity.GaussianCommonComponent.residualPart
+            (EstimatorIntegrity.GaussianCommonComponent.edgeLeafVector Y L) w omega,
+          EstimatorIntegrity.GaussianCommonComponent.commonPart
+            (EstimatorIntegrity.GaussianCommonComponent.edgeLeafVector Y L) w omega))
+      mu =
+    (MeasureTheory.Measure.map
+          (EstimatorIntegrity.GaussianCommonComponent.residualPart
+            (EstimatorIntegrity.GaussianCommonComponent.edgeLeafVector Y L) w)
+          mu).prod
+      (ProbabilityTheory.gaussianReal 0 a.toNNReal)
+EstimatorIntegrity.GaussianCommonComponent.edgeLeafVector_reconstruction_law.{u_1, u_2, u_3} {Omega : Type u_1}
+  {I : Type u_2} {E : Type u_3} [MeasurableSpace Omega] [Fintype I] [Nonempty I] [Fintype E]
+  (mu : MeasureTheory.Measure Omega) (w : I → ℝ) (Y : E → Omega → ℝ) (L : I → E → ℝ)
+  [MeasureTheory.IsProbabilityMeasure mu] (hYGauss : ∀ (e : E), ProbabilityTheory.HasGaussianLaw (Y e) mu)
+  (hYMean : ∀ (e : E), ∫ (omega : Omega), Y e omega ∂mu = 0) (hYIndep : ProbabilityTheory.iIndepFun Y mu) (ell : E → ℝ)
+  (hYVar : ∀ (e : E), ProbabilityTheory.variance (Y e) mu = ell e) (a : ℝ) (hw : ∑ i, w i = 1)
+  (hcoeff : ∀ (i : I), ∑ e, ell e * L i e * ∑ j, w j * L j e = a) :
+  MeasureTheory.Measure.map (EstimatorIntegrity.GaussianCommonComponent.edgeLeafVector Y L) mu =
+    MeasureTheory.Measure.map EstimatorIntegrity.GaussianCommonComponent.addCommon
+      ((MeasureTheory.Measure.map
+            (EstimatorIntegrity.GaussianCommonComponent.residualPart
+              (EstimatorIntegrity.GaussianCommonComponent.edgeLeafVector Y L) w)
+            mu).prod
+        (ProbabilityTheory.gaussianReal 0 a.toNNReal))
+EstimatorIntegrity.GaussianCommonComponent.edgeLeafVector_expectation.{u_1, u_2, u_3} {Omega : Type u_1} {I : Type u_2}
+  {E : Type u_3} [MeasurableSpace Omega] [Fintype I] [Nonempty I] [Fintype E] (mu : MeasureTheory.Measure Omega)
+  (w : I → ℝ) (Y : E → Omega → ℝ) (L : I → E → ℝ) [MeasureTheory.IsProbabilityMeasure mu]
+  (hYGauss : ∀ (e : E), ProbabilityTheory.HasGaussianLaw (Y e) mu)
+  (hYMean : ∀ (e : E), ∫ (omega : Omega), Y e omega ∂mu = 0) (hYIndep : ProbabilityTheory.iIndepFun Y mu) (ell : E → ℝ)
+  (hYVar : ∀ (e : E), ProbabilityTheory.variance (Y e) mu = ell e) (a : ℝ) (hw : ∑ i, w i = 1)
+  (hcoeff : ∀ (i : I), ∑ e, ell e * L i e * ∑ j, w j * L j e = a) (F : BoundedContinuousFunction (I → ℝ) ℝ) :
+  ∫ (omega : Omega), F (EstimatorIntegrity.GaussianCommonComponent.edgeLeafVector Y L omega) ∂mu =
+    ∫ (p : (I → ℝ) × ℝ),
+      F
+        (EstimatorIntegrity.GaussianCommonComponent.addCommon
+          p) ∂(MeasureTheory.Measure.map
+            (EstimatorIntegrity.GaussianCommonComponent.residualPart
+              (EstimatorIntegrity.GaussianCommonComponent.edgeLeafVector Y L) w)
+            mu).prod
+        (ProbabilityTheory.gaussianReal 0 a.toNNReal)

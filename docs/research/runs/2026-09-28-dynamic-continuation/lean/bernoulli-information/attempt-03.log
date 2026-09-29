@@ -1,0 +1,9 @@
+$ cd formal
+$ ~/.elan/bin/lake env lean EstimatorIntegrity/BernoulliInformation.lean
+
+Third scalar-Pinsker prototype failed after 77.9 seconds.  Explicitly typed
+derivative facts removed elaboration ambiguity, but `convert ... <;> ring`
+still sent `ring` to proof-irrelevant typeclass equality goals.  Lean reported
+`ring_nf made no progress` at each conversion site.  Fix: make every
+conversion goal use `first | rfl | ring` (and a field variant), so definitional
+structure equalities close by reflexivity before algebra tactics run.

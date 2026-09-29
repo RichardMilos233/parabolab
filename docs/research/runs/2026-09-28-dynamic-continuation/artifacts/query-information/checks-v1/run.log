@@ -1,0 +1,20 @@
+2026-09-28T14:39:43.882570+00:00 official T49 run started from verified frozen manifest
+2026-09-28T14:39:43.882937+00:00 finite block: K=1 enumeration started
+2026-09-28T14:39:43.883702+00:00 finite block: K=1 complete; configurations=10 runs=30 no_hit=10
+2026-09-28T14:39:43.883748+00:00 finite block: K=2 enumeration started
+2026-09-28T14:39:43.886590+00:00 finite block: K=2 complete; configurations=30 runs=150 no_hit=60
+2026-09-28T14:39:43.886638+00:00 finite block: K=3 enumeration started
+2026-09-28T14:39:43.901249+00:00 finite block: K=3 complete; configurations=120 runs=840 no_hit=360
+2026-09-28T14:39:43.901321+00:00 finite block: K=4 enumeration started
+2026-09-28T14:39:43.999469+00:00 finite block: K=4 complete; configurations=600 runs=5400 no_hit=2400
+2026-09-28T14:39:43.999542+00:00 finite block: K=6 enumeration started
+2026-09-28T14:39:50.196575+00:00 finite block: K=6 complete; configurations=25200 runs=327600 no_hit=151200
+2026-09-28T14:39:50.207717+00:00 finite block PASS: 25960 configurations, 334020 runs, 154030 no-hit alternatives, digest=98f5ff6c884388bfa4f9113c367d2e2afcde6a852c1871f990835d7977670d15
+2026-09-28T14:39:50.225717+00:00 preserved completed finite block: docs/research/runs/2026-09-28-dynamic-continuation/artifacts/query-information/checks-v1/finite_summary.json
+2026-09-28T14:39:50.226085+00:00 budget mixture PASS: 5 rows, 19262 records reused, 0 new runs
+2026-09-28T14:39:50.227421+00:00 preserved completed mixture block: docs/research/runs/2026-09-28-dynamic-continuation/artifacts/query-information/checks-v1/budget_mixture_summary.json
+2026-09-28T14:39:50.227472+00:00 scalar block: 80-digit tanh-sinh quadrature started
+2026-09-28T14:39:50.266230+00:00 scalar block: 100-digit Gauss-Legendre quadrature started
+2026-09-28T14:39:55.207564+00:00 scalar block PASS: quadratures agree within 1e-70; 4 prescribed rows passed
+2026-09-28T14:39:55.208445+00:00 preserved completed scalar block: docs/research/runs/2026-09-28-dynamic-continuation/artifacts/query-information/checks-v1/scalar_checks.json
+2026-09-28T14:39:55.208506+00:00 official T49 checks PASS; elapsed_seconds=11.331974750

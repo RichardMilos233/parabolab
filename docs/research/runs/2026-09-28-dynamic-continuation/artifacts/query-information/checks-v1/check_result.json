@@ -1,0 +1,30 @@
+{
+  "created_utc": "2026-09-28T14:39:55.208570+00:00",
+  "elapsed_seconds": 11.331974749919027,
+  "gates": {
+    "finite_status": "PASS",
+    "main_summary_rows": 105,
+    "mixture_status": "PASS",
+    "mixture_summary_rows": 5,
+    "no_hit_alternative_runs": 154030,
+    "oracle_runs": 334020,
+    "quadrature_passed": true,
+    "scalar_status": "PASS"
+  },
+  "implementation_source_sha256": "c856a9ba2548a6486d756af0b628396e8ab3d9186413e13e906fc57cd795930d",
+  "interpretation": {
+    "finite_abstract_model_only": true,
+    "novelty_evidence": false,
+    "pde_experiment": false,
+    "universal_lower_bound_empirically_proved": false
+  },
+  "manifest_sha256": "cf0dff8a5dd4a51387d192ce489479554072deb4e9fa3d32d1165e62287a2199",
+  "outputs": {
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/query-information/checks-v1/budget_mixture_summary.json": "95406301ecfc7e87359af8f43911aa798824206ee58e33e3d3569728aa81e26a",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/query-information/checks-v1/finite_summary.json": "faae74bf139b9e2401b34d7863e17df58dc6c7f4b59fe289c6abe02f89113ea9",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/query-information/checks-v1/run.log": "b9f8c675b6a9254471332b7bb4137d77160889338d8c4f831556332b40b53bfa",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/query-information/checks-v1/scalar_checks.json": "bc2fde87b817e3fea39ee20fca65d9caedb630ef5f52da5d8b7dcafa6c7f0bcb"
+  },
+  "schema_version": 1,
+  "status": "PASS"
+}

@@ -1,0 +1,6 @@
+cwd=/Users/michael/Desktop/NTU/fyp/parabolab
+command=zsh /Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/lean/uniform-slice-conditioning/TrustScan.zsh
+source=/Users/michael/Desktop/NTU/fyp/parabolab/formal/EstimatorIntegrity/UniformSliceConditioning.lean
+pattern=sorry|admit|axiom|native_decide|unsafe
+result=no matches
+exit_code=0

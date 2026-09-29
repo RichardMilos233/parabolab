@@ -1,0 +1,49 @@
+{
+  "date_local": "2026-09-29",
+  "verdict": "PASS frozen E5 protocol for implementation/preflight; official execution not yet cleared",
+  "root_review": "Read complete frozen02h and761-line final T98; checked all six reference formulas, parent rates/corners, ordered factor, physical-versus-chronological scaling, signs/H2 normalization, nested-batch identities, streams/caps and abort behavior. T89/T93 acceptance prerequisites verified.",
+  "source_locks": {
+    "04aa-polynomial-fields-and-linear-gaussian-preparation.md": "433c699d951c74fa6ba19166e159069130e1340a7a319aa0334b0ba4f8a1b8a1",
+    "reviews/R20b-continuous-domain-addendum.md": "6c5e8b158ca269588c4200ca09c82f4ffa430e8aa0146a52022370ade352e527",
+    "reviews/R21-linear-tree-common-gaussian-candidate.md": "99f8a23c98332b6797ee1ecc9f0929d94950cd047acb17bcbea0df9052ff7461",
+    "02h-smooth-field-component-experiment-protocol.md": "1866585a86fcfceb0f9b05f632dae093d3c6e03f4ab005b4eae02fbfa5b27612",
+    "reviews/R20-polynomial-reaction-field-sampler-candidate.md": "b1e42a195c67942066894d04a11c28d7ba2951a6d6730977070e424ac84542b9",
+    "reviews/T91-polynomial-field-linear-gaussian-independent-audit.md": "2f06d787fcbb631662b3be4997eb6c610e145120147a0e831d245345abde1af7",
+    "reviews/T98-smooth-field-protocol-independent-audit.md": "4684093695d5c116355d95be79d1fc0701d79b3671b1de889f938eccacd3a227",
+    "reviews/T89-root-correspondence.json": "3617d62fe22eea254dcd74c46df77b008d90a7b3a9839b1f215c4624c8b87503",
+    "reviews/T93-root-correspondence.json": "ab7aa78b0f4bb898ed01fcebf50aa8e418592d8b6847cca66a62cf74e04d40d8"
+  },
+  "essential_implementation_requirements": [
+    "separate chronological common variance from physical Gaussian aggregate; kappa applied exactly once",
+    "actual residual Xi-A; joint dense covariance fixtures and independent source correspondence are mandatory",
+    "six analytic means do not identify cross-leaf covariance or independently certify the sine sign",
+    "all repeats/constants/failures/replays charged at opaque scalar acquisition boundary",
+    "persistent cumulative segment and acquisition counters across failed versions",
+    "outside E5 sparse-frequency D48 is not substituted",
+    "fixed official cells/seeds/4096 samples/cutoffs/batches; no outcome-based selection",
+    "source/environment/tolerances/draw order frozen before official output inspection",
+    "limit or nonfinite output causes explicit abort and prefix preservation, no redraw/drop/zero fill"
+  ],
+  "statistics_scope": [
+    "nested batch risk nonincrease follows Jensen, not independent evidence for1/M",
+    "M times empirical risk is informative but not a confidence certificate",
+    "mean coefficient error identical across batch sizes; increasing cutoff adds squared terms for these targets"
+  ],
+  "budgets": {
+    "preflight_calls_cap": 8192,
+    "official_calls_cap": 245760,
+    "replay_fixed_indices": "0..7 eachseed/cell",
+    "replay_actual_worst_case": 480,
+    "replay_protocol_cap": 864,
+    "all_activity_calls_cap": 300000,
+    "all_activity_generated_segments_cap": 10000000,
+    "single_tree_segments_cap": 100000,
+    "official_wall_minutes": 30
+  },
+  "next_gate": "T99 specified implementation and preflight, then root full source/preflight correspondence and independent raw-data auditor before results acceptance",
+  "protected_initial_files": {
+    "count": 342,
+    "mismatches": []
+  },
+  "execution_status": "no implementation or numerical acquisition at acceptance; E4 frozen"
+}

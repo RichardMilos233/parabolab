@@ -1,0 +1,28 @@
+{
+  "created_utc": "2026-09-28T10:02:57.939593+00:00",
+  "environment": {
+    "numpy_version": "2.4.6",
+    "platform": "macOS-26.3-arm64-arm-64bit",
+    "python_executable": "/opt/miniconda3/envs/parabolab/bin/python",
+    "python_version": "3.11.15 (main, Jun 11 2026, 15:14:57) [Clang 20.1.8 ]"
+  },
+  "input_hashes_sha256": {
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/audit-v1/audit_summary.json": "8a72f0cdf4320d90e95dbe2d63ac15a89341bbaf677259c9a3aadace0e3828e0",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/audit-v1/derived_tables.json": "d24a0934ab95f303069e9970fc8efa0dcce81e054e1a5e3a305ffbf8106b5636",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/audit-v1/execution_manifest.json": "655aaa245e99fb3e1b799f11ab1ec18cf91e3ffc7556466a03ce79f3c128e147",
+    "docs/research/runs/2026-09-28-dynamic-continuation/numerics/plot_two_barrier_v2.py": "fd88c24111eb1487d0eeace4d7a1b3745dce93128dab57f7ccfa770b9c05eafa"
+  },
+  "schema_version": 1,
+  "scope": {
+    "changes_values": false,
+    "presentation_only": true,
+    "preserves_v1_figures": true,
+    "reads_frozen_derived_tables": true,
+    "reason": "show exact zero diagnostics on a symmetric-log y axis",
+    "reruns_reference_solver": false,
+    "resamples": false
+  },
+  "source": "docs/research/runs/2026-09-28-dynamic-continuation/numerics/plot_two_barrier_v2.py",
+  "source_sha256": "fd88c24111eb1487d0eeace4d7a1b3745dce93128dab57f7ccfa770b9c05eafa",
+  "status": "prepared-before-versioned-render"
+}

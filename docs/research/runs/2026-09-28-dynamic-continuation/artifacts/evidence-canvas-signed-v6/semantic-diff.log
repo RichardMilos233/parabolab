@@ -1,0 +1,167 @@
+started_utc=2026-09-28T20:25:18Z
+cwd=/Users/michael/Desktop/NTU/fyp/parabolab
+command=/usr/bin/diff -u /Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/dynamic-continuation-evidence.original.canvas.tsx /Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/dynamic-continuation-evidence.candidate.canvas.tsx 
+stdout_stderr_begin
+--- /Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/dynamic-continuation-evidence.original.canvas.tsx	2026-09-29 03:18:42
++++ /Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/dynamic-continuation-evidence.candidate.canvas.tsx	2026-09-29 03:23:43
+@@ -202,6 +202,16 @@
+   "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T75-root-correspondence.json";
+ const nonlinearPriorWorkPath =
+   "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/R18-nonlinear-information-prior-work.md";
++const sharpQueriesPath =
++  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/04z-all-positive-diffusivity-sharp-queries.md";
++const sharpQueriesRootPath =
++  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T90-root-correspondence.json";
++const uniformSliceLeanSourcePath =
++  "/Users/michael/Desktop/NTU/fyp/parabolab/formal/EstimatorIntegrity/UniformSliceConditioning.lean";
++const uniformSliceLeanReportPath =
++  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/06n-uniform-slice-conditioning-lean.md";
++const uniformSliceLeanRootPath =
++  "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/reviews/T86-root-correspondence.json";
+ 
+ export default function DynamicContinuationEvidence() {
+   const theme = useHostTheme();
+@@ -292,7 +302,9 @@
+           <Pill active>独立审计通过</Pill>
+           <Pill size="sm">T ∈ [0, 16] · 201 个时点</Pill>
+           <Pill size="sm">D22–D28 · 精确点查询复杂度</Pill>
++          <Pill size="sm">D40–D42 · 全部固定正扩散的精确查询阶</Pill>
+           <Pill size="sm">D37–D39 · 任意固定正扩散</Pill>
++          <Pill size="sm">T86 · 实际均匀切片条件律</Pill>
+           <Pill size="sm">Lean · 信息核 / 正类风险 / 有限树矩</Pill>
+           <Pill size="sm">E4 · 正类采样审计</Pill>
+         </Row>
+@@ -303,6 +315,61 @@
+       </Stack>
+ 
+       <Stack gap={10}>
++        <Row justify="space-between" align="end" gap={16} wrap>
++          <Stack gap={4}>
++            <H2>D40–D42 · 全部固定正扩散的精确查询阶</H2>
++            <Text tone="secondary">
++              对每个先固定的 κ&gt;0 与整数 d,s≥1，点值与强剖面问题在 RMS 1/4 下均有
++              Θ(exp(γT)) 的最坏输入期望查询阶，γ=2d/(2s+d)。
++            </Text>
++          </Stack>
++          <Pill active>常规证明与独立审查通过</Pill>
++        </Row>
++
++        <Table
++          headers={["已接受结论", "实际保证", "边界"]}
++          rows={[
++            [
++              "D40 · 实际 Gaussian–Hilbert 采样器",
++              "对已知可求值且严格位于单位 sup 球内的 g、未知残差 e=v−g 和固定 j≥1，实际随机场 Wⱼ∈H^(d+1) 无偏表示 DʲS₁^κ(g)[e,…,e]，二阶 Hilbert 矩由 Vⱼ‖e‖∞^(2j) 控制；每条种子路径至多查询 j 个未知初值。",
++              "有限实 Fourier 数组的成本依赖 cutoff；二阶矩常数不依赖 cutoff。Gaussian 公共位移与残差协方差共同构成实际采样律。",
++            ],
++            [
++              "D41 · 强剖面上界",
++              "显式算法返回有限、带实系数与索引的 Fourier 多项式 U_T，并满足 sup_v(E‖U_T−S_T^κv‖∞²)¹ᐟ²≤1/8；所有种子上的查询硬上界为 [1+J(J−1)/2]kᵈ，且 kᵈ≤C exp(γT)。",
++              "付费期望工作仍仅为 C exp(γT)(1+T)^A；输出数组与指定点求值只增加 T 的多项式成本。",
++            ],
++            [
++              "D42 · 点值与剖面的精确查询阶",
++              "充分大 T 时，Q_point(T) 与 Q_profile(T) 都夹在 c exp(γT) 和 C exp(γT) 之间；剖面上界实际达到更强的 RMS 1/8。",
++              "查询算术免费，但重复位置与预处理取得的每个未知初值都计费；下界允许有偏、自适应、随机停止规则。",
++            ],
++          ]}
++          columnAlign={["left", "left", "left"]}
++          striped
++          framed
++        />
++
++        <Callout tone="success" title="D42 只升级查询结论">
++          D42 去掉了下方历史 D39 查询上界中的多项式因子，因此在相同完整变号类、点值 oracle 与固定 κ&gt;0 量词下得到精确 Θ(exp(γT)) 查询阶。
++          下方 D37–D39 保留为冻结的较早结果；它的查询多项式差距由 D42 明确取代，但其已接受的指数率与其余边界不被改写。
++        </Callout>
++
++        <Callout tone="warning" title="工作、形式化与证据范围没有同步升级">
++          付费工作仍只有 c exp(γT)≤W_point(T),W_profile(T)≤C exp(γT)(1+T)^A，尚无精确 Θ(exp(γT)) 工作定理。
++          κ 必须先固定，常数不在 κ→0 时统一；κ=0 的点值问题可一次查询解决，这不构成完整未知剖面的单查询结论。
++          本结果没有有限位或随机位复杂度、实测速度、新数值执行、完整 Lean 证书或新颖性结论。
++          T89 仍待完成；R20/R21 仍是待审查候选，不是本结果的前提。
++        </Callout>
++
++        <Text size="small" tone="secondary">
++          冻结综合：<Link href={sharpQueriesPath}>D40–D42 完整定理</Link>（SHA256 57ef1d86…aedd4） ·
++          <Link href={sharpQueriesRootPath}>T90 主任务对应审查</Link>（SHA256 2cec8c64…f85e7）。
++          没有为本次 Canvas 包装执行数值实验或取得未知输入。
++        </Text>
++      </Stack>
++
++      <Stack gap={10}>
+         <H2>D37–D39 · 任意固定正扩散下的长期复杂度</H2>
+         <Text>
+           对单位环面上的 Allen–Cahn 方程 ∂ₜu=(κ/2)Δu+u−u³，固定 κ&gt;0 和整数 d,s≥1，
+@@ -822,6 +889,68 @@
+         <Text size="small" tone="secondary">
+           D22–D29 均在单位环面上。D26 还要求 f(0)=f(b)=0、f 在(0,b)内为正、f'(0)=λ 为正；b处可退化。
+           理论来源：<Link href={d22Path}>D22</Link> · <Link href={d23Path}>D23</Link> · <Link href={d24Path}>D24</Link> · <Link href={d25Path}>D25</Link> · <Link href={d26Path}>D26</Link> · <Link href={d27Path}>D27</Link> · <Link href={t59Path}>T59独立审查</Link> · <Link href={d28Path}>D28</Link> · <Link href={t64Path}>T64独立审查</Link> · <Link href={d29Path}>D29</Link> · <Link href={t67Path}>T67独立审查</Link> · <Link href={t67RootPath}>T67主任务对应</Link> · <Link href={d30Path}>D30/R10b</Link> · <Link href={t68Path}>T68独立审查</Link> · <Link href={t68RootPath}>T68主任务对应</Link> · <Link href={t69Path}>D31/T69</Link> · <Link href={t73Path}>T73独立审查</Link> · <Link href={t73RootPath}>T73主任务对应</Link> · <Link href={d33Path}>D32–D33</Link> · <Link href={t74Path}>T74独立审查</Link> · <Link href={t74RootPath}>T74主任务对应</Link>。
++        </Text>
++      </Stack>
++
++      <Stack gap={12}>
++        <Row justify="space-between" align="end" gap={16} wrap>
++          <Stack gap={4}>
++            <H2>T86 · 实际均匀切片条件律与单步 KL</H2>
++            <Text tone="secondary">
++              fixed05l 已经主任务直接重建与公理审查通过；这是 D37 信息下界所需的一个真实有限一步门，不是完整自适应下界证书。
++            </Text>
++          </Stack>
++          <Pill active>主任务接受 · 28 个公开声明</Pill>
++        </Row>
++
++        <Table
++          headers={["实际形式对象", "Lean 中已证明", "仍未覆盖"]}
++          rows={[
++            [
++              "固定大小均匀先验与揭示事件",
++              "从实际 PMF.uniformOfFinset 开始，给出精确单点质量，证明揭示事件正质量，并证明实际归一化限制等于兼容集合上的均匀律。",
++              "完整自适应历史、共同私有种子与可变长度转录。",
++            ],
++            [
++              "任一未揭示坐标的实际 pushforward",
++              "实际 nextBit pushforward 等于参数 r/m 的 Bool Bernoulli 律；真值质量 r/m 由计数导出而非假设，r=0 与 r=m 端点均有显式公开结论。",
++              "n 步 urn 路径、padding、随机停止、切片鞅集中与 MSE→检验合成。",
++            ],
++            [
++              "两相邻切片的实际单步信息",
++              "从可行性算术得到严格内部参考参数，并对两个实际条件 pushforward 证明有限 KL 及 toReal KL≤64ℓ²/(3K²)。",
++              "PDE、Gaussian 谱系、完整 minimax 定理、代码运行时与数值证据。",
++            ],
++          ]}
++          columnAlign={["left", "left", "left"]}
++          striped
++          framed
++        />
++
++        <Callout tone="neutral" title="28 个公开声明的精确清单">
++          <Text size="small">
++            sliceFamily；uniformSlice；uniformSlice_isProbabilityMeasure；uniformSlice_singleton；compatibleEvent；compatibleFamily；
++            mem_sliceFamily；mem_compatibleFamily；compatibleFamily_eq_filter_sdiff；compatibleFamily_card；conditionedSlice；
++            uniformSlice_compatibleEvent；uniformSlice_compatibleEvent_pos；conditionedSlice_eq_uniformCompatible；
++            conditionedSlice_isProbabilityMeasure；unrevealedSet；nextBit；measurable_nextBit；sliceParameter；sliceRatio_le；
++            conditionedSlice_next_true；conditionedSlice_next_true_zero；conditionedSlice_next_true_one；conditionedSlice_map_nextBit；
++            twoSlice_feasible；twoSlice_ratio_bounds；twoSlice_next_kl_ne_top；twoSlice_next_kl_toReal_le。
++          </Text>
++          <Text size="small" tone="secondary">
++            这里的 28 项按公开 definition、theorem 与 instance 合计，并非“28 个定理”。全部只依赖 propext、Classical.choice 与 Quot.sound。
++          </Text>
++        </Callout>
++
++        <Callout tone="warning" title="T86 的精确边界">
++          T86 只证明实际的一步有限条件律与信息界；不含完整 adaptive history、n 步链、seed simulation、padding、random stopping、
++          MSE-to-testing、PDE 证书或 minimax 定理，也不声明连续坐标之间独立。D40–D42 仍是常规证明，不因这一局部门而成为完整 Lean 定理。
++        </Callout>
++
++        <Text size="small" tone="secondary">
++          <Link href={uniformSliceLeanSourcePath}>658 行源码</Link>（SHA256 d50bd714…80fe） ·
++          <Link href={uniformSliceLeanReportPath}>形式化报告</Link> ·
++          <Link href={uniformSliceLeanRootPath}>T86 主任务对应</Link>（SHA256 b39b9cfb…ce0d）。
++          worker fresh build 为 3403 jobs；主任务另以 autoImplicit=false 直接重建源码，并核对 28 个公开类型与公理输出。
+         </Text>
+       </Stack>
+ 
+stdout_stderr_end
+exit_code=1
+ended_utc=2026-09-28T20:25:18Z

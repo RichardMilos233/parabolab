@@ -1,0 +1,69 @@
+EstimatorIntegrity/PositiveSampleMean.lean:66:2: error: `fun_prop` was unable to prove `Measurable (positiveSampleMean Y)`
+
+Issues:
+  No theorems found for `EstimatorIntegrity.positiveSampleMean` in order to prove `Measurable fun a => positiveSampleMean Y a`
+EstimatorIntegrity/PositiveSampleMean.lean:87:6: error: Failed to rewrite using equation theorems for `positiveSampleMean`
+EstimatorIntegrity/PositiveSampleMean.lean:101:10: error(lean.invalidField): Invalid field notation: Type of
+  Finset.univ.sum ?m.76
+is not known; cannot resolve field `div_const`
+
+Hint: Consider replacing the field projection with a call to one of the following:
+  • `AEMeasurable.div_const`
+  • `AnalyticAt.div_const`
+  • `AnalyticOn.div_const`
+  • `AnalyticOnNhd.div_const`
+  • `AnalyticWithinAt.div_const`
+  • `ContDiff.div_const`
+  • `ContDiffAt.div_const`
+  • `ContDiffOn.div_const`
+  • `ContDiffWithinAt.div_const`
+  • `Continuous.div_const`
+  • `ContinuousAt.div_const`
+  • `ContinuousOn.div_const`
+  • `ContinuousWithinAt.div_const`
+  • `HasSum.div_const`
+  • `IntervalIntegrable.div_const`
+  • `Measurable.div_const`
+  • `Monotone.div_const`
+  • `StrictMono.div_const`
+  • `Summable.div_const`
+  • `UniformContinuous.div_const`
+  • `ENNReal.Tendsto.div_const`
+  • `Filter.Tendsto.div_const`
+  • `Function.Periodic.div_const`
+  • `Integrable.div_const`
+EstimatorIntegrity/PositiveSampleMean.lean:101:27: error: Application type mismatch: The argument
+  fun i x => positiveSample_memLp_two μ Y A hYmeas hYrange i
+has type
+  ∀ (i : Fin n) (x : ?m.74 i), MemLp (Y i) 2 μ
+of sort `Prop` but is expected to have type
+  Fin n → ?m.66
+of sort `Type (max ?u.52 0)` in the application
+  ∑ i, ⋯
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+EstimatorIntegrity/PositiveSampleMean.lean:149:27: error: unsolved goals
+Ω : Type u_1
+inst✝¹ : MeasurableSpace Ω
+μ : Measure Ω
+inst✝ : IsProbabilityMeasure μ
+n : ℕ
+hn : 0 < n
+Y : Fin n → Ω → ℝ
+A m : ℝ
+hA : 0 ≤ A
+hm : 0 ≤ m
+hYmeas : ∀ (i : Fin n), Measurable (Y i)
+hIndep : Pairwise fun i j => Y i ⟂ᵢ[μ] Y j
+hYrange : ∀ (i : Fin n) (ω : Ω), 0 ≤ Y i ω ∧ Y i ω ≤ A
+hMean : ∀ (i : Fin n), ∫ (ω : Ω), Y i ω ∂μ = m
+hYiL2 : ∀ (i : Fin n), MemLp (Y i) 2 μ
+hsum_meas : AEMeasurable (∑ i, Y i) μ
+hmean_meas : AEMeasurable (positiveSampleMean Y) μ
+hmean_value : ∫ (ω : Ω), positiveSampleMean Y ω ∂μ = m
+hvar_each : ∀ (i : Fin n), Var[Y i; μ] ≤ A * m
+⊢ ∑ x, A * m = A * m * ↑n

@@ -1,0 +1,45 @@
+{
+  "status": "CLEARED for official positive-query run",
+  "artifact_version": "v2",
+  "reviewed_utc": "2026-09-28T17:00:04.632843+00:00",
+  "reviewer": "root",
+  "manifest_sha256": "9417c6dc18b3c761ee7cdf38c4cc8ececbfc048c0869b0fea5b96acaaae47bd5",
+  "implementation_source_sha256": "81eb2b122d325eca97d144adc00380114558c5ad35a830d9d4062fa95f63df08",
+  "preflight_result_sha256": "ae85c9f1712ada9697bedc472ea273bf692b2cc7c4f0813f58a63ce085380c1c",
+  "protocol_sha256": "8713593424011f0cb713e19125bccfff1dacf25e9ce401c68ff6867aa8c9fe9b",
+  "implementation_report_sha256": "4f7959a3b673bf1af78ade163ae13276afb72d243d2b85b72a232731c9b9839d",
+  "source_review": "Full v1 read in prior turn; complete changed v2 functions, unchanged AST functions and v2 report/evidence checked. Timing and failure-context corrections accepted.",
+  "protected_sources_verified": 342,
+  "frozen_inputs_verified": 23,
+  "ledger_checks": {
+    "v1": {
+      "rows": 220,
+      "point_calls": 655633
+    },
+    "v2": {
+      "rows": 220,
+      "point_calls": 655633
+    }
+  },
+  "v2_journal_rows": 237,
+  "scientific_and_rng_parity": "Exact after removing timing, separately appended wrapped records, and their added true passed fields.",
+  "changed_existing_definitions": [
+    "append_json",
+    "make_manifest",
+    "ActivityLedger",
+    "RunLog",
+    "run_preflight",
+    "run_official"
+  ],
+  "read_only_review_note": "Initial parity assertion did not normalize the newly added wrapped-run passed field. Inspection identified this metadata-only difference; adjusted comparison passed. No oracle calls or artifact changes occurred.",
+  "official_authorized_calls": 336883488,
+  "official_authorized_cells": 180,
+  "official_authorized_outputs": 18720,
+  "actual_calls_already_spent": 1311266,
+  "later_subset_replay_calls": 30075636,
+  "planned_total_calls": 368270390,
+  "whole_activity_cap": 500000000,
+  "automatic_retry_authorized": false,
+  "full_replay_authorized": false,
+  "scope": "One frozen official run only. Independent audit, subset replay and plots remain later gates. No exact-real bridge or actual PDE numerical solve claimed."
+}

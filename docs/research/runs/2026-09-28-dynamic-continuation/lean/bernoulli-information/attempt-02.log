@@ -1,0 +1,18 @@
+$ cd formal
+$ ~/.elan/bin/lake env lean EstimatorIntegrity/BernoulliInformation.lean
+
+Second scalar-Pinsker prototype failed after 65.7 seconds.
+
+Key diagnostics:
+
+```text
+BernoulliInformation.lean:61:4: error: `ring_nf` made no progress
+BernoulliInformation.lean:82:44: error: `simp` made no progress
+BernoulliInformation.lean:84:70: unsolved goals equating inferred
+additive/module structures and the locally named derivative function.
+```
+
+The derivative mathematics was accepted, but broad `convert` calls exposed
+irrelevant typeclass equalities.  Fix: assign explicit types to the two KL
+summand derivatives and to both derivatives of the Pinsker gap before
+converting only their scalar coefficients.

@@ -1,0 +1,29 @@
+{
+  "status": "PASS for one official frozen02e execution",
+  "utc": "2026-09-28T14:39:12.689306+00:00",
+  "source_sha256": "c856a9ba2548a6486d756af0b628396e8ab3d9186413e13e906fc57cd795930d",
+  "protocol_sha256": "5e4fe3e20cad7e435142dcf37e343798e730286aa0547cdf7812a8b7a42e33c2",
+  "review_sha256": "c2bd4343117f20a0b6b2e93e03d9773643a281a89fa4635cd433513f41ac1ffc",
+  "root_read_entire_source": true,
+  "checked": [
+    "oracle callable isolation from hidden labels",
+    "actual ordered queries and data-dependent stopping",
+    "exact Fraction losses, pair inequalities and all105rows",
+    "actual endpoint reuse and five mixture rows",
+    "allfixedcounts",
+    "prescribed quadratures and four scalarrows",
+    "source/environmentfreeze beforeexecution",
+    "immediate persistence of completed blocks and failedrun context"
+  ],
+  "pre_freeze_fixes": [
+    "preserve each completed block before starting the next",
+    "fresh scalar failure context",
+    "explicit100dps primary arithmetic using80digitI"
+  ],
+  "excluded": [
+    "general adaptive algorithm validation",
+    "PDE simulation",
+    "universal lower-bound proof by code",
+    "new D24 algorithm validation"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "utc": "2026-09-28T14:21:03.190175+00:00",
+  "status": "PASS within fixed 05g scope",
+  "source_contract_read": true,
+  "protected_paths_checked": 342,
+  "protected_mismatches": [],
+  "hashes": {
+    "formal/EstimatorIntegrity/QueryInformationLowerBound.lean": "82422e2894fa5febb586cc6fbb23e73ae3a843d5cd84310c7be3fff38d967483",
+    "formal/EstimatorIntegrity/OracleTranscript.lean": "997b4af24aeee366a170b6632969431d2bf5fc1e47dc440ecb00ead19d81c53c",
+    "docs/research/runs/2026-09-28-dynamic-continuation/lean/query-information/build.log": "1ff4098781410b0b35f686c52ad4b805a448d0567f3cfbe7ebbf01908dfe4e12",
+    "docs/research/runs/2026-09-28-dynamic-continuation/lean/query-information/axioms.log": "ef9f6f6493ef50cbb4018e3804f86120a1e90aed0d14281aa6fb227349511e10",
+    "docs/research/runs/2026-09-28-dynamic-continuation/lean/oracle-transcript/build.log": "7a3644ab172b227aae9bdb457c912c530c2b79483fdbb1e01a405059b78a80ed",
+    "docs/research/runs/2026-09-28-dynamic-continuation/lean/oracle-transcript/axioms.log": "51a0dacb8347a524e5d5a9c8bc00e53fa7cddbb87b7aebc6373abfe08ad9cadc"
+  },
+  "scope": [
+    "actual arbitrary probability-space integral paired-loss inequality",
+    "genuine finite adaptive evaluator induction, no-hit transcript and distinct cell count"
+  ],
+  "excluded": [
+    "PDE and heat-kernel construction",
+    "embedding every measurable a.s.-halting algorithm",
+    "novelty and minimax optimality"
+  ],
+  "actual_toolchain": "leanprover/lean4:v4.33.0"
+}

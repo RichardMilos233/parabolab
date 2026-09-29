@@ -1,0 +1,445 @@
+{
+  "all_passed": true,
+  "covariance_fixtures": [
+    {
+      "actual_common_aggregate": -0.36864319798536616,
+      "actual_edge_gaussians": [
+        -0.36864319798536616
+      ],
+      "actual_edge_standard_normals": [
+        -1.6486225002763846
+      ],
+      "actual_leaf_path_sums": [
+        -0.36864319798536616
+      ],
+      "actual_residuals": [
+        0.0
+      ],
+      "branching": 3,
+      "checks": {
+        "Cw_equals_a_one": true,
+        "a_lower_upper": true,
+        "actual_aggregate_edge_leaf_match": true,
+        "actual_residual_reconstruction": true,
+        "residual_covariance_edge_map": true,
+        "residual_covariance_symmetric": true,
+        "sampled_actual_aggregate_matches_edge_map": true,
+        "sampled_actual_residuals_match_edge_map": true,
+        "sampled_common_variance_matches_recursion": true,
+        "weights_nonnegative": true,
+        "weights_sum_one": true,
+        "zero_length_edges_are_exact_zero": true
+      },
+      "chronological_common_variance": 0.5,
+      "dense_covariance": [
+        [
+          0.5
+        ]
+      ],
+      "label": "one_leaf",
+      "leaf_count": 1,
+      "lower_bound": 0.5,
+      "physical_residual_covariance": [
+        [
+          0.0
+        ]
+      ],
+      "segment_count": 1,
+      "upper_bound": 0.5,
+      "weights": [
+        1.0
+      ]
+    },
+    {
+      "actual_common_aggregate": 0.09340162809133043,
+      "actual_edge_gaussians": [
+        0.043428649781846636,
+        -0.18209565029023167,
+        0.28983854532450115,
+        0.04217603989418193
+      ],
+      "actual_edge_standard_normals": [
+        0.3070869275851943,
+        -1.051329727133252,
+        1.6733836216463027,
+        0.24350347986258333
+      ],
+      "actual_leaf_path_sums": [
+        -0.13866700050838504,
+        0.3332671951063478,
+        0.08560468967602856
+      ],
+      "actual_residuals": [
+        -0.23206862859971547,
+        0.23986556701501735,
+        -0.007796938415301866
+      ],
+      "branching": 3,
+      "checks": {
+        "Cw_equals_a_one": true,
+        "a_lower_upper": true,
+        "actual_aggregate_edge_leaf_match": true,
+        "actual_residual_reconstruction": true,
+        "residual_covariance_edge_map": true,
+        "residual_covariance_symmetric": true,
+        "sampled_actual_aggregate_matches_edge_map": true,
+        "sampled_actual_residuals_match_edge_map": true,
+        "sampled_common_variance_matches_recursion": true,
+        "weights_nonnegative": true,
+        "weights_sum_one": true,
+        "zero_length_edges_are_exact_zero": true
+      },
+      "chronological_common_variance": 0.3,
+      "dense_covariance": [
+        [
+          0.5,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.5,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.5
+        ]
+      ],
+      "label": "star_positive",
+      "leaf_count": 3,
+      "lower_bound": 0.16666666666666666,
+      "physical_residual_covariance": [
+        [
+          0.020000000000000004,
+          -0.010000000000000002,
+          -0.010000000000000002
+        ],
+        [
+          -0.010000000000000002,
+          0.020000000000000004,
+          -0.010000000000000002
+        ],
+        [
+          -0.010000000000000002,
+          -0.010000000000000002,
+          0.020000000000000004
+        ]
+      ],
+      "segment_count": 4,
+      "upper_bound": 0.5,
+      "weights": [
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333
+      ]
+    },
+    {
+      "actual_common_aggregate": 0.24042289842742237,
+      "actual_edge_gaussians": [
+        0.0457610351271171,
+        0.04431279405836551,
+        0.16533482962250418,
+        0.029259020578530914,
+        0.25488852244100313,
+        0.1971292854458041,
+        0.19308863263125273
+      ],
+      "actual_edge_standard_normals": [
+        0.45761035127117095,
+        0.3618124484000989,
+        1.0456692763259803,
+        0.1850502942677904,
+        1.6120565606970216,
+        0.9856464272290204,
+        0.9654431631562636
+      ],
+      "actual_leaf_path_sums": [
+        0.2554086588079868,
+        0.11933284976401352,
+        0.34496235162648575,
+        0.2428903205729212,
+        0.23884966775836983
+      ],
+      "actual_residuals": [
+        0.014985760380564428,
+        -0.12109004866340885,
+        0.10453945319906338,
+        0.002467422145498832,
+        -0.0015732306690525444
+      ],
+      "branching": 3,
+      "checks": {
+        "Cw_equals_a_one": true,
+        "a_lower_upper": true,
+        "actual_aggregate_edge_leaf_match": true,
+        "actual_residual_reconstruction": true,
+        "residual_covariance_edge_map": true,
+        "residual_covariance_symmetric": true,
+        "sampled_actual_aggregate_matches_edge_map": true,
+        "sampled_actual_residuals_match_edge_map": true,
+        "sampled_common_variance_matches_recursion": true,
+        "weights_nonnegative": true,
+        "weights_sum_one": true,
+        "zero_length_edges_are_exact_zero": true
+      },
+      "chronological_common_variance": 0.2076923076923077,
+      "dense_covariance": [
+        [
+          0.5,
+          0.25,
+          0.25,
+          0.1,
+          0.1
+        ],
+        [
+          0.25,
+          0.5,
+          0.25,
+          0.1,
+          0.1
+        ],
+        [
+          0.25,
+          0.25,
+          0.5,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.5,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.5
+        ]
+      ],
+      "label": "unbalanced",
+      "leaf_count": 5,
+      "lower_bound": 0.1,
+      "physical_residual_covariance": [
+        [
+          0.029230769230769227,
+          0.00423076923076923,
+          0.00423076923076923,
+          -0.01076923076923077,
+          -0.01076923076923077
+        ],
+        [
+          0.00423076923076923,
+          0.029230769230769227,
+          0.00423076923076923,
+          -0.01076923076923077,
+          -0.01076923076923077
+        ],
+        [
+          0.00423076923076923,
+          0.00423076923076923,
+          0.029230769230769227,
+          -0.01076923076923077,
+          -0.01076923076923077
+        ],
+        [
+          -0.010769230769230767,
+          -0.010769230769230767,
+          -0.01076923076923077,
+          0.02923076923076924,
+          -0.01076923076923077
+        ],
+        [
+          -0.010769230769230769,
+          -0.010769230769230769,
+          -0.01076923076923077,
+          -0.01076923076923077,
+          0.02923076923076924
+        ]
+      ],
+      "segment_count": 7,
+      "upper_bound": 0.5,
+      "weights": [
+        0.15384615384615385,
+        0.15384615384615385,
+        0.15384615384615385,
+        0.2692307692307692,
+        0.2692307692307692
+      ]
+    },
+    {
+      "actual_common_aggregate": 0.16601142658844534,
+      "actual_edge_gaussians": [
+        0.16601142658844534,
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "actual_edge_standard_normals": [
+        0.7424256697869596,
+        0.8596527162057366,
+        0.2882043374484842,
+        -0.8557808998473899
+      ],
+      "actual_leaf_path_sums": [
+        0.16601142658844534,
+        0.16601142658844534,
+        0.16601142658844534
+      ],
+      "actual_residuals": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "branching": 3,
+      "checks": {
+        "Cw_equals_a_one": true,
+        "a_lower_upper": true,
+        "actual_aggregate_edge_leaf_match": true,
+        "actual_residual_reconstruction": true,
+        "residual_covariance_edge_map": true,
+        "residual_covariance_symmetric": true,
+        "sampled_actual_aggregate_matches_edge_map": true,
+        "sampled_actual_residuals_match_edge_map": true,
+        "sampled_common_variance_matches_recursion": true,
+        "weights_nonnegative": true,
+        "weights_sum_one": true,
+        "zero_length_edges_are_exact_zero": true
+      },
+      "chronological_common_variance": 0.5,
+      "dense_covariance": [
+        [
+          0.5,
+          0.5,
+          0.5
+        ],
+        [
+          0.5,
+          0.5,
+          0.5
+        ],
+        [
+          0.5,
+          0.5,
+          0.5
+        ]
+      ],
+      "label": "star_zero_terminal",
+      "leaf_count": 3,
+      "lower_bound": 0.16666666666666666,
+      "physical_residual_covariance": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "segment_count": 4,
+      "upper_bound": 0.5,
+      "weights": [
+        1.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "derivative_fixtures": [
+    {
+      "corner_partial": -0.5,
+      "expected_partial": -0.5,
+      "expected_weighted_derivative": -3.0,
+      "explicit_no_extra_delta_power": true,
+      "explicit_no_factorial_division": true,
+      "falling_factorial": 6,
+      "label": "cubic_j3",
+      "passed": true,
+      "recursive_partial": -0.5,
+      "selected": [
+        0,
+        1,
+        2
+      ],
+      "weighted_derivative": -3.0
+    },
+    {
+      "corner_partial": -0.125,
+      "expected_partial": -0.125,
+      "expected_weighted_derivative": -0.75,
+      "explicit_no_extra_delta_power": true,
+      "explicit_no_factorial_division": true,
+      "falling_factorial": 6,
+      "label": "cubic_j2",
+      "passed": true,
+      "recursive_partial": -0.125,
+      "selected": [
+        0,
+        1
+      ],
+      "weighted_derivative": -0.75
+    },
+    {
+      "corner_partial": -0.0031250000000000167,
+      "expected_partial": -0.003125,
+      "expected_weighted_derivative": -0.0625,
+      "explicit_no_extra_delta_power": true,
+      "explicit_no_factorial_division": true,
+      "falling_factorial": 20,
+      "label": "quintic_j2",
+      "passed": true,
+      "recursive_partial": -0.003125,
+      "selected": [
+        0,
+        1
+      ],
+      "weighted_derivative": -0.06250000000000033
+    }
+  ],
+  "fourier_sign_fixture": {
+    "cosine_mode_1": 8.25198182034596e-17,
+    "expected_positive_sine_mode_1": 1.3476509024628671,
+    "passed": true,
+    "sine_mode_1": 1.3476509024628671,
+    "uniform_torus": 0.25,
+    "z": 1.0
+  },
+  "h2_fixture": {
+    "constant_example": 4.0,
+    "constant_expected": 4.0,
+    "cosine_example": 18.0,
+    "cosine_expected": 18.0,
+    "passed": true
+  },
+  "n_less_than_j_fixture": {
+    "array_is_exact_zero": true,
+    "derivative_order": 2,
+    "full_array_shape": [
+      129
+    ],
+    "leaf_count": 1,
+    "opaque_calls": 0,
+    "passed": true
+  },
+  "tolerances": {
+    "covariance_atol": 5e-13,
+    "covariance_rtol": 5e-12,
+    "exact_atol": 2e-14,
+    "exact_rtol": 2e-14,
+    "partial_atol": 2e-14,
+    "partial_rtol": 2e-13
+  }
+}

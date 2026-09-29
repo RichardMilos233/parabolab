@@ -1,0 +1,17 @@
+EstimatorIntegrity/PositiveSigmoidRisk.lean:34:38: error: linarith failed to find a contradiction
+z : ℝ
+a✝ : ((fun x => 1) + id ^ 2) z ≤ 0
+⊢ False
+failed
+EstimatorIntegrity/PositiveSigmoidRisk.lean:82:6: error: invalid 'calc' step, left-hand side is
+  z / √(1 + z ^ 2) - x / √(1 + x ^ 2) : ℝ
+but is expected to be
+  -(x / √(1 + x ^ 2) - z / √(1 + z ^ 2)) : ℝ
+EstimatorIntegrity/PositiveSigmoidRisk.lean:85:6: error: invalid 'calc' step, right-hand side is
+  (z - x) / √(1 + z ^ 2) : ℝ
+but is expected to be
+  -(x - z) / √(1 + z ^ 2) : ℝ
+EstimatorIntegrity/PositiveSigmoidRisk.lean:102:8: warning: declaration uses `sorry`
+EstimatorIntegrity/PositiveSigmoidRisk.lean:110:8: warning: declaration uses `sorry`
+EstimatorIntegrity/PositiveSigmoidRisk.lean:119:8: warning: declaration uses `sorry`
+EstimatorIntegrity/PositiveSigmoidRisk.lean:130:8: warning: declaration uses `sorry`

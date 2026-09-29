@@ -1,0 +1,30 @@
+{
+  "active_segment_reservations": {},
+  "completed_samples": {
+    "official": 0,
+    "preflight": 360,
+    "replay": 0
+  },
+  "exponential_draws": 3402,
+  "failed_samples": {
+    "official": 0,
+    "preflight": 0,
+    "replay": 0
+  },
+  "gaussian_draws": 3436,
+  "known_evaluator_calls": 2442,
+  "oracle_calls": {
+    "official": 0,
+    "preflight": 430,
+    "replay": 0,
+    "total": 430
+  },
+  "segments_generated": 3456,
+  "segments_reserved": 0,
+  "sequence": 2194,
+  "tuple_draw_calls": 286,
+  "tuple_indices_drawn": 430,
+  "uniform_draws": 362,
+  "updated_utc": "2026-09-28T21:59:05.693437+00:00",
+  "version": "e5-budget-v1"
+}

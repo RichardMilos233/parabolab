@@ -1,0 +1,4 @@
+{"typescript":"6.0.3","files":["/private/tmp/t57-canvas-check/dynamic-continuation-evidence.canvas.tsx"],"diagnostics":3}
+Invalid character.
+Identifier expected.
+Unexpected token. Did you mean `{'>'}` or `&gt;`?

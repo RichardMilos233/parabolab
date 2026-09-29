@@ -1,0 +1,38 @@
+EstimatorIntegrity/MovingBarrierWidth.lean:90:4: error: Type mismatch: After simplification, term
+  hmono_int
+ has type
+  ∫ (u : ℝ) in T..T + Δ, b - l u ≤ (T + Δ - T) * (b - l T)
+but is expected to have type
+  ∫ (t : ℝ) in T..T + Δ, b - l t ≤ Δ * (b - l T)
+EstimatorIntegrity/MovingBarrierWidth.lean:105:10: error: typeclass instance problem is stuck
+  IsCountablyGenerated ?m.135
+
+Note: Lean will not try to resolve this typeclass instance problem because the first and second type arguments to `IsCountablyGenerated` are metavariables. These arguments must be fully determined before Lean will try to resolve the typeclass.
+
+Hint: Adding type annotations and supplying implicit arguments to functions can give Lean more information for typeclass resolution. For example, if you have a variable `x` that you intend to be a `Nat`, but Lean reports it as having an unresolved type like `?m`, replacing `x` with `(x : Nat)` can get typeclass resolution un-stuck.
+EstimatorIntegrity/MovingBarrierWidth.lean:141:4: error: Type mismatch: After simplification, term
+  Tendsto.mul tendsto_const_nhds (Tendsto.sub tendsto_const_nhds hl_lim)
+ has type
+  Tendsto (fun x => ?m.177 * (?m.192 - l x)) atTop (𝓝 (?m.177 * (?m.192 - b)))
+but is expected to have type
+  Tendsto (fun T => Δ * (b - l T)) atTop (𝓝 0)
+EstimatorIntegrity/MovingBarrierWidth.lean:152:4: error: Tactic `apply` failed: could not unify the type of `Tendsto.congr' ?m.286 (Tendsto.sub tendsto_const_nhds hR_zero)`
+  Tendsto ?m.283 atTop (𝓝 (?m.300 - 0))
+with the goal
+  Tendsto (fun T => ∫ (t : ℝ) in 0..T, h t) atTop (𝓝 J)
+
+l : ℝ → ℝ
+hl_cont : Continuous l
+hl_mono : Monotone l
+b Δ : ℝ
+hbound : ∀ (t : ℝ), 0 ≤ t → l t ≤ b
+hl_lim : Tendsto l atTop (𝓝 b)
+hΔ : 0 ≤ Δ
+h : ℝ → ℝ := fun t => l (t + Δ) - l t
+J : ℝ := ∫ (t : ℝ) in 0..Δ, b - l t
+R : ℝ → ℝ := fun T => ∫ (t : ℝ) in T..T + Δ, b - l t
+hh_Ici : IntegrableOn h (Ici 0) volume
+hh_Ioi : IntegrableOn h (Ioi 0) volume
+hupper : Tendsto (fun T => Δ * (b - l T)) atTop (𝓝 0)
+hR_zero : Tendsto R atTop (𝓝 0)
+⊢ Tendsto (fun T => ∫ (t : ℝ) in 0..T, h t) atTop (𝓝 J)

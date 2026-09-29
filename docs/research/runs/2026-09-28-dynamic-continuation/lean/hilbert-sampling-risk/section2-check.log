@@ -1,0 +1,128 @@
+label: section2-check
+started_utc: 2026-09-28T20:12:41Z
+cwd: /Users/michael/Desktop/NTU/fyp/parabolab/formal
+source_sha256: 07c30d39cb66acb6610fcdea4c8a277c6e86d6c60756745c0c625626f31d0587
+command: /Users/michael/.elan/bin/lake env lean EstimatorIntegrity/HilbertSamplingRisk.lean
+--- stdout+stderr ---
+EstimatorIntegrity/HilbertSamplingRisk.lean:48:0: warning: automatically included section variable(s) unused in theorem `EstimatorIntegrity.HilbertSamplingRisk.sample_integrable`:
+  [InnerProductSpace ℝ H]
+  [CompleteSpace H]
+  [MeasurableSpace H]
+  [BorelSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [InnerProductSpace ℝ H] [CompleteSpace H] [MeasurableSpace H] [BorelSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:53:0: warning: automatically included section variable(s) unused in theorem `EstimatorIntegrity.HilbertSamplingRisk.centered_memLp`:
+  [CompleteSpace H]
+  [MeasurableSpace H]
+  [BorelSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] [MeasurableSpace H] [BorelSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:66:0: warning: automatically included section variable(s) unused in theorem `EstimatorIntegrity.HilbertSamplingRisk.sample_sqNorm_integrable`:
+  [InnerProductSpace ℝ H]
+  [CompleteSpace H]
+  [MeasurableSpace H]
+  [BorelSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [InnerProductSpace ℝ H] [CompleteSpace H] [MeasurableSpace H] [BorelSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:70:0: warning: automatically included section variable(s) unused in theorem `EstimatorIntegrity.HilbertSamplingRisk.integral_centered`:
+  [MeasurableSpace H]
+  [BorelSpace H]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [MeasurableSpace H] [BorelSpace H] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:77:0: warning: automatically included section variable(s) unused in theorem `EstimatorIntegrity.HilbertSamplingRisk.sampleMean_memLp`:
+  [CompleteSpace H]
+  [MeasurableSpace H]
+  [BorelSpace H]
+  [IsProbabilityMeasure μ]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] [MeasurableSpace H] [BorelSpace H] [IsProbabilityMeasure μ] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:99:0: warning: automatically included section variable(s) unused in theorem `EstimatorIntegrity.HilbertSamplingRisk.sampleMean_sub_meanAverage`:
+  [CompleteSpace H]
+  [MeasurableSpace H]
+  [BorelSpace H]
+  [IsProbabilityMeasure μ]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] [MeasurableSpace H] [BorelSpace H] [IsProbabilityMeasure μ] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:118:0: warning: automatically included section variable(s) unused in theorem `EstimatorIntegrity.HilbertSamplingRisk.centered_indep`:
+  [CompleteSpace H]
+  [IsProbabilityMeasure μ]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace H] [IsProbabilityMeasure μ] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:151:10: warning: This simp argument is unused:
+  real_inner_self_eq_norm_sq
+
+Hint: Omit it from the simp argument list.
+  [apply] simp
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+EstimatorIntegrity/HilbertSamplingRisk.lean:241:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ∫ (a : Ω), ((fun ω => ‖Y ω‖ ^ 2) - fun x => 2 * ⟪Y x, m⟫_ℝ) a + ‖m‖ ^ 2 ∂μ
+in the target expression
+  ∫ (ω : Ω), ‖Y ω‖ ^ 2 - 2 * ⟪Y ω, m⟫_ℝ + ‖m‖ ^ 2 ∂μ = ∫ (ω : Ω), ‖Y ω‖ ^ 2 ∂μ - ‖m‖ ^ 2
+
+Ω : Type u_1
+H : Type u_2
+inst✝⁶ : MeasurableSpace Ω
+inst✝⁵ : NormedAddCommGroup H
+inst✝⁴ : InnerProductSpace ℝ H
+inst✝³ : CompleteSpace H
+inst✝² : MeasurableSpace H
+inst✝¹ : BorelSpace H
+μ : Measure Ω
+inst✝ : IsProbabilityMeasure μ
+Y : Ω → H
+hY : MemLp Y 2 μ
+m : H := ∫ (x : Ω), Y x ∂μ
+hYint : Integrable Y μ
+hnorm : Integrable (fun ω => ‖Y ω‖ ^ 2) μ
+hinner : Integrable (fun ω => ⟪Y ω, m⟫_ℝ) μ
+hconst : Integrable (fun x => ‖m‖ ^ 2) μ
+hinter : ∫ (ω : Ω), ⟪Y ω, m⟫_ℝ ∂μ = ⟪∫ (ω : Ω), Y ω ∂μ, m⟫_ℝ
+⊢ ∫ (ω : Ω), ‖Y ω‖ ^ 2 - 2 * ⟪Y ω, m⟫_ℝ + ‖m‖ ^ 2 ∂μ = ∫ (ω : Ω), ‖Y ω‖ ^ 2 ∂μ - ‖m‖ ^ 2
+EstimatorIntegrity/HilbertSamplingRisk.lean:255:41: error: unsolved goals
+Ω : Type u_1
+H : Type u_2
+inst✝⁶ : MeasurableSpace Ω
+inst✝⁵ : NormedAddCommGroup H
+inst✝⁴ : InnerProductSpace ℝ H
+inst✝³ : CompleteSpace H
+inst✝² : MeasurableSpace H
+inst✝¹ : BorelSpace H
+μ : Measure Ω
+inst✝ : IsProbabilityMeasure μ
+n : ℕ
+hn : 0 < n
+Y : Fin n → Ω → H
+m : H
+V : ℝ
+hV : 0 ≤ V
+hY : ∀ (i : Fin n), MemLp (Y i) 2 μ
+hIndep : Pairwise fun i j => Y i ⟂ᵢ[μ] Y j
+hMean : ∀ (i : Fin n), ∫ (ω : Ω), Y i ω ∂μ = m
+hMoment : ∀ (i : Fin n), ∫ (ω : Ω), ‖Y i ω‖ ^ 2 ∂μ ≤ V
+hnR : ↑n ≠ 0
+⊢ (↑n)⁻¹ • n • m = m
+EstimatorIntegrity/HilbertSamplingRisk.lean:258:10: warning: This simp argument is unused:
+  hnR
+
+Hint: Omit it from the simp argument list.
+  [apply] simp
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+--- end stdout+stderr ---
+exit_code: 1
+finished_utc: 2026-09-28T20:13:29Z

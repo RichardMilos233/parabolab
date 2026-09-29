@@ -1,0 +1,2754 @@
+{
+  "artifact_version": "sampler-v1",
+  "commands": {
+    "diagnostics": "/opt/miniconda3/envs/parabolab/bin/python run_two_barrier.py diagnostics",
+    "prepare": "/opt/miniconda3/envs/parabolab/bin/python run_two_barrier.py prepare",
+    "primary": "/opt/miniconda3/envs/parabolab/bin/python run_two_barrier.py primary"
+  },
+  "created_utc": "2026-09-28T09:47:29.766600+00:00",
+  "development_unit_tests": {
+    "command": [
+      "/opt/miniconda3/envs/parabolab/bin/python",
+      "-m",
+      "unittest",
+      "-v",
+      "test_two_barrier_sampler.py"
+    ],
+    "exit_code": 0,
+    "log": "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/sampler-v1/development_unit_tests.log",
+    "log_sha256": "064c6de0575f7c63f1d38bb52de00f8b26dedaf5152af592ba60a778f24989c4"
+  },
+  "floating_contract": {
+    "coefficient_limit_policy": "use A_c/2 only if exp(-2T) equals binary64 zero; record every use",
+    "event_q": "d/(20/9-3*d)",
+    "finite_horizon_acceptance": "leaf or strict event s<T",
+    "fixed_grid_has_representable_exp_minus_2T": true,
+    "limiting_event_probability": "7/15",
+    "limiting_leaf_atom": "8/15",
+    "rounded_zeta_endpoint_tolerance": 1.7763568394002505e-15,
+    "rounded_zeta_policy": "retain event; no clipping or dropping",
+    "stable_d": "(1-U)*(1+zeta)/(1+zeta-U/2)",
+    "working_precision": "IEEE-754 binary64 through Python float/numpy.float64"
+  },
+  "immutable_after_creation": true,
+  "preflight_contract": {
+    "absolute_tolerance": 5e-14,
+    "acceptance": "for each inverse quantity, abs(error) <= atol + rtol*abs(high_precision_target)",
+    "independent_precision_decimal_digits": 100,
+    "inverse_uniforms_decimal": [
+      "0.5333333333333334",
+      "0.75",
+      "0.99",
+      "0.9999999999999999"
+    ],
+    "inverse_uniforms_hex": [
+      "0x1.1111111111112p-1",
+      "0x1.8000000000000p-1",
+      "0x1.fae147ae147aep-1",
+      "0x1.fffffffffffffp-1"
+    ],
+    "near_zero_note": "relative error is recorded but is not a standalone gate for the event time tending to zero at the leaf threshold",
+    "relative_tolerance": 5e-14,
+    "remaining_time_direction": "nextafter(s,0) rejects; nextafter(s,+inf) accepts",
+    "root_horizons": [
+      0.0,
+      0.25,
+      4.0,
+      256.0
+    ],
+    "root_queries": [
+      0.0,
+      1.5707963267948966,
+      3.141592653589793
+    ],
+    "root_seed": 2026092890,
+    "root_spawn_keys": "(4,horizon_index,query_index)",
+    "roots_per_case": 16
+  },
+  "protocol": {
+    "checkpoint_max_completed_roots": 1000,
+    "clock_diagnostic_accepted_outcomes_per_horizon": 100000,
+    "clock_diagnostic_horizons": [
+      0.25,
+      1.0,
+      4.0
+    ],
+    "constant_endpoint_roots_per_cell": 128,
+    "constant_mean_threshold": 0.010646543503983839,
+    "constant_nonendpoint_roots": 100000,
+    "dkw_threshold": 0.008517234803187071,
+    "fixed_full_pde_root_workload": 731792,
+    "fixed_standalone_accepted_clocks": 300000,
+    "path": "docs/research/runs/2026-09-28-dynamic-continuation/02d-two-barrier-experiment-protocol.md",
+    "primary_cell_sampling_deadline_seconds": 120.0,
+    "primary_cells": 63,
+    "primary_horizons": [
+      0.0,
+      0.25,
+      1.0,
+      4.0,
+      16.0,
+      64.0,
+      256.0
+    ],
+    "primary_queries": [
+      0.0,
+      1.5707963267948966,
+      3.141592653589793
+    ],
+    "primary_roots": 630000,
+    "primary_seeds": [
+      2026092831,
+      2026092832,
+      2026092833
+    ],
+    "range_tolerance": 1e-12,
+    "roots_per_primary_cell": 10000,
+    "sha256": "605eda24574bfb7e44dc997c185836d2a54311c18344e0be4c005674e00beda9",
+    "statistical_diagnostic_alpha_each": 1e-06
+  },
+  "purpose": "fixed floating approximation of the reviewed two-barrier ideal sampler",
+  "reference_primary_gate": "required and separately frozen before primary execution",
+  "reference_snapshot_if_present_before_diagnostics": {
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/reference-v1/reference.npz": "dd49e4f5c630466942b9c276be7b807763c46171a79311ac71c7840d71603072",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/reference-v1/reference_summary.json": "cb384301956b0a650dea10f458522f55981d6e10ab738aacb105624d75dbfc81"
+  },
+  "rng_contract": {
+    "bit_generator": "numpy.random.PCG64",
+    "generator_uniform": "Generator.random binary64 in [0,1)",
+    "indices": "zero-based in the frozen listed orders",
+    "open_interval_rule": "redraw exact zero and record it separately",
+    "seed_sequence": "numpy.random.SeedSequence(entropy=seed, spawn_key=key)",
+    "streams": [
+      {
+        "entropy": 2026092831,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 293572903436587749794443483067231505115,
+            "state": 273068306744303862120855720509523637114
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092831/0/0",
+        "seed_sequence_state": {
+          "entropy": 2026092831,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            0,
+            0
+          ]
+        },
+        "spawn_key": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "entropy": 2026092831,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 8028275043616692100985323710665331347,
+            "state": 183654056312666215131109661146822667743
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092831/0/1",
+        "seed_sequence_state": {
+          "entropy": 2026092831,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            0,
+            1
+          ]
+        },
+        "spawn_key": [
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "entropy": 2026092831,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 137159138654061660444659571526291068289,
+            "state": 92769334938024705889713789943625903330
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092831/0/2",
+        "seed_sequence_state": {
+          "entropy": 2026092831,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            0,
+            2
+          ]
+        },
+        "spawn_key": [
+          0,
+          0,
+          2
+        ]
+      },
+      {
+        "entropy": 2026092831,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 90741683122529843557480632478894652885,
+            "state": 152308798295024873042742018452056495815
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092831/1/0",
+        "seed_sequence_state": {
+          "entropy": 2026092831,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            1,
+            0
+          ]
+        },
+        "spawn_key": [
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "entropy": 2026092831,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 119672351699668708686684037952669503283,
+            "state": 147625449662191901417651566473020019867
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092831/1/1",
+        "seed_sequence_state": {
+          "entropy": 2026092831,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            1,
+            1
+          ]
+        },
+        "spawn_key": [
+          0,
+          1,
+          1
+        ]
+      },
+      {
+        "entropy": 2026092831,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 300195229525459756782432317792212965933,
+            "state": 310713099160790266030391835995465564912
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092831/1/2",
+        "seed_sequence_state": {
+          "entropy": 2026092831,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            1,
+            2
+          ]
+        },
+        "spawn_key": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "entropy": 2026092831,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 92180131573259115600955383515391056309,
+            "state": 203413590589316608624921741508198087469
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092831/2/0",
+        "seed_sequence_state": {
+          "entropy": 2026092831,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            2,
+            0
+          ]
+        },
+        "spawn_key": [
+          0,
+          2,
+          0
+        ]
+      },
+      {
+        "entropy": 2026092831,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 89824036283305303231608874047117304695,
+            "state": 202275042860081119781798740552006739015
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092831/2/1",
+        "seed_sequence_state": {
+          "entropy": 2026092831,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            2,
+            1
+          ]
+        },
+        "spawn_key": [
+          0,
+          2,
+          1
+        ]
+      },
+      {
+        "entropy": 2026092831,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 285028300403629168960277797009383376403,
+            "state": 58840894242759296280686152373164291153
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092831/2/2",
+        "seed_sequence_state": {
+          "entropy": 2026092831,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            2,
+            2
+          ]
+        },
+        "spawn_key": [
+          0,
+          2,
+          2
+        ]
+      },
+      {
+        "entropy": 2026092831,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 191279584515623206950988572158719624611,
+            "state": 184737233273928528947948091101843348486
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092831/3/0",
+        "seed_sequence_state": {
+          "entropy": 2026092831,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            3,
+            0
+          ]
+        },
+        "spawn_key": [
+          0,
+          3,
+          0
+        ]
+      },
+      {
+        "entropy": 2026092831,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 324584803485202256586200318194574363597,
+            "state": 302285595312466546465589181923887967257
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092831/3/1",
+        "seed_sequence_state": {
+          "entropy": 2026092831,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            3,
+            1
+          ]
+        },
+        "spawn_key": [
+          0,
+          3,
+          1
+        ]
+      },
+      {
+        "entropy": 2026092831,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 89062991566671327670031338282813682879,
+            "state": 189914216914261673866071065867137814932
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092831/3/2",
+        "seed_sequence_state": {
+          "entropy": 2026092831,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            3,
+            2
+          ]
+        },
+        "spawn_key": [
+          0,
+          3,
+          2
+        ]
+      },
+      {
+        "entropy": 2026092831,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 253320869436922480733329453476212954635,
+            "state": 116785521437694946951332397922423053233
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092831/4/0",
+        "seed_sequence_state": {
+          "entropy": 2026092831,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            4,
+            0
+          ]
+        },
+        "spawn_key": [
+          0,
+          4,
+          0
+        ]
+      },
+      {
+        "entropy": 2026092831,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 111173157536673733753008107305209895339,
+            "state": 81133414704739419863086685119890992117
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092831/4/1",
+        "seed_sequence_state": {
+          "entropy": 2026092831,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            4,
+            1
+          ]
+        },
+        "spawn_key": [
+          0,
+          4,
+          1
+        ]
+      },
+      {
+        "entropy": 2026092831,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 103249044503933585719773682176911179641,
+            "state": 137709683701617494118672354921843591899
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092831/4/2",
+        "seed_sequence_state": {
+          "entropy": 2026092831,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            4,
+            2
+          ]
+        },
+        "spawn_key": [
+          0,
+          4,
+          2
+        ]
+      },
+      {
+        "entropy": 2026092831,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 218128821235722496445421036446363126659,
+            "state": 44683627791201754305418643002973554742
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092831/5/0",
+        "seed_sequence_state": {
+          "entropy": 2026092831,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            5,
+            0
+          ]
+        },
+        "spawn_key": [
+          0,
+          5,
+          0
+        ]
+      },
+      {
+        "entropy": 2026092831,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 319030094872998887445566377145977338587,
+            "state": 34269361534501192633843643464281447658
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092831/5/1",
+        "seed_sequence_state": {
+          "entropy": 2026092831,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            5,
+            1
+          ]
+        },
+        "spawn_key": [
+          0,
+          5,
+          1
+        ]
+      },
+      {
+        "entropy": 2026092831,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 333420943934879255593025852645035614515,
+            "state": 236677890047586048949503261140264519725
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092831/5/2",
+        "seed_sequence_state": {
+          "entropy": 2026092831,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            5,
+            2
+          ]
+        },
+        "spawn_key": [
+          0,
+          5,
+          2
+        ]
+      },
+      {
+        "entropy": 2026092831,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 27742087919462106506583208662508020499,
+            "state": 112389789236124983851593345915525172294
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092831/6/0",
+        "seed_sequence_state": {
+          "entropy": 2026092831,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            6,
+            0
+          ]
+        },
+        "spawn_key": [
+          0,
+          6,
+          0
+        ]
+      },
+      {
+        "entropy": 2026092831,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 35570683694441493713291807413784744239,
+            "state": 334261910601007293049208084735574687499
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092831/6/1",
+        "seed_sequence_state": {
+          "entropy": 2026092831,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            6,
+            1
+          ]
+        },
+        "spawn_key": [
+          0,
+          6,
+          1
+        ]
+      },
+      {
+        "entropy": 2026092831,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 131169186178672549062338148672080602461,
+            "state": 205916776109702627247826552788110818447
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092831/6/2",
+        "seed_sequence_state": {
+          "entropy": 2026092831,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            6,
+            2
+          ]
+        },
+        "spawn_key": [
+          0,
+          6,
+          2
+        ]
+      },
+      {
+        "entropy": 2026092832,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 58411693289855240902988971778322075225,
+            "state": 251479756571878198154680836935721362738
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092832/0/0",
+        "seed_sequence_state": {
+          "entropy": 2026092832,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            0,
+            0
+          ]
+        },
+        "spawn_key": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "entropy": 2026092832,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 35150881240409273844308242627857211807,
+            "state": 127579901958869468675333963906845388603
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092832/0/1",
+        "seed_sequence_state": {
+          "entropy": 2026092832,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            0,
+            1
+          ]
+        },
+        "spawn_key": [
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "entropy": 2026092832,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 270655846352797673984213997910281597233,
+            "state": 35598500859158037077060199712841795263
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092832/0/2",
+        "seed_sequence_state": {
+          "entropy": 2026092832,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            0,
+            2
+          ]
+        },
+        "spawn_key": [
+          0,
+          0,
+          2
+        ]
+      },
+      {
+        "entropy": 2026092832,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 266231369253905838473604062231897346245,
+            "state": 19578463518123574351777626204330807791
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092832/1/0",
+        "seed_sequence_state": {
+          "entropy": 2026092832,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            1,
+            0
+          ]
+        },
+        "spawn_key": [
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "entropy": 2026092832,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 204593872775600196990429254583088962729,
+            "state": 121311401583013196523113229623100943702
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092832/1/1",
+        "seed_sequence_state": {
+          "entropy": 2026092832,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            1,
+            1
+          ]
+        },
+        "spawn_key": [
+          0,
+          1,
+          1
+        ]
+      },
+      {
+        "entropy": 2026092832,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 240445964542626984197601829921101323459,
+            "state": 15248054966868031169032710124813375002
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092832/1/2",
+        "seed_sequence_state": {
+          "entropy": 2026092832,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            1,
+            2
+          ]
+        },
+        "spawn_key": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "entropy": 2026092832,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 251596682444294784337268022469870372449,
+            "state": 287280616874324876101015455134045740627
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092832/2/0",
+        "seed_sequence_state": {
+          "entropy": 2026092832,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            2,
+            0
+          ]
+        },
+        "spawn_key": [
+          0,
+          2,
+          0
+        ]
+      },
+      {
+        "entropy": 2026092832,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 87473255634479602013760059649372671355,
+            "state": 262762260259982802287690339408733632969
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092832/2/1",
+        "seed_sequence_state": {
+          "entropy": 2026092832,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            2,
+            1
+          ]
+        },
+        "spawn_key": [
+          0,
+          2,
+          1
+        ]
+      },
+      {
+        "entropy": 2026092832,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 290130098889174949736501578691413862307,
+            "state": 159315134841638610318394444801611200441
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092832/2/2",
+        "seed_sequence_state": {
+          "entropy": 2026092832,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            2,
+            2
+          ]
+        },
+        "spawn_key": [
+          0,
+          2,
+          2
+        ]
+      },
+      {
+        "entropy": 2026092832,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 339142549240037939335280950886371507491,
+            "state": 158775374301228147465273869001927488585
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092832/3/0",
+        "seed_sequence_state": {
+          "entropy": 2026092832,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            3,
+            0
+          ]
+        },
+        "spawn_key": [
+          0,
+          3,
+          0
+        ]
+      },
+      {
+        "entropy": 2026092832,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 287864537894196448586926382389795500579,
+            "state": 139947231748526829841431124785736194503
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092832/3/1",
+        "seed_sequence_state": {
+          "entropy": 2026092832,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            3,
+            1
+          ]
+        },
+        "spawn_key": [
+          0,
+          3,
+          1
+        ]
+      },
+      {
+        "entropy": 2026092832,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 177706996038901262656496917322863875633,
+            "state": 185170916874087003604427527616657333008
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092832/3/2",
+        "seed_sequence_state": {
+          "entropy": 2026092832,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            3,
+            2
+          ]
+        },
+        "spawn_key": [
+          0,
+          3,
+          2
+        ]
+      },
+      {
+        "entropy": 2026092832,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 318933190897594648693796388460635329561,
+            "state": 198850313218388236738699030001962860670
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092832/4/0",
+        "seed_sequence_state": {
+          "entropy": 2026092832,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            4,
+            0
+          ]
+        },
+        "spawn_key": [
+          0,
+          4,
+          0
+        ]
+      },
+      {
+        "entropy": 2026092832,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 129197905442598146473421654927550031909,
+            "state": 316265961476444378199217663740279892135
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092832/4/1",
+        "seed_sequence_state": {
+          "entropy": 2026092832,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            4,
+            1
+          ]
+        },
+        "spawn_key": [
+          0,
+          4,
+          1
+        ]
+      },
+      {
+        "entropy": 2026092832,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 148563836875823019178771698892699158631,
+            "state": 280222096629113256556931046868662757753
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092832/4/2",
+        "seed_sequence_state": {
+          "entropy": 2026092832,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            4,
+            2
+          ]
+        },
+        "spawn_key": [
+          0,
+          4,
+          2
+        ]
+      },
+      {
+        "entropy": 2026092832,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 256874775948579661612682025262456397891,
+            "state": 198898917403548168148970088825567064885
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092832/5/0",
+        "seed_sequence_state": {
+          "entropy": 2026092832,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            5,
+            0
+          ]
+        },
+        "spawn_key": [
+          0,
+          5,
+          0
+        ]
+      },
+      {
+        "entropy": 2026092832,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 233145774746015951343114820401681052281,
+            "state": 235023318106792002317417065406153489996
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092832/5/1",
+        "seed_sequence_state": {
+          "entropy": 2026092832,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            5,
+            1
+          ]
+        },
+        "spawn_key": [
+          0,
+          5,
+          1
+        ]
+      },
+      {
+        "entropy": 2026092832,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 89087270954362186031318581479476347849,
+            "state": 120733969064689704178217445102527291688
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092832/5/2",
+        "seed_sequence_state": {
+          "entropy": 2026092832,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            5,
+            2
+          ]
+        },
+        "spawn_key": [
+          0,
+          5,
+          2
+        ]
+      },
+      {
+        "entropy": 2026092832,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 229117729527946293314524283052158164681,
+            "state": 192854002567474607658206440378136581220
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092832/6/0",
+        "seed_sequence_state": {
+          "entropy": 2026092832,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            6,
+            0
+          ]
+        },
+        "spawn_key": [
+          0,
+          6,
+          0
+        ]
+      },
+      {
+        "entropy": 2026092832,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 129597844914330181349426578907688860941,
+            "state": 134171963884561032507215977050661168665
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092832/6/1",
+        "seed_sequence_state": {
+          "entropy": 2026092832,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            6,
+            1
+          ]
+        },
+        "spawn_key": [
+          0,
+          6,
+          1
+        ]
+      },
+      {
+        "entropy": 2026092832,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 94229961639680442285386179488524207563,
+            "state": 38784057242483173482242769942863895323
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092832/6/2",
+        "seed_sequence_state": {
+          "entropy": 2026092832,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            6,
+            2
+          ]
+        },
+        "spawn_key": [
+          0,
+          6,
+          2
+        ]
+      },
+      {
+        "entropy": 2026092833,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 140976090020920104433134519440303276957,
+            "state": 13491092781156516247760503283476554317
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092833/0/0",
+        "seed_sequence_state": {
+          "entropy": 2026092833,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            0,
+            0
+          ]
+        },
+        "spawn_key": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "entropy": 2026092833,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 217996522572420513968403552281932206805,
+            "state": 25867703954094431787022451789249423069
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092833/0/1",
+        "seed_sequence_state": {
+          "entropy": 2026092833,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            0,
+            1
+          ]
+        },
+        "spawn_key": [
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "entropy": 2026092833,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 191040767755032119486127211151311898119,
+            "state": 327923490275189166260878706268439312971
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092833/0/2",
+        "seed_sequence_state": {
+          "entropy": 2026092833,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            0,
+            2
+          ]
+        },
+        "spawn_key": [
+          0,
+          0,
+          2
+        ]
+      },
+      {
+        "entropy": 2026092833,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 205790878498558127277870078993087281697,
+            "state": 71886398151573966779213770848699132694
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092833/1/0",
+        "seed_sequence_state": {
+          "entropy": 2026092833,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            1,
+            0
+          ]
+        },
+        "spawn_key": [
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "entropy": 2026092833,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 259361677212651795923685348067626729273,
+            "state": 39822514900596115328598312692389908059
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092833/1/1",
+        "seed_sequence_state": {
+          "entropy": 2026092833,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            1,
+            1
+          ]
+        },
+        "spawn_key": [
+          0,
+          1,
+          1
+        ]
+      },
+      {
+        "entropy": 2026092833,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 179282202515685232247780076098674448433,
+            "state": 56534603264850216605136614265657149233
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092833/1/2",
+        "seed_sequence_state": {
+          "entropy": 2026092833,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            1,
+            2
+          ]
+        },
+        "spawn_key": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "entropy": 2026092833,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 108858693442561713841178259958840410327,
+            "state": 39699330627758251494517203333150306946
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092833/2/0",
+        "seed_sequence_state": {
+          "entropy": 2026092833,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            2,
+            0
+          ]
+        },
+        "spawn_key": [
+          0,
+          2,
+          0
+        ]
+      },
+      {
+        "entropy": 2026092833,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 324389882428868880621207147613205757071,
+            "state": 11023454879108125218152128778928543528
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092833/2/1",
+        "seed_sequence_state": {
+          "entropy": 2026092833,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            2,
+            1
+          ]
+        },
+        "spawn_key": [
+          0,
+          2,
+          1
+        ]
+      },
+      {
+        "entropy": 2026092833,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 165443421737497449648021785054312685229,
+            "state": 163095822885029304582217381051792735642
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092833/2/2",
+        "seed_sequence_state": {
+          "entropy": 2026092833,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            2,
+            2
+          ]
+        },
+        "spawn_key": [
+          0,
+          2,
+          2
+        ]
+      },
+      {
+        "entropy": 2026092833,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 32913321693688301390695851160573507449,
+            "state": 36737530973433118405372786229707829321
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092833/3/0",
+        "seed_sequence_state": {
+          "entropy": 2026092833,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            3,
+            0
+          ]
+        },
+        "spawn_key": [
+          0,
+          3,
+          0
+        ]
+      },
+      {
+        "entropy": 2026092833,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 120948233060286037676573216900205622235,
+            "state": 241913517188799358622836238589910931907
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092833/3/1",
+        "seed_sequence_state": {
+          "entropy": 2026092833,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            3,
+            1
+          ]
+        },
+        "spawn_key": [
+          0,
+          3,
+          1
+        ]
+      },
+      {
+        "entropy": 2026092833,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 214491925381775817436773556218820913413,
+            "state": 94173212942426703093507546658828287599
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092833/3/2",
+        "seed_sequence_state": {
+          "entropy": 2026092833,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            3,
+            2
+          ]
+        },
+        "spawn_key": [
+          0,
+          3,
+          2
+        ]
+      },
+      {
+        "entropy": 2026092833,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 288166981494486512979397940195305309031,
+            "state": 36016744709102147447669646068289849600
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092833/4/0",
+        "seed_sequence_state": {
+          "entropy": 2026092833,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            4,
+            0
+          ]
+        },
+        "spawn_key": [
+          0,
+          4,
+          0
+        ]
+      },
+      {
+        "entropy": 2026092833,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 83137029916084738722186307015960286481,
+            "state": 133616186815759531769310993666383294250
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092833/4/1",
+        "seed_sequence_state": {
+          "entropy": 2026092833,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            4,
+            1
+          ]
+        },
+        "spawn_key": [
+          0,
+          4,
+          1
+        ]
+      },
+      {
+        "entropy": 2026092833,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 87722590068477763496856140980141246747,
+            "state": 135558359709953097261338004569814379011
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092833/4/2",
+        "seed_sequence_state": {
+          "entropy": 2026092833,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            4,
+            2
+          ]
+        },
+        "spawn_key": [
+          0,
+          4,
+          2
+        ]
+      },
+      {
+        "entropy": 2026092833,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 44809102079692094335570253468395931581,
+            "state": 268056294013541070581018662270897846610
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092833/5/0",
+        "seed_sequence_state": {
+          "entropy": 2026092833,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            5,
+            0
+          ]
+        },
+        "spawn_key": [
+          0,
+          5,
+          0
+        ]
+      },
+      {
+        "entropy": 2026092833,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 189720848493908912166177088481189062937,
+            "state": 317715906330551761885748832446291599277
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092833/5/1",
+        "seed_sequence_state": {
+          "entropy": 2026092833,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            5,
+            1
+          ]
+        },
+        "spawn_key": [
+          0,
+          5,
+          1
+        ]
+      },
+      {
+        "entropy": 2026092833,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 147105093231999253805300820137746569951,
+            "state": 289754904164182662828634359100569345501
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092833/5/2",
+        "seed_sequence_state": {
+          "entropy": 2026092833,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            5,
+            2
+          ]
+        },
+        "spawn_key": [
+          0,
+          5,
+          2
+        ]
+      },
+      {
+        "entropy": 2026092833,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 241917468529901383009245680154435473599,
+            "state": 211961556010021136507241726906181529637
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092833/6/0",
+        "seed_sequence_state": {
+          "entropy": 2026092833,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            6,
+            0
+          ]
+        },
+        "spawn_key": [
+          0,
+          6,
+          0
+        ]
+      },
+      {
+        "entropy": 2026092833,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 34069970114155679802489051251041467181,
+            "state": 265563895068622277892427875878874356706
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092833/6/1",
+        "seed_sequence_state": {
+          "entropy": 2026092833,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            6,
+            1
+          ]
+        },
+        "spawn_key": [
+          0,
+          6,
+          1
+        ]
+      },
+      {
+        "entropy": 2026092833,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 230671033429630036290669681688557164619,
+            "state": 58581873492430668304206460316908009444
+          },
+          "uinteger": 0
+        },
+        "label": "primary/2026092833/6/2",
+        "seed_sequence_state": {
+          "entropy": 2026092833,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            0,
+            6,
+            2
+          ]
+        },
+        "spawn_key": [
+          0,
+          6,
+          2
+        ]
+      },
+      {
+        "entropy": 2026092891,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 340192583831014116928161220579727092673,
+            "state": 25721849364058749142475404466997408959
+          },
+          "uinteger": 0
+        },
+        "label": "clock/0",
+        "seed_sequence_state": {
+          "entropy": 2026092891,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            1,
+            0
+          ]
+        },
+        "spawn_key": [
+          1,
+          0
+        ]
+      },
+      {
+        "entropy": 2026092891,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 57222230915328518289203414130592914425,
+            "state": 21360823053411492342968302849519016401
+          },
+          "uinteger": 0
+        },
+        "label": "clock/1",
+        "seed_sequence_state": {
+          "entropy": 2026092891,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            1,
+            1
+          ]
+        },
+        "spawn_key": [
+          1,
+          1
+        ]
+      },
+      {
+        "entropy": 2026092891,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 242024260443473036114979244027918112093,
+            "state": 88684273378262177567288387377170309974
+          },
+          "uinteger": 0
+        },
+        "label": "clock/2",
+        "seed_sequence_state": {
+          "entropy": 2026092891,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            1,
+            2
+          ]
+        },
+        "spawn_key": [
+          1,
+          2
+        ]
+      },
+      {
+        "entropy": 2026092892,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 327738209099932408144761415050513823123,
+            "state": 70188708058358295385829471415378137047
+          },
+          "uinteger": 0
+        },
+        "label": "constant/nonendpoint",
+        "seed_sequence_state": {
+          "entropy": 2026092892,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            2,
+            0
+          ]
+        },
+        "spawn_key": [
+          2,
+          0
+        ]
+      },
+      {
+        "entropy": 2026092893,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 76236510291261105182196859314125453527,
+            "state": 4231493795290421611795579198126143280
+          },
+          "uinteger": 0
+        },
+        "label": "constant/endpoint/0/0",
+        "seed_sequence_state": {
+          "entropy": 2026092893,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            3,
+            0,
+            0
+          ]
+        },
+        "spawn_key": [
+          3,
+          0,
+          0
+        ]
+      },
+      {
+        "entropy": 2026092893,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 21405717049099851424382573553764305411,
+            "state": 153715976735733754554179024851898433522
+          },
+          "uinteger": 0
+        },
+        "label": "constant/endpoint/0/1",
+        "seed_sequence_state": {
+          "entropy": 2026092893,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            3,
+            0,
+            1
+          ]
+        },
+        "spawn_key": [
+          3,
+          0,
+          1
+        ]
+      },
+      {
+        "entropy": 2026092893,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 123379064865886177509158040225570445613,
+            "state": 238726574738051944004486206267133713952
+          },
+          "uinteger": 0
+        },
+        "label": "constant/endpoint/0/2",
+        "seed_sequence_state": {
+          "entropy": 2026092893,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            3,
+            0,
+            2
+          ]
+        },
+        "spawn_key": [
+          3,
+          0,
+          2
+        ]
+      },
+      {
+        "entropy": 2026092893,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 122395812680736105620470116333202390389,
+            "state": 324093724493169318152412749698900543993
+          },
+          "uinteger": 0
+        },
+        "label": "constant/endpoint/0/3",
+        "seed_sequence_state": {
+          "entropy": 2026092893,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            3,
+            0,
+            3
+          ]
+        },
+        "spawn_key": [
+          3,
+          0,
+          3
+        ]
+      },
+      {
+        "entropy": 2026092893,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 29059566958156952885272795093551018815,
+            "state": 312464241890937420139191387744511317385
+          },
+          "uinteger": 0
+        },
+        "label": "constant/endpoint/0/4",
+        "seed_sequence_state": {
+          "entropy": 2026092893,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            3,
+            0,
+            4
+          ]
+        },
+        "spawn_key": [
+          3,
+          0,
+          4
+        ]
+      },
+      {
+        "entropy": 2026092893,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 105539243275774619179092047689797442605,
+            "state": 93888172675009332290037976047194881030
+          },
+          "uinteger": 0
+        },
+        "label": "constant/endpoint/0/5",
+        "seed_sequence_state": {
+          "entropy": 2026092893,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            3,
+            0,
+            5
+          ]
+        },
+        "spawn_key": [
+          3,
+          0,
+          5
+        ]
+      },
+      {
+        "entropy": 2026092893,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 126906649138075140698577388865110608497,
+            "state": 527302038351261508467559723485333342
+          },
+          "uinteger": 0
+        },
+        "label": "constant/endpoint/0/6",
+        "seed_sequence_state": {
+          "entropy": 2026092893,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            3,
+            0,
+            6
+          ]
+        },
+        "spawn_key": [
+          3,
+          0,
+          6
+        ]
+      },
+      {
+        "entropy": 2026092893,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 338112389175833005348731245826759878289,
+            "state": 224813760906597119799841512078755056883
+          },
+          "uinteger": 0
+        },
+        "label": "constant/endpoint/1/0",
+        "seed_sequence_state": {
+          "entropy": 2026092893,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            3,
+            1,
+            0
+          ]
+        },
+        "spawn_key": [
+          3,
+          1,
+          0
+        ]
+      },
+      {
+        "entropy": 2026092893,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 44236669504826578497347633910132586993,
+            "state": 175731431216078530338966646713988307134
+          },
+          "uinteger": 0
+        },
+        "label": "constant/endpoint/1/1",
+        "seed_sequence_state": {
+          "entropy": 2026092893,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            3,
+            1,
+            1
+          ]
+        },
+        "spawn_key": [
+          3,
+          1,
+          1
+        ]
+      },
+      {
+        "entropy": 2026092893,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 269317978652637617474760544420844654455,
+            "state": 125800963842843230945889779511217819266
+          },
+          "uinteger": 0
+        },
+        "label": "constant/endpoint/1/2",
+        "seed_sequence_state": {
+          "entropy": 2026092893,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            3,
+            1,
+            2
+          ]
+        },
+        "spawn_key": [
+          3,
+          1,
+          2
+        ]
+      },
+      {
+        "entropy": 2026092893,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 43209584204556167680716719571541663043,
+            "state": 228824120880189584966250582223310526021
+          },
+          "uinteger": 0
+        },
+        "label": "constant/endpoint/1/3",
+        "seed_sequence_state": {
+          "entropy": 2026092893,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            3,
+            1,
+            3
+          ]
+        },
+        "spawn_key": [
+          3,
+          1,
+          3
+        ]
+      },
+      {
+        "entropy": 2026092893,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 283877661833636719255076115156512335125,
+            "state": 77220641832894637597669332220514631766
+          },
+          "uinteger": 0
+        },
+        "label": "constant/endpoint/1/4",
+        "seed_sequence_state": {
+          "entropy": 2026092893,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            3,
+            1,
+            4
+          ]
+        },
+        "spawn_key": [
+          3,
+          1,
+          4
+        ]
+      },
+      {
+        "entropy": 2026092893,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 171978257469371200115499065006155384883,
+            "state": 246791692428909984594122461108004789035
+          },
+          "uinteger": 0
+        },
+        "label": "constant/endpoint/1/5",
+        "seed_sequence_state": {
+          "entropy": 2026092893,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            3,
+            1,
+            5
+          ]
+        },
+        "spawn_key": [
+          3,
+          1,
+          5
+        ]
+      },
+      {
+        "entropy": 2026092893,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 86346955552398771269295477718540129605,
+            "state": 306767936649387819112520802889179365844
+          },
+          "uinteger": 0
+        },
+        "label": "constant/endpoint/1/6",
+        "seed_sequence_state": {
+          "entropy": 2026092893,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            3,
+            1,
+            6
+          ]
+        },
+        "spawn_key": [
+          3,
+          1,
+          6
+        ]
+      },
+      {
+        "entropy": 2026092890,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 33340133490540843536552274030962092451,
+            "state": 61994509394410976873002604394642058459
+          },
+          "uinteger": 0
+        },
+        "label": "preflight/0/0",
+        "seed_sequence_state": {
+          "entropy": 2026092890,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            4,
+            0,
+            0
+          ]
+        },
+        "spawn_key": [
+          4,
+          0,
+          0
+        ]
+      },
+      {
+        "entropy": 2026092890,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 96992615940993355853153096264453835353,
+            "state": 64529737932109885593116042729525464184
+          },
+          "uinteger": 0
+        },
+        "label": "preflight/0/1",
+        "seed_sequence_state": {
+          "entropy": 2026092890,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            4,
+            0,
+            1
+          ]
+        },
+        "spawn_key": [
+          4,
+          0,
+          1
+        ]
+      },
+      {
+        "entropy": 2026092890,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 99817461800435038043211547272897553289,
+            "state": 84854388396013422942921155567586211364
+          },
+          "uinteger": 0
+        },
+        "label": "preflight/0/2",
+        "seed_sequence_state": {
+          "entropy": 2026092890,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            4,
+            0,
+            2
+          ]
+        },
+        "spawn_key": [
+          4,
+          0,
+          2
+        ]
+      },
+      {
+        "entropy": 2026092890,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 246408728635607924606424203855200874709,
+            "state": 304140821190540548884223467165059273605
+          },
+          "uinteger": 0
+        },
+        "label": "preflight/1/0",
+        "seed_sequence_state": {
+          "entropy": 2026092890,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            4,
+            1,
+            0
+          ]
+        },
+        "spawn_key": [
+          4,
+          1,
+          0
+        ]
+      },
+      {
+        "entropy": 2026092890,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 10713918639047119467966997719875054249,
+            "state": 263607595543134259592476770783201699546
+          },
+          "uinteger": 0
+        },
+        "label": "preflight/1/1",
+        "seed_sequence_state": {
+          "entropy": 2026092890,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            4,
+            1,
+            1
+          ]
+        },
+        "spawn_key": [
+          4,
+          1,
+          1
+        ]
+      },
+      {
+        "entropy": 2026092890,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 269593387376428204387155255446743356761,
+            "state": 76640901846742403632994499708324583300
+          },
+          "uinteger": 0
+        },
+        "label": "preflight/1/2",
+        "seed_sequence_state": {
+          "entropy": 2026092890,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            4,
+            1,
+            2
+          ]
+        },
+        "spawn_key": [
+          4,
+          1,
+          2
+        ]
+      },
+      {
+        "entropy": 2026092890,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 261494456457476142101073854230741350563,
+            "state": 260292421040192920389550618677467345795
+          },
+          "uinteger": 0
+        },
+        "label": "preflight/2/0",
+        "seed_sequence_state": {
+          "entropy": 2026092890,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            4,
+            2,
+            0
+          ]
+        },
+        "spawn_key": [
+          4,
+          2,
+          0
+        ]
+      },
+      {
+        "entropy": 2026092890,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 146299627974963553383050470506574569897,
+            "state": 74015866199000715572924760947301013516
+          },
+          "uinteger": 0
+        },
+        "label": "preflight/2/1",
+        "seed_sequence_state": {
+          "entropy": 2026092890,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            4,
+            2,
+            1
+          ]
+        },
+        "spawn_key": [
+          4,
+          2,
+          1
+        ]
+      },
+      {
+        "entropy": 2026092890,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 42493195099044574401518378411119898953,
+            "state": 297369669409776297314725559609155827389
+          },
+          "uinteger": 0
+        },
+        "label": "preflight/2/2",
+        "seed_sequence_state": {
+          "entropy": 2026092890,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            4,
+            2,
+            2
+          ]
+        },
+        "spawn_key": [
+          4,
+          2,
+          2
+        ]
+      },
+      {
+        "entropy": 2026092890,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 145925184376006439146902421750660466967,
+            "state": 178321959846116882161865889369110132906
+          },
+          "uinteger": 0
+        },
+        "label": "preflight/3/0",
+        "seed_sequence_state": {
+          "entropy": 2026092890,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            4,
+            3,
+            0
+          ]
+        },
+        "spawn_key": [
+          4,
+          3,
+          0
+        ]
+      },
+      {
+        "entropy": 2026092890,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 94929368847463279174450473933920996961,
+            "state": 245322157688257900348532157876748353831
+          },
+          "uinteger": 0
+        },
+        "label": "preflight/3/1",
+        "seed_sequence_state": {
+          "entropy": 2026092890,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            4,
+            3,
+            1
+          ]
+        },
+        "spawn_key": [
+          4,
+          3,
+          1
+        ]
+      },
+      {
+        "entropy": 2026092890,
+        "initial_pcg64_state": {
+          "bit_generator": "PCG64",
+          "has_uint32": 0,
+          "state": {
+            "inc": 45178990603588897413622173485446357203,
+            "state": 302222112171993946664683776708618034552
+          },
+          "uinteger": 0
+        },
+        "label": "preflight/3/2",
+        "seed_sequence_state": {
+          "entropy": 2026092890,
+          "n_children_spawned": 0,
+          "pool_size": 4,
+          "spawn_key": [
+            4,
+            3,
+            2
+          ]
+        },
+        "spawn_key": [
+          4,
+          3,
+          2
+        ]
+      }
+    ]
+  },
+  "schema_version": 1,
+  "scope": {
+    "no_clipping": true,
+    "no_node_or_depth_cutoff": true,
+    "no_speedup_or_global_finite_bit_claim": true,
+    "not_finite_bit_unbiasedness_certificate": true,
+    "smooth_one_dimensional_datum_only": true
+  },
+  "source_and_gate_hashes_sha256": {
+    "docs/research/runs/2026-09-28-dynamic-continuation/02d-two-barrier-experiment-protocol.md": "605eda24574bfb7e44dc997c185836d2a54311c18344e0be4c005674e00beda9",
+    "docs/research/runs/2026-09-28-dynamic-continuation/04l-two-barrier-voting.md": "87bc9b8424fc1ea04397adeeb38aa99843d9ade97b81e13c8857b31919706d42",
+    "docs/research/runs/2026-09-28-dynamic-continuation/04m-horizon-free-clock-proposal.md": "68fac519cca959c8c5fd811ecc9ef308e0de85c3bda2cf9f2abaeea46ee9e61b",
+    "docs/research/runs/2026-09-28-dynamic-continuation/06f-moving-barrier-lean.md": "7af4309629053943aeb0a3965e5e293d95b8a9ab55df2541f7a876e6d0aef5cb",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/reference-v1/execution_manifest.json": "3ef7ed5110497633b64a248e050404ae557de8f6bd181010c736b777140eaa7c",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/reference-v1/preflight.json": "6d34b15d13bda879b9b81d73094bd579046da9fb1a7ed73fef966a6167e2274b",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/reference-v1/reference.npz": "dd49e4f5c630466942b9c276be7b807763c46171a79311ac71c7840d71603072",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/reference-v1/reference_summary.json": "cb384301956b0a650dea10f458522f55981d6e10ab738aacb105624d75dbfc81",
+    "docs/research/runs/2026-09-28-dynamic-continuation/artifacts/two-barrier/reference-v1/tests.log": "2456ff14beda5017fde75e54110d18d83fe6355248fc701b5d2966472152a6cb",
+    "docs/research/runs/2026-09-28-dynamic-continuation/lean/moving-barrier-width/axioms.log": "a186294f62b7ff77d2974cadd033c22f7a7fafe2be0d2b4621686adfbc9e1346",
+    "docs/research/runs/2026-09-28-dynamic-continuation/lean/moving-barrier-width/build.log": "55277b4d8dfb50ca256714613644c12c4c945188a6c4a994cd64afad426892e6",
+    "docs/research/runs/2026-09-28-dynamic-continuation/lean/moving-barrier-width/source-scan.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docs/research/runs/2026-09-28-dynamic-continuation/numerics/run_two_barrier.py": "afef0df8ff73608ccb9bbfb644aa2a0846065a762dc4463cc4581014a48b5ed1",
+    "docs/research/runs/2026-09-28-dynamic-continuation/numerics/test_two_barrier_reference.py": "835249633d23a08207243c96f3b19991db14f899f1b2da92232fdcb613a113ef",
+    "docs/research/runs/2026-09-28-dynamic-continuation/numerics/test_two_barrier_sampler.py": "0384f39390ea63807a39b1cdd12fe5fba36736ec09b4626ac5e48d8a2dbdce5f",
+    "docs/research/runs/2026-09-28-dynamic-continuation/numerics/two_barrier_reference.py": "d2561072434d4eaa3966c3353b299e3fa5813455d7ccf8454ee8889be64856ce",
+    "docs/research/runs/2026-09-28-dynamic-continuation/numerics/two_barrier_sampler.py": "89eafa2cec16c220eb1e049146f21066b3608c8c35e9418e322d40a306afbce0",
+    "docs/research/runs/2026-09-28-dynamic-continuation/reviews/T30-two-barrier-voting-audit.md": "a82b3c07afbaaaaa0fe5f94b6296fd2bda187ae0d7cf9e8c6812afa8a5111ce4",
+    "docs/research/runs/2026-09-28-dynamic-continuation/reviews/T31-horizon-free-clock-audit.md": "ba85315b128510f03f86f9f01fc8885406450935a091872dbf013dff3e051d2c",
+    "docs/research/runs/2026-09-28-dynamic-continuation/reviews/T34-two-barrier-protocol-review.md": "a887f7e0bd7f38e2170c02bfbf0a3cc8f9ea545fe6ada2f6cb54daa1c2958765",
+    "docs/research/runs/2026-09-28-dynamic-continuation/reviews/T34b-protocol-freeze-check.md": "7232c7e2dbe6f9efaa5933fcc749e7d548c90f2d341f4e29810a3e7cb7205216",
+    "formal/EstimatorIntegrity/MovingBarrierWidth.lean": "250cca5be42ddbe45ba157fb0cb572ec9460dcaaafefa420e125c2f1da77d11b"
+  },
+  "status": "frozen_before_diagnostics"
+}

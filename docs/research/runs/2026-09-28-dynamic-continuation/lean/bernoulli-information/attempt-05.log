@@ -1,0 +1,13 @@
+Command:
+  ~/.elan/bin/lake env lean EstimatorIntegrity/BernoulliInformation.lean
+
+Result: FAIL (exit 1; 92.9 seconds)
+
+The scalar Pinsker proof reached only the anchor derivative.  Lean could not
+normalize the generated derivative coefficient because the pretty-printer left
+`id q` in the goal:
+
+  0 = -(q * 4) + id q * 4
+
+The next attempt replaces the broad `simp [id]` conversion branch by an
+explicit `simp only [id_eq, ...]` normalization before `ring`.

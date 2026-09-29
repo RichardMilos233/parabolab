@@ -1,0 +1,10 @@
+import EstimatorIntegrity.MovingBarrierWidth
+
+#print axioms EstimatorIntegrity.movingBarrier_increment_nonneg
+#print axioms EstimatorIntegrity.movingBarrier_finite_telescope
+#print axioms EstimatorIntegrity.movingBarrier_finite_identity
+#print axioms EstimatorIntegrity.movingBarrier_remainder_bounds
+#print axioms EstimatorIntegrity.movingBarrier_integrableOn
+#print axioms EstimatorIntegrity.movingBarrier_integral_eq
+#print axioms EstimatorIntegrity.movingBarrier_width
+#print axioms EstimatorIntegrity.positiveInterval_relativeVariance

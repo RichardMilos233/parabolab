@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "previousTopLevelConstantsPreserved": 47,
+  "newTopLevelConstants": 49,
+  "localLinksVerified": 33,
+  "source_sha256": "b1280e8dab63ae9cd908b8b6dc20eb07fa706c439b5400ff06fa9dc0abc584ed",
+  "previous_sha256": "1c754eac5819c006fbed8a2e7280d63c0e688b967d25d42b61ef18948888d07c",
+  "addedScope": "D28 all-dimension signed lower only; no E4 statistics or candidate upper added",
+  "gui_render_verified": false
+}

@@ -1,0 +1,16 @@
+$ cd formal
+$ ~/.elan/bin/lake env lean ../docs/research/runs/2026-09-28-dynamic-continuation/lean/bernoulli-information/BernoulliInformationAxioms.lean
+'EstimatorIntegrity.bernoulliBool' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.bernoulliBool_isProbabilityMeasure' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.bernoulliKLScalar' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.bernoulliKLScalar_eq_log_div' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.continuous_bernoulliKLScalar' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.hasDerivAt_bernoulliKLScalar' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.bernoulliKLScalar_pinsker' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.bernoulliKLScalar_le_chiSq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.bernoulliBool_true' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.bernoulliBool_kl_ne_top' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.bernoulliBool_kl_toReal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.bernoulliBool_kl_le_chiSq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.bernoulliBool_pinsker' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.bernoulliBool_testing_error' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "task": "T71",
+  "created_utc": "2026-09-28T17:46:06Z",
+  "managed_canvas": {
+    "path": "/Users/michael/.cursor/projects/Users-michael-Desktop-NTU-fyp-parabolab/canvases/dynamic-continuation-evidence.canvas.tsx",
+    "sha256": "b1280e8dab63ae9cd908b8b6dc20eb07fa706c439b5400ff06fa9dc0abc584ed",
+    "modified_by_t71": false
+  },
+  "archives": {
+    "original": {
+      "path": "dynamic-continuation-evidence.original.canvas.tsx",
+      "sha256": "b1280e8dab63ae9cd908b8b6dc20eb07fa706c439b5400ff06fa9dc0abc584ed"
+    },
+    "candidate": {
+      "path": "dynamic-continuation-evidence.candidate.canvas.tsx",
+      "sha256": "a1ca7b101e0b5aba2c8bf8a8dc17c2c8ac071fe05fe634483a61da3ab192329d"
+    },
+    "inspection_candidate": {
+      "path": "/private/tmp/d29-e4-canvas-check/dynamic-continuation-evidence.canvas.tsx",
+      "sha256": "a1ca7b101e0b5aba2c8bf8a8dc17c2c8ac071fe05fe634483a61da3ab192329d"
+    },
+    "superseded_candidate": {
+      "path": "dynamic-continuation-evidence.superseded-72c73d23.canvas.tsx",
+      "sha256": "72c73d23a226dbd85d3422b427aafec4a0feadfd2320a9d2c8d8c7d2c5dcdcb8"
+    }
+  },
+  "inputs_sha256": {
+    "04v-all-dimension-matching-signed-query-complexity.md": "bce92681a5c8dcb58e326c1935d9e4d9f20a75a4e1b0a59c194acbbb6a64d2d4",
+    "reviews/T67-all-dimension-upper-independent-audit.md": "f7fc4f5e96782354e7aefb5d4e27b5e8ae086f285aab0625041cb96eae7fea26",
+    "reviews/T67-root-correspondence.json": "1bbd87bd076613f1fd678527cb79287d60f514c456dec1983ed758ca846e0728",
+    "reviews/R10b-finite-burnin-derivative-sampling.md": "23683587539ef2905e0679100325808ae3f6353a3782a4bb362b2d24252034f0",
+    "reviews/T68-finite-burnin-sampler-independent-audit.md": "442b446ae523b220e34ddadcf8c23b181ce60104100fd27c7e8027524840ed9f",
+    "reviews/T68-root-correspondence.json": "c2ccbb30c901dee6159ce8d345dd2aec29f7a17b0d0e0dbca964ff89aff9016b",
+    "06k-bernoulli-information-lean.md": "836e87cf2a209cdc278dfce7a449215e08036f1b7df0f7902b3dde18e0f06829",
+    "reviews/T62-root-correspondence.json": "ae011c7c3dce73d24c4f96b2375b5832caf4572033001abb2391ff42335b140e",
+    "audit-v1/statistics_raw.npz": "bd78b8fae2868fc53d6bc014076dce6d769132d4acf7129049bc0cad59a9bb8f",
+    "audit-v1/stored_audit.json": "f1f48b74996543a9f7de1aca6c0ffedbb54e34d251d046aa820b0cf9cea5f2da",
+    "figure-v2/positive_query_evidence_v2.png": "3c18c54eb64f89473cafef04760a2fb6ea2edba8371c353cc1f9a481daebef2f",
+    "figure-v2/render_result.json": "5bd1f0a636bf611eb3c3994cc31699f23b51801a687fcfee0791b341f36ec56a",
+    "reviews/T66-positive-query-independent-audit.md": "e9281b60ea1c407b5778ff85a4a4e90a6767bfb1fe6dbf45bde878f11420ebe1",
+    "reviews/T66-figure-recipe-correspondence.md": "0ad4e12768739d8897a0e0883ad09287fbd6dc6c052a3a6c96c6e6cb91c3af1f",
+    "reviews/T66-figure-root-correspondence.json": "2a84d8aa44fb4ad6c8f40ac50d3ee08fd9589e2e135b8f0b7095d1398ae0255a"
+  },
+  "oracle_calls": 0,
+  "accepted_ledgers_modified": false
+}

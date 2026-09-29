@@ -1,0 +1,6 @@
+import EstimatorIntegrity.QueryInformationLowerBound
+
+#print axioms EstimatorIntegrity.pairedSquare_lower_bound
+#print axioms EstimatorIntegrity.queryInformation_pointwise
+#print axioms EstimatorIntegrity.queryInformation_integral_lower_bound
+#print axioms EstimatorIntegrity.queryInformation_three_quarters

@@ -1,0 +1,82 @@
+EstimatorIntegrity/OracleTranscript.lean:24:2: error: Constructor field `ℝ` of `EstimatorIntegrity.OracleAction.stop` contains universe level metavariables at the expression
+  Sort ?u.5
+in its type
+  Sort ?u.5
+EstimatorIntegrity/OracleTranscript.lean:28:46: error(lean.unknownIdentifier): Unknown identifier `ℝ`
+EstimatorIntegrity/OracleTranscript.lean:34:32: error: Function expected at
+  OracleAction
+but this term has type
+  ?m.1
+
+Note: Expected a function because this term is being applied to the argument
+  X
+
+Hint: The identifier `OracleAction` is unknown, and Lean's `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement.
+EstimatorIntegrity/OracleTranscript.lean:52:32: error: Function expected at
+  OracleAction
+but this term has type
+  ?m.1
+
+Note: Expected a function because this term is being applied to the argument
+  X
+
+Hint: The identifier `OracleAction` is unknown, and Lean's `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement.
+EstimatorIntegrity/OracleTranscript.lean:86:32: error: Function expected at
+  OracleAction
+but this term has type
+  ?m.1
+
+Note: Expected a function because this term is being applied to the argument
+  X
+
+Hint: The identifier `OracleAction` is unknown, and Lean's `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement.
+EstimatorIntegrity/OracleTranscript.lean:93:8: error(lean.unknownIdentifier): Unknown identifier `runOracle_congr_of_eq_on_trace`
+EstimatorIntegrity/OracleTranscript.lean:95:8: error(lean.unknownIdentifier): Unknown identifier `hagree`
+EstimatorIntegrity/OracleTranscript.lean:92:62: error: unsolved goals
+⊢ {OracleAction : ?m.1} →
+    {ℝ : Type u_3} →
+      {X : Type u_1} →
+        (policy : OracleHistory X → sorry) →
+          (f g : X → ℝ) →
+            (forbidden : Set X) →
+              (fuel : ℕ) →
+                (history : OracleHistory X) →
+                  (output : ℝ) →
+                    (trace : List X) →
+                      (hrun : runOracle policy f history fuel = some (output, trace)) →
+                        (hagree : ∀ point ∉ forbidden, g point = f point) →
+                          (havoid : ∀ point ∈ trace, point ∉ forbidden) →
+                            ?m.53 policy f g forbidden fuel history output trace hrun hagree havoid
+EstimatorIntegrity/OracleTranscript.lean:104:32: error: Function expected at
+  OracleAction
+but this term has type
+  ?m.1
+
+Note: Expected a function because this term is being applied to the argument
+  X
+
+Hint: The identifier `OracleAction` is unknown, and Lean's `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement.
+EstimatorIntegrity/OracleTranscript.lean:111:6: error(lean.unknownIdentifier): Unknown identifier `runOracle_noHit`
+EstimatorIntegrity/OracleTranscript.lean:110:78: error: unsolved goals
+x✝ : Sort u_2
+OracleAction : x✝
+ℝ : Type u_3
+X : Type u_1
+policy : OracleHistory X → sorry
+f g : X → ℝ
+forbidden : Set X
+fuel : ℕ
+history : OracleHistory X
+output : ℝ
+trace : List X
+hrun : runOracle policy f history fuel = some (output, trace)
+hagree : ∀ point ∉ forbidden, g point = f point
+havoid : ∀ point ∈ trace, point ∉ forbidden
+⊢ oracleQueryCount (runOracle policy g history fuel) = some trace.length
+EstimatorIntegrity/OracleTranscript.lean:123:52: error: Function expected at
+  List.length_map cell
+but this term has type
+  (List.map cell ?m.20).length = List.length ?m.20
+
+Note: Expected a function because this term is being applied to the argument
+  trace

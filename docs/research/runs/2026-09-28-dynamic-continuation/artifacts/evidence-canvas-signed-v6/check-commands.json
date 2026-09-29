@@ -1,0 +1,66 @@
+[
+  {
+    "check": "AST, source-lock, insertion, constant, chart, link, path, data, and narrative parity",
+    "command": [
+      "/opt/homebrew/bin/node",
+      "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/validate.cjs"
+    ],
+    "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6",
+    "started_utc": "2026-09-28T20:24:13Z",
+    "ended_utc": "2026-09-28T20:24:13Z",
+    "exit_code": 0,
+    "log": "parity.log"
+  },
+  {
+    "check": "TypeScript exact candidate",
+    "command": [
+      "/opt/homebrew/bin/node",
+      "/private/tmp/d29-e4-canvas-check/check.cjs"
+    ],
+    "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6",
+    "started_utc": "2026-09-28T20:24:13Z",
+    "ended_utc": "2026-09-28T20:24:14Z",
+    "exit_code": 0,
+    "typescript": "6.0.3",
+    "files": 1,
+    "diagnostics": 0,
+    "log": "typescript.log"
+  },
+  {
+    "check": "esbuild browser ESM bundle",
+    "command": [
+      "/opt/homebrew/bin/node",
+      "/Applications/Cursor.app/Contents/Resources/app/extensions/node_modules/esbuild-wasm/bin/esbuild",
+      "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/dynamic-continuation-evidence.candidate.canvas.tsx",
+      "--bundle",
+      "--platform=browser",
+      "--format=esm",
+      "--external:cursor/canvas",
+      "--external:react",
+      "--external:react/jsx-runtime",
+      "--outfile=/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/dynamic-continuation-evidence.bundle.js"
+    ],
+    "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6",
+    "started_utc": "2026-09-28T20:24:28Z",
+    "ended_utc": "2026-09-28T20:24:44Z",
+    "exit_code": 0,
+    "esbuild_wasm": "0.25.9",
+    "bundle_sha256": "fd0688fa46e962c02870eddb7d661c141f7c5fcd1a5077910ab5aab5f0725a20",
+    "log": "bundle.log"
+  },
+  {
+    "check": "complete unified semantic diff",
+    "command": [
+      "/usr/bin/diff",
+      "-u",
+      "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/dynamic-continuation-evidence.original.canvas.tsx",
+      "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/artifacts/evidence-canvas-signed-v6/dynamic-continuation-evidence.candidate.canvas.tsx"
+    ],
+    "cwd": "/Users/michael/Desktop/NTU/fyp/parabolab",
+    "started_utc": "2026-09-28T20:25:18Z",
+    "ended_utc": "2026-09-28T20:25:18Z",
+    "exit_code": 1,
+    "interpretation": "Expected: files differ. The captured diff contains additions only; validate.cjs independently checks that every original line is preserved verbatim and in order.",
+    "log": "semantic-diff.log"
+  }
+]

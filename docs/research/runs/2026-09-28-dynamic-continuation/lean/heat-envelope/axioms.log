@@ -1,0 +1,13 @@
+$ cd /Users/michael/Desktop/NTU/fyp/parabolab/formal
+$ ~/.elan/bin/lake env lean ../docs/research/runs/2026-09-28-dynamic-continuation/lean/heat-envelope/HeatEnvelopeBudgetAxioms.lean
+'EstimatorIntegrity.heatI0' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.heatI1' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.heatEnvelopeC' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.heatEnvelopeJstar' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.heatI0_pos_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.heatI1_pos_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.heatDimensionRatio_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.heatEnvelopeC_pos_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.heatEnvelopeJstar_nonneg_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.heatEnvelopeA_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.heatEnvelopeCoefficientBudget' depends on axioms: [propext, Classical.choice, Quot.sound]

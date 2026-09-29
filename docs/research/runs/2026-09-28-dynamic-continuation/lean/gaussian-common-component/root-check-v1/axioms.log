@@ -1,0 +1,111 @@
+'EstimatorIntegrity.GaussianCommonComponent.commonMap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.commonMap_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.residualMap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.residualMap_apply' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.pairMap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.pairMap_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.pairUnitMap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.pairUnitMap_apply' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.addCommonMap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.addCommonMap_apply' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.addCommon' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.addCommon_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.addCommon_measurable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.edgeMap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.edgeMap_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.commonPart' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.residualPart' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.actualCovariance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.commonPart_hasGaussianLaw' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.residualPart_hasGaussianLaw' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.pair_hasGaussianLaw' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.commonPart_mean_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.residualPart_mean_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.covariance_coord_commonPart' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.commonPart_variance' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.commonPart_parameter_nonneg' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.covariance_residual_commonPart' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.covariance_residual_residual' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.residualPart_indep_commonPart' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.commonPart_map_eq_gaussianReal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.residualCommon_map_eq_product' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.reconstruction_law' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.boundedContinuous_integrable_original' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.boundedContinuous_integrable_product' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.boundedContinuous_expectation' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.edgeLeafVector' depends on axioms: [propext, Classical.choice, Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.edgeLeafVector_hasGaussianLaw' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.edgeLeafVector_mean_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.edgeVariance_nonneg' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.edgeVariables_covariance' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.edgeLeafVector_covariance' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.weighted_edgeCovariance' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.edgeLeafVector_row_covariance' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.edgeLeafVector_residual_indep_common' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.edgeLeafVector_product_law' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.edgeLeafVector_reconstruction_law' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'EstimatorIntegrity.GaussianCommonComponent.edgeLeafVector_expectation' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

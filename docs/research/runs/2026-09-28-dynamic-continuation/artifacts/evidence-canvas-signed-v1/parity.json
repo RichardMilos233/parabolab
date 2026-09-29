@@ -1,0 +1,10 @@
+{
+  "status": "PASS static source parity",
+  "prior_sha256": "0c6f4a59cacbea9bc8f846fa7e20eb64817e7777ce72d8da9d79a083c065ed4f",
+  "candidate_sha256": "1c754eac5819c006fbed8a2e7280d63c0e688b967d25d42b61ef18948888d07c",
+  "old_top_level_constants_retained_verbatim": 45,
+  "local_links_checked": 31,
+  "missing_links": [],
+  "changes": "D27 accepted theorem and mass-only counterexample only; no new numerical arrays",
+  "gui_render_verified": false
+}

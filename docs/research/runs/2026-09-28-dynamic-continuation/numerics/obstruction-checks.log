@@ -1,0 +1,8 @@
+{
+  "elapsed_seconds": 0.708036582916975,
+  "json": "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/numerics/obstruction_checks.json",
+  "maximum_absolute_residual": "1.0542197943230523224348574051270019007709961382368507550077763025108144290969760e-81",
+  "png": "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/obstruction-examples.png",
+  "status": "passed",
+  "svg": "/Users/michael/Desktop/NTU/fyp/parabolab/docs/research/runs/2026-09-28-dynamic-continuation/obstruction-examples.svg"
+}

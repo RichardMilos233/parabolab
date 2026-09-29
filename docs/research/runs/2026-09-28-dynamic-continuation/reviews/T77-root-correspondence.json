@@ -1,0 +1,50 @@
+{
+  "date_local": "2026-09-29",
+  "verdict": "PASS bounded D31-D33/T72 canvas candidate; approved for managed local deployment",
+  "root_semantic_review": "Read full zero-context semantic diff, full T77 correspondence, source/validation manifests and validator. Compared new statements against accepted04w/T73/T74/T72 and D34 local scope. Existing chart/data const declarations unchanged.",
+  "old_sha256": "a1ca7b101e0b5aba2c8bf8a8dc17c2c8ac071fe05fe634483a61da3ab192329d",
+  "candidate_sha256": "ea576d19a862e376cfdf248be5ac0cacaa3aed6c29dfde55174a084e6bd3f8ad",
+  "source_manifest_sha256": "2587f145d86c2b355cdb8f06496d96aa9a99bafe67936a6ec1381ffb5e74003c",
+  "source_hash_checks": 20,
+  "source_hash_mismatches": [],
+  "parity": {
+    "original_const_declarations_preserved": 66,
+    "old_link_occurrences_retained": 52,
+    "old_paths_retained": 47,
+    "new_paths_resolved": 55,
+    "identical_chart_subtrees": 5,
+    "e4_record_counts": [
+      60,
+      180,
+      36
+    ],
+    "new_oracle_calls": 0
+  },
+  "root_validation": {
+    "typescript": "6.0.3, exact candidate hash in checker input,1 file,0 diagnostics",
+    "esbuild": "0.25.9, exit0, /private/tmp/t77-root-canvas-bundle.js",
+    "parity_validator": "root read full validator and executed PASS",
+    "managed_before_copy": "same as archived original"
+  },
+  "root_check_failure_preserved": {
+    "stage": "initial manifest path resolution",
+    "error": "FileNotFoundError for artifacts/evidence-canvas-signed_v3/source-manifest.json",
+    "cause": "root constructed old package alias with underscore instead of hyphen",
+    "resolution": "corrected alias mapping; all20 checks passed, no source change",
+    "tool_chunk": "561f54"
+  },
+  "not_claimed": [
+    "GUI rendering",
+    "New numerical performance",
+    "Full signed Lean coverage",
+    "New diffusion/spectral scope",
+    "Finite-bit or practical speed guarantee"
+  ],
+  "deployment": {
+    "status": "complete",
+    "managed_sha256": "ea576d19a862e376cfdf248be5ac0cacaa3aed6c29dfde55174a084e6bd3f8ad",
+    "method": "sandbox-approved hash-guarded local copy",
+    "open_result": "queued",
+    "gui_render_verified": false
+  }
+}

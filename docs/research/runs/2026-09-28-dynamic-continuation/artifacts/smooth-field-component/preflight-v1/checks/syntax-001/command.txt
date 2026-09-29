@@ -1,0 +1,1 @@
+/opt/miniconda3/envs/parabolab/bin/python -m py_compile budget.py smooth_field.py fixtures.py experiment.py driver.py

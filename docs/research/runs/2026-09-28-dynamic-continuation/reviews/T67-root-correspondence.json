@@ -1,0 +1,23 @@
+{
+  "reviewer": "root",
+  "completed_utc": "2026-09-28T17:34:39.774929+00:00",
+  "status": "PASS; D29 conventional all-dimension matching query theorem accepted",
+  "read_scope": "Full frozen T65 previously root-read; complete final T67 independently authored audit read, final hashes checked. Separate D28 lower already accepted.",
+  "inputs_sha256": {
+    "reviews/T65-local-stable-graph-upper-proof.md": "58e862c9cfbaf0946605d30d9c8e8a37e2570c0c0719d626683f22db60fc9f81",
+    "reviews/T67-all-dimension-upper-independent-audit.md": "f7fc4f5e96782354e7aefb5d4e27b5e8ae086f285aab0625041cb96eae7fea26",
+    "04u-all-dimension-signed-query-lower-bound.md": "6587b4ba1b30a904bb6b336d8ca22917baad12f7db26627ca313aef632d94117",
+    "04v-all-dimension-matching-signed-query-complexity.md": "bce92681a5c8dcb58e326c1935d9e4d9f20a75a4e1b0a59c194acbbb6a64d2d4"
+  },
+  "accepted_scope": "Every fixed integers d,s>=1, original signed class and exact initial-point query model, minimax worst-input expected queries Theta(exp(2dT/(2s+d))) at RMS<=1/4; constructive upper deterministic cap and RMS<=7/64.",
+  "root_role": "Synthesis/correspondence; root contributed R07 and is not an independent upper auditor. Independent audit is T67.",
+  "excluded_scope": [
+    "efficient arithmetic or bit work",
+    "larger domains/weaker diffusion",
+    "dimension-uniform constants",
+    "full Lean certificate",
+    "signed numerical validation",
+    "novelty or prize conclusion"
+  ],
+  "protected_sources_verified": 342
+}

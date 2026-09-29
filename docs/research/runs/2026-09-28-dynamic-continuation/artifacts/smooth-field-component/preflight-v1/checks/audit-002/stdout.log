@@ -1,0 +1,15 @@
+{
+  "audit_source_sha256": "c337ae7f0b1babbbb7726c49b87f5d1ca52de30f3f755718e8d6eebfdcf92bbf",
+  "cumulative_generated_segments_reconciled": 3456,
+  "cumulative_preflight_opaque_calls_reconciled": 430,
+  "implementation_manifest_sha256": "901d4b7ad115912fd1ce9e28d77c0a3c37b9dd171b0e6dd851a7cce7014967ed",
+  "journal_events_checked": 2195,
+  "latest_generated_segment_delta": 1728,
+  "metadata_rows_checked": 180,
+  "official_executed": false,
+  "opaque_calls_made_by_audit": 0,
+  "preflight_result_sha256": "86a5fab94e718ef94074625bc968af16d727e41c06c34c07e5b0323c8d22a933",
+  "raw_arrays_checked": 180,
+  "read_only": true,
+  "status": "passed"
+}

@@ -1,0 +1,58 @@
+{
+  "task": "T92",
+  "status": "PASS",
+  "date_local": "2026-09-29",
+  "deployment": "candidate only; managed canvas unchanged",
+  "source": {
+    "managed_and_archived_original_sha256": "e2619ea14528c4e3d20e62ed2a3edb8cb2f3c175b47af4e31c9f1599f9e9fa41",
+    "candidate_sha256": "a35be1ea0d6c6357cae2b1176df538e31fd61b5012c0f9e77ad0a947226f5b73",
+    "candidate_lines": 1225,
+    "candidate_bytes": 121860,
+    "original_lines": 1096,
+    "original_bytes": 113461
+  },
+  "parity": {
+    "original_lines_preserved_verbatim_in_order": true,
+    "original_top_level_constants_preserved": "82/82",
+    "original_link_occurrences_preserved": "68/68",
+    "original_local_path_constants_preserved_and_resolved": "63/63",
+    "line_chart_subtrees_preserved_verbatim": "5/5",
+    "original_numeric_literals_missing": 0,
+    "e4_records": {
+      "pooled": 60,
+      "per_seed": 180,
+      "zero_query_baselines": 36,
+      "total_activity_368270390_preserved": true
+    },
+    "embedded_data_only": true,
+    "hardcoded_hex_colors": 0,
+    "gradients": 0,
+    "box_shadows": 0
+  },
+  "checks": {
+    "validator": { "exit_code": 0, "log_sha256": "98688361f409e991e90bcd1c2b4d58eb0ca0db5601b37efbad5d78d34ff27cb3", "t86_public_declarations_present": "28/28" },
+    "typescript_6_0_3": { "files": 1, "diagnostics": 0, "exit_code": 0, "log_sha256": "933b10351a42044d8dc7d3eb83322af49e276caaec57c5b4d11dc1e787ec9b85" },
+    "esbuild_wasm_0_25_9": { "exit_code": 0, "bundle_sha256": "fd0688fa46e962c02870eddb7d661c141f7c5fcd1a5077910ab5aab5f0725a20", "log_sha256": "b5c1a30eb0c2f5e40fc38d59fc5940787dcddaf14627d98296927cc8c4a83348" },
+    "semantic_diff": { "exit_code": 1, "expected_nonempty_diff": true, "additions_only": true, "log_sha256": "43113697c0a382c213d880cca9e4897c89be840d0691d6a782ce1b86e06040dc" },
+    "environment": { "exit_code": 0, "node": "v26.0.0", "typescript": "6.0.3", "esbuild_wasm": "0.25.9", "log_sha256": "ef174933c6eb6347d0b84077efcce92a45a7286d5ed20fce5570c5692ecdf3fb" }
+  },
+  "artifacts": {
+    "candidate_sha256": "a35be1ea0d6c6357cae2b1176df538e31fd61b5012c0f9e77ad0a947226f5b73",
+    "bundle_sha256": "fd0688fa46e962c02870eddb7d661c141f7c5fcd1a5077910ab5aab5f0725a20",
+    "source_manifest_sha256": "e09f991c10f73a7b9e63573f1b50c66651a263e63d94f7993c4965a004e7a535",
+    "check_commands_sha256": "431fc2ff4e8d11d63f700835b36df99d25ea0aa7e2d48bd0e08714e5089f4a66",
+    "review_sha256": "af3fa5eeb5b1bad10ad0e93eaea3dc3cefe82421d0b5a089f98caa0777106365"
+  },
+  "numerical_execution_or_unknown_input_acquisitions_added": 0,
+  "claims_not_made": [
+    "exact-Theta paid work",
+    "uniform kappa tending to zero",
+    "kappa=0 profile one-query reconstruction",
+    "finite-bit or random-bit complexity",
+    "practical speed",
+    "complete Lean coverage",
+    "new numerical evidence",
+    "novelty or award significance",
+    "acceptance of pending T89 or candidate R20/R21"
+  ]
+}

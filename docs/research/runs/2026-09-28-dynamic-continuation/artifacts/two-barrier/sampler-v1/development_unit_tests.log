@@ -1,0 +1,20 @@
+test_deadline_interrupts_without_a_truncated_root (test_two_barrier_sampler.TwoBarrierSamplerTests.test_deadline_interrupts_without_a_truncated_root) ... ok
+test_driver_rng_map_is_fixed_unique_and_reproducible (test_two_barrier_sampler.TwoBarrierSamplerTests.test_driver_rng_map_is_fixed_unique_and_reproducible) ... ok
+test_endpoint_constants_are_pathwise_barriers (test_two_barrier_sampler.TwoBarrierSamplerTests.test_endpoint_constants_are_pathwise_barriers) ... ok
+test_environment_and_gate_sources_are_available (test_two_barrier_sampler.TwoBarrierSamplerTests.test_environment_and_gate_sources_are_available) ... /opt/miniconda3/envs/parabolab/lib/python3.11/site-packages/numpy/__config__.py:155: UserWarning: Install `pyyaml` for better output
+  warnings.warn("Install `pyyaml` for better output", stacklevel=1)
+ok
+test_exclusive_json_writer_refuses_overwrite (test_two_barrier_sampler.TwoBarrierSamplerTests.test_exclusive_json_writer_refuses_overwrite) ... ok
+test_independent_clock_cdf_endpoints_and_monotonicity (test_two_barrier_sampler.TwoBarrierSamplerTests.test_independent_clock_cdf_endpoints_and_monotonicity) ... ok
+test_leaf_and_strict_finite_horizon_rejection (test_two_barrier_sampler.TwoBarrierSamplerTests.test_leaf_and_strict_finite_horizon_rejection) ... ok
+test_limiting_inverse_against_high_precision_formula (test_two_barrier_sampler.TwoBarrierSamplerTests.test_limiting_inverse_against_high_precision_formula) ... ok
+test_protocol_constants (test_two_barrier_sampler.TwoBarrierSamplerTests.test_protocol_constants) ... ok
+test_sampler_does_not_import_reference (test_two_barrier_sampler.TwoBarrierSamplerTests.test_sampler_does_not_import_reference) ... ok
+test_scaled_coefficients_are_stable_at_fixed_horizons (test_two_barrier_sampler.TwoBarrierSamplerTests.test_scaled_coefficients_are_stable_at_fixed_horizons) ... ok
+test_smooth_roots_satisfy_all_invariants (test_two_barrier_sampler.TwoBarrierSamplerTests.test_smooth_roots_satisfy_all_invariants) ... ok
+test_time_zero_exact_shortcut_and_rng_state (test_two_barrier_sampler.TwoBarrierSamplerTests.test_time_zero_exact_shortcut_and_rng_state) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.049s
+
+OK
