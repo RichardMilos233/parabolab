@@ -1,0 +1,181 @@
+{
+  "C_enclosure": {
+    "C_lower": {
+      "exact": "194206723397073206913671349/126961413187760770275868672",
+      "float": 1.5296515572795701
+    },
+    "C_upper": {
+      "exact": "21684607412993141486581/14167099448608935641088",
+      "float": 1.5306314105900025
+    },
+    "R": "8",
+    "finite_lower": {
+      "exact": "902244306422331020717/590295810358705651712",
+      "float": 1.5284613080246383
+    },
+    "finite_upper": {
+      "exact": "7222053556306477311655/4722366482869645213696",
+      "float": 1.529329327256669
+    },
+    "rectangles": 65536,
+    "rounding_bits": 60,
+    "step": "1/8192",
+    "tail_lower": {
+      "exact": "256/215081",
+      "float": 0.001190249254931863
+    },
+    "tail_upper": {
+      "exact": "1/768",
+      "float": 0.0013020833333333333
+    },
+    "width": {
+      "exact": "2985685464220898147215685/3047073916506258486620848128",
+      "float": 0.0009798533104324074
+    }
+  },
+  "absolute_boundary": {
+    "T_abs_lower": {
+      "exact": "806805446296017727280546964123309985593866991758786978679967099615296697150322014464394154332959877471053508802200611572437440383415207881316708540877947695325136062105274417102204723304993552729490348207828950517769789585143187/558145615461906868626399748105557976497876896988778032597347906522824853833806602015545105448108410962063081163864602221767335652099107622440143722052932372549874207252437500000000000000000000000000000000000000000000000000000000",
+      "float": 1.4455106766866321
+    },
+    "T_abs_upper": {
+      "exact": "706224896531938978033279928707997021048177131815812417001288310681749120771922034634010866789927093352175581495762992211367849082193447589491926416669314547706671029691443597312261614426477563732137370850731010803908934328539/488564289369852478621172378026958541077604468574410490535309173966513938686128220808061050618956610495319655786719947323897809607761688015300978381027058675924681121875000000000000000000000000000000000000000000000000000000000",
+      "float": 1.4455106766866321
+    },
+    "formula": "(3*pi-2*log(3))/5",
+    "log3_lower": {
+      "exact": "7376435762510466727449815942477190168223/6714321183730072818542271827044152115200",
+      "float": 1.0986122886681098
+    },
+    "log3_upper": {
+      "exact": "224981290756569235191101883106442614113539/204786796103767220965539290724846639513600",
+      "float": 1.0986122886681098
+    },
+    "pi_lower": {
+      "exact": "85383267959264234339442563186774817022883176352893816517555095654972290785438800759505882319569107829583994279530296756633774222409667853588180115145813536706325758835677466503718289294129723120514711777682452/27178338306113499232787570722939062433813587951347154219728399455650448037973832092096927577512650291369372833345509438714006314809350916445206915443344081698377779931878606145545518302242271602153778076171875",
+      "float": 3.141592653589793
+    },
+    "pi_upper": {
+      "exact": "37369473555813201072916511960038697249209212897476574920232301917870422682023708535250238787439191824676195337367776557603578581517778271084821911357019771945775519336790448937156813764956925727217127308872/11895072874299075310650886155240219198636923351896480374874564282685198104888671457124756034344921434922958646270858982998374641029284727352990544389692092968600768514153553923051731544546782970428466796875",
+      "float": 3.141592653589793
+    },
+    "series_terms": 30
+  },
+  "checks": {
+    "Tabs_nonempty": true,
+    "all_sqrt_and_cap_checks": true,
+    "g_at_1p980_positive": true,
+    "g_at_1p981_negative": true,
+    "log3_nonempty": true,
+    "log_1_plus_1p981_sq_lt_1p595": true,
+    "pi_nonempty": true,
+    "prior_C_witness_exact_match": true
+  },
+  "common_rate_horizon": {
+    "cap_checks": [
+      {
+        "horizon_upper": {
+          "exact": "203/288",
+          "float": 0.7048611111111112
+        },
+        "policy": "1/2",
+        "sqrt_bound_certified": true,
+        "sqrt_pC_upper": {
+          "exact": "7/8",
+          "float": 0.875
+        },
+        "target": {
+          "exact": "141/200",
+          "float": 0.705
+        },
+        "target_certified": true
+      },
+      {
+        "horizon_upper": {
+          "exact": "1943/2000",
+          "float": 0.9715
+        },
+        "policy": "19/20",
+        "sqrt_bound_certified": true,
+        "sqrt_pC_upper": {
+          "exact": "603/500",
+          "float": 1.206
+        },
+        "target": {
+          "exact": "243/250",
+          "float": 0.972
+        },
+        "target_certified": true
+      },
+      {
+        "horizon_upper": {
+          "exact": "17951/18000",
+          "float": 0.9972777777777778
+        },
+        "policy": "1",
+        "sqrt_bound_certified": true,
+        "sqrt_pC_upper": {
+          "exact": "619/500",
+          "float": 1.238
+        },
+        "target": {
+          "exact": "1",
+          "float": 1.0
+        },
+        "target_certified": true
+      }
+    ],
+    "exp_degree": 40,
+    "h_z_star_upper": {
+      "exact": "29/36",
+      "float": 0.8055555555555556
+    },
+    "log_upper": {
+      "exact": "319/200",
+      "float": 1.595
+    },
+    "sign_method": "compare exp(2*z^2/(1+z^2)) with 1+z^2 using rational Taylor bounds",
+    "z_star_bracket": [
+      {
+        "exact": "99/50",
+        "float": 1.98
+      },
+      {
+        "exact": "1981/1000",
+        "float": 1.981
+      }
+    ]
+  },
+  "completion_date": "2026-09-26",
+  "evidence_class": "exact rational inequalities with conventional series remainder arguments",
+  "limitations": [
+    "The analytical identities and uniqueness arguments are supplied by 04-theory.md.",
+    "These certificates do not validate floating ODE, optimizer, Monte Carlo, or PDE outputs."
+  ],
+  "provenance": {
+    "commands": {
+      "generate": "MPLCONFIGDIR=/tmp/parabolab-mpl /opt/miniconda3/envs/parabolab/bin/python docs/research/runs/2026-09-25-long-horizon/numerics/raw_experiment.py",
+      "verify": "MPLCONFIGDIR=/tmp/parabolab-mpl /opt/miniconda3/envs/parabolab/bin/python docs/research/runs/2026-09-25-long-horizon/numerics/raw_experiment.py --verify"
+    },
+    "environment": {
+      "mpmath_version": "1.3.0",
+      "numpy_version": "2.4.6",
+      "platform": "macOS-26.3-arm64-arm-64bit",
+      "python_executable": "/opt/miniconda3/envs/parabolab/bin/python",
+      "python_version": "3.11.15",
+      "scipy_version": "1.17.1"
+    },
+    "source_sha256": {
+      "docs/research/runs/2026-09-16-certified-tuple-policy/numerics/flat-explosion-checks.json": "f66849970f2c3233e55fe8f882dcf8f010ef05d42ef0b609731f32f93b2134d1",
+      "docs/research/runs/2026-09-16-certified-tuple-policy/numerics/flat_explosion_check.py": "a59bdb47f6da2cb256f10998dd77e9e141394d183efafd2b5a88cc55977c54f3",
+      "docs/research/runs/2026-09-25-long-horizon/04-theory.md": "cc2e6163aa1545fa69d6ec22ebd026521727d2aadae82f893b47007b29637727",
+      "docs/research/runs/2026-09-25-long-horizon/numerics/protocol.json": "bc5f3bc10162d726bf52a3ae548614fe8c632edbae3d316fa8ae2bb40bc60ddf",
+      "docs/research/runs/2026-09-25-long-horizon/numerics/raw_experiment.py": "fdd7603a87a5bc472fadcdd8fd8aa2ed0cabe8dc141170a6a2ae14153f2693dc",
+      "docs/research/runs/2026-09-25-long-horizon/numerics/wave-protocol.json": "d1dc77b7d04b8bd4af45d1b6e72ecf473c74b26446f07132cb6796471063214d",
+      "parabolab/library.py": "b37aebf5940be5832ed30986165cc53dc9d7bdade13faa37919a262c92612638",
+      "parabolab/tree.py": "e93b36fd8653c83ff1ceaea81c7553637ce3fa158f289cf9f11041b181aa795d"
+    }
+  },
+  "run_date": "2026-09-25",
+  "schema_version": 1
+}

@@ -174,21 +174,30 @@ class RateVarianceComparison:
     def plot(
         self,
         path: Optional[Union[str, Path]] = None,
-        figsize: tuple[float, float] = (14.0, 10.5),
+        figsize: Optional[tuple[float, float]] = None,
+        save_individual: bool = False,
     ) -> RateVarianceComparison:
-        """Render multi-panel grid comparing all sweeps."""
+        """Render multi-panel grid comparing all sweeps, and optionally save individual figures."""
         n = len(self.sweeps)
         if n == 1:
             nrows, ncols = 1, 1
+            default_figsize = (7.5, 5.5)
         elif n == 2:
             nrows, ncols = 1, 2
+            default_figsize = (14.0, 5.5)
         elif n <= 4:
             nrows, ncols = 2, 2
+            default_figsize = (14.0, 10.5)
+        elif n <= 6:
+            nrows, ncols = 2, 3
+            default_figsize = (16.5, 10.0)
         else:
             ncols = 3
             nrows = (n + ncols - 1) // ncols
+            default_figsize = (16.5, 4.8 * nrows)
 
-        fig, axes = plt.subplots(nrows, ncols, figsize=figsize, sharex=False, sharey=False)
+        fig_size = figsize if figsize is not None else default_figsize
+        fig, axes = plt.subplots(nrows, ncols, figsize=fig_size, sharex=False, sharey=False)
         ax_flat = np.atleast_1d(axes).flatten()
 
         for i, sweep in enumerate(self.sweeps):
@@ -211,6 +220,30 @@ class RateVarianceComparison:
             fig.savefig(out_p, dpi=180)
             plt.close(fig)
             print(f"Comparison figure successfully saved to: {out_p.resolve()}")
+
+            if save_individual:
+                for i, sweep in enumerate(self.sweeps):
+                    panel_letter = chr(ord('a') + i)
+                    title_clean = sweep.title
+                    if title_clean.startswith(f"({panel_letter})"):
+                        title_clean = title_clean[3:].strip()
+                    slug = (
+                        title_clean.lower()
+                        .replace(" ", "_")
+                        .replace("(", "")
+                        .replace(")", "")
+                        .replace("=", "")
+                        .replace("$", "")
+                        .replace(".", "p")
+                        .replace("–", "-")
+                        .replace("-", "_")
+                    )
+                    while "__" in slug:
+                        slug = slug.replace("__", "_")
+                    clean_slug = "".join(c if c.isalnum() or c == "_" else "" for c in slug).strip("_")
+                    indiv_path = out_p.parent / f"{out_p.stem}_{panel_letter}_{clean_slug}.png"
+                    sweep.plot(path=indiv_path)
+                    print(f"  Individual plot ({panel_letter}) saved to: {indiv_path.resolve()}")
 
         return self
 
@@ -262,12 +295,24 @@ def sweep_rate_variance(
     if opt_bracket is None:
         opt_bracket = (max(0.12, 0.35 * lam_theory), min(3.5, 2.2 * lam_theory))
 
+    if use_riccati:
+        # riccati_binary_second_moment(pde.T, r) requires r^2 + 1 - exp(r*T) > 0
+        r_lo, r_hi = opt_bracket
+        if not math.isfinite(riccati_binary_second_moment(pde.T, r_lo)):
+            curr = r_lo
+            while curr < 10.0 and not math.isfinite(riccati_binary_second_moment(pde.T, curr)):
+                curr += 0.05
+            r_lo = curr + 0.05
+        opt_bracket = (r_lo, max(r_lo + 0.5, r_hi))
+        if lambda_bracket[0] < r_lo:
+            lambda_bracket = (r_lo + 0.05, max(r_lo + 0.5, lambda_bracket[1]))
+
     quad_rates = np.linspace(lambda_bracket[0], lambda_bracket[1], n_quad_points)
     mc_rates = np.linspace(lambda_bracket[0] * 1.15, lambda_bracket[1] * 0.98, n_mc_points)
 
     # 2. Optimal rate and deterministic curve
     if use_riccati:
-        lam_opt = riccati_binary_optimal_rate(pde.T)
+        lam_opt = riccati_binary_optimal_rate(pde.T, bracket=opt_bracket)
         v_opt = riccati_binary_second_moment(pde.T, lam_opt) - exact_u**2
         curve_var = np.array([
             riccati_binary_second_moment(pde.T, r) - exact_u**2 for r in quad_rates

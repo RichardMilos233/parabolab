@@ -1,7 +1,11 @@
 # Research results and evidence
 
-Status reviewed 16 September 2026. Completed certificate/profile work is
-integrated into local main. The primary contribution concerns algorithms
+Updated 5 October 2026: the [longer-horizon λ checkpoint](lambda-horizon-checkpoint.md)
+is the latest user-reviewed addition to main. Its frozen evidence is under
+[lambda-horizon-evidence](lambda-horizon-evidence/manifest.json).
+The remaining inventory retains the 16 September certificate/profile baseline;
+subsequent algorithms remain on `research/branching-mc-theory`.
+The primary contribution concerns algorithms
 and mathematical guarantees; timing experiments are supporting evidence.
 The [research guide](../README.md) describes open questions and the
 [proof registry](../proof-registry.md) sets the exact claim boundaries.

@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "promotion_scope": {
+    "accepted_result": "For the uniform policy p=0.5, the fixed rate lambda=0.745 is inside the finite-second-moment region at T=0.05 but outside it at T=0.5; the stored T=0.5 retuning lies inside the feasible region.",
+    "retained_only_as_provenance": "The frozen source JSON files are complete historical artifacts and also contain p=0.95 and other diagnostics. Their inclusion does not promote or newly accept those results."
+  },
+  "interpretation": {
+    "exact_theorem": "For p=0.5, the feasibility boundary is T2(lambda)=log(1+0.5*C*lambda^2)/lambda, and feasibility at a fixed T is an open condition in lambda.",
+    "floating_evidence": "The plotted C value, stored optimizer rate, interval endpoints, and rendered decimals are floating numerical outputs from the frozen run.",
+    "figure_scope": "lambda-boundary.png is an explanatory rendering of the feasibility boundary. It is not a variance-minimizer curve and performs no solver, optimizer, or Monte Carlo rerun."
+  },
+  "source": {
+    "commit": "327b58241646802ecfddcf8c48f84b2b42fbc048",
+    "files": [
+      {
+        "local_path": "raw-results.json",
+        "source_path": "docs/research/runs/2026-09-25-long-horizon/numerics/raw-results.json",
+        "sha256": "8da1bd5ae952e8fcb7f97862cfb168e115a281be7d12f8daf70fb76a5f8612d7"
+      },
+      {
+        "local_path": "boundary-certificates.json",
+        "source_path": "docs/research/runs/2026-09-25-long-horizon/numerics/boundary-certificates.json",
+        "sha256": "35c155e6c4a99738bb844f59ce722c52844785fb97c69183df624728d5acc53a"
+      }
+    ]
+  }
+}

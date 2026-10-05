@@ -1,0 +1,23 @@
+---
+description: Keep Monte Carlo mathematics and neural-network fitting in their assigned worktrees
+alwaysApply: true
+---
+
+# Worktree responsibility
+
+This checkout is the source of truth for branching Monte Carlo and its
+mathematics. Its research branch is `research/branching-mc-theory`.
+Follow the user-review and main-promotion policy in [AGENTS.md](../../AGENTS.md).
+Do not advance main automatically after research commits.
+
+- Work here on coding-tree sampling, mechanisms, moment and integrability
+  theory, rate or tuple-policy optimization, numerical certificates, proofs,
+  Lean formalization, and Monte Carlo label/reference reliability.
+- Keep existing neural-network reproduction code working when MC interfaces
+  change, but do not start new NN fitting, backbone, operator-learning, or
+  latent/Fourier research in this worktree.
+- Put new NN work in the sibling checkout `../parabolab-latent-fourier` on
+  `research/nn-latent-fourier`.
+- When work spans both areas, define the MC producer contract here and make
+  the NN consumer change separately in the sibling worktree. Do not silently
+  merge or copy unrelated branch changes between the two.

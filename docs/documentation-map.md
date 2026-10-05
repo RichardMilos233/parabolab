@@ -1,6 +1,12 @@
 # Documentation map and status
 
-Reviewed 16 September 2026. The active research concerns **branching Monte
+Updated 5 October 2026: `main` is the user-reviewed baseline under
+[AGENTS.md](../AGENTS.md). The selected [longer-horizon λ checkpoint](research/results/lambda-horizon-checkpoint.md)
+adds fixed-rate failure, retuning and their evidence. Subsequent algorithms
+remain on `research/branching-mc-theory`. The inventory below otherwise
+retains the 16 September baseline and its historical checks.
+
+The research concerns **branching Monte
 Carlo algorithms and mathematical guarantees**: recursive moments, scalar
 rate selection, tuple proposals, integrability and approximation error.
 Runtime is supporting evidence. Multifactor Merton is an inactive research
@@ -58,6 +64,7 @@ between certified numerical bounds, empirical comparisons and frozen data.
 | Document | Role |
 |---|---|
 | [Certified-rate checkpoint](research/results/certified-rate-checkpoint.md) | Main flat/wave mathematical and implementation milestone |
+| [Longer-horizon λ checkpoint](research/results/lambda-horizon-checkpoint.md) | User-reviewed fixed-rate failure, exact flat boundary and retuning evidence; no later algorithms imported |
 | [Wave certificate report](research/results/wave-rate-certificate.md) | Full-tree pointwise enclosure and global objective-gap result |
 | [Binary audit](research/results/binary-benchmark-audit.md) | Corrected correspondence between the standard-binary estimator and its oracle |
 | [Profile checkpoint](research/results/profile-efficiency-checkpoint.md) | Optional common-rate grid extension and exact profile bounds |

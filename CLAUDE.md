@@ -1,5 +1,15 @@
 # parabolab — agent notes
 
+## Branch policy (2026-10-05)
+
+Follow [AGENTS.md](AGENTS.md): checked research belongs on
+`research/branching-mc-theory`; `main` contains the user-reviewed baseline.
+Promote only explicitly approved scope through an isolated integration
+worktree. Organize and commit when substantive results are ready, not on a
+timer. Push `main` after authorized integration and checks; do not force-push
+or automatically advance `main` after research commits. Preserve other
+agents' drafts. New NN research belongs in its separate sibling worktree.
+
 ## Current direction
 - The project remains a PDE solver/reproduction framework. Active research
   improves branching estimation through the exponential clock rate `lambda`

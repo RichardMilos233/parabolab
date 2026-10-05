@@ -1,14 +1,19 @@
 # Research: reliable branching-estimator algorithms
 
-**Current scope, 16 September 2026:** improve branching Monte Carlo PDE
+**Reviewed baseline, updated 5 October 2026:** improve branching Monte Carlo PDE
 estimation through exponential-rate selection, tuple proposals, moment
 control and verifiable approximation error. Algorithmic and mathematical
 contributions are primary. Runtime measurements support practical claims;
 they do not determine whether a theoretical question is worth studying.
 
-The completed work is on local `main`. The
-[integration record](results/integration-2026-09-16.md) records the last
-code/test/witness checks. For every documentation area and its status, use
+`main` contains only user-reviewed work; ongoing results remain on
+`research/branching-mc-theory`, under the [branch policy](../../AGENTS.md).
+The latest accepted checkpoint is [how the old λ fails as T grows, and how
+retuning helps](results/lambda-horizon-checkpoint.md). It includes an exact
+flat Allen–Cahn second-moment boundary and archived numerical comparisons,
+with explicit limits on the demo and Lean coverage. Later research is not
+part of this checkpoint. The [September integration record](results/integration-2026-09-16.md)
+retains its historical code/test/witness checks. For every documentation area and its status, use
 [the repository documentation map](../documentation-map.md).
 
 ## The central problem
@@ -32,6 +37,9 @@ child nodes inside one tree. It neither replaces the single-state problem
 nor produces a rate that is individually optimal at every location.
 
 ## Reading order
+
+Start with the [longer-horizon λ checkpoint](results/lambda-horizon-checkpoint.md)
+for the current user walkthrough; the background reading order follows.
 
 1. [Moment model](estimator-integrity/notation-and-moment-theorem.md) and
    [rate optimization](estimator-integrity/exponential-rate-optimization.md):

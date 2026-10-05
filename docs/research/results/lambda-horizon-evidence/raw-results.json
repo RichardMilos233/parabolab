@@ -1,0 +1,4234 @@
+{
+  "absolute_rows": [
+    {
+      "absolute_moment": 0.5188766660034292,
+      "classification": "finite",
+      "horizon": 0.05,
+      "near_boundary_lower_bound": 0.5,
+      "s": 0.018876666003429184
+    },
+    {
+      "absolute_moment": 0.538046313072269,
+      "classification": "finite",
+      "horizon": 0.1,
+      "near_boundary_lower_bound": 0.5,
+      "s": 0.038046313072268974
+    },
+    {
+      "absolute_moment": 0.5979869085172146,
+      "classification": "finite",
+      "horizon": 0.25,
+      "near_boundary_lower_bound": 0.5,
+      "s": 0.09798690851721459
+    },
+    {
+      "absolute_moment": 0.7114741528655779,
+      "classification": "finite",
+      "horizon": 0.5,
+      "near_boundary_lower_bound": 0.5,
+      "s": 0.21147415286557797
+    },
+    {
+      "absolute_moment": 0.7939621286473948,
+      "classification": "finite",
+      "horizon": 0.65,
+      "near_boundary_lower_bound": 0.5,
+      "s": 0.29396212864739474
+    },
+    {
+      "absolute_moment": 0.8252512187720927,
+      "classification": "finite",
+      "horizon": 0.7,
+      "near_boundary_lower_bound": 0.5,
+      "s": 0.32525121877209273
+    },
+    {
+      "absolute_moment": 0.859054419203688,
+      "classification": "finite",
+      "horizon": 0.75,
+      "near_boundary_lower_bound": 0.5,
+      "s": 0.3590544192036879
+    },
+    {
+      "absolute_moment": 0.9815129172568676,
+      "classification": "finite",
+      "horizon": 0.9,
+      "near_boundary_lower_bound": 0.5,
+      "s": 0.4815129172568676
+    },
+    {
+      "absolute_moment": 1.0323508170230258,
+      "classification": "finite",
+      "horizon": 0.95,
+      "near_boundary_lower_bound": 0.5,
+      "s": 0.5323508170230257
+    },
+    {
+      "absolute_moment": 1.0905550318905326,
+      "classification": "finite",
+      "horizon": 1.0,
+      "near_boundary_lower_bound": 0.5,
+      "s": 0.5905550318905325
+    },
+    {
+      "absolute_moment": "infinity",
+      "classification": "nonintegrable",
+      "horizon": 1.5,
+      "s": null
+    },
+    {
+      "absolute_moment": "infinity",
+      "classification": "nonintegrable",
+      "horizon": 2.0,
+      "s": null
+    }
+  ],
+  "artifacts": {
+    "boundary_certificates": {
+      "path": "boundary-certificates.json",
+      "sha256": "35c155e6c4a99738bb844f59ce722c52844785fb97c69183df624728d5acc53a"
+    },
+    "raw_samples": {
+      "path": "raw-samples.npz",
+      "sha256": "7a3990ad4aa4a62e34951655ce2e253dd0b1b8dbb11af0357d24ce0abde734a5"
+    },
+    "wave_results": {
+      "path": "wave-results.json",
+      "sha256": "e2360f67b883044a9542bccec5de5b37dcf55f5eb7e281413878eacb3eb5de05"
+    }
+  },
+  "checks": {
+    "absolute": {
+      "binary64_closed_inside_exact_rational_interval": false,
+      "binary64_quadrature_inside_exact_rational_interval": false,
+      "closed_exact_midpoint_agree_within_1e-12": true,
+      "closed_form": 1.445510676686632,
+      "closed_minus_exact_midpoint_abs": 2.220446049250313e-16,
+      "closed_minus_quadrature_abs": 0.0,
+      "closed_quadrature_agree_within_1e-12": true,
+      "exact_interval_midpoint_float": 1.4455106766866321,
+      "exact_interval_width": {
+        "exact": "52413386665196920956715765618530609336090154560155197882567456191601610720893379567891801438541233680490796061273057258856626094315265373975970290177065246653137868003608022847634247852827/6911512045406880580653790904631085436237861506094126770386008783142889381696360965980783794617892055025750241609630269761762349953564182468672171678125000000000000000000000000000000000000000000000000000000000",
+        "float": 7.583490605363091e-21
+      },
+      "high_precision_closed_form": {
+        "decimal_100_digit_working_precision": "1.44551067668663206651948793519869144865930541649596371189108902192969212648428181242737459",
+        "distance_above_lower": "7.8649776712458676758e-23",
+        "distance_below_upper": "7.5048408286506324464e-21",
+        "inside_exact_rational_interval": true,
+        "role": "high-precision floating diagnostic; the rational series bounds are the certificate"
+      },
+      "improper_quadrature": 1.445510676686632,
+      "note": "The exact rational interval is narrower than binary64 spacing; the two binary64 enclosure observations are retained as false rather than treated as certificate failures. The high-precision value and quadrature error bar are separate numerical diagnostics.",
+      "quadrature_minus_exact_midpoint_abs": 2.220446049250313e-16,
+      "quadrature_reported_error": 9.778301350949733e-14,
+      "quadrature_reported_error_interval_intersects_exact_interval": true
+    },
+    "failure_count": 12,
+    "five_field_scalar_check_passed": true,
+    "five_field_scalar_comparisons": 41,
+    "five_field_scalar_max_relative_difference": 2.616872084143221e-09,
+    "five_field_scalar_tolerance": 1e-07,
+    "flat_row_count": 24,
+    "raw_sample_array_count": 24
+  },
+  "completion_date": "2026-09-26",
+  "flat_rows": [
+    {
+      "absolute_moment": {
+        "absolute_moment": 0.5188766660034292,
+        "classification": "finite",
+        "horizon": 0.05,
+        "near_boundary_lower_bound": 0.5,
+        "s": 0.018876666003429184
+      },
+      "baselines": [
+        {
+          "exact_classification": {
+            "classification": "finite",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "1",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "153319094073250388394895908364402357991208739813830889326778892149113194802675390600902722961488267/2990361137370707140067751563984517883327175448330240000000000000000000000000000000000000000000000000",
+              "float": 0.05127109637602404
+            },
+            "theta_upper": {
+              "exact": "103412225824034119811686751996609347304697832173646446312781708059555780157200603162361818963769311697/2016969269890489311984129138225557464089637416610037760000000000000000000000000000000000000000000000000",
+              "float": 0.05127109637602404
+            }
+          },
+          "floating_classification": "finite",
+          "kind": "rate-1",
+          "moment": {
+            "atol": 1e-12,
+            "nfev": 29,
+            "root_second_moment": 0.27024963752837894,
+            "rtol": 1e-10,
+            "success": true,
+            "values": [
+              0.27024963752837894,
+              0.1498013785624698,
+              0.20686431230650265,
+              10.010167293584717,
+              37.845759469536866
+            ]
+          },
+          "rate": 1.0,
+          "scalar_reconstruction_check": {
+            "available": true,
+            "max_abs_difference": 2.1316282072803006e-14,
+            "max_relative_difference": 5.495603971894525e-15
+          },
+          "threshold": 0.5681850321505608,
+          "variance": 0.0010352880820687083
+        },
+        {
+          "exact_classification": {
+            "classification": "finite",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "149/200",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "1213747162730240520709689931272287537350915587233437817490881408517323032919716841608614034645198206601888569129845646530281385955520250090764290911392468604822092282627303449344617146707/17750093819800542967213615717503879495637212480707202528156057600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 0.06837976041435252
+            },
+            "theta_upper": {
+              "exact": "33902848329843862296717981400360165678636038687433190144250565586273265998803547693071617933964409614991044776595526554745480338635146651552246619348400236029337001434442989758364838128851343451/495802385448660441908321571692861521344800515099329022308524408124211200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 0.06837976041435252
+            }
+          },
+          "floating_classification": "finite",
+          "kind": "rate-0.745",
+          "moment": {
+            "atol": 1e-12,
+            "nfev": 29,
+            "root_second_moment": 0.2693655089373717,
+            "rtol": 1e-10,
+            "success": true,
+            "values": [
+              0.2693655089373717,
+              0.14902208427505073,
+              0.25305581900373264,
+              10.06620249100329,
+              37.36628915486313
+            ]
+          },
+          "rate": 0.745,
+          "scalar_reconstruction_check": {
+            "available": true,
+            "max_abs_difference": 1.1901590823981678e-13,
+            "max_relative_difference": 3.164135620181696e-14
+          },
+          "threshold": 0.4750477365874263,
+          "variance": 0.00015115949106148108
+        },
+        {
+          "exact_classification": {
+            "classification": "finite",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "log(20/19)/T",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "1298514727938234148318501147362264653201234376888311548821197167960365355964315264505027067070855499521930247182717729691146885705819973270012968092043662535640708153610184078251193895902360655708149227813078576434282387692279589900/25964601316214939830859792674193998818755803395615009301130444255784129403972049187633376145153211705355621420657140561640716071844596130785560840776202997099978389292622203008392172122565975491427626930671647290740136264674587515961",
+              "float": 0.05001096346999595
+            },
+            "theta_upper": {
+              "exact": "87242322489803423025967558946671906288715021290534234669524131144878080889835747413667499803201793840495179197978885359523440318853800945311271707339670957782901649664753028638215123347377093234893121997653760846162482376530475/1744463942234274377241319045565304946167414901613478184703738528338089855144588093767359321765198117343250164589137752365376234173479632067544432350183889949904456269890678964176992074581125822633508615198581036172225020575212544",
+              "float": 0.05001096346999595
+            }
+          },
+          "floating_classification": "finite",
+          "kind": "paper-5pct",
+          "moment": {
+            "atol": 1e-12,
+            "nfev": 29,
+            "root_second_moment": 0.2704103775416775,
+            "rtol": 1e-10,
+            "success": true,
+            "values": [
+              0.2704103775416775,
+              0.14992151865810743,
+              0.20353578307503178,
+              10.009516112752323,
+              37.89473684210527
+            ]
+          },
+          "rate": 1.0258658877510114,
+          "scalar_reconstruction_check": {
+            "available": true,
+            "max_abs_difference": 1.7763568394002505e-14,
+            "max_relative_difference": 4.6629367034256575e-15
+          },
+          "threshold": 0.5757515959686365,
+          "variance": 0.0011960280953672853
+        }
+      ],
+      "common_mean": 0.5188586989213058,
+      "common_mean_square": 0.26921434944631023,
+      "horizon": 0.05,
+      "optimizer": {
+        "evaluations": 32,
+        "evidence_class": "floating bounded scalar optimization in log(rate)",
+        "failed_evaluations": 0,
+        "first_pass": {
+          "ode_rtol": 1e-08,
+          "rate": 0.7436702796975989,
+          "root_second_moment": 0.2693654770439234,
+          "xatol": 1e-08
+        },
+        "interval": {
+          "boundary_status": "floating roots of the exact T2 formula using quadrature C",
+          "feasible": true,
+          "lower_log_rate": -2.7262950789539175,
+          "lower_rate": 0.06546137015466569,
+          "maximum_horizon": 0.7038899675378382,
+          "maximum_rate": 2.264024705281087,
+          "upper_log_rate": 5.338407386083522,
+          "upper_rate": 208.18089434240983
+        },
+        "rate": 0.743670231207945,
+        "refined_pass": {
+          "ode_rtol": 1e-10,
+          "rate": 0.743670231207945,
+          "root_second_moment": 0.2693654770439231,
+          "xatol": 1e-10
+        },
+        "refinement": {
+          "objective_difference": 2.7755575615628914e-16,
+          "rate_difference": 4.8489653958760925e-08,
+          "same_rate_ode_tolerance_difference": 2.7755575615628914e-16
+        },
+        "root_second_moment": 0.2693654770439231,
+        "scalar_reconstruction_check": {
+          "available": true,
+          "max_abs_difference": 1.2079226507921703e-13,
+          "max_relative_difference": 3.2029934260435766e-14
+        },
+        "status": "computed",
+        "variance": 0.00015112759761287675
+      },
+      "policy": 0.5
+    },
+    {
+      "absolute_moment": {
+        "absolute_moment": 0.538046313072269,
+        "classification": "finite",
+        "horizon": 0.1,
+        "near_boundary_lower_bound": 0.5,
+        "s": 0.038046313072268974
+      },
+      "baselines": [
+        {
+          "exact_classification": {
+            "classification": "finite",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "1",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "858105594111334795165233542581227233893180152757436626450866209940407190135295689036401/8159152832478977343456112695961158942720000000000000000000000000000000000000000000000000",
+              "float": 0.10517091807564763
+            },
+            "theta_upper": {
+              "exact": "14741396001238620446143547028002902651050941844220003805799430620566255119334244641956332821/140166086509156351783232560003916749476986880000000000000000000000000000000000000000000000000",
+              "float": 0.10517091807564763
+            }
+          },
+          "floating_classification": "finite",
+          "kind": "rate-1",
+          "moment": {
+            "atol": 1e-12,
+            "nfev": 41,
+            "root_second_moment": 0.2920843757185045,
+            "rtol": 1e-10,
+            "success": true,
+            "values": [
+              0.2920843757185045,
+              0.1621673182371252,
+              0.3861091153973022,
+              11.142751173664761,
+              39.78615305072332
+            ]
+          },
+          "rate": 1.0,
+          "scalar_reconstruction_check": {
+            "available": true,
+            "max_abs_difference": 3.19211324040225e-12,
+            "max_relative_difference": 9.122702593344911e-13
+          },
+          "threshold": 0.5681850321505608,
+          "variance": 0.0027486197783396227
+        },
+        {
+          "exact_classification": {
+            "classification": "finite",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "149/200",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "465685589447392792413610902038842602224351238970578624703164600037962303951671521608477382092674658554363754541158777382008364982252873032864315157879317178217295350933525288349/3341728571011765229025712372752698734618118563509043200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 0.13935470208054587
+            },
+            "theta_upper": {
+              "exact": "43269629642996936608205978314086990070369651494481122125929385134840817921478809705245673394594673328338354096657940092894567558489968988704274292484520708280968897540321302762412973/310499961587140772296768522564193194742027520173531568537600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 0.13935470208054587
+            }
+          },
+          "floating_classification": "finite",
+          "kind": "rate-0.745",
+          "moment": {
+            "atol": 1e-12,
+            "nfev": 41,
+            "root_second_moment": 0.2902012845890676,
+            "rtol": 1e-10,
+            "success": true,
+            "values": [
+              0.2902012845890676,
+              0.1624781129523714,
+              0.4888019295780985,
+              11.256433468530766,
+              38.78443236680118
+            ]
+          },
+          "rate": 0.745,
+          "scalar_reconstruction_check": {
+            "available": true,
+            "max_abs_difference": 5.927702773078636e-12,
+            "max_relative_difference": 1.6843748618100562e-12
+          },
+          "threshold": 0.4750477365874263,
+          "variance": 0.0008655286489027136
+        },
+        {
+          "exact_classification": {
+            "classification": "finite",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "log(20/19)/T",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "5194058911752936593274004589449058612804937507553246195284788671841461423857261058020108268283421998087720988730870918764587542823279893080051872368174650142562832614440736313004775583609442622832596911252314305737129550769118359600/25964601316214939830859792674193998818755803395615009301130444255784129403972049187633376145153211705355621420657140561640716071844596130785560840776202997099978389292622203008392172122565975491427626930671647290740136264674587515961",
+              "float": 0.2000438538799838
+            },
+            "theta_upper": {
+              "exact": "87242322489803423025967558946671906288715021290534234669524131144878080889835747413667499803201793840495179197978885359523440318853800945311271707339670957782901649664753028638215123347377093234893121997653760846162482376530475/436115985558568594310329761391326236541853725403369546175934632084522463786147023441839830441299529335812541147284438091344058543369908016886108087545972487476114067472669741044248018645281455658377153799645259043056255143803136",
+              "float": 0.2000438538799838
+            }
+          },
+          "floating_classification": "finite",
+          "kind": "paper-5pct",
+          "moment": {
+            "atol": 1e-12,
+            "nfev": 53,
+            "root_second_moment": 0.2934679149480232,
+            "rtol": 1e-10,
+            "success": true,
+            "values": [
+              0.2934679149480232,
+              0.16978112169024687,
+              0.6921688139001778,
+              11.714249999141098,
+              37.89473684210526
+            ]
+          },
+          "rate": 0.5129329438755057,
+          "scalar_reconstruction_check": {
+            "available": true,
+            "max_abs_difference": 2.5908164502652653e-11,
+            "max_relative_difference": 7.618128350372899e-12
+          },
+          "threshold": 0.3575398838738876,
+          "variance": 0.004132159007858349
+        }
+      ],
+      "common_mean": 0.5378993920243496,
+      "common_mean_square": 0.28933575594016486,
+      "horizon": 0.1,
+      "optimizer": {
+        "evaluations": 29,
+        "evidence_class": "floating bounded scalar optimization in log(rate)",
+        "failed_evaluations": 0,
+        "first_pass": {
+          "ode_rtol": 1e-08,
+          "rate": 0.7473187438206812,
+          "root_second_moment": 0.29020107047553073,
+          "xatol": 1e-08
+        },
+        "interval": {
+          "boundary_status": "floating roots of the exact T2 formula using quadrature C",
+          "feasible": true,
+          "lower_log_rate": -2.028199052877506,
+          "lower_rate": 0.1315722625928107,
+          "maximum_horizon": 0.7038899675378382,
+          "maximum_rate": 2.264024705281087,
+          "upper_log_rate": 4.460544783417547,
+          "upper_rate": 86.53463889371045
+        },
+        "rate": 0.7473187585697638,
+        "refined_pass": {
+          "ode_rtol": 1e-10,
+          "rate": 0.7473187585697638,
+          "root_second_moment": 0.2902010704787766,
+          "xatol": 1e-10
+        },
+        "refinement": {
+          "objective_difference": 3.2458480347941077e-12,
+          "rate_difference": 1.4749082621889897e-08,
+          "same_rate_ode_tolerance_difference": 3.2457925236428764e-12
+        },
+        "root_second_moment": 0.2902010704787766,
+        "scalar_reconstruction_check": {
+          "available": true,
+          "max_abs_difference": 5.8406612879480235e-12,
+          "max_relative_difference": 1.659783421814609e-12
+        },
+        "status": "computed",
+        "variance": 0.0008653145386117167
+      },
+      "policy": 0.5
+    },
+    {
+      "absolute_moment": {
+        "absolute_moment": 0.5979869085172146,
+        "classification": "finite",
+        "horizon": 0.25,
+        "near_boundary_lower_bound": 0.5,
+        "s": 0.09798690851721459
+      },
+      "baselines": [
+        {
+          "exact_classification": {
+            "classification": "finite",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "1",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "12180751715634412637381792715825660672959245629774275844919450682885767/42886132718981177638905380257056353143821452973520757786148864000000000",
+              "float": 0.2840254166877415
+            },
+            "theta_upper": {
+              "exact": "1918236960929822936547522098680940868438294961022482734333760012991533472969/6753751066717874835752458188261491549442146235723022456920509251584000000000",
+              "float": 0.2840254166877415
+            }
+          },
+          "floating_classification": "finite",
+          "kind": "rate-1",
+          "moment": {
+            "atol": 1e-12,
+            "nfev": 89,
+            "root_second_moment": 0.3704757610648967,
+            "rtol": 1e-10,
+            "success": true,
+            "values": [
+              0.3704757610648967,
+              0.2376676167653816,
+              1.2767153208884416,
+              15.625597319302818,
+              46.22491500075869
+            ]
+          },
+          "rate": 1.0,
+          "scalar_reconstruction_check": {
+            "available": true,
+            "max_abs_difference": 6.559730536537245e-11,
+            "max_relative_difference": 1.7152031172519286e-11
+          },
+          "threshold": 0.5681850321505608,
+          "variance": 0.015814516672453316
+        },
+        {
+          "exact_classification": {
+            "classification": "finite",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "149/200",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "11462581071339370819690252515570760871426049946358442092338170034251209017366328153656387981707930091438395548885028995272003355848140268877165900295377560033873/31076168858769398552528015574225294961596195589995867416982269678852914544640000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 0.36885438238648066
+            },
+            "theta_upper": {
+              "exact": "10756355162603156069646392287727608377793094772144953649874663108409890725456734289147315297977934980557087580333333234919366748643224898638275158125461859340238765179/29161521934509079761719347784359353271487834869313015189189346858608190214876692480000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 0.36885438238648066
+            }
+          },
+          "floating_classification": "finite",
+          "kind": "rate-0.745",
+          "moment": {
+            "atol": 1e-12,
+            "nfev": 137,
+            "root_second_moment": 0.3679078099539882,
+            "rtol": 1e-10,
+            "success": true,
+            "values": [
+              0.3679078099539882,
+              0.273554203899579,
+              1.7314911508426643,
+              16.162258918718,
+              43.370042529026044
+            ]
+          },
+          "rate": 0.745,
+          "scalar_reconstruction_check": {
+            "available": true,
+            "max_abs_difference": 1.0813039352797205e-10,
+            "max_relative_difference": 2.2414501132242893e-11
+          },
+          "threshold": 0.4750477365874263,
+          "variance": 0.013246565561544799
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "log(20/19)/T",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "32462868198455853707962528684056616330030859422207788720529929199009133899107881612625676676771387488048256179567943242278672142645499331750324202301091563391017703840254601956279847397559016392703730695326964410857059692306989747500/25964601316214939830859792674193998818755803395615009301130444255784129403972049187633376145153211705355621420657140561640716071844596130785560840776202997099978389292622203008392172122565975491427626930671647290740136264674587515961",
+              "float": 1.2502740867498987
+            },
+            "theta_upper": {
+              "exact": "2181058062245085575649188973666797657217875532263355866738103278621952022245893685341687495080044846012379479949472133988086007971345023632781792683491773944572541241618825715955378083684427330872328049941344021154062059413261875/1744463942234274377241319045565304946167414901613478184703738528338089855144588093767359321765198117343250164589137752365376234173479632067544432350183889949904456269890678964176992074581125822633508615198581036172225020575212544",
+              "float": 1.2502740867498987
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "paper-5pct",
+          "moment": null,
+          "rate": 0.2051731775502023,
+          "threshold": 0.1544952225286641
+        }
+      ],
+      "common_mean": 0.595534419150097,
+      "common_mean_square": 0.3546612443924434,
+      "horizon": 0.25,
+      "optimizer": {
+        "evaluations": 37,
+        "evidence_class": "floating bounded scalar optimization in log(rate)",
+        "failed_evaluations": 0,
+        "first_pass": {
+          "ode_rtol": 1e-08,
+          "rate": 0.8211890188145379,
+          "root_second_moment": 0.36696772228396635,
+          "xatol": 1e-08
+        },
+        "interval": {
+          "boundary_status": "floating roots of the exact T2 formula using quadrature C",
+          "feasible": true,
+          "lower_log_rate": -1.075552501370404,
+          "lower_rate": 0.3411092399057767,
+          "maximum_horizon": 0.7038899675378382,
+          "maximum_rate": 2.264024705281087,
+          "upper_log_rate": 3.2002988317754735,
+          "upper_rate": 24.539862392156877
+        },
+        "rate": 0.8211890244796767,
+        "refined_pass": {
+          "ode_rtol": 1e-10,
+          "rate": 0.8211890244796767,
+          "root_second_moment": 0.36696772238058983,
+          "xatol": 1e-10
+        },
+        "refinement": {
+          "objective_difference": 9.662348698924461e-11,
+          "rate_difference": 5.66513880251307e-09,
+          "same_rate_ode_tolerance_difference": 9.662343147809338e-11
+        },
+        "root_second_moment": 0.36696772238058983,
+        "scalar_reconstruction_check": {
+          "available": true,
+          "max_abs_difference": 8.686740216035105e-11,
+          "max_relative_difference": 1.957600085546483e-11
+        },
+        "status": "computed",
+        "variance": 0.012306477988146436
+      },
+      "policy": 0.5
+    },
+    {
+      "absolute_moment": {
+        "absolute_moment": 0.7114741528655779,
+        "classification": "finite",
+        "horizon": 0.5,
+        "near_boundary_lower_bound": 0.5,
+        "s": 0.21147415286557797
+      },
+      "baselines": [
+        {
+          "exact_classification": {
+            "classification": "finite",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "1",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "1037385495661714223646201347805149062990480042174008698881/1599123602872035903779546290900811702313997565952000000000",
+              "float": 0.6487212707001282
+            },
+            "theta_upper": {
+              "exact": "44054165592578186524772795187896727585831489497356980288863/67909235572055498149152876691620382762511698703155200000000",
+              "float": 0.6487212707001282
+            }
+          },
+          "floating_classification": "finite",
+          "kind": "rate-1",
+          "moment": {
+            "atol": 1e-12,
+            "nfev": 425,
+            "root_second_moment": 0.6428311803451549,
+            "rtol": 1e-10,
+            "success": true,
+            "values": [
+              0.6428311803451549,
+              2.0432381274532765,
+              10.607001954367194,
+              38.30253021920676,
+              59.35396574520461
+            ]
+          },
+          "rate": 1.0,
+          "scalar_reconstruction_check": {
+            "available": true,
+            "max_abs_difference": 1.2049596875840507e-09,
+            "max_relative_difference": 1.0270849295960232e-10
+          },
+          "threshold": 0.5681850321505608,
+          "variance": 0.16746429392648327
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "149/200",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "650979590484899698417097382045818175266799698416623179837841850269854784177385690812648612253309137509382885934011274293275916919919606984250022711/800494427167475467148849336279586722352266445208364035583508480000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 0.8132218893620168
+            },
+            "theta_upper": {
+              "exact": "2344687581516626861442972214257757701770110799844712516406946271110558391698415611906484440629195808740499470871161393374312794291133119432631335861851623/2883207661018649038066455539372732513021270453693059225101061073141760000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 0.8132218893620168
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "rate-0.745",
+          "moment": null,
+          "rate": 0.745,
+          "threshold": 0.4750477365874263
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "log(20/19)/T",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "129851472793823414831850114736226465320123437688831154882119716796036535596431526450502706707085549952193024718271772969114688570581997327001296809204366253564070815361018407825119389590236065570814922781307857643428238769227958990000/25964601316214939830859792674193998818755803395615009301130444255784129403972049187633376145153211705355621420657140561640716071844596130785560840776202997099978389292622203008392172122565975491427626930671647290740136264674587515961",
+              "float": 5.001096346999595
+            },
+            "theta_upper": {
+              "exact": "2181058062245085575649188973666797657217875532263355866738103278621952022245893685341687495080044846012379479949472133988086007971345023632781792683491773944572541241618825715955378083684427330872328049941344021154062059413261875/436115985558568594310329761391326236541853725403369546175934632084522463786147023441839830441299529335812541147284438091344058543369908016886108087545972487476114067472669741044248018645281455658377153799645259043056255143803136",
+              "float": 5.001096346999595
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "paper-5pct",
+          "moment": null,
+          "rate": 0.10258658877510116,
+          "threshold": 0.0781706834350418
+        }
+      ],
+      "common_mean": 0.6894685536111648,
+      "common_mean_square": 0.4753668864186716,
+      "horizon": 0.5,
+      "optimizer": {
+        "evaluations": 31,
+        "evidence_class": "floating bounded scalar optimization in log(rate)",
+        "failed_evaluations": 0,
+        "first_pass": {
+          "ode_rtol": 1e-08,
+          "rate": 1.1591178787120489,
+          "root_second_moment": 0.6190080715762881,
+          "xatol": 1e-08
+        },
+        "interval": {
+          "boundary_status": "floating roots of the exact T2 formula using quadrature C",
+          "feasible": true,
+          "lower_log_rate": -0.21747681947867628,
+          "lower_rate": 0.8045462545052819,
+          "maximum_horizon": 0.7038899675378382,
+          "maximum_rate": 2.264024705281087,
+          "upper_log_rate": 2.0340095292249423,
+          "upper_rate": 7.644676545699492
+        },
+        "rate": 1.1591178930149977,
+        "refined_pass": {
+          "ode_rtol": 1e-10,
+          "rate": 1.1591178930149977,
+          "root_second_moment": 0.6190080722419985,
+          "xatol": 1e-10
+        },
+        "refinement": {
+          "objective_difference": 6.657103757135019e-10,
+          "rate_difference": 1.4302948825317685e-08,
+          "same_rate_ode_tolerance_difference": 6.65709931624292e-10
+        },
+        "root_second_moment": 0.6190080722419985,
+        "scalar_reconstruction_check": {
+          "available": true,
+          "max_abs_difference": 6.751577075192472e-10,
+          "max_relative_difference": 6.379029540213476e-11
+        },
+        "status": "computed",
+        "variance": 0.1436411858233269
+      },
+      "policy": 0.5
+    },
+    {
+      "absolute_moment": {
+        "absolute_moment": 0.7939621286473948,
+        "classification": "finite",
+        "horizon": 0.65,
+        "near_boundary_lower_bound": 0.5,
+        "s": 0.29396212864739474
+      },
+      "baselines": [
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "1",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "1246152805989674266482800145536297421636383586124226386926838000555265236981475554991037880259711/1361111123063589959065886010006608048851695697920000000000000000000000000000000000000000000000000",
+              "float": 0.9155408290138961
+            },
+            "theta_upper": {
+              "exact": "1837100138812690667549230631943445072844559054552788873980792045127092973555168402358551139644939021/2006573689118136727915086823534524309235410696929280000000000000000000000000000000000000000000000000",
+              "float": 0.9155408290138961
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "rate-1",
+          "moment": null,
+          "rate": 1.0,
+          "threshold": 0.5681850321505608
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "149/200",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "625698976400826982631700933833696351219824328722568255795507455129091917518947061624547085769680445893653337892756122147982321461840830308907454357520278333715297749552662516342897300739/557467671172616051314401221897026711515233346003093752591155200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 1.122395089000746
+            },
+            "theta_upper": {
+              "exact": "1420041137946690593295831413061409934692441729175629980916314520227669801548655519773236835701844129759686546400903182593257042770943462881734867569915535805672250875536851025948351096651894481/1265188302998487904168786604862441272856174000209927357099448415027200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 1.122395089000746
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "rate-0.745",
+          "moment": null,
+          "rate": 0.745,
+          "threshold": 0.4750477365874263
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "log(20/19)/T",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "219448989021561571065826693904222726391008609694124651750782321385301745157969279701349574334974579419206211773879296317803823684283575482632191607555378968523279677960121109224451768407498950814677219500410279417393723519995250693100/25964601316214939830859792674193998818755803395615009301130444255784129403972049187633376145153211705355621420657140561640716071844596130785560840776202997099978389292622203008392172122565975491427626930671647290740136264674587515961",
+              "float": 8.451852826429315
+            },
+            "theta_upper": {
+              "exact": "14743952500776778491388517461987552162792838598100285659149578163484395670382241312909807466741103159043685284458431625759461413886292359757604918540404391865310378793343261839858355845706728756696937617603485583001459521633650275/1744463942234274377241319045565304946167414901613478184703738528338089855144588093767359321765198117343250164589137752365376234173479632067544432350183889949904456269890678964176992074581125822633508615198581036172225020575212544",
+              "float": 8.451852826429315
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "paper-5pct",
+          "moment": null,
+          "rate": 0.07891276059623166,
+          "threshold": 0.06022968550262379
+        }
+      ],
+      "common_mean": 0.7417394792366475,
+      "common_mean_square": 0.550177455058253,
+      "horizon": 0.65,
+      "optimizer": {
+        "evaluations": 24,
+        "evidence_class": "floating bounded scalar optimization in log(rate)",
+        "failed_evaluations": 0,
+        "first_pass": {
+          "ode_rtol": 1e-08,
+          "rate": 1.668887151057538,
+          "root_second_moment": 1.1322430698993613,
+          "xatol": 1e-08
+        },
+        "interval": {
+          "boundary_status": "floating roots of the exact T2 formula using quadrature C",
+          "feasible": true,
+          "lower_log_rate": 0.31538737480799345,
+          "lower_rate": 1.370790217717793,
+          "maximum_horizon": 0.7038899675378382,
+          "maximum_rate": 2.264024705281087,
+          "upper_log_rate": 1.3632689387590842,
+          "upper_rate": 3.90895055907844
+        },
+        "rate": 1.668887160851601,
+        "refined_pass": {
+          "ode_rtol": 1e-10,
+          "rate": 1.668887160851601,
+          "root_second_moment": 1.1322430742199276,
+          "xatol": 1e-10
+        },
+        "refinement": {
+          "objective_difference": 4.320566349136357e-09,
+          "rate_difference": 9.79406289403073e-09,
+          "same_rate_ode_tolerance_difference": 4.320565460957937e-09
+        },
+        "root_second_moment": 1.1322430742199276,
+        "scalar_reconstruction_check": {
+          "available": true,
+          "max_abs_difference": 7.77080799707619e-09,
+          "max_relative_difference": 2.745191731104152e-10
+        },
+        "status": "computed",
+        "variance": 0.5820656191616747
+      },
+      "policy": 0.5
+    },
+    {
+      "absolute_moment": {
+        "absolute_moment": 0.8252512187720927,
+        "classification": "finite",
+        "horizon": 0.7,
+        "near_boundary_lower_bound": 0.5,
+        "s": 0.32525121877209273
+      },
+      "baselines": [
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "1",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "492137994561252492803480809204217131821534272126515901368904259280158730852913537543/485461583416372781784739257211944960000000000000000000000000000000000000000000000000",
+              "float": 1.0137527074704764
+            },
+            "theta_upper": {
+              "exact": "1190481808843669780091620077465001241876291404274041965427289788273861890763871987606123/1174331570284205759137284263195694858240000000000000000000000000000000000000000000000000",
+              "float": 1.0137527074704764
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "rate-1",
+          "moment": null,
+          "rate": 1.0,
+          "threshold": 0.5681850321505608
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "149/200",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "245230927455467279734258844233634670019240634877918410817859913876073991858069058255847140020997934767938338096718627300228512166357220909832622407746116264421738914494518107/198829569287306790564985563916980944524193405337600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 1.2333725226810253
+            },
+            "theta_upper": {
+              "exact": "17022214367466350288194109154789283350045550188780950650100112125119500629634597083289034788386703067415441921963907175928871966339562834078218289646191869205452638591394420068849/13801356892939826253487342948169398302257836844698828800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 1.2333725226810253
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "rate-0.745",
+          "moment": null,
+          "rate": 0.745,
+          "threshold": 0.4750477365874263
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "log(20/19)/T",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "254508886675893893070426224883003872027441937870109063568954644920231609769005791842985305145887677906298328447812675019464789598340714760922541746040557856985578798107596079337234003596862688518797248651363400981119347987686799620400/25964601316214939830859792674193998818755803395615009301130444255784129403972049187633376145153211705355621420657140561640716071844596130785560840776202997099978389292622203008392172122565975491427626930671647290740136264674587515961",
+              "float": 9.802148840119207
+            },
+            "theta_upper": {
+              "exact": "4274873802000367728272410388386923408147036043236177498806682426099025963601951623269707490356887898184263780700965382616648575623836246320252313659643876931362180833572898403272541044021477568509762977885034281461961636449993275/436115985558568594310329761391326236541853725403369546175934632084522463786147023441839830441299529335812541147284438091344058543369908016886108087545972487476114067472669741044248018645281455658377153799645259043056255143803136",
+              "float": 9.802148840119207
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "paper-5pct",
+          "moment": null,
+          "rate": 0.07327613483935798,
+          "threshold": 0.05594585297024002
+        }
+      ],
+      "common_mean": 0.7581436007019476,
+      "common_mean_square": 0.5747817192853142,
+      "horizon": 0.7,
+      "optimizer": {
+        "evaluations": 20,
+        "evidence_class": "floating bounded scalar optimization in log(rate)",
+        "failed_evaluations": 0,
+        "first_pass": {
+          "ode_rtol": 1e-08,
+          "rate": 2.207099275530441,
+          "root_second_moment": 2.353678335709201,
+          "xatol": 1e-08
+        },
+        "interval": {
+          "boundary_status": "floating roots of the exact T2 formula using quadrature C",
+          "feasible": true,
+          "lower_log_rate": 0.6819570493116929,
+          "lower_rate": 1.9777444907720925,
+          "maximum_horizon": 0.7038899675378382,
+          "maximum_rate": 2.264024705281087,
+          "upper_log_rate": 0.9554566586647519,
+          "upper_rate": 2.5998575593589583
+        },
+        "rate": 2.2070992930822,
+        "refined_pass": {
+          "ode_rtol": 1e-10,
+          "rate": 2.2070992930822,
+          "root_second_moment": 2.3536784577993273,
+          "xatol": 1e-10
+        },
+        "refinement": {
+          "objective_difference": 1.2209012645314488e-07,
+          "rate_difference": 1.7551759157186098e-08,
+          "same_rate_ode_tolerance_difference": 1.22090105580952e-07
+        },
+        "root_second_moment": 2.3536784577993273,
+        "scalar_reconstruction_check": {
+          "available": true,
+          "max_abs_difference": 8.679072038830782e-07,
+          "max_relative_difference": 2.616872084143221e-09
+        },
+        "status": "computed",
+        "variance": 1.778896738514013
+      },
+      "policy": 0.5
+    },
+    {
+      "absolute_moment": {
+        "absolute_moment": 0.859054419203688,
+        "classification": "finite",
+        "horizon": 0.75,
+        "near_boundary_lower_bound": 0.5,
+        "s": 0.3590544192036879
+      },
+      "baselines": [
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "1",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "2843906513343368785352149378195665646544910606027555015260880249/2546021907830917754313256638092509666694198556935323648000000000",
+              "float": 1.1170000166126746
+            },
+            "theta_upper": {
+              "exact": "6413009187589296610969096847831226032958773416592136560731289465073/5741279402158719535976393718898609298395417745889154826240000000000",
+              "float": 1.1170000166126746
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "rate-1",
+          "moment": null,
+          "rate": 1.0,
+          "threshold": 0.5681850321505608
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "149/200",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "1406238880656630461796032633003612532100506801275466116210958689121064659393306439080582597866111625738306748089394496976690304911640729671966335214371541/1042769307856617209480792851058862905159232666886511199516785251450880000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 1.3485618248077464
+            },
+            "theta_upper": {
+              "exact": "637154180675593352565626221720239805781950727096702218060140598650736701698044686411849608451197938416515258669293495627126807560332388553125047523419057818809/472469388466062548060861913679111252561501888272276245900259746365130670080000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 1.3485618248077464
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "rate-0.745",
+          "moment": null,
+          "rate": 0.745,
+          "threshold": 0.4750477365874263
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "log(20/19)/T",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "292165813786102683371662758156509546970277734799870098484769362791082205091970934513631090090942487392434305616111489180508049283809493985752917820709824070519159334562291417606518626578031147534333576257942679697713537230762907727500/25964601316214939830859792674193998818755803395615009301130444255784129403972049187633376145153211705355621420657140561640716071844596130785560840776202997099978389292622203008392172122565975491427626930671647290740136264674587515961",
+              "float": 11.252466780749089
+            },
+            "theta_upper": {
+              "exact": "19629522560205770180842700763001178914960879790370202800642929507597568200213043168075187455720403614111415319545249205892774071742105212695036134151425965501152871174569431443598402753159845977850952449472096190386558534719356875/1744463942234274377241319045565304946167414901613478184703738528338089855144588093767359321765198117343250164589137752365376234173479632067544432350183889949904456269890678964176992074581125822633508615198581036172225020575212544",
+              "float": 11.252466780749089
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "paper-5pct",
+          "moment": null,
+          "rate": 0.06839105918340077,
+          "threshold": 0.052229910419041285
+        }
+      ],
+      "common_mean": 0.7739644868880243,
+      "common_mean_square": 0.5990210269638427,
+      "horizon": 0.75,
+      "optimizer": {
+        "interval": {
+          "feasible": false,
+          "maximum_horizon": 0.7038899675378382,
+          "maximum_rate": 2.264024705281087,
+          "reason": "horizon_at_or_above_floating_maximum"
+        },
+        "status": "infeasible"
+      },
+      "policy": 0.5
+    },
+    {
+      "absolute_moment": {
+        "absolute_moment": 0.9815129172568676,
+        "classification": "finite",
+        "horizon": 0.9,
+        "near_boundary_lower_bound": 0.5,
+        "s": 0.4815129172568676
+      },
+      "baselines": [
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "1",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "30739532876619113106737324492382090466803501746606012848149866794391231877943209/21060199612930067163939057172480000000000000000000000000000000000000000000000000",
+              "float": 1.4596031111569496
+            },
+            "theta_upper": {
+              "exact": "10156703303998209312973150098453541303060898194746236602331252110545313804017309111/6958537719166363956461510831636480000000000000000000000000000000000000000000000000",
+              "float": 1.4596031111569496
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "rate-1",
+          "moment": null,
+          "rate": 1.0,
+          "threshold": 0.5681850321505608
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "149/200",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "103810430897537541125158973654198280796999912943244148672676802975416862637619442467386231449304527474276832757062022356650063652369545130896636284258086877644104867387/60318780057645686527221511352563910941081600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 1.7210300141734893
+            },
+            "theta_upper": {
+              "exact": "986463132304346559850228529059697425186992201151157820260143390063103895532270356294741396539999359875420599373510965031737922838179673943374792044925546951770834103440340731/573181829590628877410942624374614419289991754547200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 1.7210300141734893
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "rate-0.745",
+          "moment": null,
+          "rate": 0.745,
+          "threshold": 0.4750477365874263
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "log(20/19)/T",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "420718771851987864055194371745373747637199938111812941818067882419158375332438145699628769730957181845105400087200544419931590968685671339484201661822146661547589441769699641353386822272364852449440349811437458764707493612298587127600/25964601316214939830859792674193998818755803395615009301130444255784129403972049187633376145153211705355621420657140561640716071844596130785560840776202997099978389292622203008392172122565975491427626930671647290740136264674587515961",
+              "float": 16.203552164278687
+            },
+            "theta_upper": {
+              "exact": "7066628121674077265103372274680424409385916724533273008231454622735124552076695540507067484059345301080109515036289714121398665827157876570213008294513347580415033622844995319695424991137544552026342881809954628539161072498968475/436115985558568594310329761391326236541853725403369546175934632084522463786147023441839830441299529335812541147284438091344058543369908016886108087545972487476114067472669741044248018645281455658377153799645259043056255143803136",
+              "float": 16.203552164278687
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "paper-5pct",
+          "moment": null,
+          "rate": 0.05699254931950064,
+          "threshold": 0.04354866725426614
+        }
+      ],
+      "common_mean": 0.8176156638619915,
+      "common_mean_square": 0.668495373792485,
+      "horizon": 0.9,
+      "optimizer": {
+        "interval": {
+          "feasible": false,
+          "maximum_horizon": 0.7038899675378382,
+          "maximum_rate": 2.264024705281087,
+          "reason": "horizon_at_or_above_floating_maximum"
+        },
+        "status": "infeasible"
+      },
+      "policy": 0.5
+    },
+    {
+      "absolute_moment": {
+        "absolute_moment": 1.0323508170230258,
+        "classification": "finite",
+        "horizon": 0.95,
+        "near_boundary_lower_bound": 0.5,
+        "s": 0.5323508170230257
+      },
+      "baselines": [
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "1",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "1010407956610153499789277733737475330955011697462535381729998260712431440189158531423460929717119/637196065921736019618101760917220942537220423680000000000000000000000000000000000000000000000000",
+              "float": 1.5857096593158462
+            },
+            "theta_upper": {
+              "exact": "4754273644697923660573004423004118736544047674491658994191053194812512176244600613461519832709957461/2998199334138604624008000041559671654921396740423680000000000000000000000000000000000000000000000000",
+              "float": 1.5857096593158462
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "rate-1",
+          "moment": null,
+          "rate": 1.0,
+          "threshold": 0.5681850321505608
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "149/200",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "72327476486763475033048953739872746647836278807996633111108924423981946310856010225856256369614740292246245719152811571040423016570217158645367927938062527726862736906515486368180457969/38996289794193570374048444120984738599642361931059858453299200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 1.8547271257978193
+            },
+            "theta_upper": {
+              "exact": "42612298590025257266385974637811135712069769682940331355951637440001696359510106905858094843261399758034919983294429907672888774710756589689964192461672795548641729324028721542464895265371294793/22974969200224201962171677034856517209589362533881302289033903839641600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 1.8547271257978193
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "rate-0.745",
+          "moment": null,
+          "rate": 0.745,
+          "threshold": 0.4750477365874263
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "log(20/19)/T",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "468763816785702527542978914197777539805645610056680469124452177633691893503117810486314771212578835327416819232961100418504025739801010350474681481227762175366295643453276452248680996420752196710641871240521366092775941956912931953900/25964601316214939830859792674193998818755803395615009301130444255784129403972049187633376145153211705355621420657140561640716071844596130785560840776202997099978389292622203008392172122565975491427626930671647290740136264674587515961",
+              "float": 18.05395781266854
+            },
+            "theta_upper": {
+              "exact": "31494478418819035712374288779748558170226122685882858715698211343300987201230704816333967428955847576418759690470377614787961955106222141257369086349621215759627495528975843338395659528403130657796417041153007665464656137927501475/1744463942234274377241319045565304946167414901613478184703738528338089855144588093767359321765198117343250164589137752365376234173479632067544432350183889949904456269890678964176992074581125822633508615198581036172225020575212544",
+              "float": 18.05395781266854
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "paper-5pct",
+          "moment": null,
+          "rate": 0.053992941460579556,
+          "threshold": 0.04126187617096123
+        }
+      ],
+      "common_mean": 0.8308256422098091,
+      "common_mean_square": 0.6902712477533418,
+      "horizon": 0.95,
+      "optimizer": {
+        "interval": {
+          "feasible": false,
+          "maximum_horizon": 0.7038899675378382,
+          "maximum_rate": 2.264024705281087,
+          "reason": "horizon_at_or_above_floating_maximum"
+        },
+        "status": "infeasible"
+      },
+      "policy": 0.5
+    },
+    {
+      "absolute_moment": {
+        "absolute_moment": 1.0905550318905326,
+        "classification": "finite",
+        "horizon": 1.0,
+        "near_boundary_lower_bound": 0.5,
+        "s": 0.5905550318905325
+      },
+      "baselines": [
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "1",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "1401972404766877519361022149057039999502469751201/815915283247897734345611269596115894272000000000",
+              "float": 1.7182818284590453
+            },
+            "theta_upper": {
+              "exact": "2356715612413121110045878232564884239163651651768923/1371553591139716091434972544191070818271232000000000",
+              "float": 1.7182818284590453
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "rate-1",
+          "moment": null,
+          "rate": 1.0,
+          "threshold": 0.5681850321505608
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "149/200",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "666173047236854557088358563761899477530829157697399597175804531225195547680058706717236478543171008156917447244635786696265727211813216349/334172857101176522902571237275269873461811856350904320000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 1.993498373912395
+            },
+            "theta_upper": {
+              "exact": "225360346322802764971977906893576736153381726586611007163738667071641740105127844442960412489388521751627279636217678174479906799891519893767601/113047670001614107109233726429088320763269794696803773317120000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 1.993498373912395
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "rate-0.745",
+          "moment": null,
+          "rate": 0.745,
+          "threshold": 0.4750477365874263
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "log(20/19)/T",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "519405891175293659327400458944905861280493750755324619528478867184146142385726105802010826828342199808772098873087091876458754282327989308005187236817465014256283261444073631300477558360944262283259691125231430573712955076911835960000/25964601316214939830859792674193998818755803395615009301130444255784129403972049187633376145153211705355621420657140561640716071844596130785560840776202997099978389292622203008392172122565975491427626930671647290740136264674587515961",
+              "float": 20.00438538799838
+            },
+            "theta_upper": {
+              "exact": "2181058062245085575649188973666797657217875532263355866738103278621952022245893685341687495080044846012379479949472133988086007971345023632781792683491773944572541241618825715955378083684427330872328049941344021154062059413261875/109028996389642148577582440347831559135463431350842386543983658021130615946536755860459957610324882333953135286821109522836014635842477004221527021886493121869028516868167435261062004661320363914594288449911314760764063785950784",
+              "float": 20.00438538799838
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "paper-5pct",
+          "moment": null,
+          "rate": 0.05129329438755058,
+          "threshold": 0.03920303710743824
+        }
+      ],
+      "common_mean": 0.8433472560147415,
+      "common_mean_square": 0.7112345942275939,
+      "horizon": 1.0,
+      "optimizer": {
+        "interval": {
+          "feasible": false,
+          "maximum_horizon": 0.7038899675378382,
+          "maximum_rate": 2.264024705281087,
+          "reason": "horizon_at_or_above_floating_maximum"
+        },
+        "status": "infeasible"
+      },
+      "policy": 0.5
+    },
+    {
+      "absolute_moment": {
+        "absolute_moment": "infinity",
+        "classification": "nonintegrable",
+        "horizon": 1.5,
+        "s": null
+      },
+      "baselines": [
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "1",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "8062176356667054458624276777166493986491281946561769/2315593435770022328427564059977621279080448000000000",
+              "float": 3.481689070338065
+            },
+            "theta_upper": {
+              "exact": "330549230623349232803595347863826253446142608624014143/94939330866570915465530126459082472442298368000000000",
+              "float": 3.481689070338065
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "rate-1",
+          "moment": null,
+          "rate": 1.0,
+          "threshold": 0.5681850321505608
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "149/200",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "3515221770365092584069496039836854091092626691993216049115154250034035246727352305418709942671017979391136374263251382311174095398761585523541/948393160667016863481688097689459850843588962458408058880000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 3.7065026574978597
+            },
+            "theta_upper": {
+              "exact": "261873476226888302235425246479726119224127410673790362072396349122145064571900431844629567639201449984586018960562977432095105026304453438161212403/70652445290210755278795318213571690508294846936264025162383360000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 3.7065026574978597
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "rate-0.745",
+          "moment": null,
+          "rate": 0.745,
+          "threshold": 0.4750477365874263
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "log(20/19)/T",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "1168663255144410733486651032626038187881110939199480393939077451164328820367883738054524360363769949569737222464445956722032197135237975943011671282839296282076637338249165670426074506312124590137334305031770718790854148923051630910000/25964601316214939830859792674193998818755803395615009301130444255784129403972049187633376145153211705355621420657140561640716071844596130785560840776202997099978389292622203008392172122565975491427626930671647290740136264674587515961",
+              "float": 45.009867122996354
+            },
+            "theta_upper": {
+              "exact": "19629522560205770180842700763001178914960879790370202800642929507597568200213043168075187455720403614111415319545249205892774071742105212695036134151425965501152871174569431443598402753159845977850952449472096190386558534719356875/436115985558568594310329761391326236541853725403369546175934632084522463786147023441839830441299529335812541147284438091344058543369908016886108087545972487476114067472669741044248018645281455658377153799645259043056255143803136",
+              "float": 45.009867122996354
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "paper-5pct",
+          "moment": null,
+          "rate": 0.034195529591700385,
+          "threshold": 0.026149957590150655
+        }
+      ],
+      "common_mean": 0.9327639071927086,
+      "common_mean_square": 0.870048506561408,
+      "horizon": 1.5,
+      "optimizer": {
+        "interval": {
+          "feasible": false,
+          "maximum_horizon": 0.7038899675378382,
+          "maximum_rate": 2.264024705281087,
+          "reason": "horizon_at_or_above_floating_maximum"
+        },
+        "status": "infeasible"
+      },
+      "policy": 0.5
+    },
+    {
+      "absolute_moment": {
+        "absolute_moment": "infinity",
+        "classification": "nonintegrable",
+        "horizon": 2.0,
+        "s": null
+      },
+      "baselines": [
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "1",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "6321507822147044267156945148666353348/989427502946028027927982317240234375",
+              "float": 6.38905609893065
+            },
+            "theta_upper": {
+              "exact": "1295909103540144074767173755476602436354/202832638103935745725236375034248046875",
+              "float": 6.38905609893065
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "rate-1",
+          "moment": null,
+          "rate": 1.0,
+          "threshold": 0.5681850321505608
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "149/200",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "57034345412608401040112127730387357348994999352460096196319088549591919138249946925113470022005785362422302326058409300388253/9209952818480057758901218118925853655040000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 6.192685949288166
+            },
+            "theta_upper": {
+              "exact": "34733935367726987102895299158515144087990408219378693730158510910075938494696922265227326194060362885709553725501199470074559745089/5608864336438628001856761468165217851203911680000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 6.192685949288166
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "rate-0.745",
+          "moment": null,
+          "rate": 0.745,
+          "threshold": 0.4750477365874263
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "194206723397073206913671349/253922826375521540551737344",
+              "float": 0.7648257786397851
+            },
+            "pC_upper": {
+              "exact": "21684607412993141486581/28334198897217871282176",
+              "float": 0.7653157052950013
+            },
+            "rate_exact": "log(20/19)/T",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "2077623564701174637309601835779623445121975003021298478113915468736584569542904423208043307313368799235088395492348367505835017129311957232020748947269860057025133045776294525201910233443777049133038764500925722294851820307647343840000/25964601316214939830859792674193998818755803395615009301130444255784129403972049187633376145153211705355621420657140561640716071844596130785560840776202997099978389292622203008392172122565975491427626930671647290740136264674587515961",
+              "float": 80.01754155199352
+            },
+            "theta_upper": {
+              "exact": "2181058062245085575649188973666797657217875532263355866738103278621952022245893685341687495080044846012379479949472133988086007971345023632781792683491773944572541241618825715955378083684427330872328049941344021154062059413261875/27257249097410537144395610086957889783865857837710596635995914505282653986634188965114989402581220583488283821705277380709003658960619251055381755471623280467257129217041858815265501165330090978648572112477828690191015946487696",
+              "float": 80.01754155199352
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "paper-5pct",
+          "moment": null,
+          "rate": 0.02564664719377529,
+          "threshold": 0.019616304420884044
+        }
+      ],
+      "common_mean": 0.9736092613710675,
+      "common_mean_square": 0.9479149938275157,
+      "horizon": 2.0,
+      "optimizer": {
+        "interval": {
+          "feasible": false,
+          "maximum_horizon": 0.7038899675378382,
+          "maximum_rate": 2.264024705281087,
+          "reason": "horizon_at_or_above_floating_maximum"
+        },
+        "status": "infeasible"
+      },
+      "policy": 0.5
+    },
+    {
+      "absolute_moment": {
+        "absolute_moment": 0.5188766660034292,
+        "classification": "finite",
+        "horizon": 0.05,
+        "near_boundary_lower_bound": 0.5,
+        "s": 0.018876666003429184
+      },
+      "baselines": [
+        {
+          "exact_classification": {
+            "classification": "finite",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "1",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "153319094073250388394895908364402357991208739813830889326778892149113194802675390600902722961488267/2990361137370707140067751563984517883327175448330240000000000000000000000000000000000000000000000000",
+              "float": 0.05127109637602404
+            },
+            "theta_upper": {
+              "exact": "103412225824034119811686751996609347304697832173646446312781708059555780157200603162361818963769311697/2016969269890489311984129138225557464089637416610037760000000000000000000000000000000000000000000000000",
+              "float": 0.05127109637602404
+            }
+          },
+          "floating_classification": "finite",
+          "kind": "rate-1",
+          "moment": {
+            "atol": 1e-12,
+            "nfev": 29,
+            "root_second_moment": 0.2702264380376284,
+            "rtol": 1e-10,
+            "success": true,
+            "values": [
+              0.2702264380376284,
+              0.14861133866716603,
+              0.13877265291130633,
+              9.749332701208257,
+              37.845759469536866
+            ]
+          },
+          "rate": 1.0,
+          "scalar_reconstruction_check": {
+            "available": true,
+            "max_abs_difference": 5.551115123125783e-17,
+            "max_relative_difference": 5.551115123125783e-17
+          },
+          "threshold": 0.8975625153636201,
+          "variance": 0.0010120885913181832
+        },
+        {
+          "exact_classification": {
+            "classification": "finite",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "149/200",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "1213747162730240520709689931272287537350915587233437817490881408517323032919716841608614034645198206601888569129845646530281385955520250090764290911392468604822092282627303449344617146707/17750093819800542967213615717503879495637212480707202528156057600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 0.06837976041435252
+            },
+            "theta_upper": {
+              "exact": "33902848329843862296717981400360165678636038687433190144250565586273265998803547693071617933964409614991044776595526554745480338635146651552246619348400236029337001434442989758364838128851343451/495802385448660441908321571692861521344800515099329022308524408124211200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 0.06837976041435252
+            }
+          },
+          "floating_classification": "finite",
+          "kind": "rate-0.745",
+          "moment": {
+            "atol": 1e-12,
+            "nfev": 29,
+            "root_second_moment": 0.269316937886727,
+            "rtol": 1e-10,
+            "success": true,
+            "values": [
+              0.269316937886727,
+              0.1471092035594022,
+              0.16167253958918143,
+              9.72106601689513,
+              37.36628915486314
+            ]
+          },
+          "rate": 0.745,
+          "scalar_reconstruction_check": {
+            "available": true,
+            "max_abs_difference": 1.7763568394002505e-15,
+            "max_relative_difference": 2.220446049250313e-16
+          },
+          "threshold": 0.7940312975320571,
+          "variance": 0.00010258844041677317
+        },
+        {
+          "exact_classification": {
+            "classification": "finite",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "log(20/19)/T",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "1298514727938234148318501147362264653201234376888311548821197167960365355964315264505027067070855499521930247182717729691146885705819973270012968092043662535640708153610184078251193895902360655708149227813078576434282387692279589900/25964601316214939830859792674193998818755803395615009301130444255784129403972049187633376145153211705355621420657140561640716071844596130785560840776202997099978389292622203008392172122565975491427626930671647290740136264674587515961",
+              "float": 0.05001096346999595
+            },
+            "theta_upper": {
+              "exact": "87242322489803423025967558946671906288715021290534234669524131144878080889835747413667499803201793840495179197978885359523440318853800945311271707339670957782901649664753028638215123347377093234893121997653760846162482376530475/1744463942234274377241319045565304946167414901613478184703738528338089855144588093767359321765198117343250164589137752365376234173479632067544432350183889949904456269890678964176992074581125822633508615198581036172225020575212544",
+              "float": 0.05001096346999595
+            }
+          },
+          "floating_classification": "finite",
+          "kind": "paper-5pct",
+          "moment": {
+            "atol": 1e-12,
+            "nfev": 29,
+            "root_second_moment": 0.270388587323806,
+            "rtol": 1e-10,
+            "success": true,
+            "values": [
+              0.270388587323806,
+              0.14877777976712572,
+              0.13712258204205582,
+              9.754844502065398,
+              37.89473684210527
+            ]
+          },
+          "rate": 1.0258658877510114,
+          "scalar_reconstruction_check": {
+            "available": true,
+            "max_abs_difference": 7.105427357601002e-15,
+            "max_relative_difference": 3.6419992938362915e-16
+          },
+          "threshold": 0.9047329125154698,
+          "variance": 0.0011742378774957651
+        }
+      ],
+      "common_mean": 0.5188586989213058,
+      "common_mean_square": 0.26921434944631023,
+      "horizon": 0.05,
+      "optimizer": {
+        "evaluations": 23,
+        "evidence_class": "floating bounded scalar optimization in log(rate)",
+        "failed_evaluations": 0,
+        "first_pass": {
+          "ode_rtol": 1e-08,
+          "rate": 0.7389531553714455,
+          "root_second_moment": 0.26931628547109104,
+          "xatol": 1e-08
+        },
+        "interval": {
+          "boundary_status": "floating roots of the exact T2 formula using quadrature C",
+          "feasible": true,
+          "lower_log_rate": -3.3689251567795773,
+          "lower_rate": 0.034426620684110086,
+          "maximum_horizon": 0.9702453628648765,
+          "maximum_rate": 1.6424961488594656,
+          "upper_log_rate": 5.411358990203758,
+          "upper_rate": 223.93570741852167
+        },
+        "rate": 0.7389531443260731,
+        "refined_pass": {
+          "ode_rtol": 1e-10,
+          "rate": 0.7389531443260731,
+          "root_second_moment": 0.2693162854710911,
+          "xatol": 1e-10
+        },
+        "refinement": {
+          "objective_difference": 5.551115123125783e-17,
+          "rate_difference": 1.1045372394491437e-08,
+          "same_rate_ode_tolerance_difference": 5.551115123125783e-17
+        },
+        "root_second_moment": 0.2693162854710911,
+        "scalar_reconstruction_check": {
+          "available": true,
+          "max_abs_difference": 2.7755575615628914e-16,
+          "max_relative_difference": 2.7755575615628914e-16
+        },
+        "status": "computed",
+        "variance": 0.00010193602478086872
+      },
+      "policy": 0.95
+    },
+    {
+      "absolute_moment": {
+        "absolute_moment": 0.538046313072269,
+        "classification": "finite",
+        "horizon": 0.1,
+        "near_boundary_lower_bound": 0.5,
+        "s": 0.038046313072268974
+      },
+      "baselines": [
+        {
+          "exact_classification": {
+            "classification": "finite",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "1",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "858105594111334795165233542581227233893180152757436626450866209940407190135295689036401/8159152832478977343456112695961158942720000000000000000000000000000000000000000000000000",
+              "float": 0.10517091807564763
+            },
+            "theta_upper": {
+              "exact": "14741396001238620446143547028002902651050941844220003805799430620566255119334244641956332821/140166086509156351783232560003916749476986880000000000000000000000000000000000000000000000000",
+              "float": 0.10517091807564763
+            }
+          },
+          "floating_classification": "finite",
+          "kind": "rate-1",
+          "moment": {
+            "atol": 1e-12,
+            "nfev": 41,
+            "root_second_moment": 0.2919273786007257,
+            "rtol": 1e-10,
+            "success": true,
+            "values": [
+              0.2919273786007257,
+              0.15774220144801895,
+              0.2297497368209124,
+              10.56972219995857,
+              39.78615305072332
+            ]
+          },
+          "rate": 1.0,
+          "scalar_reconstruction_check": {
+            "available": true,
+            "max_abs_difference": 1.2683187833317788e-12,
+            "max_relative_difference": 3.816669202905132e-13
+          },
+          "threshold": 0.8975625153636201,
+          "variance": 0.002591622660560844
+        },
+        {
+          "exact_classification": {
+            "classification": "finite",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "149/200",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "465685589447392792413610902038842602224351238970578624703164600037962303951671521608477382092674658554363754541158777382008364982252873032864315157879317178217295350933525288349/3341728571011765229025712372752698734618118563509043200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 0.13935470208054587
+            },
+            "theta_upper": {
+              "exact": "43269629642996936608205978314086990070369651494481122125929385134840817921478809705245673394594673328338354096657940092894567558489968988704274292484520708280968897540321302762412973/310499961587140772296768522564193194742027520173531568537600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 0.13935470208054587
+            }
+          },
+          "floating_classification": "finite",
+          "kind": "rate-0.745",
+          "moment": {
+            "atol": 1e-12,
+            "nfev": 41,
+            "root_second_moment": 0.28985831076050106,
+            "rtol": 1e-10,
+            "success": true,
+            "values": [
+              0.28985831076050106,
+              0.1550634219685938,
+              0.2776131285818717,
+              10.503600282462006,
+              38.78443236680118
+            ]
+          },
+          "rate": 0.745,
+          "scalar_reconstruction_check": {
+            "available": true,
+            "max_abs_difference": 1.7070789226636407e-12,
+            "max_relative_difference": 4.821143484434742e-13
+          },
+          "threshold": 0.7940312975320571,
+          "variance": 0.0005225548203361963
+        },
+        {
+          "exact_classification": {
+            "classification": "finite",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "log(20/19)/T",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "5194058911752936593274004589449058612804937507553246195284788671841461423857261058020108268283421998087720988730870918764587542823279893080051872368174650142562832614440736313004775583609442622832596911252314305737129550769118359600/25964601316214939830859792674193998818755803395615009301130444255784129403972049187633376145153211705355621420657140561640716071844596130785560840776202997099978389292622203008392172122565975491427626930671647290740136264674587515961",
+              "float": 0.2000438538799838
+            },
+            "theta_upper": {
+              "exact": "87242322489803423025967558946671906288715021290534234669524131144878080889835747413667499803201793840495179197978885359523440318853800945311271707339670957782901649664753028638215123347377093234893121997653760846162482376530475/436115985558568594310329761391326236541853725403369546175934632084522463786147023441839830441299529335812541147284438091344058543369908016886108087545972487476114067472669741044248018645281455658377153799645259043056255143803136",
+              "float": 0.2000438538799838
+            }
+          },
+          "floating_classification": "finite",
+          "kind": "paper-5pct",
+          "moment": {
+            "atol": 1e-12,
+            "nfev": 41,
+            "root_second_moment": 0.2924871174885016,
+            "rtol": 1e-10,
+            "success": true,
+            "values": [
+              0.2924871174885016,
+              0.1544704078327566,
+              0.3681128731359447,
+              10.614312217362125,
+              37.89473684210526
+            ]
+          },
+          "rate": 0.5129329438755057,
+          "scalar_reconstruction_check": {
+            "available": true,
+            "max_abs_difference": 3.289812866569264e-12,
+            "max_relative_difference": 9.07718344933528e-13
+          },
+          "threshold": 0.631378276911707,
+          "variance": 0.0031513615483367285
+        }
+      ],
+      "common_mean": 0.5378993920243496,
+      "common_mean_square": 0.28933575594016486,
+      "horizon": 0.1,
+      "optimizer": {
+        "evaluations": 41,
+        "evidence_class": "floating bounded scalar optimization in log(rate)",
+        "failed_evaluations": 0,
+        "first_pass": {
+          "ode_rtol": 1e-08,
+          "rate": 0.7308871585325629,
+          "root_second_moment": 0.2898506990839296,
+          "xatol": 1e-08
+        },
+        "interval": {
+          "boundary_status": "floating roots of the exact T2 formula using quadrature C",
+          "feasible": true,
+          "lower_log_rate": -2.6731851798328794,
+          "lower_rate": 0.06903199543997067,
+          "maximum_horizon": 0.9702453628648765,
+          "maximum_rate": 1.6424961488594656,
+          "upper_log_rate": 4.551457727857977,
+          "upper_rate": 94.77045720720436
+        },
+        "rate": 0.7308871268198763,
+        "refined_pass": {
+          "ode_rtol": 1e-10,
+          "rate": 0.7308871268198763,
+          "root_second_moment": 0.28985069908390887,
+          "xatol": 1e-10
+        },
+        "refinement": {
+          "objective_difference": 2.070565940925917e-14,
+          "rate_difference": 3.1712686587859196e-08,
+          "same_rate_ode_tolerance_difference": 2.0761170560490427e-14
+        },
+        "root_second_moment": 0.28985069908390887,
+        "scalar_reconstruction_check": {
+          "available": true,
+          "max_abs_difference": 1.7568169141668477e-12,
+          "max_relative_difference": 4.937716902020384e-13
+        },
+        "status": "computed",
+        "variance": 0.0005149431437440066
+      },
+      "policy": 0.95
+    },
+    {
+      "absolute_moment": {
+        "absolute_moment": 0.5979869085172146,
+        "classification": "finite",
+        "horizon": 0.25,
+        "near_boundary_lower_bound": 0.5,
+        "s": 0.09798690851721459
+      },
+      "baselines": [
+        {
+          "exact_classification": {
+            "classification": "finite",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "1",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "12180751715634412637381792715825660672959245629774275844919450682885767/42886132718981177638905380257056353143821452973520757786148864000000000",
+              "float": 0.2840254166877415
+            },
+            "theta_upper": {
+              "exact": "1918236960929822936547522098680940868438294961022482734333760012991533472969/6753751066717874835752458188261491549442146235723022456920509251584000000000",
+              "float": 0.2840254166877415
+            }
+          },
+          "floating_classification": "finite",
+          "kind": "rate-1",
+          "moment": {
+            "atol": 1e-12,
+            "nfev": 53,
+            "root_second_moment": 0.36742302560760154,
+            "rtol": 1e-10,
+            "success": true,
+            "values": [
+              0.36742302560760154,
+              0.19550057146779518,
+              0.6239876521227904,
+              13.557829087666867,
+              46.2249150007587
+            ]
+          },
+          "rate": 1.0,
+          "scalar_reconstruction_check": {
+            "available": true,
+            "max_abs_difference": 1.829647544582258e-11,
+            "max_relative_difference": 5.6696869421557494e-12
+          },
+          "threshold": 0.8975625153636201,
+          "variance": 0.012761781215158141
+        },
+        {
+          "exact_classification": {
+            "classification": "finite",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "149/200",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "11462581071339370819690252515570760871426049946358442092338170034251209017366328153656387981707930091438395548885028995272003355848140268877165900295377560033873/31076168858769398552528015574225294961596195589995867416982269678852914544640000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 0.36885438238648066
+            },
+            "theta_upper": {
+              "exact": "10756355162603156069646392287727608377793094772144953649874663108409890725456734289147315297977934980557087580333333234919366748643224898638275158125461859340238765179/29161521934509079761719347784359353271487834869313015189189346858608190214876692480000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 0.36885438238648066
+            }
+          },
+          "floating_classification": "finite",
+          "kind": "rate-0.745",
+          "moment": {
+            "atol": 1e-12,
+            "nfev": 65,
+            "root_second_moment": 0.360648242746349,
+            "rtol": 1e-10,
+            "success": true,
+            "values": [
+              0.360648242746349,
+              0.1928319878193486,
+              0.7667950238787908,
+              13.324443299732527,
+              43.37004252902604
+            ]
+          },
+          "rate": 0.745,
+          "scalar_reconstruction_check": {
+            "available": true,
+            "max_abs_difference": 3.47721851312599e-11,
+            "max_relative_difference": 1.0664802374549254e-11
+          },
+          "threshold": 0.7940312975320571,
+          "variance": 0.005986998353905593
+        },
+        {
+          "exact_classification": {
+            "classification": "finite",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "log(20/19)/T",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "32462868198455853707962528684056616330030859422207788720529929199009133899107881612625676676771387488048256179567943242278672142645499331750324202301091563391017703840254601956279847397559016392703730695326964410857059692306989747500/25964601316214939830859792674193998818755803395615009301130444255784129403972049187633376145153211705355621420657140561640716071844596130785560840776202997099978389292622203008392172122565975491427626930671647290740136264674587515961",
+              "float": 1.2502740867498987
+            },
+            "theta_upper": {
+              "exact": "2181058062245085575649188973666797657217875532263355866738103278621952022245893685341687495080044846012379479949472133988086007971345023632781792683491773944572541241618825715955378083684427330872328049941344021154062059413261875/1744463942234274377241319045565304946167414901613478184703738528338089855144588093767359321765198117343250164589137752365376234173479632067544432350183889949904456269890678964176992074581125822633508615198581036172225020575212544",
+              "float": 1.2502740867498987
+            }
+          },
+          "floating_classification": "finite",
+          "kind": "paper-5pct",
+          "moment": {
+            "atol": 1e-12,
+            "nfev": 413,
+            "root_second_moment": 0.6684951985756571,
+            "rtol": 1e-10,
+            "success": true,
+            "values": [
+              0.6684951985756571,
+              1.4784510972662512,
+              7.38461227021373,
+              25.385831092497654,
+              37.89473684210527
+            ]
+          },
+          "rate": 0.2051731775502023,
+          "scalar_reconstruction_check": {
+            "available": true,
+            "max_abs_difference": 7.31613880589066e-10,
+            "max_relative_difference": 9.226923080417612e-11
+          },
+          "threshold": 0.28947384754108335,
+          "variance": 0.3138339541832137
+        }
+      ],
+      "common_mean": 0.595534419150097,
+      "common_mean_square": 0.3546612443924434,
+      "horizon": 0.25,
+      "optimizer": {
+        "evaluations": 27,
+        "evidence_class": "floating bounded scalar optimization in log(rate)",
+        "failed_evaluations": 0,
+        "first_pass": {
+          "ode_rtol": 1e-08,
+          "rate": 0.7275722876560601,
+          "root_second_moment": 0.36061073071929456,
+          "xatol": 1e-08
+        },
+        "interval": {
+          "boundary_status": "floating roots of the exact T2 formula using quadrature C",
+          "feasible": true,
+          "lower_log_rate": -1.7382899309478452,
+          "lower_rate": 0.17582080940879471,
+          "maximum_horizon": 0.9702453628648765,
+          "maximum_rate": 1.6424961488594656,
+          "upper_log_rate": 3.3400268011544876,
+          "upper_rate": 28.219883020717965
+        },
+        "rate": 0.7275722869390535,
+        "refined_pass": {
+          "ode_rtol": 1e-10,
+          "rate": 0.7275722869390535,
+          "root_second_moment": 0.36061073074516126,
+          "xatol": 1e-10
+        },
+        "refinement": {
+          "objective_difference": 2.5866697672682903e-11,
+          "rate_difference": 7.170065652317703e-10,
+          "same_rate_ode_tolerance_difference": 2.586658665038044e-11
+        },
+        "root_second_moment": 0.36061073074516126,
+        "scalar_reconstruction_check": {
+          "available": true,
+          "max_abs_difference": 3.5491609651217004e-11,
+          "max_relative_difference": 1.0894396496041736e-11
+        },
+        "status": "computed",
+        "variance": 0.005949486352717859
+      },
+      "policy": 0.95
+    },
+    {
+      "absolute_moment": {
+        "absolute_moment": 0.7114741528655779,
+        "classification": "finite",
+        "horizon": 0.5,
+        "near_boundary_lower_bound": 0.5,
+        "s": 0.21147415286557797
+      },
+      "baselines": [
+        {
+          "exact_classification": {
+            "classification": "finite",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "1",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "1037385495661714223646201347805149062990480042174008698881/1599123602872035903779546290900811702313997565952000000000",
+              "float": 0.6487212707001282
+            },
+            "theta_upper": {
+              "exact": "44054165592578186524772795187896727585831489497356980288863/67909235572055498149152876691620382762511698703155200000000",
+              "float": 0.6487212707001282
+            }
+          },
+          "floating_classification": "finite",
+          "kind": "rate-1",
+          "moment": {
+            "atol": 1e-12,
+            "nfev": 149,
+            "root_second_moment": 0.5436257433504995,
+            "rtol": 1e-10,
+            "success": true,
+            "values": [
+              0.5436257433504995,
+              0.3475272993302904,
+              2.108632348404654,
+              21.407006895641846,
+              59.35396574520462
+            ]
+          },
+          "rate": 1.0,
+          "scalar_reconstruction_check": {
+            "available": true,
+            "max_abs_difference": 1.432560736702726e-10,
+            "max_relative_difference": 2.4743177703746403e-11
+          },
+          "threshold": 0.8975625153636201,
+          "variance": 0.06825885693182793
+        },
+        {
+          "exact_classification": {
+            "classification": "finite",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "149/200",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "650979590484899698417097382045818175266799698416623179837841850269854784177385690812648612253309137509382885934011274293275916919919606984250022711/800494427167475467148849336279586722352266445208364035583508480000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 0.8132218893620168
+            },
+            "theta_upper": {
+              "exact": "2344687581516626861442972214257757701770110799844712516406946271110558391698415611906484440629195808740499470871161393374312794291133119432631335861851623/2883207661018649038066455539372732513021270453693059225101061073141760000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 0.8132218893620168
+            }
+          },
+          "floating_classification": "finite",
+          "kind": "rate-0.745",
+          "moment": {
+            "atol": 1e-12,
+            "nfev": 185,
+            "root_second_moment": 0.5325207453057483,
+            "rtol": 1e-10,
+            "success": true,
+            "values": [
+              0.5325207453057483,
+              0.39983737829290433,
+              2.683476765837693,
+              21.013334250637328,
+              52.24890524915353
+            ]
+          },
+          "rate": 0.745,
+          "scalar_reconstruction_check": {
+            "available": true,
+            "max_abs_difference": 1.708890806639829e-10,
+            "max_relative_difference": 2.5130851140106303e-11
+          },
+          "threshold": 0.7940312975320571,
+          "variance": 0.05715385888707675
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "log(20/19)/T",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "129851472793823414831850114736226465320123437688831154882119716796036535596431526450502706707085549952193024718271772969114688570581997327001296809204366253564070815361018407825119389590236065570814922781307857643428238769227958990000/25964601316214939830859792674193998818755803395615009301130444255784129403972049187633376145153211705355621420657140561640716071844596130785560840776202997099978389292622203008392172122565975491427626930671647290740136264674587515961",
+              "float": 5.001096346999595
+            },
+            "theta_upper": {
+              "exact": "2181058062245085575649188973666797657217875532263355866738103278621952022245893685341687495080044846012379479949472133988086007971345023632781792683491773944572541241618825715955378083684427330872328049941344021154062059413261875/436115985558568594310329761391326236541853725403369546175934632084522463786147023441839830441299529335812541147284438091344058543369908016886108087545972487476114067472669741044248018645281455658377153799645259043056255143803136",
+              "float": 5.001096346999595
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "paper-5pct",
+          "moment": null,
+          "rate": 0.10258658877510116,
+          "threshold": 0.14799230305673428
+        }
+      ],
+      "common_mean": 0.6894685536111648,
+      "common_mean_square": 0.4753668864186716,
+      "horizon": 0.5,
+      "optimizer": {
+        "evaluations": 29,
+        "evidence_class": "floating bounded scalar optimization in log(rate)",
+        "failed_evaluations": 0,
+        "first_pass": {
+          "ode_rtol": 1e-08,
+          "rate": 0.8018751938950894,
+          "root_second_moment": 0.530971600116042,
+          "xatol": 1e-08
+        },
+        "interval": {
+          "boundary_status": "floating roots of the exact T2 formula using quadrature C",
+          "feasible": true,
+          "lower_log_rate": -0.971034729084613,
+          "lower_rate": 0.3786909927237473,
+          "maximum_horizon": 0.9702453628648765,
+          "maximum_rate": 1.6424961488594656,
+          "upper_log_rate": 2.297948323003734,
+          "upper_rate": 9.953739632320906
+        },
+        "rate": 0.80187519593893,
+        "refined_pass": {
+          "ode_rtol": 1e-10,
+          "rate": 0.80187519593893,
+          "root_second_moment": 0.5309716004115285,
+          "xatol": 1e-10
+        },
+        "refinement": {
+          "objective_difference": 2.954864131154977e-10,
+          "rate_difference": 2.0438405412548377e-09,
+          "same_rate_ode_tolerance_difference": 2.954864131154977e-10
+        },
+        "root_second_moment": 0.5309716004115285,
+        "scalar_reconstruction_check": {
+          "available": true,
+          "max_abs_difference": 1.5783285789439105e-10,
+          "max_relative_difference": 2.432366672779912e-11
+        },
+        "status": "computed",
+        "variance": 0.05560471399285688
+      },
+      "policy": 0.95
+    },
+    {
+      "absolute_moment": {
+        "absolute_moment": 0.7939621286473948,
+        "classification": "finite",
+        "horizon": 0.65,
+        "near_boundary_lower_bound": 0.5,
+        "s": 0.29396212864739474
+      },
+      "baselines": [
+        {
+          "exact_classification": {
+            "classification": "finite",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "1",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "1246152805989674266482800145536297421636383586124226386926838000555265236981475554991037880259711/1361111123063589959065886010006608048851695697920000000000000000000000000000000000000000000000000",
+              "float": 0.9155408290138961
+            },
+            "theta_upper": {
+              "exact": "1837100138812690667549230631943445072844559054552788873980792045127092973555168402358551139644939021/2006573689118136727915086823534524309235410696929280000000000000000000000000000000000000000000000000",
+              "float": 0.9155408290138961
+            }
+          },
+          "floating_classification": "finite",
+          "kind": "rate-1",
+          "moment": {
+            "atol": 1e-12,
+            "nfev": 245,
+            "root_second_moment": 0.7074863949448691,
+            "rtol": 1e-10,
+            "success": true,
+            "values": [
+              0.7074863949448691,
+              0.6606492813209585,
+              4.498112383252286,
+              30.017929401823114,
+              68.95946984450026
+            ]
+          },
+          "rate": 1.0,
+          "scalar_reconstruction_check": {
+            "available": true,
+            "max_abs_difference": 3.7779557260364527e-10,
+            "max_relative_difference": 3.631232073467553e-11
+          },
+          "threshold": 0.8975625153636201,
+          "variance": 0.1573089398866161
+        },
+        {
+          "exact_classification": {
+            "classification": "finite",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "149/200",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "625698976400826982631700933833696351219824328722568255795507455129091917518947061624547085769680445893653337892756122147982321461840830308907454357520278333715297749552662516342897300739/557467671172616051314401221897026711515233346003093752591155200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 1.122395089000746
+            },
+            "theta_upper": {
+              "exact": "1420041137946690593295831413061409934692441729175629980916314520227669801548655519773236835701844129759686546400903182593257042770943462881734867569915535805672250875536851025948351096651894481/1265188302998487904168786604862441272856174000209927357099448415027200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 1.122395089000746
+            }
+          },
+          "floating_classification": "finite",
+          "kind": "rate-0.745",
+          "moment": {
+            "atol": 1e-12,
+            "nfev": 353,
+            "root_second_moment": 0.7321763759495383,
+            "rtol": 1e-10,
+            "success": true,
+            "values": [
+              0.7321763759495383,
+              1.1056902966947817,
+              6.777195043188946,
+              31.51880960331041,
+              58.42646403381502
+            ]
+          },
+          "rate": 0.745,
+          "scalar_reconstruction_check": {
+            "available": true,
+            "max_abs_difference": 6.329834434382065e-10,
+            "max_relative_difference": 6.452202525737765e-11
+          },
+          "threshold": 0.7940312975320571,
+          "variance": 0.18199892089128533
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "log(20/19)/T",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "219448989021561571065826693904222726391008609694124651750782321385301745157969279701349574334974579419206211773879296317803823684283575482632191607555378968523279677960121109224451768407498950814677219500410279417393723519995250693100/25964601316214939830859792674193998818755803395615009301130444255784129403972049187633376145153211705355621420657140561640716071844596130785560840776202997099978389292622203008392172122565975491427626930671647290740136264674587515961",
+              "float": 8.451852826429315
+            },
+            "theta_upper": {
+              "exact": "14743952500776778491388517461987552162792838598100285659149578163484395670382241312909807466741103159043685284458431625759461413886292359757604918540404391865310378793343261839858355845706728756696937617603485583001459521633650275/1744463942234274377241319045565304946167414901613478184703738528338089855144588093767359321765198117343250164589137752365376234173479632067544432350183889949904456269890678964176992074581125822633508615198581036172225020575212544",
+              "float": 8.451852826429315
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "paper-5pct",
+          "moment": null,
+          "rate": 0.07891276059623166,
+          "threshold": 0.11419272636787248
+        }
+      ],
+      "common_mean": 0.7417394792366475,
+      "common_mean_square": 0.550177455058253,
+      "horizon": 0.65,
+      "optimizer": {
+        "evaluations": 28,
+        "evidence_class": "floating bounded scalar optimization in log(rate)",
+        "failed_evaluations": 0,
+        "first_pass": {
+          "ode_rtol": 1e-08,
+          "rate": 0.9033695271466237,
+          "root_second_moment": 0.7011025837295375,
+          "xatol": 1e-08
+        },
+        "interval": {
+          "boundary_status": "floating roots of the exact T2 formula using quadrature C",
+          "feasible": true,
+          "lower_log_rate": -0.6260268986406572,
+          "lower_rate": 0.5347120514112279,
+          "maximum_horizon": 0.9702453628648765,
+          "maximum_rate": 1.6424961488594656,
+          "upper_log_rate": 1.829796255575471,
+          "upper_rate": 6.232616668256009
+        },
+        "rate": 0.9033695340779553,
+        "refined_pass": {
+          "ode_rtol": 1e-10,
+          "rate": 0.9033695340779553,
+          "root_second_moment": 0.7011025844245373,
+          "xatol": 1e-10
+        },
+        "refinement": {
+          "objective_difference": 6.949998354599529e-10,
+          "rate_difference": 6.931331619774994e-09,
+          "same_rate_ode_tolerance_difference": 6.949991693261381e-10
+        },
+        "root_second_moment": 0.7011025844245373,
+        "scalar_reconstruction_check": {
+          "available": true,
+          "max_abs_difference": 4.431939260030049e-10,
+          "max_relative_difference": 4.065168229470225e-11
+        },
+        "status": "computed",
+        "variance": 0.15092512936628433
+      },
+      "policy": 0.95
+    },
+    {
+      "absolute_moment": {
+        "absolute_moment": 0.8252512187720927,
+        "classification": "finite",
+        "horizon": 0.7,
+        "near_boundary_lower_bound": 0.5,
+        "s": 0.32525121877209273
+      },
+      "baselines": [
+        {
+          "exact_classification": {
+            "classification": "finite",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "1",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "492137994561252492803480809204217131821534272126515901368904259280158730852913537543/485461583416372781784739257211944960000000000000000000000000000000000000000000000000",
+              "float": 1.0137527074704764
+            },
+            "theta_upper": {
+              "exact": "1190481808843669780091620077465001241876291404274041965427289788273861890763871987606123/1174331570284205759137284263195694858240000000000000000000000000000000000000000000000000",
+              "float": 1.0137527074704764
+            }
+          },
+          "floating_classification": "finite",
+          "kind": "rate-1",
+          "moment": {
+            "atol": 1e-12,
+            "nfev": 293,
+            "root_second_moment": 0.7834614120080083,
+            "rtol": 1e-10,
+            "success": true,
+            "values": [
+              0.7834614120080083,
+              0.9146015589590611,
+              6.076949017893679,
+              34.515515644346806,
+              72.49509746893716
+            ]
+          },
+          "rate": 1.0,
+          "scalar_reconstruction_check": {
+            "available": true,
+            "max_abs_difference": 5.670912628374936e-10,
+            "max_relative_difference": 4.790312591040902e-11
+          },
+          "threshold": 0.8975625153636201,
+          "variance": 0.20867969272269415
+        },
+        {
+          "exact_classification": {
+            "classification": "finite",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "149/200",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "245230927455467279734258844233634670019240634877918410817859913876073991858069058255847140020997934767938338096718627300228512166357220909832622407746116264421738914494518107/198829569287306790564985563916980944524193405337600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 1.2333725226810253
+            },
+            "theta_upper": {
+              "exact": "17022214367466350288194109154789283350045550188780950650100112125119500629634597083289034788386703067415441921963907175928871966339562834078218289646191869205452638591394420068849/13801356892939826253487342948169398302257836844698828800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 1.2333725226810253
+            }
+          },
+          "floating_classification": "finite",
+          "kind": "rate-0.745",
+          "moment": {
+            "atol": 1e-12,
+            "nfev": 425,
+            "root_second_moment": 0.8632409023394635,
+            "rtol": 1e-10,
+            "success": true,
+            "values": [
+              0.8632409023394635,
+              2.099035789916887,
+              10.87861589487935,
+              39.19857930211227,
+              60.643893038437305
+            ]
+          },
+          "rate": 0.745,
+          "scalar_reconstruction_check": {
+            "available": true,
+            "max_abs_difference": 1.2800569493265357e-09,
+            "max_relative_difference": 1.06090447419056e-10
+          },
+          "threshold": 0.7940312975320571,
+          "variance": 0.2884591830541493
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "log(20/19)/T",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "254508886675893893070426224883003872027441937870109063568954644920231609769005791842985305145887677906298328447812675019464789598340714760922541746040557856985578798107596079337234003596862688518797248651363400981119347987686799620400/25964601316214939830859792674193998818755803395615009301130444255784129403972049187633376145153211705355621420657140561640716071844596130785560840776202997099978389292622203008392172122565975491427626930671647290740136264674587515961",
+              "float": 9.802148840119207
+            },
+            "theta_upper": {
+              "exact": "4274873802000367728272410388386923408147036043236177498806682426099025963601951623269707490356887898184263780700965382616648575623836246320252313659643876931362180833572898403272541044021477568509762977885034281461961636449993275/436115985558568594310329761391326236541853725403369546175934632084522463786147023441839830441299529335812541147284438091344058543369908016886108087545972487476114067472669741044248018645281455658377153799645259043056255143803136",
+              "float": 9.802148840119207
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "paper-5pct",
+          "moment": null,
+          "rate": 0.07327613483935798,
+          "threshold": 0.1061017737860529
+        }
+      ],
+      "common_mean": 0.7581436007019476,
+      "common_mean_square": 0.5747817192853142,
+      "horizon": 0.7,
+      "optimizer": {
+        "evaluations": 34,
+        "evidence_class": "floating bounded scalar optimization in log(rate)",
+        "failed_evaluations": 0,
+        "first_pass": {
+          "ode_rtol": 1e-08,
+          "rate": 0.9506195020122652,
+          "root_second_moment": 0.781233084915744,
+          "xatol": 1e-08
+        },
+        "interval": {
+          "boundary_status": "floating roots of the exact T2 formula using quadrature C",
+          "feasible": true,
+          "lower_log_rate": -0.5141305632679846,
+          "lower_rate": 0.5980203094794563,
+          "maximum_horizon": 0.9702453628648765,
+          "maximum_rate": 1.6424961488594656,
+          "upper_log_rate": 1.6809860657619196,
+          "upper_rate": 5.370849371550316
+        },
+        "rate": 0.9506195118717921,
+        "refined_pass": {
+          "ode_rtol": 1e-10,
+          "rate": 0.9506195118717921,
+          "root_second_moment": 0.7812330858777403,
+          "xatol": 1e-10
+        },
+        "refinement": {
+          "objective_difference": 9.619963714513347e-10,
+          "rate_difference": 9.859526861610846e-09,
+          "same_rate_ode_tolerance_difference": 9.619962604290322e-10
+        },
+        "root_second_moment": 0.7812330858777403,
+        "scalar_reconstruction_check": {
+          "available": true,
+          "max_abs_difference": 6.428351184695202e-10,
+          "max_relative_difference": 5.851930051647969e-11
+        },
+        "status": "computed",
+        "variance": 0.20645136659242613
+      },
+      "policy": 0.95
+    },
+    {
+      "absolute_moment": {
+        "absolute_moment": 0.859054419203688,
+        "classification": "finite",
+        "horizon": 0.75,
+        "near_boundary_lower_bound": 0.5,
+        "s": 0.3590544192036879
+      },
+      "baselines": [
+        {
+          "exact_classification": {
+            "classification": "finite",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "1",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "2843906513343368785352149378195665646544910606027555015260880249/2546021907830917754313256638092509666694198556935323648000000000",
+              "float": 1.1170000166126746
+            },
+            "theta_upper": {
+              "exact": "6413009187589296610969096847831226032958773416592136560731289465073/5741279402158719535976393718898609298395417745889154826240000000000",
+              "float": 1.1170000166126746
+            }
+          },
+          "floating_classification": "finite",
+          "kind": "rate-1",
+          "moment": {
+            "atol": 1e-12,
+            "nfev": 365,
+            "root_second_moment": 0.8815165587994122,
+            "rtol": 1e-10,
+            "success": true,
+            "values": [
+              0.8815165587994122,
+              1.4087691619633012,
+              8.683582767990794,
+              40.821999511227354,
+              76.21200059805629
+            ]
+          },
+          "rate": 1.0,
+          "scalar_reconstruction_check": {
+            "available": true,
+            "max_abs_difference": 9.398135603078117e-10,
+            "max_relative_difference": 7.528529755338588e-11
+          },
+          "threshold": 0.8975625153636201,
+          "variance": 0.2824955318355694
+        },
+        {
+          "exact_classification": {
+            "classification": "finite",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "149/200",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "1406238880656630461796032633003612532100506801275466116210958689121064659393306439080582597866111625738306748089394496976690304911640729671966335214371541/1042769307856617209480792851058862905159232666886511199516785251450880000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 1.3485618248077464
+            },
+            "theta_upper": {
+              "exact": "637154180675593352565626221720239805781950727096702218060140598650736701698044686411849608451197938416515258669293495627126807560332388553125047523419057818809/472469388466062548060861913679111252561501888272276245900259746365130670080000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 1.3485618248077464
+            }
+          },
+          "floating_classification": "finite",
+          "kind": "rate-0.745",
+          "moment": {
+            "atol": 1e-12,
+            "nfev": 593,
+            "root_second_moment": 1.1463180085200237,
+            "rtol": 1e-10,
+            "success": true,
+            "values": [
+              1.1463180085200237,
+              6.662820840410047,
+              23.97072024131249,
+              57.02256446993171,
+              62.94547896530111
+            ]
+          },
+          "rate": 0.745,
+          "scalar_reconstruction_check": {
+            "available": true,
+            "max_abs_difference": 4.019021559997782e-09,
+            "max_relative_difference": 2.258594611271226e-10
+          },
+          "threshold": 0.7940312975320571,
+          "variance": 0.547296981556181
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "log(20/19)/T",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "292165813786102683371662758156509546970277734799870098484769362791082205091970934513631090090942487392434305616111489180508049283809493985752917820709824070519159334562291417606518626578031147534333576257942679697713537230762907727500/25964601316214939830859792674193998818755803395615009301130444255784129403972049187633376145153211705355621420657140561640716071844596130785560840776202997099978389292622203008392172122565975491427626930671647290740136264674587515961",
+              "float": 11.252466780749089
+            },
+            "theta_upper": {
+              "exact": "19629522560205770180842700763001178914960879790370202800642929507597568200213043168075187455720403614111415319545249205892774071742105212695036134151425965501152871174569431443598402753159845977850952449472096190386558534719356875/1744463942234274377241319045565304946167414901613478184703738528338089855144588093767359321765198117343250164589137752365376234173479632067544432350183889949904456269890678964176992074581125822633508615198581036172225020575212544",
+              "float": 11.252466780749089
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "paper-5pct",
+          "moment": null,
+          "rate": 0.06839105918340077,
+          "threshold": 0.09907784379690315
+        }
+      ],
+      "common_mean": 0.7739644868880243,
+      "common_mean_square": 0.5990210269638427,
+      "horizon": 0.75,
+      "optimizer": {
+        "evaluations": 32,
+        "evidence_class": "floating bounded scalar optimization in log(rate)",
+        "failed_evaluations": 0,
+        "first_pass": {
+          "ode_rtol": 1e-08,
+          "rate": 1.0075989332453097,
+          "root_second_moment": 0.8814426705296546,
+          "xatol": 1e-08
+        },
+        "interval": {
+          "boundary_status": "floating roots of the exact T2 formula using quadrature C",
+          "feasible": true,
+          "lower_log_rate": -0.3998030202834938,
+          "lower_rate": 0.6704520984936767,
+          "maximum_horizon": 0.9702453628648765,
+          "maximum_rate": 1.6424961488594656,
+          "upper_log_rate": 1.5314181725638218,
+          "upper_rate": 4.624730840229789
+        },
+        "rate": 1.0075989290548661,
+        "refined_pass": {
+          "ode_rtol": 1e-10,
+          "rate": 1.0075989290548661,
+          "root_second_moment": 0.8814426718880225,
+          "xatol": 1e-10
+        },
+        "refinement": {
+          "objective_difference": 1.3583678626361007e-09,
+          "rate_difference": 4.190443547713585e-09,
+          "same_rate_ode_tolerance_difference": 1.3583686397922179e-09
+        },
+        "root_second_moment": 0.8814426718880225,
+        "scalar_reconstruction_check": {
+          "available": true,
+          "max_abs_difference": 9.484537599746545e-10,
+          "max_relative_difference": 7.568763653541332e-11
+        },
+        "status": "computed",
+        "variance": 0.28242164492417976
+      },
+      "policy": 0.95
+    },
+    {
+      "absolute_moment": {
+        "absolute_moment": 0.9815129172568676,
+        "classification": "finite",
+        "horizon": 0.9,
+        "near_boundary_lower_bound": 0.5,
+        "s": 0.4815129172568676
+      },
+      "baselines": [
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "1",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "30739532876619113106737324492382090466803501746606012848149866794391231877943209/21060199612930067163939057172480000000000000000000000000000000000000000000000000",
+              "float": 1.4596031111569496
+            },
+            "theta_upper": {
+              "exact": "10156703303998209312973150098453541303060898194746236602331252110545313804017309111/6958537719166363956461510831636480000000000000000000000000000000000000000000000000",
+              "float": 1.4596031111569496
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "rate-1",
+          "moment": null,
+          "rate": 1.0,
+          "threshold": 0.8975625153636201
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "149/200",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "103810430897537541125158973654198280796999912943244148672676802975416862637619442467386231449304527474276832757062022356650063652369545130896636284258086877644104867387/60318780057645686527221511352563910941081600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 1.7210300141734893
+            },
+            "theta_upper": {
+              "exact": "986463132304346559850228529059697425186992201151157820260143390063103895532270356294741396539999359875420599373510965031737922838179673943374792044925546951770834103440340731/573181829590628877410942624374614419289991754547200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 1.7210300141734893
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "rate-0.745",
+          "moment": null,
+          "rate": 0.745,
+          "threshold": 0.7940312975320571
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "log(20/19)/T",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "420718771851987864055194371745373747637199938111812941818067882419158375332438145699628769730957181845105400087200544419931590968685671339484201661822146661547589441769699641353386822272364852449440349811437458764707493612298587127600/25964601316214939830859792674193998818755803395615009301130444255784129403972049187633376145153211705355621420657140561640716071844596130785560840776202997099978389292622203008392172122565975491427626930671647290740136264674587515961",
+              "float": 16.203552164278687
+            },
+            "theta_upper": {
+              "exact": "7066628121674077265103372274680424409385916724533273008231454622735124552076695540507067484059345301080109515036289714121398665827157876570213008294513347580415033622844995319695424991137544552026342881809954628539161072498968475/436115985558568594310329761391326236541853725403369546175934632084522463786147023441839830441299529335812541147284438091344058543369908016886108087545972487476114067472669741044248018645281455658377153799645259043056255143803136",
+              "float": 16.203552164278687
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "paper-5pct",
+          "moment": null,
+          "rate": 0.05699254931950064,
+          "threshold": 0.08265026813981335
+        }
+      ],
+      "common_mean": 0.8176156638619915,
+      "common_mean_square": 0.668495373792485,
+      "horizon": 0.9,
+      "optimizer": {
+        "evaluations": 29,
+        "evidence_class": "floating bounded scalar optimization in log(rate)",
+        "failed_evaluations": 0,
+        "first_pass": {
+          "ode_rtol": 1e-08,
+          "rate": 1.2981405113176159,
+          "root_second_moment": 1.497714076175064,
+          "xatol": 1e-08
+        },
+        "interval": {
+          "boundary_status": "floating roots of the exact T2 formula using quadrature C",
+          "feasible": true,
+          "lower_log_rate": 0.008548312577267445,
+          "lower_rate": 1.008584953733495,
+          "maximum_horizon": 0.9702453628648765,
+          "maximum_rate": 1.6424961488594656,
+          "upper_log_rate": 1.0257816111667317,
+          "upper_rate": 2.789274737063053
+        },
+        "rate": 1.2981405226815257,
+        "refined_pass": {
+          "ode_rtol": 1e-10,
+          "rate": 1.2981405226815257,
+          "root_second_moment": 1.4977140845331391,
+          "xatol": 1e-10
+        },
+        "refinement": {
+          "objective_difference": 8.358075120895592e-09,
+          "rate_difference": 1.1363909813155715e-08,
+          "same_rate_ode_tolerance_difference": 8.358074898850987e-09
+        },
+        "root_second_moment": 1.4977140845331391,
+        "scalar_reconstruction_check": {
+          "available": true,
+          "max_abs_difference": 7.178343253144703e-09,
+          "max_relative_difference": 2.5424733299759736e-10
+        },
+        "status": "computed",
+        "variance": 0.8292187107406541
+      },
+      "policy": 0.95
+    },
+    {
+      "absolute_moment": {
+        "absolute_moment": 1.0323508170230258,
+        "classification": "finite",
+        "horizon": 0.95,
+        "near_boundary_lower_bound": 0.5,
+        "s": 0.5323508170230257
+      },
+      "baselines": [
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "1",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "1010407956610153499789277733737475330955011697462535381729998260712431440189158531423460929717119/637196065921736019618101760917220942537220423680000000000000000000000000000000000000000000000000",
+              "float": 1.5857096593158462
+            },
+            "theta_upper": {
+              "exact": "4754273644697923660573004423004118736544047674491658994191053194812512176244600613461519832709957461/2998199334138604624008000041559671654921396740423680000000000000000000000000000000000000000000000000",
+              "float": 1.5857096593158462
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "rate-1",
+          "moment": null,
+          "rate": 1.0,
+          "threshold": 0.8975625153636201
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "149/200",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "72327476486763475033048953739872746647836278807996633111108924423981946310856010225856256369614740292246245719152811571040423016570217158645367927938062527726862736906515486368180457969/38996289794193570374048444120984738599642361931059858453299200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 1.8547271257978193
+            },
+            "theta_upper": {
+              "exact": "42612298590025257266385974637811135712069769682940331355951637440001696359510106905858094843261399758034919983294429907672888774710756589689964192461672795548641729324028721542464895265371294793/22974969200224201962171677034856517209589362533881302289033903839641600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 1.8547271257978193
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "rate-0.745",
+          "moment": null,
+          "rate": 0.745,
+          "threshold": 0.7940312975320571
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "log(20/19)/T",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "468763816785702527542978914197777539805645610056680469124452177633691893503117810486314771212578835327416819232961100418504025739801010350474681481227762175366295643453276452248680996420752196710641871240521366092775941956912931953900/25964601316214939830859792674193998818755803395615009301130444255784129403972049187633376145153211705355621420657140561640716071844596130785560840776202997099978389292622203008392172122565975491427626930671647290740136264674587515961",
+              "float": 18.05395781266854
+            },
+            "theta_upper": {
+              "exact": "31494478418819035712374288779748558170226122685882858715698211343300987201230704816333967428955847576418759690470377614787961955106222141257369086349621215759627495528975843338395659528403130657796417041153007665464656137927501475/1744463942234274377241319045565304946167414901613478184703738528338089855144588093767359321765198117343250164589137752365376234173479632067544432350183889949904456269890678964176992074581125822633508615198581036172225020575212544",
+              "float": 18.05395781266854
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "paper-5pct",
+          "moment": null,
+          "rate": 0.053992941460579556,
+          "threshold": 0.07831913167780699
+        }
+      ],
+      "common_mean": 0.8308256422098091,
+      "common_mean_square": 0.6902712477533418,
+      "horizon": 0.95,
+      "optimizer": {
+        "evaluations": 24,
+        "evidence_class": "floating bounded scalar optimization in log(rate)",
+        "failed_evaluations": 0,
+        "first_pass": {
+          "ode_rtol": 1e-08,
+          "rate": 1.5196238714996622,
+          "root_second_moment": 2.2709599662672546,
+          "xatol": 1e-08
+        },
+        "interval": {
+          "boundary_status": "floating roots of the exact T2 formula using quadrature C",
+          "feasible": true,
+          "lower_log_rate": 0.23479875144790097,
+          "lower_rate": 1.264654233287951,
+          "maximum_horizon": 0.9702453628648765,
+          "maximum_rate": 1.6424961488594656,
+          "upper_log_rate": 0.7694978587033274,
+          "upper_rate": 2.1586820182002433
+        },
+        "rate": 1.5196238794880097,
+        "refined_pass": {
+          "ode_rtol": 1e-10,
+          "rate": 1.5196238794880097,
+          "root_second_moment": 2.2709600021838745,
+          "xatol": 1e-10
+        },
+        "refinement": {
+          "objective_difference": 3.591661990043349e-08,
+          "rate_difference": 7.988347539011897e-09,
+          "same_rate_ode_tolerance_difference": 3.5916626561771636e-08
+        },
+        "root_second_moment": 2.2709600021838745,
+        "scalar_reconstruction_check": {
+          "available": true,
+          "max_abs_difference": 5.356957899493864e-08,
+          "max_relative_difference": 6.974236224589469e-10
+        },
+        "status": "computed",
+        "variance": 1.5806887544305326
+      },
+      "policy": 0.95
+    },
+    {
+      "absolute_moment": {
+        "absolute_moment": 1.0905550318905326,
+        "classification": "finite",
+        "horizon": 1.0,
+        "near_boundary_lower_bound": 0.5,
+        "s": 0.5905550318905325
+      },
+      "baselines": [
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "1",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "1401972404766877519361022149057039999502469751201/815915283247897734345611269596115894272000000000",
+              "float": 1.7182818284590453
+            },
+            "theta_upper": {
+              "exact": "2356715612413121110045878232564884239163651651768923/1371553591139716091434972544191070818271232000000000",
+              "float": 1.7182818284590453
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "rate-1",
+          "moment": null,
+          "rate": 1.0,
+          "threshold": 0.8975625153636201
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "149/200",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "666173047236854557088358563761899477530829157697399597175804531225195547680058706717236478543171008156917447244635786696265727211813216349/334172857101176522902571237275269873461811856350904320000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 1.993498373912395
+            },
+            "theta_upper": {
+              "exact": "225360346322802764971977906893576736153381726586611007163738667071641740105127844442960412489388521751627279636217678174479906799891519893767601/113047670001614107109233726429088320763269794696803773317120000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 1.993498373912395
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "rate-0.745",
+          "moment": null,
+          "rate": 0.745,
+          "threshold": 0.7940312975320571
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "log(20/19)/T",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "519405891175293659327400458944905861280493750755324619528478867184146142385726105802010826828342199808772098873087091876458754282327989308005187236817465014256283261444073631300477558360944262283259691125231430573712955076911835960000/25964601316214939830859792674193998818755803395615009301130444255784129403972049187633376145153211705355621420657140561640716071844596130785560840776202997099978389292622203008392172122565975491427626930671647290740136264674587515961",
+              "float": 20.00438538799838
+            },
+            "theta_upper": {
+              "exact": "2181058062245085575649188973666797657217875532263355866738103278621952022245893685341687495080044846012379479949472133988086007971345023632781792683491773944572541241618825715955378083684427330872328049941344021154062059413261875/109028996389642148577582440347831559135463431350842386543983658021130615946536755860459957610324882333953135286821109522836014635842477004221527021886493121869028516868167435261062004661320363914594288449911314760764063785950784",
+              "float": 20.00438538799838
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "paper-5pct",
+          "moment": null,
+          "rate": 0.05129329438755058,
+          "threshold": 0.07441849577861114
+        }
+      ],
+      "common_mean": 0.8433472560147415,
+      "common_mean_square": 0.7112345942275939,
+      "horizon": 1.0,
+      "optimizer": {
+        "interval": {
+          "feasible": false,
+          "maximum_horizon": 0.9702453628648765,
+          "maximum_rate": 1.6424961488594656,
+          "reason": "horizon_at_or_above_floating_maximum"
+        },
+        "status": "infeasible"
+      },
+      "policy": 0.95
+    },
+    {
+      "absolute_moment": {
+        "absolute_moment": "infinity",
+        "classification": "nonintegrable",
+        "horizon": 1.5,
+        "s": null
+      },
+      "baselines": [
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "1",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "8062176356667054458624276777166493986491281946561769/2315593435770022328427564059977621279080448000000000",
+              "float": 3.481689070338065
+            },
+            "theta_upper": {
+              "exact": "330549230623349232803595347863826253446142608624014143/94939330866570915465530126459082472442298368000000000",
+              "float": 3.481689070338065
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "rate-1",
+          "moment": null,
+          "rate": 1.0,
+          "threshold": 0.8975625153636201
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "149/200",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "3515221770365092584069496039836854091092626691993216049115154250034035246727352305418709942671017979391136374263251382311174095398761585523541/948393160667016863481688097689459850843588962458408058880000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 3.7065026574978597
+            },
+            "theta_upper": {
+              "exact": "261873476226888302235425246479726119224127410673790362072396349122145064571900431844629567639201449984586018960562977432095105026304453438161212403/70652445290210755278795318213571690508294846936264025162383360000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 3.7065026574978597
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "rate-0.745",
+          "moment": null,
+          "rate": 0.745,
+          "threshold": 0.7940312975320571
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "log(20/19)/T",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "1168663255144410733486651032626038187881110939199480393939077451164328820367883738054524360363769949569737222464445956722032197135237975943011671282839296282076637338249165670426074506312124590137334305031770718790854148923051630910000/25964601316214939830859792674193998818755803395615009301130444255784129403972049187633376145153211705355621420657140561640716071844596130785560840776202997099978389292622203008392172122565975491427626930671647290740136264674587515961",
+              "float": 45.009867122996354
+            },
+            "theta_upper": {
+              "exact": "19629522560205770180842700763001178914960879790370202800642929507597568200213043168075187455720403614111415319545249205892774071742105212695036134151425965501152871174569431443598402753159845977850952449472096190386558534719356875/436115985558568594310329761391326236541853725403369546175934632084522463786147023441839830441299529335812541147284438091344058543369908016886108087545972487476114067472669741044248018645281455658377153799645259043056255143803136",
+              "float": 45.009867122996354
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "paper-5pct",
+          "moment": null,
+          "rate": 0.034195529591700385,
+          "threshold": 0.049664943117219904
+        }
+      ],
+      "common_mean": 0.9327639071927086,
+      "common_mean_square": 0.870048506561408,
+      "horizon": 1.5,
+      "optimizer": {
+        "interval": {
+          "feasible": false,
+          "maximum_horizon": 0.9702453628648765,
+          "maximum_rate": 1.6424961488594656,
+          "reason": "horizon_at_or_above_floating_maximum"
+        },
+        "status": "infeasible"
+      },
+      "policy": 0.95
+    },
+    {
+      "absolute_moment": {
+        "absolute_moment": "infinity",
+        "classification": "nonintegrable",
+        "horizon": 2.0,
+        "s": null
+      },
+      "baselines": [
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "1",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "6321507822147044267156945148666353348/989427502946028027927982317240234375",
+              "float": 6.38905609893065
+            },
+            "theta_upper": {
+              "exact": "1295909103540144074767173755476602436354/202832638103935745725236375034248046875",
+              "float": 6.38905609893065
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "rate-1",
+          "moment": null,
+          "rate": 1.0,
+          "threshold": 0.8975625153636201
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "149/200",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "57034345412608401040112127730387357348994999352460096196319088549591919138249946925113470022005785362422302326058409300388253/9209952818480057758901218118925853655040000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 6.192685949288166
+            },
+            "theta_upper": {
+              "exact": "34733935367726987102895299158515144087990408219378693730158510910075938494696922265227326194060362885709553725501199470074559745089/5608864336438628001856761468165217851203911680000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "float": 6.192685949288166
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "rate-0.745",
+          "moment": null,
+          "rate": 0.745,
+          "threshold": 0.7940312975320571
+        },
+        {
+          "exact_classification": {
+            "classification": "divergent",
+            "pC_lower": {
+              "exact": "3689927744544390931359755631/2539228263755215405517373440",
+              "float": 1.4531689794155915
+            },
+            "pC_upper": {
+              "exact": "412007540846869688245039/283341988972178712821760",
+              "float": 1.4540998400605023
+            },
+            "rate_exact": "log(20/19)/T",
+            "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+            "theta_lower": {
+              "exact": "2077623564701174637309601835779623445121975003021298478113915468736584569542904423208043307313368799235088395492348367505835017129311957232020748947269860057025133045776294525201910233443777049133038764500925722294851820307647343840000/25964601316214939830859792674193998818755803395615009301130444255784129403972049187633376145153211705355621420657140561640716071844596130785560840776202997099978389292622203008392172122565975491427626930671647290740136264674587515961",
+              "float": 80.01754155199352
+            },
+            "theta_upper": {
+              "exact": "2181058062245085575649188973666797657217875532263355866738103278621952022245893685341687495080044846012379479949472133988086007971345023632781792683491773944572541241618825715955378083684427330872328049941344021154062059413261875/27257249097410537144395610086957889783865857837710596635995914505282653986634188965114989402581220583488283821705277380709003658960619251055381755471623280467257129217041858815265501165330090978648572112477828690191015946487696",
+              "float": 80.01754155199352
+            }
+          },
+          "floating_classification": "divergent",
+          "kind": "paper-5pct",
+          "moment": null,
+          "rate": 0.02564664719377529,
+          "threshold": 0.03726254452335011
+        }
+      ],
+      "common_mean": 0.9736092613710675,
+      "common_mean_square": 0.9479149938275157,
+      "horizon": 2.0,
+      "optimizer": {
+        "interval": {
+          "feasible": false,
+          "maximum_horizon": 0.9702453628648765,
+          "maximum_rate": 1.6424961488594656,
+          "reason": "horizon_at_or_above_floating_maximum"
+        },
+        "status": "infeasible"
+      },
+      "policy": 0.95
+    }
+  ],
+  "implementation_corrections": [
+    {
+      "cause": "The first independent check incorrectly reconstructed the integrating-factor Id coordinate as 1/4+p*v. Its correct auxiliary equation is d(Id_tilde)/dt=P(v)/lambda, while dv/dt=exp(lambda*t)*P(v)/(lambda*p).",
+      "failed_check": "scalar reconstruction of the Id coordinate",
+      "initial_max_relative_discrepancy": 1.5381308990045512,
+      "initial_raw_results_sha256": "83ad4b1d1091c64ac312a6e41f4c73618b35fe94d2ab8d73a10dc2173b2920bc",
+      "initial_source_sha256": "b8018072ea3d6d2968e3e445303ba028ad0a06766456a15ae914cf4b10a761f4",
+      "scope": "The primary five-field ODE, feasibility formula, optimizers, and samples were unchanged; the erroneous independent comparison was corrected and every artifact regenerated.",
+      "stage": "first post-run audit before final regeneration"
+    }
+  ],
+  "limitations": [
+    "Finite sampled trees and sample variance do not establish integrability.",
+    "No failed or nonfinite raw root is discarded when forming a batch statistic; if one occurs, full-batch mean and variance are unavailable.",
+    "Floating rate optimization is diagnostic and is restricted to the analytical finite interval.",
+    "Exact rational certificates cover only their stated scalar inequalities."
+  ],
+  "provenance": {
+    "commands": {
+      "generate": "MPLCONFIGDIR=/tmp/parabolab-mpl /opt/miniconda3/envs/parabolab/bin/python docs/research/runs/2026-09-25-long-horizon/numerics/raw_experiment.py",
+      "verify": "MPLCONFIGDIR=/tmp/parabolab-mpl /opt/miniconda3/envs/parabolab/bin/python docs/research/runs/2026-09-25-long-horizon/numerics/raw_experiment.py --verify"
+    },
+    "environment": {
+      "mpmath_version": "1.3.0",
+      "numpy_version": "2.4.6",
+      "platform": "macOS-26.3-arm64-arm-64bit",
+      "python_executable": "/opt/miniconda3/envs/parabolab/bin/python",
+      "python_version": "3.11.15",
+      "scipy_version": "1.17.1"
+    },
+    "source_sha256": {
+      "docs/research/runs/2026-09-16-certified-tuple-policy/numerics/flat-explosion-checks.json": "f66849970f2c3233e55fe8f882dcf8f010ef05d42ef0b609731f32f93b2134d1",
+      "docs/research/runs/2026-09-16-certified-tuple-policy/numerics/flat_explosion_check.py": "a59bdb47f6da2cb256f10998dd77e9e141394d183efafd2b5a88cc55977c54f3",
+      "docs/research/runs/2026-09-25-long-horizon/04-theory.md": "cc2e6163aa1545fa69d6ec22ebd026521727d2aadae82f893b47007b29637727",
+      "docs/research/runs/2026-09-25-long-horizon/numerics/protocol.json": "bc5f3bc10162d726bf52a3ae548614fe8c632edbae3d316fa8ae2bb40bc60ddf",
+      "docs/research/runs/2026-09-25-long-horizon/numerics/raw_experiment.py": "fdd7603a87a5bc472fadcdd8fd8aa2ed0cabe8dc141170a6a2ae14153f2693dc",
+      "docs/research/runs/2026-09-25-long-horizon/numerics/wave-protocol.json": "d1dc77b7d04b8bd4af45d1b6e72ecf473c74b26446f07132cb6796471063214d",
+      "parabolab/library.py": "b37aebf5940be5832ed30986165cc53dc9d7bdade13faa37919a262c92612638",
+      "parabolab/tree.py": "e93b36fd8653c83ff1ceaea81c7553637ce3fa158f289cf9f11041b181aa795d"
+    }
+  },
+  "raw_sampling_rows": [
+    {
+      "absolute_integrability_regime": "finite",
+      "all_prescheduled_roots_finite": true,
+      "array_prefix": "h_0p05",
+      "completed_finite_samples": 4096,
+      "confidence_statement": "finite-variance regime and complete batch; summaries remain diagnostics, not a claim that this particular sample is reliable",
+      "errors": [],
+      "failed_samples": 0,
+      "finite_variance_certified": true,
+      "horizon": 0.05,
+      "max_nodes": 5,
+      "mean": 0.5193828757760244,
+      "mean_nodes": 1.0478515625,
+      "nonfinite_samples": 0,
+      "ordinary_clt_assumptions_available": true,
+      "policy": "raw-uniform-existing-exact-zero-code-pruning",
+      "rate": 1.0,
+      "root_branching_fraction": 0.044677734375,
+      "runtime_seconds": 0.0065833330154418945,
+      "sample_variance": 0.0009644448629675892,
+      "scheduled_samples": 4096,
+      "seed": 40260925,
+      "variance_regime": "finite",
+      "variance_regime_certificate": {
+        "classification": "finite",
+        "pC_lower": {
+          "exact": "194206723397073206913671349/253922826375521540551737344",
+          "float": 0.7648257786397851
+        },
+        "pC_upper": {
+          "exact": "21684607412993141486581/28334198897217871282176",
+          "float": 0.7653157052950013
+        },
+        "rate_exact": "1",
+        "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+        "theta_lower": {
+          "exact": "153319094073250388394895908364402357991208739813830889326778892149113194802675390600902722961488267/2990361137370707140067751563984517883327175448330240000000000000000000000000000000000000000000000000",
+          "float": 0.05127109637602404
+        },
+        "theta_upper": {
+          "exact": "103412225824034119811686751996609347304697832173646446312781708059555780157200603162361818963769311697/2016969269890489311984129138225557464089637416610037760000000000000000000000000000000000000000000000000",
+          "float": 0.05127109637602404
+        }
+      }
+    },
+    {
+      "absolute_integrability_regime": "finite",
+      "all_prescheduled_roots_finite": true,
+      "array_prefix": "h_0p5",
+      "completed_finite_samples": 4096,
+      "confidence_statement": "finite-variance regime and complete batch; summaries remain diagnostics, not a claim that this particular sample is reliable",
+      "errors": [],
+      "failed_samples": 0,
+      "finite_variance_certified": true,
+      "horizon": 0.5,
+      "max_nodes": 21,
+      "mean": 0.6810464697332779,
+      "mean_nodes": 1.7421875,
+      "nonfinite_samples": 0,
+      "ordinary_clt_assumptions_available": true,
+      "policy": "raw-uniform-existing-exact-zero-code-pruning",
+      "rate": 1.0,
+      "root_branching_fraction": 0.4072265625,
+      "runtime_seconds": 0.008817791007459164,
+      "sample_variance": 0.12127006771137397,
+      "scheduled_samples": 4096,
+      "seed": 40260926,
+      "variance_regime": "finite",
+      "variance_regime_certificate": {
+        "classification": "finite",
+        "pC_lower": {
+          "exact": "194206723397073206913671349/253922826375521540551737344",
+          "float": 0.7648257786397851
+        },
+        "pC_upper": {
+          "exact": "21684607412993141486581/28334198897217871282176",
+          "float": 0.7653157052950013
+        },
+        "rate_exact": "1",
+        "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+        "theta_lower": {
+          "exact": "1037385495661714223646201347805149062990480042174008698881/1599123602872035903779546290900811702313997565952000000000",
+          "float": 0.6487212707001282
+        },
+        "theta_upper": {
+          "exact": "44054165592578186524772795187896727585831489497356980288863/67909235572055498149152876691620382762511698703155200000000",
+          "float": 0.6487212707001282
+        }
+      }
+    },
+    {
+      "absolute_integrability_regime": "finite",
+      "all_prescheduled_roots_finite": true,
+      "array_prefix": "h_0p7",
+      "completed_finite_samples": 4096,
+      "confidence_statement": "ordinary sample summaries are diagnostic only",
+      "errors": [],
+      "failed_samples": 0,
+      "finite_variance_certified": false,
+      "horizon": 0.7,
+      "max_nodes": 24,
+      "mean": 0.7446397478206999,
+      "mean_nodes": 2.2412109375,
+      "nonfinite_samples": 0,
+      "ordinary_clt_assumptions_available": false,
+      "policy": "raw-uniform-existing-exact-zero-code-pruning",
+      "rate": 1.0,
+      "root_branching_fraction": 0.5166015625,
+      "runtime_seconds": 0.011452874634414911,
+      "sample_variance": 0.35632587342986544,
+      "scheduled_samples": 4096,
+      "seed": 40260927,
+      "variance_regime": "infinite",
+      "variance_regime_certificate": {
+        "classification": "divergent",
+        "pC_lower": {
+          "exact": "194206723397073206913671349/253922826375521540551737344",
+          "float": 0.7648257786397851
+        },
+        "pC_upper": {
+          "exact": "21684607412993141486581/28334198897217871282176",
+          "float": 0.7653157052950013
+        },
+        "rate_exact": "1",
+        "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+        "theta_lower": {
+          "exact": "492137994561252492803480809204217131821534272126515901368904259280158730852913537543/485461583416372781784739257211944960000000000000000000000000000000000000000000000000",
+          "float": 1.0137527074704764
+        },
+        "theta_upper": {
+          "exact": "1190481808843669780091620077465001241876291404274041965427289788273861890763871987606123/1174331570284205759137284263195694858240000000000000000000000000000000000000000000000000",
+          "float": 1.0137527074704764
+        }
+      }
+    },
+    {
+      "absolute_integrability_regime": "finite",
+      "all_prescheduled_roots_finite": true,
+      "array_prefix": "h_1p0",
+      "completed_finite_samples": 4096,
+      "confidence_statement": "ordinary sample summaries are diagnostic only",
+      "errors": [],
+      "failed_samples": 0,
+      "finite_variance_certified": false,
+      "horizon": 1.0,
+      "max_nodes": 42,
+      "mean": 0.9017049699329664,
+      "mean_nodes": 3.15283203125,
+      "nonfinite_samples": 0,
+      "ordinary_clt_assumptions_available": false,
+      "policy": "raw-uniform-existing-exact-zero-code-pruning",
+      "rate": 1.0,
+      "root_branching_fraction": 0.625732421875,
+      "runtime_seconds": 0.015863999724388123,
+      "sample_variance": 13.071827907163117,
+      "scheduled_samples": 4096,
+      "seed": 40260928,
+      "variance_regime": "infinite",
+      "variance_regime_certificate": {
+        "classification": "divergent",
+        "pC_lower": {
+          "exact": "194206723397073206913671349/253922826375521540551737344",
+          "float": 0.7648257786397851
+        },
+        "pC_upper": {
+          "exact": "21684607412993141486581/28334198897217871282176",
+          "float": 0.7653157052950013
+        },
+        "rate_exact": "1",
+        "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+        "theta_lower": {
+          "exact": "1401972404766877519361022149057039999502469751201/815915283247897734345611269596115894272000000000",
+          "float": 1.7182818284590453
+        },
+        "theta_upper": {
+          "exact": "2356715612413121110045878232564884239163651651768923/1371553591139716091434972544191070818271232000000000",
+          "float": 1.7182818284590453
+        }
+      }
+    },
+    {
+      "absolute_integrability_regime": "nonintegrable",
+      "all_prescheduled_roots_finite": true,
+      "array_prefix": "h_1p5",
+      "completed_finite_samples": 4096,
+      "confidence_statement": "ordinary sample summaries are diagnostic only",
+      "errors": [],
+      "failed_samples": 0,
+      "finite_variance_certified": false,
+      "horizon": 1.5,
+      "max_nodes": 100,
+      "mean": 0.8010975970005919,
+      "mean_nodes": 5.71923828125,
+      "nonfinite_samples": 0,
+      "ordinary_clt_assumptions_available": false,
+      "policy": "raw-uniform-existing-exact-zero-code-pruning",
+      "rate": 1.0,
+      "root_branching_fraction": 0.778564453125,
+      "runtime_seconds": 0.028761583846062422,
+      "sample_variance": 18.605921440357033,
+      "scheduled_samples": 4096,
+      "seed": 40260929,
+      "variance_regime": "infinite",
+      "variance_regime_certificate": {
+        "classification": "divergent",
+        "pC_lower": {
+          "exact": "194206723397073206913671349/253922826375521540551737344",
+          "float": 0.7648257786397851
+        },
+        "pC_upper": {
+          "exact": "21684607412993141486581/28334198897217871282176",
+          "float": 0.7653157052950013
+        },
+        "rate_exact": "1",
+        "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+        "theta_lower": {
+          "exact": "8062176356667054458624276777166493986491281946561769/2315593435770022328427564059977621279080448000000000",
+          "float": 3.481689070338065
+        },
+        "theta_upper": {
+          "exact": "330549230623349232803595347863826253446142608624014143/94939330866570915465530126459082472442298368000000000",
+          "float": 3.481689070338065
+        }
+      }
+    },
+    {
+      "absolute_integrability_regime": "nonintegrable",
+      "all_prescheduled_roots_finite": true,
+      "array_prefix": "h_2p0",
+      "completed_finite_samples": 4096,
+      "confidence_statement": "ordinary sample summaries are diagnostic only",
+      "errors": [],
+      "failed_samples": 0,
+      "finite_variance_certified": false,
+      "horizon": 2.0,
+      "max_nodes": 129,
+      "mean": 1.6944065864302915,
+      "mean_nodes": 10.1669921875,
+      "nonfinite_samples": 0,
+      "ordinary_clt_assumptions_available": false,
+      "policy": "raw-uniform-existing-exact-zero-code-pruning",
+      "rate": 1.0,
+      "root_branching_fraction": 0.865478515625,
+      "runtime_seconds": 0.0500265839509666,
+      "sample_variance": 3293.1659318207944,
+      "scheduled_samples": 4096,
+      "seed": 40260930,
+      "variance_regime": "infinite",
+      "variance_regime_certificate": {
+        "classification": "divergent",
+        "pC_lower": {
+          "exact": "194206723397073206913671349/253922826375521540551737344",
+          "float": 0.7648257786397851
+        },
+        "pC_upper": {
+          "exact": "21684607412993141486581/28334198897217871282176",
+          "float": 0.7653157052950013
+        },
+        "rate_exact": "1",
+        "rule": "finite if theta_upper<pC_lower; divergent if theta_lower>=pC_upper",
+        "theta_lower": {
+          "exact": "6321507822147044267156945148666353348/989427502946028027927982317240234375",
+          "float": 6.38905609893065
+        },
+        "theta_upper": {
+          "exact": "1295909103540144074767173755476602436354/202832638103935745725236375034248046875",
+          "float": 6.38905609893065
+        }
+      }
+    }
+  ],
+  "retained_failures": [
+    {
+      "cause": "component_exceeded_1e12",
+      "dx": 0.1,
+      "kind": "wave_safety_stop",
+      "policy": "uniform",
+      "rate": 0.75,
+      "stopping_observed_max_component": 6.72463473171395e+129,
+      "stopping_time": 0.386
+    },
+    {
+      "cause": "component_exceeded_1e12",
+      "dx": 0.05,
+      "kind": "wave_safety_stop",
+      "policy": "uniform",
+      "rate": 0.75,
+      "stopping_observed_max_component": 5.930440044104863e+72,
+      "stopping_time": 0.383
+    },
+    {
+      "cause": "component_exceeded_1e12",
+      "dx": 0.1,
+      "kind": "wave_safety_stop",
+      "policy": "static-supported",
+      "rate": 0.75,
+      "stopping_observed_max_component": 2.2465620672213775e+107,
+      "stopping_time": 0.51
+    },
+    {
+      "cause": "component_exceeded_1e12",
+      "dx": 0.05,
+      "kind": "wave_safety_stop",
+      "policy": "static-supported",
+      "rate": 0.75,
+      "stopping_observed_max_component": 644302598797516.9,
+      "stopping_time": 0.507
+    },
+    {
+      "cause": "component_exceeded_1e12",
+      "dx": 0.1,
+      "kind": "wave_safety_stop",
+      "policy": "uniform",
+      "rate": 1.0,
+      "stopping_observed_max_component": 2805296088085.7524,
+      "stopping_time": 0.466
+    },
+    {
+      "cause": "component_exceeded_1e12",
+      "dx": 0.05,
+      "kind": "wave_safety_stop",
+      "policy": "uniform",
+      "rate": 1.0,
+      "stopping_observed_max_component": 1.9719218414577096e+106,
+      "stopping_time": 0.465
+    },
+    {
+      "cause": "component_exceeded_1e12",
+      "dx": 0.1,
+      "kind": "wave_safety_stop",
+      "policy": "static-supported",
+      "rate": 1.0,
+      "stopping_observed_max_component": 1.7408816685504018e+28,
+      "stopping_time": 0.594
+    },
+    {
+      "cause": "component_exceeded_1e12",
+      "dx": 0.05,
+      "kind": "wave_safety_stop",
+      "policy": "static-supported",
+      "rate": 1.0,
+      "stopping_observed_max_component": 12128163293245.898,
+      "stopping_time": 0.592
+    },
+    {
+      "cause": "component_exceeded_1e12",
+      "dx": 0.1,
+      "kind": "wave_safety_stop",
+      "policy": "uniform",
+      "rate": 2.0,
+      "stopping_observed_max_component": 3.075363582056141e+27,
+      "stopping_time": 0.606
+    },
+    {
+      "cause": "component_exceeded_1e12",
+      "dx": 0.05,
+      "kind": "wave_safety_stop",
+      "policy": "uniform",
+      "rate": 2.0,
+      "stopping_observed_max_component": 2.0961129330775952e+21,
+      "stopping_time": 0.604
+    },
+    {
+      "cause": "component_exceeded_1e12",
+      "dx": 0.1,
+      "kind": "wave_safety_stop",
+      "policy": "static-supported",
+      "rate": 2.0,
+      "stopping_observed_max_component": 1.0439611088795824e+65,
+      "stopping_time": 0.686
+    },
+    {
+      "cause": "component_exceeded_1e12",
+      "dx": 0.05,
+      "kind": "wave_safety_stop",
+      "policy": "static-supported",
+      "rate": 2.0,
+      "stopping_observed_max_component": 1.0691275104256618e+30,
+      "stopping_time": 0.6835
+    }
+  ],
+  "run_date": "2026-09-25",
+  "schema_version": 1,
+  "scope": "raw flat long-horizon moments, rate optimization, and retained raw sampling diagnostic",
+  "thresholds": {
+    "C_quadrature": 1.5301212285131,
+    "C_quadrature_inside_exact_enclosure": true,
+    "C_quadrature_reported_error": 1.698757162449193e-14,
+    "absolute": {
+      "T_abs_lower": {
+        "exact": "806805446296017727280546964123309985593866991758786978679967099615296697150322014464394154332959877471053508802200611572437440383415207881316708540877947695325136062105274417102204723304993552729490348207828950517769789585143187/558145615461906868626399748105557976497876896988778032597347906522824853833806602015545105448108410962063081163864602221767335652099107622440143722052932372549874207252437500000000000000000000000000000000000000000000000000000000",
+        "float": 1.4455106766866321
+      },
+      "T_abs_upper": {
+        "exact": "706224896531938978033279928707997021048177131815812417001288310681749120771922034634010866789927093352175581495762992211367849082193447589491926416669314547706671029691443597312261614426477563732137370850731010803908934328539/488564289369852478621172378026958541077604468574410490535309173966513938686128220808061050618956610495319655786719947323897809607761688015300978381027058675924681121875000000000000000000000000000000000000000000000000000000000",
+        "float": 1.4455106766866321
+      },
+      "formula": "(3*pi-2*log(3))/5",
+      "log3_lower": {
+        "exact": "7376435762510466727449815942477190168223/6714321183730072818542271827044152115200",
+        "float": 1.0986122886681098
+      },
+      "log3_upper": {
+        "exact": "224981290756569235191101883106442614113539/204786796103767220965539290724846639513600",
+        "float": 1.0986122886681098
+      },
+      "pi_lower": {
+        "exact": "85383267959264234339442563186774817022883176352893816517555095654972290785438800759505882319569107829583994279530296756633774222409667853588180115145813536706325758835677466503718289294129723120514711777682452/27178338306113499232787570722939062433813587951347154219728399455650448037973832092096927577512650291369372833345509438714006314809350916445206915443344081698377779931878606145545518302242271602153778076171875",
+        "float": 3.141592653589793
+      },
+      "pi_upper": {
+        "exact": "37369473555813201072916511960038697249209212897476574920232301917870422682023708535250238787439191824676195337367776557603578581517778271084821911357019771945775519336790448937156813764956925727217127308872/11895072874299075310650886155240219198636923351896480374874564282685198104888671457124756034344921434922958646270858982998374641029284727352990544389692092968600768514153553923051731544546782970428466796875",
+        "float": 3.141592653589793
+      },
+      "series_terms": 30
+    },
+    "common_rate_exact_caps": {
+      "cap_checks": [
+        {
+          "horizon_upper": {
+            "exact": "203/288",
+            "float": 0.7048611111111112
+          },
+          "policy": "1/2",
+          "sqrt_bound_certified": true,
+          "sqrt_pC_upper": {
+            "exact": "7/8",
+            "float": 0.875
+          },
+          "target": {
+            "exact": "141/200",
+            "float": 0.705
+          },
+          "target_certified": true
+        },
+        {
+          "horizon_upper": {
+            "exact": "1943/2000",
+            "float": 0.9715
+          },
+          "policy": "19/20",
+          "sqrt_bound_certified": true,
+          "sqrt_pC_upper": {
+            "exact": "603/500",
+            "float": 1.206
+          },
+          "target": {
+            "exact": "243/250",
+            "float": 0.972
+          },
+          "target_certified": true
+        },
+        {
+          "horizon_upper": {
+            "exact": "17951/18000",
+            "float": 0.9972777777777778
+          },
+          "policy": "1",
+          "sqrt_bound_certified": true,
+          "sqrt_pC_upper": {
+            "exact": "619/500",
+            "float": 1.238
+          },
+          "target": {
+            "exact": "1",
+            "float": 1.0
+          },
+          "target_certified": true
+        }
+      ],
+      "exp_degree": 40,
+      "h_z_star_upper": {
+        "exact": "29/36",
+        "float": 0.8055555555555556
+      },
+      "log_upper": {
+        "exact": "319/200",
+        "float": 1.595
+      },
+      "sign_method": "compare exp(2*z^2/(1+z^2)) with 1+z^2 using rational Taylor bounds",
+      "z_star_bracket": [
+        {
+          "exact": "99/50",
+          "float": 1.98
+        },
+        {
+          "exact": "1981/1000",
+          "float": 1.981
+        }
+      ]
+    }
+  }
+}
