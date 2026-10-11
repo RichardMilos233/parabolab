@@ -10,6 +10,7 @@ probabilities `q_c(Z)`; runtime is a supporting measurement.
 python demo/allen_cahn.py        # Allen-Cahn d=1 (JCP2024 Table 1 / Fig. 1)
 python demo/variance_reduction.py # Allen-Cahn: baseline / selected rate / terminal q / both
 python demo/rate_variance.py     # finite-depth rate diagnostics + binary Riccati control
+python demo/time_lambda.py       # full-tree second-moment T-lambda boundaries
 python demo/merton.py            # Merton HJB d=1 (JCP2024 eq. (4.6), Table 5)
 python demo/merton_vasicek.py     # retained stochastic-rate Merton example (d=1 reduced)
 python demo/dym.py               # Dym non-integrability diagnostic (JEQ Fig. 6)
@@ -96,6 +97,43 @@ it does not change the rate within a tree. It is optional when the research
 question concerns only one starting state. Python selects and checks the
 rates; Lean currently verifies selected mathematical lemmas, not the entire
 sampler or numerical verifier.
+
+## Full-tree second-moment boundary
+
+`time_lambda.py` plots the analytic boundary
+$T_2(\lambda)=\log(1+K\lambda^2)/\lambda$ for five spatially constant
+polynomial examples: Allen–Cahn at terminal values `0.5` and `0.3`,
+Fisher–KPP at `0.5` and `0.2`, and the standard binary control mechanism at
+terminal value `1`. The `--T` option draws a reference horizontal; it does
+not enter the boundary calculation. Equality is excluded from the displayed
+safe interval.
+
+This calculation applies to the raw uniform semilinear mechanism (tuple
+probability `1/2`) with a caller-asserted globally flat terminal condition,
+or to the library's standard binary mechanism. It makes no universal claim
+for spatial waves, custom proposals, non-polynomial nonlinearities, or fully
+nonlinear PDEs. `K` uses converged floating-point Gauss–Legendre quadrature
+after mapping the infinite interval to a finite one; this numerical check is
+not a formal certificate. The demo performs no Monte Carlo or depth
+truncation.
+
+The boundary follows from the derivative-code second-moment recurrence
+$F_k'=\lambda F_k+2F_0F_{k+1}/\lambda$ with
+$F_k(0)=f^{(k)}(a)^2$. After removing the common exponential factor, its
+exponential generating function reduces to
+$v'=2e^{\lambda t}P(v)/\lambda$, where
+$P(v)=\sum_k f^{(k)}(a)^2v^k/k!$. Thus
+$\int_0^{v(T)}ds/P(s)=2(e^{\lambda T}-1)/\lambda^2$; taking the explosion
+endpoint gives $K=\tfrac12\int_0^\infty ds/P(s)$ and the displayed $T_2$.
+The root moment reaches the same endpoint because its remaining integrand
+tends to a positive constant. This conditional derivation is exact; the
+reported `K` values and interval roots are floating-point approximations,
+and the plot does not compute an optimal rate.
+
+That recurrence is specific to the raw derivative-coded semilinear
+mechanism. The binary panel instead follows its separate Riccati moment
+equation $M'=\lambda M+M^2/\lambda$, $M(0)=1$, which gives the same boundary
+form with $K=1$.
 
 The original Merton demos remain benchmarks. Multifactor Merton is no longer
 the active research roadmap. Dym is a negative control: its specified

@@ -63,6 +63,12 @@ from .rate_variance import (
     compare_rate_variance,
     sweep_rate_variance,
 )
+from .time_lambda import (
+    TimeLambdaComparison,
+    TimeLambdaSweep,
+    compare_time_lambda,
+    sweep_time_lambda,
+)
 from .integrability import truncated_normal_inverse_power
 from .proposals import (
     FrozenTupleProposal,
@@ -100,11 +106,14 @@ __all__ = [
     "SemilinearMechanism",
     "Solver",
     "TSweep",
+    "TimeLambdaComparison",
+    "TimeLambdaSweep",
     "TreeSample",
     "TerminalTupleProposal",
     "TuplePilotResult",
     "compare",
     "compare_rate_variance",
+    "compare_time_lambda",
     "default_rate",
     "estimate",
     "estimate_parallel",
@@ -129,6 +138,7 @@ __all__ = [
     "short_time_rate_1d",
     "sqrt_optimal_probabilities",
     "sweep_rate_variance",
+    "sweep_time_lambda",
     "sweep_T",
     "truncated_normal_inverse_power",
     "validate_probabilities",
