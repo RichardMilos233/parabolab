@@ -1,6 +1,6 @@
 # Research: reliable branching-estimator algorithms
 
-**Reviewed baseline, updated 5 October 2026:** improve branching Monte Carlo PDE
+**Reviewed baseline, updated 12 October 2026:** improve branching Monte Carlo PDE
 estimation through exponential-rate selection, tuple proposals, moment
 control and verifiable approximation error. Algorithmic and mathematical
 contributions are primary. Runtime measurements support practical claims;
@@ -9,10 +9,14 @@ they do not determine whether a theoretical question is worth studying.
 `main` contains only user-reviewed work; ongoing results remain on
 `research/branching-mc-theory`, under the [branch policy](../../AGENTS.md).
 The latest accepted checkpoint is [how the old λ fails as T grows, and how
-retuning helps](results/lambda-horizon-checkpoint.md). It includes an exact
-flat Allen–Cahn second-moment boundary and archived numerical comparisons,
-with explicit limits on the demo and Lean coverage. Later research is not
-part of this checkpoint. The [September integration record](results/integration-2026-09-16.md)
+retuning helps](results/lambda-horizon-checkpoint.md). Its
+[12 October supplement](results/lambda-horizon-checkpoint.md#flat-polynomial-derivation)
+derives the exact boundary for flat polynomial semilinear data from the original
+codewise recursion, including the zero spatial-derivative subtree and the root
+explosion argument. The five-case [boundary demo](../../demo/time_lambda.py)
+uses floating-point integrals and roots; this adds no Lean coverage or
+finite-horizon variance optimizer. Later research is not part of this checkpoint.
+The [September integration record](results/integration-2026-09-16.md)
 retains its historical code/test/witness checks. For every documentation area and its status, use
 [the repository documentation map](../documentation-map.md).
 
@@ -67,6 +71,7 @@ which documents are frozen parts of numerical certificates.
 | Component | Available result | Boundary |
 |---|---|---|
 | Single-state numerical selection | Finite-depth quadrature and recursive rate derivatives, including child dependence | Bracket-constrained approximate objective; no generic full-tree convergence certificate |
+| Flat polynomial time boundary | Exact full-tree second-moment boundary T₂(λ)=log(1+Kλ²)/λ, with K determined by squared derivatives at the constant terminal value | Raw uniform derivative-coded mechanism and one common exponential rate; finite K assumes degree at least two and f(a)≠0; plotted integrals/roots are floating estimates, not variance minimizers |
 | Flat Allen–Cahn certificate | At phi=1/2 and T=1/20, selected 1907/2560 has global additive variance excess below 1e-4 | Specified raw 1D mechanism and uniform tuples; not a tight relative-variance result |
 | Wave-root certificate | At x=0,T=1/20, rounded historical rate 0.73055 has global additive excess below 6.130773e-6 | Separate rational residual verifier; does not certify the old quadrature algorithm |
 | Weighted-profile certificate | At five equally weighted points, lambda=1/2 has relative variance excess below 0.93%; implemented short-time rule about 0.475 is within 1.60% | Bounds concern weighted variance, not error in lambda or every PDE value; actual grid candidates are not strictly ordered by the saved intervals |
@@ -84,6 +89,7 @@ certificates through conventional mathematics.
 | Purpose | Code or runnable guide |
 |---|---|
 | Finite-depth moment evaluation | [moments.py](../../parabolab/moments.py) |
+| Flat polynomial time boundary | [time_lambda.py](../../parabolab/time_lambda.py), [five-case demo](../../demo/time_lambda.py), [full derivation](results/lambda-horizon-checkpoint.md#flat-polynomial-derivation) |
 | Recursive derivatives and pointwise selection | [rate_optimization.py](../../parabolab/rate_optimization.py) |
 | Shared-profile short-time rule and numerical selection | [profile_rates.py](../../parabolab/profile_rates.py) |
 | Flat moment/gap and depth bounds | [rate_certificate.py](../../parabolab/rate_certificate.py) |

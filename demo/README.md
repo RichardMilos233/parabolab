@@ -117,18 +117,23 @@ after mapping the infinite interval to a finite one; this numerical check is
 not a formal certificate. The demo performs no Monte Carlo or depth
 truncation.
 
-The boundary follows from the derivative-code second-moment recurrence
-$F_k'=\lambda F_k+2F_0F_{k+1}/\lambda$ with
-$F_k(0)=f^{(k)}(a)^2$. After removing the common exponential factor, its
-exponential generating function reduces to
-$v'=2e^{\lambda t}P(v)/\lambda$, where
-$P(v)=\sum_k f^{(k)}(a)^2v^k/k!$. Thus
-$\int_0^{v(T)}ds/P(s)=2(e^{\lambda T}-1)/\lambda^2$; taking the explosion
-endpoint gives $K=\tfrac12\int_0^\infty ds/P(s)$ and the displayed $T_2$.
-The root moment reaches the same endpoint because its remaining integrand
-tends to a positive constant. This conditional derivation is exact; the
-reported `K` values and interval roots are floating-point approximations,
-and the plot does not compute an optimal rate.
+The [full derivation, reviewed 12 October 2026](../docs/research/results/lambda-horizon-checkpoint.md#flat-polynomial-derivation)
+starts from the original codewise first-step recursion. It proves spatial
+independence and the pathwise-zero `D_x` subtree before simplifying the moment
+system. With remaining time `r`, the derivative moments satisfy
+$B_k'=\lambda B_k+2B_0B_{k+1}/\lambda$ and $B_k(0)=f^{(k)}(a)^2$.
+After removing the common exponential factor, the cumulative variable
+$z(r)=2\int_0^r B_0(s)ds/\lambda$ gives the polynomial
+$Q(z)=\sum_k f^{(k)}(a)^2z^k/k!$ and
+$\int_0^{z(r)}dw/Q(w)=2(e^{\lambda r}-1)/\lambda^2$.
+For degree at least two and `f(a) != 0`,
+$K=\tfrac12\int_0^\infty dw/Q(w)$ is finite. The root moment is squeezed
+between $a^2e^{\lambda r}+z(r)/2$ and $e^{\lambda r}(a^2+z(r)/2)$,
+so it reaches the same explosion endpoint. Equilibrium data `f(a)=0` and
+degree at most one instead have no finite-time boundary.
+This conditional derivation is exact; the reported `K` values and interval
+roots are floating-point approximations, and the plot does not compute an
+optimal rate or supply a new Lean proof.
 
 That recurrence is specific to the raw derivative-coded semilinear
 mechanism. The binary panel instead follows its separate Riccati moment

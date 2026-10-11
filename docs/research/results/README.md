@@ -1,7 +1,11 @@
 # Research results and evidence
 
-Updated 5 October 2026: the [longer-horizon λ checkpoint](lambda-horizon-checkpoint.md)
-is the latest user-reviewed addition to main. Its frozen evidence is under
+Updated 12 October 2026: the [longer-horizon λ checkpoint](lambda-horizon-checkpoint.md)
+now includes the user-reviewed [flat-polynomial derivation](lambda-horizon-checkpoint.md#flat-polynomial-derivation)
+from the original first-step recursion through the exact root second-moment
+boundary. The five-case demo was integrated in `ce87f46`; this supplement
+records the accepted proof and scope without new numerical runs or Lean claims.
+The original Allen–Cahn evidence remains under
 [lambda-horizon-evidence](lambda-horizon-evidence/manifest.json).
 The remaining inventory retains the 16 September certificate/profile baseline;
 subsequent algorithms remain on `research/branching-mc-theory`.
@@ -11,6 +15,10 @@ The [research guide](../README.md) describes open questions and the
 [proof registry](../proof-registry.md) sets the exact claim boundaries.
 
 ## Mathematical and implementation checkpoints
+
+The [current λ checkpoint](lambda-horizon-checkpoint.md) combines the 5 October
+retuning evidence and the 12 October detailed boundary proof. The earlier
+certificate/profile checkpoints follow.
 
 1. [Certified-rate checkpoint](certified-rate-checkpoint.md): flat and
    wave full-tree moment bounds, mean identification and global excess

@@ -1,8 +1,10 @@
 # Documentation map and status
 
-Updated 5 October 2026: `main` is the user-reviewed baseline under
+Updated 12 October 2026: `main` is the user-reviewed baseline under
 [AGENTS.md](../AGENTS.md). The selected [longer-horizon λ checkpoint](research/results/lambda-horizon-checkpoint.md)
-adds fixed-rate failure, retuning and their evidence. Subsequent algorithms
+contains fixed-rate failure, retuning and their evidence, with a dated
+[flat-polynomial boundary derivation](research/results/lambda-horizon-checkpoint.md#flat-polynomial-derivation)
+and the [five-case demo](../demo/time_lambda.py). Subsequent algorithms
 remain on `research/branching-mc-theory`. The inventory below otherwise
 retains the 16 September baseline and its historical checks.
 
@@ -64,7 +66,7 @@ between certified numerical bounds, empirical comparisons and frozen data.
 | Document | Role |
 |---|---|
 | [Certified-rate checkpoint](research/results/certified-rate-checkpoint.md) | Main flat/wave mathematical and implementation milestone |
-| [Longer-horizon λ checkpoint](research/results/lambda-horizon-checkpoint.md) | User-reviewed fixed-rate failure, exact flat boundary and retuning evidence; no later algorithms imported |
+| [Longer-horizon λ checkpoint](research/results/lambda-horizon-checkpoint.md) | User-reviewed fixed-rate failure and retuning evidence; 12 October supplement derives the flat-polynomial boundary from the full codewise recursion, with explicit root blowup and numerical/Lean limits |
 | [Wave certificate report](research/results/wave-rate-certificate.md) | Full-tree pointwise enclosure and global objective-gap result |
 | [Binary audit](research/results/binary-benchmark-audit.md) | Corrected correspondence between the standard-binary estimator and its oracle |
 | [Profile checkpoint](research/results/profile-efficiency-checkpoint.md) | Optional common-rate grid extension and exact profile bounds |
