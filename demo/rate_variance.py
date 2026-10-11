@@ -12,7 +12,7 @@ from parabolab.library import (
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Rate sensitivity and variance convexity demo")
-    parser.add_argument("--T", type=float, default=0.05, help="Terminal horizon T (default: 0.05)")
+    parser.add_argument("--T", type=float, default=0.5, help="Terminal horizon T (default: 0.05)")
     args = parser.parse_args()
     T = args.T
 
