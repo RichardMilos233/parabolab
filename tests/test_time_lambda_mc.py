@@ -122,6 +122,23 @@ def test_zero_variance_save_load_and_plot(monkeypatch, tmp_path):
         assert archive["status"][0, 0, 0] == "complete"
 
 
+def test_default_sweep_has_no_work_guards(monkeypatch):
+    def large_tree(*args, **kwargs):
+        assert kwargs["max_nodes"] is None
+        return TreeSample(value=1.0, n_nodes=60_000)
+
+    monkeypatch.setattr(tlmc, "sample_tree", large_tree)
+    sweep = sweep_time_lambda_mc(
+        binary_control_1d, lambda_min=0.5, lambda_max=1.0, n_lambda=2,
+        T_min=0.05, T_max=0.1, n_T=2, n_samples=3, progress=False,
+    )
+    assert sweep.max_nodes is None
+    assert sweep.max_cell_nodes is None
+    assert np.all(sweep.status == "complete")
+    assert np.all(sweep.completed_samples == 3)
+    assert np.all(sweep.total_nodes == 180_000)
+
+
 @pytest.mark.parametrize("name,value", [
     ("n_lambda", 2.5), ("n_T", True), ("n_samples", 1),
 ])

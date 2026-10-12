@@ -104,9 +104,7 @@ sampler or numerical verifier.
 $T_2(\lambda)=\log(1+K\lambda^2)/\lambda$ for five spatially constant
 polynomial examples: Allen–Cahn at terminal values `0.5` and `0.3`,
 Fisher–KPP at `0.5` and `0.2`, and the standard binary control mechanism at
-terminal value `1`. The `--T` option draws a reference horizontal; it does
-not enter the boundary calculation. In the theory-only view, equality is
-excluded from the displayed safe interval. The heatmap samples actual coding trees on a configurable
+terminal value `1`. The heatmap samples actual coding trees on a configurable
 `T`–lambda grid and displays their empirical variance; the theoretical
 boundary never supplies the heatmap values.
 
@@ -120,9 +118,8 @@ tree outputs, with `ddof=1`:
 
 This is not the variance of the sample mean (which would divide by `N`
 again), and it does not subtract an exact PDE solution squared. Each
-horizon uses a newly constructed PDE with that terminal time. Grid density,
-samples per cell and random seed are separate controls, so small local runs
-and larger overnight or SSH runs use the same experiment.
+horizon uses a newly constructed PDE with that terminal time. The demo exposes
+just three controls: lambda points, time points and samples per cell.
 
 The color scale shows measured variance across orders of magnitude. A
 completed batch with zero sample variance is displayed at the low end,
@@ -131,12 +128,13 @@ the theoretical second moment is infinite. A smooth interior or a sudden
 increase near the curve is an experimental observation to inspect, not a
 pattern imposed by the plot or a finite-sample certificate of explosion.
 
-Sampling uses the original full-tree estimator without a depth cutoff.
-Optional node budgets stop excessive work by marking the whole affected
-cell incomplete; a stopped tree is not replaced by zero, and surviving
-samples are not reported as an ordinary complete-batch variance. Budget
-failures, numerical overflow and unfinished cells remain distinguishable
-in saved data and are separate from the variance colors.
+Sampling is serial, one tree at a time, using the original full-tree estimator
+without a depth cutoff or a default node budget. Increasing the sample count
+increases total work, not the number of concurrent trees. The sampler traverses
+each tree recursively; it does not store all sampled trees. Per-cell scalar
+samples occupy memory proportional to the requested sample count. Very deep
+trees or large weights can still cause recursion or arithmetic failure;
+affected cells are marked invalid, not assigned zero variance.
 
 This calculation applies to the raw uniform semilinear mechanism (tuple
 probability `1/2`) with a caller-asserted globally flat terminal condition,
@@ -149,7 +147,7 @@ Carlo or depth truncation; the accompanying heatmap is a separate MC
 diagnostic. Saving its axes, statistics, completion status and sampling
 settings allows figures to be redrawn without resampling.
 
-Run the lightweight default (five PDE cases, a `12 × 10` grid per case,
+Run the default (five PDE cases, a `12 × 10` grid per case,
 128 trees per cell):
 
 ```bash
@@ -162,37 +160,28 @@ completed experiment:
 
 ```bash
 python demo/time_lambda.py \
-  --mc-lambda-points 40 --mc-T-points 30 --samples-per-cell 10000 \
-  --lambda-min 0.01 --lambda-max 12 --T-min 0.05 --T-max 1.3 \
-  --seed 20261012 --max-nodes 100000 --max-cell-nodes 0 \
-  --mc-data demo/time_lambda_mc_large.npz --output demo/time_lambda_mc_large.png
+  --mc-lambda-points 100 --mc-T-points 100 --samples-per-cell 100000
 ```
 
-`--max-nodes` is the per-tree work guard and `--max-cell-nodes` the aggregate
-guard for each grid cell; either accepts `0` to disable that guard. The
-defaults are 5,000 and 100,000 nodes respectively. If many cells are marked
-incomplete, inspect their saved reasons before increasing budgets. Increasing
-the sample count can also require increasing the cell budget. These guards
-do not change the theoretical boundary.
+The default ranges are lambda `0.01–12` and T `0.05–1.3`. These can be changed
+in the demo's sweep call if needed. Runs are reproducible from their saved
+seed. No parallel worker pool is started.
 
-The default data file is `demo/time_lambda_mc.npz`. Per-case checkpoints
-are saved alongside it, including on a keyboard interrupt. The saved arrays
-contain the two axes, variance, mean, second moment, completed sample counts,
-node counts, status and reason; node counts include attempted nodes in trees
-that hit a node guard, but exclude the unfinished tree when arithmetic or
-recursion fails. JSON metadata within the NPZ stores the seed,
-requested samples and budgets. Generated demo NPZs and figures are ignored
-by Git. Redraw saved data, or select the previous theory-only view:
+Output goes to `demo/time_lambda.png` and `demo/time_lambda_mc.npz`.
+Per-case checkpoints are saved alongside them, including on a keyboard
+interrupt. The NPZ contains axes, observed statistics, completion counts,
+statuses, reasons and sampling settings. Generated NPZs and figures are
+ignored by Git. To redraw saved data without sampling, use the library:
 
-```bash
-python demo/time_lambda.py --load-mc demo/time_lambda_mc.npz
-python demo/time_lambda.py --no-mc --output demo/time_lambda_theory.png
+```python
+from parabolab import TimeLambdaMCComparison
+TimeLambdaMCComparison.load("demo/time_lambda_mc.npz").plot("demo/time_lambda.png")
 ```
 
-Loading saved data performs no sampling. Changing the seed gives an independent
-repeat with which to inspect the stability of the observed colors; increasing
-samples alone does not certify the true variance near an infinite-moment
-boundary.
+The library retains `sweep_time_lambda` for theory-only plots and optional
+explicit node limits in `sweep_time_lambda_mc` for callers that need them;
+both node limits default to `None`. An explicit limit invalidates the whole
+affected cell rather than substituting a truncated or survivor-only variance.
 
 The [full derivation, reviewed 12 October 2026](../docs/research/results/lambda-horizon-checkpoint.md#flat-polynomial-derivation)
 starts from the original codewise first-step recursion. It proves spatial

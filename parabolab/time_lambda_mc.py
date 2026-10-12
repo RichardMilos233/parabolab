@@ -1,9 +1,11 @@
 """Empirical full-tree Monte Carlo variance grids for T-lambda plots.
 
 Every completed cell contains ordinary ``sample_tree`` realizations at that
-cell's PDE horizon and branching rate.  Invalid cells are retained as status
-data rather than filtered or replaced.  A finite batch cannot establish that
-the population second moment is finite or infinite.
+cell's PDE horizon and branching rate. Sampling is sequential. By default
+there is no per-tree or per-cell total-work limit; callers may opt into those
+guards explicitly. Invalid cells are retained as status data rather than
+filtered or replaced. A finite batch cannot establish that the population
+second moment is finite or infinite.
 """
 
 from __future__ import annotations
@@ -281,14 +283,19 @@ def sweep_time_lambda_mc(
     n_T: int = 10,
     n_samples: int = 128,
     seed: int = 20261012,
-    max_nodes: Optional[int] = 5_000,
-    max_cell_nodes: Optional[int] = 100_000,
+    max_nodes: Optional[int] = None,
+    max_cell_nodes: Optional[int] = None,
     reference_T: float = 0.5,
     theory_points: int = 401,
     checkpoint_path: Optional[Union[str, Path]] = None,
     progress: bool = True,
 ) -> TimeLambdaMCSweep:
-    """Sample one independent full-tree batch at every ``(T, lambda)`` cell."""
+    """Sequentially sample one full-tree batch at every ``(T, lambda)`` cell.
+
+    The default has no cumulative node budget. ``max_nodes`` and
+    ``max_cell_nodes`` are optional work guards; they mark an affected cell
+    invalid rather than returning a truncated estimator.
+    """
     values = (lambda_min, lambda_max, T_min, T_max, reference_T)
     if not all(math.isfinite(v) and v > 0.0 for v in values):
         raise ValueError("lambda/T bounds and reference_T must be finite and positive")
