@@ -45,7 +45,7 @@ from .solve import (
     exact_on,
     grid_states,
 )
-from .tree import TreeSample, default_rate, jcp_rate, sample_tree
+from .tree import TreeNodeLimitExceeded, TreeSample, default_rate, jcp_rate, sample_tree
 from .blowup import TSweep, integrability_edge, sweep_T
 from .moments import MomentQuadrature, finite_depth_moment_1d
 from .rate_optimization import (
@@ -68,6 +68,12 @@ from .time_lambda import (
     TimeLambdaSweep,
     compare_time_lambda,
     sweep_time_lambda,
+)
+from .time_lambda_mc import (
+    TimeLambdaMCComparison,
+    TimeLambdaMCSweep,
+    compare_time_lambda_mc,
+    sweep_time_lambda_mc,
 )
 from .integrability import truncated_normal_inverse_power
 from .proposals import (
@@ -107,13 +113,17 @@ __all__ = [
     "Solver",
     "TSweep",
     "TimeLambdaComparison",
+    "TimeLambdaMCComparison",
+    "TimeLambdaMCSweep",
     "TimeLambdaSweep",
     "TreeSample",
+    "TreeNodeLimitExceeded",
     "TerminalTupleProposal",
     "TuplePilotResult",
     "compare",
     "compare_rate_variance",
     "compare_time_lambda",
+    "compare_time_lambda_mc",
     "default_rate",
     "estimate",
     "estimate_parallel",
@@ -139,6 +149,7 @@ __all__ = [
     "sqrt_optimal_probabilities",
     "sweep_rate_variance",
     "sweep_time_lambda",
+    "sweep_time_lambda_mc",
     "sweep_T",
     "truncated_normal_inverse_power",
     "validate_probabilities",

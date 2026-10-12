@@ -5,7 +5,9 @@ import math
 import numpy as np
 import pytest
 
-from parabolab import Dx, FDeriv, Id, ParabolicPDE, estimate, sample_tree
+from parabolab import (
+    Dx, FDeriv, Id, ParabolicPDE, TreeNodeLimitExceeded, estimate, sample_tree,
+)
 from parabolab.library import allen_cahn_wave_1d
 
 
@@ -196,3 +198,14 @@ def test_max_depth_zero_kills_a_root_branch_without_extra_draws():
     assert sample.value == 0.0
     assert sample.n_nodes == 1
     assert not rng.exponentials and not rng.normals and not rng.integers_q
+
+
+def test_max_nodes_raises_without_changing_default_sampler():
+    pde = allen_cahn_wave_1d(0.5)
+    limited_rng = FakeRng(exponentials=[0.1, 1.0], normals=[0.0], integers=[])
+    with pytest.raises(TreeNodeLimitExceeded, match="max_nodes=1"):
+        sample_tree(pde, 0.0, 0.0, rng=limited_rng, rate=1.0, max_nodes=1)
+
+    ordinary_rng = FakeRng(exponentials=[0.1, 1.0], normals=[0.0, 0.0], integers=[])
+    sample = sample_tree(pde, 0.0, 0.0, rng=ordinary_rng, rate=1.0)
+    assert sample.n_nodes == 2

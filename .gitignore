@@ -13,6 +13,7 @@ examples/nn_ablation_data/
 docs/research/runs/**/*.npz
 docs/research/runs/**/*.jsonl
 demo/*.png
+demo/time_lambda*.npz
 .vscode/
 !examples/nn_ablation_results.csv
 examples/nn_corpus/

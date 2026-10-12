@@ -1,0 +1,131 @@
+import importlib
+import math
+
+import numpy as np
+import pytest
+
+from parabolab import (
+    TimeLambdaMCComparison,
+    TreeSample,
+    compare_time_lambda_mc,
+    sample_tree,
+    sweep_time_lambda_mc,
+)
+from parabolab.library import binary_control_1d
+from parabolab.rate_optimization import riccati_binary_second_moment
+
+
+tlmc = importlib.import_module("parabolab.time_lambda_mc")
+
+
+def test_mc_cell_matches_direct_sample_tree_and_uses_cell_horizon():
+    calls = []
+
+    def factory(T):
+        calls.append(T)
+        return binary_control_1d(T=T)
+
+    sweep = sweep_time_lambda_mc(
+        factory, lambda_min=0.8, lambda_max=1.2, n_lambda=2,
+        T_min=0.05, T_max=0.1, n_T=2, n_samples=64, seed=17,
+        max_nodes=None, max_cell_nodes=None, reference_T=0.075, progress=False,
+    )
+    rng = tlmc._cell_rng(17, 0, 0)
+    direct = np.array([
+        sample_tree(binary_control_1d(T=0.05), 0.0, 0.0, rng=rng, rate=0.8).value
+        for _ in range(64)
+    ])
+    assert sweep.mean[0, 0] == np.mean(direct)
+    assert sweep.variance[0, 0] == np.var(direct, ddof=1)
+    assert sweep.second_moment[0, 0] == np.mean(direct * direct)
+    assert sweep.completed_samples[0, 0] == 64
+    assert calls == pytest.approx([0.075, 0.05, 0.1])
+
+
+def test_binary_observed_second_moment_matches_finite_riccati_control():
+    sweep = sweep_time_lambda_mc(
+        binary_control_1d, lambda_min=0.5, lambda_max=1.0, n_lambda=2,
+        T_min=0.05, T_max=0.1, n_T=2, n_samples=2_000, seed=31,
+        max_nodes=None, max_cell_nodes=None, progress=False,
+    )
+    expected = riccati_binary_second_moment(0.1, 1.0)
+    assert sweep.second_moment[1, 1] == pytest.approx(expected, rel=0.15)
+
+
+def test_node_and_cell_guards_mark_whole_cell_invalid():
+    node_limited = sweep_time_lambda_mc(
+        binary_control_1d, lambda_min=8.0, lambda_max=9.0, n_lambda=2,
+        T_min=4.0, T_max=5.0, n_T=2, n_samples=2, seed=1,
+        max_nodes=1, max_cell_nodes=None, progress=False,
+    )
+    assert np.all(node_limited.status == "node_limit")
+    assert np.isnan(node_limited.variance).all()
+    assert np.all(node_limited.total_nodes == 2)
+
+    cell_limited = sweep_time_lambda_mc(
+        binary_control_1d, lambda_min=8.0, lambda_max=9.0, n_lambda=2,
+        T_min=4.0, T_max=5.0, n_T=2, n_samples=2, seed=1,
+        max_nodes=None, max_cell_nodes=1, progress=False,
+    )
+    assert np.all(cell_limited.status == "cell_budget")
+    assert np.isnan(cell_limited.variance).all()
+
+
+def test_overflow_and_interrupt_are_preserved_as_status(monkeypatch, tmp_path):
+    def overflow(*args, **kwargs):
+        raise OverflowError("synthetic overflow")
+
+    monkeypatch.setattr(tlmc, "sample_tree", overflow)
+    failed = sweep_time_lambda_mc(
+        binary_control_1d, lambda_min=0.5, lambda_max=1.0, n_lambda=2,
+        T_min=0.05, T_max=0.1, n_T=2, n_samples=2, progress=False,
+    )
+    assert np.all(failed.status == "error")
+    assert "OverflowError" in failed.reason[0, 0]
+
+    def interrupt(*args, **kwargs):
+        raise KeyboardInterrupt
+
+    monkeypatch.setattr(tlmc, "sample_tree", interrupt)
+    partial = tmp_path / "partial.npz"
+    with pytest.raises(KeyboardInterrupt):
+        sweep_time_lambda_mc(
+            binary_control_1d, lambda_min=0.5, lambda_max=1.0, n_lambda=2,
+            T_min=0.05, T_max=0.1, n_T=2, n_samples=2,
+            checkpoint_path=partial, progress=False,
+        )
+    loaded = TimeLambdaMCComparison.load(partial)
+    assert len(loaded.sweeps) == 1
+    assert loaded.sweeps[0].status[0, 0] == "interrupted"
+    assert np.count_nonzero(loaded.sweeps[0].status == "pending") == 3
+
+
+def test_zero_variance_save_load_and_plot(monkeypatch, tmp_path):
+    monkeypatch.setattr(
+        tlmc, "sample_tree", lambda *args, **kwargs: TreeSample(value=2.0, n_nodes=1),
+    )
+    sweep = sweep_time_lambda_mc(
+        binary_control_1d, lambda_min=0.5, lambda_max=1.0, n_lambda=2,
+        T_min=0.05, T_max=0.1, n_T=2, n_samples=3, progress=False,
+    )
+    assert np.array_equal(sweep.variance, np.zeros((2, 2)))
+
+    data = tmp_path / "grid.npz"
+    image = tmp_path / "grid.png"
+    comparison = compare_time_lambda_mc(sweep).save(data)
+    loaded = TimeLambdaMCComparison.load(data)
+    loaded.plot(image, save_individual=True)
+    assert np.array_equal(loaded.sweeps[0].variance, sweep.variance)
+    assert loaded.sweeps[0].completed_samples[0, 0] == 3
+    assert image.exists() and (tmp_path / "grid_1.png").exists()
+    with np.load(data, allow_pickle=False) as archive:
+        assert archive["status"][0, 0, 0] == "complete"
+
+
+@pytest.mark.parametrize("name,value", [
+    ("n_lambda", 2.5), ("n_T", True), ("n_samples", 1),
+])
+def test_grid_counts_require_integers_at_least_two(name, value):
+    kwargs = {name: value}
+    with pytest.raises(ValueError, match=name):
+        sweep_time_lambda_mc(binary_control_1d, progress=False, **kwargs)

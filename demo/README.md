@@ -98,15 +98,45 @@ question concerns only one starting state. Python selects and checks the
 rates; Lean currently verifies selected mathematical lemmas, not the entire
 sampler or numerical verifier.
 
-## Full-tree second-moment boundary
+## Time–rate boundary and Monte Carlo variance heatmap
 
-`time_lambda.py` plots the analytic boundary
+`time_lambda.py` overlays the analytic boundary
 $T_2(\lambda)=\log(1+K\lambda^2)/\lambda$ for five spatially constant
 polynomial examples: Allen–Cahn at terminal values `0.5` and `0.3`,
 Fisher–KPP at `0.5` and `0.2`, and the standard binary control mechanism at
 terminal value `1`. The `--T` option draws a reference horizontal; it does
-not enter the boundary calculation. Equality is excluded from the displayed
-safe interval.
+not enter the boundary calculation. In the theory-only view, equality is
+excluded from the displayed safe interval. The heatmap samples actual coding trees on a configurable
+`T`–lambda grid and displays their empirical variance; the theoretical
+boundary never supplies the heatmap values.
+
+For each grid cell, the statistic is the sample variance of the individual
+tree outputs, with `ddof=1`:
+
+\[
+\widehat{\operatorname{Var}}(H)
+=\frac1{N-1}\sum_{i=1}^N(H_i-\overline H)^2.
+\]
+
+This is not the variance of the sample mean (which would divide by `N`
+again), and it does not subtract an exact PDE solution squared. Each
+horizon uses a newly constructed PDE with that terminal time. Grid density,
+samples per cell and random seed are separate controls, so small local runs
+and larger overnight or SSH runs use the same experiment.
+
+The color scale shows measured variance across orders of magnitude. A
+completed batch with zero sample variance is displayed at the low end,
+not treated as missing. Finite samples can miss rare large trees even where
+the theoretical second moment is infinite. A smooth interior or a sudden
+increase near the curve is an experimental observation to inspect, not a
+pattern imposed by the plot or a finite-sample certificate of explosion.
+
+Sampling uses the original full-tree estimator without a depth cutoff.
+Optional node budgets stop excessive work by marking the whole affected
+cell incomplete; a stopped tree is not replaced by zero, and surviving
+samples are not reported as an ordinary complete-batch variance. Budget
+failures, numerical overflow and unfinished cells remain distinguishable
+in saved data and are separate from the variance colors.
 
 This calculation applies to the raw uniform semilinear mechanism (tuple
 probability `1/2`) with a caller-asserted globally flat terminal condition,
@@ -114,8 +144,55 @@ or to the library's standard binary mechanism. It makes no universal claim
 for spatial waves, custom proposals, non-polynomial nonlinearities, or fully
 nonlinear PDEs. `K` uses converged floating-point Gauss–Legendre quadrature
 after mapping the infinite interval to a finite one; this numerical check is
-not a formal certificate. The demo performs no Monte Carlo or depth
-truncation.
+not a formal certificate. The boundary calculation itself uses no Monte
+Carlo or depth truncation; the accompanying heatmap is a separate MC
+diagnostic. Saving its axes, statistics, completion status and sampling
+settings allows figures to be redrawn without resampling.
+
+Run the lightweight default (five PDE cases, a `12 × 10` grid per case,
+128 trees per cell):
+
+```bash
+python demo/time_lambda.py
+```
+
+Increase grid resolution and samples independently when more compute is
+available. This larger configuration is an example command, not a recorded
+completed experiment:
+
+```bash
+python demo/time_lambda.py \
+  --mc-lambda-points 40 --mc-T-points 30 --samples-per-cell 10000 \
+  --lambda-min 0.01 --lambda-max 12 --T-min 0.05 --T-max 1.3 \
+  --seed 20261012 --max-nodes 100000 --max-cell-nodes 0 \
+  --mc-data demo/time_lambda_mc_large.npz --output demo/time_lambda_mc_large.png
+```
+
+`--max-nodes` is the per-tree work guard and `--max-cell-nodes` the aggregate
+guard for each grid cell; either accepts `0` to disable that guard. The
+defaults are 5,000 and 100,000 nodes respectively. If many cells are marked
+incomplete, inspect their saved reasons before increasing budgets. Increasing
+the sample count can also require increasing the cell budget. These guards
+do not change the theoretical boundary.
+
+The default data file is `demo/time_lambda_mc.npz`. Per-case checkpoints
+are saved alongside it, including on a keyboard interrupt. The saved arrays
+contain the two axes, variance, mean, second moment, completed sample counts,
+node counts, status and reason; node counts include attempted nodes in trees
+that hit a node guard, but exclude the unfinished tree when arithmetic or
+recursion fails. JSON metadata within the NPZ stores the seed,
+requested samples and budgets. Generated demo NPZs and figures are ignored
+by Git. Redraw saved data, or select the previous theory-only view:
+
+```bash
+python demo/time_lambda.py --load-mc demo/time_lambda_mc.npz
+python demo/time_lambda.py --no-mc --output demo/time_lambda_theory.png
+```
+
+Loading saved data performs no sampling. Changing the seed gives an independent
+repeat with which to inspect the stability of the observed colors; increasing
+samples alone does not certify the true variance near an infinite-moment
+boundary.
 
 The [full derivation, reviewed 12 October 2026](../docs/research/results/lambda-horizon-checkpoint.md#flat-polynomial-derivation)
 starts from the original codewise first-step recursion. It proves spatial

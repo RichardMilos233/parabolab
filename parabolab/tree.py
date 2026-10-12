@@ -74,6 +74,15 @@ class TreeSample:
     n_nodes: int
 
 
+class TreeNodeLimitExceeded(RuntimeError):
+    """Raised when an explicitly configured full-tree node limit is exceeded."""
+
+    def __init__(self, max_nodes: int, n_nodes: int):
+        self.max_nodes = max_nodes
+        self.n_nodes = n_nodes
+        super().__init__(f"tree exceeded max_nodes={max_nodes}")
+
+
 def sample_tree(
     pde: ParabolicPDE,
     t: float,
@@ -85,6 +94,7 @@ def sample_tree(
     mechanism=None,
     prune_zero: bool = True,
     max_depth: Optional[int] = None,
+    max_nodes: Optional[int] = None,
     tuple_proposal: Optional[Any] = None,
 ) -> TreeSample:
     """Draw one sample of H(T_{t,x,code}); E[H] = code(u)(t, x).
@@ -101,6 +111,8 @@ def sample_tree(
     max_depth : if not None, kill branches when generation depth reaches or
         exceeds max_depth (returning 0.0 without drawing children). Root is
         depth 0.
+    max_nodes : if not None, raise ``TreeNodeLimitExceeded`` before visiting
+        node max_nodes + 1. This is a work guard, not an estimator truncation.
     tuple_proposal : optional callable (code, t, x, tau, depth, tuples) -> Sequence[float]
         providing custom tuple proposal probabilities q(Z).
     """
@@ -110,6 +122,12 @@ def sample_tree(
                 f"max_depth must be None or a non-negative integer, got {max_depth!r}"
             )
         max_depth = int(max_depth)
+    if max_nodes is not None:
+        if not isinstance(max_nodes, (int, np.integer)) or isinstance(max_nodes, bool) or max_nodes < 1:
+            raise ValueError(
+                f"max_nodes must be None or a positive integer, got {max_nodes!r}"
+            )
+        max_nodes = int(max_nodes)
     if mechanism is None:
         mechanism = getattr(pde, "mechanism", None) or SemilinearMechanism
     if rate is None:
@@ -122,6 +140,7 @@ def sample_tree(
     counter = [0]
     value = _tree(pde, mechanism, t, x, code, rng, rate, prune_zero, counter,
                   size, sig, depth=0, max_depth=max_depth,
+                  max_nodes=max_nodes,
                   tuple_proposal=tuple_proposal)
     return TreeSample(value=value, n_nodes=counter[0])
 
@@ -140,9 +159,12 @@ def _tree(
     sig: float = 1.0,
     depth: int = 0,
     max_depth: Optional[int] = None,
+    max_nodes: Optional[int] = None,
     tuple_proposal: Optional[Any] = None,
 ) -> float:
     counter[0] += 1
+    if max_nodes is not None and counter[0] > max_nodes:
+        raise TreeNodeLimitExceeded(max_nodes, counter[0])
     if prune_zero and mech.is_identically_zero(code, pde):
         return 0.0
 
@@ -185,5 +207,6 @@ def _tree(
     for cc in z:
         h *= _tree(pde, mech, t + tau, xb, cc, rng, rate, prune_zero, counter,
                    size, sig, depth=depth + 1, max_depth=max_depth,
+                   max_nodes=max_nodes,
                    tuple_proposal=tuple_proposal)
     return h
