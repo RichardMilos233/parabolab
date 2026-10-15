@@ -142,18 +142,6 @@ def _run_flat_chunk(ti, li, chunk, n, horizon, rate, rng, max_nodes, flat) -> tu
             "flat sampler returned a non-finite value")
 
 
-def _nan_box_mean(values: np.ndarray) -> np.ndarray:
-    """3x3 mean that ignores NaN entries (used only to draw contours)."""
-    finite = np.isfinite(values)
-    padded = np.pad(np.where(finite, values, 0.0), 1)
-    weight = np.pad(finite.astype(float), 1)
-    rows, cols = values.shape
-    total = sum(padded[i:i + rows, j:j + cols] for i in range(3) for j in range(3))
-    count = sum(weight[i:i + rows, j:j + cols] for i in range(3) for j in range(3))
-    with np.errstate(invalid="ignore", divide="ignore"):
-        return np.where(count > 0, total / count, np.nan)
-
-
 def _grid_edges(points: np.ndarray) -> np.ndarray:
     if len(points) == 1:
         width = max(abs(float(points[0])) * 0.05, 0.05)
@@ -278,12 +266,12 @@ class TimeLambdaMCSweep:
             ax.plot(theory_lambda, _boundary(theory_lambda, self.K), color="#172033",
                     linewidth=1.2)
         if statistic == "variance" and contour_levels:
-            # Iso-variance lines of the 3x3-averaged log10 sample variance,
-            # each labelled with its level.
+            # Iso-variance lines of the raw per-cell log10 sample variance
+            # (no smoothing), each labelled with its level.
             with np.errstate(divide="ignore", invalid="ignore"):
                 logs = np.where(valid & (data > 0), np.log10(data), np.nan)
             if np.count_nonzero(np.isfinite(logs)) > 4:
-                cs = ax.contour(self.lambdas, self.horizons, _nan_box_mean(logs),
+                cs = ax.contour(self.lambdas, self.horizons, np.ma.masked_invalid(logs),
                                 levels=np.log10(sorted(contour_levels)),
                                 colors="#f4f4f4", linewidths=0.9, linestyles="-")
                 for text in ax.clabel(cs, fmt=lambda v: f"{10 ** v:g}", fontsize=8):
@@ -348,8 +336,8 @@ class TimeLambdaMCComparison:
         """Plot one statistic: ``variance``, ``max_share`` or ``batch_cv``.
 
         The variance plot overlays thin iso-variance lines at
-        ``contour_levels``, each labelled with its value (drawn from a 3x3
-        mean of log10 variance); ``contour_levels=()`` disables them.
+        ``contour_levels``, each labelled with its value (drawn from the raw
+        per-cell variance, no smoothing); ``contour_levels=()`` disables them.
         """
         if not self.sweeps:
             raise ValueError("at least one MC sweep is required")
