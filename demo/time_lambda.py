@@ -69,5 +69,7 @@ if __name__ == "__main__":
     comparison.plot(out_dir / "time_lambda.png", save_individual=True)
     comparison.plot(out_dir / "time_lambda_max_share.png", statistic="max_share")
     comparison.plot(out_dir / "time_lambda_batch_cv.png", statistic="batch_cv")
+    comparison.plot_slices(out_dir / "time_lambda_slices.png",
+                           [factory(0.5) for factory, _, _ in cases])
     print(f"Saved MC data to: {data_path.resolve()}")
     print(f"Saved variance and diagnostic heatmaps in: {out_dir.resolve()}")

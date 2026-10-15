@@ -140,8 +140,6 @@ the vertical axis the horizon `T`, and each cell is an independent batch of
 - **solid white/black curve, `T_2(lambda)`**: the analytic second-moment
   boundary. Below it `E[H^2] < infinity`; on and above it `E[H^2] = infinity`.
   It is computed from the moment ODE, never from the samples.
-- **dashed white line**: the reference horizon `T = 0.5`, for reading off
-  the rate interval in which the second moment is finite at that horizon.
 - **grey cells**: no value to show — the batch failed (overflow, node
   limit), or the statistic is undefined (all samples zero).
 - **panel title**: PDE, grid, `N` per cell and the sampler used
@@ -149,7 +147,8 @@ the vertical axis the horizon `T`, and each cell is an independent batch of
 
 | Figure | Statistic per cell | How to read it | What it is for | Limits |
 |---|---|---|---|---|
-| `time_lambda.png` | sample variance `s^2 = sum (H_i - mean)^2 / (N-1)` (symlog colour scale) | dark = small, bright = large; look for the jump in magnitude and the speckle (neighbouring cells differing by orders of magnitude) across `T_2` | the quantity a user of the estimator actually sees; shows how large and how erratic the variance becomes | beyond `T_2` it is a finite number from a finite batch; all-zero batches show `0`, which looks *stable* although the true variance is infinite |
+| `time_lambda.png` | sample variance `s^2 = sum (H_i - mean)^2 / (N-1)` (symlog colour scale); thin lines are iso-variance contours `s^2 = 0.1, 1, 10, 100` (value written on each line, drawn from a 3×3 mean of `log10 s^2`) | dark = small, bright = large; below `T_2` the contours are smooth and ordered, above it they break up; also look for the speckle (neighbouring cells differing by orders of magnitude) | the quantity a user of the estimator actually sees; shows how large and how erratic the variance becomes | beyond `T_2` it is a finite number from a finite batch; all-zero batches show `0`, which looks *stable* although the true variance is infinite |
+| `time_lambda_slices.png` | for `lambda ≈ 1, 2, 6`: the MC sample variance (dots) along `T` and the exact `Var(H)` (black) from the moment ODE `m_k' = lambda m_k + 2 m_0 m_{k+1}/lambda` (with the matching first-moment ODE for `E[H]`) | below `T_2` the dots lie on the black curve; the black curve shoots to infinity at `T_2` (red dashed), the dots continue smoothly and scatter above it | checks the sampler against exact theory and shows why the heatmaps cannot show a sharp edge at `T_2` | near `T_2` the MC variance is systematically low (observed 12–90 % of the exact value in the last `0.05` before `T_2` at `N = 10^6`): the divergence is carried by trees far rarer than `1/N` |
 | `time_lambda_max_share.png` | `max_i H_i^2 / sum_i H_i^2`, the largest sample's share of the sum of squares (0 to 1) | near 0 (dark) = many samples contribute; near 1 (yellow) = one sample *is* the variance | the diagnostic matched to `T_2`: for i.i.d. samples it tends to 0 almost surely **iff** `E[H^2] < infinity`; it should be dark below the curve and stay patchy/bright above it as `N` grows | a single batch: values are random; just above `T_2` the tail is barely too heavy and the ratio decays only slowly, so the boundary looks gradual, not sharp |
 | `time_lambda_batch_cv.png` | split the `N` samples into 10 consecutive batches, compute each batch's variance `v_1..v_10`, then `std(v)/mean(v)` (0 to 3) | 0 = the 10 repeated variance estimates agree; 3 = all variance sits in one batch | reproducibility: would a repeated experiment give the same variance? | governed by the **fourth** moment, which diverges earlier than the second; it can light up below `T_2` and is not a test of the `T_2` boundary |
 
@@ -224,7 +223,7 @@ seed, sampler and chunk size. Checkpoints are written every five minutes.
 
 Output goes to `--output-dir` (default `demo/`): `time_lambda.png` (variance,
 plus one panel per case), `time_lambda_max_share.png`,
-`time_lambda_batch_cv.png` and `time_lambda_mc.npz`. Per-case checkpoints
+`time_lambda_batch_cv.png`, `time_lambda_slices.png` and `time_lambda_mc.npz`. Per-case checkpoints
 are saved alongside them, including on a keyboard interrupt. The NPZ
 contains axes, observed statistics, diagnostics, completion counts,
 statuses, reasons and sampling settings. Generated NPZs and figures are

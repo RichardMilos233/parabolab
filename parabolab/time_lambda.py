@@ -348,5 +348,61 @@ def sweep_time_lambda(
     )
 
 
+def flat_exact_variance(
+    leaf_values: Sequence[float],
+    flat_terminal: float,
+    rate: float,
+    horizons: Sequence[float],
+    *,
+    K: Optional[float] = None,
+    step: float = 1e-3,
+) -> np.ndarray:
+    """Exact ``Var(H)`` of the flat-data estimator (root ``Id``, ``t = 0``) at one rate.
+
+    ``leaf_values = [f(a), f'(a), ...]`` for constant terminal value ``a``.
+    With remaining time ``r`` and ``n_K = m_K = 0`` for identically zero codes,
+
+        n_k' = n_0 n_{k+1},                        n_k(0) = f^(k)(a),
+        m_k' = rate m_k + 2 m_0 m_{k+1} / rate,    m_k(0) = f^(k)(a)^2,
+        E[H]   = a + int_0^T n_0,
+        E[H^2] = e^{rate T} (a^2 + int_0^T e^{-rate s} m_0(s) ds / rate).
+
+    Classical RK4 with at most ``step`` per step (numerical integration, not
+    a certificate). With ``K`` given, horizons ``T >= T_2(rate)`` return ``inf``.
+    """
+    leaf = np.asarray(leaf_values, dtype=float)
+    Ts = np.asarray(horizons, dtype=float)
+    if Ts.ndim != 1 or np.any(np.diff(Ts) <= 0) or Ts[0] <= 0:
+        raise ValueError("horizons must be positive and increasing")
+    a, lam = float(flat_terminal), float(rate)
+    shift = lambda v: np.append(v[1:], 0.0)
+
+    def rhs(r, y):
+        n, m = y[:len(leaf)], y[len(leaf):2 * len(leaf)]
+        return np.concatenate((n[0] * shift(n), lam * m + 2.0 * m[0] * shift(m) / lam,
+                               [n[0], math.exp(-lam * r) * m[0]]))
+
+    y = np.concatenate((leaf, leaf ** 2, [0.0, 0.0]))
+    out = np.empty(len(Ts))
+    r = 0.0
+    with np.errstate(over="ignore", invalid="ignore"):
+        for i, T in enumerate(Ts):
+            steps = max(1, int(math.ceil((T - r) / step)))
+            h = (T - r) / steps
+            for _ in range(steps):
+                k1 = rhs(r, y)
+                k2 = rhs(r + h / 2, y + h / 2 * k1)
+                k3 = rhs(r + h / 2, y + h / 2 * k2)
+                k4 = rhs(r + h, y + h * k3)
+                y = y + h / 6 * (k1 + 2 * k2 + 2 * k3 + k4)
+                r += h
+            mean = a + y[-2]
+            out[i] = math.exp(lam * T) * (a * a + y[-1] / lam) - mean * mean
+    out[~np.isfinite(out)] = np.inf
+    if K is not None and math.isfinite(K):
+        out[Ts >= _boundary(lam, K)] = np.inf
+    return out
+
+
 def compare_time_lambda(*sweeps: TimeLambdaSweep) -> TimeLambdaComparison:
     return TimeLambdaComparison(sweeps)

@@ -130,3 +130,32 @@ def test_flat_sweep_requires_flat_terminal():
     with pytest.raises(ValueError, match="flat_terminal"):
         sweep_time_lambda_mc(partial(allen_cahn_flat, 0.5), sampler="flat", progress=False)
 
+
+
+def test_flat_exact_variance_matches_reference_and_diverges_at_T2():
+    from parabolab import sweep_time_lambda
+    from parabolab.time_lambda import _boundary, flat_exact_variance
+
+    pde = allen_cahn_flat(0.5)
+    leaf = flat_semilinear_leaf_values(pde, 0.5)
+    K = sweep_time_lambda(pde, flat_terminal=0.5).K
+    Ts = np.array([0.2, 0.5, 0.65, 0.9])
+    var = flat_exact_variance(leaf, 0.5, 2.0, Ts, K=K)
+    for T, v in zip(Ts[:3], var[:3]):
+        exact = (_exact_second_moment(leaf, 0.5, 2.0, T)
+                 - allen_cahn_flat(0.5, T=T).exact_solution(0.0, 0.0) ** 2)
+        assert v == pytest.approx(exact, rel=1e-6)
+    assert Ts[3] > _boundary(2.0, K) and np.isinf(var[3])
+
+
+def test_plot_slices_draws_theory_against_mc(tmp_path):
+    sweep = sweep_time_lambda_mc(
+        partial(allen_cahn_flat, 0.5), flat_terminal=0.5, lambda_min=1.0, lambda_max=3.0,
+        n_lambda=3, T_min=0.1, T_max=0.9, n_T=5, n_samples=20_000, seed=2,
+        sampler="flat", progress=False,
+    )
+    comparison = compare_time_lambda_mc(sweep)
+    comparison.plot_slices(tmp_path / "slices.png", [allen_cahn_flat(0.5)], lambdas=(1.0, 3.0))
+    assert (tmp_path / "slices.png").exists()
+    with pytest.raises(ValueError, match="one PDE per sweep"):
+        comparison.plot_slices(None, [])

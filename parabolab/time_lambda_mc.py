@@ -24,7 +24,7 @@ from matplotlib.colors import Normalize, SymLogNorm
 import numpy as np
 
 from .flat_batch import flat_semilinear_leaf_values, sample_flat_batch
-from .time_lambda import _boundary, sweep_time_lambda
+from .time_lambda import _boundary, flat_exact_variance, sweep_time_lambda
 from .tree import TreeNodeLimitExceeded, sample_tree
 
 
@@ -38,12 +38,13 @@ _INTERRUPTED = "interrupted"
 _CANCELLED = object()
 _SAMPLERS = ("tree", "flat")
 _DIAGNOSTICS = ("n_nonzero", "max_share", "batch_variance")
+_CONTOUR_LEVELS = (0.1, 1.0, 10.0, 100.0)
 _FLAT_DEFAULT_CHUNK = 100_000
 _STATISTICS = {
     "variance": ("Observed full-tree MC sample variance with theoretical boundary",
                  "Sample variance (symlog, ddof=1)",
-                 "Jumps and speckle across T₂ show the estimator's variance growing and "
-                 "becoming erratic; an all-zero batch shows 0, which is not stability."),
+                 "Thin lines: sample variance equals the labelled value. Ordered below T₂, "
+                 "broken up above it. An all-zero batch shows 0, which is not stability."),
     "max_share": ("Largest sample's share of the sum of squares, max H² / ΣH²",
                   "max H² / ΣH²  (→ 0 iff E[H²] < ∞)",
                   "Dark ≈ 0: many samples contribute (finite second moment expected below T₂). "
@@ -139,6 +140,18 @@ def _run_flat_chunk(ti, li, chunk, n, horizon, rate, rng, max_nodes, flat) -> tu
                 f"a tree exceeded max_nodes={max_nodes} visited nodes (flat sampler)")
     return (ti, li, chunk, values[:i + 1], used, _NONFINITE,
             "flat sampler returned a non-finite value")
+
+
+def _nan_box_mean(values: np.ndarray) -> np.ndarray:
+    """3x3 mean that ignores NaN entries (used only to draw contours)."""
+    finite = np.isfinite(values)
+    padded = np.pad(np.where(finite, values, 0.0), 1)
+    weight = np.pad(finite.astype(float), 1)
+    rows, cols = values.shape
+    total = sum(padded[i:i + rows, j:j + cols] for i in range(3) for j in range(3))
+    count = sum(weight[i:i + rows, j:j + cols] for i in range(3) for j in range(3))
+    with np.errstate(invalid="ignore", divide="ignore"):
+        return np.where(count > 0, total / count, np.nan)
 
 
 def _grid_edges(points: np.ndarray) -> np.ndarray:
@@ -246,7 +259,8 @@ class TimeLambdaMCSweep:
                    for name in _DIAGNOSTICS},
             )
 
-    def _plot_on(self, ax: plt.Axes, norm, statistic: str = "variance"):
+    def _plot_on(self, ax: plt.Axes, norm, statistic: str = "variance",
+                 contour_levels: Sequence[float] = _CONTOUR_LEVELS):
         data = self.statistic(statistic)
         valid = (self.status == _COMPLETE) & np.isfinite(data)
         values = np.ma.array(data, mask=~valid)
@@ -263,8 +277,17 @@ class TimeLambdaMCSweep:
                     linewidth=2.8, label=r"theory $T_2(\lambda)$")
             ax.plot(theory_lambda, _boundary(theory_lambda, self.K), color="#172033",
                     linewidth=1.2)
-        ax.axhline(self.reference_T, color="white", linestyle="--", linewidth=1.4,
-                   label=rf"reference $T={self.reference_T:g}$")
+        if statistic == "variance" and contour_levels:
+            # Iso-variance lines of the 3x3-averaged log10 sample variance,
+            # each labelled with its level.
+            with np.errstate(divide="ignore", invalid="ignore"):
+                logs = np.where(valid & (data > 0), np.log10(data), np.nan)
+            if np.count_nonzero(np.isfinite(logs)) > 4:
+                cs = ax.contour(self.lambdas, self.horizons, _nan_box_mean(logs),
+                                levels=np.log10(sorted(contour_levels)),
+                                colors="#f4f4f4", linewidths=0.9, linestyles="-")
+                for text in ax.clabel(cs, fmt=lambda v: f"{10 ** v:g}", fontsize=8):
+                    text.set_color("#f4f4f4")
         ax.set_xlim(self.lambdas[0], self.lambdas[-1])
         ax.set_ylim(self.horizons[0], self.horizons[-1])
         ax.set_title(
@@ -320,8 +343,14 @@ class TimeLambdaMCComparison:
         save_individual: bool = False,
         figsize: Optional[tuple[float, float]] = None,
         statistic: str = "variance",
+        contour_levels: Sequence[float] = _CONTOUR_LEVELS,
     ) -> "TimeLambdaMCComparison":
-        """Plot one statistic: ``variance``, ``max_share`` or ``batch_cv``."""
+        """Plot one statistic: ``variance``, ``max_share`` or ``batch_cv``.
+
+        The variance plot overlays thin iso-variance lines at
+        ``contour_levels``, each labelled with its value (drawn from a 3x3
+        mean of log10 variance); ``contour_levels=()`` disables them.
+        """
         if not self.sweeps:
             raise ValueError("at least one MC sweep is required")
         title, label, hint = _STATISTICS[statistic]
@@ -333,7 +362,7 @@ class TimeLambdaMCComparison:
         norm = self._norm(statistic)
         mesh = None
         for ax, sweep in zip(flat_axes, self.sweeps):
-            mesh = sweep._plot_on(ax, norm, statistic)
+            mesh = sweep._plot_on(ax, norm, statistic, contour_levels)
         for ax in flat_axes[n:]:
             ax.set_visible(False)
         fig.suptitle(title, fontsize=15, fontweight="bold")
@@ -350,11 +379,62 @@ class TimeLambdaMCComparison:
             if save_individual:
                 for i, sweep in enumerate(self.sweeps, start=1):
                     one, ax = plt.subplots(figsize=(7.0, 5.2))
-                    one_mesh = sweep._plot_on(ax, norm, statistic)
+                    one_mesh = sweep._plot_on(ax, norm, statistic, contour_levels)
                     one.colorbar(one_mesh, ax=ax, label=label)
                     one.tight_layout()
                     one.savefig(out.with_name(f"{out.stem}_{i}.png"), dpi=180)
                     plt.close(one)
+        return self
+
+    def plot_slices(
+        self,
+        path: Optional[Union[str, Path]],
+        pdes: Sequence[object],
+        lambdas: Sequence[float] = (1.0, 2.0, 6.0),
+    ) -> "TimeLambdaMCComparison":
+        """Variance along ``T`` at fixed rates: exact flat-data theory vs MC.
+
+        One row per sweep (``pdes[i]`` is any-horizon PDE of sweep ``i``;
+        flat polynomial semilinear data only), one column per rate (the
+        nearest grid rate is used). The exact ``Var(H)`` is drawn up to
+        ``T_2``, where it diverges.
+        """
+        if len(pdes) != len(self.sweeps):
+            raise ValueError("pdes must give one PDE per sweep")
+        rows, cols = len(self.sweeps), len(lambdas)
+        fig, axes = plt.subplots(rows, cols, figsize=(4.6 * cols, 3.3 * rows), squeeze=False)
+        for sweep, pde, row in zip(self.sweeps, pdes, axes):
+            leaf = flat_semilinear_leaf_values(pde, sweep.flat_terminal)
+            for ax, target in zip(row, lambdas):
+                j = int(np.argmin(np.abs(sweep.lambdas - target)))
+                rate = float(sweep.lambdas[j])
+                t2 = float(_boundary(rate, sweep.K)) if math.isfinite(sweep.K) else math.inf
+                end = min(t2 * (1.0 - 1e-4), float(sweep.horizons[-1]))
+                ok = (sweep.status[:, j] == _COMPLETE) & (sweep.variance[:, j] > 0)
+                ax.semilogy(sweep.horizons[ok], sweep.variance[ok, j], "o", ms=2.8,
+                            color="tab:blue", label=f"MC sample variance, N={sweep.n_samples:,}")
+                if end > sweep.horizons[0]:   # some horizons lie below T_2
+                    fine = np.linspace(float(sweep.horizons[0]), end, 400)
+                    ax.semilogy(fine, flat_exact_variance(leaf, sweep.flat_terminal, rate, fine),
+                                color="black", linewidth=1.6, label="exact Var(H)")
+                if t2 <= sweep.horizons[-1]:
+                    ax.axvline(t2, color="red", linestyle="--", linewidth=1.3,
+                               label=r"$T_2(\lambda)$")
+                ax.set_title(f"{sweep.title}, λ = {rate:.2f}", fontsize=9.5, fontweight="bold")
+                ax.set_xlabel(r"horizon $T$")
+                ax.set_ylabel("variance")
+        axes[0, 0].legend(fontsize=7.5, loc="upper left")
+        fig.suptitle("Variance along T at fixed λ: exact theory vs Monte Carlo",
+                     fontsize=14, fontweight="bold")
+        fig.text(0.5, 1 - 0.55 / (3.3 * rows), "MC agrees with the exact variance below T₂; "
+                 "the exact variance diverges at T₂, which a finite batch cannot follow.",
+                 ha="center", fontsize=9.5, style="italic")
+        fig.tight_layout(rect=(0, 0, 1, 1 - 0.75 / (3.3 * rows)))
+        if path is not None:
+            out = Path(path)
+            out.parent.mkdir(parents=True, exist_ok=True)
+            fig.savefig(out, dpi=150)
+            plt.close(fig)
         return self
 
     def save(self, path: Union[str, Path]) -> "TimeLambdaMCComparison":
