@@ -1,5 +1,20 @@
 """Vectorized full-tree sampler for flat polynomial semilinear PDEs.
 
+SCOPE -- a special-case accelerator, not a replacement for ``sample_tree``.
+It is valid only when ALL of the following hold:
+
+* a semilinear ``ParabolicPDE`` with the raw uniform ``SemilinearMechanism``
+  (no custom mechanism, no ``tuple_proposal``);
+* polynomial ``f`` given as a finite ``f_derivatives`` sequence;
+* a globally constant terminal condition ``phi == a`` with ``phi' == 0``;
+* root code ``Id`` started at ``t = 0``.
+
+Spatial terminal data (e.g. travelling waves), proposals, depth cutoffs,
+fully nonlinear or multidimensional PDEs must use the general recursive
+``tree.sample_tree``, which remains the reference estimator.
+``flat_semilinear_leaf_values`` rejects the detectable violations, but
+flatness of ``phi`` is the caller's assertion.
+
 For the raw uniform ``SemilinearMechanism`` with a globally constant terminal
 value ``a`` (so ``phi' == 0``), a coding tree's value depends only on its codes
 and branching times:

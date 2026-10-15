@@ -129,3 +129,50 @@ def test_flat_sweep_records_diagnostics_and_is_worker_independent(tmp_path):
 def test_flat_sweep_requires_flat_terminal():
     with pytest.raises(ValueError, match="flat_terminal"):
         sweep_time_lambda_mc(partial(allen_cahn_flat, 0.5), sampler="flat", progress=False)
+
+
+def test_hill_recovers_pareto_tail_index():
+    from parabolab.time_lambda_mc import hill_tail_index
+
+    rng = np.random.default_rng(4)
+    alphas = np.array([1.0, 2.0, 3.5])
+    m = 200_000
+    top = np.full((1, 3, 1024), np.nan)
+    for j, alpha in enumerate(alphas):
+        x = rng.pareto(alpha, m) + 1.0          # P(X > x) = x^{-alpha}
+        top[0, j] = np.sort(x)[::-1][:1024]
+    est = hill_tail_index(top, np.full((1, 3), m))
+    assert est[0] == pytest.approx(alphas, rel=0.12)   # k = 447: sd ~ alpha / sqrt(k)
+
+
+def test_hill_handles_ties_and_too_few_values():
+    from parabolab.time_lambda_mc import hill_tail_index
+
+    top = np.full((1, 2, 50), np.nan)
+    top[0, 0] = 3.0                  # all equal: no detectable tail
+    top[0, 1, :5] = [5, 4, 3, 2, 1]  # k would be < 10
+    est = hill_tail_index(top, np.array([[2500, 5]]))
+    assert np.isinf(est[0, 0]) and np.isnan(est[0, 1])
+
+
+def test_keep_top_stores_largest_magnitudes_and_plots(tmp_path):
+    kwargs = dict(
+        flat_terminal=0.5, lambda_min=1.0, lambda_max=6.0, n_lambda=2,
+        T_min=0.4, T_max=1.0, n_T=2, n_samples=20_000, seed=8,
+        sampler="flat", keep_top=64, progress=False,
+    )
+    sweep = sweep_time_lambda_mc(partial(allen_cahn_flat, 0.5), **kwargs)
+    assert sweep.top_abs.shape == (2, 2, 64)
+    stored = sweep.top_abs[np.isfinite(sweep.top_abs)]
+    assert np.all(stored > 0)
+    assert np.all(np.diff(sweep.top_abs, axis=2)[np.isfinite(np.diff(sweep.top_abs, axis=2))] <= 0)
+    assert sweep.tail_index.shape == (2, 2)
+    data = tmp_path / "top.npz"
+    compare_time_lambda_mc(sweep).save(data)
+    loaded = TimeLambdaMCComparison.load(data).sweeps[0]
+    assert np.array_equal(loaded.top_abs, sweep.top_abs, equal_nan=True)
+    TimeLambdaMCComparison([loaded]).plot(tmp_path / "tail.png", statistic="tail_index")
+    assert (tmp_path / "tail.png").exists()
+    without = sweep_time_lambda_mc(partial(allen_cahn_flat, 0.5), **{**kwargs, "keep_top": 0})
+    with pytest.raises(ValueError, match="keep_top"):
+        without.statistic("tail_index")

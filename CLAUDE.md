@@ -50,6 +50,12 @@ agents' drafts. New NN research belongs in its separate sibling worktree.
   excess, not rate error. The mathematical stochastic correspondence, rational
   Python verifier and selected Lean lemmas have distinct scopes; do not claim
   end-to-end formal verification. See the research guide and proof registry.
+- `flat_batch.py` is a special-case vectorized sampler (flat polynomial
+  semilinear data, raw uniform mechanism, root `Id`); it abandons a tree
+  once a factor is zero, so it is orders of magnitude faster there. It has
+  the same law of `H` but a different random stream and node counts.
+  `tree.sample_tree` stays the general reference estimator; the
+  `time_lambda.py` heatmaps use the flat sampler and say so in their titles.
 - Rate-sensitivity plots are diagnostics. The current `rate_variance.py`
   “optimal” labels denote finite-depth interval-constrained candidates except
   for its binary closed-form control. Its variance error bars use an empirical

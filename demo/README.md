@@ -126,23 +126,65 @@ With flat data, every branching of an `f^(k)` particle selects the tuple
 value zero (`phi' = 0`). Derivative chains also end in `f^(k) ≡ 0`. As
 `lambda T` grows, almost every tree is therefore exactly zero, while the
 unbiased estimator keeps `E[H] = u(0)`; the rare nonzero trees carry
-correspondingly large weights. Beyond `T_2` the second moment is infinite,
+correspondingly large weights (roughly `u/p` when a fraction `p` is
+nonzero, so `E[H^2] ≈ u^2/p`). Beyond `T_2` the second moment is infinite,
 yet a finite batch may contain no nonzero tree at all and report a small or
-zero variance. Each completed cell therefore also records:
+zero variance. The demo therefore records several diagnostics per cell.
 
-- `n_nonzero`: the number of nonzero samples;
-- `max_share = max H_i^2 / sum H_i^2`. For i.i.d. samples this ratio tends
-  to zero almost surely if and only if `E[H^2] < infinity`; a persistent
-  value of order one means a few samples determine the variance;
-- `batch_variance`: sample variances of 10 consecutive sub-batches, shown
-  as their coefficient of variation `batch_cv` (between `0` and `3`). Its
-  stability depends on the fourth moment, so it can fluctuate below `T_2`.
+### Reading the figures
 
-These are finite-sample diagnostics. An abrupt change near the curve is an
-experimental observation consistent with the analytic boundary, not a
+Every panel is one PDE; the horizontal axis is the branching rate `lambda`,
+the vertical axis the horizon `T`, and each cell is an independent batch of
+`N` trees started at `(t, x) = (0, 0)`. Common overlays:
+
+- **solid white/black curve, `T_2(lambda)`**: the analytic second-moment
+  boundary. Below it `E[H^2] < infinity`; on and above it `E[H^2] = infinity`.
+  It is computed from the moment ODE, never from the samples.
+- **dashed white line**: the reference horizon `T = 0.5`, for reading off
+  the rate interval in which the second moment is finite at that horizon.
+- **grey cells**: no value to show — the batch failed (overflow, node
+  limit), or the statistic is undefined (all samples zero; for the tail
+  index, fewer than 100 nonzero samples).
+- **panel title**: PDE, grid, `N` per cell and the sampler used
+  (`flat-data sampler (special case)` or `general sample_tree`).
+
+| Figure | Statistic per cell | How to read it | What it is for | Limits |
+|---|---|---|---|---|
+| `time_lambda.png` | sample variance `s^2 = sum (H_i - mean)^2 / (N-1)` (symlog colour scale) | dark = small, bright = large; look for the jump in magnitude and the speckle (neighbouring cells differing by orders of magnitude) across `T_2` | the quantity a user of the estimator actually sees; shows how large and how erratic the variance becomes | beyond `T_2` it is a finite number from a finite batch; all-zero batches show `0`, which looks *stable* although the true variance is infinite |
+| `time_lambda_max_share.png` | `max_i H_i^2 / sum_i H_i^2`, the largest sample's share of the sum of squares (0 to 1) | near 0 (dark) = many samples contribute; near 1 (yellow) = one sample *is* the variance | the diagnostic matched to `T_2`: for i.i.d. samples it tends to 0 almost surely **iff** `E[H^2] < infinity`; it should be dark below the curve and stay patchy/bright above it as `N` grows | a single batch: values are random; just above `T_2` the tail is barely too heavy and the ratio decays only slowly, so the boundary looks gradual, not sharp |
+| `time_lambda_batch_cv.png` | split the `N` samples into 10 consecutive batches, compute each batch's variance `v_1..v_10`, then `std(v)/mean(v)` (0 to 3) | 0 = the 10 repeated variance estimates agree; 3 = all variance sits in one batch | reproducibility: would a repeated experiment give the same variance? | governed by the **fourth** moment, which diverges earlier than the second; it can light up below `T_2` and is not a test of the `T_2` boundary |
+| `time_lambda_tail_index.png` | Hill estimate of the tail index of `\|H\|` from the `k = floor(sqrt(n_nonzero))` largest values: `alpha-hat = 1 / mean_{i<=k} log(X_i / X_{k+1})`; dashed contour = `alpha-hat = 2` after a 3×3 mean | red = heavy tail (`alpha < 2`), white ≈ 2, blue = light tail; compare the dashed contour with `T_2` | a continuous version of the boundary: if `P(\|H\| > x) ~ x^{-alpha}`, then `E[H^2]` is finite for `alpha > 2` and infinite for `alpha < 2`, so the contour should follow `T_2` | assumes a regularly varying tail; it only sees the tail within reach of `N` samples (misses the divergence at large `lambda`); biased for small `k` and with atoms of `H`. Where it contradicts the theory (`alpha-hat < 2` below `T_2`) the estimator, not the theory, is wrong |
+
+`n_nonzero` (number of nonzero samples, in the NPZ) is not plotted; it
+explains the grey all-zero cells and how much information a cell carries.
+`top_abs` stores each cell's largest `--keep-top` (default 1024) `|H|`
+values so that other tail estimators or `k` choices need no resampling:
+`parabolab.time_lambda_mc.hill_tail_index(top_abs, n_nonzero, k)`.
+
+Observed in the 101 × 101 × 10^6 run (15 October 2026; one batch per
+cell, so an observation, not a test): `max_share` is near zero below every
+curve; 10× more samples (10^5 → 10^6) made cells 0.1–0.4 above `T_2` more
+often unstable but barely changed the band just above it. Near the peak of
+`T_2` (`lambda ≈ 1.5–3`) the Hill contour lies 0.02–0.09 above the curve for
+both Allen–Cahn cases and Fisher–KPP `phi = 0.2`; for `lambda ≳ 5` it bends
+away upward (the divergent tail is beyond `10^6` samples), and for
+`lambda ≲ 1` in the `phi = 0.5` cases it falls below the curve, which the
+theory excludes.
+
+These are finite-sample diagnostics. Agreement with the curve is
+experimental evidence consistent with the analytic boundary, not a
 numerical proof of explosion; the proof is the moment calculation below.
 
 ### Samplers and parallel runs
+
+> **Scope.** The general estimator is `parabolab.tree.sample_tree`
+> (`--sampler tree`); it is unchanged and remains the reference for every
+> PDE in the package. The figures of this demo are produced with the
+> accelerated `--sampler flat`, which is valid **only** for semilinear PDEs
+> with the raw uniform mechanism, polynomial `f` and a globally constant
+> terminal condition (`phi' = 0`), root `Id` at `t = 0`. It does not apply
+> to spatial terminal data, tuple proposals, fully nonlinear or
+> multidimensional PDEs. Each panel title names the sampler used.
 
 The default `--sampler flat` (`parabolab/flat_batch.py`) advances all
 particles of a chunk of trees together as arrays. It uses that `H` is the
@@ -190,7 +232,8 @@ seed, sampler and chunk size. Checkpoints are written every five minutes.
 
 Output goes to `--output-dir` (default `demo/`): `time_lambda.png` (variance,
 plus one panel per case), `time_lambda_max_share.png`,
-`time_lambda_batch_cv.png` and `time_lambda_mc.npz`. Per-case checkpoints
+`time_lambda_batch_cv.png`, `time_lambda_tail_index.png` and
+`time_lambda_mc.npz`. Per-case checkpoints
 are saved alongside them, including on a keyboard interrupt. The NPZ
 contains axes, observed statistics, diagnostics, completion counts,
 statuses, reasons and sampling settings. Generated NPZs and figures are
