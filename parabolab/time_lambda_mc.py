@@ -1,25 +1,29 @@
 """Empirical full-tree Monte Carlo variance grids for T-lambda plots.
 
 Every completed cell contains ordinary ``sample_tree`` realizations at that
-cell's PDE horizon and branching rate. Sampling is sequential. By default
-there is no per-tree or per-cell total-work limit; callers may opt into those
-guards explicitly. Invalid cells are retained as status data rather than
+cell's PDE horizon and branching rate. Sampling is sequential unless
+``n_jobs > 1``, which distributes cells (or fixed-size sample chunks of a
+cell) over worker processes. By default there is no per-tree or per-cell
+total-work limit; callers may opt into those guards explicitly. Invalid cells are retained as status data rather than
 filtered or replaced. A finite batch cannot establish that the population
 second moment is finite or infinite.
 """
 
 from __future__ import annotations
 
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from dataclasses import dataclass
 import json
 import math
 from pathlib import Path
+import time
 from typing import Callable, Optional, Sequence, Union
 
 import matplotlib.pyplot as plt
-from matplotlib.colors import SymLogNorm
+from matplotlib.colors import Normalize, SymLogNorm
 import numpy as np
 
+from .flat_batch import flat_semilinear_leaf_values, sample_flat_batch
 from .time_lambda import _boundary, sweep_time_lambda
 from .tree import TreeNodeLimitExceeded, sample_tree
 
@@ -31,10 +35,104 @@ _CELL_BUDGET = "cell_budget"
 _NONFINITE = "nonfinite"
 _ERROR = "error"
 _INTERRUPTED = "interrupted"
+_CANCELLED = object()
+_SAMPLERS = ("tree", "flat")
+_DIAGNOSTICS = ("n_nonzero", "max_share", "batch_variance")
+_FLAT_DEFAULT_CHUNK = 100_000
+_STATISTICS = {
+    "variance": ("Observed full-tree MC sample variance with theoretical boundary",
+                 "Sample variance (symlog, ddof=1)"),
+    "max_share": ("Largest sample's share of the sum of squares, max H² / ΣH²",
+                  "max H² / ΣH²  (→ 0 iff E[H²] < ∞)"),
+    "batch_cv": ("Spread of sub-batch sample variances",
+                 "CV of batch variances (std / mean)"),
+}
 
 
 def _cell_rng(seed: int, t_index: int, lambda_index: int) -> np.random.Generator:
     return np.random.default_rng(np.random.SeedSequence([seed, t_index, lambda_index]))
+
+
+def _chunk_rng(seed: int, t_index: int, lambda_index: int, chunk: int,
+               n_chunks: int) -> np.random.Generator:
+    # A single chunk reuses the serial cell stream, so results match n_jobs=1.
+    if n_chunks == 1:
+        return _cell_rng(seed, t_index, lambda_index)
+    return np.random.default_rng(
+        np.random.SeedSequence([seed, t_index, lambda_index, chunk]))
+
+
+_WORKER_FACTORY: Optional[Callable[[float], object]] = None
+_WORKER_PDES: dict = {}
+
+
+def _worker_init(factory: Callable[[float], object]) -> None:
+    global _WORKER_FACTORY
+    _WORKER_FACTORY = factory
+    _WORKER_PDES.clear()
+
+
+def _worker_pde(horizon: float):
+    pde = _WORKER_PDES.get(horizon)
+    if pde is None:
+        pde = _WORKER_FACTORY(horizon)
+        _WORKER_PDES[horizon] = pde
+    return pde
+
+
+def _run_chunk(ti: int, li: int, chunk: int, n_chunks: int, n: int,
+               horizon: float, rate: float, seed: int,
+               max_nodes: Optional[int], flat: Optional[tuple] = None) -> tuple:
+    """Sample ``n`` trees of one cell chunk; stop at the first failure.
+
+    Returns ``(ti, li, chunk, values, nodes, status, reason)`` where
+    ``values`` holds the completed samples and ``status`` is ``None`` when
+    every requested tree completed with a finite value. ``flat`` is
+    ``(leaf_values, flat_terminal)`` for the vectorized flat sampler.
+    """
+    rng = _chunk_rng(seed, ti, li, chunk, n_chunks)
+    if flat is not None:
+        return _run_flat_chunk(ti, li, chunk, n, horizon, rate, rng, max_nodes, flat)
+    pde = _worker_pde(horizon)
+    values = np.empty(n)
+    nodes = 0
+    for si in range(n):
+        try:
+            sample = sample_tree(pde, 0.0, 0.0, rng=rng, rate=rate,
+                                 max_nodes=max_nodes)
+        except TreeNodeLimitExceeded as exc:
+            return ti, li, chunk, values[:si], nodes + exc.n_nodes, _NODE_LIMIT, str(exc)
+        except (FloatingPointError, OverflowError, RecursionError) as exc:
+            return (ti, li, chunk, values[:si], nodes, _ERROR,
+                    f"{type(exc).__name__}: {exc}")
+        nodes += sample.n_nodes
+        if not math.isfinite(sample.value):
+            return (ti, li, chunk, values[:si + 1], nodes, _NONFINITE,
+                    "sample_tree returned a non-finite value")
+        values[si] = sample.value
+    return ti, li, chunk, values, nodes, None, ""
+
+
+def _run_flat_chunk(ti, li, chunk, n, horizon, rate, rng, max_nodes, flat) -> tuple:
+    leaf_values, flat_terminal = flat
+    try:
+        values, nodes, exceeded = sample_flat_batch(
+            np.asarray(leaf_values), flat_terminal, horizon, rate, n, rng,
+            max_nodes=max_nodes,
+        )
+    except MemoryError as exc:
+        return ti, li, chunk, np.empty(0), 0, _ERROR, f"MemoryError: {exc}"
+    bad = exceeded | ~np.isfinite(values)
+    if not bad.any():
+        return ti, li, chunk, values, int(nodes.sum()), None, ""
+    # Report the first failing tree in sample order, as the serial loop would.
+    i = int(np.argmax(bad))
+    used = int(nodes[:i + 1].sum())
+    if exceeded[i]:
+        return (ti, li, chunk, values[:i], used, _NODE_LIMIT,
+                f"a tree exceeded max_nodes={max_nodes} visited nodes (flat sampler)")
+    return (ti, li, chunk, values[:i + 1], used, _NONFINITE,
+            "flat sampler returned a non-finite value")
 
 
 def _grid_edges(points: np.ndarray) -> np.ndarray:
@@ -68,6 +166,28 @@ class TimeLambdaMCSweep:
     max_cell_nodes: Optional[int]
     reference_T: float
     theory_points: int
+    chunk_size: Optional[int] = None
+    sampler: str = "tree"
+    n_nonzero: Optional[np.ndarray] = None
+    max_share: Optional[np.ndarray] = None
+    batch_variance: Optional[np.ndarray] = None
+
+    @property
+    def batch_cv(self) -> Optional[np.ndarray]:
+        """Coefficient of variation of the per-batch sample variances."""
+        if self.batch_variance is None:
+            return None
+        with np.errstate(invalid="ignore", divide="ignore"):
+            mean = np.mean(self.batch_variance, axis=2)
+            return np.where(mean > 0.0, np.std(self.batch_variance, axis=2) / mean, np.nan)
+
+    def statistic(self, name: str) -> np.ndarray:
+        if name not in _STATISTICS:
+            raise ValueError(f"statistic must be one of {sorted(_STATISTICS)}")
+        values = self.variance if name == "variance" else getattr(self, name)
+        if values is None:
+            raise ValueError(f"this sweep has no {name!r} data (recorded before diagnostics)")
+        return values
 
     def save(self, path: Union[str, Path]) -> "TimeLambdaMCSweep":
         out = Path(path)
@@ -83,14 +203,18 @@ class TimeLambdaMCSweep:
             "max_cell_nodes": self.max_cell_nodes,
             "reference_T": self.reference_T,
             "theory_points": self.theory_points,
+            "chunk_size": self.chunk_size,
+            "sampler": self.sampler,
             "kind": "sweep",
         }, sort_keys=True)
+        extra = {name: getattr(self, name) for name in _DIAGNOSTICS
+                 if getattr(self, name) is not None}
         np.savez_compressed(
             out, metadata=np.asarray(metadata), lambdas=self.lambdas,
             horizons=self.horizons, variance=self.variance, mean=self.mean,
             second_moment=self.second_moment,
             completed_samples=self.completed_samples, total_nodes=self.total_nodes,
-            status=self.status, reason=self.reason,
+            status=self.status, reason=self.reason, **extra,
         )
         return self
 
@@ -110,11 +234,16 @@ class TimeLambdaMCSweep:
                 max_cell_nodes=meta["max_cell_nodes"],
                 reference_T=float(meta["reference_T"]),
                 theory_points=int(meta.get("theory_points", 401)),
+                chunk_size=meta.get("chunk_size"),
+                sampler=meta.get("sampler", "tree"),
+                **{name: data[name].copy() if name in data.files else None
+                   for name in _DIAGNOSTICS},
             )
 
-    def _plot_on(self, ax: plt.Axes, norm: SymLogNorm):
-        valid = (self.status == _COMPLETE) & np.isfinite(self.variance)
-        values = np.ma.array(self.variance, mask=~valid)
+    def _plot_on(self, ax: plt.Axes, norm, statistic: str = "variance"):
+        data = self.statistic(statistic)
+        valid = (self.status == _COMPLETE) & np.isfinite(data)
+        values = np.ma.array(data, mask=~valid)
         cmap = plt.get_cmap("viridis").with_extremes(bad="#B8BEC7")
         mesh = ax.pcolormesh(
             _grid_edges(self.lambdas), _grid_edges(self.horizons), values,
@@ -141,7 +270,9 @@ class TimeLambdaMCSweep:
         ax.set_ylabel(r"horizon $T$")
         invalid = int(np.size(valid) - np.count_nonzero(valid))
         if invalid:
-            ax.text(0.02, 0.02, f"{invalid} invalid/uncompleted cells (grey)",
+            what = ("invalid/uncompleted" if statistic == "variance"
+                    else "invalid or all-zero")
+            ax.text(0.02, 0.02, f"{invalid} {what} cells (grey)",
                     transform=ax.transAxes, fontsize=7.5,
                     bbox={"facecolor": "white", "alpha": 0.8, "edgecolor": "none"})
         ax.legend(loc="upper right", fontsize=7.5)
@@ -154,7 +285,13 @@ class TimeLambdaMCComparison:
     def __init__(self, sweeps: Sequence[TimeLambdaMCSweep]):
         self.sweeps = list(sweeps)
 
-    def _norm(self) -> SymLogNorm:
+    def _norm(self, statistic: str = "variance"):
+        if statistic == "max_share":
+            return Normalize(vmin=0.0, vmax=1.0)
+        if statistic == "batch_cv":
+            batches = max(s.batch_variance.shape[2] for s in self.sweeps
+                          if s.batch_variance is not None)
+            return Normalize(vmin=0.0, vmax=math.sqrt(batches - 1))
         finite = [
             sweep.variance[(sweep.status == _COMPLETE) & np.isfinite(sweep.variance)]
             for sweep in self.sweeps
@@ -174,24 +311,27 @@ class TimeLambdaMCComparison:
         *,
         save_individual: bool = False,
         figsize: Optional[tuple[float, float]] = None,
+        statistic: str = "variance",
     ) -> "TimeLambdaMCComparison":
+        """Plot one statistic: ``variance``, ``max_share`` or ``batch_cv``."""
         if not self.sweeps:
             raise ValueError("at least one MC sweep is required")
+        title, label = _STATISTICS[statistic]
         n = len(self.sweeps)
-        ncols, nrows = min(3, n), (n + min(3, n) - 1) // min(3, n)
+        ncols = 2 if n == 4 else min(3, n)
+        nrows = (n + ncols - 1) // ncols
         fig, axes = plt.subplots(nrows, ncols, figsize=figsize or (5.3 * ncols, 4.4 * nrows))
         flat_axes = np.atleast_1d(axes).ravel()
-        norm = self._norm()
+        norm = self._norm(statistic)
         mesh = None
         for ax, sweep in zip(flat_axes, self.sweeps):
-            mesh = sweep._plot_on(ax, norm)
+            mesh = sweep._plot_on(ax, norm, statistic)
         for ax in flat_axes[n:]:
             ax.set_visible(False)
-        fig.suptitle("Observed full-tree MC sample variance with theoretical boundary",
-                     fontsize=15, fontweight="bold")
+        fig.suptitle(title, fontsize=15, fontweight="bold")
         fig.subplots_adjust(left=0.06, right=0.88, bottom=0.08, top=0.90,
                             wspace=0.27, hspace=0.32)
-        fig.colorbar(mesh, ax=list(flat_axes[:n]), label="Sample variance (symlog, ddof=1)",
+        fig.colorbar(mesh, ax=list(flat_axes[:n]), label=label,
                      shrink=0.86, fraction=0.025, pad=0.03)
         if path is not None:
             out = Path(path)
@@ -201,8 +341,8 @@ class TimeLambdaMCComparison:
             if save_individual:
                 for i, sweep in enumerate(self.sweeps, start=1):
                     one, ax = plt.subplots(figsize=(7.0, 5.2))
-                    one_mesh = sweep._plot_on(ax, norm)
-                    one.colorbar(one_mesh, ax=ax, label="Sample variance (symlog, ddof=1)")
+                    one_mesh = sweep._plot_on(ax, norm, statistic)
+                    one.colorbar(one_mesh, ax=ax, label=label)
                     one.tight_layout()
                     one.savefig(out.with_name(f"{out.stem}_{i}.png"), dpi=180)
                     plt.close(one)
@@ -226,8 +366,15 @@ class TimeLambdaMCComparison:
             "max_cell_nodes": [s.max_cell_nodes for s in self.sweeps],
             "reference_T": [s.reference_T for s in self.sweeps],
             "theory_points": [s.theory_points for s in self.sweeps],
+            "chunk_size": [s.chunk_size for s in self.sweeps],
+            "sampler": [s.sampler for s in self.sweeps],
             "kind": "comparison",
         }, sort_keys=True)
+        extra = {
+            name: np.stack([getattr(s, name) for s in self.sweeps])
+            for name in _DIAGNOSTICS
+            if all(getattr(s, name) is not None for s in self.sweeps)
+        }
         np.savez_compressed(
             out, metadata=np.asarray(metadata),
             lambdas=np.stack([s.lambdas for s in self.sweeps]),
@@ -239,6 +386,7 @@ class TimeLambdaMCComparison:
             total_nodes=np.stack([s.total_nodes for s in self.sweeps]),
             status=np.stack([s.status for s in self.sweeps]),
             reason=np.stack([s.reason for s in self.sweeps]),
+            **extra,
         )
         return self
 
@@ -252,6 +400,8 @@ class TimeLambdaMCComparison:
                 "lambdas", "horizons", "variance", "mean", "second_moment",
                 "completed_samples", "total_nodes", "status", "reason",
             )}
+            arrays.update({name: data[name].copy() for name in _DIAGNOSTICS
+                           if name in data.files})
         sweeps = []
         for i, title in enumerate(meta["titles"]):
             sweeps.append(TimeLambdaMCSweep(
@@ -266,6 +416,10 @@ class TimeLambdaMCComparison:
                 max_cell_nodes=meta["max_cell_nodes"][i],
                 reference_T=float(meta["reference_T"][i]),
                 theory_points=int(meta.get("theory_points", [401] * len(meta["titles"]))[i]),
+                chunk_size=meta.get("chunk_size", [None] * len(meta["titles"]))[i],
+                sampler=meta.get("sampler", ["tree"] * len(meta["titles"]))[i],
+                **{name: arrays[name][i] if name in arrays else None
+                   for name in _DIAGNOSTICS},
             ))
         return cls(sweeps)
 
@@ -289,12 +443,38 @@ def sweep_time_lambda_mc(
     theory_points: int = 401,
     checkpoint_path: Optional[Union[str, Path]] = None,
     progress: bool = True,
+    n_jobs: int = 1,
+    chunk_size: Optional[int] = None,
+    checkpoint_every: float = 300.0,
+    sampler: str = "tree",
+    n_batches: int = 10,
 ) -> TimeLambdaMCSweep:
-    """Sequentially sample one full-tree batch at every ``(T, lambda)`` cell.
+    """Sample one full-tree batch at every ``(T, lambda)`` cell.
 
     The default has no cumulative node budget. ``max_nodes`` and
     ``max_cell_nodes`` are optional work guards; they mark an affected cell
     invalid rather than returning a truncated estimator.
+
+    ``n_jobs > 1`` samples in that many worker processes; ``pde_factory``
+    must then be picklable (a module-level function or ``functools.partial``).
+    ``chunk_size`` splits each cell into independently seeded chunks of at
+    most that many trees, so one expensive cell can use several workers.
+    Results depend on ``seed`` and ``chunk_size`` but not on ``n_jobs``; with
+    ``chunk_size=None`` (one chunk per cell) they equal the serial results.
+    A failing chunk invalidates the cell exactly as a failing tree does in
+    the serial loop. ``max_cell_nodes`` is a cumulative serial budget and
+    requires ``n_jobs=1``. In parallel mode, checkpoints are written every
+    ``checkpoint_every`` seconds.
+
+    ``sampler="flat"`` uses the vectorized sampler of ``flat_batch`` (same
+    distribution of ``H`` for a flat polynomial semilinear PDE; different
+    random stream and node counts); it requires ``flat_terminal`` and
+    defaults to chunks of at most 100 000 trees, serial or parallel.
+
+    Every completed cell also records instability diagnostics: the number
+    of nonzero samples, the largest sample's share ``max H^2 / sum H^2`` of
+    the sum of squares, and the sample variances of ``n_batches`` equal
+    consecutive sub-batches.
     """
     values = (lambda_min, lambda_max, T_min, T_max, reference_T)
     if not all(math.isfinite(v) and v > 0.0 for v in values):
@@ -311,6 +491,23 @@ def sweep_time_lambda_mc(
     for name, limit in (("max_nodes", max_nodes), ("max_cell_nodes", max_cell_nodes)):
         if limit is not None and (not isinstance(limit, (int, np.integer)) or isinstance(limit, bool) or limit < 1):
             raise ValueError(f"{name} must be None or a positive integer")
+    for name, count in (("n_jobs", n_jobs), ("chunk_size", chunk_size)):
+        if count is not None and (not isinstance(count, (int, np.integer))
+                                  or isinstance(count, bool) or count < 1):
+            raise ValueError(f"{name} must be a positive integer")
+    if n_jobs is None:
+        raise ValueError("n_jobs must be a positive integer")
+    if n_jobs > 1 and max_cell_nodes is not None:
+        raise ValueError("max_cell_nodes is a serial cumulative budget; use n_jobs=1")
+    if sampler not in _SAMPLERS:
+        raise ValueError(f"sampler must be one of {_SAMPLERS}")
+    if sampler == "tree" and chunk_size is not None and chunk_size < n_samples and n_jobs == 1:
+        raise ValueError("chunk_size applies to parallel sampling; use n_jobs > 1")
+    if sampler == "flat" and max_cell_nodes is not None:
+        raise ValueError("max_cell_nodes is a serial cumulative budget of the tree sampler")
+    if (not isinstance(n_batches, (int, np.integer)) or isinstance(n_batches, bool)
+            or n_batches < 2):
+        raise ValueError("n_batches must be an integer at least 2")
 
     lambdas = np.linspace(lambda_min, lambda_max, n_lambda)
     horizons = np.linspace(T_min, T_max, n_T)
@@ -334,7 +531,27 @@ def sweep_time_lambda_mc(
         max_cell_nodes=None if max_cell_nodes is None else int(max_cell_nodes),
         reference_T=reference_T,
         theory_points=int(theory_points),
+        sampler=sampler,
+        n_nonzero=np.zeros(shape, dtype=np.int64),
+        max_share=np.full(shape, np.nan),
+        batch_variance=np.full(shape + (min(int(n_batches), n_samples // 2),), np.nan),
     )
+
+    flat = None
+    if sampler == "flat":
+        flat = (tuple(flat_semilinear_leaf_values(theory_pde, flat_terminal)),
+                float(flat_terminal))
+        if chunk_size is None and n_samples > _FLAT_DEFAULT_CHUNK:
+            chunk_size = _FLAT_DEFAULT_CHUNK
+    if n_jobs > 1 or flat is not None:
+        if chunk_size is not None and chunk_size < n_samples:
+            result.chunk_size = int(chunk_size)
+        return _fill_chunks(
+            result, pde_factory, n_jobs=int(n_jobs),
+            chunk_size=int(n_samples if result.chunk_size is None else result.chunk_size),
+            checkpoint_path=checkpoint_path, progress=progress,
+            checkpoint_every=checkpoint_every, flat=flat,
+        )
 
     current = None
     try:
@@ -384,21 +601,7 @@ def sweep_time_lambda_mc(
                         break
                     samples[si] = sample.value
                 else:
-                    with np.errstate(over="ignore", invalid="ignore"):
-                        mean = float(np.mean(samples))
-                        variance = (
-                            0.0 if np.all(samples == samples[0])
-                            else float(np.var(samples, ddof=1))
-                        )
-                        second_moment = float(np.mean(samples * samples))
-                    if all(math.isfinite(v) for v in (mean, variance, second_moment)):
-                        result.mean[ti, li] = mean
-                        result.variance[ti, li] = variance
-                        result.second_moment[ti, li] = second_moment
-                        result.status[ti, li] = _COMPLETE
-                    else:
-                        result.status[ti, li] = _NONFINITE
-                        result.reason[ti, li] = "batch statistic was non-finite"
+                    _store_statistics(result, ti, li, samples)
             if checkpoint_path is not None:
                 result.save(checkpoint_path)
             if progress:
@@ -415,6 +618,189 @@ def sweep_time_lambda_mc(
             print(f"Partial MC grid saved to {Path(checkpoint_path).resolve()}", flush=True)
         raise
     return result
+
+
+def _sample_variance(samples: np.ndarray) -> float:
+    return 0.0 if np.all(samples == samples[0]) else float(np.var(samples, ddof=1))
+
+
+def _store_statistics(result: TimeLambdaMCSweep, ti: int, li: int,
+                      samples: np.ndarray) -> None:
+    """Fill one completed cell's statistics and instability diagnostics."""
+    with np.errstate(over="ignore", invalid="ignore"):
+        mean = float(np.mean(samples))
+        variance = _sample_variance(samples)
+        squares = samples * samples
+        second_moment = float(np.mean(squares))
+        total = float(np.sum(squares))
+        batches = [_sample_variance(b) for b in
+                   np.array_split(samples, result.batch_variance.shape[2])]
+    result.n_nonzero[ti, li] = int(np.count_nonzero(samples))
+    if all(math.isfinite(v) for v in (mean, variance, second_moment)):
+        result.mean[ti, li] = mean
+        result.variance[ti, li] = variance
+        result.second_moment[ti, li] = second_moment
+        result.max_share[ti, li] = (
+            float(np.max(squares)) / total if 0.0 < total < math.inf else np.nan
+        )
+        result.batch_variance[ti, li] = batches
+        result.status[ti, li] = _COMPLETE
+    else:
+        result.status[ti, li] = _NONFINITE
+        result.reason[ti, li] = "batch statistic was non-finite"
+
+
+def _finish_cell(result: TimeLambdaMCSweep, ti: int, li: int, chunks: list) -> None:
+    """Combine a cell's chunk results in chunk order, as the serial loop would."""
+    values, nodes = [], 0
+    for _, _, _, chunk_values, chunk_nodes, status, reason in chunks:
+        values.append(chunk_values)
+        nodes += chunk_nodes
+        if status is not None:
+            result.completed_samples[ti, li] = sum(len(v) for v in values)
+            result.total_nodes[ti, li] = nodes
+            result.status[ti, li] = status
+            result.reason[ti, li] = reason
+            return
+    samples = np.concatenate(values)
+    result.completed_samples[ti, li] = len(samples)
+    result.total_nodes[ti, li] = nodes
+    _store_statistics(result, ti, li, samples)
+
+
+def _fill_chunks(
+    result: TimeLambdaMCSweep,
+    pde_factory: Callable[[float], object],
+    *,
+    n_jobs: int,
+    chunk_size: int,
+    checkpoint_path: Optional[Union[str, Path]],
+    progress: bool,
+    checkpoint_every: float,
+    flat: Optional[tuple] = None,
+) -> TimeLambdaMCSweep:
+    for horizon in result.horizons:
+        pde = pde_factory(float(horizon))
+        if not math.isclose(float(pde.T), float(horizon), rel_tol=0.0, abs_tol=1e-14):
+            raise ValueError("pde_factory must construct a PDE with the requested horizon")
+        if flat is not None and tuple(flat_semilinear_leaf_values(pde, flat[1])) != flat[0]:
+            raise ValueError("pde_factory must give the same flat data at every horizon")
+
+    n = result.n_samples
+    n_chunks = -(-n // chunk_size)
+    sizes = [min(chunk_size, n - c * chunk_size) for c in range(n_chunks)]
+    # Run the presumably most expensive cells (large lambda*T) first to
+    # shorten the tail; results do not depend on the order.
+    cells = sorted(
+        ((ti, li) for ti in range(len(result.horizons)) for li in range(len(result.lambdas))),
+        key=lambda c: -result.horizons[c[0]] * result.lambdas[c[1]],
+    )
+    n_cells = len(cells)
+    received: dict = {}
+    start = last_save = time.monotonic()
+    done_cells = 0
+
+    def task(ti: int, li: int, c: int) -> tuple:
+        return (_run_chunk, ti, li, c, n_chunks, sizes[c],
+                float(result.horizons[ti]), float(result.lambdas[li]),
+                result.seed, result.max_nodes, flat)
+
+    def report_and_save(final: bool = False) -> None:
+        if checkpoint_path is not None:
+            result.save(checkpoint_path)
+        if progress:
+            complete = int(np.count_nonzero(result.status == _COMPLETE))
+            print(f"{result.title}: {done_cells}/{n_cells} cells finished "
+                  f"(complete={complete}, invalid={done_cells - complete}), "
+                  f"elapsed {time.monotonic() - start:.0f}s"
+                  + (" [done]" if final else ""), flush=True)
+
+    def maybe_report() -> None:
+        nonlocal last_save
+        if time.monotonic() - last_save >= checkpoint_every:
+            report_and_save()
+            last_save = time.monotonic()
+
+    if progress:
+        print(f"{result.title}: {n_cells} cells x {n_chunks} chunk(s) of <= {chunk_size} "
+              f"trees, {result.sampler} sampler, {n_jobs} worker(s); progress every "
+              f"{checkpoint_every:.0f}s", flush=True)
+
+    if n_jobs == 1:
+        _worker_init(pde_factory)
+        try:
+            for ti, li in cells:
+                received[ti, li] = True
+                ordered = []
+                for c in range(n_chunks):
+                    fn, *args = task(ti, li, c)
+                    out = fn(*args)
+                    ordered.append(out)
+                    if out[5] is not None:
+                        break
+                _finish_cell(result, ti, li, ordered)
+                del received[ti, li]
+                done_cells += 1
+                maybe_report()
+        except KeyboardInterrupt:
+            _mark_interrupted(result, received, checkpoint_path)
+            raise
+        report_and_save(final=True)
+        return result
+
+    futures: dict = {}
+    cell_futures: dict = {}
+    executor = ProcessPoolExecutor(max_workers=n_jobs, initializer=_worker_init,
+                                   initargs=(pde_factory,))
+    try:
+        for ti, li in cells:
+            cell_futures[ti, li] = []
+            for c in range(n_chunks):
+                fut = executor.submit(*task(ti, li, c))
+                futures[fut] = (ti, li, c)
+                cell_futures[ti, li].append(fut)
+        for fut in as_completed(futures):
+            # Drop our references so finished chunk arrays can be freed.
+            ti, li, c = futures.pop(fut)
+            chunks = received.setdefault((ti, li), [None] * n_chunks)
+            if fut.cancelled():
+                chunks[c] = _CANCELLED
+            else:
+                out = fut.result()
+                chunks[c] = out
+                if out[5] is not None:
+                    # Later chunks of a failed cell cannot affect it.
+                    for other in cell_futures[ti, li][c + 1:]:
+                        other.cancel()
+            if all(x is not None for x in chunks):
+                ordered = []
+                for x in chunks:
+                    if x is _CANCELLED:
+                        break
+                    ordered.append(x)
+                    if x[5] is not None:
+                        break
+                _finish_cell(result, ti, li, ordered)
+                del received[ti, li], cell_futures[ti, li]
+                done_cells += 1
+            maybe_report()
+    except KeyboardInterrupt:
+        executor.shutdown(wait=False, cancel_futures=True)
+        _mark_interrupted(result, received, checkpoint_path)
+        raise
+    executor.shutdown()
+    report_and_save(final=True)
+    return result
+
+
+def _mark_interrupted(result: TimeLambdaMCSweep, in_progress,
+                      checkpoint_path: Optional[Union[str, Path]]) -> None:
+    for ti, li in in_progress:
+        result.status[ti, li] = _INTERRUPTED
+        result.reason[ti, li] = "interrupted by user"
+    if checkpoint_path is not None:
+        result.save(checkpoint_path)
+        print(f"Partial MC grid saved to {Path(checkpoint_path).resolve()}", flush=True)
 
 
 def compare_time_lambda_mc(*sweeps: TimeLambdaMCSweep) -> TimeLambdaMCComparison:

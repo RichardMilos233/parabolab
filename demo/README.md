@@ -101,15 +101,14 @@ sampler or numerical verifier.
 ## Time–rate boundary and Monte Carlo variance heatmap
 
 `time_lambda.py` overlays the analytic boundary
-$T_2(\lambda)=\log(1+K\lambda^2)/\lambda$ for five spatially constant
-polynomial examples: Allen–Cahn at terminal values `0.5` and `0.3`,
-Fisher–KPP at `0.5` and `0.2`, and the standard binary control mechanism at
-terminal value `1`. The heatmap samples actual coding trees on a configurable
-`T`–lambda grid and displays their empirical variance; the theoretical
-boundary never supplies the heatmap values.
+$T_2(\lambda)=\log(1+K\lambda^2)/\lambda$ for four spatially constant
+polynomial examples: Allen–Cahn at terminal values `0.5` and `0.3` and
+Fisher–KPP at `0.5` and `0.2`. The heatmaps sample actual coding trees on a
+configurable `T`–lambda grid; the theoretical boundary never supplies the
+heatmap values.
 
-For each grid cell, the statistic is the sample variance of the individual
-tree outputs, with `ddof=1`:
+For each grid cell, the main statistic is the sample variance of the
+individual tree outputs, with `ddof=1`:
 
 \[
 \widehat{\operatorname{Var}}(H)
@@ -118,64 +117,90 @@ tree outputs, with `ddof=1`:
 
 This is not the variance of the sample mean (which would divide by `N`
 again), and it does not subtract an exact PDE solution squared. Each
-horizon uses a newly constructed PDE with that terminal time. The demo exposes
-just three controls: lambda points, time points and samples per cell.
+horizon uses a newly constructed PDE with that terminal time.
 
-The color scale shows measured variance across orders of magnitude. A
-completed batch with zero sample variance is displayed at the low end,
-not treated as missing. Finite samples can miss rare large trees even where
-the theoretical second moment is infinite. A smooth interior or a sudden
-increase near the curve is an experimental observation to inspect, not a
-pattern imposed by the plot or a finite-sample certificate of explosion.
+### Why the variance alone can look stable beyond the boundary
 
-Sampling is serial, one tree at a time, using the original full-tree estimator
-without a depth cutoff or a default node budget. Increasing the sample count
-increases total work, not the number of concurrent trees. The sampler traverses
-each tree recursively; it does not store all sampled trees. Per-cell scalar
-samples occupy memory proportional to the requested sample count. Very deep
-trees or large weights can still cause recursion or arithmetic failure;
-affected cells are marked invalid, not assigned zero variance.
+With flat data, every branching of an `f^(k)` particle selects the tuple
+`(Dx, Dx, ...)` with probability `1/2`, and that tuple makes the whole tree
+value zero (`phi' = 0`). Derivative chains also end in `f^(k) ≡ 0`. As
+`lambda T` grows, almost every tree is therefore exactly zero, while the
+unbiased estimator keeps `E[H] = u(0)`; the rare nonzero trees carry
+correspondingly large weights. Beyond `T_2` the second moment is infinite,
+yet a finite batch may contain no nonzero tree at all and report a small or
+zero variance. Each completed cell therefore also records:
+
+- `n_nonzero`: the number of nonzero samples;
+- `max_share = max H_i^2 / sum H_i^2`. For i.i.d. samples this ratio tends
+  to zero almost surely if and only if `E[H^2] < infinity`; a persistent
+  value of order one means a few samples determine the variance;
+- `batch_variance`: sample variances of 10 consecutive sub-batches, shown
+  as their coefficient of variation `batch_cv` (between `0` and `3`). Its
+  stability depends on the fourth moment, so it can fluctuate below `T_2`.
+
+These are finite-sample diagnostics. An abrupt change near the curve is an
+experimental observation consistent with the analytic boundary, not a
+numerical proof of explosion; the proof is the moment calculation below.
+
+### Samplers and parallel runs
+
+The default `--sampler flat` (`parabolab/flat_batch.py`) advances all
+particles of a chunk of trees together as arrays. It uses that `H` is the
+product of node factors, that Brownian positions do not enter flat data, and
+that a sample can be abandoned once a factor is zero. Its `H` has the same
+law as `sample_tree` (tested against `sample_tree` and against the exact
+second-moment ODE), but its random stream differs, and its node counts cover
+only the visited particles, so they are not comparable with `sample_tree`
+counts. `--sampler tree` runs the original recursive estimator.
+
+`--n-jobs N` distributes chunks over `N` worker processes; `--chunk-size C`
+sets independently seeded chunks of at most `C` trees (flat default:
+`100000`). Results depend on the seed, sampler and chunk size, not on `N`.
+Neither sampler has a depth cutoff or default node budget; `--max-nodes`
+optionally marks a cell invalid (grey) when any tree visits more nodes.
+Arithmetic overflow or recursion failure also marks a cell invalid rather
+than assigning zero variance.
 
 This calculation applies to the raw uniform semilinear mechanism (tuple
-probability `1/2`) with a caller-asserted globally flat terminal condition,
-or to the library's standard binary mechanism. It makes no universal claim
-for spatial waves, custom proposals, non-polynomial nonlinearities, or fully
-nonlinear PDEs. `K` uses converged floating-point Gauss–Legendre quadrature
-after mapping the infinite interval to a finite one; this numerical check is
-not a formal certificate. The boundary calculation itself uses no Monte
-Carlo or depth truncation; the accompanying heatmap is a separate MC
-diagnostic. Saving its axes, statistics, completion status and sampling
-settings allows figures to be redrawn without resampling.
+probability `1/2`) with a caller-asserted globally flat terminal condition.
+It makes no universal claim for spatial waves, custom proposals,
+non-polynomial nonlinearities, or fully nonlinear PDEs. `K` uses converged
+floating-point Gauss–Legendre quadrature after mapping the infinite interval
+to a finite one; this numerical check is not a formal certificate. The
+boundary calculation itself uses no Monte Carlo or depth truncation.
 
-Run the default (five PDE cases, a `12 × 10` grid per case,
-128 trees per cell):
+Run the default (four PDE cases, a `12 × 10` grid per case, 128 trees per
+cell):
 
 ```bash
 python demo/time_lambda.py
 ```
 
-Increase grid resolution and samples independently when more compute is
-available. This larger configuration is an example command, not a recorded
-completed experiment:
+A large configuration (an example command, not a recorded completed
+experiment):
 
 ```bash
 python demo/time_lambda.py \
-  --mc-lambda-points 100 --mc-T-points 100 --samples-per-cell 100000
+  --mc-lambda-points 101 --mc-T-points 101 --samples-per-cell 100000 --n-jobs 8
 ```
 
 The default ranges are lambda `0.01–12` and T `0.05–1.3`. These can be changed
 in the demo's sweep call if needed. Runs are reproducible from their saved
-seed. No parallel worker pool is started.
+seed, sampler and chunk size. Checkpoints are written every five minutes.
 
-Output goes to `demo/time_lambda.png` and `demo/time_lambda_mc.npz`.
-Per-case checkpoints are saved alongside them, including on a keyboard
-interrupt. The NPZ contains axes, observed statistics, completion counts,
+Output goes to `--output-dir` (default `demo/`): `time_lambda.png` (variance,
+plus one panel per case), `time_lambda_max_share.png`,
+`time_lambda_batch_cv.png` and `time_lambda_mc.npz`. Per-case checkpoints
+are saved alongside them, including on a keyboard interrupt. The NPZ
+contains axes, observed statistics, diagnostics, completion counts,
 statuses, reasons and sampling settings. Generated NPZs and figures are
 ignored by Git. To redraw saved data without sampling, use the library:
 
 ```python
 from parabolab import TimeLambdaMCComparison
-TimeLambdaMCComparison.load("demo/time_lambda_mc.npz").plot("demo/time_lambda.png")
+data = TimeLambdaMCComparison.load("demo/time_lambda_mc.npz")
+data.plot("demo/time_lambda.png")
+data.plot("demo/time_lambda_max_share.png", statistic="max_share")
 ```
 
 The library retains `sweep_time_lambda` for theory-only plots and optional

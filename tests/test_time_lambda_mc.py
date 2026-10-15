@@ -146,3 +146,62 @@ def test_grid_counts_require_integers_at_least_two(name, value):
     kwargs = {name: value}
     with pytest.raises(ValueError, match=name):
         sweep_time_lambda_mc(binary_control_1d, progress=False, **kwargs)
+
+
+def test_parallel_single_chunk_matches_serial():
+    kwargs = dict(
+        lambda_min=0.5, lambda_max=2.0, n_lambda=3, T_min=0.05, T_max=0.3,
+        n_T=2, n_samples=50, seed=5, progress=False,
+    )
+    serial = sweep_time_lambda_mc(binary_control_1d, **kwargs)
+    parallel = sweep_time_lambda_mc(binary_control_1d, n_jobs=2, **kwargs)
+    for name in ("mean", "variance", "second_moment", "completed_samples",
+                 "total_nodes", "status"):
+        assert np.array_equal(getattr(parallel, name), getattr(serial, name)), name
+
+
+def test_chunked_results_do_not_depend_on_worker_count(tmp_path):
+    kwargs = dict(
+        lambda_min=0.5, lambda_max=2.0, n_lambda=2, T_min=0.05, T_max=0.3,
+        n_T=2, n_samples=60, seed=9, chunk_size=25, progress=False,
+    )
+    two = sweep_time_lambda_mc(binary_control_1d, n_jobs=2, **kwargs)
+    three = sweep_time_lambda_mc(binary_control_1d, n_jobs=3,
+                                 checkpoint_path=tmp_path / "c.npz", **kwargs)
+    assert np.array_equal(two.variance, three.variance)
+    assert np.all(two.completed_samples == 60)
+    assert np.all(two.status == "complete")
+    # Chunk streams 25 + 25 + 10 are the per-chunk seeds, concatenated in order.
+    pde = binary_control_1d(T=0.05)
+    direct = []
+    for c, n in enumerate((25, 25, 10)):
+        rng = tlmc._chunk_rng(9, 0, 1, c, 3)
+        direct += [sample_tree(pde, 0.0, 0.0, rng=rng, rate=2.0).value for _ in range(n)]
+    direct = np.array(direct)
+    assert two.mean[0, 1] == np.mean(direct)
+    assert two.variance[0, 1] == np.var(direct, ddof=1)
+    loaded = TimeLambdaMCComparison.load(tmp_path / "c.npz").sweeps[0]
+    assert loaded.status[0, 0] == "complete"
+    assert loaded.chunk_size == 25
+    assert compare_time_lambda_mc(three).save(tmp_path / "all.npz") is not None
+    assert TimeLambdaMCComparison.load(tmp_path / "all.npz").sweeps[0].chunk_size == 25
+
+
+def test_parallel_node_limit_marks_cell_with_serial_counts():
+    kwargs = dict(
+        lambda_min=8.0, lambda_max=9.0, n_lambda=2, T_min=4.0, T_max=5.0,
+        n_T=2, n_samples=6, seed=1, max_nodes=1, progress=False,
+    )
+    chunked = sweep_time_lambda_mc(binary_control_1d, n_jobs=2, chunk_size=2, **kwargs)
+    assert np.all(chunked.status == "node_limit")
+    assert np.isnan(chunked.variance).all()
+    assert np.all(chunked.total_nodes == 2)
+
+
+def test_parallel_rejects_serial_cell_budget():
+    with pytest.raises(ValueError, match="max_cell_nodes"):
+        sweep_time_lambda_mc(binary_control_1d, n_jobs=2, max_cell_nodes=10,
+                             progress=False)
+    with pytest.raises(ValueError, match="chunk_size"):
+        sweep_time_lambda_mc(binary_control_1d, n_samples=10, chunk_size=3,
+                             progress=False)

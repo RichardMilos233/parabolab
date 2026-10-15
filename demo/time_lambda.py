@@ -1,10 +1,11 @@
-"""Observed full-tree MC variance over a T-lambda grid for five flat PDEs."""
+"""Observed full-tree MC variance over a T-lambda grid for four flat PDEs."""
 
 import argparse
+from functools import partial
 from pathlib import Path
 
 from parabolab import compare_time_lambda_mc, sweep_time_lambda_mc
-from parabolab.library import allen_cahn_flat, binary_control_1d, fisher_kpp_1d
+from parabolab.library import allen_cahn_flat, fisher_kpp_1d
 
 
 if __name__ == "__main__":
@@ -12,6 +13,19 @@ if __name__ == "__main__":
     parser.add_argument("--mc-lambda-points", type=int, default=12)
     parser.add_argument("--mc-T-points", type=int, default=10)
     parser.add_argument("--samples-per-cell", type=int, default=128)
+    parser.add_argument("--sampler", choices=("flat", "tree"), default="flat",
+                        help="flat: vectorized flat-data sampler (same law of H); "
+                             "tree: original recursive sample_tree")
+    parser.add_argument("--n-jobs", type=int, default=1,
+                        help="worker processes (1 = serial)")
+    parser.add_argument("--chunk-size", type=int, default=None,
+                        help="split each cell into seeded chunks of this many trees "
+                             "(default: one chunk per cell, at most 100000 for flat)")
+    parser.add_argument("--max-nodes", type=int, default=None,
+                        help="per-tree node limit; a cell with any larger tree is "
+                             "marked invalid (default: no limit)")
+    parser.add_argument("--output-dir", type=Path, default=Path(__file__).parent,
+                        help="where the NPZ data and PNG figures are written")
     args = parser.parse_args()
 
     common = dict(
@@ -24,16 +38,22 @@ if __name__ == "__main__":
         n_lambda=args.mc_lambda_points,
         n_T=args.mc_T_points,
         n_samples=args.samples_per_cell,
+        sampler=args.sampler,
+        n_jobs=args.n_jobs,
+        chunk_size=args.chunk_size,
+        max_nodes=args.max_nodes,
     )
     cases = [
-        (lambda T: allen_cahn_flat(0.5, T=T), 0.5, "Allen–Cahn, flat phi = 0.5"),
-        (lambda T: allen_cahn_flat(0.3, T=T), 0.3, "Allen–Cahn, flat phi = 0.3"),
-        (lambda T: fisher_kpp_1d(T=T, phi0=0.5), 0.5, "Fisher–KPP, flat phi = 0.5"),
-        (lambda T: fisher_kpp_1d(T=T, phi0=0.2), 0.2, "Fisher–KPP, flat phi = 0.2"),
-        (lambda T: binary_control_1d(T=T), None, "Binary control, phi = 1"),
+        # Picklable factories (pde_factory(T)) so worker processes can rebuild PDEs.
+        (partial(allen_cahn_flat, 0.5), 0.5, "Allen–Cahn, flat phi = 0.5"),
+        (partial(allen_cahn_flat, 0.3), 0.3, "Allen–Cahn, flat phi = 0.3"),
+        (partial(fisher_kpp_1d, phi0=0.5), 0.5, "Fisher–KPP, flat phi = 0.5"),
+        (partial(fisher_kpp_1d, phi0=0.2), 0.2, "Fisher–KPP, flat phi = 0.2"),
     ]
 
-    data_path = Path(__file__).with_name("time_lambda_mc.npz")
+    out_dir = args.output_dir
+    out_dir.mkdir(parents=True, exist_ok=True)
+    data_path = out_dir / "time_lambda_mc.npz"
     sweeps = []
     for i, (factory, flat_terminal, title) in enumerate(cases, start=1):
         sweeps.append(sweep_time_lambda_mc(
@@ -46,7 +66,8 @@ if __name__ == "__main__":
         ))
 
     comparison = compare_time_lambda_mc(*sweeps).save(data_path)
-    output = Path(__file__).with_suffix(".png")
-    comparison.plot(output, save_individual=True)
+    comparison.plot(out_dir / "time_lambda.png", save_individual=True)
+    comparison.plot(out_dir / "time_lambda_max_share.png", statistic="max_share")
+    comparison.plot(out_dir / "time_lambda_batch_cv.png", statistic="batch_cv")
     print(f"Saved MC data to: {data_path.resolve()}")
-    print(f"Saved combined and individual heatmaps next to: {output.resolve()}")
+    print(f"Saved variance, max-share and batch-CV heatmaps in: {out_dir.resolve()}")
