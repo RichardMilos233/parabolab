@@ -20,8 +20,7 @@ import time
 from typing import Callable, Optional, Sequence, Union
 
 import matplotlib.pyplot as plt
-from matplotlib.colors import Normalize, SymLogNorm, TwoSlopeNorm
-from matplotlib.lines import Line2D
+from matplotlib.colors import Normalize, SymLogNorm
 import numpy as np
 
 from .flat_batch import flat_semilinear_leaf_values, sample_flat_batch
@@ -38,8 +37,7 @@ _ERROR = "error"
 _INTERRUPTED = "interrupted"
 _CANCELLED = object()
 _SAMPLERS = ("tree", "flat")
-_DIAGNOSTICS = ("n_nonzero", "max_share", "batch_variance", "top_abs")
-_HILL_MIN_K = 10
+_DIAGNOSTICS = ("n_nonzero", "max_share", "batch_variance")
 _FLAT_DEFAULT_CHUNK = 100_000
 _STATISTICS = {
     "variance": ("Observed full-tree MC sample variance with theoretical boundary",
@@ -54,10 +52,6 @@ _STATISTICS = {
                  "CV of batch variances (std / mean)",
                  "0: ten repeated variance estimates agree; 3: all variance in one batch. "
                  "Driven by the fourth moment, so it may light up below T₂."),
-    "tail_index": ("Hill tail index of |H|, k = ⌊√(nonzero samples)⌋",
-                   "Hill α̂ of |H|  (E[H²] < ∞ needs α > 2)",
-                   "Red: heavy tail (α̂ < 2), blue: light. The dashed α̂ = 2 contour should "
-                   "follow T₂ if the tail is regularly varying; it only sees tails within reach of N."),
 }
 
 
@@ -147,45 +141,6 @@ def _run_flat_chunk(ti, li, chunk, n, horizon, rate, rng, max_nodes, flat) -> tu
             "flat sampler returned a non-finite value")
 
 
-def hill_tail_index(top_abs: np.ndarray, n_nonzero: np.ndarray,
-                    k: Optional[Union[int, np.ndarray]] = None) -> np.ndarray:
-    """Hill estimate of the tail index of ``|H|`` for every cell.
-
-    ``top_abs[..., :]`` holds each cell's largest nonzero ``|H|`` in
-    descending order, NaN-padded. With ``X_1 >= X_2 >= ...`` the estimate is
-    ``1 / mean_{i<=k} log(X_i / X_{k+1})``. The default ``k`` is
-    ``floor(sqrt(n_nonzero))``; ``k`` is capped at the number of stored
-    values minus one, and cells with ``k < 10`` are NaN. Equal top values
-    (no detectable tail) give ``inf``. A finite-sample estimate of a tail
-    index assumes regular variation; it is a diagnostic, not a moment proof.
-    """
-    stored = np.sum(np.isfinite(top_abs), axis=-1)
-    if k is None:
-        k = np.floor(np.sqrt(n_nonzero)).astype(np.int64)
-    k = np.minimum(np.broadcast_to(np.asarray(k, dtype=np.int64), stored.shape), stored - 1)
-    ok = k >= _HILL_MIN_K
-    kk = np.where(ok, k, 1)
-    with np.errstate(divide="ignore", invalid="ignore"):
-        logs = np.log(np.where(np.isfinite(top_abs), top_abs, 1.0))
-        head = np.take_along_axis(np.cumsum(logs, axis=-1), (kk - 1)[..., None], axis=-1)[..., 0]
-        threshold = np.take_along_axis(logs, kk[..., None], axis=-1)[..., 0]
-        spacing = head / kk - threshold
-        alpha = np.where(spacing > 0.0, 1.0 / np.where(spacing > 0.0, spacing, 1.0), np.inf)
-    return np.where(ok, alpha, np.nan)
-
-
-def _nan_box_mean(values: np.ndarray) -> np.ndarray:
-    """3x3 mean that ignores NaN entries (used only for drawing contours)."""
-    finite = np.isfinite(values)
-    padded = np.pad(np.where(finite, values, 0.0), 1)
-    weight = np.pad(finite.astype(float), 1)
-    rows, cols = values.shape
-    total = sum(padded[i:i + rows, j:j + cols] for i in range(3) for j in range(3))
-    count = sum(weight[i:i + rows, j:j + cols] for i in range(3) for j in range(3))
-    with np.errstate(invalid="ignore", divide="ignore"):
-        return np.where(count > 0, total / count, np.nan)
-
-
 def _grid_edges(points: np.ndarray) -> np.ndarray:
     if len(points) == 1:
         width = max(abs(float(points[0])) * 0.05, 0.05)
@@ -222,14 +177,6 @@ class TimeLambdaMCSweep:
     n_nonzero: Optional[np.ndarray] = None
     max_share: Optional[np.ndarray] = None
     batch_variance: Optional[np.ndarray] = None
-    top_abs: Optional[np.ndarray] = None
-
-    @property
-    def tail_index(self) -> Optional[np.ndarray]:
-        """Hill tail index of ``|H|`` per cell (needs ``keep_top`` data)."""
-        if self.top_abs is None or self.n_nonzero is None:
-            return None
-        return hill_tail_index(self.top_abs, self.n_nonzero)
 
     @property
     def batch_cv(self) -> Optional[np.ndarray]:
@@ -245,8 +192,7 @@ class TimeLambdaMCSweep:
             raise ValueError(f"statistic must be one of {sorted(_STATISTICS)}")
         values = self.variance if name == "variance" else getattr(self, name)
         if values is None:
-            hint = " (rerun with keep_top > 0)" if name == "tail_index" else ""
-            raise ValueError(f"this sweep has no {name!r} data{hint}")
+            raise ValueError(f"this sweep has no {name!r} data (recorded before diagnostics)")
         return values
 
     def save(self, path: Union[str, Path]) -> "TimeLambdaMCSweep":
@@ -302,13 +248,9 @@ class TimeLambdaMCSweep:
 
     def _plot_on(self, ax: plt.Axes, norm, statistic: str = "variance"):
         data = self.statistic(statistic)
-        tail = statistic == "tail_index"
-        if tail:
-            # inf (no detectable tail) is drawn with the lightest-tail color.
-            data = np.where(np.isinf(data), norm.vmax, data)
         valid = (self.status == _COMPLETE) & np.isfinite(data)
         values = np.ma.array(data, mask=~valid)
-        cmap = plt.get_cmap("RdBu" if tail else "viridis").with_extremes(bad="#B8BEC7")
+        cmap = plt.get_cmap("viridis").with_extremes(bad="#B8BEC7")
         mesh = ax.pcolormesh(
             _grid_edges(self.lambdas), _grid_edges(self.horizons), values,
             shading="flat", cmap=cmap, norm=norm,
@@ -323,12 +265,6 @@ class TimeLambdaMCSweep:
                     linewidth=1.2)
         ax.axhline(self.reference_T, color="white", linestyle="--", linewidth=1.4,
                    label=rf"reference $T={self.reference_T:g}$")
-        if tail and np.count_nonzero(valid) > 4:
-            smooth = _nan_box_mean(np.where(valid, np.minimum(data, norm.vmax), np.nan))
-            ax.contour(self.lambdas, self.horizons, smooth, levels=[2.0],
-                       colors="#111111", linestyles="--", linewidths=1.4)
-            ax.add_line(Line2D([], [], color="#111111", linestyle="--", linewidth=1.4,
-                               label=r"Hill $\hat\alpha=2$ (3×3 mean)"))
         ax.set_xlim(self.lambdas[0], self.lambdas[-1])
         ax.set_ylim(self.horizons[0], self.horizons[-1])
         ax.set_title(
@@ -342,9 +278,8 @@ class TimeLambdaMCSweep:
         ax.set_ylabel(r"horizon $T$")
         invalid = int(np.size(valid) - np.count_nonzero(valid))
         if invalid:
-            what = {"variance": "invalid/uncompleted",
-                    "tail_index": "invalid, all-zero or <100 nonzero"}.get(
-                        statistic, "invalid or all-zero")
+            what = ("invalid/uncompleted" if statistic == "variance"
+                    else "invalid or all-zero")
             ax.text(0.02, 0.02, f"{invalid} {what} cells (grey)",
                     transform=ax.transAxes, fontsize=7.5,
                     bbox={"facecolor": "white", "alpha": 0.8, "edgecolor": "none"})
@@ -361,8 +296,6 @@ class TimeLambdaMCComparison:
     def _norm(self, statistic: str = "variance"):
         if statistic == "max_share":
             return Normalize(vmin=0.0, vmax=1.0)
-        if statistic == "tail_index":
-            return TwoSlopeNorm(vmin=0.5, vcenter=2.0, vmax=6.0)
         if statistic == "batch_cv":
             batches = max(s.batch_variance.shape[2] for s in self.sweeps
                           if s.batch_variance is not None)
@@ -524,7 +457,6 @@ def sweep_time_lambda_mc(
     checkpoint_every: float = 300.0,
     sampler: str = "tree",
     n_batches: int = 10,
-    keep_top: int = 0,
 ) -> TimeLambdaMCSweep:
     """Sample one full-tree batch at every ``(T, lambda)`` cell.
 
@@ -551,9 +483,7 @@ def sweep_time_lambda_mc(
     Every completed cell also records instability diagnostics: the number
     of nonzero samples, the largest sample's share ``max H^2 / sum H^2`` of
     the sum of squares, and the sample variances of ``n_batches`` equal
-    consecutive sub-batches. ``keep_top > 0`` also stores each cell's
-    largest ``keep_top`` nonzero ``|H|`` values, from which
-    ``TimeLambdaMCSweep.tail_index`` computes Hill tail-index estimates.
+    consecutive sub-batches.
     """
     values = (lambda_min, lambda_max, T_min, T_max, reference_T)
     if not all(math.isfinite(v) and v > 0.0 for v in values):
@@ -587,8 +517,6 @@ def sweep_time_lambda_mc(
     if (not isinstance(n_batches, (int, np.integer)) or isinstance(n_batches, bool)
             or n_batches < 2):
         raise ValueError("n_batches must be an integer at least 2")
-    if not isinstance(keep_top, (int, np.integer)) or isinstance(keep_top, bool) or keep_top < 0:
-        raise ValueError("keep_top must be a non-negative integer")
 
     lambdas = np.linspace(lambda_min, lambda_max, n_lambda)
     horizons = np.linspace(T_min, T_max, n_T)
@@ -616,7 +544,6 @@ def sweep_time_lambda_mc(
         n_nonzero=np.zeros(shape, dtype=np.int64),
         max_share=np.full(shape, np.nan),
         batch_variance=np.full(shape + (min(int(n_batches), n_samples // 2),), np.nan),
-        top_abs=np.full(shape + (int(keep_top),), np.nan) if keep_top else None,
     )
 
     flat = None
@@ -706,7 +633,7 @@ def _sample_variance(samples: np.ndarray) -> float:
     return 0.0 if np.all(samples == samples[0]) else float(np.var(samples, ddof=1))
 
 
-def _cell_summary(samples: np.ndarray, n_batches: int, keep_top: int) -> dict:
+def _cell_summary(samples: np.ndarray, n_batches: int) -> dict:
     """Statistics and instability diagnostics of one completed cell.
 
     Computed where the samples live (a worker process in parallel runs), so
@@ -719,19 +646,13 @@ def _cell_summary(samples: np.ndarray, n_batches: int, keep_top: int) -> dict:
         second_moment = float(np.mean(squares))
         total = float(np.sum(squares))
         batches = np.array([_sample_variance(b) for b in np.array_split(samples, n_batches)])
-    summary = {
+    return {
         "n_nonzero": int(np.count_nonzero(samples)),
         "finite": all(math.isfinite(v) for v in (mean, variance, second_moment)),
         "mean": mean, "variance": variance, "second_moment": second_moment,
         "max_share": float(np.max(squares)) / total if 0.0 < total < math.inf else np.nan,
-        "batch_variance": batches, "top_abs": None,
+        "batch_variance": batches,
     }
-    if keep_top and summary["finite"]:
-        magnitudes = np.abs(samples[samples != 0.0])
-        keep = min(keep_top, magnitudes.size)
-        top = np.partition(magnitudes, magnitudes.size - keep)[-keep:] if keep else magnitudes[:0]
-        summary["top_abs"] = np.sort(top)[::-1]
-    return summary
 
 
 def _apply_summary(result: TimeLambdaMCSweep, ti: int, li: int, summary: dict) -> None:
@@ -742,23 +663,18 @@ def _apply_summary(result: TimeLambdaMCSweep, ti: int, li: int, summary: dict) -
         return
     for name in ("mean", "variance", "second_moment", "max_share", "batch_variance"):
         getattr(result, name)[ti, li] = summary[name]
-    if result.top_abs is not None:
-        top = summary["top_abs"]
-        result.top_abs[ti, li, :len(top)] = top
     result.status[ti, li] = _COMPLETE
 
 
 def _store_statistics(result: TimeLambdaMCSweep, ti: int, li: int,
                       samples: np.ndarray) -> None:
     """Fill one completed cell's statistics and instability diagnostics."""
-    keep_top = 0 if result.top_abs is None else result.top_abs.shape[2]
-    _apply_summary(result, ti, li,
-                   _cell_summary(samples, result.batch_variance.shape[2], keep_top))
+    _apply_summary(result, ti, li, _cell_summary(samples, result.batch_variance.shape[2]))
 
 
 def _run_cell(ti: int, li: int, sizes: Sequence[int], horizon: float, rate: float,
               seed: int, max_nodes: Optional[int], flat: Optional[tuple],
-              n_batches: int, keep_top: int) -> tuple:
+              n_batches: int) -> tuple:
     """Sample a whole cell chunk by chunk and summarize it in place.
 
     Returns ``(ti, li, completed, nodes, status, reason, summary)``; the
@@ -774,7 +690,7 @@ def _run_cell(ti: int, li: int, sizes: Sequence[int], horizon: float, rate: floa
             return ti, li, sum(len(v) for v in values), nodes, status, reason, None
     samples = np.concatenate(values)
     return (ti, li, len(samples), nodes, None, "",
-            _cell_summary(samples, n_batches, keep_top))
+            _cell_summary(samples, n_batches))
 
 
 def _finish_cell(result: TimeLambdaMCSweep, ti: int, li: int, chunks: list) -> None:
@@ -926,11 +842,10 @@ def _fill_cells(result, sizes, cells, n_jobs, pde_factory, flat,
                 report_and_save, maybe_report, received) -> TimeLambdaMCSweep:
     """One task per cell; workers return summaries, not raw samples."""
     n_batches = result.batch_variance.shape[2]
-    keep_top = 0 if result.top_abs is None else result.top_abs.shape[2]
 
     def args(ti, li):
         return (ti, li, sizes, float(result.horizons[ti]), float(result.lambdas[li]),
-                result.seed, result.max_nodes, flat, n_batches, keep_top)
+                result.seed, result.max_nodes, flat, n_batches)
 
     def apply(out) -> None:
         ti, li, completed, nodes, status, reason, summary = out

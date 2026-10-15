@@ -143,8 +143,7 @@ the vertical axis the horizon `T`, and each cell is an independent batch of
 - **dashed white line**: the reference horizon `T = 0.5`, for reading off
   the rate interval in which the second moment is finite at that horizon.
 - **grey cells**: no value to show — the batch failed (overflow, node
-  limit), or the statistic is undefined (all samples zero; for the tail
-  index, fewer than 100 nonzero samples).
+  limit), or the statistic is undefined (all samples zero).
 - **panel title**: PDE, grid, `N` per cell and the sampler used
   (`flat-data sampler (special case)` or `general sample_tree`).
 
@@ -153,23 +152,16 @@ the vertical axis the horizon `T`, and each cell is an independent batch of
 | `time_lambda.png` | sample variance `s^2 = sum (H_i - mean)^2 / (N-1)` (symlog colour scale) | dark = small, bright = large; look for the jump in magnitude and the speckle (neighbouring cells differing by orders of magnitude) across `T_2` | the quantity a user of the estimator actually sees; shows how large and how erratic the variance becomes | beyond `T_2` it is a finite number from a finite batch; all-zero batches show `0`, which looks *stable* although the true variance is infinite |
 | `time_lambda_max_share.png` | `max_i H_i^2 / sum_i H_i^2`, the largest sample's share of the sum of squares (0 to 1) | near 0 (dark) = many samples contribute; near 1 (yellow) = one sample *is* the variance | the diagnostic matched to `T_2`: for i.i.d. samples it tends to 0 almost surely **iff** `E[H^2] < infinity`; it should be dark below the curve and stay patchy/bright above it as `N` grows | a single batch: values are random; just above `T_2` the tail is barely too heavy and the ratio decays only slowly, so the boundary looks gradual, not sharp |
 | `time_lambda_batch_cv.png` | split the `N` samples into 10 consecutive batches, compute each batch's variance `v_1..v_10`, then `std(v)/mean(v)` (0 to 3) | 0 = the 10 repeated variance estimates agree; 3 = all variance sits in one batch | reproducibility: would a repeated experiment give the same variance? | governed by the **fourth** moment, which diverges earlier than the second; it can light up below `T_2` and is not a test of the `T_2` boundary |
-| `time_lambda_tail_index.png` | Hill estimate of the tail index of `\|H\|` from the `k = floor(sqrt(n_nonzero))` largest values: `alpha-hat = 1 / mean_{i<=k} log(X_i / X_{k+1})`; dashed contour = `alpha-hat = 2` after a 3×3 mean | red = heavy tail (`alpha < 2`), white ≈ 2, blue = light tail; compare the dashed contour with `T_2` | a continuous version of the boundary: if `P(\|H\| > x) ~ x^{-alpha}`, then `E[H^2]` is finite for `alpha > 2` and infinite for `alpha < 2`, so the contour should follow `T_2` | assumes a regularly varying tail; it only sees the tail within reach of `N` samples (misses the divergence at large `lambda`); biased for small `k` and with atoms of `H`. Where it contradicts the theory (`alpha-hat < 2` below `T_2`) the estimator, not the theory, is wrong |
 
 `n_nonzero` (number of nonzero samples, in the NPZ) is not plotted; it
 explains the grey all-zero cells and how much information a cell carries.
-`top_abs` stores each cell's largest `--keep-top` (default 1024) `|H|`
-values so that other tail estimators or `k` choices need no resampling:
-`parabolab.time_lambda_mc.hill_tail_index(top_abs, n_nonzero, k)`.
 
 Observed in the 101 × 101 × 10^6 run (15 October 2026; one batch per
 cell, so an observation, not a test): `max_share` is near zero below every
 curve; 10× more samples (10^5 → 10^6) made cells 0.1–0.4 above `T_2` more
-often unstable but barely changed the band just above it. Near the peak of
-`T_2` (`lambda ≈ 1.5–3`) the Hill contour lies 0.02–0.09 above the curve for
-both Allen–Cahn cases and Fisher–KPP `phi = 0.2`; for `lambda ≳ 5` it bends
-away upward (the divergent tail is beyond `10^6` samples), and for
-`lambda ≲ 1` in the `phi = 0.5` cases it falls below the curve, which the
-theory excludes.
+often unstable but barely changed the band just above it: close to `T_2`
+the tail is only slightly too heavy, so the instability appears gradually
+rather than as a sharp edge.
 
 These are finite-sample diagnostics. Agreement with the curve is
 experimental evidence consistent with the analytic boundary, not a
@@ -232,8 +224,7 @@ seed, sampler and chunk size. Checkpoints are written every five minutes.
 
 Output goes to `--output-dir` (default `demo/`): `time_lambda.png` (variance,
 plus one panel per case), `time_lambda_max_share.png`,
-`time_lambda_batch_cv.png`, `time_lambda_tail_index.png` and
-`time_lambda_mc.npz`. Per-case checkpoints
+`time_lambda_batch_cv.png` and `time_lambda_mc.npz`. Per-case checkpoints
 are saved alongside them, including on a keyboard interrupt. The NPZ
 contains axes, observed statistics, diagnostics, completion counts,
 statuses, reasons and sampling settings. Generated NPZs and figures are

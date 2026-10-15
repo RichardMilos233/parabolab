@@ -24,9 +24,6 @@ if __name__ == "__main__":
     parser.add_argument("--max-nodes", type=int, default=None,
                         help="per-tree node limit; a cell with any larger tree is "
                              "marked invalid (default: no limit)")
-    parser.add_argument("--keep-top", type=int, default=1024,
-                        help="largest |H| values stored per cell for tail-index "
-                             "estimates (0 = none)")
     parser.add_argument("--output-dir", type=Path, default=Path(__file__).parent,
                         help="where the NPZ data and PNG figures are written")
     args = parser.parse_args()
@@ -45,7 +42,6 @@ if __name__ == "__main__":
         n_jobs=args.n_jobs,
         chunk_size=args.chunk_size,
         max_nodes=args.max_nodes,
-        keep_top=args.keep_top,
     )
     cases = [
         # Picklable factories (pde_factory(T)) so worker processes can rebuild PDEs.
@@ -73,7 +69,5 @@ if __name__ == "__main__":
     comparison.plot(out_dir / "time_lambda.png", save_individual=True)
     comparison.plot(out_dir / "time_lambda_max_share.png", statistic="max_share")
     comparison.plot(out_dir / "time_lambda_batch_cv.png", statistic="batch_cv")
-    if args.keep_top:
-        comparison.plot(out_dir / "time_lambda_tail_index.png", statistic="tail_index")
     print(f"Saved MC data to: {data_path.resolve()}")
     print(f"Saved variance and diagnostic heatmaps in: {out_dir.resolve()}")
